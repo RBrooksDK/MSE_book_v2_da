@@ -1,14 +1,14 @@
-\chapter{Set Theory}
+\chapter{Mængdelære}
 \label{chap:ch3}
 
-In software engineering, we are constantly working with collections of things: users in a system, records in a database, or nodes in a network. Set theory provides the formal mathematical language to describe and manipulate these collections with precision and clarity. It is the bedrock upon which many core computer science concepts—from database query languages like SQL to data structures and algorithmic logic—are built.
+I softwareudvikling arbejder vi hele tiden med samlinger af ting: brugere i et system, poster i en database eller knuder i et netværk. Mængdelæren giver os det formelle matematiske sprog til at beskrive og håndtere disse samlinger præcist og klart. Den er fundamentet for mange centrale begreber i datalogi -- fra databaseforespørgselssprog som SQL til datastrukturer og algoritmisk logik.
 
-This chapter introduces the fundamental principles of set theory. We will begin with the simple, intuitive idea of a set and explore the formal notation used to define them. We will then cover the essential relationships between sets, such as subsets, and the core operations used to combine them, including unions, intersections, and complements. These operations directly correspond to the logical operators (\texttt{OR}, \texttt{AND}, \texttt{NOT}) that govern the flow of your code. Finally, we will explore ordered collections called tuples and introduce a simple method for proving set equalities.
+Dette kapitel introducerer mængdelærens grundlæggende principper. Vi begynder med den enkle, intuitive idé om en mængde og ser på den formelle notation, der bruges til at definere mængder. Derefter gennemgår vi de væsentligste relationer mellem mængder, fx delmængder, og de centrale operationer, der bruges til at kombinere dem, herunder foreningsmængder, fællesmængder og komplementer. Disse operationer svarer direkte til de logiske operatorer (\texttt{OR}, \texttt{AND}, \texttt{NOT}), der styrer forløbet i din kode. Til sidst ser vi på ordnede samlinger, der kaldes tupler, og introducerer en enkel metode til at bevise, at to mængder er lig med hinanden.
 
-\section{What is a Set?}
-A set is an unordered collection of distinct objects. The objects within a set are called its \textbf{elements} or \textbf{members}. We can think of a set as a simple container where items are grouped together, and the order in which we list them does not matter. For example, the set of primary colors can be written as $\{ \text{red}, \text{yellow}, \text{blue} \}$ or equally as $\{ \text{blue}, \text{red}, \text{yellow} \}$.
+\section{Hvad er en mængde?}
+En mængde er en uordnet samling af forskellige objekter. Objekterne i en mængde kaldes dens \textbf{elementer} eller \textbf{medlemmer}. Vi kan tænke på en mængde som en simpel beholder, hvor ting er samlet, og hvor rækkefølgen, vi skriver dem i, ikke har betydning. For eksempel kan mængden af primærfarver skrives som $\{ \text{rød}, \text{gul}, \text{blå} \}$ eller lige så godt som $\{ \text{blå}, \text{rød}, \text{gul} \}$.
 
-Sets are a cornerstone of modern mathematics and a fundamental concept in computer science. They form the logical basis for everything from database query languages and data structures to the specification of programming language types.
+Mængder er en hjørnesten i moderne matematik og et grundlæggende begreb i datalogi. De udgør det logiske grundlag for alt fra databaseforespørgselssprog og datastrukturer til specifikationen af typer i programmeringssprog.
 
 % --- Figure Placeholder ---
 % This figure illustrates the basic concept of a set.
@@ -32,83 +32,83 @@ Sets are a cornerstone of modern mathematics and a fundamental concept in comput
         \node at (2, 0) {$d$};
 
         % Annotation
-        \node[align=center] at (0,-2.2) {The elements of set $S$ are $a, c, e,$ and $g$.};
+        \node[align=center] at (0,-2.2) {Elementerne i mængden $S$ er $a, c, e$ og $g$.};
     \end{tikzpicture}
-    \caption{A set $S$ containing four elements. The objects $b, d,$ and $f$ are not elements of $S$.}
+    \caption{En mængde $S$ med fire elementer. Objekterne $b, d$ og $f$ er ikke elementer i $S$.}
     \label{fig:set_concept}
 \end{figure}
 
-\subsection*{Specifying a Set}
-There are two primary ways to describe a set: by explicitly listing its members or by defining a property that its members must satisfy.
+\subsection*{Angivelse af en mængde}
+Der er to primære måder at beskrive en mængde på: ved eksplicit at opremse dens elementer eller ved at angive en egenskab, som elementerne skal opfylde.
 
-\subsubsection*{Listing Notation (Roster Method)}
-The most direct way to define a set is by listing all its elements between curly braces, $\{ \}$. This is known as the \textbf{roster method}.
+\subsubsection*{Listenotation}
+Den mest direkte måde at definere en mængde på er at opremse alle dens elementer mellem krøllede parenteser, $\{ \}$. Det kaldes \textbf{listenotation}.
 
-For example:
+For eksempel:
 \begin{itemize}
-    \item The set of the first five letters of the alphabet is $A = \{a, b, c, d, e\}$.
-    \item The set of the first three positive integers is $C = \{1, 2, 3\}$.
-    \item A set can contain different types of elements: $D = \{ \text{Alice}, 42, \pi \}$.
+    \item Mængden af alfabetets første fem bogstaver er $A = \{a, b, c, d, e\}$.
+    \item Mængden af de første tre positive hele tal er $C = \{1, 2, 3\}$.
+    \item En mængde kan indeholde forskellige typer af elementer: $D = \{ \text{Alice}, 42, \pi \}$.
 \end{itemize}
 
-When using the roster method, there are two fundamental rules:
+Når vi bruger listenotation, gælder der to grundlæggende regler:
 \begin{enumerate}
-    \item \textbf{Order does not matter.} A set is defined only by the elements it contains, not by the sequence in which they are listed. For example, $\{1, 2, 3\}$ is the exact same set as $\{3, 1, 2\}$.
-    \item \textbf{Each element must be unique.} An element is either in a set or it is not. Listing an element more than once is redundant and does not change the set. For instance, the set $\{a, a, b, c, c\}$ is simply $\{a, b, c\}$.
+    \item \textbf{Rækkefølgen har ingen betydning.} En mængde er alene bestemt af de elementer, den indeholder, ikke af den rækkefølge, de er opremset i. For eksempel er $\{1, 2, 3\}$ præcis den samme mængde som $\{3, 1, 2\}$.
+    \item \textbf{Hvert element skal være entydigt.} Et element er enten med i en mængde, eller også er det ikke. At opremse et element mere end én gang er overflødigt og ændrer ikke mængden. For eksempel er mængden $\{a, a, b, c, c\}$ blot $\{a, b, c\}$.
 \end{enumerate}
 
 
-\subsubsection*{Set-Builder Notation}
-When listing every element is impractical or impossible (for example, with infinite sets), we use \textbf{set-builder notation}. This method defines a set by stating a property or rule that its elements must satisfy. The notation uses a vertical bar `|` or a colon `:`, which is read as "such that."
+\subsubsection*{Mængdebyggernotation}
+Når det er upraktisk eller umuligt at opremse alle elementer (fx for uendelige mængder), bruger vi \textbf{mængdebyggernotation}. Denne metode definerer en mængde ved at angive en egenskab eller regel, som elementerne skal opfylde. Notationen bruger en lodret streg `|` eller et kolon `:`, som læses »sådan at«.
 
-The general structure is:
-\[ \{ \text{variable} \mid \text{a property the variable must satisfy} \} \]
+Den generelle struktur er:
+\[ \{ \text{variabel} \mid \text{en egenskab, som variablen skal opfylde} \} \]
 
-For example:
+For eksempel:
 \begin{itemize}
-    \item $A = \{ l \mid l \text{ is a vowel in the English alphabet} \}$ \\
-    This is read as: "$A$ is the set of all elements $l$ such that $l$ is a vowel in the English alphabet." This is another way of writing $A = \{a, e, i, o, u\}$.
+    \item $A = \{ l \mid l \text{ er en vokal i det engelske alfabet} \}$ \\
+    Det læses: »$A$ er mængden af alle elementer $l$, sådan at $l$ er en vokal i det engelske alfabet.« Det er en anden måde at skrive $A = \{a, e, i, o, u\}$ på.
     
-    \item $C = \{ n \mid n \in \mathbb{Z} \text{ and } 0 < n < 4 \}$ \\
-    This is read as: "$C$ is the set of all numbers $n$ such that $n$ is an integer and $n$ is greater than 0 and less than 4." This defines the set $\{1, 2, 3\}$.
+    \item $C = \{ n \mid n \in \mathbb{Z} \text{ og } 0 < n < 4 \}$ \\
+    Det læses: »$C$ er mængden af alle tal $n$, sådan at $n$ er et helt tal, og $n$ er større end 0 og mindre end 4.« Det definerer mængden $\{1, 2, 3\}$.
     
-    \item $E = \{ x \mid x \text{ is an even integer} \}$ \\
-    This defines the infinite set of all even integers: $\{\dots, -4, -2, 0, 2, 4, \dots\}$.
+    \item $E = \{ x \mid x \text{ er et lige helt tal} \}$ \\
+    Det definerer den uendelige mængde af alle lige hele tal: $\{\dots, -4, -2, 0, 2, 4, \dots\}$.
 \end{itemize}
 
-Set-builder notation is extremely powerful because it allows us to define large, complex, or even infinite sets with a short and precise description.
+Mængdebyggernotation er meget effektiv, fordi den gør det muligt at definere store, komplekse eller endda uendelige mængder med en kort og præcis beskrivelse.
 
-\section{Important Sets: The Number Systems}
-Numbers are the foundation of mathematics and computation. The different categories of numbers we use every day, from counting items to measuring continuous values, can be formally defined as sets. Understanding these fundamental sets is crucial for any software engineer, as they underpin data types, arithmetic logic, and numerical algorithms.
+\section{Vigtige mængder: talsystemerne}
+Tal er fundamentet for matematik og beregning. De forskellige kategorier af tal, vi bruger i hverdagen -- fra at tælle ting til at måle kontinuerte størrelser -- kan defineres formelt som mængder. Det er afgørende for enhver softwareingeniør at forstå disse grundlæggende mængder, fordi de ligger til grund for datatyper, aritmetisk logik og numeriske algoritmer.
 
-\subsection*{The Main Number Sets}
-The following sets are some of the most important in mathematics and are used throughout science and engineering.
+\subsection*{De vigtigste talmængder}
+Følgende mængder er blandt de vigtigste i matematikken og bruges overalt i naturvidenskab og ingeniørarbejde.
 
 \begin{description}
-    \item[Natural Numbers ($\mathbb{N}$)] The set of positive integers used for counting: $\{1, 2, 3, \dots\}$. Sometimes, this set is defined to include $0$. Due to this ambiguity, it is often clearer to specify \textit{positive integers} or \textit{non-negative integers}.
+    \item[Naturlige tal ($\mathbb{N}$)] Mængden af positive hele tal, som bruges til at tælle: $\{1, 2, 3, \dots\}$. Nogle gange defineres denne mængde, så den også indeholder $0$. På grund af denne tvetydighed er det ofte tydeligere at angive \textit{positive hele tal} eller \textit{ikke-negative hele tal}.
 
-    \item[Integers ($\mathbb{Z}$)] The set of all positive and negative whole numbers, including zero: $\{\dots, -2, -1, 0, 1, 2, \dots\}$.
+    \item[Hele tal ($\mathbb{Z}$)] Mængden af alle positive og negative hele tal, inklusive nul: $\{\dots, -2, -1, 0, 1, 2, \dots\}$.
 
-    \item[Rational Numbers ($\mathbb{Q}$)] The set of all numbers that can be expressed as a fraction $\frac{p}{q}$, where $p$ and $q$ are integers and $q \neq 0$. This includes all integers and terminating or repeating decimals. Examples: $\frac{1}{2}$, $-5$, $0.25$.
+    \item[Rationale tal ($\mathbb{Q}$)] Mængden af alle tal, der kan skrives som en brøk $\frac{p}{q}$, hvor $p$ og $q$ er hele tal og $q \neq 0$. Den omfatter alle hele tal samt alle endelige og periodiske decimalbrøker. Eksempler: $\frac{1}{2}$, $-5$, $0.25$.
 
-    \item[Real Numbers ($\mathbb{R}$)] The set of all numbers on the number line. It includes both rational numbers and irrational numbers (like $\pi$ or $\sqrt{2}$), which cannot be expressed as simple fractions.
+    \item[Reelle tal ($\mathbb{R}$)] Mængden af alle tal på tallinjen. Den omfatter både rationale tal og irrationale tal (som $\pi$ eller $\sqrt{2}$), der ikke kan skrives som simple brøker.
     
-    \item[Complex Numbers ($\mathbb{C}$)] The set of all numbers that can be expressed in the form $a + bi$, where $a$ and $b$ are real numbers and $i$ is the imaginary unit, satisfying $i^2 = -1$.
+    \item[Komplekse tal ($\mathbb{C}$)] Mængden af alle tal, der kan skrives på formen $a + bi$, hvor $a$ og $b$ er reelle tal, og $i$ er den imaginære enhed, som opfylder $i^2 = -1$.
 \end{description}
 
-Visualizing the relationships between these sets is key to understanding them. A Venn diagram shows the hierarchy of how these sets are nested within one another, while a number line illustrates how they cover or populate the continuum of values.
+Det er vigtigt at kunne visualisere relationerne mellem disse mængder for at forstå dem. Et Venn-diagram viser hierarkiet i, hvordan mængderne ligger inden i hinanden, mens en tallinje illustrerer, hvordan de dækker eller udfylder kontinuummet af værdier.
 
 % --- Venn Diagram of Number Systems ---
 % This is the TikZ code you provided for the number system Venn diagram.
 \begin{figure}[htbp]
     \centering
     \input{figure/number_sets_venn}
-    \caption{A Venn diagram illustrating the hierarchical relationship between the major number sets.}
+    \caption{Et Venn-diagram, der illustrerer den hierarkiske relation mellem de vigtigste talmængder.}
     \label{fig:venn_num}
 \end{figure}
 
 \begin{remark}
-    The Venn diagram in \autoref{fig:venn_num} shows that the set of real numbers ($\mathbb{R}$) is composed exclusively of rational ($\mathbb{Q}$) and irrational numbers. There is no real number that is not one or the other. This is why the set of irrational numbers is formally denoted as $\mathbb{R} \setminus \mathbb{Q}$, which means "the set of all real numbers, excluding the rational numbers."
+    Venn-diagrammet i \autoref{fig:venn_num} viser, at mængden af reelle tal ($\mathbb{R}$) udelukkende består af rationale ($\mathbb{Q}$) og irrationale tal. Der findes intet reelt tal, som hverken er det ene eller det andet. Derfor betegnes mængden af irrationale tal formelt $\mathbb{R} \setminus \mathbb{Q}$, hvilket betyder »mængden af alle reelle tal bortset fra de rationale tal«.
 \end{remark}
 
 % --- The Number Line ---
@@ -135,77 +135,77 @@ Visualizing the relationships between these sets is key to understanding them. A
         }
 
         % Annotations for different number sets (properly spaced)
-        \node[above=20pt, color=orange!70] at (0,0) {Integers ($\mathbb{Z}$) are marked with dots.};
+        \node[above=20pt, color=orange!70] at (0,0) {Hele tal ($\mathbb{Z}$) er markeret med prikker.};
         
         % Example rational numbers
         \node[rational] at (2.5, 0){};
         \node[above=3pt] at (2.5, 0){$\frac{5}{2}$};
         \node[rational] at (-1.5, 0){};
         \node[above=3pt] at (-1.5, 0){$-\frac{3}{2}$};
-        \node[below=15pt, color=mseOrange] at (0.5,-0.3) {Rational numbers ($\mathbb{Q}$) fill in the fractions.};
+        \node[below=15pt, color=mseOrange] at (0.5,-0.3) {Rationale tal ($\mathbb{Q}$) udfylder brøkerne.};
         
         % Example irrational numbers
         \node[irrational] at (1.414, 0){};
         \node[above=3pt] at (1.414, 0){$\sqrt{2}$};
         \node[irrational] at (-3.141, 0){};
         \node[above=3pt] at (-3.141, 0){$-\pi$};
-        \node[below=30pt] at (0,-0.3) {\textcolor{mseQuestionBorder}{Irrational numbers fill the gaps,} \textcolor{mseViaBlue}{completing the real number line.}};
+        \node[below=30pt] at (0,-0.3) {\textcolor{mseQuestionBorder}{Irrationale tal udfylder hullerne} \textcolor{mseViaBlue}{og fuldender den reelle tallinje.}};
         
     \end{tikzpicture}
-    \caption{The real number line, populated by integers, rationals, and irrationals.}
+    \caption{Den reelle tallinje, udfyldt med hele tal, rationale tal og irrationale tal.}
     \label{fig:number_line}
 \end{figure}
 
 
-\subsection*{Interval Notation}
-In many applications, we need to refer to a continuous range of real numbers. \textbf{Interval notation} is a convenient shorthand for describing such subsets of $\mathbb{R}$.
+\subsection*{Intervalnotation}
+I mange anvendelser har vi brug for at henvise til et sammenhængende udsnit af de reelle tal. \textbf{Intervalnotation} er en praktisk kortform til at beskrive sådanne delmængder af $\mathbb{R}$.
 
-An interval is defined by its two endpoints. We use square brackets `[` `]` to indicate that an endpoint is included in the set, and parentheses `(` `)` to indicate that it is excluded.
+Et interval er bestemt ved sine to endepunkter. Vi bruger firkantede parenteser `[` `]` til at angive, at et endepunkt er med i mængden, og runde parenteser `(` `)` til at angive, at det ikke er med.
 
 \begin{description}
-    \item[Closed Interval:] Includes both endpoints.
+    \item[Lukket interval:] Indeholder begge endepunkter.
     \[ [a, b] = \{ x \in \mathbb{R} \mid a \leq x \leq b \} \]
 
-    \item[Open Interval:] Excludes both endpoints.
+    \item[Åbent interval:] Indeholder ingen af endepunkterne.
     \[ (a, b) = \{ x \in \mathbb{R} \mid a < x < b \} \]
 
-    \item[Half-Open Intervals:] Includes one endpoint but not the other.
-    \[ [a, b) = \{ x \in \mathbb{R} \mid a \leq x < b \} \quad \text{and} \quad (a, b] = \{ x \in \mathbb{R} \mid a < x \leq b \} \]
+    \item[Halvåbne intervaller:] Indeholder det ene endepunkt, men ikke det andet.
+    \[ [a, b) = \{ x \in \mathbb{R} \mid a \leq x < b \} \quad \text{og} \quad (a, b] = \{ x \in \mathbb{R} \mid a < x \leq b \} \]
 \end{description}
 
-\begin{example} Interval Notation
+\begin{example} Intervalnotation
 \begin{itemize}
-    \item $[-2, 3]$ is the set of all real numbers from $-2$ to $3$, including $-2$ and $3$.
-    \item $(-2, 3)$ is the set of all real numbers between $-2$ and $3$.
-    \item $[0, 100)$ represents all numbers from $0$ up to (but not including) $100$.
+    \item $[-2, 3]$ er mængden af alle reelle tal fra $-2$ til $3$, inklusive $-2$ og $3$.
+    \item $(-2, 3)$ er mængden af alle reelle tal mellem $-2$ og $3$.
+    \item $[0, 100)$ betegner alle tal fra $0$ op til (men ikke med) $100$.
 \end{itemize}
 \end{example}
 
-Intervals can also be unbounded, extending towards positive or negative infinity ($\infty$). Since infinity is not a number, it is always excluded with a parenthesis.
-\[ (a, \infty) = \{ x \in \mathbb{R} \mid x > a \} \quad \text{and} \quad (-\infty, b] = \{ x \in \mathbb{R} \mid x \leq b \} \]
+Intervaller kan også være ubegrænsede, så de strækker sig mod plus eller minus uendelig ($\infty$). Da uendelig ikke er et tal, udelukkes det altid med en rund parentes.
+\[ (a, \infty) = \{ x \in \mathbb{R} \mid x > a \} \quad \text{og} \quad (-\infty, b] = \{ x \in \mathbb{R} \mid x \leq b \} \]
 
-\begin{example} Unbounded Interval
+\begin{example} Ubegrænset interval
 \begin{itemize}
-    \item $(3, \infty)$ represents all real numbers greater than $3$.
-    \item $(-\infty, 5)$ represents all real numbers less than $5$.
-    \item $(-\infty, 0]$ represents the set of all non-positive real numbers.
+    \item $(3, \infty)$ betegner alle reelle tal større end $3$.
+    \item $(-\infty, 5)$ betegner alle reelle tal mindre end $5$.
+    \item $(-\infty, 0]$ betegner mængden af alle ikke-positive reelle tal.
 \end{itemize}
 \end{example}
 
 %======================================================================
 % SECTION: Relationships Between Sets
 %======================================================================
-\section{Relationships Between Sets}
-Understanding a set is not just about its elements, but also how it relates to other sets. This section defines the fundamental relationships that allow us to compare and classify sets.
+\section{Relationer mellem mængder}
+At forstå en mængde handler ikke kun om dens elementer, men også om, hvordan den forholder sig til andre mængder. Dette afsnit definerer de grundlæggende relationer, som gør det muligt at sammenligne og klassificere mængder.
 
-\subsection*{Subsets and Proper Subsets}
-One of the most basic relationships is that of inclusion, where one set is contained within another.
+\subsection*{Delmængder og ægte delmængder}
+En af de mest grundlæggende relationer er inklusion, hvor én mængde er indeholdt i en anden.
 
-\begin{definition}[Subset]
-    A set $A$ is a \textbf{subset} of a set $B$ if every element of $A$ is also an element of $B$. We write this as $A \subseteq B$.
+\begin{definition}[Delmængde]
+    En mængde $A$ er en \textbf{delmængde} af en mængde $B$, hvis ethvert element i $A$ også er et element i $B$. Vi skriver det som $A \subseteq B$.
 \end{definition}
 
-For example, if $A = \{1, 2\}$ and $B = \{1, 2, 3\}$, then $A \subseteq B$ because every element in $A$ is also in $B$. By this definition, every set is a subset of itself (i.e., $A \subseteq A$).
+Hvis fx $A = \{1, 2\}$ og $B = \{1, 2, 3\}$, så gælder $A \subseteq B$, fordi ethvert element i $A$ også er med i $B$. Ifølge denne definition er enhver mængde en delmængde af sig selv (dvs. $A \subseteq A$).
 
 % --- Subset Figure ---
 \begin{figure}[htbp]
@@ -225,26 +225,26 @@ For example, if $A = \{1, 2\}$ and $B = \{1, 2, 3\}$, then $A \subseteq B$ becau
         \node at (1.5, 0.5) {$c$};
         \node at (-1.5, -1) {$d$};
     \end{tikzpicture}
-    \caption{Set $A = \{a, b\}$ is a subset of set $B = \{a, b, c, d\}$, denoted $A \subseteq B$.}
+    \caption{Mængden $A = \{a, b\}$ er en delmængde af mængden $B = \{a, b, c, d\}$, hvilket skrives $A \subseteq B$.}
     \label{fig:subset}
 \end{figure}
 
-Sometimes we want to specify that a set is a subset of another but is not equal to it.
+Nogle gange vil vi angive, at en mængde er en delmængde af en anden, men ikke er lig med den.
 
-\begin{definition}[Proper Subset]
-    A set $A$ is a \textbf{proper subset} of a set $B$ if $A \subseteq B$ and $A \neq B$. This means that $B$ must contain at least one element that is not in $A$. We write this as $A \subset B$.
+\begin{definition}[Ægte delmængde]
+    En mængde $A$ er en \textbf{ægte delmængde} af en mængde $B$, hvis $A \subseteq B$ og $A \neq B$. Det betyder, at $B$ skal indeholde mindst ét element, som ikke er med i $A$. Vi skriver det som $A \subset B$.
 \end{definition}
 
-Using the previous example, since $B$ contains the element $3$ which is not in $A$, we can say that $A$ is a proper subset of $B$, or $A \subset B$.
+I det foregående eksempel indeholder $B$ elementet $3$, som ikke er med i $A$. Derfor kan vi sige, at $A$ er en ægte delmængde af $B$, dvs. $A \subset B$.
 
-\subsection*{The Universal Set and the Empty Set}
-Two special sets act as the boundaries for set theory: the set containing everything and the set containing nothing.
+\subsection*{Universalmængden og den tomme mængde}
+To særlige mængder udgør mængdelærens yderpunkter: mængden, der indeholder alt, og mængden, der ikke indeholder noget.
 
-\begin{definition}[Universal Set]
-    The \textbf{universal set}, denoted by $U$, is the set of all possible elements under consideration in a given context. All other sets in that context are considered subsets of the universal set.
+\begin{definition}[Universalmængde]
+    \textbf{Universalmængden}, som betegnes $U$, er mængden af alle mulige elementer, der er i betragtning i en given sammenhæng. Alle andre mængder i den sammenhæng betragtes som delmængder af universalmængden.
 \end{definition}
 
-The universal set is represented in Venn diagrams by a rectangle that encloses all other sets. For example, if we are discussing integers, the universal set would be $U = \mathbb{Z}$. If we were discussing students at a university, $U$ would be the set of all enrolled students.
+I Venn-diagrammer tegnes universalmængden som et rektangel, der omslutter alle andre mængder. Hvis vi fx taler om hele tal, er universalmængden $U = \mathbb{Z}$. Hvis vi taler om studerende på et universitet, er $U$ mængden af alle indskrevne studerende.
 
 % --- Universal and Empty Set Figure ---
 \begin{figure}[htbp]
@@ -258,28 +258,28 @@ The universal set is represented in Venn diagrams by a rectangle that encloses a
         \draw[mseDarkBlue] (0,0) circle (1cm);
         \node[mseDarkBlue] at (0,0) {$A$};
     \end{tikzpicture}
-    \caption{The universal set $U$ contains all elements and sets under consideration.}
+    \caption{Universalmængden $U$ indeholder alle de elementer og mængder, der er i betragtning.}
     \label{fig:universal_set}
 \end{figure}
 
-\begin{definition}[Empty Set]
-    The \textbf{empty set} (or \textbf{null set}) is the unique set containing no elements. It is denoted by $\emptyset$ or by $\{\}$.
+\begin{definition}[Den tomme mængde]
+    \textbf{Den tomme mængde} (eller \textbf{nulmængden}) er den entydige mængde, der ikke indeholder nogen elementer. Den betegnes $\emptyset$ eller $\{\}$.
 \end{definition}
 
-The empty set has a crucial property:
+Den tomme mængde har en afgørende egenskab:
 \begin{center}
-    \textit{The empty set is a subset of every set.}
+    \textit{Den tomme mængde er en delmængde af enhver mængde.}
 \end{center}
-This is because there are no elements in $\emptyset$ that are not in any other set $A$. Therefore, for any set $A$, it is always true that $\emptyset \subseteq A$.
+Det skyldes, at der ikke findes noget element i $\emptyset$, som ikke er med i en vilkårlig anden mængde $A$. For enhver mængde $A$ gælder derfor altid $\emptyset \subseteq A$.
 
-\subsection*{Disjoint Sets}
-Sometimes, sets have no relationship at all because they are entirely separate.
+\subsection*{Disjunkte mængder}
+Nogle gange har mængder slet ingen sammenhæng, fordi de er helt adskilte.
 
-\begin{definition}[Disjoint Sets]
-    Two sets, $A$ and $B$, are \textbf{disjoint} if they have no elements in common. In other words, their intersection is the empty set: $A \cap B = \emptyset$.
+\begin{definition}[Disjunkte mængder]
+    To mængder $A$ og $B$ er \textbf{disjunkte}, hvis de ikke har nogen elementer til fælles. Deres fællesmængde er med andre ord den tomme mængde: $A \cap B = \emptyset$.
 \end{definition}
 
-For example, consider the set of even integers, $E = \{\dots, -2, 0, 2, \dots\}$, and the set of odd integers, $O = \{\dots, -3, -1, 1, 3, \dots\}$. These two sets are disjoint.
+Se fx på mængden af lige hele tal, $E = \{\dots, -2, 0, 2, \dots\}$, og mængden af ulige hele tal, $O = \{\dots, -3, -1, 1, 3, \dots\}$. Disse to mængder er disjunkte.
 
 % --- Disjoint Sets Figure ---
 \begin{figure}[htbp]
@@ -294,60 +294,60 @@ For example, consider the set of even integers, $E = \{\dots, -2, 0, 2, \dots\}$
         \node[color=fourth] at (1.2, 0) {$B$};
         
         % Caption Label
-        \node at (0, -1.5) {Disjoint Sets};
+        \node at (0, -1.5) {Disjunkte mængder};
     \end{tikzpicture}
-    \caption{Sets $A$ and $B$ are disjoint because they do not overlap.}
+    \caption{Mængderne $A$ og $B$ er disjunkte, fordi de ikke overlapper.}
     \label{fig:disjoint_sets}
 \end{figure}
 
 %======================================================================
 % SECTION: Properties of Sets
 %======================================================================
-\section{Properties of Sets}
-Beyond the relationships between sets, we can also describe their intrinsic properties. The two most fundamental properties are a set's size (its cardinality) and the collection of all its possible subsets (its power set).
+\section{Egenskaber ved mængder}
+Ud over relationerne mellem mængder kan vi også beskrive deres indre egenskaber. De to mest grundlæggende egenskaber er en mængdes størrelse (dens kardinalitet) og samlingen af alle dens mulige delmængder (dens potensmængde).
 
-\subsection*{Cardinality}
-The most basic property of a finite set is its size.
+\subsection*{Kardinalitet}
+Den mest grundlæggende egenskab ved en endelig mængde er dens størrelse.
 
-\begin{definition}[Cardinality]
-    The \textbf{cardinality} of a finite set $A$, denoted $|A|$, is the number of distinct elements in the set.
+\begin{definition}[Kardinalitet]
+    \textbf{Kardinaliteten} af en endelig mængde $A$, som betegnes $|A|$, er antallet af forskellige elementer i mængden.
 \end{definition}
 
-For example:
+For eksempel:
 \begin{itemize}
-    \item If $A = \{a, b, c, d\}$, then $|A| = 4$.
-    \item If $B = \{ n \in \mathbb{Z} \mid 0 < n < 5 \}$, then $B = \{1, 2, 3, 4\}$ and $|B| = 4$.
-    \item For the empty set, $|\emptyset| = 0$.
+    \item Hvis $A = \{a, b, c, d\}$, så er $|A| = 4$.
+    \item Hvis $B = \{ n \in \mathbb{Z} \mid 0 < n < 5 \}$, så er $B = \{1, 2, 3, 4\}$ og $|B| = 4$.
+    \item For den tomme mængde gælder $|\emptyset| = 0$.
 \end{itemize}
 
-The concept of cardinality can be extended to infinite sets, but that is a more advanced topic beyond the scope of this chapter. For our purposes, cardinality is a simple count of the elements.
+Begrebet kardinalitet kan udvides til uendelige mængder, men det er et mere avanceret emne, der ligger uden for dette kapitels rammer. Til vores formål er kardinaliteten blot antallet af elementer.
 
-\subsection*{Power Sets}
-One of the most powerful constructs in set theory is the idea of creating a set that contains all possible subsets of another set.
+\subsection*{Potensmængder}
+En af de mest effektive konstruktioner i mængdelæren er idéen om at danne en mængde, der indeholder alle mulige delmængder af en anden mængde.
 
-\begin{definition}[Power Set]
-    The \textbf{power set} of a set $A$, denoted $\mathcal{P}(A)$, is the set of all subsets of $A$. The elements of the power set are themselves sets.
+\begin{definition}[Potensmængde]
+    \textbf{Potensmængden} af en mængde $A$, som betegnes $\mathcal{P}(A)$, er mængden af alle delmængder af $A$. Elementerne i potensmængden er altså selv mængder.
 \end{definition}
 
-The power set always includes the empty set ($\emptyset$) and the set $A$ itself.
+Potensmængden indeholder altid den tomme mængde ($\emptyset$) og mængden $A$ selv.
 
-\begin{example}{Finding the Power Set of $A = \{1, 2, 3\}$}\\
-    To find $\mathcal{P}(A)$, we list all possible subsets of $A$, grouped by their cardinality:
+\begin{example}{Bestemmelse af potensmængden af $A = \{1, 2, 3\}$}\\
+    For at bestemme $\mathcal{P}(A)$ opremser vi alle mulige delmængder af $A$, grupperet efter deres kardinalitet:
     \begin{itemize}
-        \item Subsets of size 0: $\{ \emptyset \}$
-        \item Subsets of size 1: $\{ \{1\}, \{2\}, \{3\} \}$
-        \item Subsets of size 2: $\{ \{1, 2\}, \{1, 3\}, \{2, 3\} \}$
-        \item Subsets of size 3: $\{ \{1, 2, 3\} \}$
+        \item Delmængder af størrelse 0: $\{ \emptyset \}$
+        \item Delmængder af størrelse 1: $\{ \{1\}, \{2\}, \{3\} \}$
+        \item Delmængder af størrelse 2: $\{ \{1, 2\}, \{1, 3\}, \{2, 3\} \}$
+        \item Delmængder af størrelse 3: $\{ \{1, 2, 3\} \}$
     \end{itemize}
     
-    Combining all these subsets into a single set gives us the power set:
+    Når vi samler alle disse delmængder i én mængde, får vi potensmængden:
     \[ \mathcal{P}(A) = \{ \emptyset, \{1\}, \{2\}, \{3\}, \{1, 2\}, \{1, 3\}, \{2, 3\}, \{1, 2, 3\} \} \]
 \end{example}
 
 \begin{remark}
-    For a finite set $A$ with cardinality $|A| = n$, the cardinality of its power set is $|\mathcal{P}(A)| = 2^n$.
+    For en endelig mængde $A$ med kardinalitet $|A| = n$ er kardinaliteten af dens potensmængde $|\mathcal{P}(A)| = 2^n$.
     
-    This is a crucial formula for computer science. The reason is that for each of the $n$ elements in set $A$, we can make a binary choice: either we \textbf{include} it in a subset or we \textbf{exclude} it. With two choices for each of the $n$ elements, there are $2 \times 2 \times \dots \times 2$ ($n$ times), or $2^n$, total possible combinations, which corresponds to the total number of possible subsets.
+    Denne formel er afgørende i datalogi. Grunden er, at vi for hvert af de $n$ elementer i mængden $A$ kan træffe et binært valg: Enten \textbf{medtager} vi elementet i en delmængde, eller også \textbf{udelader} vi det. Med to valg for hvert af de $n$ elementer er der i alt $2 \times 2 \times \dots \times 2$ ($n$ gange), dvs. $2^n$, mulige kombinationer, hvilket svarer til det samlede antal mulige delmængder.
 \end{remark}
 
 
@@ -355,33 +355,33 @@ The power set always includes the empty set ($\emptyset$) and the set $A$ itself
 %======================================================================
 % SECTION: Operations on Sets (Revised with Custom Style)
 %======================================================================
-\section{Operations on Sets}
-Just as we can perform arithmetic operations on numbers, we can perform operations on sets to create new sets. These operations form the foundation of set algebra. For a software engineer, the most powerful insight is that set operations are a direct parallel to the logical operations of \textbf{Boolean algebra}. Every rule you learn for sets has an equivalent rule in logic and digital circuit design.
+\section{Mængdeoperationer}
+Ligesom vi kan udføre aritmetiske operationer på tal, kan vi udføre operationer på mængder og derved danne nye mængder. Disse operationer udgør grundlaget for mængdealgebraen. For en softwareingeniør er den vigtigste indsigt, at mængdeoperationer er en direkte parallel til de logiske operationer i \textbf{boolesk algebra}. Hver regel, du lærer for mængder, har en tilsvarende regel i logik og i design af digitale kredsløb.
 
-\begin{custombox}{The Duality of Sets and Boolean Algebra}
-    The relationship between set theory and Boolean algebra is so direct that they are considered "dually isomorphic." This means they are structurally identical. Understanding one is understanding the other. The key translations are:
+\begin{custombox}{Dualiteten mellem mængder og boolesk algebra}
+    Sammenhængen mellem mængdelære og boolesk algebra er så direkte, at de betragtes som »dualt isomorfe«. Det betyder, at de har nøjagtig samme struktur. Forstår man den ene, forstår man også den anden. De vigtigste oversættelser er:
     \begin{center}
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{lcl}
-        \textbf{Set Theory} & & \textbf{Boolean Algebra / Logic} \\
+        \textbf{Mængdelære} & & \textbf{Boolesk algebra/logik} \\
         \hline
-        Union ($\cup$) & $\iff$ & Boolean Sum ($+$) or \texttt{OR} \\
-        Intersection ($\cap$) & $\iff$ & Boolean Product ($\cdot$) or \texttt{AND} \\
-        Complement ($A^c$) & $\iff$ & Complementation ($\overline{x}$) or \texttt{NOT} \\
-        The Universal Set ($U$) & $\iff$ & True (1) \\
-        The Empty Set ($\emptyset$) & $\iff$ & False (0) \\
+        Foreningsmængde ($\cup$) & $\iff$ & Boolesk sum ($+$) eller \texttt{OR} \\
+        Fællesmængde ($\cap$) & $\iff$ & Boolesk produkt ($\cdot$) eller \texttt{AND} \\
+        Komplement ($A^c$) & $\iff$ & Komplementering ($\overline{x}$) eller \texttt{NOT} \\
+        Universalmængden ($U$) & $\iff$ & Sand (1) \\
+        Den tomme mængde ($\emptyset$) & $\iff$ & Falsk (0) \\
     \end{tabular}
     \end{center}
 \end{custombox}
 
-We will now explore the primary set operations, keeping this duality in mind.
+Vi gennemgår nu de primære mængdeoperationer og holder denne dualitet for øje.
 
-\subsection*{Intersection}
-The intersection of two sets contains only the elements that are common to both sets. It corresponds to the logical \texttt{AND} operator.
+\subsection*{Fællesmængde}
+Fællesmængden af to mængder indeholder kun de elementer, der er fælles for begge mængder. Den svarer til den logiske operator \texttt{AND}.
 
-\begin{definition}[Intersection]
-    The \textbf{intersection} of sets $A$ and $B$, denoted $A \cap B$, is the set containing all elements that are in both $A$ and $B$.
-    \[ A \cap B = \{ x \mid x \in A \text{ and } x \in B \} \]
+\begin{definition}[Fællesmængde]
+    \textbf{Fællesmængden} af mængderne $A$ og $B$, som betegnes $A \cap B$, er mængden af alle elementer, der både er med i $A$ og i $B$.
+    \[ A \cap B = \{ x \mid x \in A \text{ og } x \in B \} \]
 \end{definition}
 
 % --- Intersection Figure (Your Style) ---
@@ -398,16 +398,16 @@ The intersection of two sets contains only the elements that are common to both 
         \draw[outline] \firstcircle node {$A$};
         \draw[outline] \secondcircle node {$B$};
     \end{tikzpicture}
-    \caption{The shaded region represents the intersection $A \cap B$.}
+    \caption{Det skraverede område angiver fællesmængden $A \cap B$.}
     \label{fig:intersection_custom}
 \end{figure}
 
-\subsection*{Union}
-The union of two sets contains all the elements that appear in either set (or both). It corresponds to the logical \texttt{OR} operator.
+\subsection*{Foreningsmængde}
+Foreningsmængden af to mængder indeholder alle de elementer, der forekommer i mindst én af mængderne (eller i begge). Den svarer til den logiske operator \texttt{OR}.
 
-\begin{definition}[Union]
-    The \textbf{union} of sets $A$ and $B$, denoted $A \cup B$, is the set containing all elements that are in $A$, or in $B$, or in both.
-    \[ A \cup B = \{ x \mid x \in A \text{ or } x \in B \} \]
+\begin{definition}[Foreningsmængde]
+    \textbf{Foreningsmængden} af mængderne $A$ og $B$, som betegnes $A \cup B$, er mængden af alle elementer, der er med i $A$, i $B$ eller i begge.
+    \[ A \cup B = \{ x \mid x \in A \text{ eller } x \in B \} \]
 \end{definition}
 
 % --- Union Figure (Your Style) ---
@@ -421,16 +421,16 @@ The union of two sets contains all the elements that appear in either set (or bo
         \draw[outline] \firstcircle node {$A$};
         \draw[outline] \secondcircle node {$B$};
     \end{tikzpicture}
-    \caption{The shaded region represents the union $A \cup B$.}
+    \caption{Det skraverede område angiver foreningsmængden $A \cup B$.}
     \label{fig:union_custom}
 \end{figure}
 
-\subsection*{Set Difference}
-The difference between two sets contains the elements that are in the first set but \textit{not} in the second set.
+\subsection*{Mængdedifferens}
+Differensen mellem to mængder indeholder de elementer, der er med i den første mængde, men \textit{ikke} i den anden.
 
-\begin{definition}[Set Difference]
-    The \textbf{difference} of set $A$ and set $B$, denoted $A \setminus B$, is the set containing all elements that are in $A$ but not in $B$.
-    \[ A \setminus B = \{ x \mid x \in A \text{ and } x \notin B \} \]
+\begin{definition}[Mængdedifferens]
+    \textbf{Differensen} mellem mængden $A$ og mængden $B$, som betegnes $A \setminus B$, er mængden af alle elementer, der er med i $A$, men ikke i $B$.
+    \[ A \setminus B = \{ x \mid x \in A \text{ og } x \notin B \} \]
 \end{definition}
 
 % --- Set Difference Figure (Your Style) ---
@@ -447,15 +447,15 @@ The difference between two sets contains the elements that are in the first set 
         \draw[outline] \firstcircle node {$A$};
         \draw[outline] \secondcircle node {$B$};
     \end{tikzpicture}
-    \caption{The shaded region represents the difference $A \setminus B$.}
+    \caption{Det skraverede område angiver differensen $A \setminus B$.}
     \label{fig:difference_custom}
 \end{figure}
 
-\subsection*{Symmetric Difference}
-The symmetric difference contains all elements that are in one set or the other, but not in both. It corresponds to the logical \texttt{XOR} operator.
+\subsection*{Symmetrisk differens}
+Den symmetriske differens indeholder alle elementer, der er med i den ene eller den anden mængde, men ikke i begge. Den svarer til den logiske operator \texttt{XOR}.
 
-\begin{definition}[Symmetric Difference]
-    The \textbf{symmetric difference} of sets $A$ and $B$, denoted $A \oplus B$, is the set of elements which are in either of the sets, but not in their intersection.
+\begin{definition}[Symmetrisk differens]
+    Den \textbf{symmetriske differens} af mængderne $A$ og $B$, som betegnes $A \oplus B$, er mængden af de elementer, der er med i en af mængderne, men ikke i deres fællesmængde.
     \[ A \oplus B = (A \cup B) \setminus (A \cap B) \]
 \end{definition}
 
@@ -470,15 +470,15 @@ The symmetric difference contains all elements that are in one set or the other,
         \draw[outline] \firstcircle node {$A$};
         \draw[outline] \secondcircle node {$B$};
     \end{tikzpicture}
-    \caption{The shaded region represents the symmetric difference $A \oplus B$.}
+    \caption{Det skraverede område angiver den symmetriske differens $A \oplus B$.}
     \label{fig:symmetric_difference_custom}
 \end{figure}
 
-\subsection*{Complement}
-The complement of a set contains all the elements in the universal set that are \textit{not} in the set itself. It corresponds to the logical \texttt{NOT} operator.
+\subsection*{Komplement}
+Komplementet til en mængde indeholder alle de elementer i universalmængden, som \textit{ikke} er med i mængden selv. Det svarer til den logiske operator \texttt{NOT}.
 
-\begin{definition}[Complement]
-    The \textbf{complement} of a set $A$, denoted $A^c$, is the set of all elements in the universal set $U$ that are not in $A$.
+\begin{definition}[Komplement]
+    \textbf{Komplementet} til en mængde $A$, som betegnes $A^c$, er mængden af alle elementer i universalmængden $U$, der ikke er med i $A$.
     \[ A^c = U \setminus A \]
 \end{definition}
 
@@ -496,25 +496,25 @@ The complement of a set contains all the elements in the universal set that are 
         \draw[outline] (-2.5, -2) rectangle (2.5, 2) node[below left] {$U$};
         \draw[outline] \firstcircle node {$A$};
     \end{tikzpicture}
-    \caption{The shaded region represents the complement $A^c$.}
+    \caption{Det skraverede område angiver komplementet $A^c$.}
     \label{fig:complement_custom}
 \end{figure}
 
 %======================================================================
 % SECTION: Cartesian Products and Tuples
 %======================================================================
-\section{Cartesian Products and Tuples}
-While sets are unordered collections, we often need to work with ordered collections in computer science, such as coordinates, database records, or structured data. The Cartesian product is the set operation that allows us to create these ordered structures.
+\section{Kartesiske produkter og tupler}
+Mængder er uordnede samlinger, men i datalogi har vi ofte brug for at arbejde med ordnede samlinger, fx koordinater, databaseposter eller strukturerede data. Det kartesiske produkt er den mængdeoperation, der gør det muligt at danne sådanne ordnede strukturer.
 
-\subsection*{Cartesian Product}
-The Cartesian product creates a new set from two or more existing sets, consisting of all possible ordered combinations of their elements.
+\subsection*{Kartesisk produkt}
+Det kartesiske produkt danner en ny mængde ud fra to eller flere eksisterende mængder. Den nye mængde består af alle mulige ordnede kombinationer af deres elementer.
 
-\begin{definition}[Cartesian Product]
-    The \textbf{Cartesian product} of sets $A$ and $B$, denoted $A \times B$, is the set of all possible ordered pairs $(a, b)$, where the first element $a$ is from $A$ and the second element $b$ is from $B$.
-    \[ A \times B = \{ (a, b) \mid a \in A \text{ and } b \in B \} \]
+\begin{definition}[Kartesisk produkt]
+    Det \textbf{kartesiske produkt} af mængderne $A$ og $B$, som betegnes $A \times B$, er mængden af alle mulige ordnede par $(a, b)$, hvor det første element $a$ kommer fra $A$, og det andet element $b$ kommer fra $B$.
+    \[ A \times B = \{ (a, b) \mid a \in A \text{ og } b \in B \} \]
 \end{definition}
 
-The name comes from the Cartesian coordinate system, where any point on a 2D plane can be represented by an ordered pair $(x, y)$ from the Cartesian product of the real numbers, $\mathbb{R} \times \mathbb{R}$.
+Navnet kommer fra det kartesiske koordinatsystem, hvor ethvert punkt i en 2D-plan kan repræsenteres ved et ordnet par $(x, y)$ fra det kartesiske produkt af de reelle tal, $\mathbb{R} \times \mathbb{R}$.
 
 % --- Cartesian Product Figure ---
 \begin{figure}[htbp]
@@ -551,43 +551,43 @@ The name comes from the Cartesian coordinate system, where any point on a 2D pla
         \draw[->, gray, dashed] (A.north) -| (3.5, -1.5);
         \draw[->, gray, dashed] (B.east) |- (1.5, 0);
     \end{tikzpicture}
-    \caption{The Cartesian product of $A=\{1,2,3\}$ and $B=\{c,d\}$ results in a set of 6 ordered pairs.}
+    \caption{Det kartesiske produkt af $A=\{1,2,3\}$ og $B=\{c,d\}$ er en mængde med 6 ordnede par.}
     \label{fig:cartesian_product}
 \end{figure}
 
 \begin{remark}
-    The order of the sets in a Cartesian product matters. The set $A \times B$ is generally not equal to the set $B \times A$. For example, the pair $(1, c)$ is in $A \times B$, but the pair $(c, 1)$ would be in $B \times A$.
+    Rækkefølgen af mængderne i et kartesisk produkt har betydning. Mængden $A \times B$ er generelt ikke lig med mængden $B \times A$. For eksempel er parret $(1, c)$ med i $A \times B$, mens parret $(c, 1)$ ville være med i $B \times A$.
 \end{remark}
 
-\subsection*{Tuples}
-The elements of a Cartesian product are called \textbf{tuples}. If the product involves $n$ sets, its elements are called \textbf{n-tuples}.
+\subsection*{Tupler}
+Elementerne i et kartesisk produkt kaldes \textbf{tupler}. Hvis produktet involverer $n$ mængder, kaldes elementerne \textbf{n-tupler}.
 
 \begin{itemize}
-    \item A \textbf{2-tuple}, such as $(a, b)$, is more commonly known as an \textbf{ordered pair}.
-    \item A \textbf{3-tuple} has the form $(a, b, c)$.
-    \item An \textbf{n-tuple} has the form $(a_1, a_2, \dots, a_n)$.
+    \item En \textbf{2-tupel}, fx $(a, b)$, kaldes oftere et \textbf{ordnet par}.
+    \item En \textbf{3-tupel} har formen $(a, b, c)$.
+    \item En \textbf{n-tupel} har formen $(a_1, a_2, \dots, a_n)$.
 \end{itemize}
 
-The defining characteristic of a tuple is that \textbf{order matters}. This makes tuples fundamentally different from sets.
+Det afgørende kendetegn ved en tupel er, at \textbf{rækkefølgen har betydning}. Det gør tupler grundlæggende forskellige fra mængder.
 \begin{itemize}
-    \item For sets: $\{1, 2, 3\} = \{3, 2, 1\}$
-    \item For tuples: $(1, 2, 3) \neq (3, 2, 1)$
+    \item For mængder: $\{1, 2, 3\} = \{3, 2, 1\}$
+    \item For tupler: $(1, 2, 3) \neq (3, 2, 1)$
 \end{itemize}
-This property makes tuples ideal for representing data where the position of an element carries meaning, such as a database record `(UserID, Name, Email)`.
+Denne egenskab gør tupler velegnede til at repræsentere data, hvor et elements position har betydning, fx en databasepost `(UserID, Name, Email)`.
 
 %======================================================================
 % SECTION: Proving Set Equalities
 %======================================================================
-\section{Proving Set Equalities}
-In software development, simplifying complex conditional logic is crucial for writing efficient and readable code. Similarly, in set theory, we often need to prove that two different expressions describe the exact same set. There are two primary methods for this: using membership tables and applying set identities.
+\section{Bevis for mængdeligheder}
+I softwareudvikling er det afgørende at kunne forenkle kompleks betinget logik for at skrive effektiv og læsbar kode. På samme måde har vi i mængdelæren ofte brug for at bevise, at to forskellige udtryk beskriver præcis den samme mængde. Der er to primære metoder til dette: medlemskabstabeller og mængdeidentiteter.
 
-\subsection*{Method 1: Membership Tables}
-A membership table is a tool used to prove that two set expressions are equal by checking every possible combination of an element's membership in the constituent sets.
+\subsection*{Metode 1: Medlemskabstabeller}
+En medlemskabstabel er et værktøj til at bevise, at to mængdeudtryk er lig med hinanden, ved at kontrollere alle mulige kombinationer af et elements medlemskab af de indgående mængder.
 
-This method is the set-theory equivalent of using a \textbf{truth table} in Boolean algebra. Instead of checking for \texttt{TRUE} or \texttt{FALSE}, we check if an element is a member (represented by a $1$) or not a member (represented by a $0$) of a set. If the columns for two different set expressions are identical in all rows, the expressions are proven to be equal.
+Metoden er mængdelærens pendant til at bruge en \textbf{sandhedstabel} i boolesk algebra. I stedet for at kontrollere \texttt{TRUE} eller \texttt{FALSE} kontrollerer vi, om et element er med i en mængde (angivet med $1$) eller ikke er med (angivet med $0$). Hvis søjlerne for to forskellige mængdeudtryk er ens i alle rækker, er det bevist, at udtrykkene er lig med hinanden.
 
-\begin{example}{Showing that $A \cap B = B \setminus (B \setminus A)$}\\
-    To prove this equality, we construct a membership table for all combinations of membership in sets $A$ and $B$.
+\begin{example}{Vis, at $A \cap B = B \setminus (B \setminus A)$}\\
+    For at bevise denne lighed opstiller vi en medlemskabstabel for alle kombinationer af medlemskab af mængderne $A$ og $B$.
     
     \begin{center}
     \renewcommand{\arraystretch}{1.5}
@@ -604,116 +604,116 @@ This method is the set-theory equivalent of using a \textbf{truth table} in Bool
     \end{center}
     \label{ex:membership_table}
 
-\begin{solution} (\autoref{ex:membership_table}) Since the column for $A \cap B$ is identical to the column for $B \setminus (B \setminus A)$ for all possible membership combinations, the two expressions are equal.
+\begin{solution} (\autoref{ex:membership_table}) Da søjlen for $A \cap B$ er identisk med søjlen for $B \setminus (B \setminus A)$ for alle mulige kombinationer af medlemskab, er de to udtryk lig med hinanden.
 \end{solution}
 
 \end{example}
 
 
 
-\subsection*{Method 2: Set Identities}
-While membership tables are effective, they can become very large as the number of sets increases. A more algebraic approach is to use \textbf{set identities} to simplify one expression until it matches the other. These identities are fundamental laws that govern how set operations behave.
+\subsection*{Metode 2: Mængdeidentiteter}
+Medlemskabstabeller er effektive, men de kan blive meget store, når antallet af mængder vokser. En mere algebraisk fremgangsmåde er at bruge \textbf{mængdeidentiteter} til at forenkle det ene udtryk, indtil det svarer til det andet. Disse identiteter er grundlæggende love, der bestemmer, hvordan mængdeoperationer opfører sig.
 
-\autoref{tab:set_identities} shows the most important set identities. Notice the striking similarity to the laws of Boolean algebra — they are structurally identical.
+\autoref{tab:set_identities} viser de vigtigste mængdeidentiteter. Læg mærke til den slående lighed med lovene i boolesk algebra -- de har nøjagtig samme struktur.
 
 % --- Set Identities Table ---
 \begin{table}
 \centering
-\caption{Fundamental Set Identities and their Boolean Algebra Counterparts.}
+\caption{Grundlæggende mængdeidentiteter og deres modstykker i boolesk algebra.}
 \label{tab:set_identities}
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|l|l|l|}
 \hline
-\textbf{Identity Name} & \textbf{Set Identity} & \textbf{Boolean Identity} \\
+\textbf{Navn} & \textbf{Mængdeidentitet} & \textbf{Boolesk identitet} \\
 \hline
-Identity Laws & $A \cup \emptyset = A$ & $x + 0 = x$ \\
+Identitetslove & $A \cup \emptyset = A$ & $x + 0 = x$ \\
 & $A \cap U = A$ & $x \cdot 1 = x$ \\
 \hline
-Domination Laws & $A \cup U = U$ & $x + 1 = 1$ \\
+Dominanslove & $A \cup U = U$ & $x + 1 = 1$ \\
 & $A \cap \emptyset = \emptyset$ & $x \cdot 0 = 0$ \\
 \hline
-Idempotent Laws & $A \cup A = A$ & $x + x = x$ \\
+Idempotenslove & $A \cup A = A$ & $x + x = x$ \\
 & $A \cap A = A$ & $x \cdot x = x$ \\
 \hline
-Complement Laws & $A \cup A^c = U$ & $x + \overline{x} = 1$ \\
+Komplementlove & $A \cup A^c = U$ & $x + \overline{x} = 1$ \\
 & $A \cap A^c = \emptyset$ & $x \cdot \overline{x} = 0$ \\
 \hline
-Commutative Laws & $A \cup B = B \cup A$ & $x + y = y + x$ \\
+Kommutative love & $A \cup B = B \cup A$ & $x + y = y + x$ \\
 & $A \cap B = B \cap A$ & $x \cdot y = y \cdot x$ \\
 \hline
-Associative Laws & $(A \cup B) \cup C = A \cup (B \cup C)$ & $(x+y)+z = x+(y+z)$ \\
+Associative love & $(A \cup B) \cup C = A \cup (B \cup C)$ & $(x+y)+z = x+(y+z)$ \\
 & $(A \cap B) \cap C = A \cap (B \cap C)$ & $(x \cdot y) \cdot z = x \cdot (y \cdot z)$ \\
 \hline
-Distributive Laws & $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$ & $x \cdot (y+z) = (x \cdot y)+(x \cdot z)$ \\
+Distributive love & $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$ & $x \cdot (y+z) = (x \cdot y)+(x \cdot z)$ \\
 & $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$ & $x + (y \cdot z) = (x+y) \cdot (x+z)$ \\
 \hline
-De Morgan's Laws & $(A \cap B)^c = A^c \cup B^c$ & $\overline{x \cdot y} = \overline{x} + \overline{y}$ \\
+De Morgans love & $(A \cap B)^c = A^c \cup B^c$ & $\overline{x \cdot y} = \overline{x} + \overline{y}$ \\
 & $(A \cup B)^c = A^c \cap B^c$ & $\overline{x + y} = \overline{x} \cdot \overline{y}$ \\
 \hline
-Absorption Laws & $A \cup (A \cap B) = A$ & $x + (x \cdot y) = x$ \\
+Absorptionslove & $A \cup (A \cap B) = A$ & $x + (x \cdot y) = x$ \\
 & $A \cap (A \cup B) = A$ & $x \cdot (x+y) = x$ \\
 \hline
 \end{tabular}
 \end{table}
 
-\begin{example}{Proving $A \cup (B \cap A^c) = A \cup B$ using identities}
+\begin{example}{Bevis for $A \cup (B \cap A^c) = A \cup B$ ved hjælp af identiteter}
 \begin{align*}
-    A \cup (B \cap A^c) &= (A \cup B) \cap (A \cup A^c) && \text{by Distributive Law} \\
-    &= (A \cup B) \cap U && \text{by Complement Law} \\
-    &= A \cup B && \text{by Identity Law}
+    A \cup (B \cap A^c) &= (A \cup B) \cap (A \cup A^c) && \text{jf. den distributive lov} \\
+    &= (A \cup B) \cap U && \text{jf. komplementloven} \\
+    &= A \cup B && \text{jf. identitetsloven}
 \end{align*}
 \end{example}
 
-\begin{example}{Determine whether $(A \cap B) \cup (A \cap B^c) = A$}
+\begin{example}{Afgør, om $(A \cap B) \cup (A \cap B^c) = A$}
 \begin{solution}
-Let's simplify the left side using set identities:
+Vi forenkler venstre side ved hjælp af mængdeidentiteter:
 \begin{align*}
-    (A \cap B) \cup (A \cap B^c) &= A \cap (B \cup B^c) && \text{by Distributive Law} \\
-    &= A \cap U && \text{by Complement Law} \\
-    &= A && \text{by Identity Law}
+    (A \cap B) \cup (A \cap B^c) &= A \cap (B \cup B^c) && \text{jf. den distributive lov} \\
+    &= A \cap U && \text{jf. komplementloven} \\
+    &= A && \text{jf. identitetsloven}
 \end{align*}
-Since the left side simplifies to $A$, we have $(A \cap B) \cup (A \cap B^c) = A$. \textbf{The expressions are equal.}
+Da venstre side kan forenkles til $A$, har vi $(A \cap B) \cup (A \cap B^c) = A$. \textbf{Udtrykkene er lig med hinanden.}
 \end{solution}
 \end{example}
 
-\begin{example}{Determine whether $(A \cup B) \cap (A^c \cup B^c) = A \cap B$}
+\begin{example}{Afgør, om $(A \cup B) \cap (A^c \cup B^c) = A \cap B$}
 \begin{solution}
-Let's simplify the left side:
+Vi forenkler venstre side:
 \begin{align*}
-    (A \cup B) \cap (A^c \cup B^c) &= (A \cup B) \cap (A \cap B)^c && \text{by De Morgan's Law} \\
+    (A \cup B) \cap (A^c \cup B^c) &= (A \cup B) \cap (A \cap B)^c && \text{jf. De Morgans lov} \\
     &= (A \cup B) \cap (A \cap B)^c
 \end{align*}
-This represents all elements that are in $A$ or $B$ but not in both $A$ and $B$ simultaneously. This is the symmetric difference $A \oplus B$, not $A \cap B$.
+Det er alle de elementer, der er med i $A$ eller $B$, men ikke i både $A$ og $B$ på samme tid. Det er den symmetriske differens $A \oplus B$, ikke $A \cap B$.
 
-For a concrete counterexample, let the universal set be $U=\{1,2,3\}$, with $A = \{1, 2\}$ and $B = \{2, 3\}$:
+Som et konkret modeksempel lader vi universalmængden være $U=\{1,2,3\}$ med $A = \{1, 2\}$ og $B = \{2, 3\}$:
 \begin{itemize}
     \item $(A \cup B) \cap (A^c \cup B^c) = \{1, 2, 3\} \cap \{3, 1\} = \{1, 3\}$
     \item $A \cap B = \{2\}$
 \end{itemize}
-Since $\{1, 3\} \neq \{2\}$, \textbf{the expressions are not equal.}
+Da $\{1, 3\} \neq \{2\}$, \textbf{er udtrykkene ikke lig med hinanden.}
 \end{solution}
 \end{example}
 
-\begin{example}{Determine whether $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$}
+\begin{example}{Afgør, om $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$}
 \begin{solution}
-This is actually the Distributive Law for union over intersection. Let's verify:
+Dette er faktisk den distributive lov for foreningsmængde over fællesmængde. Lad os eftervise det:
 \begin{align*}
-    (A \cup B) \cap (A \cup C) &= A \cup (B \cap C) && \text{by Distributive Law}
+    (A \cup B) \cap (A \cup C) &= A \cup (B \cap C) && \text{jf. den distributive lov}
 \end{align*}
-So we have $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$. \textbf{The expressions are equal.}
+Vi har altså $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$. \textbf{Udtrykkene er lig med hinanden.}
 \end{solution}
 \end{example}
 
-\begin{example}{Determine whether $(A \cap B^c) \cup (A^c \cap B) = (A \cup B) \cap (A \cap B)^c$}
+\begin{example}{Afgør, om $(A \cap B^c) \cup (A^c \cap B) = (A \cup B) \cap (A \cap B)^c$}
 \begin{solution}
-The left side is the symmetric difference $A \oplus B$. Let's check the right side:
+Venstre side er den symmetriske differens $A \oplus B$. Vi undersøger højre side:
 \begin{align*}
-    (A \cup B) \cap (A \cap B)^c &= (A \cup B) \cap (A^c \cup B^c) && \text{by De Morgan's Law} \\
-    &= (A \cap A^c) \cup (A \cap B^c) \cup (B \cap A^c) \cup (B \cap B^c) && \text{by Distributive Law} \\
-    &= \emptyset \cup (A \cap B^c) \cup (A^c \cap B) \cup \emptyset && \text{by Complement Law} \\
-    &= (A \cap B^c) \cup (A^c \cap B) && \text{by Identity Law}
+    (A \cup B) \cap (A \cap B)^c &= (A \cup B) \cap (A^c \cup B^c) && \text{jf. De Morgans lov} \\
+    &= (A \cap A^c) \cup (A \cap B^c) \cup (B \cap A^c) \cup (B \cap B^c) && \text{jf. den distributive lov} \\
+    &= \emptyset \cup (A \cap B^c) \cup (A^c \cap B) \cup \emptyset && \text{jf. komplementloven} \\
+    &= (A \cap B^c) \cup (A^c \cap B) && \text{jf. identitetsloven}
 \end{align*}
-Since both sides equal $(A \cap B^c) \cup (A^c \cap B)$, \textbf{the expressions are equal.}
+Da begge sider er lig med $(A \cap B^c) \cup (A^c \cap B)$, \textbf{er udtrykkene lig med hinanden.}
 \end{solution}
 \end{example}
 
@@ -722,47 +722,47 @@ Since both sides equal $(A \cap B^c) \cup (A^c \cap B)$, \textbf{the expressions
 %======================================================================
 % SECTION: Computer Representation of Sets
 %======================================================================
-\section{Computer Representation of Sets}
-While set theory provides the abstract language for collections, computer science requires concrete and efficient ways to implement these ideas. For finite universal sets, one of the most elegant and performant methods is to represent sets using \textbf{bit strings}.This technique requires two conditions:
+\section{Repræsentation af mængder i computeren}
+Mængdelæren giver et abstrakt sprog for samlinger, men datalogi kræver konkrete og effektive måder at implementere idéerne på. For endelige universalmængder er en af de mest elegante og effektive metoder at repræsentere mængder med \textbf{bitstrenge}. Teknikken kræver to betingelser:
 \begin{enumerate}
-    \item The universal set $U$ must be finite.
-    \item The elements of $U$ must have a fixed, agreed-upon order.
+    \item Universalmængden $U$ skal være endelig.
+    \item Elementerne i $U$ skal have en fast, aftalt rækkefølge.
 \end{enumerate}
 
-Let $U = \{a_1, a_2, \dots, a_n\}$. Any subset $A \subseteq U$ can be represented by a bit string of length $n$, where the $i$-th bit is $1$ if $a_i \in A$, and $0$ if $a_i \notin A$.
+Lad $U = \{a_1, a_2, \dots, a_n\}$. Enhver delmængde $A \subseteq U$ kan repræsenteres ved en bitstreng af længde $n$, hvor den $i$'te bit er $1$, hvis $a_i \in A$, og $0$, hvis $a_i \notin A$.
 
-\begin{example}{Representing Sets as Bit Strings}\\
-    Let the universal set be $U = \{1, 2, 3, 4, 5, 6, 7, 8\}$.
+\begin{example}{Mængder repræsenteret som bitstrenge}\\
+    Lad universalmængden være $U = \{1, 2, 3, 4, 5, 6, 7, 8\}$.
     \begin{itemize}
-        \item The set $A = \{1, 3, 4, 8\}$ is represented by the bit string \texttt{10110001}.
-        \item The set $B = \{2, 3, 8\}$ is represented by the bit string \texttt{01100001}.
-        \item The set of all even numbers, $\{2, 4, 6, 8\}$, is \texttt{01010101}.
-        \item The empty set, $\emptyset$, is \texttt{00000000}.
+        \item Mængden $A = \{1, 3, 4, 8\}$ repræsenteres ved bitstrengen \texttt{10110001}.
+        \item Mængden $B = \{2, 3, 8\}$ repræsenteres ved bitstrengen \texttt{01100001}.
+        \item Mængden af alle lige tal, $\{2, 4, 6, 8\}$, er \texttt{01010101}.
+        \item Den tomme mængde, $\emptyset$, er \texttt{00000000}.
     \end{itemize}
 \end{example}
 
-The true power of this representation is that set operations map directly to extremely fast, low-level bitwise operations that processors can execute in a single cycle.
+Den virkelige styrke ved denne repræsentation er, at mængdeoperationer svarer direkte til ekstremt hurtige bitvise operationer på lavt niveau, som processorer kan udføre i en enkelt cyklus.
 
-\begin{custombox}{Set Operations as Bitwise Operations}
-    Let the bit strings for sets $A$ and $B$ be $s_A$ and $s_B$.
+\begin{custombox}{Mængdeoperationer som bitvise operationer}
+    Lad bitstrengene for mængderne $A$ og $B$ være $s_A$ og $s_B$.
     \begin{itemize}
-        \item \textbf{Union ($A \cup B$)} corresponds to a bitwise \textbf{\texttt{OR}} operation.
-        \item \textbf{Intersection ($A \cap B$)} corresponds to a bitwise \textbf{\texttt{AND}} operation.
-        \item \textbf{Complement ($A^c$)} corresponds to a bitwise \textbf{\texttt{NOT}} (one's complement) operation.
-        \item \textbf{Symmetric Difference ($A \oplus B$)} corresponds to a bitwise \textbf{\texttt{XOR}} operation.
+        \item \textbf{Foreningsmængde ($A \cup B$)} svarer til en bitvis \textbf{\texttt{OR}}-operation.
+        \item \textbf{Fællesmængde ($A \cap B$)} svarer til en bitvis \textbf{\texttt{AND}}-operation.
+        \item \textbf{Komplement ($A^c$)} svarer til en bitvis \textbf{\texttt{NOT}}-operation (enerkomplement).
+        \item \textbf{Symmetrisk differens ($A \oplus B$)} svarer til en bitvis \textbf{\texttt{XOR}}-operation.
     \end{itemize}
 \end{custombox}
 
-\begin{example}Performing Set Operations with Bit Strings\\
-    Using $U = \{1, 2, 3, 4, 5, 6, 7, 8\}$, let $A = \{1, 3, 4, 8\}$ and $B = \{2, 3, 8\}$.
+\begin{example}Mængdeoperationer udført med bitstrenge\\
+    Med $U = \{1, 2, 3, 4, 5, 6, 7, 8\}$ lader vi $A = \{1, 3, 4, 8\}$ og $B = \{2, 3, 8\}$.
     
     \begin{center}
     \renewcommand{\arraystretch}{1.4}
     \begin{tabular}{rll}
-         & \textbf{Set Representation} & \textbf{Bit String Representation} \\
+         & \textbf{Mængderepræsentation} & \textbf{Bitstrengsrepræsentation} \\
         \hline
-        Set $A$ & $\{1, 3, 4, 8\}$ & \texttt{10110001} \\
-        Set $B$ & $\{2, 3, 8\}$ & \texttt{01100001} \\
+        Mængden $A$ & $\{1, 3, 4, 8\}$ & \texttt{10110001} \\
+        Mængden $B$ & $\{2, 3, 8\}$ & \texttt{01100001} \\
         \hline
         $A \cup B$ & $\{1, 2, 3, 4, 8\}$ & \texttt{10110001 OR 01100001 = 11110001} \\
         $A \cap B$ & $\{3, 8\}$ & \texttt{10110001 AND 01100001 = 00100001} \\
@@ -771,4 +771,4 @@ The true power of this representation is that set operations map directly to ext
     \end{center}
 \end{example}
 
-This bit string representation is fundamental in many areas of computing, including file permissions in operating systems, database indexing, network protocols, and graphics programming, as it provides a way to manage and query collections with maximum efficiency.
+Bitstrengsrepræsentationen er grundlæggende inden for mange områder af databehandling, herunder filrettigheder i styresystemer, databaseindeksering, netværksprotokoller og grafikprogrammering, fordi den gør det muligt at håndtere og forespørge samlinger med maksimal effektivitet.

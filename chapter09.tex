@@ -1,18 +1,18 @@
-\chapter{Matrix Algebra}\label{chap:ch9}
+\chapter{Matrixalgebra}\label{chap:ch9}
 
-In the previous chapters, we explored concepts like linear equations, echelon forms, row reductions, linear independence, vector equations, and matrix equations. Now, to take our problem-solving skills to the next level, we need to dive into matrix algebra. Matrix operations allow us to handle complex systems more efficiently, building on the foundations we've established. The tools and techniques in this chapter will streamline the way we work with multiple matrices and lead us toward deeper insights, including key ideas like the Invertible Matrix Theorem.
+I de foregående kapitler har vi set på begreber som lineære ligninger, echelonformer, rækkereduktion, lineær uafhængighed, vektorligninger og matrixligninger. For at løfte vores problemløsningsevner til næste niveau skal vi nu dykke ned i matrixalgebra. Matrixoperationer gør det muligt at håndtere komplekse systemer mere effektivt og bygger videre på det fundament, vi har lagt. Værktøjerne og teknikkerne i dette kapitel gør det lettere at arbejde med flere matricer og fører os frem mod dybere indsigt, herunder centrale idéer som sætningen om invertible matricer.
 
-\section{Matrix Arithmetic}
-Matrix arithmetic like adding, subtracting, scaling, and multiplying let you combine and manipulate matrices in simple ways. These operations are the building blocks for more complex matrix manipulations, like solving systems of equations and finding inverses.
+\section{Regning med matricer}
+Regneoperationer på matricer som addition, subtraktion, skalering og multiplikation gør det muligt at kombinere og bearbejde matricer på enkle måder. Disse operationer er byggestenene i mere komplekse matrixmanipulationer, fx løsning af ligningssystemer og bestemmelse af inverse matricer.
 
 
-\subsection*{Addition and Scalar Multiplication}
-We begin with the definition of matrix addition.
+\subsection*{Addition og multiplikation med skalar}
+Vi begynder med definitionen af matrixaddition.
 
-\begin{definition}{Matrix Addition}
-    Let $A$ and $B$ be $m \times n$ matrices. The \textbf{sum} of $A$ and $B$, denoted $A + B$, is the $m \times n$ matrix whose entries are obtained by adding the corresponding entries of $A$ and $B$.
+\begin{definition}{Matrixaddition}
+    Lad $A$ og $B$ være $m \times n$-matricer. \textbf{Summen} af $A$ og $B$, betegnet $A + B$, er den $m \times n$-matrix, hvis indgange fås ved at addere de tilsvarende indgange i $A$ og $B$.
 
-    Given matrices
+    For matricerne
 
     $$
     A=\left[\begin{array}{cccc}
@@ -28,7 +28,7 @@ We begin with the definition of matrix addition.
     \end{array}\right]
     $$
 
-    both of the same dimension $m \times n$, the sum $A+B$ is thus defined as
+    som begge har dimensionen $m \times n$, er summen $A+B$ altså defineret som
 
     $$
     A+B=\left[\begin{array}{cccc}
@@ -41,13 +41,13 @@ We begin with the definition of matrix addition.
 \end{definition}
 
 \begin{remark}
-    Similar considerations apply for substraction of matrices, although not mentioned here explicitly.
+    Tilsvarende gælder for subtraktion af matricer, selv om det ikke nævnes eksplicit her.
 \end{remark}
 
-Next is the definition of scalar-matrix multiplication. \newpage
+Dernæst kommer definitionen af multiplikation af en matrix med en skalar. \newpage
 
-\begin{definition}{Scalar-Matrix Multiplication}
-    Let $A$ be an $m \times n$ matrix and $c$ be a scalar. The \textbf{product} of $c$ and $A$, denoted $cA$, is the $m \times n$ matrix whose entries are obtained by multiplying each entry of $A$ by $c$, and is thus defined as
+\begin{definition}{Multiplikation med skalar}
+    Lad $A$ være en $m \times n$-matrix og $c$ en skalar. \textbf{Produktet} af $c$ og $A$, betegnet $cA$, er den $m \times n$-matrix, hvis indgange fås ved at multiplicere hver indgang i $A$ med $c$. Produktet er altså defineret som
 
     $$
     c A=\left[\begin{array}{cccc}
@@ -66,7 +66,7 @@ Next is the definition of scalar-matrix multiplication. \newpage
 \end{definition}
 
  \begin{example}
-    Given matrices
+    Givet matricerne
     \[
 A=\left[\begin{array}{ccc}
 -5 & 2 & 0 \\
@@ -79,11 +79,11 @@ B=\left[\begin{array}{ccc}
 9 & 5 & 1
 \end{array}\right]
 \]
-    find the sum $A + B$ and the product $3A$.
+    skal du bestemme summen $A + B$ og produktet $3A$.
  \end{example}
 
 \begin{solution}
-    The sum $A + B$ is obtained by adding the corresponding entries of $A$ and $B$:
+    Summen $A + B$ fås ved at addere de tilsvarende indgange i $A$ og $B$:
 \begin{align*}
 \begin{split}
 A+B & =\left[\begin{array}{ccc}
@@ -106,7 +106,7 @@ A+B & =\left[\begin{array}{ccc}
 8 & 8 & 3
 \end{array}\right]
 \end{split}
-\intertext{The product $3A$ is obtained by multiplying each entry of $A$ by $3$:}
+\intertext{Produktet $3A$ fås ved at multiplicere hver indgang i $A$ med $3$:}
 \begin{split}
 3A & = 3 \left[\begin{array}{ccc}
 -5 & 2 & 0 \\
@@ -128,7 +128,7 @@ A+B & =\left[\begin{array}{ccc}
 \end{solution}
 
 \begin{example}
-Given $A$ and $B$ below, find $3A-2B$.
+Bestem $3A-2B$ for $A$ og $B$ nedenfor.
 \[
     A=\left[\begin{array}{lll}
     1 & -2 & 5 \\
@@ -144,7 +144,7 @@ Given $A$ and $B$ below, find $3A-2B$.
 \end{example}
 
 \begin{solution}
-    We compute:
+    Vi beregner:
 
     \[
 \begin{aligned}
@@ -166,11 +166,11 @@ Given $A$ and $B$ below, find $3A-2B$.
 \]
 \end{solution}
 
-Before moving on to matrix multiplication, we need to state some basic algebraic properties of matrix addition and scalar multiplication.
+Før vi går videre til matrixmultiplikation, skal vi formulere nogle grundlæggende algebraiske egenskaber ved matrixaddition og multiplikation med skalar.
 
 \begin{theorem}
 
-    Let $A$, $B$, $C$ be matrices of the same size and let $\alpha$, $\beta$ be scalars. Then
+    Lad $A$, $B$, $C$ være matricer af samme størrelse, og lad $\alpha$, $\beta$ være skalarer. Så gælder
     \begin{enumerate}[(a)]
         \item $A+B=B+A$
         \item $(A+B)+C=A+(B+C)$
@@ -180,23 +180,23 @@ Before moving on to matrix multiplication, we need to state some basic algebraic
         \item $\alpha(\beta A)=(\alpha \beta) A$
     \end{enumerate}
 \end{theorem}
-\subsection*{Matrix Multiplication}
-Matrix multiplication is a bit more complex than addition and scalar multiplication. The product of two matrices is defined only when the number of columns in the first matrix is equal to the number of rows in the second matrix. The product of two matrices $A$ and $B$ is a new matrix $C$ whose entries are determined by the dot product of the rows of $A$ and the columns of $B$. Note that $\vect{x}$ is a column vector.
+\subsection*{Matrixmultiplikation}
+Matrixmultiplikation er lidt mere kompliceret end addition og multiplikation med skalar. Produktet af to matricer er kun defineret, når antallet af søjler i den første matrix er lig med antallet af rækker i den anden matrix. Produktet af to matricer $A$ og $B$ er en ny matrix $C$, hvis indgange bestemmes af prikproduktet af rækkerne i $A$ og søjlerne i $B$. Bemærk, at $\vect{x}$ er en søjlevektor.
 
-Let \(B\) be an \(n \times p\) matrix and \(A\) be an \(m \times n\) matrix. If \(\vect{x} \in \mathbb{R}^p\), then multiplying \(B\) by \(\vect{x}\) produces a new vector \(B\vect{x}\) in \(\mathbb{R}^n\). Once we have this result, we can further multiply it by \(A\), giving us \(A(B\vect{x})\), which is a vector in \(\mathbb{R}^m\).
+Lad \(B\) være en \(n \times p\)-matrix og \(A\) en \(m \times n\)-matrix. Hvis \(\vect{x} \in \mathbb{R}^p\), giver multiplikation af \(B\) med \(\vect{x}\) en ny vektor \(B\vect{x}\) i \(\mathbb{R}^n\). Når vi har dette resultat, kan vi multiplicere det videre med \(A\) og får \(A(B\vect{x})\), som er en vektor i \(\mathbb{R}^m\).
 
-Thus, for any vector \(\vect{x}\) in \(\mathbb{R}^p\), this process produces a corresponding vector in \(\mathbb{R}^m\). This two-step operation—first multiplying by \(B\) and then by \(A\)—is referred to as the composition of \(A\) and \(B\), and is usually written as \(AB\). Therefore, we have:
+For enhver vektor \(\vect{x}\) i \(\mathbb{R}^p\) giver denne proces altså en tilsvarende vektor i \(\mathbb{R}^m\). Denne operation i to trin -- først multiplikation med \(B\) og derefter med \(A\) -- kaldes sammensætningen af \(A\) og \(B\) og skrives normalt som \(AB\). Vi har derfor:
 
 \[
 (AB)\vect{x} = A(B\vect{x})
 \]
 
-To compute the matrix resulting from this composition, we multiply \(A\) by \(B\) directly, following the rules of matrix multiplication. The result is a matrix \(C = AB\), where each entry of \(C\) is determined by the interactions between the rows of \(A\) and the columns of \(B\).
+For at beregne den matrix, der fremkommer ved denne sammensætning, multiplicerer vi \(A\) direkte med \(B\) efter reglerne for matrixmultiplikation. Resultatet er en matrix \(C = AB\), hvor hver indgang i \(C\) bestemmes af samspillet mellem rækkerne i \(A\) og søjlerne i \(B\).
 
-In essence, \(C\) represents the matrix that captures the combined effect of applying both \(B\) and \(A\) to any vector \(\vect{x} \in \mathbb{R}^p\), without needing to break it down into intermediate steps.
+Grundlæggende er \(C\) den matrix, der udtrykker den samlede virkning af at anvende både \(B\) og \(A\) på en vilkårlig vektor \(\vect{x} \in \mathbb{R}^p\), uden at vi behøver at dele det op i mellemtrin.
 
 \begin{definition}
-    For $A \in \mathbb{R}^{m \times n}$ and $B \in \mathbb{R}^{n \times p}$, with $B=\left[\begin{array}{lll}\vect{b_1} & \vect{b_2} \cdots & \vect{b_p}\end{array}\right]$, we define the product $A B$ by the formula
+    For $A \in \mathbb{R}^{m \times n}$ og $B \in \mathbb{R}^{n \times p}$, med $B=\left[\begin{array}{lll}\vect{b_1} & \vect{b_2} \cdots & \vect{b_p}\end{array}\right]$, definerer vi produktet $A B$ ved formlen
 
 \[
 A B=\left[\begin{array}{llll}
@@ -206,7 +206,7 @@ A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
 
 \end{definition}
 
-The product $AB$ is defined only when the number of columns of $A$ equals the number of rows of $B$. The following diagram is useful for remembering this:
+Produktet $AB$ er kun defineret, når antallet af søjler i $A$ er lig med antallet af rækker i $B$. Følgende diagram er nyttigt at huske det med:
 
 
 \[
@@ -224,10 +224,10 @@ The product $AB$ is defined only when the number of columns of $A$ equals the nu
 \end{tikzpicture}
 \]
 
-The diagram shows that the number of columns in the first matrix must equal the number of rows in the second matrix (the \textcolor{blue}{blue arrow}). The result is a new matrix with the number of rows from the first matrix and the number of columns from the second matrix (the \textcolor{red}{red arrow}).
+Diagrammet viser, at antallet af søjler i den første matrix skal være lig med antallet af rækker i den anden matrix (den \textcolor{blue}{blå pil}). Resultatet er en ny matrix med lige så mange rækker som den første matrix og lige så mange søjler som den anden matrix (den \textcolor{red}{røde pil}).
 
 \begin{example}
-    For $A$ and $B$ below compute $AB$ and $BA$.
+    Beregn $AB$ og $BA$ for $A$ og $B$ nedenfor.
 
     \[
     A=\left[\begin{array}{lll}
@@ -243,7 +243,7 @@ The diagram shows that the number of columns in the first matrix must equal the 
 \end{example}
 
 \begin{solution}
-    First $A B=\left[\begin{array}{llll}A \vect{b_1} & A \vect{b_2} & A \vect{b_3} & A \vect{b_4}\end{array}\right]$ :
+    Først $A B=\left[\begin{array}{llll}A \vect{b_1} & A \vect{b_2} & A \vect{b_3} & A \vect{b_4}\end{array}\right]$:
 
 \[
 \begin{aligned}
@@ -257,29 +257,29 @@ The diagram shows that the number of columns in the first matrix must equal the 
 \end{array}\right] \\
 & = \vcenter{\hbox{\begin{tikzpicture}
     \matrix (m1) [matrix of math nodes,left delimiter={[}] {
-    2 & \quad \text{Row 1 of $A$ and Column 1 of $B$} \\
-    7 & \quad \text{Row 2 of $A$ and Column 1 of $B$} \\
+    2 & \quad \text{Række 1 i $A$ og søjle 1 i $B$} \\
+    7 & \quad \text{Række 2 i $A$ og søjle 1 i $B$} \\
     };
     \draw[headercolor,thick] (m1-1-1.north west) rectangle (m1-2-1.south east);
 \end{tikzpicture}}} \\
 & = \vcenter{\hbox{\begin{tikzpicture}
     \matrix (m2) [matrix of math nodes,left delimiter={[}] {
-    2 & 0 & \quad \text{Row 1 of $A$ and Column 2 of $B$} \\
-    7 & 9 & \quad \text{Row 2 of $A$ and Column 2 of $B$} \\
+    2 & 0 & \quad \text{Række 1 i $A$ og søjle 2 i $B$} \\
+    7 & 9 & \quad \text{Række 2 i $A$ og søjle 2 i $B$} \\
     };
     \draw[headercolor,thick] (m2-1-2.north west) rectangle (m2-2-2.south east);
 \end{tikzpicture}}} \\
 & = \vcenter{\hbox{\begin{tikzpicture}
     \matrix (m3) [matrix of math nodes,left delimiter={[}] {
-    2 & 0 & 4 & \quad \text{Row 1 of $A$ and Column 3 of $B$} \\
-    7 & 9 & 10 & \quad \text{Row 2 of $A$ and Column 3 of $B$} \\
+    2 & 0 & 4 & \quad \text{Række 1 i $A$ og søjle 3 i $B$} \\
+    7 & 9 & 10 & \quad \text{Række 2 i $A$ og søjle 3 i $B$} \\
     };
     \draw[headercolor,thick] (m3-1-3.north west) rectangle (m3-2-3.south east);
 \end{tikzpicture}}} \\
 & = \vcenter{\hbox{\begin{tikzpicture}
     \matrix (m4) [matrix of math nodes,left delimiter={[}] {
-    2 & 0 & 4 & 4 & \quad \text{Row 1 of $A$ and Column 4 of $B$} \\
-    7 & 9 & 10 & 2 & \quad \text{Row 2 of $A$ and Column 4 of $B$} \\
+    2 & 0 & 4 & 4 & \quad \text{Række 1 i $A$ og søjle 4 i $B$} \\
+    7 & 9 & 10 & 2 & \quad \text{Række 2 i $A$ og søjle 4 i $B$} \\
     };
     \draw[headercolor,thick] (m4-1-4.north west) rectangle (m4-2-4.south east);
 \end{tikzpicture}}} \\
@@ -292,17 +292,17 @@ The diagram shows that the number of columns in the first matrix must equal the 
 \end{aligned}
 \]
 
-On the other hand, $B A$ is not defined! $B$ has 4 columns and $A$ has 2 rows. Thus, the number of columns in $B$ is not equal to the number of rows in $A$. \end{solution}
+Derimod er $B A$ ikke defineret! $B$ har 4 søjler, og $A$ har 2 rækker. Antallet af søjler i $B$ er altså ikke lig med antallet af rækker i $A$. \end{solution}
 
 \begin{example}
-    Example Compute the matrix $A B$, where
+    Beregn matricen $A B$, hvor
 
 \[
 A=\left[\begin{array}{ll}
 1 & 2 \\
 2 & 3 \\
 3 & 4
-\end{array}\right], \quad \text { and } B=\left[\begin{array}{cc}
+\end{array}\right], \quad \text { og } B=\left[\begin{array}{cc}
 2 & -1 \\
 3 & 1
 \end{array}\right]
@@ -311,7 +311,7 @@ A=\left[\begin{array}{ll}
 \end{example}
 
 \begin{solution}
-    By the definition of multiplication given above,
+    Ifølge definitionen af multiplikation ovenfor er
 
 \[
 \begin{aligned}
@@ -355,33 +355,33 @@ A B & =\left[A\left[\begin{array}{l}
 \]
 \end{solution}
 
-\begin{example} If $A$ is $3 \times 5$ and $B$ is $5 \times 2$, what are the sizes of $A B$ and $B A$ (assuming they are defined)?
+\begin{example} Hvis $A$ er $3 \times 5$ og $B$ er $5 \times 2$, hvilke størrelser har $A B$ og $B A$ så (forudsat at de er defineret)?
 \end{example}
 
 \begin{solution}
     \begin{itemize}
-        \item The product $A B$ is defined since the number of columns of $A$ matches the number of rows of $B$ (5). The resulting matrix $A B$ is a $3 \times 2$ matrix.
-        \item The product $B A$ is not defined, since the number of columns of $B$ (2) does not match the number of rows of $A$ (3).
+        \item Produktet $A B$ er defineret, da antallet af søjler i $A$ svarer til antallet af rækker i $B$ (5). Den resulterende matrix $A B$ er en $3 \times 2$-matrix.
+        \item Produktet $B A$ er ikke defineret, da antallet af søjler i $B$ (2) ikke svarer til antallet af rækker i $A$ (3).
     \end{itemize}
 \end{solution}
 
-The next example illustrate that even if both $AB$ and $BA$ are defined, they are not necessarily equal.
+Det næste eksempel viser, at selv hvis både $AB$ og $BA$ er defineret, er de ikke nødvendigvis ens.
 
 \begin{example}
-    For $A = \left[\begin{array}{rrr}
+    Beregn $AB$ og $BA$ for $A = \left[\begin{array}{rrr}
         -4 & 4 & 3 \\
         3 & -3 & -1 \\
         -2 & -1 & 1
-        \end{array}\right] $ and $B = \left[\begin{array}{rrr}
+        \end{array}\right] $ og $B = \left[\begin{array}{rrr}
             -1 & -1 & 0 \\
             -3 & 0 & -2 \\
             -2 & 1 & -2
-            \end{array}\right]$ compute $AB$ and $BA$.
+            \end{array}\right]$.
 
 \end{example}
 
 \begin{solution}
-    First $AB$:
+    Først $AB$:
 
     \[
     \begin{aligned}
@@ -412,7 +412,7 @@ The next example illustrate that even if both $AB$ and $BA$ are defined, they ar
     \end{aligned}
     \]
 
-    Next $BA$:
+    Dernæst $BA$:
     \[
     \begin{aligned}
     B A & =\left[\begin{array}{rrr}
@@ -442,9 +442,9 @@ The next example illustrate that even if both $AB$ and $BA$ are defined, they ar
     \end{aligned}
     \]
 
-    We see that $AB \neq BA$. \end{solution}
+    Vi ser, at $AB \neq BA$. \end{solution}
 
-    In regular arithmetic the multiplicative identity is 1. In matrix algebra, the multiplicative identity is the identity matrix, denoted by $I$. The identity matrix is a \textit{square} matrix with 1s on the diagonal and 0s elsewhere. The size of the identity matrix is determined by the context, and is usually clear from the context. For example, $I_2$ is a $2 \times 2$ identity matrix, and $I_3$ is a $3 \times 3$ identity matrix and in general $I_n \in \mathbb{R}^{n \times n}$ is an $n \times n$ identity matrix:
+    I almindelig aritmetik er det neutrale element for multiplikation 1. I matrixalgebra er det neutrale element for multiplikation identitetsmatricen, som betegnes $I$. Identitetsmatricen er en \textit{kvadratisk} matrix med 1-taller i diagonalen og 0-taller alle andre steder. Identitetsmatricens størrelse bestemmes af sammenhængen og fremgår som regel klart af den. For eksempel er $I_2$ en $2 \times 2$-identitetsmatrix, og $I_3$ er en $3 \times 3$-identitetsmatrix, og generelt er $I_n \in \mathbb{R}^{n \times n}$ en $n \times n$-identitetsmatrix:
 
     $$
     I_n=\left[\begin{array}{ccccc}
@@ -455,33 +455,33 @@ The next example illustrate that even if both $AB$ and $BA$ are defined, they ar
     \end{array}\right]
     $$
 
-    We can now state the following theorem.
+    Vi kan nu formulere følgende sætning.
 
     \begin{theorem}
-        Let $A, B, C$ be matrices, of appropriate dimensions, and let $\alpha$ be a scalar. Then
+        Lad $A, B, C$ være matricer af passende dimensioner, og lad $\alpha$ være en skalar. Så gælder
 \begin{enumerate}[(a)]
     \item $A(BC) = (AB)C$
     \item $A(B + C) = AB + AC$
     \item $(B + C)A = BA + CA$
     \item $\alpha(AB) = (\alpha A)B = A(\alpha B)$
-    \item If $A$ is an $m\times n$ matrix, then $I_m A=A=AI_n$
+    \item Hvis $A$ er en $m\times n$-matrix, så er $I_m A=A=AI_n$
 \end{enumerate}
 \end{theorem}
 
-We conclude this section by looking at the $k$th power of a matrix.
+Vi afslutter dette afsnit med at se på den $k$'te potens af en matrix.
 
 \begin{definition}
-    Let $A$ be a square matrix, i.e. $ A \in \mathbb{R}^{n \times n}$. The $k$th power of $A$, denoted $A^k$, is defined as the product of $A$ with itself $k$ times. That is,
+    Lad $A$ være en kvadratisk matrix, dvs. $ A \in \mathbb{R}^{n \times n}$. Den $k$'te potens af $A$, betegnet $A^k$, er defineret som produktet af $A$ med sig selv $k$ gange. Det vil sige
 
     $$
-    A^k=\underbrace{ AAA \cdot \cdots A}_{k \text { times }}
+    A^k=\underbrace{ AAA \cdot \cdots A}_{k \text { gange }}
     $$
 
-    where $A$ appears $k$ times on the right-hand side.
+    hvor $A$ optræder $k$ gange på højre side.
 \end{definition}
 
 \begin{example}
-    Compute $A^3$ if
+    Beregn $A^3$, hvis
     \[
     A=\left[\begin{array}{rr}
     -2 & 3 \\
@@ -492,7 +492,7 @@ We conclude this section by looking at the $k$th power of a matrix.
 
 \begin{solution}
 
-    Compute $A^2$ :
+    Beregn $A^2$:
 
     \[
     A^2=\left[\begin{array}{rr}
@@ -507,7 +507,7 @@ We conclude this section by looking at the $k$th power of a matrix.
     \end{array}\right]
     \]
 
-    And then $A^3$ :
+    Og derefter $A^3$:
 
     \[
     \begin{aligned}
@@ -525,7 +525,7 @@ We conclude this section by looking at the $k$th power of a matrix.
     \end{aligned}
     \]
 
-    We could also do:
+    Vi kunne også gøre sådan:
 
     \[
     A^3=A A^2=\left[\begin{array}{rr}
@@ -542,14 +542,14 @@ We conclude this section by looking at the $k$th power of a matrix.
 
 \end{solution}
 
-\section{Matrix Transpose}
-We begin with the definition of the transpose of a matrix.
+\section{Den transponerede matrix}
+Vi begynder med definitionen af den transponerede af en matrix.
 
 \begin{definition}
-    Given a matrix $A \in \mathbb{R}^{m \times n}$, the transpose of $A$ is the matrix $A^T$ whose $i$th column is the $i$th row of $A$.
+    For en matrix $A \in \mathbb{R}^{m \times n}$ er den transponerede af $A$ matricen $A^T$, hvis $i$'te søjle er den $i$'te række i $A$.
 \end{definition}
 
-If $A$ is $m \times n$ then $A^T$ is $n \times m$. For example, if
+Hvis $A$ er $m \times n$, så er $A^T$ $n \times m$. Hvis for eksempel
 
 \[
 A=\left[\begin{array}{rrrrr}
@@ -560,7 +560,7 @@ A=\left[\begin{array}{rrrrr}
 \end{array}\right]
 \]
 
-then
+så er
 
 \[
 A^T=\left[\begin{array}{rrrr}
@@ -572,7 +572,7 @@ A^T=\left[\begin{array}{rrrr}
 \end{array}\right]
 \]
 
-\begin{example} Compute $(AB)^T$ and $B^T A^T$ if
+\begin{example} Beregn $(AB)^T$ og $B^T A^T$, hvis
 
 \[
 A=\left[\begin{array}{rrr}
@@ -587,7 +587,7 @@ A=\left[\begin{array}{rrr}
 \end{example}
 
 \begin{solution}
-    First, compute $(AB)^T$:
+    Først beregner vi $(AB)^T$:
 
     \[
     \begin{aligned}
@@ -606,7 +606,7 @@ A=\left[\begin{array}{rrr}
     \end{aligned}
     \]
 
-    and then $(AB)^T$:
+    og derefter $(AB)^T$:
 
     \[
     \begin{aligned}
@@ -622,7 +622,7 @@ A=\left[\begin{array}{rrr}
     \end{aligned}
     \]
 
-    Next, compute $B^T A^T$:
+    Dernæst beregner vi $B^T A^T$:
 
     \[
     \begin{aligned}
@@ -643,12 +643,12 @@ A=\left[\begin{array}{rrr}
     \end{aligned}
     \]
 
-    We see that $(AB)^T = B^T A^T$. \end{solution}
+    Vi ser, at $(AB)^T = B^T A^T$. \end{solution}
 
-The following theorem summarises the properties of the transpose of a matrix.
+Følgende sætning opsummerer egenskaberne ved den transponerede af en matrix.
 
 \begin{theorem}
-    Let $A$ and $B$ be matrices of appropriate dimensions and let $\alpha$ be a scalar. Then
+    Lad $A$ og $B$ være matricer af passende dimensioner, og lad $\alpha$ være en skalar. Så gælder
     \begin{enumerate}[(a)]
         \item $(A^T)^T = A$
         \item $(A + B)^T = A^T + B^T$
@@ -657,32 +657,32 @@ The following theorem summarises the properties of the transpose of a matrix.
     \end{enumerate}
 \end{theorem}
 
-A consequence of property (4) is that
+En konsekvens af egenskab (4) er, at
 \[
 \left(A_1 A_2 \ldots A_k\right)^T=A_k^T A_{k-1}^T \cdots A_2^T A_1^T
 \]
 
-and as a special case
+og som et specialtilfælde
 
 \[
 \left(A^k\right)^T=\left(A^T\right)^k
 \]
 
-\section{Invertible Matrices}
-The inverse of a square matrix \( A \in \mathbb{R}^{n \times n} \) extends the concept of the reciprocal for a nonzero real number \( a \in \mathbb{R} \). More precisely, the inverse of a non-zero number \( a \in \mathbb{R} \) is the unique number \( c \in \mathbb{R} \) such that \( a c = c a = 1 \). The inverse of \( a \neq 0 \), typically written as \( a^{-1} = \frac{1}{a} \), enables solving the equation \( a x = b \):
+\section{Invertible matricer}
+Den inverse af en kvadratisk matrix \( A \in \mathbb{R}^{n \times n} \) udvider begrebet den reciprokke værdi af et reelt tal \( a \in \mathbb{R} \), der er forskelligt fra nul. Mere præcist er den inverse af et tal \( a \in \mathbb{R} \), der er forskelligt fra nul, det entydige tal \( c \in \mathbb{R} \), som opfylder \( a c = c a = 1 \). Den inverse af \( a \neq 0 \), som typisk skrives \( a^{-1} = \frac{1}{a} \), gør det muligt at løse ligningen \( a x = b \):
 
 \[
 a x = b \Rightarrow a^{-1} a x = a^{-1} b \Rightarrow x = a^{-1} b.
 \]
 
-This concept extends to square matrices, where the inverse of a matrix \( A \in \mathbb{R}^{n \times n} \) is a matrix \( C \in \mathbb{R}^{n \times n} \) such that \( A C = C A = I_n \), where \( I_n \) is the identity matrix of size \( n \times n \). The inverse of a matrix is denoted by \( A^{-1} \). We can now define the invertible matrix.
+Dette begreb kan udvides til kvadratiske matricer, hvor den inverse af en matrix \( A \in \mathbb{R}^{n \times n} \) er en matrix \( C \in \mathbb{R}^{n \times n} \), som opfylder \( A C = C A = I_n \), hvor \( I_n \) er identitetsmatricen af størrelse \( n \times n \). Den inverse af en matrix betegnes \( A^{-1} \). Vi kan nu definere en invertibel matrix.
 
 \begin{definition}
-    A square matrix \( A \in \mathbb{R}^{n \times n} \) is invertible (or \textbf{nonsingular}) if there exists a matrix \( C \in \mathbb{R}^{n \times n} \) such that \( A C = C A = I_n \). The matrix \( C \) is called the inverse of \( A \) and is denoted by \( A^{-1} \). Thus, \( A^{-1} A = A A^{-1} = I_n \).
+    En kvadratisk matrix \( A \in \mathbb{R}^{n \times n} \) er invertibel (eller \textbf{ikke-singulær}), hvis der findes en matrix \( C \in \mathbb{R}^{n \times n} \), så \( A C = C A = I_n \). Matricen \( C \) kaldes den inverse af \( A \) og betegnes \( A^{-1} \). Der gælder altså \( A^{-1} A = A A^{-1} = I_n \).
 \end{definition}
 
 \begin{example}
-    Given $A$ and $C$ below, show that $C$ is the inverse of $A$.
+    Vis, at $C$ er den inverse af $A$, hvor $A$ og $C$ er givet nedenfor.
 
     \[
     A=\left[\begin{array}{rrr}
@@ -699,7 +699,7 @@ This concept extends to square matrices, where the inverse of a matrix \( A \in 
 \end{example}
 
 \begin{solution}
-    We need to show that $A C = C A = I_3$. First, compute $AC$:
+    Vi skal vise, at $A C = C A = I_3$. Først beregner vi $AC$:
 
     \[
     \begin{aligned}
@@ -720,7 +720,7 @@ This concept extends to square matrices, where the inverse of a matrix \( A \in 
     \end{aligned}
     \]
 
-    Next, compute $CA$:
+    Dernæst beregner vi $CA$:
 
     \[
     \begin{aligned}
@@ -741,21 +741,21 @@ This concept extends to square matrices, where the inverse of a matrix \( A \in 
     \end{aligned}
     \]
 
-    We see that $C=A^{-1}$ is the inverse of $A$. \end{solution}
+    Vi ser, at $C=A^{-1}$ er den inverse af $A$. \end{solution}
 
-The following theorem summarizes the relationship between the matrix inverse and matrix multiplication and matrix transpose.
+Følgende sætning opsummerer sammenhængen mellem den inverse matrix og henholdsvis matrixmultiplikation og den transponerede matrix.
 
-\begin{theorem} Let $A$ and $B$ be invertible $n \times n$ matrices. Then:
+\begin{theorem} Lad $A$ og $B$ være invertible $n \times n$-matricer. Så gælder:
 \begin{enumerate}[(a)]
-    \item $A^{-1}$ is invertible, with
+    \item $A^{-1}$ er invertibel, og
     \[
     \left(A^{-1}\right)^{-1}=A
     \]
-    \item The product $A B$ is invertible, with
+    \item Produktet $A B$ er invertibelt, og
     \[
     (A B)^{-1}=B^{-1} A^{-1}
     \]
-    \item The transpose of $A$ is also invertible, i.e. $A^T$ is invertible, with
+    \item Den transponerede af $A$ er også invertibel, dvs. $A^T$ er invertibel, og
     \[
     \left(A^T\right)^{-1}=\left(A^{-1}\right)^T
     \]
@@ -763,17 +763,17 @@ The following theorem summarizes the relationship between the matrix inverse and
 
 \end{theorem}
 
-We will now consider how we can find the inverse of a matrix.
+Vi ser nu på, hvordan vi kan bestemme den inverse af en matrix.
 
-\subsection*{Finding the Determinant and Inverse of a $2 \times 2$ Matrix}
+\subsection*{Bestemmelse af determinanten og den inverse af en $2 \times 2$-matrix}
 
-The inverse of a matrix is not always easy to find. However, for a $2 \times 2$ matrix, we can use a formula to find the inverse.
+Den inverse af en matrix er ikke altid let at bestemme. For en $2 \times 2$-matrix kan vi dog bruge en formel til at finde den inverse.
 
 \begin{theorem}
-    Let $A=\left[\begin{array}{ll}
+    Lad $A=\left[\begin{array}{ll}
     a & b \\
     c & d
-    \end{array}\right]$. If $ad-bc \neq 0$, then the inverse of $A$ is given by
+    \end{array}\right]$. Hvis $ad-bc \neq 0$, er den inverse af $A$ givet ved
 
     \[
     A^{-1}=\frac{1}{ad-bc}\left[\begin{array}{cc}
@@ -784,15 +784,15 @@ The inverse of a matrix is not always easy to find. However, for a $2 \times 2$ 
 \end{theorem}
 
 \begin{remark}
-    The quantity $ad - bc$ is called the determinant of $A$, and we write
+    Størrelsen $ad - bc$ kaldes determinanten af $A$, og vi skriver
     \[
     \text{det}(A) = |A| = ad - bc
     \]
 \end{remark}
 
-The determinant of a $2 \times 2$ matrix is a scalar quantity that provides information about the matrix. If the determinant is zero, then the matrix is not invertible. If the determinant is non-zero, then the matrix is invertible. The explicit formulas $\det(A)=ad-bc$ and the corresponding inverse formula given here apply specifically to $2\times2$ matrices; determinants and inverses of larger square matrices are defined using more general methods.
+Determinanten af en $2 \times 2$-matrix er en skalar størrelse, der giver information om matricen. Hvis determinanten er nul, er matricen ikke invertibel. Hvis determinanten er forskellig fra nul, er matricen invertibel. De eksplicitte formler $\det(A)=ad-bc$ og den tilhørende formel for den inverse, som er givet her, gælder specifikt for $2\times2$-matricer; determinanter og inverse af større kvadratiske matricer defineres ved hjælp af mere generelle metoder.
 
-\begin{example} We let
+\begin{example} Vi lader
 
 \[
 A=\left[\begin{array}{ll}
@@ -801,7 +801,7 @@ A=\left[\begin{array}{ll}
 \end{array}\right]
 \]
 
-and compute $A^{-1}$. By the theorem, we have
+og beregner $A^{-1}$. Ifølge sætningen har vi
 
 \[
 \begin{aligned}
@@ -820,7 +820,7 @@ A^{-1} & =\frac{1}{1 \cdot 4-2 \cdot 3}\left[\begin{array}{cc}
 \end{aligned}
 \]
 
-Now we confirm that $A A^{-1}=I_2$ :
+Nu bekræfter vi, at $A A^{-1}=I_2$:
 
 \[
 \begin{aligned}
@@ -848,18 +848,18 @@ A A^{-1} & =\left[\begin{array}{ll}
 \label{ex:inverse}
 \end{example}
 
-\begin{example} Find the inverse of $A=\left[\begin{array}{cc}1 & 3 \\ -1 & -2\end{array}\right]$ if it exists.
+\begin{example} Bestem den inverse af $A=\left[\begin{array}{cc}1 & 3 \\ -1 & -2\end{array}\right]$, hvis den findes.
     
 \end{example}
 
 \begin{solution}
-    We first compute the determinant of $A$:
+    Først beregner vi determinanten af $A$:
 
     \[
     \text{det}(A)=1(-2)-3(-1)=(-2)+3=1
     \]
 
-    Since the determinant is non-zero, the inverse of $A$ exists. By the formula, we have
+    Da determinanten er forskellig fra nul, findes den inverse af $A$. Ifølge formlen har vi
 
     \[
     \begin{aligned}
@@ -867,7 +867,7 @@ A A^{-1} & =\left[\begin{array}{ll}
     \end{aligned}
     \]
 
-    We can confirm that $A A^{-1}=I_2$:
+    Vi kan bekræfte, at $A A^{-1}=I_2$:
 
     \[
         A A^{-1}=\left[\begin{array}{cc}
@@ -884,10 +884,10 @@ A A^{-1} & =\left[\begin{array}{ll}
 
 \end{solution}
 
-For larger matrices, we need to use other methods to find the inverse.
+For større matricer skal vi bruge andre metoder til at bestemme den inverse.
 
-\subsection*{Finding the Inverse of a $n \times n$ Matrix}
-An \textbf{elementary matrix} is a matrix that is obtained by performing a single elementary row operation (replacement, swap, or scaling) on an identity matrix. For example, the matrix
+\subsection*{Bestemmelse af den inverse af en $n \times n$-matrix}
+En \textbf{elementærmatrix} er en matrix, der fremkommer ved at udføre én enkelt elementær rækkeoperation (erstatning, ombytning eller skalering) på en identitetsmatrix. For eksempel er matricen
 
 \[
 E_1=\left[\begin{array}{ccc}
@@ -897,11 +897,11 @@ E_1=\left[\begin{array}{ccc}
 \end{array}\right]
 \]
 
-is an elementary matrix since it is obtained from $I_3$ via the single elementary row operation $r_3 \mapsto r_3-2 r_1$.
+en elementærmatrix, da den fremkommer ud fra $I_3$ ved den ene elementære rækkeoperation $r_3 \mapsto r_3-2 r_1$.
 
 \begin{example}
 
-Let $A$ be a general $3 \times 3$ matrix
+Lad $A$ være en generel $3 \times 3$-matrix
 
 \[
 A=\left[\begin{array}{lll}
@@ -911,7 +911,7 @@ g & h & i
 \end{array}\right]
 \]
 
-and we let $E_1, E_2$, and $E_3$ be the elementary matrices
+og lad $E_1, E_2$ og $E_3$ være elementærmatricerne
 
 \[
 E_1=\left[\begin{array}{ccc}
@@ -922,7 +922,7 @@ E_1=\left[\begin{array}{ccc}
 1 & 0 & 0 \\
 0 & 0 & 1 \\
 0 & 1 & 0
-\end{array}\right], \quad \text { and } \quad E_3=\left[\begin{array}{lll}
+\end{array}\right], \quad \text { og } \quad E_3=\left[\begin{array}{lll}
 1 & 0 & 0 \\
 0 & 3 & 0 \\
 0 & 0 & 1
@@ -930,7 +930,7 @@ E_1=\left[\begin{array}{ccc}
 \]
 \end{example}
 
-Notice, then, that $E_1$ corresponds to $r_3 \mapsto r_3-2 r_1, E_2$ corresponds to $r_2 \longleftrightarrow r_3$, and $E_3$ corresponds to $r_2 \mapsto 3 r_2$. We also have the following products:
+Bemærk så, at $E_1$ svarer til $r_3 \mapsto r_3-2 r_1, E_2$ svarer til $r_2 \longleftrightarrow r_3$, og $E_3$ svarer til $r_2 \mapsto 3 r_2$. Vi har også følgende produkter:
 
 \[
 E_1 A=\left[\begin{array}{ccc}
@@ -941,7 +941,7 @@ g-2 a & h-2 b & i-2 c
 a & b & c \\
 g & h & i \\
 d & e & f
-\end{array}\right], \quad \text { and } \quad E_3 A=\left[\begin{array}{ccc}
+\end{array}\right], \quad \text { og } \quad E_3 A=\left[\begin{array}{ccc}
 a & b & c \\
 3 d & 3 e & 3 f \\
 g & h & i
@@ -949,7 +949,7 @@ g & h & i
 \]
 
 
-Notice that $E_1 A$ is the matrix obtained by performing the row operation $r_3 \mapsto r_3-2 r_1$ on $A$. In general, multiplying $A$ on the left by an elementary matrix is the same as performing the corresponding row operation on $A$. We can also represent a sequence of row operations by multiplication of several elementary matrices. For example,
+Bemærk, at $E_1 A$ er den matrix, der fremkommer ved at udføre rækkeoperationen $r_3 \mapsto r_3-2 r_1$ på $A$. Generelt er det at multiplicere $A$ fra venstre med en elementærmatrix det samme som at udføre den tilsvarende rækkeoperation på $A$. Vi kan også repræsentere en række af rækkeoperationer ved at multiplicere flere elementærmatricer. For eksempel svarer
 
 \[
 E_2 E_1 A=\left[\begin{array}{ccc}
@@ -959,31 +959,31 @@ d & e & f
 \end{array}\right]
 \]
 
-corresponds to performing $r_3 \mapsto r_3-2 r_1$ followed by $r_2 \longleftrightarrow r_3$ on the matrix $A$.
-As we have observed before, row operations are reversible. It follows that elementary matrices are also invertible. This leads to the following theorem.
+til at udføre $r_3 \mapsto r_3-2 r_1$ efterfulgt af $r_2 \longleftrightarrow r_3$ på matricen $A$.
+Som vi tidligere har set, kan rækkeoperationer gøres om. Heraf følger, at elementærmatricer også er invertible. Det fører til følgende sætning.
 
 \begin{theorem}
-    An $n \times n$ matrix $A$ is invertible if and only if $A$ is row equivalent to $I_n$. In this case, any sequence of elementary row operations that reduces $A$ to $I_n$ also transforms $I_n$ into $A^{-1}$.
+    En $n \times n$-matrix $A$ er invertibel, hvis og kun hvis $A$ er rækkeækvivalent med $I_n$. I så fald vil enhver følge af elementære rækkeoperationer, der reducerer $A$ til $I_n$, også omdanne $I_n$ til $A^{-1}$.
 \end{theorem}
 
-This theorem leads to a nice algorithm for finding the inverse of an $n \times n$ matrix, assuming such an inverse exists.
+Denne sætning fører til en praktisk algoritme til at bestemme den inverse af en $n \times n$-matrix, forudsat at den inverse findes.
 
-\begin{custombox}{Algorithm for Finding the Inverse of an $n \times n$ Matrix}
-    Let $A$ be an $n \times n$ matrix. To find the inverse of $A$, follow these steps:
+\begin{custombox}{Algoritme til bestemmelse af den inverse af en $n \times n$-matrix}
+    Lad $A$ være en $n \times n$-matrix. Følg disse trin for at bestemme den inverse af $A$:
     \begin{enumerate}
-        \item Form the augmented matrix $[A | I_n]$.
-        \item Perform row operations on $[A | I_n]$ to reduce $A$ to $I_n$.
-        \item The matrix on the right side of the augmented matrix is $A^{-1}$.
+        \item Opstil totalmatricen $[A | I_n]$.
+        \item Udfør rækkeoperationer på $[A | I_n]$ for at reducere $A$ til $I_n$.
+        \item Matricen i højre side af totalmatricen er $A^{-1}$.
     \end{enumerate}
 
-    If $A$ is not invertible, then the algorithm will not be able to reduce $A$ to $I_n$.
+    Hvis $A$ ikke er invertibel, vil algoritmen ikke kunne reducere $A$ til $I_n$.
 \end{custombox}
 
-\begin{example} Find the inverse of $A=\left[\begin{array}{rrr}1 & 0 & 3 \\ 1 & 1 & 0 \\ -2 & 0 & -7\end{array}\right]$ if it exists.    
+\begin{example} Bestem den inverse af $A=\left[\begin{array}{rrr}1 & 0 & 3 \\ 1 & 1 & 0 \\ -2 & 0 & -7\end{array}\right]$, hvis den findes.    
 \end{example}
 
 \begin{solution}
-    Solution. Form the augmented matrix $\left[\begin{array}{ll}A & I_3\end{array}\right]$ and row reduce:
+    Opstil totalmatricen $\left[\begin{array}{ll}A & I_3\end{array}\right]$, og rækkereducér:
 \[
 \begin{alignedat}{3}
 & \left[\begin{array}{cccccc}
@@ -1018,7 +1018,7 @@ This theorem leads to a nice algorithm for finding the inverse of an $n \times n
 \end{alignedat}
 \]
 
-Therefore, \(\operatorname{rref}A = I_3\), confirming that \( A \) is invertible. The inverse is
+Altså er \(\operatorname{rref}A = I_3\), hvilket bekræfter, at \( A \) er invertibel. Den inverse er
 \[
 A^{-1} = \left[\begin{array}{ccc}
 7 & 0 & 3 \\
@@ -1026,7 +1026,7 @@ A^{-1} = \left[\begin{array}{ccc}
 -2 & 0 & -1
 \end{array}\right]
 \]
-Verify:
+Kontrol:
 \[
 AA^{-1}=\left[\begin{array}{ccc}
 1 & 0 & 3 \\
@@ -1046,11 +1046,11 @@ AA^{-1}=\left[\begin{array}{ccc}
 \end{solution}
 
 \begin{example}
-    Find the inverse of $A=\left[\begin{array}{rrr}1 & 0 & 1 \\ 1 & 1 & -2 \\ -2 & 0 & -2\end{array}\right]$ if it exists.
+    Bestem den inverse af $A=\left[\begin{array}{rrr}1 & 0 & 1 \\ 1 & 1 & -2 \\ -2 & 0 & -2\end{array}\right]$, hvis den findes.
 \end{example}
 
 \begin{solution}
-    Form the augmented matrix $\left[\begin{array}{ll}A & I_3\end{array}\right]$ and row reduce:
+    Opstil totalmatricen $\left[\begin{array}{ll}A & I_3\end{array}\right]$, og rækkereducér:
 \[
 \begin{alignedat}{3}
 & \left[\begin{array}{cccccc}
@@ -1070,11 +1070,11 @@ AA^{-1}=\left[\begin{array}{ccc}
 \end{alignedat}
 \]
 
-We need not go further since the rref($A$) is not $I_3$. Therefore, A is not invertible.
+Vi behøver ikke at gå videre, da rref($A$) ikke er $I_3$. Derfor er A ikke invertibel.
 \end{solution}
 
 \begin{example}
-    Find the inverse of the matrix
+    Bestem den inverse af matricen
 
     \[
     A=\left[\begin{array}{lll}
@@ -1083,10 +1083,10 @@ We need not go further since the rref($A$) is not $I_3$. Therefore, A is not inv
         0 & 0 & 2
         \end{array}\right]
     \]
-if it exists.
+hvis den findes.
 \end{example}
 
-\begin{solution} (We ommit the row reduction steps for brevity.)
+\begin{solution} (Af hensyn til kortheden udelader vi trinene i rækkereduktionen.)
 \[
 \begin{aligned}
 {\left[\begin{array}{llllll}
@@ -1121,7 +1121,7 @@ if it exists.
 \end{aligned}
 \]
 
-Hence
+Dermed er
 
 \[
 A^{-1}=\left[\begin{array}{ccc}
@@ -1133,17 +1133,17 @@ A^{-1}=\left[\begin{array}{ccc}
 
 \end{solution}
 
-With the method for finding matrix inverses established, we now have a powerful tool for approaching linear systems. We will see how matrix inverses can be used to solve systems of equations efficiently, offering a straightforward way to find solutions when a matrix is invertible.
+Med metoden til at bestemme inverse matricer på plads har vi nu et stærkt værktøj til at angribe lineære ligningssystemer. Vi skal se, hvordan inverse matricer kan bruges til at løse ligningssystemer effektivt, og hvordan de giver en ligetil måde at finde løsninger på, når en matrix er invertibel.
 
-\subsection*{Solving Matrix Equations with Inverses}
-Just like we can solve an equation by using the reciprocal of a non-zero number as we saw previously, we can do something similar with matrices. When a matrix \( A \) is invertible, we can use its inverse to solve matrix equations involving \( A \). This brings us to the theorem below, which shows how we can find solutions for equations like \( A \vect{x} = \vect{b} \) when \( A \) has an inverse.
+\subsection*{Løsning af matrixligninger med inverse matricer}
+Ligesom vi kan løse en ligning ved hjælp af den reciprokke værdi af et tal forskelligt fra nul, som vi så tidligere, kan vi gøre noget tilsvarende med matricer. Når en matrix \( A \) er invertibel, kan vi bruge dens inverse til at løse matrixligninger, hvori \( A \) indgår. Det bringer os til sætningen nedenfor, som viser, hvordan vi kan finde løsninger til ligninger som \( A \vect{x} = \vect{b} \), når \( A \) har en invers.
 
 \begin{theorem}
-    Let \( A \) be an invertible matrix. Then the equation \( A \vect{x} = \vect{b} \) has a unique solution given by \( \vect{x} = A^{-1} \vect{b} \).
+    Lad \( A \) være en invertibel matrix. Så har ligningen \( A \vect{x} = \vect{b} \) en entydig løsning givet ved \( \vect{x} = A^{-1} \vect{b} \).
 \end{theorem}
 
 \begin{example}
-We can use the inverse from \autoref{ex:inverse} to solve the linear system
+Vi kan bruge den inverse fra \autoref{ex:inverse} til at løse det lineære ligningssystem
 
 \[
 \begin{aligned}
@@ -1152,7 +1152,7 @@ x_1+2 x_2 & =5 \\
 \end{aligned}
 \]
 
-We think of this in matrix terms as \(A \vect{x}=\vect{b}\), where
+Vi opfatter det på matrixform som \(A \vect{x}=\vect{b}\), hvor
 
 \[
 A=\left[\begin{array}{ll}
@@ -1161,13 +1161,13 @@ A=\left[\begin{array}{ll}
 \end{array}\right], \quad \vect{x}=\left[\begin{array}{l}
 x_1 \\
 x_2
-\end{array}\right], \quad \text { and } \quad \vect{b}=\left[\begin{array}{l}
+\end{array}\right], \quad \text { og } \quad \vect{b}=\left[\begin{array}{l}
 5 \\
 6
 \end{array}\right]
 \]
 
-The theorem tells us that \(\vect{x}=A^{-1} \vect{b}\) is a solution, i.e. that
+Sætningen fortæller os, at \(\vect{x}=A^{-1} \vect{b}\) er en løsning, dvs. at
 
 \[
 \begin{aligned}
@@ -1193,13 +1193,13 @@ x_2
 \]
 \end{example}
 
-\begin{example} Use the result from \autoref{ex:inverse2} to solve the linear system $A \vect{x} = \vect{b}$ where
+\begin{example} Brug resultatet fra \autoref{ex:inverse2} til at løse det lineære ligningssystem $A \vect{x} = \vect{b}$, hvor
 
     \[A=\left[\begin{array}{rrr}1 & -3 & 0 \\ -1 & 2 & -2 \\ -2 & 6 & 1\end{array}\right], \quad \vect{b}=\left[\begin{array}{c}1 \\ -3 \\ -1\end{array}\right]\]
 
 \end{example}
 
-\begin{solution} We showed in \autoref{ex:inverse2} that
+\begin{solution} Vi viste i \autoref{ex:inverse2}, at
 
     \[
     A^{-1}=\left[\begin{array}{rrr}
@@ -1209,7 +1209,7 @@ x_2
     \end{array}\right]
     \]
 
-Therefore, the unique solution to the linear system $A \vect{x} = \vect{b}$ is
+Den entydige løsning til det lineære ligningssystem $A \vect{x} = \vect{b}$ er derfor
 
     \[
     A^{-1} \vect{b}=\left[\begin{array}{rrr}
@@ -1227,7 +1227,7 @@ Therefore, the unique solution to the linear system $A \vect{x} = \vect{b}$ is
     \end{array}\right]
     \]
 
-Verify:
+Kontrol:
 
     \[
     \left[\begin{array}{rrr}
@@ -1246,34 +1246,34 @@ Verify:
     \]
 \end{solution}
 
-We conclude this chapter with one of the most important theorems in linear algebra, The Invertible Matrix Theorem.
+Vi afslutter dette kapitel med en af de vigtigste sætninger i lineær algebra: sætningen om invertible matricer.
 
-\section{The Invertible Matrix Theorem}
+\section{Sætningen om invertible matricer}
 
-The Invertible Matrix Theorem provides a comprehensive list of equivalent statements for a square matrix to be invertible and it enables us to determine the truth value of one statement by checking the truth value of another.
+Sætningen om invertible matricer giver en omfattende liste over ækvivalente udsagn om, hvornår en kvadratisk matrix er invertibel, og den gør det muligt at afgøre sandhedsværdien af ét udsagn ved at undersøge sandhedsværdien af et andet.
 
 \newpage
 
 \begin{theorem}
-    Let \( A \) be an \( n \times n \) matrix. The following statements are equivalent:
+    Lad \( A \) være en \( n \times n \)-matrix. Følgende udsagn er ækvivalente:
     \begin{enumerate}[(a)]
-        \item $A$ is invertible.
-        \item $A$ is row equivalent to $I_n$.
-        \item $A$ has $n$ pivot positions (i.e. one for each row and column).
-        \item The equation $A \vect{x}=\overline{0}$ has only the trivial solution.
-        \item The columns of $A$ are linearly independent.
-        \item The equation \( A \vect{x} = \vect{b} \) has a unique solution for each \( \vect{b} \in \mathbb{R}^n \).
-        \item The columns of $A \operatorname{span} \mathbb{R}^n$.
+        \item $A$ er invertibel.
+        \item $A$ er rækkeækvivalent med $I_n$.
+        \item $A$ har $n$ pivotpositioner (dvs. én for hver række og søjle).
+        \item Ligningen $A \vect{x}=\overline{0}$ har kun den trivielle løsning.
+        \item Søjlerne i $A$ er lineært uafhængige.
+        \item Ligningen \( A \vect{x} = \vect{b} \) har en entydig løsning for hvert \( \vect{b} \in \mathbb{R}^n \).
+        \item Søjlerne i $A$ udspænder $\mathbb{R}^n$.
         \item \( \text{det}(A) \neq 0 \).
-        \item There is an $n \times n$ matrix $C$ such that $C A=I$.
-        \item There is an $n \times n$ matrix $D$ such that $A D=I$.
-        \item $A^T$ is invertible.
+        \item Der findes en $n \times n$-matrix $C$, så $C A=I$.
+        \item Der findes en $n \times n$-matrix $D$, så $A D=I$.
+        \item $A^T$ er invertibel.
     \end{enumerate}
 \end{theorem}
 
-Note how the theorem connects the properties of a matrix to its invertibility, thus summarising the main elements of our discussion on linear systems, independence, vectors, and matrices.
+Bemærk, hvordan sætningen forbinder en matrix' egenskaber med dens invertibilitet og dermed opsummerer hovedelementerne i vores gennemgang af lineære ligningssystemer, lineær uafhængighed, vektorer og matricer.
 
-\begin{example} Decide if the following matrix is invertible:
+\begin{example} Afgør, om følgende matrix er invertibel:
 
 \[
 A=\left[\begin{array}{lll}
@@ -1286,7 +1286,7 @@ A=\left[\begin{array}{lll}
 \end{example}
 
 \begin{solution}
-Performing row operations, we see
+Ved at udføre rækkeoperationer får vi
 
 \[
 \begin{aligned}
@@ -1307,7 +1307,7 @@ A & \sim\left[\begin{array}{lll}
 \end{array}\right]
 \end{aligned}
 \]
-which has 3 pivots, so by (c) we have that $A$ is invertible.
+som har 3 pivoter, så ifølge (c) er $A$ invertibel.
 \end{solution}
 
-This concludes our discussion on matrices.
+Dette afslutter vores gennemgang af matricer.

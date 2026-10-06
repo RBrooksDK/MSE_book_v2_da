@@ -1,0 +1,138 @@
+% Danish redrawings of the function-family figures in Chapter 1.
+% Each panel shows the same function and properties as the original figure.
+\pgfplotsset{
+  dapanel/.style={
+    axis lines=middle, width=5.6cm, height=5.6cm,
+    xlabel={$x$}, ylabel={$y$},
+    xlabel style={anchor=west}, ylabel style={anchor=south},
+    tick label style={font=\scriptsize}, samples=200,
+    every axis plot/.append style={very thick, color=mseViaBlue},
+    clip=false
+  }
+}
+\tikzset{
+  danote/.style={font=\scriptsize, align=center, fill=white, inner sep=1pt},
+  dapin/.style={-{Stealth[length=4pt]}, thin, black!70}
+}
+\newcommand{\dacaption}[2]{\node[font=\small, align=center, anchor=north] at (#1) {#2};}
+
+\newcommand{\DaLinearPanels}{%
+\begin{tikzpicture}
+  \begin{axis}[dapanel, xmin=-1.5, xmax=10.5, ymin=-1.5, ymax=10.5, xtick={5,10}, ytick={5,10}, name=p1]
+    \addplot[domain=-1.5:10] {x};
+    \node[danote, anchor=north west] at (axis cs:4.5,2.5) {Grundfunktion\\$y = x$};
+  \end{axis}
+  \begin{axis}[dapanel, xmin=-1.5, xmax=10.5, ymin=-1.5, ymax=10.5, xtick={5,10}, ytick={5,10}, at={(p1.east)}, anchor=west, xshift=1cm, name=p2]
+    \addplot[domain=-1.5:10] {-0.7*x+8};
+    \fill[mseViaBlue] (axis cs:0,8) circle (1.6pt) (axis cs:6,3.8) circle (1.6pt);
+    \draw[thin] (axis cs:0,8) -- (axis cs:6,8) -- (axis cs:6,3.8);
+    \node[danote, anchor=north] at (axis cs:3.9,7.85) {Vandret skridt};
+    \node[danote, anchor=west] at (axis cs:6.1,6) {Stigning\\(negativ)};
+    \node[danote, anchor=south west] at (axis cs:0.4,9.2) {Skæring med $y$-aksen $= 8$};
+    \node[danote, anchor=north east] at (axis cs:5.6,3.4) {Punkt $(x, y)$};
+    \node[danote] at (axis cs:5,-3.2) {$y = -0.7x + 8$};
+  \end{axis}
+  \begin{axis}[dapanel, xmin=-1.5, xmax=10.5, ymin=-1.5, ymax=10.5, xtick={5,10}, ytick={5,10}, at={(p2.east)}, anchor=west, xshift=1cm]
+    \addplot[domain=-1.5:10] {4+2/3*(x-1)};
+    \fill[mseViaBlue] (axis cs:1,4) circle (1.6pt) (axis cs:7,8) circle (1.6pt);
+    \draw[thin] (axis cs:1,4) -- (axis cs:7,4) -- (axis cs:7,8);
+    \node[danote, anchor=north] at (axis cs:4,3.9) {Vandret skridt};
+    \node[danote, anchor=west] at (axis cs:7.1,6) {Stigning};
+    \node[danote, anchor=south east] at (axis cs:6.8,8.4) {Punkt $(x, y)$};
+    \node[danote, anchor=north west] at (axis cs:1.3,2.4) {Punkt $(1, 4)$};
+    \node[danote] at (axis cs:5,-3.2) {$y = 4 + \frac{2}{3}(x - 1)$};
+  \end{axis}
+\end{tikzpicture}}
+
+\newcommand{\DaQuadraticPanels}{%
+\begin{tikzpicture}
+  \begin{axis}[dapanel, xmin=-5.5, xmax=5.5, ymin=-5.5, ymax=5.5, xtick={-5,5}, ytick={-5,5}, name=p1]
+    \addplot[domain=-2.3:2.3] {x^2};
+    \node[danote, anchor=east] at (axis cs:-1.6,2.5) {Grundfunktion\\for andengrads-\\funktioner\\$y = x^2$};
+  \end{axis}
+  \begin{axis}[dapanel, xmin=-5.5, xmax=5.5, ymin=-5.5, ymax=5.5, xtick={-5,5}, ytick={-5,5}, at={(p1.east)}, anchor=west, xshift=1cm, name=p2]
+    \addplot[domain=-2.4:4.4] {3+0.4*(x-1)^2};
+    \fill[mseViaBlue] (axis cs:1,3) circle (1.6pt);
+    \draw[dapin] (axis cs:2.5,1.6) -- (axis cs:1.1,2.9);
+    \node[danote, anchor=north west] at (axis cs:2.2,1.7) {Toppunkt $(1, 3)$};
+    \node[danote] at (axis cs:0,-7.0) {$y = 3 + 0.4(x - 1)^2$};
+  \end{axis}
+  \begin{axis}[dapanel, xmin=-5.5, xmax=5.5, ymin=-5.5, ymax=5.5, xtick={-5,5}, ytick={-5,5}, at={(p2.east)}, anchor=west, xshift=1cm]
+    \addplot[domain=-0.9:2.9] {3-2*(x-1)^2};
+    \fill[mseViaBlue] (axis cs:1,3) circle (1.6pt);
+    \draw[dapin] (axis cs:2.6,4.4) -- (axis cs:1.1,3.1);
+    \node[danote, anchor=south west] at (axis cs:2.3,4.2) {Toppunkt $(1, 3)$};
+    \node[danote] at (axis cs:0,-7.0) {$y = 3 - 2(x - 1)^2$};
+  \end{axis}
+\end{tikzpicture}}
+
+\newcommand{\DaPowerPanels}{%
+\begin{tikzpicture}
+  \begin{axis}[dapanel, xmin=-1, xmax=11, ymin=-1, ymax=11, xtick={5,10}, ytick={5,10}, name=p1]
+    \addplot[domain=0:8.1] {0.02*x^3};
+    \draw[dapin] (axis cs:4.2,8.5) -- (axis cs:7,6.9);
+    \node[danote, anchor=south] at (axis cs:4.2,8.5) {Voksende};
+    \draw[dapin] (axis cs:2.2,4.6) -- (axis cs:5,2.5);
+    \node[danote, anchor=south] at (axis cs:2.2,4.6) {Konveks};
+    \draw[dapin] (axis cs:1.8,-0.6) -- (axis cs:0.1,-0.05);
+    \node[danote, anchor=west] at (axis cs:1.8,-0.6) {Origo};
+    \node[danote] at (axis cs:5,-3.0) {$y = 0.02x^3$\\Eksponent større end 1};
+  \end{axis}
+  \begin{axis}[dapanel, xmin=-1, xmax=11, ymin=-1, ymax=11, xtick={5,10}, ytick={5,10}, at={(p1.east)}, anchor=west, xshift=1cm, name=p2]
+    \addplot[domain=0:11] {2.5*x^0.6};
+    \draw[dapin] (axis cs:3.6,9.2) -- (axis cs:5.6,7.0);
+    \node[danote, anchor=south] at (axis cs:3.6,9.2) {Voksende};
+    \draw[dapin] (axis cs:6.5,3.2) -- (axis cs:3.6,5.4);
+    \node[danote, anchor=north] at (axis cs:6.5,3.2) {Konkav};
+    \draw[dapin] (axis cs:1.8,-0.6) -- (axis cs:0.1,-0.05);
+    \node[danote, anchor=west] at (axis cs:1.8,-0.6) {Origo};
+    \node[danote] at (axis cs:5,-3.0) {$y = 2.5x^{0.6}$\\Eksponent mellem 0 og 1};
+  \end{axis}
+  \begin{axis}[dapanel, xmin=-1, xmax=11, ymin=-1, ymax=11, xtick={5,10}, ytick={5,10}, at={(p2.east)}, anchor=west, xshift=1cm]
+    \addplot[domain=0.28:10] {3/x};
+    \draw[dapin] (axis cs:3.2,8.6) -- (axis cs:0.65,4.6);
+    \node[danote, anchor=south] at (axis cs:3.2,8.6) {Aftagende};
+    \draw[dapin] (axis cs:6.5,3.4) -- (axis cs:4,0.9);
+    \node[danote, anchor=south] at (axis cs:6.5,3.4) {Konveks};
+    \draw[dapin] (axis cs:1.8,-0.6) -- (axis cs:0.1,-0.05);
+    \node[danote, anchor=west] at (axis cs:1.8,-0.6) {Origo};
+    \node[danote] at (axis cs:5,-3.0) {$y = 3x^{-1}$\\Negativ eksponent};
+  \end{axis}
+\end{tikzpicture}}
+
+\newcommand{\DaExponentialPanels}{%
+\begin{tikzpicture}
+  \begin{axis}[dapanel, xmin=-1, xmax=11, ymin=-1, ymax=11, xtick={5,10}, ytick={5,10}, name=p1]
+    \addplot[domain=-1:9.4] {2*1.2^x};
+    \fill[mseViaBlue] (axis cs:0,2) circle (1.6pt);
+    \draw[dapin] (axis cs:3.6,9.4) -- (axis cs:7,7.2);
+    \node[danote, anchor=south] at (axis cs:3.6,9.4) {Voksende};
+    \draw[dapin] (axis cs:2,6.4) -- (axis cs:4.6,4.6);
+    \node[danote, anchor=south] at (axis cs:2,6.4) {Konveks};
+    \draw[dapin] (axis cs:2.6,1.5) -- (axis cs:0.15,1.95);
+    \node[danote, anchor=west] at (axis cs:2.6,1.5) {Skæring med $y$-aksen\\$=$ værdien af $a$};
+    \node[danote] at (axis cs:5,-3.0) {$y = 2 \cdot 1.2^x$\\Grundtal større end 1};
+  \end{axis}
+  \begin{axis}[dapanel, xmin=-1, xmax=11, ymin=-1, ymax=11, xtick={5,10}, ytick={5,10}, at={(p1.east)}, anchor=west, xshift=1cm, name=p2]
+    \addplot[domain=-1:10] {6*0.7^x};
+    \fill[mseViaBlue] (axis cs:0,6) circle (1.6pt);
+    \draw[dapin] (axis cs:2.4,8.8) -- (axis cs:0.15,6.1);
+    \node[danote, anchor=west] at (axis cs:2.4,8.8) {Skæring med $y$-aksen\\$=$ værdien af $a$};
+    \draw[dapin] (axis cs:5,5.2) -- (axis cs:2.3,2.8);
+    \node[danote, anchor=south] at (axis cs:5,5.2) {Aftagende};
+    \draw[dapin] (axis cs:7.8,3.1) -- (axis cs:5.2,1.1);
+    \node[danote, anchor=south] at (axis cs:7.8,3.1) {Konveks};
+    \node[danote] at (axis cs:5,-3.0) {$y = 6 \cdot 0.7^x$\\Grundtal mellem 0 og 1};
+  \end{axis}
+  \begin{axis}[dapanel, xmin=-1, xmax=11, ymin=-7, ymax=5, xtick={5,10}, ytick={-5,5}, at={(p2.east)}, anchor=west, xshift=1cm]
+    \addplot[domain=-1:10.5] {-3*1.06^x};
+    \fill[mseViaBlue] (axis cs:0,-3) circle (1.6pt);
+    \draw[dapin] (axis cs:1.6,1.2) -- (axis cs:0.1,-2.85);
+    \node[danote, anchor=south west] at (axis cs:1.6,1.2) {Skæring med $y$-aksen\\$=$ værdien af $a$};
+    \draw[dapin] (axis cs:4,-5.6) -- (axis cs:4.5,-3.9);
+    \node[danote, anchor=north] at (axis cs:4,-5.6) {Aftagende};
+    \draw[dapin] (axis cs:9.2,-3.1) -- (axis cs:8.6,-4.8);
+    \node[danote, anchor=south] at (axis cs:9.2,-3.1) {Konkav};
+    \node[danote] at (axis cs:5,-9.0) {$y = -3 \cdot 1.06^x$\\Negativ koefficient};
+  \end{axis}
+\end{tikzpicture}}

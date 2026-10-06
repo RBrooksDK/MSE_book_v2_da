@@ -1,0 +1,29 @@
+% Danish labels placed over raster images with embedded English text.
+% Coordinates are given in pixels of the source image, measured from the top left corner.
+\newsavebox{\DaImgBox}
+\newcommand{\DaPixelOverlay}[5]{% #1 graphics options, #2 file, #3 width px, #4 height px, #5 tikz code
+  \sbox{\DaImgBox}{\includegraphics[#1]{#2}}%
+  \def\DaW{#3}\def\DaH{#4}%
+  \begin{tikzpicture}[x=\wd\DaImgBox, y=\ht\DaImgBox]
+    \node[anchor=south west, inner sep=0] at (0,0) {\usebox{\DaImgBox}};
+    #5
+  \end{tikzpicture}}
+\newcommand{\DaPx}[2]{({(#1)/\DaW},{1-(#2)/\DaH})}
+
+\newcommand{\DaLogicInComp}[1]{%
+  \DaPixelOverlay{#1}{figure/logicincomp.png}{722}{234}{%
+    \fill[white] \DaPx{4}{90} rectangle \DaPx{72}{110};
+    \fill[white] \DaPx{4}{148} rectangle \DaPx{72}{168};
+    \fill[white] \DaPx{196}{56} rectangle \DaPx{240}{72};
+    \node[font=\sffamily\scriptsize, anchor=east, inner sep=1pt] at \DaPx{70}{100} {Indgang A};
+    \node[font=\sffamily\scriptsize, anchor=east, inner sep=1pt] at \DaPx{70}{158} {Indgang B};
+    \node[font=\sffamily\scriptsize, anchor=west, inner sep=1pt] at \DaPx{198}{64} {Udgang};
+  }}
+
+\newcommand{\DaTopographicMap}[1]{%
+  \DaPixelOverlay{#1}{figure/topographic-map.png}{439}{230}{%
+    \fill[white] \DaPx{330}{58} rectangle \DaPx{439}{98};
+    \fill[white] \DaPx{330}{186} rectangle \DaPx{439}{210};
+    \node[font=\sffamily\bfseries\small, anchor=west, inner sep=1pt] at \DaPx{334}{84} {Bakket terræn};
+    \node[font=\sffamily\bfseries\small, anchor=west, inner sep=1pt, text={rgb,255:red,0;green,160;blue,210}] at \DaPx{334}{198} {Topografisk kort};
+  }}

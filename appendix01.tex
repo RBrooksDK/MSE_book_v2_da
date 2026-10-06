@@ -1,81 +1,81 @@
-\chapter{Summation}\label{app:appendix01}
+\chapter{Summer}\label{app:appendix01}
 
-This appendix offers methods for evaluating summations, which occur frequently in the analysis of algorithms. Many
-of the formulas here appear in any calculus text, but you will find it convenient to have these methods compiled in one place. The content of this appendix is based on \textit{Introduction to Algorithms} \cite{clrs4}. The appendix concludes with a useful cheat sheet for time-complexity analysis.
+Dette bilag præsenterer metoder til at beregne summer, som ofte optræder i analysen af algoritmer. Mange
+af formlerne her findes i enhver lærebog i infinitesimalregning, men det er praktisk at have metoderne samlet ét sted. Indholdet i bilaget bygger på \textit{Introduction to Algorithms} \cite{clrs4}. Bilaget afsluttes med et nyttigt oversigtsark til tidskompleksitetsanalyse.
 
-When an algorithm contains an iterative control construct such as a \While or \For loop, you can express its running time as the sum of the times spent on each execution of the body of the loop. For example, in \autoref{sec:loop-analysis} we argued that the $i$th iteration of $\proc{Quadratic-Sum}$ took time proportional to $i$ in the worst case. Adding up the time spent on each iteration produced the summation (or series) $\sum\limits_{i=1}^n i$. Evaluating this summation resulted in a bound of $\mathcal{O}(n^2)$ on the worst-case running time of the algorithm. This example illustrates why you should know how to manipulate summations. Before going into details, we provide an overview of the most important summations and their closed forms.
+Når en algoritme indeholder en iterativ kontrolstruktur som en løkke af typen \While eller \For\unskip, kan du udtrykke dens køretid som summen af den tid, der bruges på hver udførelse af løkkens krop. I \autoref{sec:loop-analysis} argumenterede vi for eksempel for, at den $i$'te iteration af $\proc{Quadratic-Sum}$ i værste tilfælde tog tid proportional med $i$. Ved at lægge den tid sammen, der blev brugt på hver iteration, fik vi summen (eller rækken) $\sum\limits_{i=1}^n i$. Beregningen af denne sum gav en grænse på $\mathcal{O}(n^2)$ for algoritmens køretid i værste tilfælde. Eksemplet viser, hvorfor du bør kunne regne med summer. Før vi går i detaljer, giver vi et overblik over de vigtigste summer og deres lukkede former.
 
 \begin{table}[htbp]
     \centering
     \renewcommand{\arraystretch}{2}
     \begin{tabular}{|c|c|}
     \hline
-    \textbf{Sum} & \textbf{Closed Form} \\ \hline
+    \textbf{Sum} & \textbf{Lukket form} \\ \hline
     $\displaystyle \sum_{k=0}^n ar^k \, (r \neq 1)$ & $\displaystyle \frac{ar^{n+1} - a}{r - 1}$ \\ \hline
     $\displaystyle \sum_{k=1}^n k$ & $\displaystyle \frac{n(n+1)}{2}$ \\ \hline
     $\displaystyle \sum_{k=1}^n k^2$ & $\displaystyle \frac{n(n+1)(2n+1)}{6}$ \\ \hline
     $\displaystyle \sum_{k=1}^n k^3$ & $\displaystyle \frac{n^2(n+1)^2}{4}$ \\ \hline
     $\displaystyle \sum_{k=0}^n x^k \, (x \neq 1)$ & $\displaystyle \frac{x^{n+1} - 1}{x - 1}$ \\ \hline
-    $\displaystyle \sum_{i=1,2,4,\ldots,n} i$ ($n$ a power of 2) & $\displaystyle 2n - 1$ \\ \hline
+    $\displaystyle \sum_{i=1,2,4,\ldots,n} i$ ($n$ en potens af 2) & $\displaystyle 2n - 1$ \\ \hline
     $\displaystyle \sum_{k=0}^\infty x^k, \, |x| < 1$ & $\displaystyle \frac{1}{1 - x}$ \\ \hline
     $\displaystyle \sum_{k=1}^\infty kx^{k-1}, \, |x| < 1$ & $\displaystyle \frac{1}{(1 - x)^2}$ \\ \hline
     $\displaystyle \sum_{k=1}^n \frac{1}{k}$ & $\displaystyle \ln n + O(1)$ \\ \hline
     $\displaystyle \sum_{k=1}^n (a + bk)$ & $\displaystyle a n + b \frac{n(n+1)}{2}$ \\ \hline  
     \end{tabular}
-    \caption{Some Useful Summation Formulae}
+    \caption{Nogle nyttige sumformler}
 \end{table}
 
 
-\section*{Summation Notation}
+\section*{Sumnotation}
 
-Consider a sequence of numbers \( a_1, a_2, \ldots, a_n \), where \( n \) is a nonnegative integer. The sum of this sequence, \( a_1 + a_2 + \dots + a_n \), can be represented by the notation \( \sum_{k=1}^n a_k \). When \( n = 0 \), this summation is defined to have a value of 0. The result of a finite sum is always well-defined, and the order in which the terms are summed does not affect the final value.
+Betragt en følge af tal \( a_1, a_2, \ldots, a_n \), hvor \( n \) er et ikke-negativt heltal. Summen af denne følge, \( a_1 + a_2 + \dots + a_n \), kan skrives med notationen \( \sum_{k=1}^n a_k \). Når \( n = 0 \), defineres summen til at have værdien 0. Resultatet af en endelig sum er altid veldefineret, og den rækkefølge, leddene lægges sammen i, påvirker ikke slutværdien.
 
-For an infinite sequence \( a_1, a_2, \ldots \) of numbers, we represent their infinite sum \( a_1 + a_2 + \dots \) by the notation \( \sum_{k=1}^{\infty} a_k \), which corresponds to \( \lim_{n \rightarrow \infty} \sum_{k=1}^n a_k \). If this limit exists, the series is said to converge; otherwise, it diverges. Unlike finite sums, the terms of a convergent series cannot necessarily be rearranged without affecting the outcome. However, in an absolutely convergent series—one where \( \sum_{k=1}^{\infty} |a_k| \) also converges — the terms can be reordered without changing the sum.
+For en uendelig følge \( a_1, a_2, \ldots \) af tal skriver vi den uendelige sum \( a_1 + a_2 + \dots \) med notationen \( \sum_{k=1}^{\infty} a_k \), som svarer til \( \lim_{n \rightarrow \infty} \sum_{k=1}^n a_k \). Hvis denne grænseværdi eksisterer, siges rækken at være konvergent; ellers er den divergent. I modsætning til endelige summer kan leddene i en konvergent række ikke nødvendigvis byttes om uden at påvirke resultatet. I en absolut konvergent række -- dvs. en række, hvor også \( \sum_{k=1}^{\infty} |a_k| \) konvergerer -- kan leddene dog ombyttes uden at ændre summen.
 
 \[
     \sum_{i=i_0}^n c a_i=c \sum_{i=i_0}^n a_i
 \]
 
-where $c$ is any number. So, we can factor constants out of a summation.
+hvor $c$ er et vilkårligt tal. Vi kan altså sætte konstanter uden for en sum.
 
-Similarly, we can split a summation into two summations:
+På samme måde kan vi dele en sum op i to summer:
 
 \[
 \sum_{i=i_0}^n\left(a_i \pm b_i\right)=\sum_{i=i_0}^n a_i \pm \sum_{i=i_0}^n b_i
 \]
 
-Note that we started the series at $i_0$ to denote the fact that they can start at any value of $i$ that we need them to. Also note that while we can break up sums and differences as we did above we can't do the same thing for products and quotients. In other words,
+Bemærk, at vi har ladet rækkerne starte ved $i_0$ for at markere, at de kan starte ved en hvilken som helst værdi af $i$, vi har brug for. Bemærk også, at selv om vi kan dele summer og differenser op som ovenfor, kan vi ikke gøre det samme med produkter og kvotienter. Med andre ord:
 
 \[
-    \sum_{i=i_0}^n\left(a_i b_i\right) \neq\left(\sum_{i=i_0}^n a_i\right)\left(\sum_{i=i_0}^n b_i\right) \qquad \text{and} \qquad \sum_{i=i_0}^n \frac{a_i}{b_i} \neq \frac{\sum_{i=i_0}^n a_i}{\sum_{i=i_0}^n b_i}.
+    \sum_{i=i_0}^n\left(a_i b_i\right) \neq\left(\sum_{i=i_0}^n a_i\right)\left(\sum_{i=i_0}^n b_i\right) \qquad \text{og} \qquad \sum_{i=i_0}^n \frac{a_i}{b_i} \neq \frac{\sum_{i=i_0}^n a_i}{\sum_{i=i_0}^n b_i}.
 \]
 
-\section*{Linearity of Summation}
-For any real number $c$ and any finite sequences $a_1, a_2, \ldots, a_n$ and $b_1, b_2, \ldots, b_n$,
+\section*{Summers linearitet}
+For ethvert reelt tal $c$ og alle endelige følger $a_1, a_2, \ldots, a_n$ og $b_1, b_2, \ldots, b_n$ gælder
 
 \[
     \sum_{k=1}^n\left(c a_k+b_k\right)=c \sum_{k=1}^n a_k+\sum_{k=1}^n b_k .
 \]
 
-The linearity property also applies to infinite convergent series.
+Linearitetsegenskaben gælder også for uendelige konvergente rækker.
 
-With nonnegative functions and constants in the $\Theta$ bounds that are uniform in $k$, the same idea applies to summations incorporating asymptotic notation. For example,
+Med ikke-negative funktioner og konstanter i $\Theta$-grænserne, som er uniforme i $k$, gælder samme idé for summer, der indeholder asymptotisk notation. For eksempel er
 
 \[
     \sum_{k=1}^n \Theta(f(k))=\Theta\left(\sum_{k=1}^n f(k)\right) .
 \]
 
-In this equation, the $\Theta$-notation on the left-hand side applies to the variable $k$, but on the right-hand side, it applies to $n$. Such manipulations also apply to infinite convergent series.
+I denne ligning gælder $\Theta$-notationen på venstre side variablen $k$, mens den på højre side gælder $n$. Sådanne omskrivninger gælder også for uendelige konvergente rækker.
 
-\section*{Arithmetic Series}
-The summation
+\section*{Aritmetiske rækker}
+Summen
 
 
 \[
         \sum_{k=1}^n k=1+2+\cdots+n \label{eq:arithmetic-series}
 \]
 
-is an arithmetic series and has the value
+er en aritmetisk række og har værdien
 
 
 \begin{align}
@@ -83,14 +83,14 @@ is an arithmetic series and has the value
     & =\Theta\left(n^2\right) . \label{eq:arithmetic-series-asymptotic}
 \end{align}
 
-A general arithmetic series includes an additive constant $a \geq 0$ and a constant coefficient $b>0$ in each term, but has the same total asymptotically:
+En generel aritmetisk række har en additiv konstant $a \geq 0$ og en konstant koefficient $b>0$ i hvert led, men har asymptotisk samme sum:
 
 \begin{equation}
     \sum_{k=1}^n(a+b k)=\Theta\left(n^2\right) . \label{eq:general-arithmetic-series}
     \end{equation}
 
-\section*{Sums of Squares and Cubes}
-The following formulas apply to summations of squares and cubes:
+\section*{Summer af kvadrater og kubiktal}
+Følgende formler gælder for summer af kvadrater og kubiktal:
 
     \begin{equation}
     \sum_{k=0}^n k^2=\frac{n(n+1)(2 n+1)}{6}, \label{eq:sum-of-squares}
@@ -100,62 +100,62 @@ The following formulas apply to summations of squares and cubes:
         \sum_{k=0}^n k^3=\frac{n^2(n+1)^2}{4} . \label{eq:sum-of-cubes}
         \end{equation}
 
-        \section*{Geometric Series}
-        For real $x \neq 1$, the summation
+        \section*{Geometriske rækker}
+        For reelle $x \neq 1$ er summen
         
         \[
             \sum_{k=0}^n x^k=1+x+x^2+\cdots+x^n
         \]
         
-        is a geometric series and has the value
+        en geometrisk række og har værdien
         
         \begin{equation}
             \sum_{k=0}^n x^k=\frac{x^{n+1}-1}{x-1} . \label{eq:geometric-series}
         \end{equation}
         
-        The infinite decreasing geometric series occurs when the summation is infinite and $|x|<1$:
+        Den uendelige aftagende geometriske række opstår, når summen er uendelig, og $|x|<1$:
         
         \begin{equation}
             \sum_{k=0}^{\infty} x^k=\frac{1}{1-x} . \label{eq:infinite-geometric-series}
         \end{equation}
         
-        If we assume that $0^0=1$, these formulas apply even when $x=0$.
+        Hvis vi antager, at $0^0=1$, gælder formlerne også, når $x=0$.
         
-        A \textbf{special} case of the geometric series arises when the terms form a progression of powers of 2. Suppose $n$ itself is a power of 2, so the terms are \(1, 2, 4, 8, \ldots, n\). In this case:
+        Et \textbf{særtilfælde} af den geometriske række opstår, når leddene er potenser af 2. Antag, at $n$ selv er en potens af 2, så leddene er \(1, 2, 4, 8, \ldots, n\). I dette tilfælde er:
         \[
             \sum_{i=1,2,4,\ldots,n} i = 1 + 2 + 4 + 8 + \cdots + n.
         \]
         
-        This series can be derived from the general formula for a geometric series. The general form of a geometric series is:
+        Denne række kan udledes af den generelle formel for en geometrisk række. Den generelle form for en geometrisk række er:
         \[
             S = a + ar + ar^2 + \cdots + ar^{k-1},
         \]
-        where:
+        hvor:
         \begin{itemize}
-            \item \(a\) is the first term (\(a=1\) in this case),
-            \item \(r\) is the common ratio (\(r=2\) here),
-            \item \(k\) is the number of terms in the series.
+            \item \(a\) er det første led (\(a=1\) i dette tilfælde),
+            \item \(r\) er kvotienten (\(r=2\) her),
+            \item \(k\) er antallet af led i rækken.
         \end{itemize}
-        The number of terms, \(k\), is determined by how many times the progression \(1, 2, 4, \ldots, n\) doubles until reaching \(n\). Since \(n = 2^{k-1}\), we have \(k = \log_2(n) + 1\).
+        Antallet af led, \(k\), er bestemt af, hvor mange gange følgen \(1, 2, 4, \ldots, n\) fordobles, indtil den når \(n\). Da \(n = 2^{k-1}\), har vi \(k = \log_2(n) + 1\).
         
-        Using the geometric series formula \eqref{eq:geometric-series}:
+        Med formlen for den geometriske række \eqref{eq:geometric-series} får vi:
         \[
             \sum_{i=1,2,4,\ldots,n} i = \frac{2^k - 1}{2 - 1} = 2^k - 1.
         \]
         
-        Substituting \(k = \log_2(n) + 1\):
+        Ved at indsætte \(k = \log_2(n) + 1\) får vi:
         \[
             \sum_{i=1,2,4,\ldots,n} i = 2^{\log_2(n)+1} - 1 = 2n - 1.
         \]
         
-        Thus, the sum of the powers of 2 up to \(n\) is:
+        Summen af potenserne af 2 op til \(n\) er altså:
         \[
             \sum_{i=1,2,4,\ldots,n} i = 2n - 1.
         \]
         
 
-\section*{Harmonic Series}
-For positive integers $n$, the $n$th harmonic number is
+\section*{Harmoniske rækker}
+For positive heltal $n$ er det $n$'te harmoniske tal
 
 \begin{align}
     H_n & = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \cdots + \frac{1}{n} \nonumber \\
@@ -163,8 +163,8 @@ For positive integers $n$, the $n$th harmonic number is
         & = \ln n + O(1) . \label{eq:approximation}
 \end{align}
 
-\section*{Integrating and Differentiating}
-Integrating or differentiating the formulas above yields additional formulas. For example, differentiating both sides of the infinite geometric series (\ref{eq:infinite-geometric-series}) and multiplying by $x$ gives
+\section*{Integration og differentiation}
+Ved at integrere eller differentiere formlerne ovenfor får man yderligere formler. Hvis man for eksempel differentierer begge sider af den uendelige geometriske række (\ref{eq:infinite-geometric-series}) og ganger med $x$, får man
 
 
 \begin{equation}
@@ -174,130 +174,130 @@ Integrating or differentiating the formulas above yields additional formulas. Fo
     \end{aligned}
 \end{equation}
 
-\section*{Telescoping Series}
+\section*{Teleskoprækker}
 
-For any sequence $a_0, a_1, \ldots, a_n$
+For enhver følge $a_0, a_1, \ldots, a_n$ gælder
 
 \begin{equation}
     \sum_{k=1}^n\left(a_k-a_{k-1}\right)=a_n-a_0, \label{eq:telescoping-series}
 \end{equation}
 
-since each of the terms $a_1, a_2, \ldots, a_{n-1}$ is added in exactly once and subtracted out exactly once. We say that the sum telescopes. Similarly,
+da hvert af leddene $a_1, a_2, \ldots, a_{n-1}$ lægges til præcis én gang og trækkes fra præcis én gang. Vi siger, at summen teleskoperer. Tilsvarende gælder
 
 \[
     \sum_{k=0}^{n-1}\left(a_k-a_{k+1}\right)=a_0-a_n .
 \]
 
-As an example of a telescoping sum, consider the series
+Som eksempel på en teleskopsum kan vi se på rækken
 
 \[
 \sum_{k=1}^{n-1} \frac{1}{k(k+1)}
 \]
 
-Rewriting each term as
+Når hvert led omskrives til
 
 \[
 \frac{1}{k(k+1)}=\frac{1}{k}-\frac{1}{k+1},
 \]
 
-gives
+får vi
 
 \begin{align}
 \sum_{k=1}^{n-1} \frac{1}{k(k+1)} & =\sum_{k=1}^{n-1}\left(\frac{1}{k}-\frac{1}{k+1}\right) \nonumber \\
 & =1-\frac{1}{n} . \label{eq:telescoping-example}
 \end{align}
 
-\section*{Reindexing Sums}
-A series can sometimes be simplified by changing its index, often reversing the order of summation. Consider the series $\sum_{k=0}^n a_{n-k}$. Because the terms in this summation are $a_n, a_{n-1}, \ldots, a_0$, we can reverse the order of indices by letting $j=n-k$ and rewrite this summation as
+\section*{Omindeksering af summer}
+En række kan undertiden forenkles ved at ændre dens indeks, ofte ved at vende summationsrækkefølgen om. Betragt rækken $\sum_{k=0}^n a_{n-k}$. Da leddene i denne sum er $a_n, a_{n-1}, \ldots, a_0$, kan vi vende indeksernes rækkefølge om ved at sætte $j=n-k$ og omskrive summen til
 
 $$
 \sum_{k=0}^n a_{n-k}=\sum_{j=0}^n a_j
 $$
 
 
-Generally, if the summation index appears in the body of the sum with a minus sign, it's worth thinking about reindexing.
+Generelt er det værd at overveje en omindeksering, hvis summationsindekset optræder med minustegn i summens led.
 
-As an example, consider the summation
+Betragt som eksempel summen
 
 \begin{equation}
     \sum_{k=1}^n \frac{1}{n-k+1} . \label{eq:reindexing-example}
 \end{equation}
 
 
-The index $k$ appears with a negative sign in $\dfrac{1}{(n-k+1)}$. And indeed, we can simplify this summation, this time setting $j=n-k+1$, yielding
+Indekset $k$ optræder med negativt fortegn i $\dfrac{1}{(n-k+1)}$. Vi kan da også forenkle denne sum, denne gang ved at sætte $j=n-k+1$, hvilket giver
 
 \begin{equation}
     \sum_{k=1}^n \frac{1}{n-k+1}=\sum_{j=1}^n \frac{1}{j}. \label{eq:reindexing-example-solution}
 \end{equation}
 
-which is just the harmonic series (\ref{eq:harmonic_sum}).
+som netop er den harmoniske række (\ref{eq:harmonic_sum}).
 
-\section*{Products}
-The finite product $a_1 a_2 \ldots a_n$ can be expressed as
+\section*{Produkter}
+Det endelige produkt $a_1 a_2 \ldots a_n$ kan skrives som
 
 \[
 \prod_{k=1}^n a_k .
 \]
 
 
-If $n=0$, the value of the product is defined to be 1 . You can convert a formula with a product to a formula with a summation by using the identity
+Hvis $n=0$, defineres produktets værdi til at være 1 . Man kan omdanne en formel med et produkt til en formel med en sum ved hjælp af identiteten
 
 \[
 \log \left(\prod_{k=1}^n a_k\right)=\sum_{k=1}^n \log a_k, \qquad a_k>0.
 \]
 
-\section*{Cheat Sheet for Time Complexity Analysis}
+\section*{Oversigtsark til tidskompleksitetsanalyse}
 
-This section provides essential formulas and shortcuts for asymptotic analysis and algorithm evaluation. These complement the detailed summation methods in this appendix.
+Dette afsnit giver de vigtigste formler og genveje til asymptotisk analyse og vurdering af algoritmer. De supplerer de detaljerede summationsmetoder i dette bilag.
 
 \begin{itemize}
-    \item \textbf{Logarithmic Factorial Approximation (Stirling's Approximation):} 
+    \item \textbf{Logaritmisk tilnærmelse af fakultet (Stirlings approksimation):} 
     \[
     \ln(n!) = n\ln n-n+\mathcal{O}(\ln n).
     \]
  
-    \item \textbf{Logarithmic Exponent Rule:} 
+    \item \textbf{Reglen for logaritmisk eksponent:} 
     \[
     2^{\log_2 n} = n.
     \]
 
-    \item \textbf{Base as a Power with Logarithmic Exponent:} 
-    If the base is \( a^b \) and the exponent involves \( \log_a \), then:
+    \item \textbf{Grundtal som potens med logaritmisk eksponent:} 
+    Hvis grundtallet er \( a^b \), og eksponenten indeholder \( \log_a \), så gælder:
     \[
     (a^b)^{\log_a(n^c)} = n^{bc}, \qquad a>0,\ a\neq1,\ n>0.
     \]
     
-    \textbf{Example:} \( 4^{\log_2(n^2)} = n^4 \) (since \( 4 = 2^2 \)).
+    \textbf{Eksempel:} \( 4^{\log_2(n^2)} = n^4 \) (da \( 4 = 2^2 \)).
     
-    \item \textbf{Power of a Logarithm Rule:} 
+    \item \textbf{Reglen for logaritmen til en potens:} 
     \[
     \log(n^k) = k \log n, \quad \text{for } k > 0.
     \]
     
-    \item \textbf{Logarithmic Growth for Powers of 2:} 
-    For \( n = 2^k \),
+    \item \textbf{Logaritmisk vækst for potenser af 2:} 
+    For \( n = 2^k \) gælder
     \[
     k = \log_2 n.
     \]
     
-    \item \textbf{Simplifying Logarithmic Expressions:} 
+    \item \textbf{Forenkling af logaritmiske udtryk:} 
     \[
-    \log_a n = \frac{\log_b n}{\log_b a}, \quad \text{for } a,b,n>0 \text{ with } a\neq1 \text{ and } b\neq1.
+    \log_a n = \frac{\log_b n}{\log_b a}, \quad \text{for } a,b,n>0 \text{ med } a\neq1 \text{ og } b\neq1.
     \]
     
-    \item \textbf{Common Asymptotic Comparisons:} 
+    \item \textbf{Almindelige asymptotiske sammenligninger:} 
     \[
-    n^c \ll c^n \quad \text{for any constant } c > 1.
+    n^c \ll c^n \quad \text{for enhver konstant } c > 1.
     \]
     
-    \item \textbf{Factorial Asymptotics (Expanded Stirling's Approximation):} 
-    Using Stirling's formula, the growth of \( n! \) is approximately:
+    \item \textbf{Fakultetets asymptotik (udvidet Stirlings approksimation):} 
+    Ifølge Stirlings formel er væksten af \( n! \) tilnærmelsesvis:
     \[
     n! \sim \sqrt{2\pi n}\left(\frac{n}{e}\right)^n,
     \]
     
-    \item \textbf{Sum of Powers of 2:} 
-    If $n$ is a power of 2 and the terms are \(1,2,4,8,\ldots,n\), the sum is:
+    \item \textbf{Sum af potenser af 2:} 
+    Hvis $n$ er en potens af 2, og leddene er \(1,2,4,8,\ldots,n\), er summen:
     \[
     \sum_{i=1,2,4,\ldots,n} i = 2n - 1.
     \]

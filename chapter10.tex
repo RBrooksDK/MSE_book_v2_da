@@ -1,17 +1,17 @@
-\chapter{Differential Calculus}
+\chapter{Differentialregning}
 \label{chap:ch10}
 
-In both practical experience and modern engineering, we frequently encounter situations where one quantity changes in response to another. A car’s fuel consumption reflects how distance depends on the amount of fuel used. A sprinter’s velocity describes how position varies with time. In agriculture, yield changes with the amount of fertiliser, and in economics, demand responds to price. The study of such relationships lies at the heart of \emph{differential calculus}, the mathematical discipline devoted to understanding how quantities vary together.
+Både i praksis og i moderne ingeniørarbejde møder vi ofte situationer, hvor én størrelse ændrer sig som følge af en anden. En bils brændstofforbrug afspejler, hvordan den tilbagelagte afstand afhænger af den mængde brændstof, der bruges. En sprinters hastighed beskriver, hvordan positionen varierer med tiden. I landbruget ændrer udbyttet sig med mængden af gødning, og i økonomi reagerer efterspørgslen på prisen. Studiet af sådanne sammenhænge er kernen i \emph{differentialregning}, den matematiske disciplin, der handler om at forstå, hvordan størrelser varierer i forhold til hinanden.
 
-The concept that captures this variation is the \emph{rate of change}.
+Det begreb, der indfanger denne variation, er \emph{ændringshastigheden}.
 
 \begin{itemize}
-\item The change of distance with respect to time is \emph{velocity}.
-\item The change of profit with respect to price is \emph{marginal profit}.
-\item The change of loss with respect to model parameters is the \emph{gradient}.
+\item Ændringen i afstand i forhold til tid er \emph{hastighed}.
+\item Ændringen i fortjeneste i forhold til pris er \emph{marginal fortjeneste}.
+\item Ændringen i tab i forhold til modelparametre er \emph{gradienten}.
 \end{itemize}
 
-When a rate of change remains constant, the relationship between the quantities is linear, and the graph forms a straight line. When the rate of change varies, the graph becomes curved, and the slope depends on the specific point of measurement. This naturally leads to the idea of a \emph{tangent line}, which locally approximates a curve at a single point.
+Når en ændringshastighed er konstant, er sammenhængen mellem størrelserne lineær, og grafen er en ret linje. Når ændringshastigheden varierer, bliver grafen krum, og hældningen afhænger af det konkrete punkt, hvor vi måler. Det fører naturligt til idéen om en \emph{tangent}, som lokalt approksimerer en kurve i et enkelt punkt.
 
 % --- Ensure these packages are in your preamble ---
 % \usepackage{pgfplots}
@@ -54,7 +54,7 @@ When a rate of change remains constant, the relationship between the quantities 
             domain=0:2.5,
             red, thick
         ] {3*x - 2};
-        \addlegendentry{Tangent at \(x=1\)}
+        \addlegendentry{Tangent i \(x=1\)}
 
         % Mark the point of tangency
         \coordinate (P) at (axis cs:1, 1);
@@ -63,103 +63,103 @@ When a rate of change remains constant, the relationship between the quantities 
         
         \end{axis}
     \end{tikzpicture}
-    \caption{The tangent line to the graph of \(f(x)=x^3\) at the point \(P(1, 1)\).}
+    \caption{Tangenten til grafen for \(f(x)=x^3\) i punktet \(P(1, 1)\).}
     \label{fig:ch10-tangent}
 \end{figure}
 
 \begin{remark}
-For a straight line, the slope is constant. For a curved graph, the slope varies from point to point, so we speak of the \emph{instantaneous rate of change}, the slope of the tangent at a specific point.
+For en ret linje er hældningen konstant. For en krum graf varierer hældningen fra punkt til punkt, og vi taler derfor om den \emph{momentane ændringshastighed}, dvs. tangentens hældning i et bestemt punkt.
 \end{remark}
 
-The same principle extends to computational and data-driven systems. A program’s runtime changes with input size, a model’s accuracy varies with the number of training epochs, and network throughput depends on available bandwidth. In machine learning, the process of training a model resembles a hiker searching for the lowest point in a vast, foggy landscape. The “altitude” represents the model’s error, and progress requires moving downhill. Determining the correct direction among millions of possible ones depends on knowing the local slope — the \emph{derivative} — which expresses the instantaneous rate of change.
+Det samme princip gælder for beregningsmæssige og datadrevne systemer. Et programs køretid ændrer sig med inputstørrelsen, en models nøjagtighed varierer med antallet af træningsepoker, og et netværks gennemløb afhænger af den tilgængelige båndbredde. Inden for maskinlæring minder træningen af en model om en vandrer, der leder efter det laveste punkt i et stort, tågedækket landskab. »Højden« repræsenterer modellens fejl, og for at komme videre må man gå nedad. Hvilken retning der er den rigtige blandt millioner af mulige, afhænger af, at vi kender den lokale hældning -- den \emph{afledte} -- som udtrykker den momentane ændringshastighed.
 
-Differential calculus provides the tools to describe, compute, and interpret such changes with precision. It transforms intuitive ideas such as being faster, steeper, or more efficient into exact mathematical expressions. This chapter introduces the fundamental ideas of differential calculus, beginning with the concepts of \emph{limits} and \emph{continuity}, which formalise the notion of approaching a point infinitely closely. Building on these, we develop the definition and interpretation of the \emph{derivative} as a measure of instantaneous change and explore its applications in contexts ranging from physical motion to the optimisation of modern algorithms.
+Differentialregning giver os værktøjerne til præcist at beskrive, beregne og fortolke sådanne ændringer. Den omsætter intuitive forestillinger som at være hurtigere, stejlere eller mere effektiv til eksakte matematiske udtryk. Dette kapitel introducerer de grundlæggende idéer i differentialregning. Vi begynder med begreberne \emph{grænseværdi} og \emph{kontinuitet}, som formaliserer forestillingen om at nærme sig et punkt uendeligt tæt. På det grundlag udvikler vi definitionen og fortolkningen af den \emph{afledte} som et mål for momentan ændring og ser på anvendelser i sammenhænge, der spænder fra fysisk bevægelse til optimering af moderne algoritmer.
 
 
-\section{Limits and Continuity: The Foundation of Calculus}
+\section{Grænseværdier og kontinuitet: grundlaget for differentialregning}
 
-Before we can measure an instantaneous rate of change, we must first build a formal understanding of what it means to get "infinitesimally close" to a point without necessarily being at that point. This is the concept of a \textbf{limit}. Building on limits, \textbf{continuity} gives us the language to describe functions that are predictable and well-behaved, without sudden jumps or breaks.
+Før vi kan måle en momentan ændringshastighed, må vi først opbygge en formel forståelse af, hvad det vil sige at komme »uendeligt tæt« på et punkt uden nødvendigvis at være i punktet. Det er begrebet \textbf{grænseværdi}. Med udgangspunkt i grænseværdier giver \textbf{kontinuitet} os et sprog til at beskrive funktioner, der er forudsigelige og velopdragne, uden pludselige spring eller brud.
 
-\subsection*{Limits}
+\subsection*{Grænseværdier}
 
-A limit describes the value that a function "approaches" as its input gets closer and closer to a specific point. This idea is fundamental not just in calculus, but in software engineering, where we often analyze the behavior of systems under approaching conditions.
+En grænseværdi beskriver den værdi, som en funktion »nærmer sig«, når dens input kommer tættere og tættere på et bestemt punkt. Idéen er grundlæggende ikke kun i differentialregning, men også i softwareudvikling, hvor vi ofte analyserer systemers opførsel, når forholdene nærmer sig en bestemt tilstand.
 
-For example, when analyzing an algorithm's runtime, we ask what happens to the execution time as the input size `n` approaches infinity. In networking, we might model the theoretical maximum throughput as a limit when latency approaches zero.
+Når vi for eksempel analyserer en algoritmes køretid, spørger vi, hvad der sker med udførelsestiden, når inputstørrelsen `n` går mod uendelig. Inden for netværk kan vi modellere det teoretiske maksimale gennemløb som en grænseværdi, når latensen går mod nul.
 
-\begin{definition}[Limit]
-Let \( f(x) \) be a function defined near a point \( c \). We say that the \textbf{limit} of \( f(x) \) as \( x \) approaches \( c \) is \( L \), written as
+\begin{definition}[Grænseværdi]
+Lad \( f(x) \) være en funktion, der er defineret i nærheden af et punkt \( c \). Vi siger, at \textbf{grænseværdien} af \( f(x) \), når \( x \) går mod \( c \), er \( L \), og skriver
 \vspace{0.5em}
 \[
 \lim_{x \to c} f(x) = L
 \]
 \vspace{0.5em}
-if we can make the value of \( f(x) \) arbitrarily close to \( L \) by choosing an \( x \) that is sufficiently close to \( c \), but not equal to \( c \).
+hvis vi kan gøre værdien af \( f(x) \) vilkårligt tæt på \( L \) ved at vælge et \( x \), der er tilstrækkeligt tæt på \( c \), men forskelligt fra \( c \).
 \end{definition}
 
-In many simple cases, the limit is just the value of the function at that point. For example, for \( f(x) = x^2 \), the limit as \( x \) approaches 3 is simply \( 3^2 = 9 \). The real power of limits, however, is in handling cases where the function is undefined at the point of interest.
+I mange simple tilfælde er grænseværdien blot funktionens værdi i punktet. For \( f(x) = x^2 \) er grænseværdien, når \( x \) går mod 3, for eksempel simpelthen \( 3^2 = 9 \). Grænseværdiernes egentlige styrke viser sig dog i tilfælde, hvor funktionen ikke er defineret i det punkt, vi interesserer os for.
 
-\begin{example} A Limit at an Undefined Point
+\begin{example} En grænseværdi i et punkt, hvor funktionen ikke er defineret
 
-Consider the function \( f(x) = \frac{\sin(x)}{x} \). This function is fundamental in signal processing and is known as the sinc function. Notice that \( f(0) \) is undefined because it results in division by zero. However, we can ask what value the function approaches as \( x \) gets very close to 0.
+Se på funktionen \( f(x) = \frac{\sin(x)}{x} \). Funktionen er grundlæggende i signalbehandling og kaldes sinc-funktionen. Bemærk, at \( f(0) \) ikke er defineret, fordi det giver division med nul. Vi kan dog spørge, hvilken værdi funktionen nærmer sig, når \( x \) kommer meget tæt på 0.
 
-By plugging in values very close to 0, we can observe a trend:
+Ved at indsætte værdier meget tæt på 0 kan vi se en tendens:
 \begin{align*}
 f(0.1) &= \frac{\sin(0.1)}{0.1} \approx 0.9983 \\
 f(0.01) &= \frac{\sin(0.01)}{0.01} \approx 0.99998 \\
 f(-0.01) &= \frac{\sin(-0.01)}{-0.01} \approx 0.99998
 \end{align*}
-The function appears to approach 1. In calculus, it can be formally proven that:
+Funktionen ser ud til at nærme sig 1. I differentialregning kan det bevises formelt, at:
 \[
 \lim_{x \to 0} \frac{\sin(x)}{x} = 1
 \]
-This ability to analyze behavior at a problematic point is essential for creating robust numerical algorithms.
+Evnen til at analysere opførslen i et problematisk punkt er afgørende for at kunne lave robuste numeriske algoritmer.
 \end{example}
 
-\begin{example} Asymptotic Analysis with Limits
+\begin{example} Asymptotisk analyse med grænseværdier
 
-Suppose you want to analyze whether the function \( f(n) = 5n^2 + 4n + 7 \) is \( \mathcal{O}(n^2) \) as \( n \) grows large, as is common in the study of algorithm complexity. One way to formalize this is to examine the limit:
+Antag, at du vil undersøge, om funktionen \( f(n) = 5n^2 + 4n + 7 \) er \( \mathcal{O}(n^2) \), når \( n \) bliver stor, sådan som man ofte gør i studiet af algoritmers kompleksitet. En måde at formalisere det på er at undersøge grænseværdien:
 \[
 \lim_{n \to \infty} \frac{f(n)}{n^2}
 = \lim_{n \to \infty} \frac{5n^2 + 4n + 7}{n^2}
 = \lim_{n \to \infty} \left( 5 + \frac{4}{n} + \frac{7}{n^2} \right)
 \]
-As \( n \) becomes very large, the terms \( \frac{4}{n} \) and \( \frac{7}{n^2} \) both approach zero, so the whole expression approaches \( 5 \). Because this limit is a finite constant, it confirms that \( f(n) \) grows at the same rate as \( n^2 \). This type of limit calculation is at the heart of asymptotic analysis, formally justifying Big-\(\mathcal{O}\) claims about algorithm runtime.
+Når \( n \) bliver meget stor, går leddene \( \frac{4}{n} \) og \( \frac{7}{n^2} \) begge mod nul, så hele udtrykket nærmer sig \( 5 \). Da grænseværdien er en endelig konstant, bekræfter det, at \( f(n) \) vokser med samme hastighed som \( n^2 \). Denne type grænseværdiberegning er kernen i asymptotisk analyse og giver en formel begrundelse for påstande om algoritmers køretid udtrykt med store \(\mathcal{O}\).
 \end{example}
 
-\subsection*{Continuity}
-Continuity formalizes the idea of a function being "well-behaved" or predictable. Intuitively, a function is continuous if you can draw its graph without lifting your pen from the paper. In software, we often assume our systems are continuous: a small change in input should lead to a small, predictable change in output, not a sudden, drastic jump.
+\subsection*{Kontinuitet}
+Kontinuitet formaliserer idéen om, at en funktion er »velopdragen« eller forudsigelig. Intuitivt er en funktion kontinuert, hvis du kan tegne dens graf uden at løfte blyanten fra papiret. I software antager vi ofte, at vores systemer er kontinuerte: En lille ændring i input bør give en lille, forudsigelig ændring i output og ikke et pludseligt, drastisk spring.
 
-\begin{definition}[Continuity]
-A function \( f \) is \textbf{continuous} at a point \( c \) if the following three conditions are met:
+\begin{definition}[Kontinuitet]
+En funktion \( f \) er \textbf{kontinuert} i et punkt \( c \), hvis følgende tre betingelser er opfyldt:
 \begin{enumerate}
-    \item \( f(c) \) is defined.
-    \item \( \lim_{x \to c} f(x) \) exists.
+    \item \( f(c) \) er defineret.
+    \item \( \lim_{x \to c} f(x) \) eksisterer.
     \item \( \lim_{x \to c} f(x) = f(c) \).
 \end{enumerate}
-A function is continuous on an interval if it is continuous at every point in that interval.
+En funktion er kontinuert på et interval, hvis den er kontinuert i alle punkter i intervallet.
 \end{definition}
 
-Discontinuities often represent important events in software systems, such as state transitions or threshold triggers.
+Diskontinuiteter repræsenterer ofte vigtige hændelser i softwaresystemer, fx tilstandsskift eller tærskler, der udløser en handling.
 
-\begin{example} Jump Discontinuity in a SaaS Pricing Model
+\begin{example} Springdiskontinuitet i en SaaS-prismodel
     
-Consider a cloud service that charges based on the number of API calls per month. The pricing model is tiered: \$20 for up to 10,000 calls, and \$40 for any usage above 10,000 calls. The cost function \(C(x)\), where \(x\) is the number of calls, has a \textbf{jump discontinuity} at \(x = 10,000\).
+Se på en cloudtjeneste, der tager betaling efter antallet af API-kald pr. måned. Prismodellen er trinvis: \$20 for op til 10\,000 kald og \$40 for ethvert forbrug over 10\,000 kald. Omkostningsfunktionen \(C(x)\), hvor \(x\) er antallet af kald, har en \textbf{springdiskontinuitet} i \(x = 10\,000\).
 \[
 C(x) =
 \begin{cases}
-    20 & \text{if } x \le 10000 \\
-    40 & \text{if } x > 10000
+    20 & \text{hvis } x \le 10000 \\
+    40 & \text{hvis } x > 10000
 \end{cases}
 \]
-As shown in \autoref{fig:jump_discontinuity}, the cost suddenly jumps at the threshold. Understanding discontinuities is crucial for modeling any system with threshold-based logic, from auto-scaling policies to billing systems.
+Som vist i \autoref{fig:jump_discontinuity} springer prisen pludselig ved tærsklen. Det er afgørende at forstå diskontinuiteter, når man modellerer systemer med tærskelbaseret logik, lige fra regler for automatisk skalering til faktureringssystemer.
 \end{example}
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    xlabel={API Calls},
-    ylabel={Cost (\$)},
+    xlabel={API-kald},
+    ylabel={Pris (\$)},
     xmin=0, xmax=20,
     ymin=0, ymax=50,
     xtick={0, 10, 20},
@@ -181,16 +181,16 @@ As shown in \autoref{fig:jump_discontinuity}, the cost suddenly jumps at the thr
 \addplot[only marks, mark=o, mark size=2pt, mseViaBlue, thick] coordinates {(10, 40)};
 \end{axis}
 \end{tikzpicture}
-\caption{The cost function exhibits a jump discontinuity at 10,000 API calls as the price tier changes.}
+\caption{Omkostningsfunktionen har en springdiskontinuitet ved 10\,000 API-kald, hvor pristrinnet skifter.}
 \label{fig:jump_discontinuity}
 \end{figure}
 
-\section{The Derivative: Measuring the Rate of Change}
+\section{Den afledte: et mål for ændringshastigheden}
 \label{sec:ch10-derivative}
 
-We often talk about average rates of change. For example, if a data transfer takes 10 seconds and moves 500 MB, the average transfer rate is 50 MB/s. But this average tells us nothing about fluctuations during the transfer. The \textbf{derivative} is the tool that lets us move from this average rate to the \textbf{instantaneous rate of change} at any specific moment.
+Vi taler ofte om gennemsnitlige ændringshastigheder. Hvis en dataoverførsel tager 10 sekunder og flytter 500 MB, er den gennemsnitlige overførselshastighed for eksempel 50 MB/s. Men gennemsnittet fortæller intet om udsvingene under overførslen. Den \textbf{afledte} er det værktøj, der lader os gå fra den gennemsnitlige hastighed til den \textbf{momentane ændringshastighed} på et hvilket som helst bestemt tidspunkt.
 
-We may thus say that differential calculus is about determining how one quantity changes in relation to another. Geometrically, the derivative of a function at a point is the slope of the line tangent to the function's graph at that point. To find the slope of a tangent, we approximate it using secant lines between two nearby points on the curve. As the points move closer together, the secant slope approaches the tangent slope. As shown in \autoref{fig:secant_to_tangent}, this tangent line is the limit of secant lines passing through two points on the curve as the points get infinitesimally close.
+Vi kan altså sige, at differentialregning handler om at bestemme, hvordan én størrelse ændrer sig i forhold til en anden. Geometrisk er den afledte af en funktion i et punkt hældningen af tangenten til funktionens graf i punktet. For at finde en tangents hældning approksimerer vi den med sekanter gennem to nærliggende punkter på kurven. Når punkterne rykker tættere på hinanden, nærmer sekantens hældning sig tangentens hældning. Som vist i \autoref{fig:secant_to_tangent} er tangenten grænsen for sekanter gennem to punkter på kurven, når punkterne kommer uendeligt tæt på hinanden.
 
 \begin{figure}[htbp]
     \centering
@@ -209,86 +209,86 @@ We may thus say that differential calculus is about determining how one quantity
     \coordinate (Q2) at (axis cs:1.5, 3.375);
     \coordinate (Q1) at (axis cs:2, 8);
     \addplot[domain=0.6:2.2, dashed, color=gray] {7*x - 6};
-    \addlegendentry{Secant through $PQ_1$}
+    \addlegendentry{Sekant gennem $PQ_1$}
     \addplot[domain=0.6:2.0, color=orange, dashed] {4.75*x - 3.75};
-    \addlegendentry{Secant through $PQ_2$}
+    \addlegendentry{Sekant gennem $PQ_2$}
     \addplot[domain=0.5:2.0, red] {3*x - 2};
-    \addlegendentry{Tangent at $P$}
+    \addlegendentry{Tangent i $P$}
     \fill[red] (P) circle (2pt) node[below right, xshift=4pt] {$P$};
     \fill[black] (Q2) circle (2pt) node[right, xshift=4pt] {$Q_2$};
     \fill[black] (Q1) circle (2pt) node[above right, xshift=4pt] {$Q_1$};
     \end{axis}
     \end{tikzpicture}
-    \caption{Illustration of the tangent line as a limit of secant lines.}
+    \caption{Tangenten som grænse for sekanter.}
     \label{fig:secant_to_tangent}
     \end{figure}
     
-    In \autoref{fig:secant_to_tangent} as the point $Q$ moves along the curve toward $P$ (from $Q_1$ to $Q_2$ to $P$), the slope of the secant line $PQ$ approaches the slope of the tangent line to $f(x) = x^3$ at $P$. Note how the tangent only touches the curve at $P$, while the secant passes through two points.
+    Når punktet $Q$ i \autoref{fig:secant_to_tangent} bevæger sig langs kurven mod $P$ (fra $Q_1$ til $Q_2$ til $P$), nærmer sekanten $PQ$'s hældning sig hældningen af tangenten til $f(x) = x^3$ i $P$. Bemærk, at tangenten kun rører kurven i $P$, mens sekanten går gennem to punkter.
     
-    This leads to the formal definition of the derivative.
+    Det fører til den formelle definition af den afledte.
     
-    \begin{definition}[The Derivative]
-    The \textbf{derivative} of a function \( f \) with respect to \( x \), denoted \( f'(x) \), is the function
+    \begin{definition}[Den afledte]
+    Den \textbf{afledte} af en funktion \( f \) med hensyn til \( x \), betegnet \( f'(x) \), er funktionen
     \[
     f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
     \]
-    provided the limit exists. If \( f'(x) \) exists, we say that \( f \) is \textbf{differentiable} at \( x \).
+    forudsat at grænseværdien eksisterer. Hvis \( f'(x) \) eksisterer, siger vi, at \( f \) er \textbf{differentiabel} i \( x \).
     \end{definition}
     
-    The expression \( \frac{f(x+h) - f(x)}{h} \) is the \textbf{difference quotient}, representing the average rate of change over the interval from \(x\) to \(x+h\). The derivative is the limit of this average rate as the interval size \(h\) shrinks to zero.
+    Udtrykket \( \frac{f(x+h) - f(x)}{h} \) er \textbf{differenskvotienten}, som er den gennemsnitlige ændringshastighed på intervallet fra \(x\) til \(x+h\). Den afledte er grænseværdien af denne gennemsnitlige hastighed, når intervallets længde \(h\) går mod nul.
     
-    \begin{example} Derivative from First Principles
+    \begin{example} Den afledte ud fra definitionen
         
-    Let's find the derivative of \( f(x) = x^2 \) using the limit definition.
+    Lad os finde den afledte af \( f(x) = x^2 \) ved hjælp af definitionen med grænseværdi.
     \end{example}
     \begin{solution}
-    We start with the difference quotient and simplify:
+    Vi begynder med differenskvotienten og reducerer:
     \[
     \frac{f(x+h) - f(x)}{h} = \frac{(x+h)^2 - x^2}{h} = \frac{x^2 + 2xh + h^2 - x^2}{h} = \frac{2xh + h^2}{h} = 2x + h
     \]
-    Finally, we take the limit as \( h \to 0 \):
+    Til sidst tager vi grænseværdien for \( h \to 0 \):
     \[
     f'(x) = \lim_{h \to 0} (2x + h) = 2x
     \]
-    Thus, the derivative of \( f(x) = x^2 \) is \( f'(x) = 2x \). This tells us the slope of the parabola at any point \(x\).
+    Den afledte af \( f(x) = x^2 \) er altså \( f'(x) = 2x \). Den angiver parablens hældning i ethvert punkt \(x\).
     \end{solution}
 
 \subsection*{Notation}
-The derivative of $f$ can be written in several equivalent forms:
+Den afledte af $f$ kan skrives på flere ækvivalente måder:
 \[
 f'(x), \quad \frac{df}{dx}, \quad \frac{dy}{dx}, \quad Df(x), \quad \frac{d}{dx}f(x).
 \]
 
-\section{Rules of Differentiation}
+\section{Differentiationsregler}
 \label{sec:ch10-rules}
 
-Differential calculus provides a way to find the exact derivative of a function directly from its formula, without relying on graphs or numerical estimation. In practice, this is done using a set of simple rules that allow us to compute the derivative of nearly any function we are likely to encounter. In this section, we will introduce these rules, explain their meaning, and show how to apply them in practice.
+Differentialregning giver os en metode til at finde den eksakte afledte af en funktion direkte ud fra dens forskrift uden at skulle bruge grafer eller numeriske skøn. I praksis sker det ved hjælp af en række enkle regler, som gør det muligt at beregne den afledte af næsten enhver funktion, vi sandsynligvis vil møde. I dette afsnit introducerer vi reglerne, forklarer deres betydning og viser, hvordan de anvendes i praksis.
 
 
-\subsection*{Constant and Power Rules}
-Perhaps the simplest functions in mathematics are the constant functions and the functions of the form $x^{n}$.\\
+\subsection*{Konstantreglen og potensreglen}
+De måske simpleste funktioner i matematikken er de konstante funktioner og funktionerne på formen $x^{n}$.\\
 
-\begin{theorem}{Constant and Power Rules}
+\begin{theorem}{Konstantreglen og potensreglen}
     \begin{enumerate}
-        \item \textbf{Constant Rule:} If $c$ is constant, then $\dfrac{d}{dx}(c) = 0$, \vspace{0.5em}
-        \item \textbf{Power Rule:} For any real $n$, $\dfrac{d}{dx}x^n = n x^{n - 1}$. \vspace{0.5em}
+        \item \textbf{Konstantreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}(c) = 0$, \vspace{0.5em}
+        \item \textbf{Potensreglen:} For ethvert reelt $n$ gælder $\dfrac{d}{dx}x^n = n x^{n - 1}$. \vspace{0.5em}
     \end{enumerate}
 \end{theorem}
 
 \begin{example}
 
     \begin{itemize}
-        \item If \(f(x)=x^7\), then \(f'(x) = 7x^6\),
+        \item Hvis \(f(x)=x^7\), så er \(f'(x) = 7x^6\),
         \vspace{0.5em}
-        \item If \(y = x^{-0.5}\), then \(\frac{dy}{dx} = -0.5x^{-1.5}\),
+        \item Hvis \(y = x^{-0.5}\), så er \(\frac{dy}{dx} = -0.5x^{-1.5}\),
         \vspace{0.5em}
         \item \(\frac{d}{dx} x^{-3} = -3x^{-4}\),
         \vspace{0.5em}
-        \item If \(g(x) = 3.2\), then \(g'(x) = 0\),
+        \item Hvis \(g(x) = 3.2\), så er \(g'(x) = 0\),
         \vspace{0.5em}
-        \item If \(f(t) = \sqrt{t}=t^{\frac{1}{2}}\), then \(f'(t) = \frac{1}{2} t^{-\frac{1}{2}}=\frac{1}{2 \sqrt{t}} \),
+        \item Hvis \(f(t) = \sqrt{t}=t^{\frac{1}{2}}\), så er \(f'(t) = \frac{1}{2} t^{-\frac{1}{2}}=\frac{1}{2 \sqrt{t}} \),
         \vspace{0.5em}
-        \item If \(h(u) = -13.29\), then \(h'(u) = 0\),
+        \item Hvis \(h(u) = -13.29\), så er \(h'(u) = 0\),
         \vspace{0.5em}
         \item $\dfrac{d}{dx}x^3 = 3x^2$,
         $\dfrac{d}{dx}x^{-2} = -2x^{-3}$.
@@ -296,11 +296,11 @@ Perhaps the simplest functions in mathematics are the constant functions and the
 
 \end{example}
 
-In the examples above, we have used the constant and power rules to find the derivatives of several simple functions. However, it is important to remember what these calculations actually represent. The derivative tells us the slope of the tangent line to the graph of a function at any given point.
+I eksemplerne ovenfor har vi brugt konstantreglen og potensreglen til at finde de afledte af flere simple funktioner. Det er dog vigtigt at huske, hvad disse beregninger faktisk repræsenterer. Den afledte angiver hældningen af tangenten til en funktions graf i et givet punkt.
 
-For instance, if $f(x) = x^{2}$, then $f'(x) = 2x$. To find the slope of the tangent to the graph of $x^{2}$ at $x = 1$, we substitute $x = 1$ into the derivative, giving $f'(1) = 2 \times 1 = 2$. Similarly, the slope of the tangent at $x = -0.5$ is $f'(-0.5) = 2 \times (-0.5) = -1$.
+Hvis for eksempel $f(x) = x^{2}$, så er $f'(x) = 2x$. For at finde hældningen af tangenten til grafen for $x^{2}$ i $x = 1$ indsætter vi $x = 1$ i den afledte og får $f'(1) = 2 \times 1 = 2$. Tilsvarende er tangentens hældning i $x = -0.5$ lig med $f'(-0.5) = 2 \times (-0.5) = -1$.
 
-These results are illustrated in \autoref{fig:tangent_lines}, where the tangent lines at $x = 1$ and $x = -0.5$ have slopes of 2 and -1, respectively.
+Resultaterne er illustreret i \autoref{fig:tangent_lines}, hvor tangenterne i $x = 1$ og $x = -0.5$ har hældningerne henholdsvis 2 og -1.
 
 % --- Ensure these packages are in your preamble ---
 % \usepackage{pgfplots}
@@ -340,35 +340,35 @@ These results are illustrated in \autoref{fig:tangent_lines}, where the tangent 
             domain=0:1.5,
             red, thick
         ] {2*x - 1};
-        \addlegendentry{Tangent at \(x=1\)}
+        \addlegendentry{Tangent i \(x=1\)}
         
         % Mark and label the point at x=1
         \coordinate (P1) at (axis cs:1, 1);
         \fill[red] (P1) circle (2.5pt);
-        \node[right, xshift=10pt, font=\small, color=red] at (P1) {Slope \(f'(1)=2\)};
+        \node[right, xshift=10pt, font=\small, color=red] at (P1) {Hældning \(f'(1)=2\)};
 
         % -- Tangent Line at x = -0.5 --
         \addplot[
             domain=-1.5:0.5,
             orange, thick
         ] {-x - 0.25};
-        \addlegendentry{Tangent at \(x=-0.5\)}
+        \addlegendentry{Tangent i \(x=-0.5\)}
 
         % Mark and label the point at x=-0.5
         \coordinate (P2) at (axis cs:-0.5, 0.25);
         \fill[orange] (P2) circle (2.5pt);
-        \node[left, xshift=-10pt, font=\small, color=orange] at (P2) {Slope \(f'(-0.5)=-1\)};
+        \node[left, xshift=-10pt, font=\small, color=orange] at (P2) {Hældning \(f'(-0.5)=-1\)};
 
         \end{axis}
     \end{tikzpicture}
-    \caption{The tangent lines to the graph of \(f(x) = x^2\) at different points have different slopes.}
+    \caption{Tangenterne til grafen for \(f(x) = x^2\) har forskellige hældninger i forskellige punkter.}
     \label{fig:tangent_lines}
 \end{figure}
 
 
 \begin{example}
 
-Let $f(x)=(x^2+1)^3$. Then
+Lad $f(x)=(x^2+1)^3$. Så er
 \[
 f'(x) = 3(x^2+1)^2\cdot 2x = 6x(x^2+1)^2.
 \]
@@ -376,12 +376,12 @@ f'(x) = 3(x^2+1)^2\cdot 2x = 6x(x^2+1)^2.
 
 \begin{example}
 
-Find the slope of the tangent to the graph of the function $g(t)=t^{4}$ at the point on the graph where $t=-2$.
+Find hældningen af tangenten til grafen for funktionen $g(t)=t^{4}$ i det punkt på grafen, hvor $t=-2$.
 
 
 \begin{solution}
     
-The derivative is $g^{\prime}(t)=4 t^{3}$, and so the slope of the tangent line at $t=-2$ is $g^{\prime}(-2)= 4 \times(-2)^{3}=-32$.
+Den afledte er $g^{\prime}(t)=4 t^{3}$, så tangentens hældning i $t=-2$ er $g^{\prime}(-2)= 4 \times(-2)^{3}=-32$.
 \end{solution}
 
 \end{example}
@@ -390,47 +390,47 @@ The derivative is $g^{\prime}(t)=4 t^{3}$, and so the slope of the tangent line 
 
 \begin{example}
 
-Find the equation of the line tangent to the graph of $y=f(x)=x^{\frac{1}{2}}$ at the point $x=4$.
+Find ligningen for tangenten til grafen for $y=f(x)=x^{\frac{1}{2}}$ i punktet $x=4$.
 
 
 
 \begin{solution}
 
-$f(4)=4^{\frac{1}{2}}=\sqrt{4}=2$, so the coordinates of the point on the graph are $(4,2)$. The derivative is
+$f(4)=4^{\frac{1}{2}}=\sqrt{4}=2$, så koordinaterne til punktet på grafen er $(4,2)$. Den afledte er
 
-Any non vertical line has equation of the form $y=m x+b$ where $m$ is the slope and $b$ the vertical intercept.
+Enhver ikke-lodret linje har en ligning på formen $y=m x+b$, hvor $m$ er hældningen, og $b$ er skæringen med andenaksen.
 
-In this case the slope is $\frac{1}{4}$, so $m=\frac{1}{4}$, and the equation is $y=\frac{x}{4}+b$. Because the line passes through the point $(4,2)$ we know that $y=2$ when $x=4$.
+Her er hældningen $\frac{1}{4}$, så $m=\frac{1}{4}$, og ligningen er $y=\frac{x}{4}+b$. Da linjen går gennem punktet $(4,2)$, ved vi, at $y=2$, når $x=4$.
 
-Substituting we get $2=\frac{4}{4}+b$, so that $b=1$. The equation is therefore $y=\frac{x}{4}+1$. \end{solution}
+Ved indsættelse får vi $2=\frac{4}{4}+b$, så $b=1$. Ligningen er derfor $y=\frac{x}{4}+1$. \end{solution}
 
 \end{example}
 
-We now know how to differentiate any function that is a power of the variable. Examples are functions like $x^{3}$ and $t^{-1.3}$. You will come across functions that do not at first appear to be a power of the variable, but can be rewritten in this form. One of the simplest examples is the function
+Vi ved nu, hvordan man differentierer enhver funktion, der er en potens af variablen. Eksempler er funktioner som $x^{3}$ og $t^{-1.3}$. Du vil møde funktioner, der ved første øjekast ikke ser ud til at være en potens af variablen, men som kan omskrives til denne form. Et af de simpleste eksempler er funktionen
 
 \[
     f(t)=\sqrt{t}
 \]
 
-which can also be written in the form
+som også kan skrives på formen
 
 \[
 f(t)=t^{\frac{1}{2}} .
 \]
 
-The derivative is then
+Den afledte er så
 
 \[
 f^{\prime}(t)=\frac{t^{-\frac{1}{2}}}{2}=\frac{1}{2 \sqrt{t}}
 \]
 
-Similarly, if
+Tilsvarende gælder, at hvis
 
 \[
 h(s)=\frac{1}{s}=s^{-1}
 \]
 
-then
+så er
 
 \[
 h^{\prime}(s)=-s^{-2}=-\frac{1}{s^{2}}
@@ -438,65 +438,65 @@ h^{\prime}(s)=-s^{-2}=-\frac{1}{s^{2}}
 
 \begin{example}
 
-If $f(x)=\frac{1}{\sqrt[3]{x}}=x^{-\frac{1}{3}}$ then $f^{\prime}(x)=-\frac{1}{3} x^{-\frac{4}{3}}$.
+Hvis $f(x)=\frac{1}{\sqrt[3]{x}}=x^{-\frac{1}{3}}$, så er $f^{\prime}(x)=-\frac{1}{3} x^{-\frac{4}{3}}$.
 \end{example}
 
 \begin{example}
 
-If $y=\frac{1}{x \sqrt{x}}=x^{-\frac{3}{2}}$ then $\frac{d y}{d x}=-\frac{3}{2} x^{-\frac{5}{2}}$.
+Hvis $y=\frac{1}{x \sqrt{x}}=x^{-\frac{3}{2}}$, så er $\frac{d y}{d x}=-\frac{3}{2} x^{-\frac{5}{2}}$.
 \end{example}
 
 
-\subsection*{Scalar Rule and Linearity}
+\subsection*{Skalarreglen og linearitet}
 
-So far we know how to differentiate powers of the independent variable. Many of the functions that arise in applications are built from such powers in simple ways. For instance, the function  $3x^2$ is merely a scalar multiple of $x^2$, yet neither the constant and power rules tell us how to differentiate $3x^2$. Likewise, these rules do not explain how to differentiate expressions such as $x^{2} + x^{3}$ or $x^{2} - x^{3}$.
+Indtil videre ved vi, hvordan man differentierer potenser af den uafhængige variabel. Mange af de funktioner, der optræder i anvendelser, er bygget op af sådanne potenser på enkle måder. Funktionen $3x^2$ er for eksempel blot et skalart multiplum af $x^2$, men hverken konstantreglen eller potensreglen fortæller os, hvordan vi differentierer $3x^2$. Reglerne forklarer heller ikke, hvordan man differentierer udtryk som $x^{2} + x^{3}$ eller $x^{2} - x^{3}$.
 
-\begin{theorem}{Scalar and Linearity Rules}
+\begin{theorem}{Skalarreglen og linearitetsreglen}
     \begin{enumerate}
         \setcounter{enumi}{2}
         \vspace{0.5em}
-        \item \textbf{Scalar Rule:} \( \frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x) \). \vspace{0.5em}
-        \item \textbf{Linearity Rule:} \( \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) \). \vspace{0.5em}
+        \item \textbf{Skalarreglen:} \( \frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x) \). \vspace{0.5em}
+        \item \textbf{Linearitetsreglen:} \( \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) \). \vspace{0.5em}
     \end{enumerate}
 \end{theorem}
 
-The scalar rule and linearity rules address this gap. They describe how to differentiate functions that are formed by multiplying a function by a constant, and by adding or subtracting functions. These rules allow us to extend our differentiation techniques from simple powers to a broad class of functions constructed from them.
+Skalarreglen og linearitetsreglen udfylder dette hul. De beskriver, hvordan man differentierer funktioner, der fremkommer ved at gange en funktion med en konstant og ved at lægge funktioner sammen eller trække dem fra hinanden. Med disse regler kan vi udvide vores differentiationsteknikker fra simple potenser til en bred klasse af funktioner, der er bygget op af dem.
 
 \begin{example}
     \begin{itemize}
-        \item If \(f(x)=3 x^2\) then \(f^{\prime}(x)=3 \times \frac{d}{d x} x^2=6 x\). \vspace{0.5em}
-        \item If \(g(t)=3 t^2+2 t^{-2}\) then \(g^{\prime}(t)=\frac{d}{d t} 3 t^2+\frac{d}{d t} 2 t^{-2}=6 t-4 t^{-3}\). \vspace{0.5em}
-        \item If \(y=\frac{3}{\sqrt{x}}-2 x \sqrt[3]{x}=3 x^{-\frac{1}{2}}-2 x^{\frac{4}{3}}\) then \(\frac{d y}{d x}=-\frac{3}{2} x^{-\frac{3}{2}}-\frac{8}{3} x^{\frac{1}{3}}\). \vspace{0.5em}
-        \item If \(y=-0.3 x^{-0.4}\) then \(\frac{d y}{d x}=0.12 x^{-1.4}\). \vspace{0.5em}
+        \item Hvis \(f(x)=3 x^2\), så er \(f^{\prime}(x)=3 \times \frac{d}{d x} x^2=6 x\). \vspace{0.5em}
+        \item Hvis \(g(t)=3 t^2+2 t^{-2}\), så er \(g^{\prime}(t)=\frac{d}{d t} 3 t^2+\frac{d}{d t} 2 t^{-2}=6 t-4 t^{-3}\). \vspace{0.5em}
+        \item Hvis \(y=\frac{3}{\sqrt{x}}-2 x \sqrt[3]{x}=3 x^{-\frac{1}{2}}-2 x^{\frac{4}{3}}\), så er \(\frac{d y}{d x}=-\frac{3}{2} x^{-\frac{3}{2}}-\frac{8}{3} x^{\frac{1}{3}}\). \vspace{0.5em}
+        \item Hvis \(y=-0.3 x^{-0.4}\), så er \(\frac{d y}{d x}=0.12 x^{-1.4}\). \vspace{0.5em}
         \item \(\frac{d}{d x} 2 x^{0.3}=0.6 x^{-0.7}\).
     \end{itemize}
     
 \end{example}
 
-\textbf{Caution.} Although the linearity rule states that $\dfrac{d}{dx}\big(f(x)\pm g(x)\big)=f'(x)\pm g'(x)$, this property does \emph{not} extend to products or quotients. In general,
+\textbf{Advarsel.} Selv om linearitetsreglen siger, at $\dfrac{d}{dx}\big(f(x)\pm g(x)\big)=f'(x)\pm g'(x)$, gælder denne egenskab \emph{ikke} for produkter eller kvotienter. Generelt er
 \[
 \frac{d}{dx}\big(f(x)g(x)\big)\neq f'(x)g'(x),
 \qquad
 \frac{d}{dx}\left(\frac{f(x)}{g(x)}\right)\neq \frac{f'(x)}{g'(x)}.
 \]
-To differentiate $f(x)g(x)$ or $\frac{f(x)}{g(x)}$ we cannot simply differentiate the factors and then multiply or divide the results. The correct techniques are the \emph{product rule} and the \emph{quotient rule}, which are developed in the next section.
+For at differentiere $f(x)g(x)$ eller $\frac{f(x)}{g(x)}$ kan vi ikke blot differentiere faktorerne og derefter gange eller dividere resultaterne. De korrekte teknikker er \emph{produktreglen} og \emph{kvotientreglen}, som udvikles i næste afsnit.
 
-\subsection*{The Product and Quotient Rules}
+\subsection*{Produktreglen og kvotientreglen}
 
-Another common way of combining functions is to multiply them, thereby forming a \emph{product}. The product rule provides the method for differentiating functions constructed in this way. 
+En anden almindelig måde at kombinere funktioner på er at gange dem med hinanden og derved danne et \emph{produkt}. Produktreglen giver metoden til at differentiere funktioner, der er opbygget på denne måde. 
 
-On the other hand the quotient rule allows us to differentiate functions which are formed by dividing one function
-by another, i.e. by forming quotients of functions. The quotient rule provides the method for differentiating functions constructed in this way.
+Kvotientreglen gør det derimod muligt at differentiere funktioner, der fremkommer ved at dividere én funktion
+med en anden, dvs. ved at danne kvotienter af funktioner. Kvotientreglen giver metoden til at differentiere funktioner, der er opbygget på denne måde.
 
-\begin{theorem}{Product and Quotient Rules}
+\begin{theorem}{Produktreglen og kvotientreglen}
     \begin{enumerate}
         \setcounter{enumi}{4}
         \vspace{0.5em}
-        \item \textbf{Product Rule:} If \(f(x)\) and \(g(x)\) are differentiable, then \vspace{0.5em}
+        \item \textbf{Produktreglen:} Hvis \(f(x)\) og \(g(x)\) er differentiable, så gælder \vspace{0.5em}
         \[
         \frac{d}{dx}\big(f(x)g(x)\big)=f'(x)g(x)+f(x)g'(x). \vspace{0.5em}
         \] \vspace{0.5em}
-        \item \textbf{Quotient Rule:} If \(f(x)\) and \(g(x)\) are differentiable and \(g(x)\neq0\), then
+        \item \textbf{Kvotientreglen:} Hvis \(f(x)\) og \(g(x)\) er differentiable, og \(g(x)\neq0\), så gælder
         \vspace{0.5em}
         \[
         \frac{d}{dx}\left(\frac{f(x)}{g(x)}\right)=\frac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2}. \vspace{0.5em}
@@ -504,35 +504,35 @@ by another, i.e. by forming quotients of functions. The quotient rule provides t
     \end{enumerate}
 \end{theorem}
 
-\begin{example} Product Rule
+\begin{example} Produktreglen
 
     \begin{itemize}
-        \item If \(y=(x+2)\left(x^2+3\right)\) then \(y^{\prime}=(x+2) 2 x+1\left(x^2+3\right)\). \vspace{0.5em}
-        \item If \(f(x)=\sqrt{x}\left(x^3-3 x^2+7\right)\) then \(f^{\prime}(x)=\sqrt{x}\left(3 x^2-6 x\right)+\frac{1}{2} x^{-\frac{1}{2}}\left(x^3-3 x^2+7\right)\). \vspace{0.5em}
-        \item If \(z=\left(t^2+3\right)\left(\sqrt{t}+t^3\right)\) then \(\frac{d z}{d t}=\left(t^2+3\right)\left(\frac{1}{2} t^{-\frac{1}{2}}+3 t^2\right)+2 t\left(\sqrt{t}+t^3\right)\). \vspace{0.5em}
+        \item Hvis \(y=(x+2)\left(x^2+3\right)\), så er \(y^{\prime}=(x+2) 2 x+1\left(x^2+3\right)\). \vspace{0.5em}
+        \item Hvis \(f(x)=\sqrt{x}\left(x^3-3 x^2+7\right)\), så er \(f^{\prime}(x)=\sqrt{x}\left(3 x^2-6 x\right)+\frac{1}{2} x^{-\frac{1}{2}}\left(x^3-3 x^2+7\right)\). \vspace{0.5em}
+        \item Hvis \(z=\left(t^2+3\right)\left(\sqrt{t}+t^3\right)\), så er \(\frac{d z}{d t}=\left(t^2+3\right)\left(\frac{1}{2} t^{-\frac{1}{2}}+3 t^2\right)+2 t\left(\sqrt{t}+t^3\right)\). \vspace{0.5em}
     \end{itemize}
 
 \end{example}
 
-\begin{example} Quotient Rule
+\begin{example} Kvotientreglen
 
     \begin{itemize}
-        \item If \(y=\frac{2 x^2+3 x}{x^3+1}\), then \(\frac{d y}{d x}=\frac{\left(x^3+1\right)(4 x+3)-\left(2 x^2+3 x\right) 3 x^2}{\left(x^3+1\right)^2}\). \vspace{0.5em}   
-        \item If \(g(t)=\frac{t^2+3 t+1}{\sqrt{t}+1}\) then \(g^{\prime}(t)=\frac{(\sqrt{t}+1)(2 t+3)-\left(t^2+3 t+1\right)\left(\frac{1}{2} t^{-\frac{1}{2}}\right)}{(\sqrt{t}+1)^2}\). \vspace{0.5em}
+        \item Hvis \(y=\frac{2 x^2+3 x}{x^3+1}\), så er \(\frac{d y}{d x}=\frac{\left(x^3+1\right)(4 x+3)-\left(2 x^2+3 x\right) 3 x^2}{\left(x^3+1\right)^2}\). \vspace{0.5em}   
+        \item Hvis \(g(t)=\frac{t^2+3 t+1}{\sqrt{t}+1}\), så er \(g^{\prime}(t)=\frac{(\sqrt{t}+1)(2 t+3)-\left(t^2+3 t+1\right)\left(\frac{1}{2} t^{-\frac{1}{2}}\right)}{(\sqrt{t}+1)^2}\). \vspace{0.5em}
     \end{itemize}
 \end{example}
 
-In the quotient rule, because of the minus sign in the numerator (i.e. in the top line) it is important to get the terms in the numerator in the correct order. This is often a source of mistakes, so be careful. Decide on your own way of remembering the correct order of the terms.
+På grund af minustegnet i tælleren (dvs. øverst i brøken) er det i kvotientreglen vigtigt at skrive leddene i tælleren i den rigtige rækkefølge. Det er en hyppig kilde til fejl, så vær omhyggelig. Find din egen måde at huske den rigtige rækkefølge af leddene på.
 
 
-\subsection*{The Chain Rule}
-The chain rule is arguably the most important differentiation rule, especially in machine learning. It tells us how to find the derivative of a composite function — a function nested inside another. In software, we constantly compose functions, and the chain rule is the mathematical tool for analyzing how changes propagate through these compositions.
+\subsection*{Kædereglen}
+Kædereglen er nok den vigtigste differentiationsregel, især inden for maskinlæring. Den fortæller os, hvordan vi finder den afledte af en sammensat funktion -- en funktion, der er indlejret i en anden. I software sammensætter vi hele tiden funktioner, og kædereglen er det matematiske værktøj til at analysere, hvordan ændringer forplanter sig gennem disse sammensætninger.
 
-\begin{theorem}{Chain Rule}
+\begin{theorem}{Kædereglen}
     \vspace{0.5em}
     \setcounter{enumi}{6}
     \begin{enumerate}
-        \item If \( h(x) = f(g(x)) \) is a composite function, then its derivative is the derivative of the outer function (evaluated at the inner function) multiplied by the derivative of the inner function. \vspace{0.5em}
+        \item Hvis \( h(x) = f(g(x)) \) er en sammensat funktion, er dens afledte lig med den afledte af den ydre funktion (udregnet i den indre funktion) ganget med den afledte af den indre funktion. \vspace{0.5em}
         \[
         h'(x) = f'(g(x)) \cdot g'(x). \vspace{0.5em}
         \]
@@ -541,12 +541,12 @@ The chain rule is arguably the most important differentiation rule, especially i
 
 \begin{example}
 
-Find the derivative of \( h(x) = (x^3 + 2x)^5 \).
+Find den afledte af \( h(x) = (x^3 + 2x)^5 \).
 \end{example}
 
 \begin{solution}
-This is a composition where the outer function is \( f(u) = u^5 \) and the inner function is \( g(x) = x^3 + 2x \). Their derivatives are \( f'(u) = 5u^4 \) and \( g'(x) = 3x^2 + 2 \).
-Applying the chain rule:
+Der er tale om en sammensætning, hvor den ydre funktion er \( f(u) = u^5 \), og den indre funktion er \( g(x) = x^3 + 2x \). Deres afledte er \( f'(u) = 5u^4 \) og \( g'(x) = 3x^2 + 2 \).
+Vi anvender kædereglen:
 \[
 \begin{aligned}
 h'(x) &= f'(g(x)) \cdot g'(x) \\
@@ -557,11 +557,11 @@ h'(x) &= f'(g(x)) \cdot g'(x) \\
 
 \begin{example}
 
-    Differentiate \(\left(3 x^2-5\right)^3\).
+    Differentiér \(\left(3 x^2-5\right)^3\).
 \end{example}
 
 \begin{solution}
-    The first step is always to identify that the expression represents a composite function and then to separate it into its outer and inner components. In this example, the outer function is $(\,\cdot\,)^{3}$, whose derivative is $3(\,\cdot\,)^{2}$, and the inner function is $3x^{2}-5$, whose derivative is $6x$. Applying the composite function rule therefore gives
+    Første skridt er altid at se, at udtrykket er en sammensat funktion, og derefter at opdele det i dets ydre og indre del. I dette eksempel er den ydre funktion $(\,\cdot\,)^{3}$ med den afledte $3(\,\cdot\,)^{2}$, og den indre funktion er $3x^{2}-5$ med den afledte $6x$. Reglen for sammensatte funktioner giver derfor
 
     \[
     \frac{d}{dx}\big(3x^{2}-5\big)^{3}
@@ -569,7 +569,7 @@ h'(x) &= f'(g(x)) \cdot g'(x) \\
     = 18x\big(3x^{2}-5\big)^{2}.
     \]
     
-    Alternatively, we may introduce the substitution \(u = 3x^{2}-5\) and write \(y = u^{3}\). Then
+    Alternativt kan vi indføre substitutionen \(u = 3x^{2}-5\) og skrive \(y = u^{3}\). Så er
     
     \[
     \frac{dy}{dx}
@@ -582,62 +582,62 @@ h'(x) &= f'(g(x)) \cdot g'(x) \\
 
 \begin{example}
 
-    Find \(\frac{d y}{d x}\) if \(y=\sqrt{x^2+1}\).
+    Find \(\frac{d y}{d x}\), hvis \(y=\sqrt{x^2+1}\).
 
 \end{example}
 \begin{solution}
-    The outer function is \(\sqrt{\cdot}\), whose derivative is \(\frac{1}{2\sqrt{\cdot}}\), and the inner function is \(x^2+1\), whose derivative is \(2x\). Applying the chain rule therefore gives
+    Den ydre funktion er \(\sqrt{\cdot}\) med den afledte \(\frac{1}{2\sqrt{\cdot}}\), og den indre funktion er \(x^2+1\) med den afledte \(2x\). Kædereglen giver derfor
 
     \[
     \frac{d y}{d x} = \frac{1}{2\sqrt{x^2+1}} \times 2x = \frac{x}{\sqrt{x^2+1}}.
     \]
 \end{solution}
 
-The chain rule is the core mechanism behind the \textbf{backpropagation} algorithm used to train neural networks. An error at the output of a network is a composition of many nested functions (the layers). Backpropagation uses the chain rule repeatedly to calculate the derivative of the error with respect to each weight in the network, telling us how to adjust each weight to improve the model.
+Kædereglen er den centrale mekanisme bag \textbf{backpropagation}-algoritmen, som bruges til at træne neurale netværk. En fejl i et netværks output er en sammensætning af mange indlejrede funktioner (lagene). Backpropagation bruger kædereglen gentagne gange til at beregne den afledte af fejlen med hensyn til hver vægt i netværket og fortæller os dermed, hvordan hver vægt skal justeres for at forbedre modellen.
 
-\begin{example} A Multi-Rule Problem
+\begin{example} En opgave med flere regler
 
-Find the derivative of \( h(x) = \frac{x^2}{(3x+1)^4} \).
+Find den afledte af \( h(x) = \frac{x^2}{(3x+1)^4} \).
 \end{example}
 
 \begin{solution}
-This problem requires the quotient rule, and the denominator requires the chain rule.
-Let \( f(x) = x^2 \) and \( g(x) = (3x+1)^4 \).
-Then \( f'(x) = 2x \). To find \( g'(x) \), we use the chain rule: \( g'(x) = 4(3x+1)^3 \cdot 3 = 12(3x+1)^3 \).
-Now, apply the quotient rule:
+Opgaven kræver kvotientreglen, og nævneren kræver kædereglen.
+Lad \( f(x) = x^2 \) og \( g(x) = (3x+1)^4 \).
+Så er \( f'(x) = 2x \). For at finde \( g'(x) \) bruger vi kædereglen: \( g'(x) = 4(3x+1)^3 \cdot 3 = 12(3x+1)^3 \).
+Nu anvender vi kvotientreglen:
 \[
 \begin{aligned}
 h'(x) &= \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2} \\
 &= \frac{(2x)(3x+1)^4 - (x^2)(12(3x+1)^3)}{((3x+1)^4)^2} \\
-&= \frac{(2x)(3x+1) - 12x^2}{(3x+1)^5} \quad \text{(after factoring out and canceling \((3x+1)^3\))} \\
+&= \frac{(2x)(3x+1) - 12x^2}{(3x+1)^5} \quad \text{(efter at have sat \((3x+1)^3\) uden for parentes og forkortet)} \\
 &= \frac{6x^2 + 2x - 12x^2}{(3x+1)^5} = \frac{2x - 6x^2}{(3x+1)^5}
 \end{aligned}
 \]
 \end{solution}
 
-\subsection*{Summary of Rules of Differentiation}
+\subsection*{Oversigt over differentiationsreglerne}
 \label{sec:ch10-common}
 
-The rules of differentiation are summarized in the following theorem.
+Differentiationsreglerne er samlet i følgende sætning.
 
-\begin{theorem}{Rules of Differentiation}
+\begin{theorem}{Differentiationsregler}
 
     \begin{enumerate}
-        \item \textbf{Constant Rule:} If $c$ is constant, then $\dfrac{d}{dx}c=0$. \vspace{0.5em}
-        \item \textbf{Power Rule:} For any real $n$, $\dfrac{d}{dx}x^n = n x^{n-1}$. \vspace{0.5em}
+        \item \textbf{Konstantreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}c=0$. \vspace{0.5em}
+        \item \textbf{Potensreglen:} For ethvert reelt $n$ gælder $\dfrac{d}{dx}x^n = n x^{n-1}$. \vspace{0.5em}
         \[
         \frac{d}{dx}x^n = n x^{n-1}.
         \]
-        \item \textbf{Scalar Rule:} If $c$ is constant, then $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$. \vspace{0.5em}
-        \item \textbf{Linearity:} For differentiable $f,g$ and constants $a,b$, $\dfrac{d}{dx}(a f + b g) = a f' + b g'$. \vspace{0.5em}
-        \item \textbf{Product Rule:} If $f,g$ are differentiable, then $\dfrac{d}{dx}(f g) = f'g + fg'$. \vspace{0.5em}
-        \item \textbf{Quotient Rule:} If $f,g$ are differentiable and $g(x)\neq0$, then $\dfrac{d}{dx}\left(\frac{f}{g}\right) = \frac{f'g - fg'}{g^2}$. \vspace{0.5em}
-        \item \textbf{Chain Rule:} If $f,g$ are differentiable, then $\dfrac{d}{dx}(f(g(x))) = f'(g(x))g'(x)$. \vspace{0.5em}
+        \item \textbf{Skalarreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$. \vspace{0.5em}
+        \item \textbf{Linearitet:} For differentiable $f,g$ og konstanter $a,b$ gælder $\dfrac{d}{dx}(a f + b g) = a f' + b g'$. \vspace{0.5em}
+        \item \textbf{Produktreglen:} Hvis $f,g$ er differentiable, så er $\dfrac{d}{dx}(f g) = f'g + fg'$. \vspace{0.5em}
+        \item \textbf{Kvotientreglen:} Hvis $f,g$ er differentiable, og $g(x)\neq0$, så er $\dfrac{d}{dx}\left(\frac{f}{g}\right) = \frac{f'g - fg'}{g^2}$. \vspace{0.5em}
+        \item \textbf{Kædereglen:} Hvis $f,g$ er differentiable, så er $\dfrac{d}{dx}(f(g(x))) = f'(g(x))g'(x)$. \vspace{0.5em}
     \end{enumerate}
 
 \end{theorem}
 
-These rules do not apply to every function. For instance, the derivative of $e^{x}$ is $e^{x}$, while the derivative of $\ln x$ is $\dfrac{1}{x}$, and neither of these fits the patterns described so far. The most common differentiable functions that fall outside these earlier rules are listed below.
+Reglerne dækker ikke alle funktioner. Den afledte af $e^{x}$ er for eksempel $e^{x}$, mens den afledte af $\ln x$ er $\dfrac{1}{x}$, og ingen af dem passer ind i de mønstre, vi har beskrevet indtil nu. De mest almindelige differentiable funktioner, der falder uden for de tidligere regler, er anført nedenfor.
 
 
 \begin{itemize}
@@ -649,15 +649,15 @@ These rules do not apply to every function. For instance, the derivative of $e^{
 
 \begin{example}
 
-    Differentiate \(\ln \left(x^2+3 x+1\right)\).
+    Differentiér \(\ln \left(x^2+3 x+1\right)\).
 \end{example}
 
-\begin{solution} We solve this by using the chain rule and our knowledge of the derivative of \(\ln x\).
+\begin{solution} Vi løser opgaven ved hjælp af kædereglen og vores viden om den afledte af \(\ln x\).
 
     \[
     \begin{aligned}
-    \frac{d}{d x} \ln\left(x^2+3 x+1\right) & =\frac{d}{d x}\left(\ln u\right) \quad\left(\text { where } u=x^2+3 x+1\right) \\
-    & =\frac{d}{d u}\left(\ln u\right) \times \frac{d u}{d x} \quad(\text { by the chain rule }) \\
+    \frac{d}{d x} \ln\left(x^2+3 x+1\right) & =\frac{d}{d x}\left(\ln u\right) \quad\left(\text { hvor } u=x^2+3 x+1\right) \\
+    & =\frac{d}{d u}\left(\ln u\right) \times \frac{d u}{d x} \quad(\text { ifølge kædereglen }) \\
     & =\frac{1}{u} \times \frac{d u}{d x} \\
     & =\frac{1}{x^2+3 x+1} \times \frac{d}{d x}\left(x^2+3 x+1\right) \\
     & =\frac{1}{x^2+3 x+1} \times(2 x+3) \\
@@ -672,12 +672,12 @@ These rules do not apply to every function. For instance, the derivative of $e^{
     
 Find \(\frac{d}{d x}\left(e^{3 x^2}\right)\).
 \end{example}
-\begin{solution} This is an application of the chain rule together with our knowledge of the derivative of \(e^x\).
+\begin{solution} Det er en anvendelse af kædereglen sammen med vores viden om den afledte af \(e^x\).
 
 \[
 \begin{aligned}
-\frac{d}{d x}\left(e^{3 x^2}\right) & =\frac{d e^u}{d x} \quad \text { where } u=3 x^2 \\
-& =\frac{d e^u}{d u} \times \frac{d u}{d x} \quad \text { by the chain rule } \\
+\frac{d}{d x}\left(e^{3 x^2}\right) & =\frac{d e^u}{d x} \quad \text { hvor } u=3 x^2 \\
+& =\frac{d e^u}{d u} \times \frac{d u}{d x} \quad \text { ifølge kædereglen } \\
 & =e^u \times \frac{d u}{d x} \\
 & =e^{3 x^2} \times \frac{d}{d x}\left(3 x^2\right) \\
 & =6 x e^{3 x^2}
@@ -690,12 +690,12 @@ Find \(\frac{d}{d x}\left(e^{3 x^2}\right)\).
 
 Find \(\frac{d}{d x}\left(e^{x^2+2 x}\right)\).
 \end{example}
-\begin{solution} Again, we use our knowledge of the derivative of \(e^x\) together with the chain rule.
+\begin{solution} Igen bruger vi vores viden om den afledte af \(e^x\) sammen med kædereglen.
 
 \[
 \begin{aligned}
-\frac{d}{d x}\left(e^{x^2+2 x}\right) & =\frac{d e^{u}}{d x} \quad\left(\text { where } u=x^2+2 x\right) \\
-& =e^{u} \times \frac{d u}{d x} \quad \text { (by the chain rule) } \\
+\frac{d}{d x}\left(e^{x^2+2 x}\right) & =\frac{d e^{u}}{d x} \quad\left(\text { hvor } u=x^2+2 x\right) \\
+& =e^{u} \times \frac{d u}{d x} \quad \text { (ifølge kædereglen) } \\
 & =e^{x^2+2 x} \times \frac{d}{d x}\left(x^2+2 x\right) \\
 & =\left(2x+2\right)e^{x^2+2 x}
 \end{aligned}
@@ -705,15 +705,15 @@ Find \(\frac{d}{d x}\left(e^{x^2+2 x}\right)\).
 
 \begin{example}
 
-Differentiate \(\ln \left(2 x^3+5 x^2-3\right)\).
+Differentiér \(\ln \left(2 x^3+5 x^2-3\right)\).
 \end{example}
 \begin{solution}
-We solve this by using the chain rule and our knowledge of the derivative of \(\ln x\).
+Vi løser opgaven ved hjælp af kædereglen og vores viden om den afledte af \(\ln x\).
 
 \[
 \begin{aligned}
-\frac{d}{d x} \ln \left(2 x^3+5 x^2-3\right) & =\frac{d \ln u}{d x} \quad \text { (where } u=\left(2 x^3+5 x^2-3\right) \\
-& =\frac{d \ln u}{d u} \times \frac{d u}{d x} \quad \text { (by the chain rule) } \\
+\frac{d}{d x} \ln \left(2 x^3+5 x^2-3\right) & =\frac{d \ln u}{d x} \quad \text { (hvor } u=\left(2 x^3+5 x^2-3\right) \\
+& =\frac{d \ln u}{d u} \times \frac{d u}{d x} \quad \text { (ifølge kædereglen) } \\
 & =\frac{1}{u} \times \frac{d u}{d x} \\
 & =\frac{1}{2 x^3+5 x^2-3} \times \frac{d}{d x}\left(2 x^3+5 x^2-3\right) \\
 & =\frac{1}{2 x^3+5 x^2-3} \times\left(6 x^2+10 x\right) \\
@@ -722,7 +722,7 @@ We solve this by using the chain rule and our knowledge of the derivative of \(\
 \]
 \end{solution}
 
-There are two shortcuts to differentiating functions involving exponents and logarithms. The four examples above gave
+Der findes to genveje til at differentiere funktioner med eksponentialfunktioner og logaritmer. De fire eksempler ovenfor gav
 
 \[
 \begin{aligned}
@@ -734,7 +734,7 @@ There are two shortcuts to differentiating functions involving exponents and log
 \]
 
 
-These examples suggest the general rules
+Eksemplerne antyder de generelle regler
 
 \[
 \begin{aligned}
@@ -744,40 +744,40 @@ These examples suggest the general rules
 \]
 
 
-These rules arise from the chain rule and the facts that \(\frac{d}{dx}e^x=e^x\) and \(\frac{d}{dx}\ln x=\frac{1}{x}\) for $x>0$. They can speed up differentiation, but if you forget them, they can be reconstructed using the chain rule as in the examples above.
+Reglerne følger af kædereglen og af, at \(\frac{d}{dx}e^x=e^x\) og \(\frac{d}{dx}\ln x=\frac{1}{x}\) for $x>0$. De kan gøre differentiationen hurtigere, men hvis du glemmer dem, kan de genskabes ved hjælp af kædereglen som i eksemplerne ovenfor.
 
 
-\section{Applications of Derivatives}
+\section{Anvendelser af afledte}
 \label{sec:ch10-applications}
 
-The development of mathematics ranks among the greatest achievements of human thought, and the emergence of calculus — both differential and integral — marks a turning point in that history. Differential calculus in particular has countless practical applications across science and engineering, far too many to enumerate. Its importance is reflected in the fact that virtually every quantitative discipline relies on its methods.
+Matematikkens udvikling hører til blandt den menneskelige tænknings største bedrifter, og fremkomsten af infinitesimalregningen -- både differential- og integralregning -- markerer et vendepunkt i den historie. Især differentialregning har utallige praktiske anvendelser inden for naturvidenskab og ingeniørfag, alt for mange til at opregne. Dens betydning afspejles i, at stort set alle kvantitative discipliner bygger på dens metoder.
 
-Within elementary mathematics, differential calculus is used primarily in two areas: analysing and sketching curves, and solving optimisation problems. In this section, we offer a brief introduction to how differential calculus is applied in optimisation.
+I elementær matematik bruges differentialregning primært på to områder: til at analysere og skitsere kurver og til at løse optimeringsproblemer. I dette afsnit giver vi en kort introduktion til, hvordan differentialregning anvendes til optimering.
 
 
-\subsection*{Stationary points - the idea behind optimisation}
-Let us return to our metaphor of the mountain range. Imagine standing somewhere among peaks and valleys, perhaps even with your eyes closed or shrouded in fog. As you wander along, you notice that whenever you’re hiking uphill or downhill, you know you are not at the highest summit or the lowest valley—you are either still climbing or still descending.
+\subsection*{Stationære punkter -- idéen bag optimering}
+Lad os vende tilbage til vores metafor med bjergkæden. Forestil dig, at du står et sted mellem tinder og dale, måske endda med lukkede øjne eller indhyllet i tåge. Mens du vandrer rundt, bemærker du, at når du går op ad bakke eller ned ad bakke, ved du, at du ikke er på den højeste top eller i den laveste dal -- du er enten stadig på vej op eller stadig på vej ned.
 
-But at the top of a peak, there is a brief, level stretch where the slope under your feet is zero. At a bottom of a valley, there is also a level spot. If you find yourself on perfectly flat ground—at least for a moment—you have a clue: you might be at a summit, a valley, or perhaps at a gentle inflection point along a ridge. In the vast terrain of a mountain range, it is only at these level patches, where the slope vanishes, that you could possibly be at an extreme point: a maximum or minimum.
+Men på toppen af en tinde er der et kort, plant stykke, hvor hældningen under dine fødder er nul. I bunden af en dal er der også et plant sted. Hvis du befinder dig på helt flad grund -- i det mindste et øjeblik -- har du et fingerpeg: Du er måske på en top, i en dal eller måske ved et blidt vendepunkt langs en bjergryg. I en bjergkædes store terræn er det kun på disse plane steder, hvor hældningen forsvinder, at du overhovedet kan være i et ekstremumspunkt: et maksimum eller et minimum.
 
-This motivates an important step in optimisation: interior points where a differentiable function has a local maximum or minimum must have zero derivative. These locations are known as stationary points. A complete optimisation problem may also require checking endpoints and points where the derivative does not exist.
+Det motiverer et vigtigt skridt i optimering: Indre punkter, hvor en differentiabel funktion har et lokalt maksimum eller minimum, skal have afledt lig med nul. Disse steder kaldes stationære punkter. Et fuldstændigt optimeringsproblem kan også kræve, at man undersøger endepunkter og punkter, hvor den afledte ikke eksisterer.
 
 \begin{definition}
-     For a function $y=f(x)$ the points on the graph where the graph has zero slope are called stationary points. In other words stationary points are where $f^{\prime}(x)=0$.
+     For en funktion $y=f(x)$ kaldes de punkter på grafen, hvor grafen har hældningen nul, for stationære punkter. Stationære punkter er med andre ord der, hvor $f^{\prime}(x)=0$.
     \end{definition}
 
-To find the stationary points of a function we differentiate, set the derivative equal to zero and solve the equation.
+For at finde en funktions stationære punkter differentierer vi, sætter den afledte lig med nul og løser ligningen.
 
 \begin{example}
 
-    Find the stationary points of the function $f(x)=2 x^{3}+3 x^{2}-12 x+17$.
+    Find de stationære punkter for funktionen $f(x)=2 x^{3}+3 x^{2}-12 x+17$.
     \label{ex:stationary-points-1}
 \end{example}
 
 
 \begin{solution}
     
-    $f^{\prime}(x)=6 x^{2}+6 x-12$. Setting $f^{\prime}(x)=0$ and solving we obtain
+    $f^{\prime}(x)=6 x^{2}+6 x-12$. Vi sætter $f^{\prime}(x)=0$ og løser:
 
 
 \[
@@ -789,24 +789,24 @@ x & =1,-2
 \end{aligned}
 \]
 
-This gives us the values of $x$ for which the function $f$ is stationary. The corresponding values of the function are found by substituting 1 and -2 into the function.
+Det giver de værdier af $x$, hvor funktionen $f$ er stationær. De tilhørende funktionsværdier findes ved at indsætte 1 og -2 i funktionen.
 
-They are $f(1)=2 \times 1^{3}+3 \times 1^{2}-12 \times 1+17=10$ and 
-$f(-2)=2 \times(-2)^{3}+3 \times(-2)^{2}-12 \times(-2)+17=37$. The stationary points are therefore $(1,10)$ and $(-2,37)$.
+De er $f(1)=2 \times 1^{3}+3 \times 1^{2}-12 \times 1+17=10$ og 
+$f(-2)=2 \times(-2)^{3}+3 \times(-2)^{2}-12 \times(-2)+17=37$. De stationære punkter er derfor $(1,10)$ og $(-2,37)$.
 \end{solution}
 
 
 \begin{example}
 
-    Find the stationary points of the function $g(t)=e^{t^{2}}$.
+    Find de stationære punkter for funktionen $g(t)=e^{t^{2}}$.
 \end{example}
 
 \begin{solution}
-    Differentiating and setting the derivative equal to zero we obtain the equation $g^{\prime}(t)=2 t e^{t^{2}}=0$. Since $e^{t^{2}}$ is never zero, the only solution to this equation is where $2 t=0$, ie $t=0$. Substituting into the formula for $g$ we obtain the function value $g(0)=e^{0^{2}}=1$. Thus the stationary point is $(0,1)$.
+    Ved at differentiere og sætte den afledte lig med nul får vi ligningen $g^{\prime}(t)=2 t e^{t^{2}}=0$. Da $e^{t^{2}}$ aldrig er nul, er den eneste løsning til ligningen der, hvor $2 t=0$, dvs. $t=0$. Ved indsættelse i forskriften for $g$ får vi funktionsværdien $g(0)=e^{0^{2}}=1$. Det stationære punkt er altså $(0,1)$.
 \end{solution}
 
-\subsubsection*{Types of stationary points}
-Returning to our mountain range metaphor, stationary points can be thought of as the special spots where, just for a moment, the ground feels perfectly level beneath your feet. Sometimes, this happens at the very top of a hill—where, if you reach out in any direction, you only sense downhill slopes ahead. This is called a local maximum: the summit of your immediate surroundings, though not necessarily the tallest peak in the whole range. Other times, the level spot is at the bottom of a valley—everything around you slopes upward. This is called a local minimum: the lowest place in your local vicinity, even if deeper valleys exist elsewhere. The “local” label emphasizes that we’re talking about the highest or lowest point nearby, not globally. You might also hear the terms “relative maximum” and “relative minimum” used for these. \autoref{fig:local-extrema} illustrates a function as a landscape with both a hilltop (local maximum) and a valley floor (local minimum). Notice that, at each of these points—just like on a level patch in the mountains—the slope is zero.
+\subsubsection*{Typer af stationære punkter}
+Hvis vi vender tilbage til metaforen med bjergkæden, kan stationære punkter opfattes som de særlige steder, hvor jorden et øjeblik føles helt plan under dine fødder. Nogle gange sker det helt oppe på toppen af en bakke -- hvor du, uanset hvilken retning du rækker ud i, kun mærker skråninger nedad foran dig. Det kaldes et lokalt maksimum: toppen i dine umiddelbare omgivelser, men ikke nødvendigvis den højeste tinde i hele bjergkæden. Andre gange ligger det plane sted i bunden af en dal -- alt omkring dig skråner opad. Det kaldes et lokalt minimum: det laveste sted i dit lokale nærområde, selv om der findes dybere dale andre steder. Betegnelsen »lokal« understreger, at vi taler om det højeste eller laveste punkt i nærheden, ikke globalt. Du vil måske også høre betegnelserne »relativt maksimum« og »relativt minimum« brugt om dem. \autoref{fig:local-extrema} viser en funktion som et landskab med både en bakketop (lokalt maksimum) og en dalbund (lokalt minimum). Bemærk, at hældningen er nul i hvert af disse punkter -- præcis som på et plant stykke i bjergene.
 
 % Figure: Local maximum and local minimum (example with f(x)=x^3 - 3x)
 % --- Ensure these packages are in your preamble ---
@@ -851,18 +851,18 @@ Returning to our mountain range metaphor, stationary points can be thought of as
             mark size=2.5pt,
             color=red            % Make the points stand out
         ] coordinates {(-1,2) (1,-2)};
-        \addlegendentry{Stationary points}
+        \addlegendentry{Stationære punkter}
 
         % Add labels for the points using nodes
-        \node[above right, color=red, font=\small] at (axis cs:-1, 2) {Local Maximum};
-        \node[below right, color=red, font=\small] at (axis cs:1, -2) {Local Minimum};
+        \node[above right, color=red, font=\small] at (axis cs:-1, 2) {Lokalt maksimum};
+        \node[below right, color=red, font=\small] at (axis cs:1, -2) {Lokalt minimum};
         \end{axis}
     \end{tikzpicture}
-    \caption{A curve with a local maximum at \(x=-1\) and a local minimum at \(x=1\).}
+    \caption{En kurve med et lokalt maksimum i \(x=-1\) og et lokalt minimum i \(x=1\).}
     \label{fig:local-extrema}
 \end{figure}
 
-Local maxima and local minima are not the only types of stationary points. There is a third kind. \autoref{fig:stationary-inflection} shows a stationary point that is neither a local maximum nor a local minimum. This type of stationary point is called a stationary point of inflection or simply \textit{inflection point}.
+Lokale maksima og lokale minima er ikke de eneste typer af stationære punkter. Der findes en tredje slags. \autoref{fig:stationary-inflection} viser et stationært punkt, der hverken er et lokalt maksimum eller et lokalt minimum. Denne type stationært punkt kaldes et stationært vendepunkt eller blot et \textit{vendepunkt}.
 
 % --- Ensure these packages are in your preamble ---
 % \usepackage{pgfplots}
@@ -907,10 +907,10 @@ Local maxima and local minima are not the only types of stationary points. There
             mark size=2.5pt,
             color=red
         ] coordinates {(1,0)};
-        \addlegendentry{Stationary point}
+        \addlegendentry{Stationært punkt}
 
         % Add a label for the point using a node and an arrow
-        \node[color=red, font=\small] (label_node) at (axis cs:2.5, 2) {Stationary point of inflection};
+        \node[color=red, font=\small] (label_node) at (axis cs:2.5, 2) {Stationært vendepunkt};
         \draw[->, color=red, thick] (label_node) -- (axis cs:1.1, 0.1);
 
         % Optional: Add a tangent line at the inflection point to show it's horizontal
@@ -920,24 +920,24 @@ Local maxima and local minima are not the only types of stationary points. There
             color=black,
             thin
         ] {0};
-        \addlegendentry{Tangent at x=1}
+        \addlegendentry{Tangent i x=1}
 
         \end{axis}
     \end{tikzpicture}
-    \caption{A function with a stationary point of inflection at \(x=1\). The tangent line at this point is horizontal, but it is neither a local maximum nor a local minimum.}
+    \caption{En funktion med et stationært vendepunkt i \(x=1\). Tangenten i punktet er vandret, men punktet er hverken et lokalt maksimum eller et lokalt minimum.}
     \label{fig:stationary-inflection}
 \end{figure}
 
-\subsection*{The first derivative test}
-Let us return to \autoref{ex:stationary-points-1}. For the function $f(x)=2 x^{3}+3 x^{2}-12 x+17$ we identified stationary points at $(1,10)$ and $(-2,37)$. The natural question is: what type of stationary points are these? Without a sketch of the graph it is not immediately clear whether they correspond to local maxima, local minima, or stationary points of inflection. Drawing an accurate graph would resolve the question, but doing so can require substantial effort. Instead, we seek a method that allows us to classify a stationary point without needing to plot the entire function.
+\subsection*{Første afledtes test}
+Lad os vende tilbage til \autoref{ex:stationary-points-1}. For funktionen $f(x)=2 x^{3}+3 x^{2}-12 x+17$ fandt vi stationære punkter i $(1,10)$ og $(-2,37)$. Det naturlige spørgsmål er: Hvilken type stationære punkter er det? Uden en skitse af grafen er det ikke umiddelbart klart, om de svarer til lokale maksima, lokale minima eller stationære vendepunkter. En nøjagtig graf ville besvare spørgsmålet, men den kan kræve en betydelig indsats. I stedet søger vi en metode, der gør det muligt at klassificere et stationært punkt uden at tegne hele funktionen.
 
-Several approaches exist, but in this section we focus on one technique, known as the \emph{first derivative test}. The idea is to examine the behaviour of the function immediately to the left and immediately to the right of the stationary point.
+Der findes flere fremgangsmåder, men i dette afsnit fokuserer vi på én teknik, kendt som \emph{første afledtes test}. Idéen er at undersøge funktionens opførsel umiddelbart til venstre og umiddelbart til højre for det stationære punkt.
 
-To understand the principle, imagine a person standing at a point on a landscape where the ground is level. Without seeing the surroundings, the person wishes to determine whether this point is the top of a hill, the bottom of a valley, or neither. One way to decide is to take a small step backward and observe the slope, and then take a small step forward and observe the slope again.
+For at forstå princippet kan du forestille dig en person, der står et sted i et landskab, hvor jorden er plan. Uden at kunne se omgivelserne vil personen afgøre, om stedet er toppen af en bakke, bunden af en dal eller ingen af delene. En måde at afgøre det på er at tage et lille skridt tilbage og mærke hældningen og derefter tage et lille skridt frem og mærke hældningen igen.
 
-If the ground slopes upward behind and downward ahead, the level point is the top of a hill, corresponding to a local maximum. If the ground slopes downward behind and upward ahead, the point is the bottom of a valley, corresponding to a local minimum. If the slopes have the same sign on both sides, the point is not a local extremum; further analysis is needed to determine whether it is an inflection point.
+Hvis jorden skråner opad bagude og nedad forude, er det plane punkt toppen af en bakke, svarende til et lokalt maksimum. Hvis jorden skråner nedad bagude og opad forude, er punktet bunden af en dal, svarende til et lokalt minimum. Hvis hældningen har samme fortegn på begge sider, er punktet ikke et lokalt ekstremum; der kræves yderligere analyse for at afgøre, om det er et vendepunkt.
 
-This reasoning captures the essence of the first derivative test: by analysing the sign of \(f^{\prime}(x)\) immediately on either side of a stationary point, we can determine its character without relying on a graph.
+Denne tankegang indfanger essensen af første afledtes test: Ved at analysere fortegnet for \(f^{\prime}(x)\) umiddelbart på hver side af et stationært punkt kan vi bestemme punktets karakter uden at være afhængige af en graf.
 
 % --- Ensure these packages are in your preamble ---
 % \usepackage{pgfplots}
@@ -1001,7 +1001,7 @@ This reasoning captures the essence of the first derivative test: by analysing t
 
         \end{axis}
     \end{tikzpicture}
-    \caption{Illustration of the first derivative test. At a local maximum, the derivative changes from positive to negative. At a local minimum, it changes from negative to positive.}
+    \caption{Illustration af første afledtes test. I et lokalt maksimum skifter den afledte fra positiv til negativ. I et lokalt minimum skifter den fra negativ til positiv.}
     \label{fig:first-derivative-test}
 \end{figure}
 
@@ -1057,26 +1057,26 @@ This reasoning captures the essence of the first derivative test: by analysing t
 
         \end{axis}
     \end{tikzpicture}
-    \caption{Illustration of a stationary point of inflection. The derivative is zero at \(x=0\), but it is positive on both sides, so the point is neither a local maximum nor a minimum.}
+    \caption{Illustration af et stationært vendepunkt. Den afledte er nul i \(x=0\), men positiv på begge sider, så punktet er hverken et lokalt maksimum eller et lokalt minimum.}
     \label{fig:stationary-inflection-test}
 \end{figure}
 
-We can summarize these considerations in the following theorem:
+Vi kan sammenfatte disse overvejelser i følgende sætning:
 
-\begin{theorem}[The First Derivative Test]
-    Let \(c\) be a critical point of a continuous function \(f\).
+\begin{theorem}[Første afledtes test]
+    Lad \(c\) være et kritisk punkt for en kontinuert funktion \(f\).
     \begin{itemize}
-        \item If \(f'(x)\) changes from negative to positive at \(c\), then \(f\) has a \textbf{local minimum} at \(c\).
-        \item If \(f'(x)\) changes from positive to negative at \(c\), then \(f\) has a \textbf{local maximum} at \(c\).
-        \item If \(f'(x)\) does not change sign at \(c\), then \(f\) has no local extremum at \(c\). The first derivative test alone does not determine whether $c$ is an inflection point.
+        \item Hvis \(f'(x)\) skifter fra negativ til positiv i \(c\), har \(f\) et \textbf{lokalt minimum} i \(c\).
+        \item Hvis \(f'(x)\) skifter fra positiv til negativ i \(c\), har \(f\) et \textbf{lokalt maksimum} i \(c\).
+        \item Hvis \(f'(x)\) ikke skifter fortegn i \(c\), har \(f\) intet lokalt ekstremum i \(c\). Første afledtes test kan ikke alene afgøre, om $c$ er et vendepunkt.
     \end{itemize}
 
     \end{theorem}
-This test is visualized in \autoref{fig:first-derivative-test} and \autoref{fig:stationary-inflection-test}.
+Testen er illustreret i \autoref{fig:first-derivative-test} og \autoref{fig:stationary-inflection-test}.
 
 
-\subsection*{Optimisation}
-Now that we've laid the groundwork, we can approach some optimisation problems. When we want to maximise a function $f(x)$ within a specified interval for $x$, our goal is to find the largest value that $f(x)$ achieves on that interval. Importantly, this maximum value does not always coincide with a stationary point. As shown in \autoref{fig:restricted-domain-extrema}, consider searching for the greatest and least values of a function on the interval $2 \leq x \leq 7$. Within this interval, the function has two stationary points—one corresponding to a local maximum, the other to a local minimum. However, the highest value of the function in this interval actually occurs at the endpoint $x=7$, which is not a stationary point. It takes this value simply because, outside of the interval, larger $x$ values are excluded from consideration. In contrast, the minimum value in this example is located at a stationary point within the interval. With this understanding, we can now explain the systematic steps for finding the maximum or minimum of a function in a given region.
+\subsection*{Optimering}
+Nu hvor vi har lagt fundamentet, kan vi gå i gang med nogle optimeringsproblemer. Når vi vil maksimere en funktion $f(x)$ på et bestemt interval for $x$, er målet at finde den største værdi, som $f(x)$ antager på intervallet. Det er vigtigt at være opmærksom på, at denne maksimumsværdi ikke altid ligger i et stationært punkt. Se på \autoref{fig:restricted-domain-extrema}, hvor vi søger funktionens største og mindste værdi på intervallet $2 \leq x \leq 7$. På intervallet har funktionen to stationære punkter -- det ene svarer til et lokalt maksimum, det andet til et lokalt minimum. Funktionens største værdi på intervallet antages dog faktisk i endepunktet $x=7$, som ikke er et stationært punkt. Funktionen antager denne værdi, simpelthen fordi større $x$-værdier uden for intervallet ikke tages i betragtning. Mindsteværdien ligger derimod i dette eksempel i et stationært punkt inden for intervallet. Med denne forståelse kan vi nu forklare de systematiske trin til at finde en funktions maksimum eller minimum i et givet område.
 
 % --- Ensure these packages are in your preamble ---
 % \usepackage{pgfplots}
@@ -1131,23 +1131,23 @@ Now that we've laid the groundwork, we can approach some optimisation problems. 
         \path[name path=right_bound] (axis cs:7, -5) -- (axis cs:7, 45);
         % Shade the area between x=2 and x=7
         \addplot[gray!20] fill between[of=left_bound and right_bound];
-        \addlegendentry{Domain [2, 7]}
+        \addlegendentry{Interval [2, 7]}
 
         % -- Mark and Label the Points of Interest --
         % Local Maximum (at x=3)
         \coordinate (local_max) at (axis cs:3, 9);
         \fill[blue] (local_max) circle (2.5pt);
-        \node[above, blue, font=\small] at (local_max) {Local Maximum};
+        \node[above, blue, font=\small] at (local_max) {Lokalt maksimum};
 
         % Absolute Minimum (at x=5, which is also a local min)
         \coordinate (abs_min) at (axis cs:5, 1);
         \fill[red] (abs_min) circle (2.5pt);
-        \node[below, red, font=\small] at (abs_min) {Absolute Minimum};
+        \node[below, red, font=\small] at (abs_min) {Globalt minimum};
 
         % Absolute Maximum (at endpoint x=7)
         \coordinate (abs_max) at (axis cs:7, 41);
         \fill[red] (abs_max) circle (2.5pt);
-        \node[above, red, font=\small] at (abs_max) {Absolute Maximum};
+        \node[above, red, font=\small] at (abs_max) {Globalt maksimum};
 
         % Left Endpoint (at x=2)
         \coordinate (left_end) at (axis cs:2, 1);
@@ -1155,112 +1155,112 @@ Now that we've laid the groundwork, we can approach some optimisation problems. 
 
         \end{axis}
     \end{tikzpicture}
-    \caption{On the restricted domain \([2, 7]\), the absolute maximum occurs at an endpoint (\(x=7\)), not at the local maximum. The absolute minimum occurs at an interior stationary point (\(x=5\)).}
+    \caption{På det begrænsede interval \([2, 7]\) ligger det globale maksimum i et endepunkt (\(x=7\)) og ikke i det lokale maksimum. Det globale minimum ligger i et indre stationært punkt (\(x=5\)).}
     \label{fig:restricted-domain-extrema}
 \end{figure}
 
-\subsection*{The location of maxima and minima}
-A function $f(x)$ may or may not have a maximum or minimum value in a particular region of $x$ values. However, if they do exist the maximum and the minimum values must occur at one of three places:
+\subsection*{Placeringen af maksima og minima}
+En funktion $f(x)$ har ikke nødvendigvis en største eller mindste værdi i et bestemt område af $x$-værdier. Men hvis de findes, skal maksimums- og minimumsværdien ligge et af tre steder:
 
 \begin{enumerate}
-  \item At the endpoints (if they exist) of the region under consideration.
-  \item Inside the region at a stationary point.
-  \item Inside the region at a point where the derivative does not exist.
+  \item I endepunkterne (hvis de findes) af det område, vi betragter.
+  \item Inde i området i et stationært punkt.
+  \item Inde i området i et punkt, hvor den afledte ikke eksisterer.
 \end{enumerate}
 
 \begin{remark}
     
 
 \begin{enumerate}
-  \item It is straightforward to find cases where a function does not attain a maximum or minimum within a certain range. For instance, the function $f(x) = x$ lacks both a maximum and a minimum over the interval $-\infty < x < \infty$; its graph increases without bound as $x$ increases. According to Point 1 above, note that in the region $-\infty < x < \infty$, there are actually no endpoints. As another illustration, for the region $x \geq 1$, there is only a single endpoint at $x = 1$.
-  \item Regarding Point 3, this text does not cover situations where the derivative fails to exist at certain points. Nevertheless, keep in mind that such points can occur and could be where a maximum or minimum is located. For more details, refer to advanced calculus resources.
+  \item Det er let at finde tilfælde, hvor en funktion ikke antager et maksimum eller minimum inden for et bestemt område. Funktionen $f(x) = x$ har for eksempel hverken maksimum eller minimum på intervallet $-\infty < x < \infty$; grafen vokser ubegrænset, når $x$ vokser. Med hensyn til punkt 1 ovenfor skal du bemærke, at området $-\infty < x < \infty$ faktisk ikke har nogen endepunkter. Et andet eksempel er området $x \geq 1$, som kun har ét endepunkt, nemlig $x = 1$.
+  \item Med hensyn til punkt 3 behandler denne tekst ikke situationer, hvor den afledte ikke eksisterer i visse punkter. Husk dog, at sådanne punkter kan forekomme, og at et maksimum eller minimum kan ligge netop dér. Flere detaljer findes i litteratur om videregående infinitesimalregning.
 \end{enumerate}
 \end{remark}
 
-Now that we know exactly where the maxima or minima can occur, we can give a procedure for finding them.
+Nu hvor vi ved præcis, hvor maksima og minima kan ligge, kan vi give en fremgangsmåde til at finde dem.
 
-\subsubsection*{Procedure for finding the maximum or minimum values of a function.}
+\subsubsection*{Fremgangsmåde til at finde en funktions største eller mindste værdi.}
 \begin{enumerate}
-  \item Find the endpoints of the region under consideration (if there are any).
-  \item Find all the stationary points in the region.
-  \item Find all points in the region where the derivative does not exist.
-  \item Substitute each of these into the function and see which gives the greatest (or smallest) function value.
+  \item Find endepunkterne for det område, vi betragter (hvis der er nogen).
+  \item Find alle stationære punkter i området.
+  \item Find alle punkter i området, hvor den afledte ikke eksisterer.
+  \item Indsæt hvert af disse punkter i funktionen, og se, hvilket der giver den største (eller mindste) funktionsværdi.
 \end{enumerate}
 
 \begin{example}
 
-    Find the minimum value and the maximum value of the function $f(x)=x^{2} e^{x}$ for $-4 \leq x \leq 1$.
+    Find den mindste og den største værdi af funktionen $f(x)=x^{2} e^{x}$ for $-4 \leq x \leq 1$.
 \end{example}
 
-\begin{solution} We will follow the procedure outlined above. The endpoints are -4 and 1 . Differentiating we obtain $f^{\prime}(x)=x^{2} e^{x}+2 x e^{x}=x(x+2) e^{x}$. Setting $f^{\prime}(x)=0$ and solving we get stationary points at $x=0$ and $x=-2$. There are no points where the derivative does not exist. Therefore the maximum and minimum values will be found at one of the points $x=-4,-2,0,1$. Substituting we obtain $f(-4) \approx 0.29, f(-2) \approx 0.54, f(0)=0$ and $f(1)=e \approx 2.7$. therefore the maximum value occurs at $x=1$ and is equal to $e$, and the minimum value occurs at $x=0$ and is 0 .
+\begin{solution} Vi følger fremgangsmåden ovenfor. Endepunkterne er -4 og 1. Ved differentiation får vi $f^{\prime}(x)=x^{2} e^{x}+2 x e^{x}=x(x+2) e^{x}$. Ved at sætte $f^{\prime}(x)=0$ og løse ligningen får vi stationære punkter i $x=0$ og $x=-2$. Der er ingen punkter, hvor den afledte ikke eksisterer. Den største og den mindste værdi findes derfor i et af punkterne $x=-4,-2,0,1$. Ved indsættelse får vi $f(-4) \approx 0.29, f(-2) \approx 0.54, f(0)=0$ og $f(1)=e \approx 2.7$. Den største værdi antages derfor i $x=1$ og er lig med $e$, og den mindste værdi antages i $x=0$ og er 0.
 \end{solution}
 
 \begin{example}
 
-    Find the maximum and minimum values of the function $g(t)=\frac{1}{3} t^{3}-t+2$ for $0 \leq t \leq 3$.
+    Find den største og den mindste værdi af funktionen $g(t)=\frac{1}{3} t^{3}-t+2$ for $0 \leq t \leq 3$.
 \end{example}
 
-\begin{solution} The endpoints are $t=0$ and $t=3$. Differentiating and equating to zero we get $g^{\prime}(t)=t^{2}-1=(t-1)(t+1)=0$ so the stationary points are at $t=-1,1$. Since -1 is not in the region, the possible locations of the maximum and the minimum are $t=0,1,3$. Substituting into $g$ we obtain $g(0)=2, g(1)=\frac{4}{3}$ and $g(3)=8$. The maximum is therefore $g(3)=8$ and the minimum is $g(1)=\frac{4}{3}$.
+\begin{solution} Endepunkterne er $t=0$ og $t=3$. Ved at differentiere og sætte lig med nul får vi $g^{\prime}(t)=t^{2}-1=(t-1)(t+1)=0$, så de stationære punkter ligger i $t=-1,1$. Da -1 ikke ligger i området, er de mulige placeringer af maksimum og minimum $t=0,1,3$. Ved indsættelse i $g$ får vi $g(0)=2, g(1)=\frac{4}{3}$ og $g(3)=8$. Den største værdi er derfor $g(3)=8$, og den mindste værdi er $g(1)=\frac{4}{3}$.
 \end{solution}
 
 \begin{example}
 
-    Suppose you are tuning a machine learning model, and you want to find the learning rate \( \alpha \) (between \(0\) and \(1\)) that minimizes the loss function \( L(\alpha) = (\alpha - 0.3)^2 + 1 \). What value of \( \alpha \) gives the minimum loss?
+    Antag, at du tuner en maskinlæringsmodel og vil finde den læringsrate \( \alpha \) (mellem \(0\) og \(1\)), der minimerer tabsfunktionen \( L(\alpha) = (\alpha - 0.3)^2 + 1 \). Hvilken værdi af \( \alpha \) giver det mindste tab?
     \end{example}
     
-    \begin{solution} We will apply the procedure for finding absolute extrema on the closed interval \( [0, 1] \). The function to minimize is the loss function \( L(\alpha) = (\alpha - 0.3)^2 + 1 \).
+    \begin{solution} Vi anvender fremgangsmåden til at finde globale ekstrema på det lukkede interval \( [0, 1] \). Den funktion, der skal minimeres, er tabsfunktionen \( L(\alpha) = (\alpha - 0.3)^2 + 1 \).
     
     \begin{enumerate}
-        \item \textbf{Identify Endpoints:} The region under consideration is \( 0 \le \alpha \le 1 \), so the endpoints are \( \alpha = 0 \) and \( \alpha = 1 \).
+        \item \textbf{Find endepunkterne:} Det område, vi betragter, er \( 0 \le \alpha \le 1 \), så endepunkterne er \( \alpha = 0 \) og \( \alpha = 1 \).
     
-        \item \textbf{Find Stationary Points:} We first find the derivative of the loss function with respect to \( \alpha \):
+        \item \textbf{Find de stationære punkter:} Først finder vi den afledte af tabsfunktionen med hensyn til \( \alpha \):
         \[
         \frac{dL}{d\alpha} = \frac{d}{d\alpha} \left[ (\alpha - 0.3)^2 + 1 \right] = 2(\alpha - 0.3)
         \]
-        Next, we set the derivative to zero to find the stationary points:
+        Dernæst sætter vi den afledte lig med nul for at finde de stationære punkter:
         \[
         2(\alpha - 0.3) = 0 \implies \alpha = 0.3
         \]
-        The only stationary point is \( \alpha = 0.3 \), which lies within our interval \( [0, 1] \).
+        Det eneste stationære punkt er \( \alpha = 0.3 \), som ligger i vores interval \( [0, 1] \).
     
-        \item \textbf{Identify Points Where Derivative is Undefined:} The derivative \( 2(\alpha - 0.3) \) is a simple linear function and is defined for all values of \( \alpha \). There are no such points.
+        \item \textbf{Find punkter, hvor den afledte ikke er defineret:} Den afledte \( 2(\alpha - 0.3) \) er en simpel lineær funktion og er defineret for alle værdier af \( \alpha \). Der er ingen sådanne punkter.
     
-        \item \textbf{Compare Values at Candidate Points:} We now evaluate the loss function \( L(\alpha) \) at all the candidate points we have found: the endpoints and the stationary point.
+        \item \textbf{Sammenlign værdierne i kandidatpunkterne:} Vi udregner nu tabsfunktionen \( L(\alpha) \) i alle de kandidatpunkter, vi har fundet: endepunkterne og det stationære punkt.
         \begin{itemize}
-            \item At the left endpoint, \( \alpha = 0 \):
+            \item I det venstre endepunkt, \( \alpha = 0 \):
             \[ L(0) = (0 - 0.3)^2 + 1 = 0.09 + 1 = 1.09 \]
-            \item At the stationary point, \( \alpha = 0.3 \):
+            \item I det stationære punkt, \( \alpha = 0.3 \):
             \[ L(0.3) = (0.3 - 0.3)^2 + 1 = 0 + 1 = 1.00 \]
-            \item At the right endpoint, \( \alpha = 1 \):
+            \item I det højre endepunkt, \( \alpha = 1 \):
             \[ L(1) = (1 - 0.3)^2 + 1 = (0.7)^2 + 1 = 0.49 + 1 = 1.49 \]
         \end{itemize}
     \end{enumerate}
     
-    By comparing these values, we see that the smallest loss is \( 1.00 \), which occurs at the stationary point.
+    Ved at sammenligne værdierne ser vi, at det mindste tab er \( 1.00 \), som antages i det stationære punkt.
     
-    \textbf{Conclusion:} The minimum loss occurs when the learning rate is \( \alpha = 0.3 \).
+    \textbf{Konklusion:} Det mindste tab opnås, når læringsraten er \( \alpha = 0.3 \).
     \end{solution}
 
-    \section{The Second Derivative: Curvature and Inflection}
+    \section{Den anden afledte: krumning og vendepunkter}
 
-    The first derivative, \(f'(x)\), tells us about the slope or rate of change of a function. The \textbf{second derivative}, denoted \(f''(x)\), is the derivative of the first derivative. It measures how the slope itself is changing. This provides deeper insight into the shape of a function's graph.
+    Den første afledte, \(f'(x)\), fortæller os om en funktions hældning eller ændringshastighed. Den \textbf{anden afledte}, betegnet \(f''(x)\), er den afledte af den første afledte. Den måler, hvordan selve hældningen ændrer sig. Det giver en dybere indsigt i formen af en funktions graf.
     
-    \begin{definition}[The Second Derivative]
-    The \textbf{second derivative} of a function \( f \), denoted \( f''(x) \), is the function
+    \begin{definition}[Den anden afledte]
+    Den \textbf{anden afledte} af en funktion \( f \), betegnet \( f''(x) \), er funktionen
     \[
     f''(x) = \frac{d}{dx} \left( f'(x) \right)
     \]
-    provided the limit exists.
+    forudsat at grænseværdien eksisterer.
     \end{definition}
     
-    The most important geometric interpretation of the second derivative is \textbf{concavity}.
+    Den vigtigste geometriske fortolkning af den anden afledte er \textbf{krumning}.
     
     \begin{itemize}
-        \item If \( f''(x) > 0 \) on an interval, the slope \(f'(x)\) is increasing. The graph bends upwards, like a cup holding water. We say the function is \textbf{concave up}.
-        \item If \( f''(x) < 0 \) on an interval, the slope \(f'(x)\) is decreasing. The graph bends downwards, like a cup spilling water. We say the function is \textbf{concave down}.
+        \item Hvis \( f''(x) > 0 \) på et interval, er hældningen \(f'(x)\) voksende. Grafen bøjer opad som en kop, der holder på vand. Vi siger, at funktionen er \textbf{konveks} (krummer opad).
+        \item Hvis \( f''(x) < 0 \) på et interval, er hældningen \(f'(x)\) aftagende. Grafen bøjer nedad som en kop, der spilder vand. Vi siger, at funktionen er \textbf{konkav} (krummer nedad).
     \end{itemize}
     
-    A point on the graph where the concavity changes is called an \textbf{inflection point}. This typically occurs where \(f''(x) = 0\).
+    Et punkt på grafen, hvor krumningen skifter, kaldes et \textbf{vendepunkt}. Det sker typisk der, hvor \(f''(x) = 0\).
     
     \begin{figure}[htbp]
         \centering
@@ -1289,25 +1289,25 @@ Now that we know exactly where the maxima or minima can occur, we can give a pro
             % Mark the inflection point at x=0
             \coordinate (P) at (axis cs:0, 0);
             \fill[red] (P) circle (2.5pt);
-            \node[above right, font=\small, color=red] at (P) {Inflection Point at \(x=0\)};
+            \node[above right, font=\small, color=red] at (P) {Vendepunkt i \(x=0\)};
     
             % Annotate Concavity
-            \node[below, font=\small, color=orange] at (axis cs:-1.5, -1) {Concave Down (\(f'' < 0\))};
-            \node[above, font=\small, color=green!60!black] at (axis cs:1.5, 1) {Concave Up (\(f'' > 0\))};
+            \node[below, font=\small, color=orange] at (axis cs:-1.5, -1) {Konkav (\(f'' < 0\))};
+            \node[above, font=\small, color=green!60!black] at (axis cs:1.5, 1) {Konveks (\(f'' > 0\))};
             
             \end{axis}
         \end{tikzpicture}
-        \caption{A function showing a region of concave down curvature, followed by a region of concave up curvature. The transition occurs at the inflection point.}
+        \caption{En funktion med et område, hvor den er konkav (krummer nedad), efterfulgt af et område, hvor den er konveks (krummer opad). Overgangen sker i vendepunktet.}
         \label{fig:ch11-concavity}
     \end{figure}
     
-    The second derivative also gives us a powerful tool for classifying stationary points.
+    Den anden afledte giver os også et stærkt værktøj til at klassificere stationære punkter.
     
-    \begin{theorem}[The Second Derivative Test]
-    Let \(c\) be a stationary point of \(f\) (i.e., \(f'(c) = 0\)).
+    \begin{theorem}[Anden afledtes test]
+    Lad \(c\) være et stationært punkt for \(f\) (dvs. \(f'(c) = 0\)).
     \begin{itemize}
-        \item If \(f''(c) > 0\), then \(f\) has a \textbf{local minimum} at \(c\).
-        \item If \(f''(c) < 0\), then \(f\) has a \textbf{local maximum} at \(c\).
-        \item If \(f''(c) = 0\), the test is inconclusive.
+        \item Hvis \(f''(c) > 0\), har \(f\) et \textbf{lokalt minimum} i \(c\).
+        \item Hvis \(f''(c) < 0\), har \(f\) et \textbf{lokalt maksimum} i \(c\).
+        \item Hvis \(f''(c) = 0\), giver testen ingen konklusion.
     \end{itemize}
     \end{theorem}

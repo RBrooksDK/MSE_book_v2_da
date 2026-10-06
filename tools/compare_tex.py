@@ -74,7 +74,8 @@ def math_segments(s):
 
 
 def listings(s):
-    return re.findall(r"\\begin\{(lstlisting|codebox|verbatim)\}(.*?)\\end\{\1\}", s, re.S)
+    # the optional [...] argument (caption=...) is reader-facing and translated
+    return re.findall(r"\\begin\{(lstlisting|codebox|verbatim)\}(?:\[[^\]]*\])?(.*?)\\end\{\1\}", s, re.S)
 
 
 def text_numbers(rest):

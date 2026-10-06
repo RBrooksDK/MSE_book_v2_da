@@ -1,0 +1,20 @@
+% Danish version of the overview of common logic gates (standard ANSI symbols).
+\begin{circuitikz}[font=\small]
+  \def\gate#1#2#3#4#5#6{% x, y, port type, symbol text, output label, caption
+    \node[#3 port, anchor=center, scale=1.3] (g) at (#1,#2) {};
+    \path (g.west) -- (g.east) node[midway, font=\scriptsize\sffamily] {#4};
+    \draw[-{Stealth[length=5pt]}] (#1-1.9,#2 |- g.in 1) node[left, text=cyan!60!black] {$x$} -- (g.in 1);
+    \draw[-{Stealth[length=5pt]}] (#1-1.9,#2 |- g.in 2) node[left, text=cyan!60!black] {$y$} -- (g.in 2);
+    \draw[-{Stealth[length=5pt]}] (g.out) -- (#1+1.9,#2 |- g.out) node[pos=0.5, above, text=cyan!60!black] {#5};
+    \node[anchor=north] at (#1,#2-0.85) {#6};
+  }
+  \node[not port, anchor=center, scale=1.3] (n) at (0,0) {};
+  \draw[-{Stealth[length=5pt]}] (-1.9,0 |- n.in) node[left, text=cyan!60!black] {$x$} -- (n.in);
+  \draw[-{Stealth[length=5pt]}] (n.out) -- (1.9,0 |- n.out) node[pos=0.5, above, text=cyan!60!black] {$\bar{x}$};
+  \node[anchor=north] at (0,-0.85) {NOT-gate};
+  \gate{5.5}{0}{or}{OR}{$x + y$}{OR-gate}
+  \gate{11}{0}{and}{AND}{$xy$}{AND-gate}
+  \gate{0}{-3}{nand}{NAND}{$x \uparrow y$}{NAND-gate}
+  \gate{5.5}{-3}{nor}{NOR}{$x \downarrow y$}{NOR-gate}
+  \gate{11}{-3}{xor}{XOR}{$x \oplus y$}{XOR-gate}
+\end{circuitikz}

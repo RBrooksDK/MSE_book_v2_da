@@ -1,11 +1,11 @@
-\chapter{Boolean Algebra}
+\chapter{Boolesk algebra}
 \label{chap:ch13}
-In Chapter~\ref{chap:ch2}, we explored binary, decimal, octal, and hexadecimal numeral systems and learned how to perform conversions and binary arithmetic. Binary, with its base-2 structure, is particularly significant in computing because digital systems represent and manipulate information using two logical states.
+I kapitel~\ref{chap:ch2} udforskede vi det binære, det decimale, det oktale og det hexadecimale talsystem og lærte at omregne mellem dem og at regne binært. Totalssystemet er med sit grundtal 2 særligt vigtigt i computere, fordi digitale systemer repræsenterer og behandler information ved hjælp af to logiske tilstande.
 
-As we move from working with binary numbers to understanding \textbf{Boolean algebra}, we take the next step in comprehending how computers perform logical operations using binary values. While numeral systems allowed us to understand how numbers are represented and manipulated, Boolean algebra enables us to understand how decisions and logical processes are carried out within digital systems. In essence, Boolean algebra provides the rules that guide logical decision-making in binary, the same way arithmetic operates in numeral systems.
+Når vi går fra at arbejde med binære tal til at forstå \textbf{boolesk algebra}, tager vi det næste skridt i forståelsen af, hvordan computere udfører logiske operationer med binære værdier. Talsystemerne gav os en forståelse af, hvordan tal repræsenteres og behandles. Boolesk algebra gør det muligt at forstå, hvordan beslutninger og logiske processer udføres i digitale systemer. Kort sagt giver boolesk algebra de regler, der styrer logiske beslutninger i det binære system, på samme måde som aritmetikken fungerer i talsystemerne.
 
-\section{Introduction to Boolean Algebra}
-Boolean algebra is a mathematical framework that deals with binary values — typically represented as 0 and 1 - and shows us what kind of operations that can be carried out on bits. This system, first introduced by \textbf{George Boole} in the mid-19th century, forms the foundation of modern digital logic and is essential in the fields of computer science and electrical engineering.
+\section{Introduktion til boolesk algebra}
+Boolesk algebra er en matematisk ramme, der arbejder med binære værdier -- typisk repræsenteret som 0 og 1 -- og viser os, hvilke slags operationer der kan udføres på bit. Systemet blev først introduceret af \textbf{George Boole} i midten af det 19. århundrede. Det danner grundlaget for moderne digital logik og er uundværligt inden for datalogi og elektroteknik.
 
 \begin{figure}[h]
     \centering
@@ -14,80 +14,80 @@ Boolean algebra is a mathematical framework that deals with binary values — ty
         % First image and its caption
         \begin{center}
             \includegraphics[width=0.6\linewidth]{figure/boole.png}  % Adjust the width as needed
-            \caption{Developed the rules of logic.}
+            \caption{Udviklede logikkens regler.}
         \end{center}
 
         % Second image and its caption
         \begin{center}
             \includegraphics[width=0.6\linewidth]{figure/shannon.png}  % Adjust the width as needed
-            \caption{Showed how to use Boolean algebra for designing computer circuits.}
+            \caption{Viste, hvordan boolesk algebra kan bruges til at konstruere computerkredsløb.}
         \end{center}
     \end{multicols}
 \end{figure}
 
-Although Boole laid the groundwork, it was not until the 1930s that \textbf{Claude Shannon}, widely regarded as the father of information theory, demonstrated how Boolean algebra could be applied to the design of electronic circuits. In his groundbreaking master's thesis, Shannon showed that Boolean algebra could be used to model and simplify the complex arrangement of switches and relays found in electrical circuits. This revelation bridged the gap between abstract mathematical logic and practical engineering, laying the foundation for the digital circuits used in modern computers. Shannon's master thesis won the 1939 Alfred Noble Prize.
+Selv om Boole lagde grunden, var det først i 1930'erne, at \textbf{Claude Shannon}, der bredt anses for informationsteoriens fader, viste, hvordan boolesk algebra kunne anvendes til at konstruere elektroniske kredsløb. I sit banebrydende speciale viste Shannon, at boolesk algebra kunne bruges til at modellere og forenkle de komplekse arrangementer af kontakter og relæer, som findes i elektriske kredsløb. Denne erkendelse slog bro mellem abstrakt matematisk logik og praktisk ingeniørarbejde og lagde grunden til de digitale kredsløb, der bruges i moderne computere. Shannons speciale vandt Alfred Noble-prisen i 1939.
 
-\subsection*{Relevance to Computer Science}
-Boolean algebra plays a central role in computer science, especially in the design and functioning of digital systems, such as computers, mobile devices, and embedded systems. At its core, Boolean algebra is used to model and design the behaviour of \textbf{digital circuits}, which are built from electronic components that have two states: on or off, corresponding directly to the binary values 1 and 0.
+\subsection*{Relevans for datalogi}
+Boolesk algebra spiller en central rolle i datalogi, især i design og funktion af digitale systemer som computere, mobile enheder og indlejrede systemer. Grundlæggende bruges boolesk algebra til at modellere og designe opførslen af \textbf{digitale kredsløb}. De er bygget af elektroniske komponenter med to tilstande: tændt eller slukket, hvilket svarer direkte til de binære værdier 1 og 0.
 
-At the heart of these digital circuits are \textbf{transistors}. A transistor is a semiconductor device that can control electrical current and can therefore be used as an electronic switch. Modern processors contain billions of interconnected transistors.
+Kernen i disse digitale kredsløb er \textbf{transistorer}. En transistor er en halvlederkomponent, der kan styre elektrisk strøm og derfor kan bruges som en elektronisk kontakt. Moderne processorer indeholder milliarder af forbundne transistorer.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width = 0.3\textwidth]{figure/transistor.png} % Adjust width here to scale the image
-    \caption{A Transistor.}
+    \caption{En transistor.}
     \label{fig:transistor}
 \end{figure}
 
-These transistors can be wired together in such a way that they store information in binary form — each 0 or 1 represents a single bit of information. Furthermore, they can be used to perform logical operations on these bits.
+Transistorerne kan forbindes på en sådan måde, at de gemmer information i binær form -- hvert 0 eller 1 repræsenterer en enkelt bit information. Desuden kan de bruges til at udføre logiske operationer på disse bit.
 
-Every computation or decision made by a computer involves a series of logical operations — such as \texttt{AND}, \texttt{OR}, and \texttt{NOT} — that are described and optimised using Boolean expressions. These logical operations are fundamental to controlling the flow of data and decision-making in software and hardware systems. For example:
+Enhver beregning eller beslutning, som en computer foretager, involverer en række logiske operationer -- såsom \texttt{AND}, \texttt{OR} og \texttt{NOT} -- der beskrives og optimeres ved hjælp af booleske udtryk. Disse logiske operationer er grundlæggende for styringen af datastrømme og beslutninger i software- og hardwaresystemer. For eksempel:
 
 \begin{itemize}
-    \item In \textbf{processors}, Boolean algebra is used to create \textbf{logic gates} and circuits that handle data processing, arithmetic operations, and decision-making.
-    \item In \textbf{software}, conditional statements like \texttt{IF} and \texttt{ELSE} are based on Boolean logic, determining which paths a program will follow.
+    \item I \textbf{processorer} bruges boolesk algebra til at skabe \textbf{logiske gates} og kredsløb, der står for databehandling, regneoperationer og beslutninger.
+    \item I \textbf{software} bygger betingede sætninger som \texttt{IF} og \texttt{ELSE} på boolesk logik og afgør, hvilke veje et program følger.
 \end{itemize}
 
-Beyond digital circuits, Boolean algebra also underpins essential concepts in \textbf{logic programming}, \textbf{database querying}, and \textbf{search algorithms}, where conditions must be evaluated as \texttt{TRUE} or \texttt{FALSE}.
+Ud over digitale kredsløb ligger boolesk algebra også til grund for centrale begreber inden for \textbf{logikprogrammering}, \textbf{databaseforespørgsler} og \textbf{søgealgoritmer}, hvor betingelser skal evalueres som \texttt{TRUE} eller \texttt{FALSE}.
 
-At the physical level, the circuits in digital devices operate by processing binary inputs to produce a binary output. Each of these circuits can be modelled using Boolean functions, which are expressions that describe how input values are manipulated to produce an output. For example, a simple \texttt{AND} gate outputs 1 only if both of its inputs are 1, which aligns directly with the Boolean operation \( x \land y \).
+På det fysiske niveau fungerer kredsløbene i digitale enheder ved at behandle binære input og frembringe et binært output. Hvert af disse kredsløb kan modelleres med booleske funktioner, som er udtryk, der beskriver, hvordan inputværdierne behandles for at frembringe et output. En simpel \texttt{AND}-gate giver for eksempel kun outputtet 1, hvis begge dens input er 1, hvilket svarer direkte til den booleske operation \( x \land y \).
 
-Boolean algebra is not only a way of simplifying logical reasoning but also a tool for optimising digital circuit designs. By simplifying Boolean expressions, designers can reduce the number of logic gates required, which leads to more efficient circuits that use less power and occupy less space on a chip.
+Boolesk algebra er ikke kun en måde at forenkle logiske ræsonnementer på, men også et værktøj til at optimere design af digitale kredsløb. Ved at reducere booleske udtryk kan designere mindske antallet af nødvendige logiske gates. Det giver mere effektive kredsløb, der bruger mindre strøm og fylder mindre på en chip.
 
-\section{Basic Operations on Bits}
-Boolean operators define the basic rules for manipulating binary values (0 and 1). The three primary operations in Boolean algebra are:
+\section{Grundlæggende operationer på bit}
+De booleske operatorer definerer de grundlæggende regler for behandling af binære værdier (0 og 1). De tre primære operationer i boolesk algebra er:
 
-\begin{custombox}{Primary Boolean Operations}
+\begin{custombox}{Primære booleske operationer}
     
 
 \begin{itemize}
-    \item \textbf{Complementation} (denoted as \texttt{NOT}, e.g. $\overline{0}$)
-    \item \textbf{Boolean Sum} (denoted as \texttt{OR}, e.g. $1 + 0$)
-    \item \textbf{Boolean Product} (denoted as \texttt{AND}, e.g. $1 \cdot 0$)
+    \item \textbf{Komplementering} (betegnes \texttt{NOT}, fx $\overline{0}$)
+    \item \textbf{Boolesk sum} (betegnes \texttt{OR}, fx $1 + 0$)
+    \item \textbf{Boolesk produkt} (betegnes \texttt{AND}, fx $1 \cdot 0$)
 \end{itemize}
 \end{custombox}
 
-The \textbf{complement} of a Boolean value is the inverse of its state. It is denoted with a bar over the variable. For instance:
+\textbf{Komplementet} af en boolesk værdi er den modsatte tilstand. Det betegnes med en streg over variablen. For eksempel:
 
 \[
 \overline{0} = 1, \quad \overline{1} = 0
 \]
 
-The complement operation flips the value: if the input is 0, the output is 1, and vice versa.
+Komplementeringen vender værdien: Hvis input er 0, er output 1, og omvendt.
 
-The Boolean sum, or \texttt{OR}, is a logical operation that returns 1 if at least one of the operands is 1. Its results are as follows:
+Den booleske sum, eller \texttt{OR}, er en logisk operation, der giver 1, hvis mindst én af operanderne er 1. Resultaterne er som følger:
 \[
 1 + 1 = 1, \quad 1 + 0 = 1, \quad 0 + 1 = 1, \quad 0 + 0 = 0
 \]
-This operation is analogous to addition but follows different rules for binary logic.
+Denne operation svarer til addition, men følger andre regler for binær logik.
 
-The Boolean product, or \texttt{AND}, returns 1 only if both operands are 1. Its results are:
+Det booleske produkt, eller \texttt{AND}, giver kun 1, hvis begge operander er 1. Resultaterne er:
 \[
 1 \cdot 1 = 1, \quad 1 \cdot 0 = 0, \quad 0 \cdot 1 = 0, \quad 0 \cdot 0 = 0
 \]
-In some cases, the multiplication symbol (\texttt{AND}) can be omitted for clarity, similar to how it is omitted in algebraic multiplication.
+I nogle tilfælde kan multiplikationstegnet (\texttt{AND}) udelades for overskuelighedens skyld, på samme måde som det udelades ved multiplikation i algebra.
 
-We can summarise the considerations about the basic Boolean operators in the following table:
+Vi kan opsummere overvejelserne om de grundlæggende booleske operatorer i følgende tabel:
 
 \begin{table}[h!]
     \begin{center}
@@ -99,51 +99,51 @@ We can summarise the considerations about the basic Boolean operators in the fol
     $1 + 1 = 1$ & $1 \cdot 1 = 1$ & \\
     \end{tabular}
     \end{center}
-    \caption{Basic Boolean Operators.}
+    \caption{Grundlæggende booleske operatorer.}
     \label{tab:basicops}
 \end{table}
 
 
-\begin{remark} A \textbf{Boolean variable} can only take on two possible values: 0 (\texttt{FALSE}) or 1 (\texttt{TRUE}). These variables represent the states in logic circuits. For example, given $x = 1$ and $y = 0$, you can apply Boolean operations:
+\begin{remark} En \textbf{boolesk variabel} kan kun antage to mulige værdier: 0 (\texttt{FALSE}) eller 1 (\texttt{TRUE}). Disse variable repræsenterer tilstandene i logiske kredsløb. Givet $x = 1$ og $y = 0$ kan du for eksempel anvende booleske operationer:
 
 \[
 x + y = 1, \quad x \cdot y = 0, \quad \overline{x} = 0
 \]
 
-We will typically use $x, y$ and $z$ as our Boolean variables.
+Vi bruger typisk $x, y$ og $z$ som vores booleske variable.
 
 \end{remark}
 
-\subsection*{Operator Precedence}
-When evaluating expressions with multiple Boolean operators, the following order of operations is applied:
+\subsection*{Operatorpræcedens}
+Når udtryk med flere booleske operatorer skal evalueres, anvendes følgende rækkefølge:
 \begin{enumerate}
-    \item Complements (\texttt{NOT}) are evaluated first.
-    \item Boolean products (\texttt{AND}) are computed next.
-    \item Boolean sums (\texttt{OR}) are evaluated last.
+    \item Komplementer (\texttt{NOT}) evalueres først.
+    \item Booleske produkter (\texttt{AND}) beregnes derefter.
+    \item Booleske summer (\texttt{OR}) evalueres til sidst.
 \end{enumerate}
 
-So, for example, $x \cdot y+z$ means $(x \cdot y)+z$. Most of the time, however, we will write the parenthesis to avoid misunderstandings. Also note that parentheses can be used to override the default precedence, ensuring that certain operations are evaluated before others.
+For eksempel betyder $x \cdot y+z$ altså $(x \cdot y)+z$. I de fleste tilfælde skriver vi dog parenteserne for at undgå misforståelser. Bemærk også, at parenteser kan bruges til at tilsidesætte den normale præcedens, så bestemte operationer evalueres før andre.
 
-Consider the expression:
+Se på udtrykket:
 \[
 \overline{x} \cdot y + z
 \]
-According to the precedence rules, the complement (\texttt{NOT}) of $x$ is evaluated first, followed by the Boolean product (\texttt{AND}) between $\overline{x}$ and $y$, and finally, the Boolean sum (\texttt{OR}) with $z$. This can be written explicitly as:
+Ifølge præcedensreglerne evalueres komplementet (\texttt{NOT}) af $x$ først, derefter det booleske produkt (\texttt{AND}) af $\overline{x}$ og $y$ og til sidst den booleske sum (\texttt{OR}) med $z$. Det kan skrives eksplicit som:
 \[
 (\overline{x} \cdot y) + z
 \]
 
-Now consider another expression:
+Se nu på et andet udtryk:
 \[
 \overline{x \cdot (y + z)}
 \]
-In this case, the parentheses override the default precedence. The Boolean sum (\texttt{OR}) between $y$ and $z$ is evaluated first, followed by the Boolean product (\texttt{AND}) with $x$, and finally, the complement (\texttt{NOT}) of the entire result.
+Her tilsidesætter parenteserne den normale præcedens. Den booleske sum (\texttt{OR}) af $y$ og $z$ evalueres først, derefter det booleske produkt (\texttt{AND}) med $x$ og til sidst komplementet (\texttt{NOT}) af hele resultatet.
 
 \begin{example}
-    Find the value of $1 \cdot 0+\overline{(0+1)}$.
+    Find værdien af $1 \cdot 0+\overline{(0+1)}$.
 
     \begin{solution}
-        Using the definitions of complementation, sum, product and the order of operations, it follows that
+        Ud fra definitionerne af komplementering, sum og produkt og rækkefølgen af operationerne følger det, at
         \[
         \begin{aligned}
         1 \cdot 0+\overline{(0+1)} & =0+\overline{1} \\
@@ -155,15 +155,15 @@ In this case, the parentheses override the default precedence. The Boolean sum (
     \label{ex4.1}
 \end{example}
 
-It turns out that Boolean operators are intimately linked with logical operators.
+Det viser sig, at de booleske operatorer er tæt forbundet med de logiske operatorer.
 
-\subsection*{Logical Operators}
-The complement, Boolean sum, and Boolean product correspond to the logical operators $\neg$, $\vee$, and $\wedge$, respectively. In this context, 0 corresponds to \texttt{FALSE} ($\mathbf{F}$) and 1 corresponds to \texttt{TRUE} ($\mathbf{T}$). 
+\subsection*{Logiske operatorer}
+Komplementet, den booleske sum og det booleske produkt svarer til henholdsvis de logiske operatorer $\neg$, $\vee$ og $\wedge$. I denne sammenhæng svarer 0 til \texttt{FALSE} ($\mathbf{F}$), og 1 svarer til \texttt{TRUE} ($\mathbf{T}$). 
 
-Equalities in Boolean algebra can be directly translated into equivalences of compound propositions in logic. Similarly, logical equivalences can be translated into equalities in Boolean algebra. These translations allow us to move between Boolean algebra and propositional logic seamlessly.
+Ligheder i boolesk algebra kan oversættes direkte til ækvivalenser mellem sammensatte udsagn i logik. Tilsvarende kan logiske ækvivalenser oversættes til ligheder i boolesk algebra. Disse oversættelser gør det muligt at bevæge sig gnidningsløst mellem boolesk algebra og udsagnslogik.
 
 \begin{example}
-    Translate $1 \cdot 0+\overline{(0+1)}=0$, the equality found in Example \ref{ex4.1}, into a logical equivalence.
+    Oversæt $1 \cdot 0+\overline{(0+1)}=0$, den lighed, vi fandt i Eksempel \ref{ex4.1}, til en logisk ækvivalens.
 
     \begin{solution}
         $(\mathbf{T} \wedge \mathbf{F}) \vee \neg(\mathbf{F} \vee \mathbf{T}) \equiv \mathbf{F}$
@@ -171,17 +171,17 @@ Equalities in Boolean algebra can be directly translated into equivalences of co
     
 \end{example}
 
-Since logic is a field in its own right, we will not pursue it further here.\footnote{The symbol '$\equiv$' denotes logical equivalence: two propositions are logically equivalent when they have the same truth value for every valuation of their variables. Equivalent propositions need not have the same syntactic structure. In Boolean algebra, '$=$' similarly indicates that two Boolean expressions define the same function on all inputs.}
+Da logik er et selvstændigt fagområde, går vi ikke videre med det her.\footnote{Symbolet »$\equiv$« betegner logisk ækvivalens: To udsagn er logisk ækvivalente, når de har samme sandhedsværdi for enhver tildeling af værdier til deres variable. Ækvivalente udsagn behøver ikke at have samme syntaktiske struktur. I boolesk algebra angiver »$=$« tilsvarende, at to booleske udtryk definerer den samme funktion for alle input.}
 
-\section{Boolean Functions}
+\section{Booleske funktioner}
 
-A \textbf{Boolean function} maps Boolean inputs to a Boolean output. Consider the Boolean function $F(x, y, z)$:
+En \textbf{boolesk funktion} afbilder booleske input over i et boolesk output. Se på den booleske funktion $F(x, y, z)$:
 
 \[
 F(x, y, z) = (x \cdot \overline{y}) + z
 \]
 
-This function returns the result of the Boolean \texttt{OR} between two terms: $x \cdot \overline{y}$ (the \texttt{AND} of $x$ and the complement of $y$) and $z$. In the following, the function is displayed in a table, which shows the value of $F$ for all combinations of values of the inputs:
+Funktionen giver resultatet af boolesk \texttt{OR} mellem to led: $x \cdot \overline{y}$ (\texttt{AND} af $x$ og komplementet af $y$) og $z$. Nedenfor er funktionen vist i en tabel, som angiver værdien af $F$ for alle kombinationer af inputværdier:
 
 \begin{table}[h!]
         \begin{center}
@@ -203,18 +203,18 @@ This function returns the result of the Boolean \texttt{OR} between two terms: $
         1 & 1 & 1 & 1 \\
         \end{tabular}
         \end{center}
-    \caption{Truth Table for $F(x, y, z) = (x \cdot \overline{y}) + z$.}
+    \caption{Sandhedstabel for $F(x, y, z) = (x \cdot \overline{y}) + z$.}
     \label{tab:ttexam}
 \end{table}
 
-\begin{example}Consider the Boolean function defined as:
+\begin{example}Se på den booleske funktion, der er defineret ved:
     \[
 F(x, y, z) = xy + \overline{z}
 \]
 
-Display the truth table for this function.
+Opstil sandhedstabellen for funktionen.
 
-\begin{solution} This function is displayed in the table below, which shows the value of \( F \) for all combinations of the input values \( x \), \( y \), and \( z \):
+\begin{solution} Funktionen er vist i tabellen nedenfor, som angiver værdien af \( F \) for alle kombinationer af inputværdierne \( x \), \( y \) og \( z \):
 
 \begin{table}[h!]
 \begin{center}
@@ -237,18 +237,18 @@ $x$ & $y$ & $z$ & $xy$ & $\overline{z}$ & $F(x, y, z)$ \\
 1 & 1 & 1 & 1 & 0 & 1 \\
 \end{tabular}
 \end{center}
-\caption{Truth table for the Boolean function \( F(x, y, z) = xy + \overline{z} \).}
+\caption{Sandhedstabel for den booleske funktion \( F(x, y, z) = xy + \overline{z} \).}
 \label{tab:boolean_example}
 \end{table}
 
-The columns \( xy \) and \( \overline{z} \) are “helping” columns that assist in the calculation of \( F \), since they are not strictly necessary. They break down the expression \( F(x, y, z) \) into smaller parts to make it easier to compute the final result.
+Søjlerne \( xy \) og \( \overline{z} \) er »hjælpesøjler«, der hjælper med at beregne \( F \), selv om de ikke er strengt nødvendige. De opdeler udtrykket \( F(x, y, z) \) i mindre dele, så det bliver lettere at beregne det endelige resultat.
     
 \end{solution}
 \end{example}
 
-\subsection*{Simplifying a Boolean Expression}
+\subsection*{Reduktion af et boolesk udtryk}
 
-The table below shows the output for the functions \( F(x, y) = (x\overline{y} + xy) \cdot y \) and \( G(x, y) = xy \) for all values of \( x \) and \( y \):
+Tabellen nedenfor viser output for funktionerne \( F(x, y) = (x\overline{y} + xy) \cdot y \) og \( G(x, y) = xy \) for alle værdier af \( x \) og \( y \):
 
 \begin{table}[h!]
 \begin{center}
@@ -265,79 +265,79 @@ $x$ & $y$ & $xy$ & $\overline{y}$ & $x\overline{y}$ & $xy + x\overline{y}$ & $F(
 
 \end{tabular}
 \end{center}
-\caption{Comparison of \( F(x, y) = (x\overline{y} + xy) \cdot y \) and \( G(x, y) = xy \).}
+\caption{Sammenligning af \( F(x, y) = (x\overline{y} + xy) \cdot y \) og \( G(x, y) = xy \).}
 \label{tab:simplifying_boolean}
 \end{table}
 
-These functions produce the same output for all values of \( x \) and \( y \). That is, these two functions are equivalent!
+Funktionerne giver samme output for alle værdier af \( x \) og \( y \). De to funktioner er altså ækvivalente!
 
-Boolean expressions can often be simplified significantly. In the following section, we will delve into some rules and techniques to achieve this simplification.
+Booleske udtryk kan ofte reduceres betydeligt. I det følgende afsnit ser vi nærmere på nogle regler og teknikker til at opnå denne reduktion.
 
-\subsection*{Boolean Identities}
-Boolean identities are fundamental rules that define the relationships and operations between Boolean variables. These identities allow us to simplify and manipulate Boolean expressions. By applying these identities, complex Boolean expressions can be reduced to simpler forms, making them easier to evaluate or implement in digital circuits. Whether using commutative, associative, distributive, or De Morgan's laws, these identities provide the building blocks for efficient logic manipulation, helping us understand the behaviour of Boolean functions at a deeper level.
+\subsection*{Booleske identiteter}
+Booleske identiteter er grundlæggende regler, der definerer sammenhængene og operationerne mellem booleske variable. Identiteterne gør det muligt at reducere og omskrive booleske udtryk. Ved at anvende dem kan komplekse booleske udtryk reduceres til simplere former, så de bliver lettere at evaluere eller implementere i digitale kredsløb. Uanset om der er tale om de kommutative, associative eller distributive love eller De Morgans love, er identiteterne byggestenene til effektiv logisk manipulation og hjælper os til at forstå booleske funktioners opførsel på et dybere niveau.
 
-We start out by inspecting the must fundamental of these identities:
+Vi begynder med at se på de mest grundlæggende af disse identiteter:
 
-\begin{custombox}{Fundamental Boolean Properties}
+\begin{custombox}{Grundlæggende booleske egenskaber}
 \begin{itemize}
-    \item \textbf{Double Complement:} \\
+    \item \textbf{Dobbelt komplement:} \\
     \hspace*{15pt} $\overline{\overline{x}} = x$\hspace{15pt}
     
-    \item \textbf{Idempotent Laws:} \\
+    \item \textbf{Idempotenslove:} \\
     \hspace*{15pt}$x + x = x$, \quad $x \cdot x = x$
     
-    \item \textbf{Identity Laws:} \\
+    \item \textbf{Identitetslove:} \\
     \hspace*{15pt}$x + 0 = x$, \quad $x \cdot 1 = x$
     
-    \item \textbf{Domination Laws:} \\
+    \item \textbf{Dominanslove:} \\
     \hspace*{15pt}$x + 1 = 1$, \quad $x \cdot 0 = 0$
     
-    \item \textbf{Unit Property:} \\
+    \item \textbf{Enhedsegenskaben:} \\
     \hspace*{15pt}$\overline{x} + x = 1$
     
-    \item \textbf{Zero Property:} \\
+    \item \textbf{Nulegenskaben:} \\
     \hspace*{15pt} $\overline{x} \cdot x = 0$
 \end{itemize}
 \end{custombox}
 
-These identities represent the most fundamental properties of Boolean algebra, dealing with the behavior of \texttt{OR}, \texttt{AND}, and the identity elements (0 and 1).
+Disse identiteter udgør de mest grundlæggende egenskaber ved boolesk algebra og handler om, hvordan \texttt{OR}, \texttt{AND} og de neutrale elementer (0 og 1) opfører sig.
 
-\begin{example} Show that $(1 \cdot 1)+(\overline{0 \cdot 1}+0)=1$.         
+\begin{example} Vis, at $(1 \cdot 1)+(\overline{0 \cdot 1}+0)=1$.         
 \end{example}
 
 
 \begin{solution}
-    To show that $(1 \cdot 1)+(\overline{0 \cdot 1}+0)=1$, let's break down and simplify the expression step by step using Boolean algebra identities.
+    For at vise, at $(1 \cdot 1)+(\overline{0 \cdot 1}+0)=1$, deler vi udtrykket op og reducerer det trin for trin ved hjælp af booleske identiteter.
 
     \begin{itemize}
-        \item \textbf{Step 1:} Simplify the first part $(1 \cdot 1)$
-                Using the Idempotent Law $(x \cdot x=x)$ or simply calculating the result:
+        \item \textbf{Trin 1:} Reducér den første del $(1 \cdot 1)$
+                Ved hjælp af idempotensloven $(x \cdot x=x)$ eller ved blot at beregne resultatet:
                 
                 \[
                 1 \cdot 1=1
                 \]
                 
                 
-                So, the expression becomes:
+                Udtrykket bliver altså:
                 
                 \[
                 1+(\overline{0 \cdot 1}+0)
                 \]
-        \item \textbf{Step 2:} Simplify the second part $(\overline{0 \cdot 1}+0)$
-                First, simplify $0 \cdot 1$ using the Domination Law $(0 \cdot x=0)$:
+        \item \textbf{Trin 2:} Reducér den anden del $(\overline{0 \cdot 1}+0)$
+                Reducér først $0 \cdot 1$ ved hjælp af dominansloven $(0 \cdot x=0)$:
                 
                 \[
                 0 \cdot 1=0
                 \]
                 
                 
-                So, the expression becomes:
+                Udtrykket bliver altså:
                 
                 \[
                 1+(\overline{0}+0)
                 \]
-        \item \textbf{Step 3:} Simplify the complement $\overline{0}$
-    Using the Complement Law $(\overline{0}=1)$ :
+        \item \textbf{Trin 3:} Reducér komplementet $\overline{0}$
+    Ved hjælp af komplementloven $(\overline{0}=1)$:
     
     \[
     \overline{0}=1
@@ -345,64 +345,64 @@ These identities represent the most fundamental properties of Boolean algebra, d
 
     
     
-    Thus, the expression becomes:
+    Dermed bliver udtrykket:
     
     \[
     1+(1+0)
     \]
 
-    \item \textbf{Step 4:} Simplify the inner expression \( (1 + 0) \) \\
-        Using the Identity Law \( (x + 0 = x) \):
+    \item \textbf{Trin 4:} Reducér det indre udtryk \( (1 + 0) \) \\
+        Ved hjælp af identitetsloven \( (x + 0 = x) \):
         
         \[
         1 + 0 = 1
         \]
         
-        So, the expression now becomes:
+        Udtrykket bliver nu:
         
         \[
         1 + 1
         \]
         
-        \item \textbf{Step 5: }Simplify \( 1 + 1 \) \\
-        Using the Idempotent Law \( (x + x = x) \) or the Domination Law:
+        \item \textbf{Trin 5: }Reducér \( 1 + 1 \) \\
+        Ved hjælp af idempotensloven \( (x + x = x) \) eller dominansloven:
         
         \[
         1 + 1 = 1
         \]
         
-        The expression is true. \end{itemize}
-        Thus, we have shown that:
+        Udtrykket er sandt. \end{itemize}
+        Dermed har vi vist, at:
         
         \[
         (1 \cdot 1) + (\overline{0 \cdot 1} + 0) = 1
         \]
         \end{solution}
 
-Next we take a look at some other important laws:
+Dernæst ser vi på nogle andre vigtige love:
 
-\begin{custombox}{Structural Boolean Laws}
+\begin{custombox}{Strukturelle booleske love}
 \begin{itemize}
-    \item \textbf{Commutative Laws:} \\
+    \item \textbf{Kommutative love:} \\
     \hspace*{15pt}$x + y = y + x$, \quad $x \cdot y = y \cdot x$
     
-    \item \textbf{Absorption Laws:} \\
+    \item \textbf{Absorptionslove:} \\
     \hspace*{15pt}$x + (x \cdot y) = x$, \quad $x \cdot (x + y) = x$, \quad $\bar{x} \cdot \bar{y}+x=\bar{y}+x$
     
-    \item \textbf{De Morgan’s Laws:} \\
+    \item \textbf{De Morgans love:} \\
     \hspace*{15pt} $\overline{x \cdot y} = \overline{x} + \overline{y}$, \quad $\overline{x + y} = \overline{x} \cdot \overline{y}$
-    \item \textbf{Associative Laws:} \\
+    \item \textbf{Associative love:} \\
     \hspace*{15pt} $x + (y + z) = (x + y) + z$, \quad $x \cdot (y \cdot z) = (x \cdot y) \cdot z$
     
-    \item \textbf{Distributive Law:} \\
+    \item \textbf{Den distributive lov:} \\
     \hspace*{15pt} $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$, \quad $x + (y \cdot z) = (x + y) \cdot (x + z)$
 \end{itemize}
 \end{custombox}
 
-Together with the basic identities, the structural laws allow us to reduce more complex expressions.
+Sammen med de grundlæggende identiteter gør de strukturelle love det muligt at reducere mere komplekse udtryk.
 
 \begin{example}
-    Show that
+    Vis, at
     \(
     (x \cdot y) + \overline{(x + z) \cdot \overline{y}} = y + \overline{x} \cdot \overline{z}
     \)
@@ -410,53 +410,53 @@ Together with the basic identities, the structural laws allow us to reduce more 
 
 \begin{solution}
 
-    Note that we do not explicitly state the use of the \textbf{Commutative Laws}.
+    Bemærk, at vi ikke eksplicit nævner brugen af de \textbf{kommutative love}.
 
     \begin{itemize}
 
-        \item \textbf{Step 1:} Apply \textbf{De Morgan's Law} to the complement
+        \item \textbf{Trin 1:} Anvend \textbf{De Morgans lov} på komplementet
         
         \[ \overline{(x + z) \cdot \overline{y}} \]
         
-        The expression becomes:
+        Udtrykket bliver:
         
         \[
         (x \cdot y) + \overline{(x + z)} + \overline{\overline{y}}
         \]
         
-        \item \textbf{Step 2:} Use \textbf{Double Complement Law}
+        \item \textbf{Trin 2:} Brug \textbf{loven om dobbelt komplement}
         
         \[
         \overline{\overline{y}}
         \]
         
-        The expression becomes:
+        Udtrykket bliver:
 
          \[
         (x \cdot y) + \overline{(x + z)} + y
         \]
         
-        \item \textbf{Step 3:} Apply \textbf{De Morgan's Law} to the complement
+        \item \textbf{Trin 3:} Anvend \textbf{De Morgans lov} på komplementet
              
         \[
         \overline{(x + z)}
         \]
         
-        The expression becomes:
+        Udtrykket bliver:
 
         \[
        (x \cdot y) + \overline{x} \cdot \overline{z} + y
        \]
         
-        \item \textbf{Step 4:} Apply the \textbf{Distributive Law} in reverse
+        \item \textbf{Trin 4:} Anvend \textbf{den distributive lov} baglæns
         
         \[
         (x \cdot y) + \overline{x} \cdot \overline{z} + y = y (x + 1) + \overline{x} \cdot \overline{z}
         \]
         
-        \item \textbf{Step 5:} Use the \textbf{Domination Law} to simplify \( x + 1 \):
+        \item \textbf{Trin 5:} Brug \textbf{dominansloven} til at reducere \( x + 1 \):
         
-        So, the expression simplifies to:
+        Udtrykket reduceres altså til:
         
         \[
         y + \overline{x} \cdot \overline{z}
@@ -464,7 +464,7 @@ Together with the basic identities, the structural laws allow us to reduce more 
         
     \end{itemize}
     
-    Thus, we have shown that:
+    Dermed har vi vist, at:
     
     \[
     (x \cdot y) + \overline{(x + z) \cdot \overline{y}} = y + \overline{x} \cdot \overline{z}
@@ -473,27 +473,27 @@ Together with the basic identities, the structural laws allow us to reduce more 
 
 \end{solution}
 
-In addition to the basic operators, we have other commonly used operators in Boolean algebra:
+Ud over de grundlæggende operatorer har vi andre almindeligt anvendte operatorer i boolesk algebra:
 
 \begin{itemize}
 \setlength{\itemsep}{10pt}
-    \item \texttt{NOT} \texttt{AND} (\texttt{NAND}): This is the complement of the \texttt{AND} operation. It returns true unless both inputs are true. In Boolean algebra, \texttt{NAND} is denoted by the symbol $\uparrow$ and can be written as: \[
+    \item \texttt{NOT} \texttt{AND} (\texttt{NAND}): Dette er komplementet til \texttt{AND}-operationen. Den giver sand, medmindre begge input er sande. I boolesk algebra betegnes \texttt{NAND} med symbolet $\uparrow$ og kan skrives som: \[
         x \uparrow y = \overline{x \cdot y}
         \]
 
-    \item \texttt{NOT} \texttt{OR} (\texttt{NOR}): The \texttt{NOR} operator is the complement of the \texttt{OR} operation. It returns true only when both inputs are false. Denoted by the symbol $\downarrow$, it can be expressed as:
+    \item \texttt{NOT} \texttt{OR} (\texttt{NOR}): Operatoren \texttt{NOR} er komplementet til \texttt{OR}-operationen. Den giver kun sand, når begge input er falske. Den betegnes med symbolet $\downarrow$ og kan udtrykkes som:
         \[
         x \downarrow y = \overline{x + y}
         \]
 
-    \item Exclusive \texttt{OR} (\texttt{XOR}): The \texttt{XOR} operator returns true if exactly one of the inputs is true, but not both. This is particularly useful in arithmetic operations such as binary addition. Denoted by $\oplus$, the Boolean expression for \texttt{XOR} is:
+    \item Eksklusiv \texttt{OR} (\texttt{XOR}): Operatoren \texttt{XOR} giver sand, hvis præcis ét af input er sandt, men ikke begge. Det er særligt nyttigt i regneoperationer som binær addition. Den betegnes med $\oplus$, og det booleske udtryk for \texttt{XOR} er:
         \[
         x \oplus y = (x \cdot \overline{y}) + (\overline{x} \cdot y)
         \]
 
 \end{itemize}
 
-We summarise the additional operators in the following table:
+Vi opsummerer de supplerende operatorer i følgende tabel:
 
 \begin{table}[h!]
 \begin{center}
@@ -505,12 +505,12 @@ $1 \uparrow 0 = 1$ & $1 \downarrow 0 = 0$ & $1 \oplus 0 = 1$ \\
 $1 \uparrow 1 = 0$ & $1 \downarrow 1 = 0$ & $1 \oplus 1 = 0$ \\
 \end{tabular}
 \end{center}
-    \caption{Additional Boolean Operators.}
+    \caption{Supplerende booleske operatorer.}
     \label{tab:addibool}
 \end{table}
 
 
-Here are all the operators in one table:
+Her er alle operatorerne samlet i én tabel:
 
 \begin{table}[h!]
     \begin{center}
@@ -524,34 +524,34 @@ Here are all the operators in one table:
     $1 + 1 = 1$ & $1 \cdot 1 = 1$ & & $1 \uparrow 1 = 0$ & $1 \downarrow 1 = 0$ & $1 \oplus 1 = 0$ \\
     \end{tabular}
     \end{center}
-    \caption{Basic and Additional Boolean Operators.}
+    \caption{Grundlæggende og supplerende booleske operatorer.}
     \label{tab:mergedops}
 \end{table}
 
 
-Now we can state the final, and more advanced, Boolean identities:
+Nu kan vi angive de sidste og mere avancerede booleske identiteter:
 
-\begin{custombox}{Advanced Boolean Identities}
+\begin{custombox}{Avancerede booleske identiteter}
 \begin{itemize}
-    \item \textbf{Exclusive \texttt{OR} (\texttt{XOR}):} \\
+    \item \textbf{Eksklusiv \texttt{OR} (\texttt{XOR}):} \\
     \hspace*{15pt} $x \oplus y = (x \cdot \overline{y}) + (\overline{x} \cdot y)$
     
-    \item \textbf{Exclusive \texttt{NOR} (\texttt{XNOR}):} \\
+    \item \textbf{Eksklusiv \texttt{NOR} (\texttt{XNOR}):} \\
     \hspace*{15pt} $\overline{x \oplus y} = (x \cdot y) + (\overline{x} \cdot \overline{y})$
     
-    \item \textbf{Disappearing Opposite:} \\
+    \item \textbf{Den forsvindende modsætning:} \\
     \hspace*{15pt} $x + \overline{x} \cdot y = x + y$
     
-    \item \textbf{FOIL Law (First, Outer, Inner, Last):} \\
+    \item \textbf{FOIL-loven (af engelsk \emph{First, Outer, Inner, Last}: første, yderste, inderste, sidste):} \\
     \hspace*{15pt} $(x + y) \cdot (z + w) = (x \cdot z) + (x \cdot w) + (y \cdot z) + (y \cdot w)$
 \end{itemize}
 \end{custombox}
 
-\section{Logic Gates}
-Logic gates, the fundamental building blocks of digital circuits, manage the flow of electric current entering and leaving circuits. By receiving binary inputs and generating outputs, logic gates regulate electrical signals. These gates operate within transistors or as parts of larger systems like arithmetic units, multiplexers, and microprocessors, enabling essential electronic logic operations.
+\section{Logiske gates}
+Logiske gates er de grundlæggende byggesten i digitale kredsløb og styrer den elektriske strøm, der løber ind i og ud af kredsløbene. Logiske gates modtager binære input og frembringer output og regulerer derved elektriske signaler. Disse gates fungerer i transistorer eller som dele af større systemer som regneenheder, multipleksere og mikroprocessorer og muliggør vigtige elektroniske logiske operationer.
 
-\subsubsection*{Types of Logic Gates}
-There are various examples of logic gates that function differently depending on the type of binary input they receive. In Boolean algebra, these gates correspond to basic logical operations, such as \texttt{AND}, \texttt{OR}, and \texttt{NOT}. Below are the most common types of logic gates found in most electronic circuits:
+\subsubsection*{Typer af logiske gates}
+Der findes forskellige logiske gates, som fungerer forskelligt afhængigt af, hvilken type binært input de modtager. I boolesk algebra svarer disse gates til grundlæggende logiske operationer som \texttt{AND}, \texttt{OR} og \texttt{NOT}. Nedenfor ses de mest almindelige typer logiske gates, som findes i de fleste elektroniske kredsløb:
 
 \begin{itemize}
     \item \texttt{AND}
@@ -562,68 +562,68 @@ There are various examples of logic gates that function differently depending on
     \item \texttt{NAND}    
 \end{itemize}
 
-The activation of each of these logic gates depends on the presence or absence of a specific binary input that the gate is designed to recognise. If the input matches its configuration, the logic gate will output a 1; if it does not match, the output will be a 0.
+Om hver af disse logiske gates aktiveres, afhænger af, om et bestemt binært input, som gaten er designet til at genkende, er til stede eller ej. Hvis inputtet passer til gatens konfiguration, giver den logiske gate outputtet 1; hvis det ikke passer, er outputtet 0.
 
-\textbf{\texttt{AND} Logic Gates}\\
-An \texttt{AND} gate functions as an all-or-nothing device. To activate the gate, all inputs must be 1. If even one input is 0, the output will be 0.
+\textbf{\texttt{AND}-gates}\\
+En \texttt{AND}-gate fungerer efter alt-eller-intet-princippet. For at aktivere gaten skal alle input være 1. Hvis blot ét input er 0, bliver outputtet 0.
 
-\textbf{\texttt{OR} Logic Gates}\\
-\texttt{OR} gates are less restrictive than \texttt{AND} gates. If at least one input is 1, the output will be 1, regardless of the remaining inputs.
+\textbf{\texttt{OR}-gates}\\
+\texttt{OR}-gates er mindre restriktive end \texttt{AND}-gates. Hvis mindst ét input er 1, bliver outputtet 1, uanset de øvrige input.
 
-\textbf{\texttt{NOT} Logic Gates}\\
-A \texttt{NOT} gate inverts its input. It has a single input and a single output, where the output is always the opposite of the input. For example, if the input is 1, the output will be 0, and vice versa.
+\textbf{\texttt{NOT}-gates}\\
+En \texttt{NOT}-gate inverterer sit input. Den har ét input og ét output, og outputtet er altid det modsatte af inputtet. Hvis inputtet for eksempel er 1, bliver outputtet 0, og omvendt.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width = 0.8\textwidth]{figure/gates.png} % Adjust width here to scale the image
-    \caption{ANSI Symbols of Most Common Logic Gates. (\cite{rosen2012}).}
+    \resizebox{0.8\textwidth}{!}{\input{figure/da/gates_da}}
+    \caption{ANSI-symboler for de mest almindelige logiske gates. (\cite{rosen2012}).}
     \label{fig:gates}
 \end{figure}
 
-\textbf{\texttt{NOR} Logic Gates}\\
-A \texttt{NOR} gate combines the characteristics of an \texttt{OR} gate with an inverter. The output of a \texttt{NOR} gate is 1 only when all inputs are 0. Any other input combination results in a 0 output.
+\textbf{\texttt{NOR}-gates}\\
+En \texttt{NOR}-gate kombinerer egenskaberne ved en \texttt{OR}-gate med en inverter. Outputtet fra en \texttt{NOR}-gate er kun 1, når alle input er 0. Alle andre kombinationer af input giver outputtet 0.
 
-\textbf{\texttt{XOR} Logic Gates}\\
-An \texttt{XOR} (Exclusive OR) gate outputs a 1 only when exactly one of its inputs is 1. If both inputs are the same, either both 0 or both 1, the output will be 0. It functions like an \texttt{OR} gate, but with the additional condition that both inputs cannot be 1 simultaneously to produce a 1.
+\textbf{\texttt{XOR}-gates}\\
+En \texttt{XOR}-gate (eksklusiv OR) giver kun outputtet 1, når præcis ét af dens input er 1. Hvis begge input er ens, enten begge 0 eller begge 1, bliver outputtet 0. Den fungerer som en \texttt{OR}-gate, men med den ekstra betingelse, at begge input ikke samtidig må være 1, for at den giver 1.
 
-\textbf{\texttt{NAND} Logic Gates}\\
-A \texttt{NAND} gate is a combination of an \texttt{AND} gate and a \texttt{NOT} gate. The output will be 0 only if all inputs are 1. In any other situation, the output will be 1.
+\textbf{\texttt{NAND}-gates}\\
+En \texttt{NAND}-gate er en kombination af en \texttt{AND}-gate og en \texttt{NOT}-gate. Outputtet er kun 0, hvis alle input er 1. I alle andre tilfælde er outputtet 1.
 
-Similarly to how we previously reduced Boolean expressions to simpler forms, we can achieve the same outputs using different circuit designs as seen in figure \ref{fig:gates2}.
+På samme måde som vi tidligere reducerede booleske udtryk til simplere former, kan vi opnå samme output med forskellige kredsløbsdesign, som det ses i figur \ref{fig:gates2}.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width = 0.9\textwidth]{figure/gatessimilar.png} % Adjust width here to scale the image
-    \caption{Two Equivalent Logic Gates. (\cite{rosen2012}).}
+    \caption{To ækvivalente kredsløb af logiske gates. (\cite{rosen2012}).}
     \label{fig:gates2}
 \end{figure}
 
-We conclude this chapter by exploring the idea of \textbf{functional completeness}, also known as a \textbf{universal gate}. This concept refers to a set of logic gates that can be combined to implement any Boolean function. In essence, a functionally complete set of gates, like \texttt{NAND} or \texttt{NOR}, can replicate the behaviour of all other basic logic gates, making them versatile tools in digital circuit design.
+Vi afslutter kapitlet med at se på idéen om \textbf{funktionel fuldstændighed}, også kendt som en \textbf{universel gate}. Begrebet henviser til en mængde af logiske gates, der kan kombineres, så de implementerer en vilkårlig boolesk funktion. En funktionelt fuldstændig mængde af gates, såsom \texttt{NAND} eller \texttt{NOR}, kan altså efterligne opførslen af alle de andre grundlæggende logiske gates, hvilket gør dem til alsidige værktøjer i design af digitale kredsløb.
 
 
-\subsubsection*{Functional Completeness and a Universal Gate}
-An operator or set of operators is considered \textbf{functionally complete} if it can be used to express any Boolean function. Both \texttt{NAND} and \texttt{NOR} gates are functionally complete, or \textbf{universal gates}, meaning that any logical expression can be constructed using only \texttt{NAND} or only \texttt{NOR}.
+\subsubsection*{Funktionel fuldstændighed og universelle gates}
+En operator eller en mængde af operatorer kaldes \textbf{funktionelt fuldstændig}, hvis den kan bruges til at udtrykke en vilkårlig boolesk funktion. Både \texttt{NAND}- og \texttt{NOR}-gates er funktionelt fuldstændige, eller \textbf{universelle gates}. Det betyder, at ethvert logisk udtryk kan konstrueres med kun \texttt{NAND} eller kun \texttt{NOR}.
 
-The reason the \texttt{NAND} (or the \texttt{NOR}) gate is functionally complete lies in its ability to mimic other Boolean operations. Using just \texttt{NAND} operations, we can construct the fundamental operations of \texttt{NOT}, \texttt{AND}, and \texttt{OR}, which are the building blocks for any Boolean function.
+Grunden til, at \texttt{NAND}-gaten (eller \texttt{NOR}-gaten) er funktionelt fuldstændig, er dens evne til at efterligne andre booleske operationer. Med \texttt{NAND}-operationer alene kan vi konstruere de grundlæggende operationer \texttt{NOT}, \texttt{AND} og \texttt{OR}, som er byggestenene i enhver boolesk funktion.
 
 \begin{itemize}
 \setlength{\itemsep}{10pt}
-    \item \texttt{NOT} (\(\overline{x}\)): A \texttt{NOT} gate can be constructed by connecting both inputs of a \texttt{NAND} gate to the same variable:
+    \item \texttt{NOT} (\(\overline{x}\)): En \texttt{NOT}-gate kan konstrueres ved at forbinde begge input på en \texttt{NAND}-gate til den samme variabel:
     \(
     \overline{x} = x \uparrow x
     \)
 
-    \item \texttt{AND} (\(x \cdot y\)): The \texttt{AND} operation can be achieved by first applying a \texttt{NAND} gate and then passing the result through a \texttt{NOT} (which, as seen, can also be constructed using \texttt{NAND}): \newline
+    \item \texttt{AND} (\(x \cdot y\)): \texttt{AND}-operationen kan opnås ved først at anvende en \texttt{NAND}-gate og derefter sende resultatet gennem en \texttt{NOT} (som, vi har set, også kan konstrueres med \texttt{NAND}): \newline
    $x \cdot y=\overline{x \uparrow y}=(x \uparrow y) \uparrow(x \uparrow y)$
 
-    \item \texttt{OR} (\(x + y\)): The \texttt{OR} operation can be created using multiple \texttt{NAND} gates, taking advantage of De Morgan’s laws:
+    \item \texttt{OR} (\(x + y\)): \texttt{OR}-operationen kan dannes med flere \texttt{NAND}-gates ved at udnytte De Morgans love:
     \(
     x + y = (x \uparrow x) \uparrow (y \uparrow y)
     \)
 \end{itemize}
 
 
-The table below demonstrates how we can construct the basic Boolean operations using only \texttt{NAND} gates. Notice how the different columns represent the transformations of variables $x$ and $y$ using combinations of \texttt{NAND} gates to form the logical operations \texttt{NOT}, \texttt{AND}, and \texttt{OR}:
+Tabellen nedenfor viser, hvordan vi kan konstruere de grundlæggende booleske operationer med kun \texttt{NAND}-gates. Læg mærke til, hvordan de forskellige søjler viser transformationer af variablene $x$ og $y$, hvor kombinationer af \texttt{NAND}-gates danner de logiske operationer \texttt{NOT}, \texttt{AND} og \texttt{OR}:
 
 \begin{table}[h!]
     \begin{center}
@@ -638,16 +638,16 @@ The table below demonstrates how we can construct the basic Boolean operations u
     1 & 1 & 0 & 1 & 1 \\
     \end{tabular}
     \end{center}
-    \caption{Constructing Basic Boolean Operators with \texttt{NAND} Gates.}
+    \caption{Konstruktion af grundlæggende booleske operatorer med \texttt{NAND}-gates.}
 \end{table}
 
-Since we have seen how to build all Boolean functions using just \texttt{NAND} gates, we now understand that all logic operations in a computer can be implemented using this single type of gate. This makes the \texttt{NAND} gate incredibly important in digital circuit design, as it allows for simpler and more efficient hardware implementation. In modern computer systems, transistors are used to build \texttt{NAND} gates, meaning that any logical operation can ultimately be represented by a combination of transistors.
+Da vi har set, hvordan alle booleske funktioner kan bygges med kun \texttt{NAND}-gates, forstår vi nu, at alle logiske operationer i en computer kan implementeres med denne ene type gate. Det gør \texttt{NAND}-gaten utrolig vigtig i design af digitale kredsløb, da den giver mulighed for simplere og mere effektiv implementering i hardware. I moderne computersystemer bruges transistorer til at bygge \texttt{NAND}-gates, hvilket betyder, at enhver logisk operation i sidste ende kan repræsenteres ved en kombination af transistorer.
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width = 0.9\textwidth]{figure/logicincomp.png} % Adjust width here to scale the image
-    \caption{Logic Gates in Computers.}
+    \DaLogicInComp{width = 0.9\textwidth}
+    \caption{Logiske gates i computere.}
     \label{fig:logincom}
 \end{figure}
 
-Thus, the concept of functional completeness is not just theoretical; it is a powerful principle that allows computer engineers to design flexible and efficient circuits using minimal components.
+Begrebet funktionel fuldstændighed er således ikke kun teoretisk; det er et stærkt princip, der gør det muligt for computeringeniører at designe fleksible og effektive kredsløb med et minimum af komponenter.

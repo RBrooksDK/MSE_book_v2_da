@@ -1,13 +1,13 @@
-\chapter{Important Concepts}
+\chapter{Vigtige begreber}
 \label{chap:ic}
 
-This appendix is a collection of important mathematical concepts that are frequently used in software engineering. 
-The content of this appendix is based on the concepts in this book.
+Dette bilag er en samling af vigtige matematiske begreber, som ofte bruges i softwareudvikling. 
+Indholdet i bilaget bygger på begreberne i denne bog.
 
 % ---------- 01 
 
-\begin{proposition}[Rules for Calculations with Fractions]
-For $a,b,c,m \in \mathbb{R}$, with $a,b,c,m \neq 0$ where required, the following identities hold:
+\begin{proposition}[Regneregler for brøker]
+For $a,b,c,m \in \mathbb{R}$, hvor $a,b,c,m \neq 0$ når det er nødvendigt, gælder følgende identiteter:
 \begingroup
 \setlength{\jot}{8pt} % increase space between align rows (default ~3pt)
 \begin{align*}
@@ -22,32 +22,32 @@ For $a,b,c,m \in \mathbb{R}$, with $a,b,c,m \neq 0$ where required, the followin
 \endgroup
 \end{proposition}
 
-\begin{proposition}{Rules for calculations involving radicals}
+\begin{proposition}{Regneregler for rødder}
     \begin{align*}
-    &(1) \quad \sqrt[n]{x y}=\sqrt[n]{x} \times \sqrt[n]{y}   &   &\textnormal{where both sides are real; if }n\textnormal{ is even, require }x,y\geq0\\
-    &(2) \quad \sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}    &   &\textnormal{where both sides are real and }y\neq0;\textnormal{ if }n\textnormal{ is even, require }x\geq0,y>0 \\
-    &(3) \quad \sqrt{x^2} = |x|   &   &\textnormal{where } x \in \mathbb{R} \\
-    &(4) \quad (\sqrt[n]{x})^n = x    &   &\textnormal{for all real }x\textnormal{ if }n\textnormal{ is odd, and for }x\geq0\textnormal{ if }n\textnormal{ is even}\\
-    &(5) \quad \sqrt[n]{-x}=-\sqrt[n]{x}  &   &\textnormal{where } x \geq 0 \textnormal{ and } n \in \mathbb{N} \textnormal{ is odd }
+    &(1) \quad \sqrt[n]{x y}=\sqrt[n]{x} \times \sqrt[n]{y}   &   &\textnormal{hvor begge sider er reelle; hvis }n\textnormal{ er lige, kræves }x,y\geq0\\
+    &(2) \quad \sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}    &   &\textnormal{hvor begge sider er reelle og }y\neq0;\textnormal{ hvis }n\textnormal{ er lige, kræves }x\geq0,y>0 \\
+    &(3) \quad \sqrt{x^2} = |x|   &   &\textnormal{hvor } x \in \mathbb{R} \\
+    &(4) \quad (\sqrt[n]{x})^n = x    &   &\textnormal{for alle reelle }x\textnormal{, hvis }n\textnormal{ er ulige, og for }x\geq0\textnormal{, hvis }n\textnormal{ er lige}\\
+    &(5) \quad \sqrt[n]{-x}=-\sqrt[n]{x}  &   &\textnormal{hvor } x \geq 0 \textnormal{ og } n \in \mathbb{N} \textnormal{ er ulige }
     \end{align*}
 \end{proposition}
 
-\begin{proposition}{Properties of Integer Exponents}
-Let $n,m\in\mathbb{Z}$. Then the following hold wherever the powers are defined; in particular, a base must be non-zero whenever a negative exponent occurs:
+\begin{proposition}{Potensregneregler for heltallige eksponenter}
+Lad $n,m\in\mathbb{Z}$. Følgende identiteter gælder, når potenserne er definerede. Især skal et grundtal være forskelligt fra nul, når der optræder en negativ eksponent:
 \[
 \begin{aligned}
 &\text{(1)}\quad x^{n}\cdot x^{m}=x^{\,n+m},\\[2pt]
-&\text{(2)}\quad \dfrac{x^{n}}{x^{m}}=x^{\,n-m}\quad \text{with } x\neq 0,\\[2pt]
+&\text{(2)}\quad \dfrac{x^{n}}{x^{m}}=x^{\,n-m}\quad \text{med } x\neq 0,\\[2pt]
 &\text{(3)}\quad x^{n}\cdot y^{n}=(xy)^{n},\\[2pt]
-&\text{(4)}\quad \dfrac{x^{n}}{y^{n}}=\left(\dfrac{x}{y}\right)^{n}\quad \text{with } y\neq 0,\\[2pt]
+&\text{(4)}\quad \dfrac{x^{n}}{y^{n}}=\left(\dfrac{x}{y}\right)^{n}\quad \text{med } y\neq 0,\\[2pt]
 &\text{(5)}\quad \bigl(x^{n}\bigr)^{m}=x^{\,nm},\\[2pt]
 &\text{(6)}\quad x^{1}=x.
 \end{aligned}
 \]
 \end{proposition}
 
-\begin{proposition}{More Properties of Integer Exponents}
-Let $n,m\in\mathbb{Z}$. Then the following hold (with $x,y\in\mathbb{R}$ and nonzero where stated):
+\begin{proposition}{Flere potensregneregler for heltallige eksponenter}
+Lad $n,m\in\mathbb{Z}$. Så gælder følgende (med $x,y\in\mathbb{R}$ og forskellige fra nul, hvor det er angivet):
 \[
 \begin{aligned}
 &\text{(7)}\quad x^{0}=1   &\qquad&   x \neq 0  \\
@@ -56,14 +56,14 @@ Let $n,m\in\mathbb{Z}$. Then the following hold (with $x,y\in\mathbb{R}$ and non
 \]
 \end{proposition}
 
-\begin{definition}{The Extended Concept of Exponentiation}
-$\textnormal{Let } m \in \mathbb{Z} \textnormal{ and let }  n \in \mathbb{N} \textnormal{ such that } \dfrac{m}{n} \in \mathbb{Q}  \textnormal{. Then the following applies:}$
+\begin{definition}{Det udvidede potensbegreb}
+$\textnormal{Lad } m \in \mathbb{Z} \textnormal{ og lad }  n \in \mathbb{N}\textnormal{, så } \dfrac{m}{n} \in \mathbb{Q}  \textnormal{. Så gælder følgende:}$
 
 \[
 x^{\frac{m}{n}} = \sqrt[n]{x^m} \hspace{1cm} x > 0
 \]
 
-\textnormal{And more specifically, the following holds true}
+\textnormal{Mere specifikt gælder}
 
 \[
 x^{\frac{1}{n}} = \sqrt[n]{x} \hspace{1.3cm} x > 0
@@ -71,154 +71,154 @@ x^{\frac{1}{n}} = \sqrt[n]{x} \hspace{1.3cm} x > 0
 
 \end{definition}
 
-\begin{custombox}{Rules for rearranging formulae}
-The following operations can be performed on both sides of the formula:
+\begin{custombox}{Regler for omskrivning af formler}
+Følgende operationer kan udføres på begge sider af formlen:
 \begin{itemize}
-    \item Add the same quantity to both sides
-    \item Subtract the same quantity from both sides
-    \item Multiply both sides by the same quantity - remember to multiply all terms
-    \item Divide both sides by the same non-zero quantity - remember to divide all terms
-    \item Apply a function to both sides. This preserves implication, but it preserves equivalence only when the function is one-to-one on the relevant domain; squaring can introduce extraneous solutions, and reciprocals require non-zero sides.
+    \item Læg den samme størrelse til på begge sider
+    \item Træk den samme størrelse fra på begge sider
+    \item Gang begge sider med den samme størrelse -- husk at gange alle led
+    \item Divider begge sider med den samme størrelse forskellig fra nul -- husk at dividere alle led
+    \item Anvend en funktion på begge sider. Det bevarer implikationen, men det bevarer kun ækvivalensen, når funktionen er injektiv på den relevante definitionsmængde. Kvadrering kan give falske løsninger, og at tage den reciprokke værdi kræver, at siderne er forskellige fra nul.
 \end{itemize}
 \end{custombox}
 
 \begin{definition}
-Let $A$ and $B$ be nonempty sets. A function $f$ from $A$ to $B$ is an assignment of exactly one element of $B$ to each element of $A$. We write $f(a)=b$ if $b$ is the unique element of $B$ assigned by the function $f$ to the element $a$ of $A$. If $f$ is a function from $A$ to $B$, we write $f: A \rightarrow B$.
+Lad $A$ og $B$ være ikke-tomme mængder. En funktion $f$ fra $A$ til $B$ er en tilordning, der til hvert element i $A$ knytter præcis ét element i $B$. Vi skriver $f(a)=b$, hvis $b$ er det entydige element i $B$, som funktionen $f$ knytter til elementet $a$ i $A$. Hvis $f$ er en funktion fra $A$ til $B$, skriver vi $f: A \rightarrow B$.
 \end{definition}
 
 \begin{definition}
-If $f$ is a function from $A$ to $B$, we say that $A$ is the \textbf{domain} of $f$ and $B$ is the \textbf{co-domain} of $f$. If $f(a)=b$, we say that $b$ is the \textbf{image} of $a$ and $a$ is a \textbf{preimage} of $b$. The \textbf{range}, or image, of $f$ is the set of all images of elements of $A$. Also, if $f$ is a function from $A$ to $B$, we say that $f$ \textbf{maps} $A$ to $B$.    
+Hvis $f$ er en funktion fra $A$ til $B$, siger vi, at $A$ er \textbf{definitionsmængden} for $f$, og at $B$ er \textbf{dispositionsmængden} for $f$. Hvis $f(a)=b$, siger vi, at $b$ er \textbf{billedet} af $a$, og at $a$ er et \textbf{urbillede} af $b$. \textbf{Værdimængden}, eller billedet, af $f$ er mængden af alle billeder af elementer i $A$. Hvis $f$ er en funktion fra $A$ til $B$, siger vi desuden, at $f$ \textbf{afbilder} $A$ ind i $B$.    
 \end{definition}
 
-\begin{definition} {One-to-One functions (Injective)}
-A function \( f: A \rightarrow B \) is called \textbf{one-to-one} (or \textbf{injective}) if different elements in \( A \) map to different elements in \( B \). In other words, if \( f(a_1) = f(a_2) \), then \( a_1 = a_2 \). This property ensures that no two distinct elements in \( A \) are mapped to the same element in \( B \).     
+\begin{definition} {Injektive funktioner}
+En funktion \( f: A \rightarrow B \) kaldes \textbf{injektiv} (på engelsk \textbf{one-to-one}), hvis forskellige elementer i \( A \) afbildes over i forskellige elementer i \( B \). Med andre ord: Hvis \( f(a_1) = f(a_2) \), så er \( a_1 = a_2 \). Denne egenskab sikrer, at to forskellige elementer i \( A \) aldrig afbildes over i det samme element i \( B \).     
 \end{definition}
 
-\begin{definition}{Onto Functions (Surjective)}
-A function \( f: A \rightarrow B \) is called \textbf{onto} (or \textbf{surjective}) if every element in \( B \) is the image of at least one element in \( A \). In other words, for every \( b \in B \), there exists at least one \( a \in A \) such that \( f(a) = b \). This property ensures that the function ``covers'' the entire set \( B \).
+\begin{definition}{Surjektive funktioner}
+En funktion \( f: A \rightarrow B \) kaldes \textbf{surjektiv} (på engelsk \textbf{onto}), hvis ethvert element i \( B \) er billedet af mindst ét element i \( A \). Med andre ord findes der for ethvert \( b \in B \) mindst ét \( a \in A \), så \( f(a) = b \). Denne egenskab sikrer, at funktionen »dækker« hele mængden \( B \).
 \end{definition}
 
-\begin{definition}{Inverse Functions}
-Let $f$ be a one-to-one correspondence from the set $A$ to the set $B$. The inverse function of $f$ is the function that assigns to an element $b$ belonging to $B$ the unique element $a$ in $A$ such that $f(a)=b$. The inverse function of $f$ is denoted by $f^{-1}$. Hence, $f^{-1}(b)=a$ when $f(a)=b$.    
+\begin{definition}{Inverse funktioner}
+Lad $f$ være en bijektion fra mængden $A$ til mængden $B$. Den inverse funktion til $f$ er den funktion, der til et element $b$ i $B$ knytter det entydige element $a$ i $A$, for hvilket $f(a)=b$. Den inverse funktion til $f$ betegnes $f^{-1}$. Altså er $f^{-1}(b)=a$, når $f(a)=b$.    
 \end{definition}
 
 \begin{definition}
     
 
-Let \( f: B \rightarrow C \) and \( g: A \rightarrow B \) be two functions. The \textbf{composite function} of \( f \) and \( g \), denoted by \( f \circ g \), is a function from \( A \) to \( C \) defined by
+Lad \( f: B \rightarrow C \) og \( g: A \rightarrow B \) være to funktioner. Den \textbf{sammensatte funktion} af \( f \) og \( g \), betegnet \( f \circ g \), er en funktion fra \( A \) til \( C \), der er defineret ved
 
 \[
 (f \circ g)(x) = f(g(x)),
 \]
 
-for every \( x \in A \).
+for ethvert \( x \in A \).
 
 \end{definition}
 
-\begin{definition}{Special Exponential Functions}
+\begin{definition}{Særlige eksponentialfunktioner}
 
 \begin{align*}
-y &= a \cdot 10^{bx} \hspace{1cm} \text{base-10 exponential function} \\
-y &= a \cdot e^{bx}  \hspace{1.2cm} \text{natural (base-}e\text{) exponential function,}
+y &= a \cdot 10^{bx} \hspace{1cm} \text{eksponentialfunktion med grundtal 10} \\
+y &= a \cdot e^{bx}  \hspace{1.2cm} \text{naturlig eksponentialfunktion (grundtal }e\text{),}
 \end{align*}
 
-where $a$ and $b$ are constants and the domain is all real numbers.
+hvor $a$ og $b$ er konstanter, og definitionsmængden er alle reelle tal.
     
 \end{definition}
 
-\begin{definition}{Base-10 Logarithms}
+\begin{definition}{Titalslogaritmer}
 
 \[
 \log x=y \iff 10^y=x, \qquad x>0
 \]
 
-\textit{Verbally}: $\log x$ is the exponent in the power of 10 that gives $x$   
+\textit{Med ord}: $\log x$ er den eksponent i potensen af 10, der giver $x$   
 \end{definition}
 
-\begin{custombox}{Properties of base-10 logarithms}
-The following identities require $x>0$ and $y>0$:
+\begin{custombox}{Regneregler for titalslogaritmer}
+Følgende identiteter kræver $x>0$ og $y>0$:
 \begin{itemize}
-    \item Log of a Product:
+    \item Logaritmen til et produkt:
     
     \[
     \log x y=\log x+\log y
     \]
     
-    \textit{Verbally}: The $\log$ of a product equals the sum of the logs of the factors.
+    \textit{Med ord}: $\log$ til et produkt er lig med summen af logaritmerne til faktorerne.
     \vspace{0.2cm}
-    \item Log of a Quotient:
+    \item Logaritmen til en kvotient:
     
     \[
     \log \frac{x}{y}=\log x-\log y
     \]
     \vspace{0.1cm}
-    \textit{Verbally}: The $\log$ of a quotient equals the log of the numerator minus the $\log$ of the denominator.
+    \textit{Med ord}: $\log$ til en kvotient er lig med logaritmen til tælleren minus $\log$ til nævneren.
     \vspace{0.2cm}
-    \item Log of a Power:
+    \item Logaritmen til en potens:
     \[
     \log x^y=y \log x
     \]
-    \textit{Verbally}: The $\log$ of a power equals the exponent times the log of the base.
+    \textit{Med ord}: $\log$ til en potens er lig med eksponenten gange logaritmen til grundtallet.
 \end{itemize}
 
    
 \end{custombox}
 
-\begin{custombox}{The most important thing to remember about logarithms is this}
-    \textbf{A logarithm is an exponent.}
+\begin{custombox}{Det vigtigste at huske om logaritmer er dette}
+    \textbf{En logaritme er en eksponent.}
 \end{custombox}
 
-\begin{definition}{Logarithm with Any Base}
-\textit{Algebraically}:
+\begin{definition}{Logaritme med vilkårligt grundtal}
+\textit{Algebraisk}:
 
-\hspace{1cm}$\log _b x=y$ if and only if $b^y=x, \quad$ where $b>0, b \neq 1$, and $x>0$
+\hspace{1cm}$\log _b x=y$ hvis og kun hvis $b^y=x, \quad$ hvor $b>0, b \neq 1$, og $x>0$
 
 \vspace{0.3cm}
 
-\textit{Verbally}:
+\textit{Med ord}:
 
-\hspace{1cm} $\log _b x=y$ means that $y$ is the exponent of $b$ that gives $x$ as the answer.
+\hspace{1cm} $\log _b x=y$ betyder, at $y$ er den eksponent til $b$, der giver $x$ som resultat.
     
 \end{definition}
 
-\begin{definition}{Common Logarithm and Natural Logarithm}
-\hspace{1cm} \textit{Common}: The symbol $\log x$ means $\log _{10} x$.
+\begin{definition}{Titalslogaritme og naturlig logaritme}
+\hspace{1cm} \textit{Titalslogaritme}: Symbolet $\log x$ betyder $\log _{10} x$.
 
-\hspace{1cm}  \textit{Natural}: \hspace{0.2cm}The symbol $\ln x$ means $\log _e x$, where $e$ is a constant equal to $2.71828182845 \ldots$
+\hspace{1cm}  \textit{Naturlig}: \hspace{0.2cm}Symbolet $\ln x$ betyder $\log _e x$, hvor $e$ er en konstant lig med $2.71828182845 \ldots$
 \end{definition}
 
-\begin{custombox}{The Change-of-Base Property of Logarithms}
+\begin{custombox}{Reglen for basisskift for logaritmer}
 
 \begin{equation*}
-\log _a x=\frac{\log_b x}{\log_b a} \quad \text { or } \quad \log_a x=\frac{1}{\log_b a}\left(\log_b x\right)
+\log _a x=\frac{\log_b x}{\log_b a} \quad \text { eller } \quad \log_a x=\frac{1}{\log_b a}\left(\log_b x\right)
 \end{equation*}
-where $a,b,x>0$ and $a\neq1$, $b\neq1$.
+hvor $a,b,x>0$ og $a\neq1$, $b\neq1$.
     
 \end{custombox}
 
-\begin{custombox}{Properties of Logarithms}
+\begin{custombox}{Logaritmeregneregler}
 \setlength{\leftskip}{1cm}  % Reset the text indent
 \setlength{\rightskip}{1cm} % Reset the right indent
-Assume throughout that the logarithm bases are positive and not equal to 1, and that all logarithm arguments are positive.
-The Logarithm of a Power:
+Vi antager overalt, at logaritmernes grundtal er positive og forskellige fra 1, og at alle logaritmernes argumenter er positive.
+Logaritmen til en potens:
 $$
 \log _b x^y=y \log _b x
 $$
 
-\textit{Verbally}: The logarithm of a power equals the product of the exponent and the logarithm of the base.
+\textit{Med ord}: Logaritmen til en potens er lig med produktet af eksponenten og logaritmen til grundtallet.
 \vspace{0.5cm}
-The Logarithm of a Product:
+Logaritmen til et produkt:
 $$
 \log _b(x y)=\log _b x+\log _b y
 $$
-\textit{Verbally}: The logarithm of a product equals the sum of the logarithms of the factors.
+\textit{Med ord}: Logaritmen til et produkt er lig med summen af logaritmerne til faktorerne.
 \vspace{0.5cm}
-The Logarithm of a Quotient:
+Logaritmen til en kvotient:
 $$
 \log _b \frac{x}{y}=\log _b x-\log _b y
 $$
 
-\textit{Verbally}: The logarithm of a quotient equals the logarithm of the numerator minus the logarithm of the denominator.
+\textit{Med ord}: Logaritmen til en kvotient er lig med logaritmen til tælleren minus logaritmen til nævneren.
 
 \setlength{\leftskip}{0cm}  % Reset the text indent
 \setlength{\rightskip}{0cm} % Reset the right indent
@@ -232,13 +232,13 @@ $$
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Numeral system} & \textbf{Symbols} & \textbf{Base} & \textbf{Additional information} \\ \hline
-\textbf{Decimal} & 0-9 & 10 & - \\ \hline
-\textbf{Binary} & 0, 1 & 2 & - \\ \hline
-\textbf{Hexadecimal} & 0-9, A-F & 16 & $\mathrm{A} \equiv 10, \mathrm{B} \equiv 11, \mathrm{C} \equiv 12,$ $\mathrm{D} \equiv 13, \mathrm{E} \equiv 14, \mathrm{F} \equiv 15$ \\ \hline
-\textbf{Octal} & 0-7 & 8 & - \\ \hline
+\textbf{Talsystem} & \textbf{Symboler} & \textbf{Grundtal} & \textbf{Yderligere information} \\ \hline
+\textbf{Decimalt} & 0-9 & 10 & - \\ \hline
+\textbf{Binært} & 0, 1 & 2 & - \\ \hline
+\textbf{Hexadecimalt} & 0-9, A-F & 16 & $\mathrm{A} \equiv 10, \mathrm{B} \equiv 11, \mathrm{C} \equiv 12,$ $\mathrm{D} \equiv 13, \mathrm{E} \equiv 14, \mathrm{F} \equiv 15$ \\ \hline
+\textbf{Oktalt} & 0-7 & 8 & - \\ \hline
 \end{tabular}
-\caption{Summary of Common Numeral Systems}
+\caption{Oversigt over almindelige talsystemer}
 \end{table}
 
 \begin{table}[!ht]
@@ -246,7 +246,7 @@ $$
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|c c c c c c c c|}
 \hline 
-\multirow{2}{*}{Decimal number} & & \multirow{2}{*}{In powers of 2} & \multicolumn{4}{c}{Power of 2} & \multirow{2}{*}{Binary number} \\
+\multirow{2}{*}{Decimalt tal} & & \multirow{2}{*}{Som potenser af 2} & \multicolumn{4}{c}{Potens af 2} & \multirow{2}{*}{Binært tal} \\
 & & & 3 & 2 & 1 & 0 & \\ \hline
 8 & $=$ & $2^3$ & 1 & 0 & 0 & 0 & 1000 \\
 7 & $=$ & $2^2 + 2^1 + 2^0$ & 0 & 1 & 1 & 1 & 111 \\
@@ -257,29 +257,29 @@ $$
 2 & $=$ & $2^1$ & 0 & 0 & 1 & 0 & 10 \\
 1 & $=$ & $2^0$ & 0 & 0 & 0 & 1 & 1 \\ \hline
 \end{tabular}
-\caption{Decimal Numbers in Binary Representation}
+\caption{Decimale tal i binær repræsentation}
 \end{table}
 
-\begin{proposition}{Binary Addition Rules}
+\begin{proposition}{Regler for binær addition}
 \[
 0 + 0 = 0, \quad 0 + 1 = 1, \quad 1 + 0 = 1, \quad 1 + 1 = 10
 \]
 \end{proposition}
 
-\begin{proposition}{Binary Multiplication Rules}
+\begin{proposition}{Regler for binær multiplikation}
 \[
 \begin{aligned}
 & 0 \times 0=0 \\
 & 0 \times 1=0 \\
 & 1 \times 0=0 \\
 & 1 \times 1=1 \\
-& 1 \times 10_2 = 10_2 \quad \left( \text{multiplying by base } 10_2 \text{ adds a 0 to the end} \right)
+& 1 \times 10_2 = 10_2 \quad \left( \text{multiplikation med grundtallet } 10_2 \text{ tilføjer et 0 til sidst} \right)
 \end{aligned}
 \]
 \end{proposition}
 
-\begin{proposition}{XOR Operation}
-XOR produces a 1 if the two bits being compared are different and a 0 if they are the same:
+\begin{proposition}{XOR-operationen}
+XOR giver 1, hvis de to bit, der sammenlignes, er forskellige, og 0, hvis de er ens:
 \[
 0 \oplus 0 = 0, \quad 0 \oplus 1 = 1, \quad 1 \oplus 0 = 1, \quad 1 \oplus 1 = 0
 \]
@@ -306,7 +306,7 @@ XOR produces a 1 if the two bits being compared are different and a 0 if they ar
     ([shift={(270:1.5cm)}]6,0);
 
 \end{tikzpicture}
-\caption{A function \(f\) mapping an element \(a\) from set \(A\) to an element \(b=f(a)\) in set \(B\).}
+\caption{En funktion \(f\), der afbilder et element \(a\) fra mængden \(A\) over i et element \(b=f(a)\) i mængden \(B\).}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -336,7 +336,7 @@ XOR produces a 1 if the two bits being compared are different and a 0 if they ar
 \draw[->] (5.4,-1.8) to[bend left=20] node[midway, below] {$f^{-1}$} (0.6,-1.8);
 
 \end{tikzpicture}
-\caption{The function $f^{-1}$ is the inverse of function $f$.}
+\caption{Funktionen $f^{-1}$ er den inverse til funktionen $f$.}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -371,163 +371,163 @@ XOR produces a 1 if the two bits being compared are different and a 0 if they ar
 \draw[->, bend right=20] ([shift={(270:1.5cm)}]0,0) to node[midway, below] {$f(g(a))$} ([shift={(270:0.7cm)}]10,0);
 
 \end{tikzpicture}
-\caption{The composition of functions \(f\) and \(g\), denoted \(f \circ g\), is the function that results from applying \(g\) and then \(f\).}
+\caption{Sammensætningen af funktionerne \(f\) og \(g\), betegnet \(f \circ g\), er den funktion, der fremkommer ved først at anvende \(g\) og derefter \(f\).}
 \end{figure}
 
 
 % ---------- 03
-\begin{definition}[Subset]
-    A set $A$ is a \textbf{subset} of a set $B$ if every element of $A$ is also an element of $B$. We write this as $A \subseteq B$.
+\begin{definition}[Delmængde]
+    En mængde $A$ er en \textbf{delmængde} af en mængde $B$, hvis ethvert element i $A$ også er et element i $B$. Det skriver vi som $A \subseteq B$.
 \end{definition}
 
-\begin{definition}[Proper Subset]
-    A set $A$ is a \textbf{proper subset} of a set $B$ if $A \subseteq B$ and $A \neq B$. This means that $B$ must contain at least one element that is not in $A$. We write this as $A \subset B$.
+\begin{definition}[Ægte delmængde]
+    En mængde $A$ er en \textbf{ægte delmængde} af en mængde $B$, hvis $A \subseteq B$ og $A \neq B$. Det betyder, at $B$ skal indeholde mindst ét element, som ikke ligger i $A$. Det skriver vi som $A \subset B$.
 \end{definition}
 
-\begin{definition}[Universal Set]
-    The \textbf{universal set}, denoted by $U$, is the set of all possible elements under consideration in a given context. All other sets in that context are considered subsets of the universal set.
+\begin{definition}[Universalmængde]
+    \textbf{Universalmængden}, betegnet $U$, er mængden af alle mulige elementer, der betragtes i en given sammenhæng. Alle andre mængder i den sammenhæng betragtes som delmængder af universalmængden.
 \end{definition}
 
-\begin{definition}[Empty Set]
-    The \textbf{empty set} (or \textbf{null set}) is the unique set containing no elements. It is denoted by $\emptyset$ or by $\{\}$.
+\begin{definition}[Den tomme mængde]
+    \textbf{Den tomme mængde} (eller \textbf{nulmængden}) er den entydige mængde, der ikke indeholder nogen elementer. Den betegnes $\emptyset$ eller $\{\}$.
 \end{definition}
 
-\begin{definition}[Disjoint Sets]
-    Two sets, $A$ and $B$, are \textbf{disjoint} if they have no elements in common. In other words, their intersection is the empty set: $A \cap B = \emptyset$.
+\begin{definition}[Disjunkte mængder]
+    To mængder $A$ og $B$ er \textbf{disjunkte}, hvis de ikke har nogen elementer til fælles. Med andre ord er deres fællesmængde den tomme mængde: $A \cap B = \emptyset$.
 \end{definition}
 
-\begin{definition}[Cardinality]
-    The \textbf{cardinality} of a finite set $A$, denoted $|A|$, is the number of distinct elements in the set.
+\begin{definition}[Kardinalitet]
+    \textbf{Kardinaliteten} af en endelig mængde $A$, betegnet $|A|$, er antallet af forskellige elementer i mængden.
 \end{definition}
 
-\begin{definition}[Power Set]
-    The \textbf{power set} of a set $A$, denoted $\mathcal{P}(A)$, is the set of all subsets of $A$. The elements of the power set are themselves sets.
+\begin{definition}[Potensmængde]
+    \textbf{Potensmængden} af en mængde $A$, betegnet $\mathcal{P}(A)$, er mængden af alle delmængder af $A$. Potensmængdens elementer er altså selv mængder.
 \end{definition}
 
-\begin{custombox}{The Duality of Sets and Boolean Algebra}
-    The relationship between set theory and Boolean algebra is so direct that they are considered "dually isomorphic." This means they are structurally identical. Understanding one is understanding the other. The key translations are:
+\begin{custombox}{Dualiteten mellem mængdelære og boolesk algebra}
+    Sammenhængen mellem mængdelære og boolesk algebra er så direkte, at de betragtes som »dualt isomorfe«. Det betyder, at de er strukturelt identiske. At forstå den ene er at forstå den anden. De vigtigste oversættelser er:
     \begin{center}
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{lcl}
-        \textbf{Set Theory} & & \textbf{Boolean Algebra / Logic} \\
+        \textbf{Mængdelære} & & \textbf{Boolesk algebra / logik} \\
         \hline
-        Union ($\cup$) & $\iff$ & Boolean Sum ($+$) or \texttt{OR} \\
-        Intersection ($\cap$) & $\iff$ & Boolean Product ($\cdot$) or \texttt{AND} \\
-        Complement ($A^c$) & $\iff$ & Complementation ($\overline{x}$) or \texttt{NOT} \\
-        The Universal Set ($U$) & $\iff$ & True (1) \\
-        The Empty Set ($\emptyset$) & $\iff$ & False (0) \\
+        Foreningsmængde ($\cup$) & $\iff$ & Boolesk sum ($+$) eller \texttt{OR} \\
+        Fællesmængde ($\cap$) & $\iff$ & Boolesk produkt ($\cdot$) eller \texttt{AND} \\
+        Komplement ($A^c$) & $\iff$ & Komplementering ($\overline{x}$) eller \texttt{NOT} \\
+        Universalmængden ($U$) & $\iff$ & Sand (1) \\
+        Den tomme mængde ($\emptyset$) & $\iff$ & Falsk (0) \\
     \end{tabular}
     \end{center}
 \end{custombox}
 
-\begin{definition}[Intersection]
-    The \textbf{intersection} of sets $A$ and $B$, denoted $A \cap B$, is the set containing all elements that are in both $A$ and $B$.
-    \[ A \cap B = \{ x \mid x \in A \text{ and } x \in B \} \]
+\begin{definition}[Fællesmængde]
+    \textbf{Fællesmængden} af mængderne $A$ og $B$, betegnet $A \cap B$, er mængden af alle elementer, der ligger i både $A$ og $B$.
+    \[ A \cap B = \{ x \mid x \in A \text{ og } x \in B \} \]
 \end{definition}
 
-\begin{definition}[Union]
-    The \textbf{union} of sets $A$ and $B$, denoted $A \cup B$, is the set containing all elements that are in $A$, or in $B$, or in both.
-    \[ A \cup B = \{ x \mid x \in A \text{ or } x \in B \} \]
+\begin{definition}[Foreningsmængde]
+    \textbf{Foreningsmængden} af mængderne $A$ og $B$, betegnet $A \cup B$, er mængden af alle elementer, der ligger i $A$, i $B$ eller i begge.
+    \[ A \cup B = \{ x \mid x \in A \text{ eller } x \in B \} \]
 \end{definition}
 
-\begin{definition}[Set Difference]
-    The \textbf{difference} of set $A$ and set $B$, denoted $A \setminus B$, is the set containing all elements that are in $A$ but not in $B$.
-    \[ A \setminus B = \{ x \mid x \in A \text{ and } x \notin B \} \]
+\begin{definition}[Mængdedifferens]
+    \textbf{Differensen} mellem mængden $A$ og mængden $B$, betegnet $A \setminus B$, er mængden af alle elementer, der ligger i $A$, men ikke i $B$.
+    \[ A \setminus B = \{ x \mid x \in A \text{ og } x \notin B \} \]
 \end{definition}
 
-\begin{definition}[Symmetric Difference]
-    The \textbf{symmetric difference} of sets $A$ and $B$, denoted $A \oplus B$, is the set of elements which are in either of the sets, but not in their intersection.
+\begin{definition}[Symmetrisk differens]
+    Den \textbf{symmetriske differens} af mængderne $A$ og $B$, betegnet $A \oplus B$, er mængden af de elementer, der ligger i en af mængderne, men ikke i deres fællesmængde.
     \[ A \oplus B = (A \cup B) \setminus (A \cap B) \]
 \end{definition}
 
-\begin{definition}[Complement]
-    The \textbf{complement} of a set $A$, denoted $A^c$, is the set of all elements in the universal set $U$ that are not in $A$.
+\begin{definition}[Komplement]
+    \textbf{Komplementet} til en mængde $A$, betegnet $A^c$, er mængden af alle elementer i universalmængden $U$, som ikke ligger i $A$.
     \[ A^c = U \setminus A \]
 \end{definition}
 
-\begin{definition}[Cartesian Product]
-    The \textbf{Cartesian product} of sets $A$ and $B$, denoted $A \times B$, is the set of all possible ordered pairs $(a, b)$, where the first element $a$ is from $A$ and the second element $b$ is from $B$.
-    \[ A \times B = \{ (a, b) \mid a \in A \text{ and } b \in B \} \]
+\begin{definition}[Kartesisk produkt]
+    Det \textbf{kartesiske produkt} af mængderne $A$ og $B$, betegnet $A \times B$, er mængden af alle mulige ordnede par $(a, b)$, hvor det første element $a$ er fra $A$, og det andet element $b$ er fra $B$.
+    \[ A \times B = \{ (a, b) \mid a \in A \text{ og } b \in B \} \]
 \end{definition}
 
-\begin{custombox}{Set Operations as Bitwise Operations}
-    Let the bit strings for sets $A$ and $B$ be $s_A$ and $s_B$.
+\begin{custombox}{Mængdeoperationer som bitvise operationer}
+    Lad bitstrengene for mængderne $A$ og $B$ være $s_A$ og $s_B$.
     \begin{itemize}
-        \item \textbf{Union ($A \cup B$)} corresponds to a bitwise \textbf{\texttt{OR}} operation.
-        \item \textbf{Intersection ($A \cap B$)} corresponds to a bitwise \textbf{\texttt{AND}} operation.
-        \item \textbf{Complement ($A^c$)} corresponds to a bitwise \textbf{\texttt{NOT}} (one's complement) operation.
-        \item \textbf{Symmetric Difference ($A \oplus B$)} corresponds to a bitwise \textbf{\texttt{XOR}} operation.
+        \item \textbf{Foreningsmængde ($A \cup B$)} svarer til en bitvis \textbf{\texttt{OR}}-operation.
+        \item \textbf{Fællesmængde ($A \cap B$)} svarer til en bitvis \textbf{\texttt{AND}}-operation.
+        \item \textbf{Komplement ($A^c$)} svarer til en bitvis \textbf{\texttt{NOT}}-operation (enerkomplement).
+        \item \textbf{Symmetrisk differens ($A \oplus B$)} svarer til en bitvis \textbf{\texttt{XOR}}-operation.
     \end{itemize}
 \end{custombox}
 
 % ---------- 04 Combinatorics & Probability ----------
-\begin{definition}{Random Experiment}
-    A random experiment is one that can give different results, even if you do everything the same each time.
+\begin{definition}{Stokastisk eksperiment}
+    Et stokastisk eksperiment er et eksperiment, der kan give forskellige resultater, selv om man gør alting på samme måde hver gang.
 \end{definition}
 
-\begin{definition}{Sample Spaces, Outcomes, and Events}
-    \textbf{Sample Space:} The set of all possible outcomes of a random experiment is called the sample space, denoted by \( S \). Outcomes can be discrete or continuous, depending on the nature of the experiment.
+\begin{definition}{Udfaldsrum, udfald og hændelser}
+    \textbf{Udfaldsrum:} Mængden af alle mulige udfald af et stokastisk eksperiment kaldes udfaldsrummet og betegnes \( S \). Udfaldene kan være diskrete eller kontinuerte afhængigt af eksperimentets natur.
     
-    \textbf{Outcome:} A single possible result of a random experiment.
+    \textbf{Udfald:} Et enkelt muligt resultat af et stokastisk eksperiment.
     
-    \textbf{Event:} Any subset of the sample space, which may consist of one or more outcomes.
+    \textbf{Hændelse:} En vilkårlig delmængde af udfaldsrummet, som kan bestå af et eller flere udfald.
 \end{definition}
 
-\begin{theorem}[Multiplication Rule]
-    Let an operation be described as a sequence of $k$ steps. Assume the following conditions:
+\begin{theorem}[Multiplikationsreglen]
+    Lad en operation være beskrevet som en følge af $k$ trin. Antag, at følgende betingelser er opfyldt:
     
     \begin{itemize}
-        \item There are $n_1$ ways to complete step 1.
-        \item There are $n_2$ ways to complete step 2 for each way of completing step 1.
-        \item There are $n_3$ ways to complete step 3 for each way of completing step 2, and so on.
+        \item Der er $n_1$ måder at udføre trin 1 på.
+        \item Der er $n_2$ måder at udføre trin 2 på for hver måde at udføre trin 1 på.
+        \item Der er $n_3$ måder at udføre trin 3 på for hver måde at udføre trin 2 på, og så videre.
     \end{itemize}
     
-    Then, the total number of ways to complete the entire operation is given by:
+    Så er det samlede antal måder at udføre hele operationen på givet ved:
     
     \[
     n_1 \times n_2 \times \cdots \times n_k.
     \]
 \end{theorem}
 
-\begin{definition}[Counting with and without Replacement]
-    When counting the number of ways to select objects from a set, two common scenarios are:
+\begin{definition}[Optælling med og uden tilbagelægning]
+    Når vi tæller antallet af måder at udvælge objekter fra en mængde på, er der to almindelige scenarier:
 
     \begin{itemize}
-        \item \textbf{With Replacement}: An object can be selected more than once.
-        \item \textbf{Without Replacement}: Once an object is selected, it cannot be chosen again.
+        \item \textbf{Med tilbagelægning}: Et objekt kan udvælges mere end én gang.
+        \item \textbf{Uden tilbagelægning}: Når et objekt er udvalgt, kan det ikke vælges igen.
     \end{itemize}
 \end{definition}
 
-\begin{definition}[Permutation and Combination]
+\begin{definition}[Permutation og kombination]
     \begin{itemize}
-        \item \textbf{Permutation (order matters)}: Different sequences are counted as distinct outcomes, leading to a higher count.
-        \item \textbf{Combination (order does not matter)}: Sequences are treated as identical, resulting in a lower count.
+        \item \textbf{Permutation (rækkefølgen har betydning)}: Forskellige rækkefølger tælles som forskellige udfald, hvilket giver et større antal.
+        \item \textbf{Kombination (rækkefølgen har ikke betydning)}: Rækkefølger behandles som ens, hvilket giver et mindre antal.
     \end{itemize}
 \end{definition}
 
-\begin{proposition}[Permutations of \(n\) Distinct Objects]
-    The number of ordered arrangements (permutations) of $n$ distinct objects is
+\begin{proposition}[Permutationer af \(n\) forskellige objekter]
+    Antallet af ordnede arrangementer (permutationer) af $n$ forskellige objekter er
     \[
     n! = n \cdot (n-1) \cdot \dots \cdot 2 \cdot 1.
     \]
 \end{proposition}
 
-\begin{theorem}[Permutations of Subsets]
-    For integers $n \ge r \ge 0$, the number of ordered selections of $r$ distinct objects from $n$ distinct objects is
+\begin{theorem}[Permutationer af delmængder]
+    For heltal $n \ge r \ge 0$ er antallet af ordnede udvalg af $r$ forskellige objekter blandt $n$ forskellige objekter
     \[
     P_r^n = P(n,r) = n \cdot (n-1) \cdots (n-r+1) = \frac{n!}{(n-r)!}.
     \]
 \end{theorem}
 
-\begin{theorem}[Combinations]
-    The number of combinations of $r$ elements selected from a set of $n$ different elements is given by
+\begin{theorem}[Kombinationer]
+    Antallet af kombinationer af $r$ elementer udvalgt fra en mængde med $n$ forskellige elementer er givet ved
     \[
     C_r^n = \binom{n}{r} = \frac{n!}{r!(n-r)!}
     \]
 \end{theorem}
 
-\begin{theorem}[Binomial Theorem]
-    In algebra, the binomial coefficient is used to expand powers of binomials. According to the binomial theorem
+\begin{theorem}[Binomialsætningen]
+    I algebra bruges binomialkoefficienten til at udvikle potenser af binomier. Ifølge binomialsætningen gælder
 
 $$
 (a+b)^n=\sum_{k=0}^n\binom{n}{k} a^k b^{n-k}
@@ -535,154 +535,154 @@ $$
 
 \end{theorem}
 
-\begin{proposition}[With replacement]
-For selections from $n$ types:
+\begin{proposition}[Med tilbagelægning]
+For udvælgelser blandt $n$ typer gælder:
 \begin{itemize}
-    \item \textbf{Ordered with replacement}: $n^r$ outcomes.
-    \item \textbf{Unordered with replacement}: $\displaystyle \binom{n+r-1}{r}$ outcomes. % (stars and bars)
+    \item \textbf{Ordnet med tilbagelægning}: $n^r$ udfald.
+    \item \textbf{Uordnet med tilbagelægning}: $\displaystyle \binom{n+r-1}{r}$ udfald. % (stars and bars)
 \end{itemize}
 \end{proposition}
 
-\begin{axiom}[Axioms of Probability]
+\begin{axiom}[Sandsynlighedsregningens aksiomer]
     \begin{itemize}
-        \item \textbf{Axiom 1:} For any event \(A\), \( 0 \leq P(A) \leq 1 \).
-        \item \textbf{Axiom 2:} Probability of the sample space \(S\) is \(P(S) = 1\).
-        \item \textbf{Axiom 3:} If \(A_1, A_2, A_3, \cdots\) are disjoint events, then \(P\left(A_1 \cup A_2 \cup A_3 \cdots\right) = P\left(A_1\right) + P\left(A_2\right) + P\left(A_3\right) + \cdots\)
+        \item \textbf{Aksiom 1:} For enhver hændelse \(A\) gælder \( 0 \leq P(A) \leq 1 \).
+        \item \textbf{Aksiom 2:} Sandsynligheden for udfaldsrummet \(S\) er \(P(S) = 1\).
+        \item \textbf{Aksiom 3:} Hvis \(A_1, A_2, A_3, \cdots\) er disjunkte hændelser, så gælder \(P\left(A_1 \cup A_2 \cup A_3 \cdots\right) = P\left(A_1\right) + P\left(A_2\right) + P\left(A_3\right) + \cdots\)
     \end{itemize}
 \end{axiom}
 
-\begin{definition}[Probability of an Event]
-    A probability measure assigns a number \(P(A)\in[0,1]\) to each event \(A\) in accordance with the probability axioms. In a finite sample space whose elementary outcomes are equally likely, this reduces to
+\begin{definition}[Sandsynligheden for en hændelse]
+    Et sandsynlighedsmål tildeler et tal \(P(A)\in[0,1]\) til hver hændelse \(A\) i overensstemmelse med sandsynlighedsaksiomerne. I et endeligt udfaldsrum, hvor de elementære udfald er lige sandsynlige, reduceres dette til
     \[
-    P(A) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}}
+    P(A) = \frac{\text{Antal gunstige udfald}}{\text{Samlet antal udfald}}
     \]
 \end{definition}
 
-\begin{theorem}{Rules of Probability}
+\begin{theorem}{Regneregler for sandsynligheder}
     \begin{itemize}
-        \item \textbf{Complement Rule:} The probability of the complement of event $A$ is
+        \item \textbf{Komplementreglen:} Sandsynligheden for komplementet til hændelse $A$ er
     
         \[
         P(A^c) = 1 - P(A)
         \]
 
-        \item \textbf{Empty Set Rule:} The probability of the empty set is 0, i.e.,
+        \item \textbf{Reglen for den tomme mængde:} Sandsynligheden for den tomme mængde er 0, dvs.
         
         \[P(\emptyset) = 0\]
         
-        \item \textbf{Addition Rule:} For any two events $A$ and $B$, the probability of the union of events $A$ and $B$ is given by
+        \item \textbf{Additionsreglen:} For to vilkårlige hændelser $A$ og $B$ er sandsynligheden for foreningsmængden af hændelserne $A$ og $B$ givet ved
         \[
         P(A \cup B) = P(A) + P(B) - P(A \cap B)
         \]
 
-        \item \textbf{Difference Rule:} The probability of the difference between events $A$ and $B$ is given by
+        \item \textbf{Differensreglen:} Sandsynligheden for differensen mellem hændelserne $A$ og $B$ er givet ved
         \[
         P(A-B)=P(A)-P(A \cap B)
         \]
-        \item \textbf{Subset Rule:} If $A$ is a subset of $B$ ($A \subset B$), then
+        \item \textbf{Delmængdereglen:} Hvis $A$ er en delmængde af $B$ ($A \subset B$), så gælder
         \[P(A) \leq P(B).\]
     \end{itemize}
 \end{theorem}
 
 % ---------- 05 Conditional Probability ----------
-\begin{definition}[Conditional Probability]
-For any two events \( A \) and \( B \) with \( P(B) > 0 \), the conditional probability of \( A \) given \( B \) is defined as:
+\begin{definition}[Betinget sandsynlighed]
+For to vilkårlige hændelser \( A \) og \( B \) med \( P(B) > 0 \) er den betingede sandsynlighed for \( A \) givet \( B \) defineret som:
 \[
 P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) > 0
 \]
 \end{definition}
 
-\begin{axiom}[Axioms of Conditional Probability]
-    Fix an event $B$ with $P(B)>0$. Then $A\mapsto P(A\mid B)$ is a probability measure, so:
+\begin{axiom}[Aksiomer for betinget sandsynlighed]
+    Fastlæg en hændelse $B$ med $P(B)>0$. Så er $A\mapsto P(A\mid B)$ et sandsynlighedsmål, og derfor gælder:
     \begin{itemize}
-        \item \textbf{Axiom 1:} For any event \(A\), \( 0 \leq P(A\mid B) \leq 1 \).
-        \item \textbf{Axiom 2:} $P(S\mid B)=1$ (and consequently $P(B\mid B)=1$).
-        \item \textbf{Axiom 3:} If \(A_1, A_2, A_3, \cdots\) are disjoint events, then
+        \item \textbf{Aksiom 1:} For enhver hændelse \(A\) gælder \( 0 \leq P(A\mid B) \leq 1 \).
+        \item \textbf{Aksiom 2:} $P(S\mid B)=1$ (og dermed $P(B\mid B)=1$).
+        \item \textbf{Aksiom 3:} Hvis \(A_1, A_2, A_3, \cdots\) er disjunkte hændelser, så gælder
          
         \hspace*{2.8em}$P\left(A_1 \cup A_2 \cup A_3 \cdots \mid B\right)=P\left(A_1 \mid B\right)+P\left(A_2 \mid B\right)+P\left(A_3 \mid B\right)+\cdots$
     \end{itemize}
 \end{axiom}
 
-\begin{theorem}{Rules of Conditional Probability}
-    In the following rules, assume $P(C)>0$.
+\begin{theorem}{Regler for betinget sandsynlighed}
+    I de følgende regler antages $P(C)>0$.
     \begin{itemize}
-        \item \textbf{Complement Rule:} The probability of the complement of event $A$ given $C$ is
+        \item \textbf{Komplementreglen:} Sandsynligheden for komplementet til hændelse $A$ givet $C$ er
     
         \[
         P\left(A^c \mid C\right)=1-P(A \mid C)
         \]
 
-        \item \textbf{Empty Set Rule:} The probability of the empty set given some event $C$ is 0, i.e.,
+        \item \textbf{Reglen for den tomme mængde:} Sandsynligheden for den tomme mængde givet en hændelse $C$ er 0, dvs.
         
         \[P(\emptyset \mid C) = 0\]
         
-        \item \textbf{Addition Rule:} For any two events $A$ and $B$, the probability of the union of events $A$ and $B$ given another event $C$ is
+        \item \textbf{Additionsreglen:} For to vilkårlige hændelser $A$ og $B$ er sandsynligheden for foreningsmængden af hændelserne $A$ og $B$ givet en anden hændelse $C$
         \[
         P(A \cup B \mid C)=P(A \mid C)+P(B \mid C)-P(A \cap B \mid C)
         \]
 
-        \item \textbf{Difference Rule:} The probability of the difference between events $A$ and $B$ given another event $C$ is
+        \item \textbf{Differensreglen:} Sandsynligheden for differensen mellem hændelserne $A$ og $B$ givet en anden hændelse $C$ er
         \[
             P(A-B \mid C)=P(A \mid C)-P(A \cap B \mid C)
         \]
-        \item \textbf{Subset Rule:} If $A \subset B$, then
+        \item \textbf{Delmængdereglen:} Hvis $A \subset B$, så gælder
         \[
         P(A \mid C) \leq P(B \mid C)
         \]
     \end{itemize}
 \end{theorem}
 
-\begin{theorem}[Multiplication Rule]
-    If $P(A)>0$, then $P(A\cap B)=P(A)P(B\mid A)$. If $P(B)>0$, then $P(A\cap B)=P(B)P(A\mid B)$. Hence, when both probabilities are positive:
+\begin{theorem}[Multiplikationsreglen]
+    Hvis $P(A)>0$, så er $P(A\cap B)=P(A)P(B\mid A)$. Hvis $P(B)>0$, så er $P(A\cap B)=P(B)P(A\mid B)$. Når begge sandsynligheder er positive, gælder derfor:
     \[
     P(A \cap B) = P(A) P(B \mid A) = P(B) P(A \mid B)
     \]
 \end{theorem}
 
-\begin{theorem}[Law of Total Probability]
-For any event \(A\) and event \(B\) with $0<P(B)<1$, the partition $B,B^c$ gives:
+\begin{theorem}[Loven om total sandsynlighed]
+For en vilkårlig hændelse \(A\) og en hændelse \(B\) med $0<P(B)<1$ giver partitionen $B,B^c$:
     \begin{align*}
     P(A) &= P(A \cap B) + P(A \cap B^c) \\
     &= P(B) P(A \mid B) + P(B^c) P(A \mid B^c)
     \end{align*}
 
-    More generally, for any finite partition \(B_1,\ldots,B_n\) of $S$ with $P(B_i)>0$ for every $i$:
+    Mere generelt gælder for enhver endelig partition \(B_1,\ldots,B_n\) af $S$ med $P(B_i)>0$ for alle $i$:
     \begin{align*}
     P(A) &= \sum_{i=1}^{n} P(A \mid B_i) P(B_i)
     \end{align*}
 \end{theorem}
 
-\begin{definition}[Independence]
-    Events \(A\) and \(B\) are independent precisely when
+\begin{definition}[Uafhængighed]
+    Hændelserne \(A\) og \(B\) er uafhængige, netop når
     \begin{align*}
         P(A \cap B) &= P(A)P(B).
     \end{align*}
-    If $P(B)>0$, this is equivalent to $P(A\mid B)=P(A)$; if $P(A)>0$, it is equivalent to $P(B\mid A)=P(B)$.
+    Hvis $P(B)>0$, er dette ensbetydende med $P(A\mid B)=P(A)$; hvis $P(A)>0$, er det ensbetydende med $P(B\mid A)=P(B)$.
 \end{definition}
 
-\begin{theorem}[Independence and DeMorgan's Law]
-        If \( A_1, A_2, \ldots, A_n \) are mutually independent, then
+\begin{theorem}[Uafhængighed og De Morgans lov]
+        Hvis \( A_1, A_2, \ldots, A_n \) er indbyrdes uafhængige, så gælder
         \begin{align*}
         &P\left(A_1 \cup A_2 \cup \cdots \cup A_n\right)=1-\left(1-P\left(A_1\right)\right)\left(1-P\left(A_2\right)\right) \cdots\left(1-P\left(A_n\right)\right)
         \end{align*}
 \end{theorem}
 
-\begin{definition}[Independence of Multiple Events]
-    Events \(A_1,\ldots,A_k\) are \emph{mutually independent} if, for every subset of at least two distinct indices $J\subseteq\{1,\ldots,k\}$,
+\begin{definition}[Uafhængighed af flere hændelser]
+    Hændelserne \(A_1,\ldots,A_k\) er \emph{indbyrdes uafhængige}, hvis der for enhver delmængde $J\subseteq\{1,\ldots,k\}$ af mindst to forskellige indeks gælder, at
     \[
       P\!\left(\bigcap_{j\in J}A_j\right)=\prod_{j\in J}P(A_j).
     \]
-    Checking only the intersection of all $k$ events is not sufficient.
+    Det er ikke tilstrækkeligt kun at kontrollere fællesmængden af alle $k$ hændelser.
 \end{definition}
 
-\begin{theorem}[Bayes' Theorem]
-    For events $A$ and $B$ with $P(A)>0$, Bayes' theorem gives the first equality below. The expanded denominator also assumes $0<P(B)<1$ so both displayed conditional probabilities are defined:
+\begin{theorem}[Bayes' sætning]
+    For hændelser $A$ og $B$ med $P(A)>0$ giver Bayes' sætning den første lighed nedenfor. Den udvidede nævner forudsætter desuden $0<P(B)<1$, så begge de viste betingede sandsynligheder er definerede:
     \begin{align*}
     P(B \mid A) = \frac{P(A \mid B) \cdot P(B)}{P(A)}
      = \frac{P(A \mid B) \cdot P(B)}{P(A \mid B) \cdot P(B) + P(A \mid B^c) \cdot P(B^c)}
     \end{align*}
 
-    If $B_1,B_2,\ldots$ form a finite or countable partition of $S$ with $P(B_i)>0$ for all $i$, and $P(A)>0$, then
+    Hvis $B_1,B_2,\ldots$ udgør en endelig eller tællelig partition af $S$ med $P(B_i)>0$ for alle $i$, og $P(A)>0$, så gælder
 
     \begin{align*}
     P\left(B_j \mid A\right) = \frac{P\left(A \mid B_j\right) \cdot P\left(B_j\right)}{\sum_i P\left(A \mid B_i\right) \cdot P\left(B_i\right)}
@@ -692,37 +692,37 @@ For any event \(A\) and event \(B\) with $0<P(B)<1$, the partition $B,B^c$ gives
 % ---------- 06 Descriptive Statistics ----------
 
 \begin{definition}[Population]
-A \textbf{population} is the complete set of all possible observations or measurements of interest in a particular study. In software engineering contexts, this might include all possible execution times of an algorithm, all user sessions on a website, or all lines of code in a project.
+En \textbf{population} er den fuldstændige mængde af alle mulige observationer eller målinger, der er af interesse i en bestemt undersøgelse. I softwareudvikling kan det fx være alle mulige køretider for en algoritme, alle brugersessioner på et websted eller alle kodelinjer i et projekt.
 \end{definition}
 
-\begin{definition}[Sample]
-A \textbf{sample} is a subset of the population that we actually observe or measure. Due to practical constraints, we often work with samples rather than entire populations.
+\begin{definition}[Stikprøve]
+En \textbf{stikprøve} er en delmængde af populationen, som vi faktisk observerer eller måler. På grund af praktiske begrænsninger arbejder vi ofte med stikprøver frem for hele populationer.
 \end{definition}
 
-\begin{definition}[Qualitative Data]
-\textbf{Qualitative data} (also called categorical data) consists of non-numerical information that can be categorized. Examples include programming languages used in a project, user satisfaction ratings (satisfied/neutral/dissatisfied), or bug severity levels (critical/high/medium/low).
+\begin{definition}[Kvalitative data]
+\textbf{Kvalitative data} (også kaldet kategoriske data) består af ikke-numerisk information, der kan inddeles i kategorier. Eksempler er de programmeringssprog, der bruges i et projekt, brugernes vurdering af deres tilfredshed (tilfreds/neutral/utilfreds) eller fejlenes alvorlighedsgrad (kritisk/høj/middel/lav).
 \end{definition}
 
-\begin{definition}[Quantitative Data]
-\textbf{Quantitative data} consists of numerical measurements that can be ordered and subjected to mathematical operations. This can be further divided into:
+\begin{definition}[Kvantitative data]
+\textbf{Kvantitative data} består af numeriske målinger, der kan ordnes, og som man kan udføre matematiske operationer på. De kan yderligere opdeles i:
 \begin{itemize}
-    \item \textbf{Discrete}: Countable values (number of bugs, lines of code, user sessions)
-    \item \textbf{Continuous}: Measurable values that can take any value within a range (response times, memory usage, CPU utilization)
+    \item \textbf{Diskrete}: Tællelige værdier (antal fejl, kodelinjer, brugersessioner)
+    \item \textbf{Kontinuerte}: Målbare værdier, der kan antage enhver værdi inden for et interval (svartider, hukommelsesforbrug, CPU-udnyttelse)
 \end{itemize}
 \end{definition}
 
-\begin{definition}[Frequency Distribution]
-A \textbf{frequency distribution} is a table that shows the frequency (count) of each value or class of values in a dataset. It can be presented as:
+\begin{definition}[Hyppighedsfordeling]
+En \textbf{hyppighedsfordeling} er en tabel, der viser hyppigheden (antallet) af hver værdi eller klasse af værdier i et datasæt. Den kan angives som:
 \begin{itemize}
-    \item \textbf{Absolute frequency}: The actual count of occurrences
-    \item \textbf{Relative frequency}: The proportion of total observations
-    \item \textbf{Cumulative frequency}: The running total of frequencies
+    \item \textbf{Absolut hyppighed}: Det faktiske antal forekomster
+    \item \textbf{Relativ hyppighed}: Andelen af det samlede antal observationer
+    \item \textbf{Kumuleret hyppighed}: Den løbende sum af hyppighederne
 \end{itemize}
 \end{definition}
 
-\begin{definition}[Arithmetic Mean]
+\begin{definition}[Aritmetisk gennemsnit]
 
-For a dataset with $n$ values $x_1, x_2, \ldots, x_n$, the \textbf{arithmetic mean} is defined as:
+For et datasæt med $n$ værdier $x_1, x_2, \ldots, x_n$ er det \textbf{aritmetiske gennemsnit} defineret som:
 
 $$
 \bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}
@@ -731,106 +731,106 @@ $$
 \end{definition}
 
 \begin{definition}[Median]
-    For a dataset with $n$ values arranged in ascending order, the median is defined as:
+    For et datasæt med $n$ værdier ordnet i stigende rækkefølge er medianen defineret som:
     \[
     \text{median} =
     \begin{cases}
-        x_{\frac{n+1}{2}} & \text{if } n \text{ is odd} \\
-        \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2} & \text{if } n \text{ is even}
+        x_{\frac{n+1}{2}} & \text{hvis } n \text{ er ulige} \\
+        \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2} & \text{hvis } n \text{ er lige}
     \end{cases}
     \]
 \end{definition}
 
-\begin{definition}[Mode]
-The \textbf{mode} is the value that appears most frequently in a dataset. A dataset can have:
+\begin{definition}[Typetal]
+\textbf{Typetallet} er den værdi, der forekommer hyppigst i et datasæt. Et datasæt kan have:
 \begin{itemize}
-    \item \textbf{No unique mode}: If all observed values have equal frequency, every value ties for highest frequency; some conventions report this as ``no mode.''
-    \item \textbf{One mode (unimodal)}: If one value appears most frequently
-    \item \textbf{Multiple modes (multimodal)}: If two or more values tie for the highest frequency
+    \item \textbf{Intet entydigt typetal}: Hvis alle observerede værdier har samme hyppighed, deler alle værdier den højeste hyppighed; efter nogle konventioner angives dette som »intet typetal«.
+    \item \textbf{Ét typetal (unimodalt)}: Hvis én værdi forekommer hyppigst
+    \item \textbf{Flere typetal (multimodalt)}: Hvis to eller flere værdier deler den højeste hyppighed
 \end{itemize}
 \end{definition}
 
-\begin{definition}[Range]
-The \textbf{range} of a dataset is the difference between the maximum and minimum values:
+\begin{definition}[Variationsbredde]
+\textbf{Variationsbredden} for et datasæt er forskellen mellem den største og den mindste værdi:
 \[
-\text{Range} = x_{\max} - x_{\min}
+\text{Variationsbredde} = x_{\max} - x_{\min}
 \]
 \end{definition}
 
-\begin{definition}[Sample Variance and Standard Deviation]
-For a sample with $n$ values, the \textbf{sample variance}, denoted by $s^2$, is defined as:
+\begin{definition}[Stikprøvevarians og standardafvigelse]
+For en stikprøve med $n$ værdier er \textbf{stikprøvevariansen}, betegnet $s^2$, defineret som:
 $$
 s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
 $$
-The \textbf{sample standard deviation}, denoted by $s$, is the square root of the variance:
+\textbf{Stikprøvestandardafvigelsen}, betegnet $s$, er kvadratroden af variansen:
 $$
 s = \sqrt{s^2} = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
 $$
 \end{definition}
 
-\begin{definition}[Coefficient of Variation]
-For ratio-scale data with non-zero sample mean, the \textbf{coefficient of variation} is the ratio of the sample standard deviation to the mean:
+\begin{definition}[Variationskoefficient]
+For data på forholdsskala med et stikprøvegennemsnit forskelligt fra nul er \textbf{variationskoefficienten} forholdet mellem stikprøvestandardafvigelsen og gennemsnittet:
 \[
 CV = \frac{s}{\bar{x}} \times 100\%
 \]
 \end{definition}
 
-\begin{definition}[Percentile]
-The $p$th \textbf{percentile} is a value at or below which approximately $p\%$ of the ordered observations lie. Several interpolation conventions exist, so a numerical percentile calculation should state the convention used.
+\begin{definition}[Percentil]
+Den $p$'te \textbf{percentil} er en værdi, som cirka $p\%$ af de ordnede observationer ligger på eller under. Der findes flere interpolationskonventioner, så en numerisk percentilberegning bør angive, hvilken konvention der er brugt.
 \end{definition}
 
-\begin{definition}[Quartiles]
+\begin{definition}[Kvartiler]
 
-Quartiles divide an ordered dataset into four equal parts.
+Kvartiler deler et ordnet datasæt i fire lige store dele.
 
 \begin{itemize}
-    \item \textbf{Q1 (First Quartile)}: The 25th percentile.
-    \item \textbf{Q2 (Second Quartile)}: The 50th percentile. This is the \textbf{median} of the dataset.
-    \item \textbf{Q3 (Third Quartile)}: The 75th percentile.
+    \item \textbf{Q1 (første kvartil)}: 25.-percentilen.
+    \item \textbf{Q2 (anden kvartil)}: 50.-percentilen. Det er datasættets \textbf{median}.
+    \item \textbf{Q3 (tredje kvartil)}: 75.-percentilen.
 \end{itemize}
 \end{definition}
 
-\begin{definition}[Interquartile Range]
-    The \textbf{interquartile range (IQR)} measures the spread of the middle 50\% of the data and is defined as
+\begin{definition}[Kvartilafstand]
+    \textbf{Kvartilafstanden (IQR)} måler spredningen af de midterste 50\% af dataene og er defineret som
     $$
     IQR = Q_3 - Q_1,
     $$
-    where $Q_1$ and $Q_3$ are the first and third quartiles. A larger IQR indicates that the central portion of the data is more widely dispersed, while a smaller IQR indicates that it is more tightly clustered.
+    hvor $Q_1$ og $Q_3$ er første og tredje kvartil. En større IQR viser, at den centrale del af dataene er mere spredt, mens en mindre IQR viser, at den er tættere samlet.
 \end{definition}
 
-\begin{definition}[Normal Distribution]
-A \textbf{normal distribution} is a symmetric, bell-shaped distribution where the mean, median, and mode are all equal and located at the center. Its shape is determined entirely by its mean ($\mu$) and standard deviation ($\sigma$).
+\begin{definition}[Normalfordeling]
+En \textbf{normalfordeling} er en symmetrisk, klokkeformet fordeling, hvor middelværdien, medianen og typetallet alle er ens og ligger i centrum. Fordelingens form er fuldstændig bestemt af dens middelværdi ($\mu$) og standardafvigelse ($\sigma$).
 \end{definition}
 
-\begin{definition}[Skewness]
-    \textbf{Skewness} measures the asymmetry of data distribution:
+\begin{definition}[Skævhed]
+    \textbf{Skævhed} måler asymmetrien i en datafordeling:
     \begin{itemize}
-        \item \textbf{Positive skew (skewed to the right)}: The longer tail extends to the right.
-        \item \textbf{Negative skew (skewed to the left)}: The longer tail extends to the left.
-        \item \textbf{Symmetric}: The two sides have approximately the same shape.
+        \item \textbf{Positiv skævhed (højreskæv)}: Den længste hale strækker sig mod højre.
+        \item \textbf{Negativ skævhed (venstreskæv)}: Den længste hale strækker sig mod venstre.
+        \item \textbf{Symmetrisk}: De to sider har omtrent samme form.
     \end{itemize}
-    Comparisons between the mean and median can be useful heuristics, but they do not define skewness.
+    Sammenligninger mellem gennemsnit og median kan være nyttige tommelfingerregler, men de definerer ikke skævhed.
 \end{definition}
 
-\begin{definition}[Box Plot Components]
-A standard Tukey box plot shows the quartiles and whiskers:
+\begin{definition}[Boksplottets bestanddele]
+Et standardboksplot efter Tukey viser kvartilerne og knurhårene:
 \begin{itemize}
-    \item the box from $Q_1$ to $Q_3$ and a line at the median $Q_2$;
-    \item whiskers extending to the most extreme observations within $1.5\,IQR$ of the relevant quartile; and
-    \item observations beyond the whiskers plotted individually as potential outliers.
+    \item boksen fra $Q_1$ til $Q_3$ og en linje ved medianen $Q_2$;
+    \item knurhår, der strækker sig ud til de mest ekstreme observationer inden for $1.5\,IQR$ fra den pågældende kvartil; og
+    \item observationer uden for knurhårene, som afsættes enkeltvis som mulige outliers.
 \end{itemize}
 \end{definition}
 
-\begin{theorem}[Law of Large Numbers]
-    If $X_1,X_2,\ldots$ are independent and identically distributed random variables with finite expected value $\mu$, then their sample mean converges to $\mu$ in probability as the sample size tends to infinity.
+\begin{theorem}[Store tals lov]
+    Hvis $X_1,X_2,\ldots$ er uafhængige og identisk fordelte stokastiske variable med endelig middelværdi $\mu$, så konvergerer deres stikprøvegennemsnit i sandsynlighed mod $\mu$, når stikprøvestørrelsen går mod uendelig.
 \end{theorem}
 
-\begin{theorem}[The Empirical Rule]
-If a dataset is approximately normal with a sample mean $\bar{x}$ and sample standard deviation $s$, then:
+\begin{theorem}[Den empiriske regel]
+Hvis et datasæt er tilnærmelsesvis normalfordelt med stikprøvegennemsnit $\bar{x}$ og stikprøvestandardafvigelse $s$, så gælder:
 \begin{itemize}
-    \item Approximately \textbf{68.3\%} of the observations lie within 1 standard deviation of the mean ($\bar{x} \pm s$).
-    \item Approximately \textbf{95.4\%} of the observations lie within 2 standard deviations of the mean ($\bar{x} \pm 2s$).
-    \item Approximately \textbf{99.7\%} of the observations lie within 3 standard deviations of the mean ($\bar{x} \pm 3s$).
+    \item Cirka \textbf{68.3\%} af observationerne ligger inden for 1 standardafvigelse fra gennemsnittet ($\bar{x} \pm s$).
+    \item Cirka \textbf{95.4\%} af observationerne ligger inden for 2 standardafvigelser fra gennemsnittet ($\bar{x} \pm 2s$).
+    \item Cirka \textbf{99.7\%} af observationerne ligger inden for 3 standardafvigelser fra gennemsnittet ($\bar{x} \pm 3s$).
 \end{itemize}
 \end{theorem}
 
@@ -838,102 +838,102 @@ If a dataset is approximately normal with a sample mean $\bar{x}$ and sample sta
 
 % 7
 
-\begin{definition}{Linear Equations} A linear equation in the variables $x_1, x_2, \ldots, x_n$ is an equation that can be written in the form
+\begin{definition}{Lineære ligninger} En lineær ligning i variablene $x_1, x_2, \ldots, x_n$ er en ligning, der kan skrives på formen
 \[
 a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b
 \]
 
-where $b$ and the coefficients $a_1, \ldots, a_n$ are constants.
+hvor $b$ og koefficienterne $a_1, \ldots, a_n$ er konstanter.
 
 \end{definition}
 
-\begin{definition}{Systems of Linear Equations} A \textbf{system of linear equations} (also called a \textbf{linear system}) is a collection of one or more linear equations involving the same set of variables. \end{definition}
+\begin{definition}{Lineære ligningssystemer} Et \textbf{lineært ligningssystem} (eller kort et \textbf{lineært system}) er en samling af en eller flere lineære ligninger med de samme variable. \end{definition}
 
-\begin{definition}{Solutions to a System of Linear Equations} A \textbf{solution} of a linear system in the variables $x_1, x_2, \ldots, x_n$ is a list of numbers $(s_1, s_2, \ldots, s_n)$ that satisfies all equations of the system when substituted for the variables $x_1, x_2, \ldots, x_n$, respectively. The set of all possible solutions is called its \textbf{solution set}. Two linear systems are called \textbf{equivalent} if they have the same solution set. \end{definition}
+\begin{definition}{Løsninger til et lineært ligningssystem} En \textbf{løsning} til et lineært ligningssystem i variablene $x_1, x_2, \ldots, x_n$ er en liste af tal $(s_1, s_2, \ldots, s_n)$, der opfylder alle systemets ligninger, når tallene indsættes på variablenes plads $x_1, x_2, \ldots, x_n$ i den nævnte rækkefølge. Mængden af alle mulige løsninger kaldes systemets \textbf{løsningsmængde}. To lineære ligningssystemer kaldes \textbf{ækvivalente}, hvis de har den samme løsningsmængde. \end{definition}
 
-\begin{definition} A \textbf{matrix} is a rectangular array of numbers arranged in rows and columns. The \textbf{coefficient matrix} of a linear system contains only the coefficients of the variables, while the \textbf{augmented matrix} includes an additional column for the constants from the right-hand side of the equations. \end{definition}
+\begin{definition} En \textbf{matrix} er et rektangulært skema af tal ordnet i rækker og søjler. \textbf{Koefficientmatricen} for et lineært ligningssystem indeholder kun variablenes koefficienter, mens \textbf{totalmatricen} har en ekstra søjle med konstanterne fra ligningernes højre side. \end{definition}
 
-\begin{definition} The \textbf{size} of a matrix is defined by the number of its rows and columns, expressed as \emph{rows} $\times$ \emph{columns}. For instance, the coefficient matrix above is of size $3 \times 3$, and the augmented matrix is of size $3 \times 4$. \end{definition}
+\begin{definition} \textbf{Størrelsen} af en matrix er bestemt af antallet af rækker og søjler og angives som \emph{rækker} $\times$ \emph{søjler}. For eksempel har koefficientmatricen ovenfor størrelsen $3 \times 3$, og totalmatricen har størrelsen $3 \times 4$. \end{definition}
 
-\begin{definition}{Echelon Forms}
-A matrix is in \textbf{echelon form} if it satisfies the following conditions:
+\begin{definition}{Echelonformer}
+En matrix er på \textbf{echelonform}, hvis den opfylder følgende betingelser:
 \begin{enumerate}
-    \item All zero rows are at the bottom.
-    \item Each leading entry of a row is in a column to the right of the leading entry of the row above it.
-    \item All entries in a column below a leading entry are zeros.
+    \item Alle nulrækker står nederst.
+    \item Hver ledende indgang i en række står i en søjle til højre for den ledende indgang i rækken ovenover.
+    \item Alle indgange i en søjle under en ledende indgang er nul.
 \end{enumerate}
 
-In addition to echelon form, a matrix may also be in \textbf{reduced row echelon form} (RREF), which has the following properties:
+Ud over echelonform kan en matrix også være på \textbf{reduceret echelonform} (RREF), som har følgende egenskaber:
 \begin{enumerate}[resume]
-    \item The leading entry in each nonzero row is 1.
-    \item Each leading 1 is the only nonzero entry in its column.
+    \item Den ledende indgang i hver række, der ikke er en nulrække, er 1.
+    \item Hvert ledende 1-tal er den eneste indgang forskellig fra nul i sin søjle.
 \end{enumerate}
 \end{definition}
 
-\begin{theorem}{Existence Theorem}
-A linear system is consistent if and only if an echelon form of the augmented matrix has no row of the form
+\begin{theorem}{Eksistenssætningen}
+Et lineært ligningssystem er konsistent, hvis og kun hvis en echelonform af totalmatricen ikke har nogen række på formen
     \[
     \left[\begin{array}{llll}
     0 & \ldots & 0 & b
     \end{array}\right]
     \]
-where $b$ is nonzero.
+hvor $b$ er forskellig fra nul.
 \end{theorem}
 
-\begin{theorem}{Uniqueness of Reduced Echelon Form}
-    Each matrix is row equivalent to one and only one reduced echelon matrix
+\begin{theorem}{Entydighed af den reducerede echelonform}
+    Hver matrix er rækkeækvivalent med én og kun én matrix på reduceret echelonform
 \end{theorem}
 
-\begin{custombox}{The Row Reduction Algorithm}
-    Here we describe an algorithm for turning any matrix into an equivalent
-    (reduced) echelon matrix. This algorithm is the foundation of solving systems of linear equations using matrices.
+\begin{custombox}{Rækkereduktionsalgoritmen}
+    Her beskriver vi en algoritme, der omdanner en vilkårlig matrix til en ækvivalent
+    matrix på (reduceret) echelonform. Algoritmen er grundlaget for at løse lineære ligningssystemer ved hjælp af matricer.
 
     \begin{enumerate}
-        \item Begin with the leftmost nonzero column. This is a pivot column, with the pivot position at the top.
-        \item Select a nonzero entry in the pivot column as a pivot. If necessary, interchange rows to move this entry into the pivot position.
-        \item Use row replacement operations to create zeros in all positions below the pivot.
-        \item Apply steps 1-3 to the submatrix of all entries below and to the right of the pivot position. Repeat this process until there are no more nonzero rows to modify. (At this point we have reached an echelon form of the matrix.)
-        \item Beginning with the rightmost pivot and working upward and to the left, create zeros above each pivot using row operations. If a pivot is not 1, make it 1 by a scaling operation. (This step produces the reduced echelon form of the matrix.)
+        \item Begynd med den søjle længst til venstre, der ikke er en nulsøjle. Det er en pivotsøjle, og pivotpositionen er øverst.
+        \item Vælg en indgang forskellig fra nul i pivotsøjlen som pivot. Byt om nødvendigt rækker for at flytte denne indgang til pivotpositionen.
+        \item Brug rækkeerstatninger til at skabe nuller i alle positioner under pivoten.
+        \item Anvend trin 1-3 på delmatricen af alle indgange under og til højre for pivotpositionen. Gentag processen, indtil der ikke er flere rækker forskellige fra nul at ændre. (Nu har vi nået en echelonform af matricen.)
+        \item Begynd med pivoten længst til højre, og arbejd opad og mod venstre: Skab nuller over hver pivot ved hjælp af rækkeoperationer. Hvis en pivot ikke er 1, gøres den til 1 ved en skalering. (Dette trin giver matricens reducerede echelonform.)
     \end{enumerate}
 
 \end{custombox}
 
-\begin{theorem}{Uniqueness Theorem}
-    If a linear system is consistent, then the solution set contains either
+\begin{theorem}{Entydighedssætningen}
+    Hvis et lineært ligningssystem er konsistent, indeholder løsningsmængden enten
     \begin{enumerate}[label=(\roman*)]
-        \item a unique solution, when there are no free variables, or
-        \item infinitely many solutions, when there is at least one free variable.
+        \item en entydig løsning, når der ikke er nogen frie variable, eller
+        \item uendeligt mange løsninger, når der er mindst én fri variabel.
     \end{enumerate}
 \end{theorem}
 
 % 8
 
 \begin{definition}
-    For each positive integer $n$, we let $\mathbb{R}^n$ denote the collection of ordered $n$-tuples with each entry in $\mathbb{R}$. We often write these elements as $n \times 1$ matrices. We define addition and scalar multiplication of vectors in $\mathbb{R}^n$ in the same way as we do for $\mathbb{R}^2$. That is, we go coordinate-by-coordinate.
+    For ethvert positivt heltal $n$ lader vi $\mathbb{R}^n$ betegne samlingen af ordnede $n$-tupler, hvor hver indgang ligger i $\mathbb{R}$. Vi skriver ofte disse elementer som $n \times 1$-matricer. Vi definerer addition og multiplikation med skalar for vektorer i $\mathbb{R}^n$ på samme måde som for $\mathbb{R}^2$. Det vil sige, at vi regner koordinat for koordinat.
 \end{definition}
 
-\begin{definition}{Linear Combinations}
-    Given a set of vectors $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_p \in \mathbb{R}^n$ and scalars $c_1, c_2, \ldots, c_p \in \mathbb{R}$, the vector $\vect{y}$ given by
+\begin{definition}{Linearkombinationer}
+    Givet vektorerne $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_p \in \mathbb{R}^n$ og skalarerne $c_1, c_2, \ldots, c_p \in \mathbb{R}$ kaldes vektoren $\vect{y}$ givet ved
 
 \[
 \vect{y} = c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p
 \]
 
-is called a linear combination of $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_p$ with weights $c_1, c_2, \ldots, c_p$.
+en linearkombination af $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_p$ med vægtene $c_1, c_2, \ldots, c_p$.
 
 \end{definition}
 
-\begin{definition}{Span of a Set of Vectors}
-    If $\vect{v}_1, \ldots, \vect{v}_p$ are in $\mathbb{R}^n$, then the set of all linear combinations of $\vect{v}_1, \ldots, \vect{v}_p$ is denoted by \text{Span} $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ and is called the subset of $\mathbb{R}^n$ spanned by $\vect{v}_1, \ldots, \vect{v}_p$. In other words, the span of $\vect{v}_1, \ldots, \vect{v}_p$ is all vectors that can be written in the form
+\begin{definition}{Udspændet af en mængde vektorer}
+    Hvis $\vect{v}_1, \ldots, \vect{v}_p$ ligger i $\mathbb{R}^n$, betegnes mængden af alle linearkombinationer af $\vect{v}_1, \ldots, \vect{v}_p$ med \text{Span} $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$, og den kaldes den delmængde af $\mathbb{R}^n$, der udspændes af $\vect{v}_1, \ldots, \vect{v}_p$. Med andre ord består udspændet af $\vect{v}_1, \ldots, \vect{v}_p$ af alle vektorer, der kan skrives på formen
     $$
     c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p
     $$
-    with $c_1, \ldots, c_p$ scalars.
+    hvor $c_1, \ldots, c_p$ er skalarer.
 
 \end{definition}
 
-\begin{definition}{Matrix Equation}
-  If $A$ is an $m \times n$ matrix with columns $\vect{a}_1, \ldots, \vect{a}_n$, and if $\vect{x} \in \mathbb{R}^n$, then the product of $A$ and $\vect{x}$, denoted by $A \vect{x}$, is
+\begin{definition}{Matrixligning}
+  Hvis $A$ er en $m \times n$-matrix med søjlerne $\vect{a}_1, \ldots, \vect{a}_n$, og hvis $\vect{x} \in \mathbb{R}^n$, så er produktet af $A$ og $\vect{x}$, betegnet $A \vect{x}$, givet ved
 
 \[
 A \vect{x} = \left[\begin{array}{llll}
@@ -949,35 +949,35 @@ x_n
 \end{definition}
 
 \begin{definition}
-    An indexed set of vectors $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\} \subset \mathbb{R}^n$ is said to be \textbf{linearly independent} if the vector equation
+    En indekseret mængde af vektorer $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\} \subset \mathbb{R}^n$ siges at være \textbf{lineært uafhængig}, hvis vektorligningen
     
     \[
     x_1 \vect{v}_1 + \cdots + x_p \vect{v}_p = \vect{0}
     \]
     
-    has only the trivial solution, i.e., if the only solution is $\left(x_1, \ldots, x_p\right) = (0, \ldots, 0)$. Likewise, the set $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ is said to be \textbf{linearly dependent} if there exist weights $c_1, \ldots, c_p$, not all zero, such that
+    kun har den trivielle løsning, dvs. hvis den eneste løsning er $\left(x_1, \ldots, x_p\right) = (0, \ldots, 0)$. Tilsvarende siges mængden $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ at være \textbf{lineært afhængig}, hvis der findes vægte $c_1, \ldots, c_p$, som ikke alle er nul, så
     
     \[
     c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p = \vect{0}
     \]
     
-    We call such an equation a \textit{linear dependence relation} when the weights are not all zero.
+    Vi kalder en sådan ligning en \textit{lineær afhængighedsrelation}, når vægtene ikke alle er nul.
 \end{definition}
 
 \begin{theorem}
-    If $A$ is an $m \times n$ matrix, with columns $\vect{a}_1, \ldots, \vect{a}_n \in \mathbb{R}^m$ and if $\vect{b} \in \mathbb{R}^m$, the matrix equation
+    Hvis $A$ er en $m \times n$-matrix med søjlerne $\vect{a}_1, \ldots, \vect{a}_n \in \mathbb{R}^m$, og hvis $\vect{b} \in \mathbb{R}^m$, så har matrixligningen
 
 \[
 A \vect{x} = \vect{b}
 \]
 
-has the same solution set as the vector equation
+samme løsningsmængde som vektorligningen
 
 \[
 x_1 \vect{a}_1 + x_2 \vect{a}_2 + \cdots + x_n \vect{a}_n = \vect{b}
 \]
 
-which, in turn, has the same solution set as the system of linear equations with augmented matrix
+som igen har samme løsningsmængde som det lineære ligningssystem med totalmatricen
 
 \[
 \left[\begin{array}{lllll}
@@ -988,17 +988,17 @@ which, in turn, has the same solution set as the system of linear equations with
 \end{theorem}
 
 \begin{theorem}
-Let \( A \) be an \( m \times n \) matrix. Then the following statements are equivalent:
+Lad \( A \) være en \( m \times n \)-matrix. Så er følgende udsagn ækvivalente:
 \begin{enumerate}[label=(\alph*)]
-    \item For each \( \vect{b} \in \mathbb{R}^m \), the equation \( A \vect{x} = \vect{b} \) has a solution.
-    \item Each \( \vect{b} \in \mathbb{R}^m \) is a linear combination of the columns of \( A \).
-    \item The columns of \( A \) span \( \mathbb{R}^m \).
-    \item The matrix \( A \) has a pivot position in every row.
+    \item For hvert \( \vect{b} \in \mathbb{R}^m \) har ligningen \( A \vect{x} = \vect{b} \) en løsning.
+    \item Hvert \( \vect{b} \in \mathbb{R}^m \) er en linearkombination af søjlerne i \( A \).
+    \item Søjlerne i \( A \) udspænder \( \mathbb{R}^m \).
+    \item Matricen \( A \) har en pivotposition i hver række.
 \end{enumerate}
 \end{theorem}
 
 \begin{theorem}
-If \( A \) is an \( m \times n \) matrix, \( \vect{u} \) and \( \vect{v} \) are vectors in \( \mathbb{R}^n \), and \( c \) is a scalar, then:
+Hvis \( A \) er en \( m \times n \)-matrix, \( \vect{u} \) og \( \vect{v} \) er vektorer i \( \mathbb{R}^n \), og \( c \) er en skalar, så gælder:
 
 \begin{enumerate}[label=(\alph*)]
     \item \( A(\vect{u} + \vect{v}) = A \vect{u} + A \vect{v} \)  
@@ -1010,27 +1010,27 @@ If \( A \) is an \( m \times n \) matrix, \( \vect{u} \) and \( \vect{v} \) are 
 \end{theorem}
 
 \begin{theorem}
-    Suppose $A \vect{x} = \vect{b}$ is consistent for some $\vect{b}$, and let $\vect{p}$ be a solution. Then the solution set of $A \vect{x} = \vect{b}$ is the set of all vectors of the form
+    Antag, at $A \vect{x} = \vect{b}$ er konsistent for et bestemt $\vect{b}$, og lad $\vect{p}$ være en løsning. Så er løsningsmængden for $A \vect{x} = \vect{b}$ mængden af alle vektorer på formen
     \[
     \vect{w} = \vect{p} + \vect{v}_h,
     \]
-    where $\vect{v}_h$ is any solution of the homogeneous equation $A \vect{x} = \vect{0}$.
+    hvor $\vect{v}_h$ er en vilkårlig løsning til den homogene ligning $A \vect{x} = \vect{0}$.
 \end{theorem}
 
 \begin{theorem}
     \begin{enumerate}[(a)]
-        \item If a set of vectors contains the zero vector, then the set is linearly dependent.
-        \item If a set of vectors contains a scalar multiple of another vector, then the set is linearly dependent.
-        \item If a set of vectors contains more vectors than there are entries in each vector, then the set is linearly dependent.
+        \item Hvis en mængde vektorer indeholder nulvektoren, er mængden lineært afhængig.
+        \item Hvis en mængde vektorer indeholder et skalarmultiplum af en anden vektor, er mængden lineært afhængig.
+        \item Hvis en mængde vektorer indeholder flere vektorer, end der er indgange i hver vektor, er mængden lineært afhængig.
     \end{enumerate}
 \end{theorem}
 
 % 9
 
-\begin{definition}{Matrix Addition}
-    Let $A$ and $B$ be $m \times n$ matrices. The \textbf{sum} of $A$ and $B$, denoted $A + B$, is the $m \times n$ matrix whose entries are obtained by adding the corresponding entries of $A$ and $B$.
+\begin{definition}{Matrixaddition}
+    Lad $A$ og $B$ være $m \times n$-matricer. \textbf{Summen} af $A$ og $B$, betegnet $A + B$, er den $m \times n$-matrix, hvis indgange fås ved at lægge de tilsvarende indgange i $A$ og $B$ sammen.
 
-    Given matrices
+    Givet matricerne
 
     $$
     A=\left[\begin{array}{cccc}
@@ -1046,7 +1046,7 @@ If \( A \) is an \( m \times n \) matrix, \( \vect{u} \) and \( \vect{v} \) are 
     \end{array}\right]
     $$
 
-    both of the same dimension $m \times n$, the sum $A+B$ is thus defined as
+    som begge har dimensionen $m \times n$, er summen $A+B$ altså defineret som
 
     $$
     A+B=\left[\begin{array}{cccc}
@@ -1058,8 +1058,8 @@ If \( A \) is an \( m \times n \) matrix, \( \vect{u} \) and \( \vect{v} \) are 
     $$
 \end{definition}
 
-\begin{definition}{Scalar-Matrix Multiplication}
-    Let $A$ be an $m \times n$ matrix and $c$ be a scalar. The \textbf{product} of $c$ and $A$, denoted $cA$, is the $m \times n$ matrix whose entries are obtained by multiplying each entry of $A$ by $c$, and is thus defined as
+\begin{definition}{Multiplikation af en matrix med en skalar}
+    Lad $A$ være en $m \times n$-matrix og $c$ en skalar. \textbf{Produktet} af $c$ og $A$, betegnet $cA$, er den $m \times n$-matrix, hvis indgange fås ved at gange hver indgang i $A$ med $c$. Det er altså defineret som
 
     $$
     c A=\left[\begin{array}{cccc}
@@ -1078,7 +1078,7 @@ If \( A \) is an \( m \times n \) matrix, \( \vect{u} \) and \( \vect{v} \) are 
 \end{definition}
 
 \begin{definition}
-    For $A \in \mathbb{R}^{m \times n}$ and $B \in \mathbb{R}^{n \times p}$, with $B=\left[\begin{array}{lll}\vect{b_1} & \vect{b_2} \cdots & \vect{b_p}\end{array}\right]$, we define the product $A B$ by the formula
+    For $A \in \mathbb{R}^{m \times n}$ og $B \in \mathbb{R}^{n \times p}$, hvor $B=\left[\begin{array}{lll}\vect{b_1} & \vect{b_2} \cdots & \vect{b_p}\end{array}\right]$, definerer vi produktet $A B$ ved formlen
 
 \[
 A B=\left[\begin{array}{llll}
@@ -1089,26 +1089,26 @@ A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
 \end{definition}
 
 \begin{definition}
-    Let $A$ be a square matrix, i.e. $ A \in \mathbb{R}^{n \times n}$. The $k$th power of $A$, denoted $A^k$, is defined as the product of $A$ with itself $k$ times. That is,
+    Lad $A$ være en kvadratisk matrix, dvs. $ A \in \mathbb{R}^{n \times n}$. Den $k$'te potens af $A$, betegnet $A^k$, er defineret som produktet af $A$ med sig selv $k$ gange. Det vil sige
 
     $$
-    A^k=\underbrace{ AAA \cdot \cdots A}_{k \text { times }}
+    A^k=\underbrace{ AAA \cdot \cdots A}_{k \text { gange }}
     $$
 
-    where $A$ appears $k$ times on the right-hand side.
+    hvor $A$ optræder $k$ gange på højre side.
 \end{definition}
 
 \begin{definition}
-    Given a matrix $A \in \mathbb{R}^{m \times n}$, the transpose of $A$ is the matrix $A^T$ whose $i$th column is the $i$th row of $A$.
+    Givet en matrix $A \in \mathbb{R}^{m \times n}$ er den transponerede af $A$ den matrix $A^T$, hvis $i$'te søjle er den $i$'te række i $A$.
 \end{definition}
 
 \begin{definition}
-    A square matrix \( A \in \mathbb{R}^{n \times n} \) is invertible (or \textbf{nonsingular}) if there exists a matrix \( C \in \mathbb{R}^{n \times n} \) such that \( A C = C A = I_n \). The matrix \( C \) is called the inverse of \( A \) and is denoted by \( A^{-1} \). Thus, \( A^{-1} A = A A^{-1} = I_n \).
+    En kvadratisk matrix \( A \in \mathbb{R}^{n \times n} \) er invertibel (eller \textbf{ikke-singulær}), hvis der findes en matrix \( C \in \mathbb{R}^{n \times n} \), så \( A C = C A = I_n \). Matricen \( C \) kaldes den inverse til \( A \) og betegnes \( A^{-1} \). Altså er \( A^{-1} A = A A^{-1} = I_n \).
 \end{definition}
 
 \begin{theorem}
 
-    Let $A$, $B$, $C$ be matrices of the same size and let $\alpha$, $\beta$ be scalars. Then
+    Lad $A$, $B$, $C$ være matricer af samme størrelse, og lad $\alpha$, $\beta$ være skalarer. Så gælder
     \begin{enumerate}[(a)]
         \item $A+B=B+A$
         \item $(A+B)+C=A+(B+C)$
@@ -1120,18 +1120,18 @@ A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
 \end{theorem}
 
 \begin{theorem}
-        Let $A, B, C$ be matrices, of appropriate dimensions, and let $\alpha$ be a scalar. Then
+        Lad $A, B, C$ være matricer med passende dimensioner, og lad $\alpha$ være en skalar. Så gælder
 \begin{enumerate}[(a)]
     \item $A(BC) = (AB)C$
     \item $A(B + C) = AB + AC$
     \item $(B + C)A = BA + CA$
     \item $\alpha(AB) = (\alpha A)B = A(\alpha B)$
-    \item If $A$ is $m\times n$, then $I_mA=A=AI_n$.
+    \item Hvis $A$ er $m\times n$, så er $I_mA=A=AI_n$.
 \end{enumerate}
 \end{theorem}
 
 \begin{theorem}
-    Let $A$ and $B$ be matrices of appropriate dimensions and let $\alpha$ be a scalar. Then
+    Lad $A$ og $B$ være matricer med passende dimensioner, og lad $\alpha$ være en skalar. Så gælder
     \begin{enumerate}[(a)]
         \item $(A^T)^T = A$
         \item $(A + B)^T = A^T + B^T$
@@ -1140,17 +1140,17 @@ A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
     \end{enumerate}
 \end{theorem}
 
-\begin{theorem} Let $A$ and $B$ be invertible $n \times n$ matrices. Then:
+\begin{theorem} Lad $A$ og $B$ være invertible $n \times n$-matricer. Så gælder:
 \begin{enumerate}[(a)]
-    \item $A^{-1}$ is invertible, with
+    \item $A^{-1}$ er invertibel, og
     \[
     \left(A^{-1}\right)^{-1}=A
     \]
-    \item The product $A B$ is invertible, with
+    \item Produktet $A B$ er invertibelt, og
     \[
     (A B)^{-1}=B^{-1} A^{-1}
     \]
-    \item The transpose of $A$ is also invertible, i.e. $A^T$ is invertible, with
+    \item Den transponerede af $A$ er også invertibel, dvs. $A^T$ er invertibel, og
     \[
     \left(A^T\right)^{-1}=\left(A^{-1}\right)^T
     \]
@@ -1159,10 +1159,10 @@ A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
 \end{theorem}
 
 \begin{theorem}
-    Let $A=\left[\begin{array}{ll}
+    Lad $A=\left[\begin{array}{ll}
     a & b \\
     c & d
-    \end{array}\right]$. If $ad-bc \neq 0$, then the inverse of $A$ is given by
+    \end{array}\right]$. Hvis $ad-bc \neq 0$, er den inverse til $A$ givet ved
 
     \[
     A^{-1}=\frac{1}{ad-bc}\left[\begin{array}{cc}
@@ -1173,38 +1173,38 @@ A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
 \end{theorem}
 
 \begin{theorem}
-    An $n \times n$ matrix $A$ is invertible if and only if $A$ is row equivalent to $I_n$. In this case, any sequence of elementary row operations that reduces $A$ to $I_n$ also transforms $I_n$ into $A^{-1}$.
+    En $n \times n$-matrix $A$ er invertibel, hvis og kun hvis $A$ er rækkeækvivalent med $I_n$. I så fald vil enhver følge af elementære rækkeoperationer, der reducerer $A$ til $I_n$, også omdanne $I_n$ til $A^{-1}$.
 \end{theorem}
 
-\begin{custombox}{Algorithm for Finding the Inverse of an $n \times n$ Matrix}
-    Let $A$ be an $n \times n$ matrix. To find the inverse of $A$, follow these steps:
+\begin{custombox}{Algoritme til at finde den inverse til en $n \times n$-matrix}
+    Lad $A$ være en $n \times n$-matrix. Følg disse trin for at finde den inverse til $A$:
     \begin{enumerate}
-        \item Form the augmented matrix $[A | I_n]$.
-        \item Perform row operations on $[A | I_n]$ to reduce $A$ to $I_n$.
-        \item The matrix on the right side of the augmented matrix is $A^{-1}$.
+        \item Opstil totalmatricen $[A | I_n]$.
+        \item Udfør rækkeoperationer på $[A | I_n]$ for at reducere $A$ til $I_n$.
+        \item Matricen i højre side af totalmatricen er $A^{-1}$.
     \end{enumerate}
 
-    If $A$ is not invertible, then the algorithm will not be able to reduce $A$ to $I_n$.
+    Hvis $A$ ikke er invertibel, vil algoritmen ikke kunne reducere $A$ til $I_n$.
 \end{custombox}
 
 \begin{theorem}
-    Let \( A \) be an invertible matrix. Then the equation \( A \vect{x} = \vect{b} \) has a unique solution given by \( \vect{x} = A^{-1} \vect{b} \).
+    Lad \( A \) være en invertibel matrix. Så har ligningen \( A \vect{x} = \vect{b} \) en entydig løsning, som er givet ved \( \vect{x} = A^{-1} \vect{b} \).
 \end{theorem}
 
 \begin{theorem}
-    Let \( A \) be an \( n \times n \) matrix. The following statements are equivalent:
+    Lad \( A \) være en \( n \times n \)-matrix. Følgende udsagn er ækvivalente:
     \begin{enumerate}[(a)]
-        \item $A$ is invertible.
-        \item $A$ is row equivalent to $I_n$.
-        \item $A$ has $n$ pivot positions (i.e. one for each row and column).
-        \item The equation $A \vect{x}=\overline{0}$ has only the trivial solution.
-        \item The columns of $A$ are linearly independent.
-        \item The equation \( A \vect{x} = \vect{b} \) has a unique solution for each \( \vect{b} \in \mathbb{R}^n \).
-        \item The columns of $A \operatorname{span} \mathbb{R}^n$.
+        \item $A$ er invertibel.
+        \item $A$ er rækkeækvivalent med $I_n$.
+        \item $A$ har $n$ pivotpositioner (dvs. én for hver række og søjle).
+        \item Ligningen $A \vect{x}=\overline{0}$ har kun den trivielle løsning.
+        \item Søjlerne i $A$ er lineært uafhængige.
+        \item Ligningen \( A \vect{x} = \vect{b} \) har en entydig løsning for hvert \( \vect{b} \in \mathbb{R}^n \).
+        \item Søjlerne i $A \textnormal{ udspænder } \mathbb{R}^n$.
         \item \( \text{det}(A) \neq 0 \).
-        \item There is an $n \times n$ matrix $C$ such that $C A=I$.
-        \item There is an $n \times n$ matrix $D$ such that $A D=I$.
-        \item $A^T$ is invertible.
+        \item Der findes en $n \times n$-matrix $C$, så $C A=I$.
+        \item Der findes en $n \times n$-matrix $D$, så $A D=I$.
+        \item $A^T$ er invertibel.
     \end{enumerate}
 \end{theorem}
 
@@ -1212,71 +1212,71 @@ A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
 
 % 10
 
-\begin{definition}[Limit]
-Let \( f(x) \) be a function defined near a point \( c \). We say that the \textbf{limit} of \( f(x) \) as \( x \) approaches \( c \) is \( L \), written as
+\begin{definition}[Grænseværdi]
+Lad \( f(x) \) være en funktion, der er defineret i nærheden af et punkt \( c \). Vi siger, at \textbf{grænseværdien} af \( f(x) \) for \( x \) gående mod \( c \) er \( L \), hvilket skrives
 \vspace{0.5em}
 \[
 \lim_{x \to c} f(x) = L
 \]
 \vspace{0.5em}
-if we can make the value of \( f(x) \) arbitrarily close to \( L \) by choosing an \( x \) that is sufficiently close to \( c \), but not equal to \( c \).
+hvis vi kan få værdien af \( f(x) \) vilkårligt tæt på \( L \) ved at vælge et \( x \), der ligger tilstrækkelig tæt på \( c \), men ikke er lig med \( c \).
 \end{definition}
 
-\begin{definition}[Continuity]
-A function \( f \) is \textbf{continuous} at a point \( c \) if the following three conditions are met:
+\begin{definition}[Kontinuitet]
+En funktion \( f \) er \textbf{kontinuert} i et punkt \( c \), hvis følgende tre betingelser er opfyldt:
 \begin{enumerate}
-    \item \( f(c) \) is defined.
-    \item \( \lim_{x \to c} f(x) \) exists.
+    \item \( f(c) \) er defineret.
+    \item \( \lim_{x \to c} f(x) \) eksisterer.
     \item \( \lim_{x \to c} f(x) = f(c) \).
 \end{enumerate}
-A function is continuous on an interval if it is continuous at every point in that interval.
+En funktion er kontinuert på et interval, hvis den er kontinuert i alle intervallets punkter.
 \end{definition}
 
-\begin{definition}[The Derivative]
-The \textbf{derivative} of a function \( f \) with respect to \( x \), denoted \( f'(x) \), is the function
+\begin{definition}[Den afledte funktion]
+Den \textbf{afledte funktion} af en funktion \( f \) med hensyn til \( x \), betegnet \( f'(x) \), er funktionen
 \[
 f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
 \]
-provided the limit exists. If \( f'(x) \) exists, we say that \( f \) is \textbf{differentiable} at \( x \).
+forudsat at grænseværdien eksisterer. Hvis \( f'(x) \) eksisterer, siger vi, at \( f \) er \textbf{differentiabel} i \( x \).
 \end{definition}
 
 \begin{definition}
-     For a function $y=f(x)$ the points on the graph where the graph has zero slope are called stationary points. In other words stationary points are where $f^{\prime}(x)=0$.
+     For en funktion $y=f(x)$ kaldes de punkter på grafen, hvor grafen har hældningen nul, for stationære punkter. Med andre ord er de stationære punkter dér, hvor $f^{\prime}(x)=0$.
     \end{definition}
 
-\begin{definition}[The Second Derivative]
-The \textbf{second derivative} of a function \( f \), denoted \( f''(x) \), is the function
+\begin{definition}[Den anden afledte]
+Den \textbf{anden afledte} af en funktion \( f \), betegnet \( f''(x) \), er funktionen
 \[
 f''(x) = \frac{d}{dx} \left( f'(x) \right)
 \]
-provided the limit exists.
+forudsat at grænseværdien eksisterer.
 \end{definition}
 
-\begin{theorem}{Constant and Power Rules}
+\begin{theorem}{Konstantreglen og potensreglen}
     \begin{enumerate}
-        \item \textbf{Constant Rule:} If $c$ is constant, then $\dfrac{d}{dx}(c) = 0$, \vspace{0.5em}
-        \item \textbf{Power Rule:} For any real $n$, $\dfrac{d}{dx}x^n = n x^{n - 1}$. \vspace{0.5em}
+        \item \textbf{Konstantreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}(c) = 0$, \vspace{0.5em}
+        \item \textbf{Potensreglen:} For ethvert reelt $n$ gælder $\dfrac{d}{dx}x^n = n x^{n - 1}$. \vspace{0.5em}
     \end{enumerate}
 \end{theorem}
 
-\begin{theorem}{Scalar and Linearity Rules}
+\begin{theorem}{Skalarreglen og linearitetsreglen}
     \begin{enumerate}
         \setcounter{enumi}{2}
         \vspace{0.5em}
-        \item \textbf{Scalar Rule:} \( \frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x) \). \vspace{0.5em}
-        \item \textbf{Linearity Rule:} \( \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) \). \vspace{0.5em}
+        \item \textbf{Skalarreglen:} \( \frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x) \). \vspace{0.5em}
+        \item \textbf{Linearitetsreglen:} \( \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) \). \vspace{0.5em}
     \end{enumerate}
 \end{theorem}
 
-\begin{theorem}{Product and Quotient Rules}
+\begin{theorem}{Produktreglen og kvotientreglen}
     \begin{enumerate}
         \setcounter{enumi}{4}
         \vspace{0.5em}
-        \item \textbf{Product Rule:} If \(f(x)\) and \(g(x)\) are differentiable, then \vspace{0.5em}
+        \item \textbf{Produktreglen:} Hvis \(f(x)\) og \(g(x)\) er differentiable, så gælder \vspace{0.5em}
         \[
         \frac{d}{dx}\big(f(x)g(x)\big)=f'(x)g(x)+f(x)g'(x). \vspace{0.5em}
         \] \vspace{0.5em}
-        \item \textbf{Quotient Rule:} If \(f(x)\) and \(g(x)\) are differentiable and \(g(x)\neq0\), then
+        \item \textbf{Kvotientreglen:} Hvis \(f(x)\) og \(g(x)\) er differentiable, og \(g(x)\neq0\), så gælder
         \vspace{0.5em}
         \[
         \frac{d}{dx}\left(\frac{f(x)}{g(x)}\right)=\frac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2}. \vspace{0.5em}
@@ -1284,80 +1284,80 @@ provided the limit exists.
     \end{enumerate}
 \end{theorem}
 
-\begin{theorem}{Chain Rule}
+\begin{theorem}{Kædereglen}
     \vspace{0.5em}
     \setcounter{enumi}{6}
     \begin{enumerate}
-        \item If \( h(x) = f(g(x)) \) is a composite function, then its derivative is the derivative of the outer function (evaluated at the inner function) multiplied by the derivative of the inner function. \vspace{0.5em}
+        \item Hvis \( h(x) = f(g(x)) \) er en sammensat funktion, er dens afledte lig med den afledte af den ydre funktion (evalueret i den indre funktion) ganget med den afledte af den indre funktion. \vspace{0.5em}
         \[
         h'(x) = f'(g(x)) \cdot g'(x). \vspace{0.5em}
         \]
     \end{enumerate}
 \end{theorem}
 
-\begin{theorem}{Rules of Differentiation}
+\begin{theorem}{Differentiationsregler}
 
     \begin{enumerate}
-        \item \textbf{Constant Rule:} If $c$ is constant, then $\dfrac{d}{dx}c=0$. \vspace{0.5em}
-        \item \textbf{Power Rule:} For any real $n$, at points where the real-valued power function is defined and differentiable, $\dfrac{d}{dx}x^n = n x^{n-1}$. \vspace{0.5em}
+        \item \textbf{Konstantreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}c=0$. \vspace{0.5em}
+        \item \textbf{Potensreglen:} For ethvert reelt $n$ gælder i de punkter, hvor den reelle potensfunktion er defineret og differentiabel, at $\dfrac{d}{dx}x^n = n x^{n-1}$. \vspace{0.5em}
         \[
         \frac{d}{dx}x^n = n x^{n-1}.
         \]
-        \item \textbf{Scalar Rule:} If $c$ is constant, then $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$. \vspace{0.5em}
-        \item \textbf{Linearity:} For differentiable $f,g$ and constants $a,b$, $\dfrac{d}{dx}(a f + b g) = a f' + b g'$. \vspace{0.5em}
-        \item \textbf{Product Rule:} If $f,g$ are differentiable, then $\dfrac{d}{dx}(f g) = f'g + fg'$. \vspace{0.5em}
-        \item \textbf{Quotient Rule:} If $f,g$ are differentiable and $g(x)\neq0$, then $\dfrac{d}{dx}\left(\frac{f}{g}\right) = \frac{f'g - fg'}{g^2}$. \vspace{0.5em}
-        \item \textbf{Chain Rule:} If $f,g$ are differentiable, then $\dfrac{d}{dx}(f(g(x))) = f'(g(x))g'(x)$. \vspace{0.5em}
+        \item \textbf{Skalarreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$. \vspace{0.5em}
+        \item \textbf{Linearitet:} For differentiable $f,g$ og konstanter $a,b$ gælder $\dfrac{d}{dx}(a f + b g) = a f' + b g'$. \vspace{0.5em}
+        \item \textbf{Produktreglen:} Hvis $f,g$ er differentiable, så er $\dfrac{d}{dx}(f g) = f'g + fg'$. \vspace{0.5em}
+        \item \textbf{Kvotientreglen:} Hvis $f,g$ er differentiable, og $g(x)\neq0$, så er $\dfrac{d}{dx}\left(\frac{f}{g}\right) = \frac{f'g - fg'}{g^2}$. \vspace{0.5em}
+        \item \textbf{Kædereglen:} Hvis $f,g$ er differentiable, så er $\dfrac{d}{dx}(f(g(x))) = f'(g(x))g'(x)$. \vspace{0.5em}
     \end{enumerate}
 
 \end{theorem}
 
-\begin{theorem}[The First Derivative Test]
-    Let \(c\) be a critical point of a continuous function \(f\).
+\begin{theorem}[Første afledtes test]
+    Lad \(c\) være et kritisk punkt for en kontinuert funktion \(f\).
     \begin{itemize}
-        \item If \(f'(x)\) changes from negative to positive at \(c\), then \(f\) has a \textbf{local minimum} at \(c\).
-        \item If \(f'(x)\) changes from positive to negative at \(c\), then \(f\) has a \textbf{local maximum} at \(c\).
-        \item If \(f'(x)\) does not change sign at \(c\), then \(f\) has no local extremum at \(c\). This alone does not imply that $c$ is an inflection point.
+        \item Hvis \(f'(x)\) skifter fra negativ til positiv i \(c\), har \(f\) et \textbf{lokalt minimum} i \(c\).
+        \item Hvis \(f'(x)\) skifter fra positiv til negativ i \(c\), har \(f\) et \textbf{lokalt maksimum} i \(c\).
+        \item Hvis \(f'(x)\) ikke skifter fortegn i \(c\), har \(f\) intet lokalt ekstremum i \(c\). Det alene medfører ikke, at $c$ er et vendepunkt.
     \end{itemize}
 
 \end{theorem}
 
-\begin{theorem}[The Second Derivative Test]
-    Let \(c\) be a stationary point of \(f\) (i.e., \(f'(c) = 0\)).
+\begin{theorem}[Anden afledtes test]
+    Lad \(c\) være et stationært punkt for \(f\) (dvs. \(f'(c) = 0\)).
     \begin{itemize}
-        \item If \(f''(c) > 0\), then \(f\) has a \textbf{local minimum} at \(c\).
-        \item If \(f''(c) < 0\), then \(f\) has a \textbf{local maximum} at \(c\).
-        \item If \(f''(c) = 0\), the test is inconclusive.
+        \item Hvis \(f''(c) > 0\), har \(f\) et \textbf{lokalt minimum} i \(c\).
+        \item Hvis \(f''(c) < 0\), har \(f\) et \textbf{lokalt maksimum} i \(c\).
+        \item Hvis \(f''(c) = 0\), giver testen ingen konklusion.
     \end{itemize}
 \end{theorem}
 
 % 11
 
-\begin{definition}[Function of Two Variables]
-A \emph{function of two variables} is a rule that assigns to each ordered pair \((x, y)\) in a set \(D \subseteq \mathbb{R}^2\) a unique real number \(z\), which we write as \(z = f(x, y)\). The set \(D\) is called the \emph{domain} of \(f\).
+\begin{definition}[Funktion af to variable]
+En \emph{funktion af to variable} er en regel, der til hvert ordnet par \((x, y)\) i en mængde \(D \subseteq \mathbb{R}^2\) knytter et entydigt reelt tal \(z\), som vi skriver som \(z = f(x, y)\). Mængden \(D\) kaldes \emph{definitionsmængden} for \(f\).
 
-The \emph{range} of \(f\) is the set of all real numbers \(z\) for which there exists at least one \((x, y) \in D\) such that \(f(x, y) = z\) which is illustrated in \autoref{fig:ch11-domain-range}.
+\emph{Værdimængden} for \(f\) er mængden af alle reelle tal \(z\), for hvilke der findes mindst ét \((x, y) \in D\), så \(f(x, y) = z\). Det er illustreret i \autoref{fig:ch11-domain-range}.
 \end{definition}
 
-\begin{definition}[Level Curve and Contour Map]
-A \textbf{level curve} of a function \(f(x, y)\) is the set of all points \((x, y)\) in the input plane where the function has a constant value, i.e., \(f(x, y) = c\) for some constant \(c\).
+\begin{definition}[Niveaukurve og konturkort]
+En \textbf{niveaukurve} for en funktion \(f(x, y)\) er mængden af alle punkter \((x, y)\) i inputplanen, hvor funktionen har en konstant værdi, dvs. \(f(x, y) = c\) for en konstant \(c\).
 
-A collection of level curves for different values of \(c\) forms a \textbf{contour map}.
+En samling af niveaukurver for forskellige værdier af \(c\) udgør et \textbf{konturkort}.
 \end{definition}
 
-\begin{definition}[Partial Derivatives]
-The \textbf{partial derivative} of \( f(x, y) \) with respect to \( x \), denoted \( \frac{\partial f}{\partial x} \) or \( f_x \), is
+\begin{definition}[Partielle afledte]
+Den \textbf{partielle afledte} af \( f(x, y) \) med hensyn til \( x \), betegnet \( \frac{\partial f}{\partial x} \) eller \( f_x \), er
 $$
 \frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}
 $$
-The \textbf{partial derivative} with respect to \( y \), denoted \( \frac{\partial f}{\partial y} \) or \( f_y \), is
+Den \textbf{partielle afledte} med hensyn til \( y \), betegnet \( \frac{\partial f}{\partial y} \) eller \( f_y \), er
 $$
 \frac{\partial f}{\partial y} = \lim_{h \to 0} \frac{f(x, y+h) - f(x, y)}{h}
 $$
 \end{definition}
 
-\begin{definition}[The Gradient]
-The \textbf{gradient} of a function \( f(x, y) \), denoted \( \nabla f \), is the vector function defined by:
+\begin{definition}[Gradienten]
+\textbf{Gradienten} af en funktion \( f(x, y) \), betegnet \( \nabla f \), er den vektorfunktion, der er defineret ved:
 
 $$
 \nabla f(x, y) = \left\langle \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right\rangle = \frac{\partial f}{\partial x} \mathbf{i} + \frac{\partial f}{\partial y} \mathbf{j}
@@ -1367,220 +1367,220 @@ $$
 
 % ---------- 12+ Number Theory and other universal concepts ----------
 
-\begin{custombox}{{Commutative, Associative, and Distributive Laws}}
+\begin{custombox}{{Kommutative, associative og distributive love}}
 
 
     \begin{itemize}
-    \item Commutativity: $a+b=b+a$
-    \item Associativity: $(a+b)+c=a+(b+c)$
-    \item Distributive property: $a \times(b+c)=a \times b+a \times c$
+    \item Kommutativitet: $a+b=b+a$
+    \item Associativitet: $(a+b)+c=a+(b+c)$
+    \item Den distributive lov: $a \times(b+c)=a \times b+a \times c$
     \end{itemize}
     
 \end{custombox}
 
-\begin{custombox}{Closure Property}
-    \textbf{Addition:} The set of integers is closed under the operation of addition. This means that if you take any two integers and add them together, the sum will always be an integer. For example, if \(a\) and \(b\) are integers, then \(a + b\) is also an integer. This closure property ensures that the set of integers is stable and complete under addition, meaning that no matter how many times you add integers together, the result will remain within the set of integers.
+\begin{custombox}{Lukkethed}
+    \textbf{Addition:} Mængden af hele tal er lukket under addition. Det betyder, at hvis man tager to vilkårlige hele tal og lægger dem sammen, vil summen altid være et helt tal. Hvis \(a\) og \(b\) for eksempel er hele tal, så er \(a + b\) også et helt tal. Denne lukkethedsegenskab sikrer, at mængden af hele tal er stabil og fuldstændig under addition: Uanset hvor mange gange man lægger hele tal sammen, forbliver resultatet inden for mængden af hele tal.
 
-\textbf{Multiplication:} The set of integers is also closed under multiplication. If you multiply any two integers, the product will always be an integer. For instance, if \(a\) and \(b\) are integers, then \(a \times b\) is also an integer. This property guarantees that the operation of multiplication, like addition, does not produce results outside the set of integers, thereby preserving the integrity of the set under multiplication.
+\textbf{Multiplikation:} Mængden af hele tal er også lukket under multiplikation. Hvis man ganger to vilkårlige hele tal, vil produktet altid være et helt tal. Hvis \(a\) og \(b\) for eksempel er hele tal, så er \(a \times b\) også et helt tal. Denne egenskab garanterer, at multiplikation ligesom addition ikke giver resultater uden for mængden af hele tal, og bevarer dermed mængdens integritet under multiplikation.
 
 \end{custombox}
 
-\begin{custombox}{Similarities and Differences of Rational and Irrational Numbers}
+\begin{custombox}{Ligheder og forskelle mellem rationale og irrationale tal}
     \begin{itemize}
-    \item \textbf{Representation:} Rational numbers can be represented as fractions, while irrational numbers cannot. This distinction makes irrational numbers more complex to handle, especially in arithmetic operations.
+    \item \textbf{Repræsentation:} Rationale tal kan skrives som brøker, mens irrationale tal ikke kan. Denne forskel gør irrationale tal mere komplicerede at håndtere, især i regneoperationer.
 
-    \item \textbf{Decimal Expansion:} The decimal expansion of rational numbers is either finite or periodic, while that of irrational numbers is infinite and non-repeating.
+    \item \textbf{Decimaludvikling:} Decimaludviklingen af et rationalt tal er enten endelig eller periodisk, mens decimaludviklingen af et irrationalt tal er uendelig og ikke-periodisk.
 
-    \item \textbf{Closure Properties:} Rational numbers are closed under addition, subtraction, multiplication, and division (except by zero). Irrational numbers are not closed under these operations; for example, the sum or product of two irrational numbers can sometimes be rational.
+    \item \textbf{Lukkethed:} De rationale tal er lukkede under addition, subtraktion, multiplikation og division (undtagen division med nul). De irrationale tal er ikke lukkede under disse operationer; for eksempel kan summen eller produktet af to irrationale tal undertiden være rationalt.
 
-    \item \textbf{Density:} Rational numbers are dense on the real number line, meaning that between any two rational numbers, there exists another rational number. Irrational numbers are also densely distributed but in a complementary manner, filling in the "gaps" left by the rationals, ensuring that the real number line is continuous without any breaks.
+    \item \textbf{Tæthed:} De rationale tal ligger tæt på den reelle tallinje, dvs. at der mellem to vilkårlige rationale tal findes et andet rationalt tal. De irrationale tal ligger også tæt, men på en komplementær måde: De udfylder de »huller«, som de rationale tal efterlader, og sikrer dermed, at den reelle tallinje er sammenhængende uden afbrydelser.
 \end{itemize}
 \end{custombox}
 
-\begin{theorem}{The Fundamental Theorem of Arithmetic}
-Every integer greater than 1 can be represented uniquely as a product of prime numbers, up to the order of the factors.
+\begin{theorem}{Aritmetikkens fundamentalsætning}
+Ethvert helt tal større end 1 kan skrives entydigt som et produkt af primtal, bortset fra faktorernes rækkefølge.
 \end{theorem}
 
 % 13
 
-\begin{custombox}{Primary Boolean Operations}
+\begin{custombox}{Primære booleske operationer}
     
 
 \begin{itemize}
-    \item \textbf{Complementation} (denoted as \texttt{NOT}, e.g. $\overline{0}$)
-    \item \textbf{Boolean Sum} (denoted as \texttt{OR}, e.g. $1 + 0$)
-    \item \textbf{Boolean Product} (denoted as \texttt{AND}, e.g. $1 \cdot 0$)
+    \item \textbf{Komplementering} (betegnet \texttt{NOT}, fx $\overline{0}$)
+    \item \textbf{Boolesk sum} (betegnet \texttt{OR}, fx $1 + 0$)
+    \item \textbf{Boolesk produkt} (betegnet \texttt{AND}, fx $1 \cdot 0$)
 \end{itemize}
 \end{custombox}
 
-\begin{custombox}{Fundamental Boolean Properties}
+\begin{custombox}{Grundlæggende booleske egenskaber}
 \begin{itemize}
-    \item \textbf{Double Complement:} \\
+    \item \textbf{Dobbelt komplement:} \\
     \hspace*{15pt} $\overline{\overline{x}} = x$\hspace{15pt}
     
-    \item \textbf{Idempotent Laws:} \\
+    \item \textbf{Idempotenslove:} \\
     \hspace*{15pt}$x + x = x$, \quad $x \cdot x = x$
     
-    \item \textbf{Identity Laws:} \\
+    \item \textbf{Identitetslove:} \\
     \hspace*{15pt}$x + 0 = x$, \quad $x \cdot 1 = x$
     
-    \item \textbf{Domination Laws:} \\
+    \item \textbf{Dominanslove:} \\
     \hspace*{15pt}$x + 1 = 1$, \quad $x \cdot 0 = 0$
     
-    \item \textbf{Unit Property:} \\
+    \item \textbf{Enhedsegenskaben:} \\
     \hspace*{15pt}$\overline{x} + x = 1$
     
-    \item \textbf{Zero Property:} \\
+    \item \textbf{Nulegenskaben:} \\
     \hspace*{15pt} $\overline{x} \cdot x = 0$
 \end{itemize}
 \end{custombox}
 
-\begin{custombox}{Structural Boolean Laws}
+\begin{custombox}{Strukturelle booleske love}
 \begin{itemize}
-    \item \textbf{Commutative Laws:} \\
+    \item \textbf{Kommutative love:} \\
     \hspace*{15pt}$x + y = y + x$, \quad $x \cdot y = y \cdot x$
     
-    \item \textbf{Absorption Laws:} \\
+    \item \textbf{Absorptionslove:} \\
     \hspace*{15pt}$x + (x \cdot y) = x$, \quad $x \cdot (x + y) = x$, \quad $\bar{x} \cdot \bar{y}+x=\bar{y}+x$
     
-    \item \textbf{De Morgan’s Laws:} \\
+    \item \textbf{De Morgans love:} \\
     \hspace*{15pt} $\overline{x \cdot y} = \overline{x} + \overline{y}$, \quad $\overline{x + y} = \overline{x} \cdot \overline{y}$
-    \item \textbf{Associative Laws:} \\
+    \item \textbf{Associative love:} \\
     \hspace*{15pt} $x + (y + z) = (x + y) + z$, \quad $x \cdot (y \cdot z) = (x \cdot y) \cdot z$
     
-    \item \textbf{Distributive Law:} \\
+    \item \textbf{Distributive love:} \\
     \hspace*{15pt} $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$, \quad $x + (y \cdot z) = (x + y) \cdot (x + z)$
 \end{itemize}
 \end{custombox}
 
-\begin{custombox}{Advanced Boolean Identities}
+\begin{custombox}{Avancerede booleske identiteter}
 \begin{itemize}
-    \item \textbf{Exclusive \texttt{OR} (\texttt{XOR}):} \\
+    \item \textbf{Eksklusivt \texttt{OR} (\texttt{XOR}):} \\
     \hspace*{15pt} $x \oplus y = (x \cdot \overline{y}) + (\overline{x} \cdot y)$
     
-    \item \textbf{Exclusive \texttt{NOR} (\texttt{XNOR}):} \\
+    \item \textbf{Eksklusivt \texttt{NOR} (\texttt{XNOR}):} \\
     \hspace*{15pt} $\overline{x \oplus y} = (x \cdot y) + (\overline{x} \cdot \overline{y})$
     
-    \item \textbf{Disappearing Opposite:} \\
+    \item \textbf{Forsvindende modsætning:} \\
     \hspace*{15pt} $x + \overline{x} \cdot y = x + y$
     
-    \item \textbf{FOIL Law (First, Outer, Inner, Last):} \\
+    \item \textbf{FOIL-loven (First, Outer, Inner, Last -- første, ydre, indre, sidste):} \\
     \hspace*{15pt} $(x + y) \cdot (z + w) = (x \cdot z) + (x \cdot w) + (y \cdot z) + (y \cdot w)$
 \end{itemize}
 \end{custombox}
 
 % 14
 
-In the following definitions, $f$ and $g$ are nonnegative functions and $g(n)>0$ for all sufficiently large $n$.
+I de følgende definitioner er $f$ og $g$ ikke-negative funktioner, og $g(n)>0$ for alle tilstrækkelig store $n$.
 
 \begin{definition}{Theta(\(\Theta\))}
-    $f(n)$ is $\Theta(g(n))$ if there exist positive constants $c_1, c_2$, and $k$ such that for all $n \geq k$,
+    $f(n)$ er $\Theta(g(n))$, hvis der findes positive konstanter $c_1, c_2$ og $k$, så der for alle $n \geq k$ gælder
     \medskip
     \[
     c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)
     \]
     \medskip
-This means that $f(n)$ is asymptotically bounded both above and below by $g(n)$, meaning that $f(n)$ grows at the same rate as $g(n)$ as $n$ becomes sufficiently large.
+Det betyder, at $f(n)$ asymptotisk er begrænset både opadtil og nedadtil af $g(n)$, dvs. at $f(n)$ vokser med samme hastighed som $g(n)$, når $n$ bliver tilstrækkelig stor.
 \end{definition}
 
 \begin{proposition} 
-    Let $f(n)$ and $g(n)$ be two nonnegative functions with $g(n)>0$ eventually, and suppose there is a constant $c>0$ for which
+    Lad $f(n)$ og $g(n)$ være to ikke-negative funktioner med $g(n)>0$ fra et vist trin, og antag, at der findes en konstant $c>0$, så
     \medskip
     \[
     \lim _{n \rightarrow \infty} \frac{f(n)}{g(n)}=c
     \]
     \medskip
-    Then $f(n)=\Theta(g(n))$. Also, if
+    Så er $f(n)=\Theta(g(n))$. Hvis desuden
     \medskip
     \[
     \lim _{n \rightarrow \infty} \frac{f(n)}{g(n)}
     \]
     \medskip
-    exists but does \textbf{not} equal a positive constant, then $f(n) \neq \Theta(g(n))$.
+    eksisterer, men \textbf{ikke} er lig med en positiv konstant, så er $f(n) \neq \Theta(g(n))$.
 \end{proposition}
 
-\begin{definition}{Big-$\mathcal{O}$}
-    $f(n)$ is $\mathcal{O}(g(n))$ if there exist positive constants $c$ and $k$ such that for all $n \geq k$,
+\begin{definition}{Store $\mathcal{O}$}
+    $f(n)$ er $\mathcal{O}(g(n))$, hvis der findes positive konstanter $c$ og $k$, så der for alle $n \geq k$ gælder
     \medskip
     \[
     f(n) \leq c \cdot g(n)
     \]
     \medskip
-    This means that $f(n)$ is asymptotically bounded above by $g(n)$, meaning that $f(n)$ grows at most as fast as $g(n)$ as $n$ becomes sufficiently large.
+    Det betyder, at $f(n)$ asymptotisk er begrænset opadtil af $g(n)$, dvs. at $f(n)$ højst vokser lige så hurtigt som $g(n)$, når $n$ bliver tilstrækkelig stor.
 \end{definition}
 
-\begin{definition}{Omega Notation}
-    $f(n)$ is $\Omega(g(n))$ if there exist positive constants $c$ and $k$ such that for all $n \geq k$,
+\begin{definition}{Omega-notation}
+    $f(n)$ er $\Omega(g(n))$, hvis der findes positive konstanter $c$ og $k$, så der for alle $n \geq k$ gælder
     \medskip
     \[
     f(n) \geq c \cdot g(n)
     \]
     \medskip
-    This means that $f(n)$ is asymptotically bounded below by $g(n)$, meaning that $f(n)$ grows at least as fast as $g(n)$ as $n$ becomes sufficiently large.
+    Det betyder, at $f(n)$ asymptotisk er begrænset nedadtil af $g(n)$, dvs. at $f(n)$ mindst vokser lige så hurtigt som $g(n)$, når $n$ bliver tilstrækkelig stor.
 \end{definition}
 
-\begin{definition}{Little-$o$}
-    $f(n)$ is $o(g(n))$ if for any positive constant $\epsilon > 0$, there exists a constant $k \geq 0$ such that for all $n \geq k$,
+\begin{definition}{Lille $o$}
+    $f(n)$ er $o(g(n))$, hvis der for enhver positiv konstant $\epsilon > 0$ findes en konstant $k \geq 0$, så der for alle $n \geq k$ gælder
     \medskip
     \[
     f(n) < \epsilon \cdot g(n)
     \]
     \medskip
-    This means that $f(n)$ grows strictly slower than $g(n)$ as $n$ becomes sufficiently large.
+    Det betyder, at $f(n)$ vokser strengt langsommere end $g(n)$, når $n$ bliver tilstrækkelig stor.
     
 \end{definition}
 
 \begin{proposition}
-    Let \( f(n) \) and \( g(n) \) be two nonnegative functions with $g(n)>0$ eventually, and suppose
+    Lad \( f(n) \) og \( g(n) \) være to ikke-negative funktioner med $g(n)>0$ fra et vist trin, og antag, at
     \medskip
     \[
     \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} = 0
     \]
     \medskip
-    Then \( f(n) = o(g(n)) \), meaning \( f(n) \) grows strictly slower than \( g(n) \) as \( n \to \infty \).
+    Så er \( f(n) = o(g(n)) \), dvs. at \( f(n) \) vokser strengt langsommere end \( g(n) \) for \( n \to \infty \).
 \end{proposition}
 
-\begin{definition}{Little-$\omega$}
-    $f(n)$ is $\omega(g(n))$ if for any positive constant $\epsilon > 0$, there exists a constant $k \geq 0$ such that for all $n \geq k$,
+\begin{definition}{Lille $\omega$}
+    $f(n)$ er $\omega(g(n))$, hvis der for enhver positiv konstant $\epsilon > 0$ findes en konstant $k \geq 0$, så der for alle $n \geq k$ gælder
     \medskip
     \[
     f(n) > \epsilon \cdot g(n)
     \]
     \medskip
-    This means that $f(n)$ grows strictly faster than $g(n)$ as $n$ becomes sufficiently large.
+    Det betyder, at $f(n)$ vokser strengt hurtigere end $g(n)$, når $n$ bliver tilstrækkelig stor.
 \end{definition}
 
 \begin{proposition}
-    Let \( f(n) \) and \( g(n) \) be two nonnegative functions with $g(n)>0$ eventually, and suppose
+    Lad \( f(n) \) og \( g(n) \) være to ikke-negative funktioner med $g(n)>0$ fra et vist trin, og antag, at
     \medskip
     \[
     \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} = \infty
     \]
     \medskip
-    Then \( f(n) = \omega(g(n)) \), meaning \( f(n) \) grows strictly faster than \( g(n) \) as \( n \to \infty \).
+    Så er \( f(n) = \omega(g(n)) \), dvs. at \( f(n) \) vokser strengt hurtigere end \( g(n) \) for \( n \to \infty \).
 \end{proposition}
 
         \begin{proposition}
-            Let \( f(n) \) and \( g(n) \) be two nonnegative functions with $g(n)>0$ eventually. If
+            Lad \( f(n) \) og \( g(n) \) være to ikke-negative funktioner med $g(n)>0$ fra et vist trin. Hvis
             \medskip
             \[
             \limsup_{n \rightarrow \infty} \frac{f(n)}{g(n)} < \infty
             \]
             \medskip
-            then \( f(n) = \mathcal{O}(g(n)) \), meaning \( f(n) \) grows at most as fast as \( g(n) \) asymptotically.
+            så er \( f(n) = \mathcal{O}(g(n)) \), dvs. at \( f(n) \) asymptotisk højst vokser lige så hurtigt som \( g(n) \).
         \end{proposition}
 
         \begin{proposition}
-            Let \( f(n) \) and \( g(n) \) be two nonnegative functions with $g(n)>0$ eventually. If
+            Lad \( f(n) \) og \( g(n) \) være to ikke-negative funktioner med $g(n)>0$ fra et vist trin. Hvis
             \medskip
             \[
             \liminf_{n \rightarrow \infty} \frac{f(n)}{g(n)} > 0
             \]
             \medskip
-            then \( f(n) = \Omega(g(n)) \), meaning \( f(n) \) grows at least as fast as \( g(n) \) asymptotically.
+            så er \( f(n) = \Omega(g(n)) \), dvs. at \( f(n) \) asymptotisk mindst vokser lige så hurtigt som \( g(n) \).
         \end{proposition}
 
-        \begin{custombox}{Informal Limit Approach}
+        \begin{custombox}{Uformel grænseværdimetode}
             \[
                 \begin{array}{ll}
                 \displaystyle \lim_{n \to \infty} \frac{f(n)}{g(n)} = L<\infty & \Rightarrow f(n) = \mathcal{O}(g(n)) \\[10pt]
@@ -1588,5 +1588,5 @@ This means that $f(n)$ is asymptotically bounded both above and below by $g(n)$,
                 \end{array}
                 \]
                 \medskip
-                \textbf{Note:} This approach is an informal guideline and not a strict mathematical definition. There are cases where this limit-based method may not apply, but it often provides a convenient tool for determining asymptotic behavior.
+                \textbf{Bemærk:} Denne metode er en uformel rettesnor og ikke en streng matematisk definition. Der findes tilfælde, hvor den grænseværdibaserede metode ikke kan anvendes, men den er ofte et bekvemt værktøj til at bestemme asymptotisk opførsel.
         \end{custombox}

@@ -1,37 +1,52 @@
-# Mathematics for Software Engineering
+# Matematik for softwareingeniører
 
-## Description
+Dette repository indeholder LaTeX-kilden til den **danske udgave** af
+lærebogen *Mathematics for Software Engineering* (MSE1) af Richard Brooks,
+VIA University College.
 
-This repository contains the LaTeX source code for the course book "Mathematics for Software Engineering". The book covers essential mathematical concepts relevant to software engineers, providing foundational knowledge for various areas within computer science. Topics include arithmetic, number theory, numeral systems, Boolean algebra, combinatorics, probability, and linear algebra, among others.
+Den engelske udgave ligger i et separat projekt (`MSE_book_v2`) og er
+autoritet for indholdet. Den danske udgave er oversat fra commit
+`6dc0964e5e5ad896e1ef2d09234ab64f33c2e315` (3. september 2026) og har samme
+opbygning: fem dele, kapitel 0–15 og to bilag.
 
-## Target Audience
+## Build
 
-This book is primarily aimed at undergraduate software engineering students. It may also be beneficial for professional developers looking to refresh or strengthen their understanding of the mathematical principles underlying software development.
+```powershell
+latexmk -pdf main.tex
+```
 
-## Structure Overview
+ElegantBook har ingen indbygget `lang=da`; danske betegnelser (Kapitel, Del,
+Eksempel, Sætning, Bilag osv.) er sat i `main.tex`. Forsiden genskabes på
+dansk ved at lægge tekst over det originale forsidebillede
+(`figure/cover_da.tex`).
 
-The book is organized into several chapters covering fundamental mathematical topics relevant to software engineering, along with appendices for supplementary material. *(The specific chapter structure and titles are subject to change.)*
+Under arbejdet med et enkelt kapitel kan man bygge det alene:
 
-## Building the Book
+```powershell
+.\tools\build_chapter.ps1 chapter05
+```
 
-This book is written in LaTeX using the `elegantbook` class and various other packages (like `tikz`, `circuitikz`, `amsmath`, `pgfplots`, `listings`, `clrscode4e`, `biblatex`).
+## Kvalitetskontrol
 
-To compile the book into a PDF:
+- `python tools/compare_tex.py all` sammenligner hver dansk fil med den
+  engelske kilde: miljøer, labels, henvisninger, citater, alle formler, tal i
+  teksten og programkode.
+- `python tools/find_english.py` finder linjer, der stadig ligner engelsk.
+- `python tools/render_pages.py main.pdf <mappe> <sider>` renderer sider til
+  visuel kontrol.
 
-1.  Ensure you have a working LaTeX distribution installed (e.g., TeX Live, MiKTeX, MacTeX).
-2.  Make sure all necessary packages listed in `main.tex` are installed.
-3.  Navigate to the root directory of this repository in your terminal.
-4.  Run the following command (using `latexmk` is recommended as it handles dependencies and multiple passes):
-    ```bash
-    latexmk -pdf main.tex
-    ```
-5.  This will generate `main.pdf`.
+## Redaktionelle dokumenter
 
-## Contributors
+- `planning/DA_ORDLISTE.md` – bindende dansk terminologi
+- `planning/OVERSAETTELSESPRINCIPPER.md` – principper og konventioner
+- `planning/KILDEFEJL.md` – mulige fejl fundet i den engelske kilde
+- `planning/KONTROLRAPPORT.md` – kontrolrapport for den færdige udgave
 
-*   [Richard Brooks](https://github.com/RBrooksDK)
-*   [Eduard Fekete](https://github.com/fredoslav2004)
+## Forfattere
 
-## License
+* [Richard Brooks](https://github.com/RBrooksDK)
+* [Eduard Fekete](https://github.com/fredoslav2004)
 
-This project is licensed under the MIT License.
+## Licens
+
+Projektet er udgivet under MIT-licensen.

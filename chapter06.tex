@@ -1,94 +1,94 @@
-\chapter{Descriptive Statistics}
+\chapter{Beskrivende statistik}
 \label{chap:ch6}
 
-In software engineering, we constantly deal with data: performance metrics, user behavior patterns, system response times, and code complexity measures. To make sense of this information and extract meaningful insights, we need tools to summarize, organize, and visualize data. Descriptive statistics provides these essential tools, allowing us to understand the characteristics of our data without making inferences about larger populations.
+I softwareudvikling arbejder vi konstant med data: ydelsesmålinger, mønstre i brugeradfærd, systemers svartider og mål for kodekompleksitet. For at forstå disse oplysninger og uddrage meningsfuld indsigt har vi brug for værktøjer til at opsummere, organisere og visualisere data. Beskrivende statistik giver os disse grundlæggende værktøjer, så vi kan forstå vores datas egenskaber uden at drage slutninger om større populationer.
 
-Consider a software development team analyzing the performance of their web application. They collect response times for 1000 user requests and find values ranging from 50 milliseconds to 3.2 seconds. Without proper analysis, this raw data is overwhelming and uninformative. However, by applying descriptive statistics, they can determine that the average response time is 450 milliseconds, that 75\% of requests complete within 600 milliseconds, and that there are a few unusually slow requests that might indicate performance issues.
+Forestil dig et softwareudviklingsteam, der analyserer ydelsen af sin webapplikation. Teamet indsamler svartider for 1000 brugerforespørgsler og finder værdier fra 50 millisekunder til 3.2 sekunder. Uden en ordentlig analyse er disse rådata overvældende og siger ikke meget. Ved at anvende beskrivende statistik kan teamet derimod fastslå, at den gennemsnitlige svartid er 450 millisekunder, at 75\% af forespørgslerne er afsluttet inden for 600 millisekunder, og at der er nogle få usædvanligt langsomme forespørgsler, som kan tyde på ydelsesproblemer.
 
-This chapter introduces the fundamental concepts of descriptive statistics, focusing on measures that help us understand the central tendencies, variability, and distribution patterns in our data. We will explore how these techniques apply specifically to software engineering contexts, from analyzing algorithm performance to understanding user behavior patterns.
+Dette kapitel introducerer de grundlæggende begreber i beskrivende statistik med fokus på mål, der hjælper os med at forstå centrale tendenser, variation og fordelingsmønstre i vores data. Vi undersøger, hvordan disse teknikker anvendes specifikt i softwareudvikling, fra analyse af algoritmers ydelse til forståelse af mønstre i brugeradfærd.
 
-\section{Introduction to Descriptive Statistics} \label{sec:ch6sec1}
+\section{Introduktion til beskrivende statistik} \label{sec:ch6sec1}
 
-Sometimes statistical work begins with existing data, such as precipitation records, unemployment rates, or GDP figures, which we then summarize and analyze. In other situations, data must be generated through an experiment or study. For example, to compare two teaching methods in an introductory programming course, an instructor might randomly divide students into two groups, apply a different method to each, and then compare test scores. Random assignment is essential: it ensures that differences between groups are not due to preexisting factors such as aptitude, but rather to the teaching method itself.  
+Nogle gange begynder statistisk arbejde med eksisterende data, fx nedbørsmålinger, ledighedsprocenter eller BNP-tal, som vi derefter opsummerer og analyserer. I andre situationer skal data frembringes gennem et eksperiment eller en undersøgelse. Hvis en underviser fx vil sammenligne to undervisningsmetoder i et introducerende programmeringskursus, kan underviseren tilfældigt dele de studerende i to grupper, anvende en forskellig metode i hver gruppe og derefter sammenligne testresultaterne. Den tilfældige fordeling er afgørende: Den sikrer, at forskelle mellem grupperne ikke skyldes forhold, der fandtes i forvejen, fx evner, men derimod selve undervisningsmetoden.  
 
-After the data are collected, they are summarized and visualized—for example, by reporting the average score for each group. This process is the essence of \textbf{descriptive statistics}: organising, presenting, and describing data in a meaningful way.  
+Når data er indsamlet, bliver de opsummeret og visualiseret -- for eksempel ved at angive det gennemsnitlige resultat for hver gruppe. Denne proces er kernen i \textbf{beskrivende statistik}: at organisere, præsentere og beskrive data på en meningsfuld måde.  
 
-\subsection*{Population versus Sample}
+\subsection*{Population og stikprøve}
 
-In statistical analysis, we distinguish between two key concepts:
+I statistisk analyse skelner vi mellem to centrale begreber:
 
 \begin{definition}[Population]
-A \textbf{population} is the complete set of all possible observations or measurements of interest in a particular study. In software engineering contexts, this might include all possible execution times of an algorithm, all user sessions on a website, or all lines of code in a project.
+En \textbf{population} er den fuldstændige mængde af alle mulige observationer eller målinger, der er af interesse i en bestemt undersøgelse. I softwareudvikling kan det være alle mulige køretider for en algoritme, alle brugersessioner på et websted eller alle kodelinjer i et projekt.
 \end{definition}
 
-\begin{definition}[Sample]
-A \textbf{sample} is a subset of the population that we actually observe or measure. Due to practical constraints, we often work with samples rather than entire populations.
+\begin{definition}[Stikprøve]
+En \textbf{stikprøve} er en delmængde af populationen, som vi faktisk observerer eller måler. På grund af praktiske begrænsninger arbejder vi ofte med stikprøver i stedet for hele populationer.
 \end{definition}
 
-In the teaching-method example, the students in the classroom form only a \emph{sample} of the larger \emph{population} of potential learners. Descriptive statistics helps us understand the sample itself, while inferential methods later allow us to use that sample to draw conclusions about the broader population. Inferential statistics lies beyond the scope of this book. We will focus on descriptive statistics in this chapter.
+I eksemplet med undervisningsmetoderne udgør de studerende i klasselokalet kun en \emph{stikprøve} af den større \emph{population} af potentielle studerende. Beskrivende statistik hjælper os med at forstå selve stikprøven, mens inferentielle metoder senere gør det muligt at bruge stikprøven til at drage konklusioner om den bredere population. Inferentiel statistik ligger uden for denne bogs rammer. I dette kapitel fokuserer vi på beskrivende statistik.
 
 
-\begin{example} Software Performance Analysis
+\begin{example} Analyse af softwareydelse
 
-Consider a web application serving millions of users daily. The \textbf{population} would be the response times for all possible user requests. However, due to computational and storage limitations, we might only collect response times for a \textbf{sample} of 10,000 requests per day. This sample should be representative of the population to draw meaningful conclusions.
+Se på en webapplikation, der betjener millioner af brugere dagligt. \textbf{Populationen} vil være svartiderne for alle mulige brugerforespørgsler. På grund af begrænsninger i beregnings- og lagerkapacitet indsamler vi dog måske kun svartider for en \textbf{stikprøve} på 10\,000 forespørgsler om dagen. Stikprøven bør være repræsentativ for populationen, hvis vi skal kunne drage meningsfulde konklusioner.
 \end{example}
 
-\subsection*{Types of Data}
+\subsection*{Datatyper}
 
-Data can be classified into different types, each requiring different statistical approaches:
+Data kan inddeles i forskellige typer, som hver kræver forskellige statistiske tilgange:
 
-\begin{definition}[Qualitative Data]
-\textbf{Qualitative data} (also called categorical data) consists of non-numerical information that can be categorized. Examples include programming languages used in a project, user satisfaction ratings (satisfied/neutral/dissatisfied), or bug severity levels (critical/high/medium/low).
+\begin{definition}[Kvalitative data]
+\textbf{Kvalitative data} (også kaldet kategoriske data) består af ikke-numeriske oplysninger, der kan inddeles i kategorier. Eksempler er de programmeringssprog, der bruges i et projekt, brugertilfredshed (tilfreds/neutral/utilfreds) eller fejls alvorlighedsgrad (kritisk/høj/middel/lav).
 \end{definition}
 
-The essential difference between \textbf{qualitative} and \textbf{quantitative} data lies in what they represent and how they are analyzed. Qualitative data refers to categories or attributes that cannot be expressed meaningfully as numbers. Such data are used to classify or label elements, for example, programming language or bug severity. Quantitative data, on the other hand, consists of numerical values that represent counts or measurements, such as response times or number of users. Because these values are numerical, they permit mathematical operations and statistical analysis. Recognizing the distinction between qualitative and quantitative data is fundamental, as it guides the choice of statistical methods and the types of visualizations that are appropriate for analysis.
+Den væsentlige forskel mellem \textbf{kvalitative} og \textbf{kvantitative} data ligger i, hvad de repræsenterer, og hvordan de analyseres. Kvalitative data er kategorier eller egenskaber, der ikke meningsfuldt kan udtrykkes som tal. Sådanne data bruges til at klassificere eller mærke elementer, fx programmeringssprog eller fejls alvorlighedsgrad. Kvantitative data består derimod af numeriske værdier, der repræsenterer antal eller målinger, fx svartider eller antal brugere. Fordi disse værdier er numeriske, kan man udføre matematiske operationer og statistisk analyse på dem. Det er grundlæggende at kunne skelne mellem kvalitative og kvantitative data, da det styrer valget af statistiske metoder og af, hvilke typer visualiseringer der er egnede til analysen.
 
-\begin{definition}[Quantitative Data]
-\textbf{Quantitative data} consists of numerical measurements that can be ordered and subjected to mathematical operations. This can be further divided into:
+\begin{definition}[Kvantitative data]
+\textbf{Kvantitative data} består af numeriske målinger, der kan ordnes og underkastes matematiske operationer. De kan yderligere opdeles i:
 \begin{itemize}
-    \item \textbf{Discrete}: Countable values (number of bugs, lines of code, user sessions)
-    \item \textbf{Continuous}: Measurable values that can take any value within a range (response times, memory usage, CPU utilization)
+    \item \textbf{Diskrete}: Tællelige værdier (antal fejl, kodelinjer, brugersessioner)
+    \item \textbf{Kontinuerte}: Målbare værdier, der kan antage enhver værdi inden for et interval (svartider, hukommelsesforbrug, CPU-udnyttelse)
 \end{itemize}
 \end{definition}
 
 \begin{example}
 \begin{itemize}
-    \item \textbf{Qualitative}: Programming language (Python, Java, C++), deployment environment (development, staging, production)
-    \item \textbf{Quantitative Discrete}: Number of commits per day, lines of code, number of test cases
-    \item \textbf{Quantitative Continuous}: Response time in milliseconds, memory usage in MB, CPU utilization percentage
+    \item \textbf{Kvalitative}: Programmeringssprog (Python, Java, C++), driftsmiljø (udvikling, staging, produktion)
+    \item \textbf{Kvantitative, diskrete}: Antal commits pr. dag, kodelinjer, antal testtilfælde
+    \item \textbf{Kvantitative, kontinuerte}: Svartid i millisekunder, hukommelsesforbrug i MB, CPU-udnyttelse i procent
 \end{itemize}
 \end{example}
 
-\subsection*{Outliers and Extreme Data}
+\subsection*{Outliers og ekstreme data}
 
-In any dataset, most values tend to cluster around a central region, but occasionally, we encounter values that are much higher or lower than the rest. These are called \textbf{outliers} or \textbf{extreme values}. Outliers can arise for many reasons: measurement errors, unusual but valid events, or natural variability in the data.
+I ethvert datasæt har de fleste værdier en tendens til at samle sig i et centralt område, men af og til møder vi værdier, der er meget større eller mindre end resten. De kaldes \textbf{outliers} eller \textbf{ekstremværdier}. Outliers kan opstå af mange grunde: målefejl, usædvanlige, men gyldige hændelser eller naturlig variation i data.
 
-For example, if most web requests complete in under 400 milliseconds, but one request takes 1200 milliseconds, that 1200ms value is an outlier. Outliers can have a strong influence on summary statistics like the mean, making the data appear more variable or shifting the average away from where most values lie.
+Hvis de fleste webforespørgsler fx er afsluttet på under 400 millisekunder, men én forespørgsel tager 1200 millisekunder, er værdien 1200ms en outlier. Outliers kan have stor indflydelse på opsummerende statistikker som gennemsnittet, så data ser ud til at variere mere, eller så gennemsnittet flyttes væk fra det sted, hvor de fleste værdier ligger.
 
-It's important to look for outliers when analyzing data, as they can signal interesting phenomena (such as a rare performance bottleneck), data entry mistakes, or the need for further investigation. While there are formal methods to detect outliers, which we will discuss later, often a simple plot or a scan of the sorted data is enough to spot values that "stand out" from the rest.
+Det er vigtigt at holde øje med outliers, når man analyserer data, da de kan være tegn på interessante fænomener (fx en sjælden flaskehals i ydelsen), indtastningsfejl eller et behov for nærmere undersøgelse. Der findes formelle metoder til at finde outliers, som vi gennemgår senere, men ofte er et simpelt plot eller et blik på de sorterede data nok til at få øje på værdier, der »skiller sig ud« fra resten.
 
-In practice, understanding the context is key: sometimes outliers are errors to be corrected or removed, but other times they are the most important part of the story.
+I praksis er det afgørende at forstå sammenhængen: Nogle gange er outliers fejl, der skal rettes eller fjernes, men andre gange er de den vigtigste del af historien.
 
-\section{Describing Data Sets}
-When presenting numerical results, clarity and brevity are essential. Tables and graphs are particularly effective, as they allow the reader to quickly grasp the main characteristics of a dataset. Visual and tabular summaries often highlight important aspects such as the overall range, how tightly the values are concentrated, and whether the data appear symmetric or skewed.
+\section{Beskrivelse af datasæt}
+Når man præsenterer numeriske resultater, er klarhed og kortfattethed afgørende. Tabeller og grafer er særligt effektive, fordi de lader læseren hurtigt få fat i et datasæts vigtigste egenskaber. Visuelle opsummeringer og tabeller fremhæver ofte vigtige forhold som den samlede variationsbredde, hvor tæt værdierne er samlet, og om data ser symmetriske eller skæve ud.
 
-\subsection*{Frequency Tables and Graphs} \label{sub:frequency_tables_and_graphs}
+\subsection*{Hyppighedstabeller og grafer} \label{sub:frequency_tables_and_graphs}
 
-The first step in data analysis is often to organize raw data into a frequency distribution, which shows how often each value (or range of values) occurs.
+Det første skridt i en dataanalyse er ofte at organisere rådata i en hyppighedsfordeling, som viser, hvor ofte hver værdi (eller hvert interval af værdier) forekommer.
 
-\begin{definition}[Frequency Distribution]
-A \textbf{frequency distribution} is a table that shows the frequency (count) of each value or class of values in a dataset. It can be presented as:
+\begin{definition}[Hyppighedsfordeling]
+En \textbf{hyppighedsfordeling} er en tabel, der viser hyppigheden (antallet) af hver værdi eller klasse af værdier i et datasæt. Den kan angives som:
 \begin{itemize}
-    \item \textbf{Absolute frequency}: The actual count of occurrences
-    \item \textbf{Relative frequency}: The proportion of total observations
-    \item \textbf{Cumulative frequency}: The running total of frequencies
+    \item \textbf{Absolut hyppighed}: Det faktiske antal forekomster
+    \item \textbf{Relativ hyppighed}: Andelen af det samlede antal observationer
+    \item \textbf{Kumuleret hyppighed}: Den løbende sum af hyppighederne
 \end{itemize}
 \end{definition}
 
 \begin{example}
-A dataset with a relatively small number of distinct values can be conveniently presented in a frequency table. For instance, consider a dataset consisting of the starting monthly salaries (to the nearest thousand Danish Kroner) of 42 recently graduated students with B.S. degrees in software engineering.
+Et datasæt med et forholdsvis lille antal forskellige værdier kan bekvemt præsenteres i en hyppighedstabel. Se fx på et datasæt med de månedlige startlønninger (afrundet til nærmeste tusind danske kroner) for 42 nyuddannede med en bachelorgrad i softwareudvikling.
 
-The raw data is as follows:
+Rådata er som følger:
 \[
 \begin{aligned}
 &37, 37, 37, 37, 38, 39, 39, 39, 40, 40, 40, 40, 40, 41, 41, 41, 41, 41, 41, 41, 41, \\
@@ -96,7 +96,7 @@ The raw data is as follows:
 \end{aligned}
 \]
 
-From this data, we can construct a frequency table. \autoref{tab:salary_freq} tells us, among other things, that the lowest starting salary of 37,000 DKK was received by four of the graduates, whereas the highest salary of 50,000 DKK was received by a single student. The most common starting salary was 42,000 DKK, received by 10 of the students.
+Ud fra disse data kan vi opstille en hyppighedstabel. \autoref{tab:salary_freq} fortæller os blandt andet, at den laveste startløn på 37\,000 DKK blev givet til fire af de nyuddannede, mens den højeste løn på 50\,000 DKK kun blev givet til én. Den hyppigste startløn var 42\,000 DKK, som 10 af de nyuddannede fik.
 
 \begin{table}[htbp]
 \centering
@@ -104,7 +104,7 @@ From this data, we can construct a frequency table. \autoref{tab:salary_freq} te
 {\arrayrulecolor{mseViaBlue}
 \begin{tabular}{cc}
 \toprule
-\textbf{Salary (\(\times 1000\) DKK)} & \textbf{Frequency} \\
+\textbf{Løn (\(\times 1000\) DKK)} & \textbf{Hyppighed} \\
 \midrule
 37 & 4 \\
 38 & 1 \\
@@ -119,22 +119,22 @@ From this data, we can construct a frequency table. \autoref{tab:salary_freq} te
 \bottomrule
 \end{tabular}
 }
-\caption{Frequency Distribution of Monthly Starting Salaries}
+\caption{Hyppighedsfordeling af månedlige startlønninger}
 \label{tab:salary_freq}
 \end{table}
 \end{example}
 
-Data from a frequency table can be graphically represented by a line graph that plots the
-distinct data values on the horizontal axis and indicates their frequencies by the heights of
-vertical lines. A line graph of the data presented in \autoref{tab:salary_freq} is shown in \autoref{fig:salary_line_graph}.
+Data fra en hyppighedstabel kan afbildes grafisk i et pindediagram, der afsætter de
+forskellige dataværdier på den vandrette akse og angiver deres hyppigheder med højden af
+lodrette linjer. Et pindediagram over dataene i \autoref{tab:salary_freq} er vist i \autoref{fig:salary_line_graph}.
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Line Graph of Starting Salaries},
-    xlabel={Starting Salary (\(\times 1000\) DKK)},
-    ylabel={Frequency},
+    title={Pindediagram over startlønninger},
+    xlabel={Startløn (\(\times 1000\) DKK)},
+    ylabel={Hyppighed},
     ymin=0,
     ymax=12,
     xmin=36,
@@ -161,11 +161,11 @@ vertical lines. A line graph of the data presented in \autoref{tab:salary_freq} 
 };
 \end{axis}
 \end{tikzpicture}
-\caption{A line graph showing the frequency of different starting salaries.}
+\caption{Et pindediagram, der viser hyppigheden af de forskellige startlønninger.}
 \label{fig:salary_line_graph}
 \end{figure}
 
-When the lines in a line graph are given added thickness, the graph is called a bar graph. \autoref{fig:salary_bar_graph} shows a bar graph for the same salary data.
+Når linjerne i et pindediagram gøres tykkere, kaldes grafen et søjlediagram. \autoref{fig:salary_bar_graph} viser et søjlediagram over de samme lønninger.
 
 \newpage   
 
@@ -173,9 +173,9 @@ When the lines in a line graph are given added thickness, the graph is called a 
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Bar Graph of Starting Salaries},
-    xlabel={Starting Salary (\(\times 1000\) DKK)},
-    ylabel={Frequency},
+    title={Søjlediagram over startlønninger},
+    xlabel={Startløn (\(\times 1000\) DKK)},
+    ylabel={Hyppighed},
     ymin=0,
     ymax=12,
     xmin=36,
@@ -205,21 +205,21 @@ When the lines in a line graph are given added thickness, the graph is called a 
 };
 \end{axis}
 \end{tikzpicture}
-\caption{A bar graph of the salary data.}
+\caption{Et søjlediagram over lønningerne.}
 \label{fig:salary_bar_graph}
 \end{figure}
 
-Another type of graph used to represent a frequency table is the frequency polygon, which
-plots the frequencies of the different data values on the vertical axis, and then connects the
-plotted points with straight lines. \autoref{fig:salary_frequency_polygon} shows a frequency polygon for the same salary data.
+En anden type graf, der bruges til at afbilde en hyppighedstabel, er hyppighedspolygonen, som
+afsætter hyppighederne af de forskellige dataværdier på den lodrette akse og derefter forbinder de
+afsatte punkter med rette linjestykker. \autoref{fig:salary_frequency_polygon} viser en hyppighedspolygon for de samme lønninger.
 
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Frequency Polygon of Starting Salaries},
-    xlabel={Starting Salary (\(\times 1000\) DKK)},
-    ylabel={Frequency},
+    title={Hyppighedspolygon for startlønninger},
+    xlabel={Startløn (\(\times 1000\) DKK)},
+    ylabel={Hyppighed},
     ymin=0,
     ymax=12,
     xmin=36,
@@ -250,11 +250,11 @@ plotted points with straight lines. \autoref{fig:salary_frequency_polygon} shows
 };
 \end{axis}
 \end{tikzpicture}
-\caption{A frequency polygon of the salary data, connecting the points from the frequency table.}
+\caption{En hyppighedspolygon for lønningerne, der forbinder punkterne fra hyppighedstabellen.}
 \label{fig:salary_frequency_polygon}
 \end{figure}
 
-Sometimes we prefer the relative frequency over the absolute frequency. This is particularly useful when dealing with large datasets and when you want to compare values from datasets of different sizes. An extension of the relative frequency is the cumulative relative frequency, which is the running total of the relative frequencies. \autoref{tab:salary_full_freq} shows the frequency, relative frequency, and cumulative relative frequency for the salary data.
+Nogle gange foretrækker vi den relative hyppighed frem for den absolutte hyppighed. Det er særligt nyttigt ved store datasæt, og når man vil sammenligne værdier fra datasæt af forskellig størrelse. En udvidelse af den relative hyppighed er den kumulerede relative hyppighed, som er den løbende sum af de relative hyppigheder. \autoref{tab:salary_full_freq} viser hyppigheden, den relative hyppighed og den kumulerede relative hyppighed for lønningerne.
 
 \begin{table}[htbp]
 \centering
@@ -262,7 +262,7 @@ Sometimes we prefer the relative frequency over the absolute frequency. This is 
 {\arrayrulecolor{mseViaBlue}
 \begin{tabular}{cccc}
 \toprule
-\textbf{Salary} & \textbf{Frequency} & \textbf{Relative Freq.} & \textbf{Cumulative Rel. Freq.} \\
+\textbf{Løn} & \textbf{Hyppighed} & \textbf{Relativ hyppighed} & \textbf{Kumuleret rel. hyppighed} \\
 \midrule
 37 & 4 & $4/42 \approx 0.095$ & $4/42 \approx 0.095$ \\
 38 & 1 & $1/42 \approx 0.024$ & $5/42 \approx 0.119$ \\
@@ -277,15 +277,15 @@ Sometimes we prefer the relative frequency over the absolute frequency. This is 
 \bottomrule
 \end{tabular}
 }
-\caption{Frequency, Relative Frequency, and Cumulative Relative Frequency of Monthly Starting Salaries.}
+\caption{Hyppighed, relativ hyppighed og kumuleret relativ hyppighed af månedlige startlønninger.}
 \label{tab:salary_full_freq}
 \end{table}
 
 \newpage
 
-\subsection*{Grouped Data and Histograms}
+\subsection*{Grupperede data og histogrammer}
 
-As we saw in \autoref{sub:frequency_tables_and_graphs}, line and bar graphs are useful for showing frequencies of data values. When a dataset contains many distinct values, such as the lamp lifetimes in \autoref{tab:lamp_life_raw}, creating a frequency table for each individual value becomes impractical. A more effective approach is to group the data into a set of \textbf{class intervals}, which are also commonly referred to as \textbf{bins}.
+Som vi så i \autoref{sub:frequency_tables_and_graphs}, er pindediagrammer og søjlediagrammer nyttige til at vise dataværdiers hyppigheder. Når et datasæt indeholder mange forskellige værdier, som pærernes levetider i \autoref{tab:lamp_life_raw}, bliver det upraktisk at lave en hyppighedstabel for hver enkelt værdi. En mere effektiv fremgangsmåde er at gruppere data i et antal \textbf{klasseintervaller}, som også ofte kaldes \textbf{intervaller} (på engelsk \emph{bins}).
 
 \begin{table}[h!]
 \centering
@@ -294,7 +294,7 @@ As we saw in \autoref{sub:frequency_tables_and_graphs}, line and bar graphs are 
 {\arrayrulecolor{mseViaBlue}
 \begin{tabular}{rrrrrrrrrr}
 \toprule
-\multicolumn{10}{c}{\textbf{Item Lifetimes (in Hours)}} \\
+\multicolumn{10}{c}{\textbf{Levetider (i timer)}} \\
 \midrule
 1067 & 919 & 1196 & 785 & 1126 & 936 & 918 & 1156 & 920 & 948 \\
 855 & 1092 & 1162 & 1170 & 929 & 950 & 905 & 972 & 1035 & 1045 \\
@@ -319,17 +319,17 @@ As we saw in \autoref{sub:frequency_tables_and_graphs}, line and bar graphs are 
 \bottomrule
 \end{tabular}
 }
-\caption{Life in Hours of 200 Incandescent Lamps.}
+\caption{Levetid i timer for 200 glødepærer.}
 \label{tab:lamp_life_raw}
 \end{table}
 
-The choice of how many bins to use involves a trade-off. If there are too few bins, we risk losing important information by grouping too many distinct values together. If there are too many bins, the frequencies within each bin may become too small to reveal any clear pattern in the data's distribution.
+Valget af, hvor mange intervaller man skal bruge, er en afvejning. Med for få intervaller risikerer vi at miste vigtig information, fordi for mange forskellige værdier bliver grupperet sammen. Med for mange intervaller kan hyppighederne i hvert interval blive så små, at de ikke afslører noget tydeligt mønster i datas fordeling.
 
-While the optimal number of bins is a subjective choice that depends on the dataset, a selection of 5 to 10 bins is typical. It is also customary, though not required, to use bins of equal width, as this often makes interpretation easier.
+Det optimale antal intervaller er et subjektivt valg, der afhænger af datasættet, men det er typisk at vælge 5 til 10 intervaller. Det er også almindeligt, men ikke påkrævet, at bruge lige brede intervaller, da det ofte gør fortolkningen lettere.
 
-The endpoints of a bin are called its \textbf{class boundaries}. We will adopt the common \textbf{left-end inclusion convention}, which specifies that a bin contains its left-end boundary but not its right-end one. For example, the bin 700--800 would contain any value \(x\) such that \(700 \le x < 800\).
+Et intervals endepunkter kaldes dets \textbf{klassegrænser}. Vi følger den almindelige \textbf{konvention om inklusion af venstre endepunkt}, som fastlægger, at et interval indeholder sin venstre grænse, men ikke sin højre. Intervallet 700--800 indeholder for eksempel enhver værdi \(x\), hvor \(700 \le x < 800\).
 
-Following this approach, the raw data from \autoref{tab:lamp_life_raw} is summarized in \autoref{tab:lamp_life_freq} using bins of length 100, starting at 500.
+Med denne fremgangsmåde er rådata fra \autoref{tab:lamp_life_raw} opsummeret i \autoref{tab:lamp_life_freq} med intervaller af længden 100, startende ved 500.
 
 \begin{table}[htbp]
 \centering
@@ -337,7 +337,7 @@ Following this approach, the raw data from \autoref{tab:lamp_life_raw} is summar
 {\arrayrulecolor{mseViaBlue}
 \begin{tabular}{cccc}
 \toprule
-\textbf{Class Interval} & \textbf{Frequency} & \textbf{Relative Freq.} & \textbf{Cumulative Rel. Freq.} \\
+\textbf{Klasseinterval} & \textbf{Hyppighed} & \textbf{Relativ hyppighed} & \textbf{Kumuleret rel. hyppighed} \\
 \midrule
 500--600   & 2   & 0.010 & 0.010 \\
 600--700   & 5   & 0.025 & 0.035 \\
@@ -352,11 +352,11 @@ Following this approach, the raw data from \autoref{tab:lamp_life_raw} is summar
 \bottomrule
 \end{tabular}
 }
-\caption{Frequency Distribution for the Lifetimes of 200 Incandescent Lamps.}
+\caption{Hyppighedsfordeling for levetiderne af 200 glødepærer.}
 \label{tab:lamp_life_freq}
 \end{table}
 
-A bar graph that plots the frequencies of data grouped into bins is called a \textbf{histogram}. A key feature of a histogram is that the bars are placed directly adjacent to one another, reflecting the continuous nature of the bins. The vertical axis can represent either the absolute frequency (the count of values in each interval) or the relative frequency. The former is called a \textbf{frequency histogram}, while the latter is a \textbf{relative frequency histogram}. \autoref{fig:lamp_life_histogram} shows a frequency histogram for the lamp lifetime data.
+Et søjlediagram, der viser hyppighederne af data grupperet i intervaller, kaldes et \textbf{histogram}. Et vigtigt kendetegn ved et histogram er, at søjlerne står direkte op ad hinanden, hvilket afspejler, at intervallerne er sammenhængende. Den lodrette akse kan angive enten den absolutte hyppighed (antallet af værdier i hvert interval) eller den relative hyppighed. Det første kaldes et \textbf{hyppighedshistogram}, det sidste et \textbf{relativt hyppighedshistogram}. \autoref{fig:lamp_life_histogram} viser et hyppighedshistogram for pærernes levetider.
 
 \newpage
 
@@ -364,9 +364,9 @@ A bar graph that plots the frequencies of data grouped into bins is called a \te
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Frequency Histogram of Lamp Lifetimes},
-    xlabel={Lifetime (in Hours)},
-    ylabel={Frequency},
+    title={Hyppighedshistogram over pærernes levetider},
+    xlabel={Levetid (i timer)},
+    ylabel={Hyppighed},
     ymin=0,
     width=0.9\linewidth,
     height=7cm,
@@ -392,19 +392,19 @@ A bar graph that plots the frequencies of data grouped into bins is called a \te
 };
 \end{axis}
 \end{tikzpicture}
-\caption{A frequency histogram for the lamp lifetime data. The adjacent bars show the distribution of data across continuous intervals.}
+\caption{Et hyppighedshistogram for pærernes levetider. De tilstødende søjler viser, hvordan data fordeler sig på sammenhængende intervaller.}
 \label{fig:lamp_life_histogram}
 \end{figure}
 
-Finally, we are sometimes interested in plotting the cumulative frequency or, more commonly, the cumulative relative frequency. Such a graph, often called an \textbf{ogive}, shows the number or proportion of data points that fall at or below a certain value.
+Endelig er vi nogle gange interesserede i at afbilde den kumulerede hyppighed eller, oftere, den kumulerede relative hyppighed. En sådan graf, der ofte kaldes en \textbf{sumkurve} (på engelsk \emph{ogive}), viser antallet eller andelen af datapunkter, der ligger på eller under en bestemt værdi.
 
 \begin{figure}[h!]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-    title={Cumulative Relative Frequency of Lamp Lifetimes (Ogive)},
-    xlabel={Lifetime (in Hours)},
-    ylabel={Cumulative Relative Frequency},
+    title={Kumuleret relativ hyppighed af pærernes levetider (sumkurve)},
+    xlabel={Levetid (i timer)},
+    ylabel={Kumuleret relativ hyppighed},
     ymin=0, ymax=1.05,
     xmin=400, xmax=1500,
     width=0.9\linewidth,
@@ -428,21 +428,21 @@ Finally, we are sometimes interested in plotting the cumulative frequency or, mo
 };
 \end{axis}
 \end{tikzpicture}
-\caption{An ogive showing the cumulative relative frequency for the lamp lifetime data.}
+\caption{En sumkurve, der viser den kumulerede relative hyppighed for pærernes levetider.}
 \label{fig:lamp_life_ogive}
 \end{figure}
 
-On an ogive, each point on the horizontal axis represents a data value, while the corresponding point on the vertical axis shows the proportion of the data that is less than or equal to that value. For example, \autoref{fig:lamp_life_ogive} presents the cumulative relative frequency plot for the lamp lifetime data. From this graph, we can quickly determine that approximately 50\% of the lamps had a lifetime of less than 1000 hours, about 95\% had a lifetime of less than 1200 hours (the actual value is 93\%), and 100\% of the lamps failed by 1500 hours.
+På en sumkurve repræsenterer hvert punkt på den vandrette akse en dataværdi, mens det tilsvarende punkt på den lodrette akse viser andelen af data, der er mindre end eller lig med denne værdi. \autoref{fig:lamp_life_ogive} viser fx den kumulerede relative hyppighed for pærernes levetider. Ud fra grafen kan vi hurtigt se, at omkring 50\% af pærerne havde en levetid på under 1000 timer, at cirka 95\% havde en levetid på under 1200 timer (den faktiske værdi er 93\%), og at 100\% af pærerne var gået i stykker efter 1500 timer.
 
-\section{Summarizing Data}
-Having seen how to visually and numerically summarize data distributions, we now focus on two fundamental aspects of describing a dataset: its \emph{center} (or typical value) and its \emph{dispersion} (or variability).
+\section{Opsummering af data}
+Vi har set, hvordan man kan opsummere datafordelinger visuelt og numerisk. Nu fokuserer vi på to grundlæggende aspekter af beskrivelsen af et datasæt: dets \emph{centrum} (eller typiske værdi) og dets \emph{spredning} (eller variation).
 
-\subsection*{Measures of Central Tendency}
-The \textbf{mean}, often called the average, is the most commonly used measure of central tendency. \autoref{def:arithmetic_mean} shows how to calculate the mean of a dataset and \autoref{ex:mean_response_time} examplifies .
+\subsection*{Centralmål}
+\textbf{Gennemsnittet} (også kaldet middelværdien) er det mest anvendte centralmål. \autoref{def:arithmetic_mean} viser, hvordan man beregner et datasæts gennemsnit, og \autoref{ex:mean_response_time} giver et eksempel.
 
-\begin{definition}[Arithmetic Mean] \label{def:arithmetic_mean}
+\begin{definition}[Aritmetisk gennemsnit] \label{def:arithmetic_mean}
 
-For a dataset with $n$ values $x_1, x_2, \ldots, x_n$, the \textbf{arithmetic mean} is defined as:
+For et datasæt med $n$ værdier $x_1, x_2, \ldots, x_n$ er det \textbf{aritmetiske gennemsnit} defineret som:
 
 $$
 \bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}
@@ -451,174 +451,174 @@ $$
 \end{definition}
 
 
-\begin{example} Response Time Analysis \label{ex:mean_response_time}
+\begin{example} Analyse af svartider \label{ex:mean_response_time}
 
-A web application recorded the following response times (in milliseconds) for 10 requests:
+En webapplikation har registreret følgende svartider (i millisekunder) for 10 forespørgsler:
 
 \[
 \{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}
 \]
 
-The mean response time is:
+Den gennemsnitlige svartid er:
 \[
-\bar{x} = \frac{120 + 150 + 180 + 200 + 220 + 250 + 280 + 300 + 350 + 400}{10} = \frac{2450}{10} = 245 \text{ milliseconds}
+\bar{x} = \frac{120 + 150 + 180 + 200 + 220 + 250 + 280 + 300 + 350 + 400}{10} = \frac{2450}{10} = 245 \text{ millisekunder}
 \]
 \end{example}
 
-The mean incorporates every value in a dataset, which makes it a powerful measure of central tendency. It is most appropriate when the data values are of similar magnitude and when the distribution is reasonably symmetric without extreme outliers. Under these conditions, the mean provides a reliable summary of the dataset.
+Gennemsnittet inddrager alle værdier i et datasæt, hvilket gør det til et stærkt centralmål. Det er mest velegnet, når dataværdierne er af nogenlunde samme størrelsesorden, og når fordelingen er rimeligt symmetrisk uden ekstreme outliers. Under disse betingelser giver gennemsnittet en pålidelig opsummering af datasættet.
 
-For example, in the analysis of web performance, the mean response time offers an overall indication of how quickly a system responds on average. However, if a few response times are much slower than the rest, the mean may give a misleading impression of the typical user experience.
+I analysen af webydelse giver den gennemsnitlige svartid fx et samlet billede af, hvor hurtigt et system i gennemsnit svarer. Hvis nogle få svartider er meget langsommere end resten, kan gennemsnittet dog give et misvisende indtryk af den typiske brugeroplevelse.
 
-Beyond its role as a summary statistic, the mean also serves as a foundation for many statistical methods. In particular, it is central to the definitions of variance and standard deviation, which measure the dispersion of data around the mean.
+Ud over sin rolle som opsummerende statistik er gennemsnittet også grundlaget for mange statistiske metoder. Det er især centralt i definitionerne af varians og standardafvigelse, som måler datas spredning omkring gennemsnittet.
 
 \begin{remark}
-    As mentioned earlier, and as we will revisit, the mean is highly sensitive to extreme values or outliers. Even a single unusually large or small observation can shift the mean considerably, reducing its ability to reflect the typical value of the dataset.
-    It is therefore important to consider the distribution of the data before relying solely on the mean to describe the center of a dataset.
+    Som nævnt tidligere, og som vi vender tilbage til, er gennemsnittet meget følsomt over for ekstremværdier eller outliers. Selv en enkelt usædvanligt stor eller lille observation kan flytte gennemsnittet betydeligt, så det i mindre grad afspejler datasættets typiske værdi.
+    Det er derfor vigtigt at se på datas fordeling, før man udelukkende bruger gennemsnittet til at beskrive et datasæts centrum.
 \end{remark}
 
-The \textbf{median} is the middle value when data is arranged in ascending order. It is less sensitive to outliers than the mean.
+\textbf{Medianen} er den midterste værdi, når data er ordnet i stigende rækkefølge. Den er mindre følsom over for outliers end gennemsnittet.
 
 \begin{definition}[Median]
-    For a dataset with $n$ values arranged in ascending order, the median is defined as:
+    For et datasæt med $n$ værdier ordnet i stigende rækkefølge er medianen defineret som:
     \[
     \text{median} =
     \begin{cases}
-        x_{\frac{n+1}{2}} & \text{if } n \text{ is odd} \\
-        \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2} & \text{if } n \text{ is even}
+        x_{\frac{n+1}{2}} & \text{hvis } n \text{ er ulige} \\
+        \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2} & \text{hvis } n \text{ er lige}
     \end{cases}
     \]
 \end{definition}
 
-\begin{example} Median Response Time
+\begin{example} Median svartid
 
-Using the same response time data from the previous example:
+Vi bruger de samme svartider som i det foregående eksempel:
 \[
 \{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}
 \]
 
-Since $n = 10$ (even), the median is the average of the 5th and 6th values:
+Da $n = 10$ (lige), er medianen gennemsnittet af den 5. og 6. værdi:
 \[
-\text{Median} = \frac{220 + 250}{2} = 235 \text{ milliseconds}
+\text{Median} = \frac{220 + 250}{2} = 235 \text{ millisekunder}
 \]
 \end{example}
 
 \begin{example}
 
-Consider the same data with an extreme value:
+Se på de samme data med en ekstremværdi:
 \[
 \{120, 150, 180, 200, 220, 250, 280, 300, 350, 2000\}
 \]
 
-The mean becomes: $\bar{x} = \frac{4050}{10} = 405$ milliseconds (significantly affected by the outlier)
+Gennemsnittet bliver: $\bar{x} = \frac{4050}{10} = 405$ millisekunder (stærkt påvirket af outlieren)
 
-The median remains: $\frac{220 + 250}{2} = 235$ milliseconds (unaffected by the outlier)
+Medianen forbliver: $\frac{220 + 250}{2} = 235$ millisekunder (upåvirket af outlieren)
 \end{example}
 
-Because the median divides a dataset into two equal halves, it serves as a robust measure of central tendency, particularly when the data contain outliers or are skewed. Unlike the mean, which can be drawn toward extreme values, the median remains largely unaffected, offering a more reliable indication of the ``typical'' value in such situations.
+Fordi medianen deler et datasæt i to lige store halvdele, er den et robust centralmål, især når data indeholder outliers eller er skæve. I modsætning til gennemsnittet, som kan trækkes mod ekstremværdier, er medianen stort set upåvirket og giver i sådanne situationer et mere pålideligt billede af den »typiske« værdi.
 
-The \textbf{mode} is the most frequently occurring value in a dataset.
+\textbf{Typetallet} er den værdi, der forekommer oftest i et datasæt.
 
-\begin{definition}[Mode]
-The \textbf{mode} is the value that appears most frequently in a dataset. A dataset can have:
+\begin{definition}[Typetal]
+\textbf{Typetallet} er den værdi, der forekommer hyppigst i et datasæt. Et datasæt kan have:
 \begin{itemize}
-    \item \textbf{No mode}: If all values appear with equal frequency
-    \item \textbf{One mode (unimodal)}: If one value appears most frequently
-    \item \textbf{Multiple modes (multimodal)}: If two or more values tie for the highest frequency
+    \item \textbf{Intet typetal}: Hvis alle værdier forekommer lige hyppigt
+    \item \textbf{Ét typetal (unimodalt)}: Hvis én værdi forekommer hyppigst
+    \item \textbf{Flere typetal (multimodalt)}: Hvis to eller flere værdier deler den højeste hyppighed
 \end{itemize}
 \end{definition}
 
-Sometimes, when a data set has two modes, it is called a \textbf{bimodal} dataset.
+Når et datasæt har to typetal, kaldes det nogle gange et \textbf{bimodalt} datasæt.
 
 \newpage
 
 \begin{example}
 
-A software project has the following bug severity levels:
+Et softwareprojekt har følgende alvorlighedsgrader for fejl:
 \[
-\{\text{High}, \text{Medium}, \text{Low}, \text{High}, \text{Critical}, \text{Medium}, \text{High}, \text{Low}, \text{High}, \text{Medium}\}
+\{\text{Høj}, \text{Middel}, \text{Lav}, \text{Høj}, \text{Kritisk}, \text{Middel}, \text{Høj}, \text{Lav}, \text{Høj}, \text{Middel}\}
 \]
 
-Counting frequencies:
+Optælling af hyppigheder:
 \begin{itemize}
-    \item High: 4 occurrences
-    \item Medium: 3 occurrences  
-    \item Low: 2 occurrences
-    \item Critical: 1 occurrence
+    \item Høj: 4 forekomster
+    \item Middel: 3 forekomster  
+    \item Lav: 2 forekomster
+    \item Kritisk: 1 forekomst
 \end{itemize}
 
-The mode is "High" since it appears most frequently.
+Typetallet er »Høj«, da denne værdi forekommer hyppigst.
 \end{example}
 
-The mode is especially useful when analyzing categorical or discrete data, where calculating a mean or median may not make sense. For example, in software engineering, the mode can help identify the most common error code returned by an API, the most frequently used programming language in a codebase, or the most reported type of bug in an issue tracker.
+Typetallet er især nyttigt ved analyse af kategoriske eller diskrete data, hvor det ikke altid giver mening at beregne et gennemsnit eller en median. I softwareudvikling kan typetallet fx hjælpe med at finde den fejlkode, som et API oftest returnerer, det mest anvendte programmeringssprog i en kodebase eller den hyppigst rapporterede fejltype i et issue-tracking-system.
 
-\subsubsection*{When to Use Each Measure}
+\subsubsection*{Hvornår bruges hvilket mål?}
 
 \begin{table}[htbp]
 \centering
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|l|l|l|}
 \hline
-\textbf{Measure} & \textbf{Best For} & \textbf{Limitations} \\
+\textbf{Mål} & \textbf{Bedst til} & \textbf{Begrænsninger} \\
 \hline
-Mean & Continuous data, symmetric distributions & Sensitive to outliers \\
+Gennemsnit & Kontinuerte data, symmetriske fordelinger & Følsomt over for outliers \\
 \hline
-Median & Data with outliers, skewed distributions & Less informative for symmetric data \\
+Median & Data med outliers, skæve fordelinger & Mindre informativ ved symmetriske data \\
 \hline
-Mode & Categorical data, discrete data & May not exist or be unique \\
+Typetal & Kategoriske data, diskrete data & Findes ikke altid eller er ikke entydigt \\
 \hline
 \end{tabular}
-\caption{Comparison of Central Tendency Measures}
+\caption{Sammenligning af centralmål}
 \label{tab:central_tendency}
 \end{table}
 
-\subsection*{Measures of Dispersion}
+\subsection*{Spredningsmål}
 
-While measures of central tendency tell us about the typical value, \textbf{measures of dispersion} describe how spread out the data are.Understanding variability is crucial in software engineering for assessing consistency and reliability.
+Mens centralmål fortæller os om den typiske værdi, beskriver \textbf{spredningsmål}, hvor spredte data er. I softwareudvikling er det afgørende at forstå variation, når man skal vurdere konsistens og pålidelighed.
 
-The \textbf{range} is the simplest measure of dispersion.
+\textbf{Variationsbredden} er det simpleste spredningsmål.
 
-\begin{definition}[Range]
-The \textbf{range} of a dataset is the difference between the maximum and minimum values:
+\begin{definition}[Variationsbredde]
+Et datasæts \textbf{variationsbredde} er forskellen mellem den største og den mindste værdi:
 \[
-\text{Range} = x_{\max} - x_{\min}
+\text{Variationsbredde} = x_{\max} - x_{\min}
 \]
 \end{definition}
 
 \begin{example}
 
-    For the response time data: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
+    For svartiderne: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
 
 \[
-\text{Range} = 400 - 120 = 280 \text{ milliseconds}
+\text{Variationsbredde} = 400 - 120 = 280 \text{ millisekunder}
 \]
 \end{example}
 
 \begin{remark}
-The range is sensitive to outliers and doesn't provide information about the distribution of values between the extremes.
+Variationsbredden er følsom over for outliers og giver ingen information om, hvordan værdierne er fordelt mellem yderpunkterne.
 \end{remark}
 
-The \textbf{variance} and \textbf{standard deviation} are more sophisticated measures that consider all data points.
+\textbf{Variansen} og \textbf{standardafvigelsen} er mere avancerede mål, der tager hensyn til alle datapunkter.
 
-\begin{definition}[Sample Variance and Standard Deviation]
-For a sample with $n$ values, the \textbf{sample variance}, denoted by $s^2$, is defined as:
+\begin{definition}[Stikprøvevarians og standardafvigelse]
+For en stikprøve med $n$ værdier er \textbf{stikprøvevariansen}, betegnet $s^2$, defineret som:
 $$
 s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
 $$
-The \textbf{sample standard deviation}, denoted by $s$, is the square root of the variance:
+\textbf{Stikprøvestandardafvigelsen}, betegnet $s$, er kvadratroden af variansen:
 $$
 s = \sqrt{s^2} = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
 $$
 \end{definition}
 
-While the mean identifies the center of a dataset, the \textbf{variance} and \textbf{standard deviation} measure its variability or spread. A small standard deviation indicates that data points are clustered tightly around the mean, whereas a large standard deviation signifies that they are more spread out.
+Mens gennemsnittet angiver et datasæts centrum, måler \textbf{variansen} og \textbf{standardafvigelsen} dets variation eller spredning. En lille standardafvigelse betyder, at datapunkterne ligger tæt samlet omkring gennemsnittet, mens en stor standardafvigelse betyder, at de er mere spredte.
 
-The sample variance is a scaled sum of the squared deviations from the mean, using the divisor $n-1$. Squaring each deviation serves two purposes: it makes all contributions non-negative, and it gives greater weight to larger deviations. However, this calculation leaves the variance in squared units (e.g., milliseconds squared), which are not intuitive to interpret.
+Stikprøvevariansen er en skaleret sum af de kvadrerede afvigelser fra gennemsnittet med divisoren $n-1$. Kvadreringen af hver afvigelse tjener to formål: Den gør alle bidrag ikke-negative, og den giver større afvigelser større vægt. Beregningen efterlader dog variansen i kvadrerede enheder (fx millisekunder i anden), som ikke er intuitive at fortolke.
 
-To solve this, we use the standard deviation, which is simply the square root of the variance. This crucial step returns the measure to the original units of the data (e.g., milliseconds), making it directly interpretable. In short, the standard deviation represents the typical distance of a data point from the mean.
+Det løser vi ved at bruge standardafvigelsen, som blot er kvadratroden af variansen. Dette afgørende skridt bringer målet tilbage til datas oprindelige enheder (fx millisekunder), så det kan fortolkes direkte. Kort sagt repræsenterer standardafvigelsen et datapunkts typiske afstand fra gennemsnittet.
 
-\begin{example} Calculating Standard Deviation
+\begin{example} Beregning af standardafvigelse
 
-    For the response time data: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$ with $\bar{x} = 245$:
+    For svartiderne: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$ med $\bar{x} = 245$:
 
 \begin{align*}
 s^2 &= \frac{1}{9}[(120-245)^2 + (150-245)^2 + \cdots + (400-245)^2] \\
@@ -628,48 +628,48 @@ s^2 &= \frac{1}{9}[(120-245)^2 + (150-245)^2 + \cdots + (400-245)^2] \\
 \end{align*}
 
 \[
-s = \sqrt{7872.22} \approx 88.73 \text{ milliseconds}
+s = \sqrt{7872.22} \approx 88.73 \text{ millisekunder}
 \]
 \end{example}
 
-The following algebraic identity is often helpful when computing variance or standard deviation by hand:
+Følgende algebraiske identitet er ofte nyttig, når man beregner varians eller standardafvigelse i hånden:
 
-We start from the definition:
+Vi tager udgangspunkt i definitionen:
 
 \[
 s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2
 \]
 
-Using the identity
+Ved hjælp af identiteten
 
 \[
 \sum_{i=1}^n (x_i - \bar{x})^2 = \sum_{i=1}^n x_i^2 - \frac{\left(\sum_{i=1}^n x_i \right)^2}{n}
 \]
 
-we can rewrite sample variance as
+kan vi omskrive stikprøvevariansen til
 
 \[
 s^2 = \frac{1}{n-1} \left( \sum_{i=1}^n x_i^2 - \frac{\left(\sum_{i=1}^n x_i\right)^2}{n} \right) =\frac{1}{n-1}\left(\sum_{i=1}^n x_i^2-n \bar{x}^2\right)
 \]
 
-This is known as the \textbf{computational formula for variance}, as it allows you to calculate $s^2$ directly from $\sum x_i$ and $\sum x_i^2$ (or equivalently, from $\sum x_i^2$ and $\bar{x}$), without needing to compute each individual deviation from the mean.
+Dette kaldes \textbf{regneformlen for varians}, da den gør det muligt at beregne $s^2$ direkte ud fra $\sum x_i$ og $\sum x_i^2$ (eller tilsvarende ud fra $\sum x_i^2$ og $\bar{x}$) uden at skulle beregne hver enkelt afvigelse fra gennemsnittet.
 
 
-The \textbf{coefficient of variation} allows comparison of variability across datasets with different scales.
+\textbf{Variationskoefficienten} gør det muligt at sammenligne variation på tværs af datasæt med forskellige skalaer.
 
-\begin{definition}[Coefficient of Variation]
-The \textbf{coefficient of variation} is the ratio of standard deviation to the mean:
+\begin{definition}[Variationskoefficient]
+\textbf{Variationskoefficienten} er forholdet mellem standardafvigelsen og gennemsnittet:
 \[
 CV = \frac{s}{\bar{x}} \times 100\%
 \]
 \end{definition}
 
-\begin{example} Comparing Variability
+\begin{example} Sammenligning af variation
 
-Consider two systems:
+Se på to systemer:
 \begin{itemize}
-    \item System A: Mean response time = 100ms, Standard deviation = 20ms
-    \item System B: Mean response time = 500ms, Standard deviation = 100ms
+    \item System A: Gennemsnitlig svartid = 100ms, standardafvigelse = 20ms
+    \item System B: Gennemsnitlig svartid = 500ms, standardafvigelse = 100ms
 \end{itemize}
 
 \begin{align*}
@@ -677,54 +677,54 @@ CV_A &= \frac{20}{100} \times 100\% = 20\% \\
 CV_B &= \frac{100}{500} \times 100\% = 20\%
 \end{align*}
 
-Both systems have the same relative variability (20\%), despite different absolute standard deviations.
+Begge systemer har samme relative variation (20\%), selv om deres absolutte standardafvigelser er forskellige.
 \end{example}
 
-\subsection*{Measures of Position}
+\subsection*{Positionsmål}
 
-To introduce a measure of spread that is less sensitive to outliers, we first need to understand measures of position, which describe the relative standing of a data point within a dataset.
+For at kunne introducere et spredningsmål, der er mindre følsomt over for outliers, skal vi først forstå positionsmål, som beskriver et datapunkts relative placering i et datasæt.
 
-\begin{definition}[Percentile]
-The $p$-th \textbf{percentile} is a value at or below which approximately $p\%$ of the observations fall. Several conventions are used to calculate percentiles, especially for small samples, so the chosen method should always be stated.
+\begin{definition}[Percentil]
+Den $p$-te \textbf{percentil} er en værdi, som cirka $p\%$ af observationerne ligger på eller under. Der findes flere konventioner for beregning af percentiler, især for små stikprøver, så den valgte metode bør altid angives.
 \end{definition}
 
-For example, if a response time is at the 95th percentile, it means that 95\% of all response times are faster than this one.
+Hvis en svartid fx ligger på 95.-percentilen, betyder det, at 95\% af alle svartider er hurtigere end denne.
 
-\begin{example} Percentile Calculation
+\begin{example} Beregning af percentil
 
-    For the response time data, use the nearest-rank method to find the 90th percentile:
+    Brug metoden med nærmeste rang til at finde 90.-percentilen for svartiderne:
 \begin{enumerate}
-        \item Sort data: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
-        \item Rank: $\lceil 0.9 \times 10\rceil = 9$
-        \item 90th percentile = 350ms
+        \item Sortér data: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
+        \item Rang: $\lceil 0.9 \times 10\rceil = 9$
+        \item 90.-percentilen = 350ms
 \end{enumerate}
     \end{example}
 
-Quartiles are specific, widely used percentiles that divide the data into four equal parts.
+Kvartiler er specifikke, meget anvendte percentiler, der deler data i fire lige store dele.
 
-\begin{definition}[Quartiles]
+\begin{definition}[Kvartiler]
 
-Quartiles divide an ordered dataset into four equal parts.
+Kvartiler deler et ordnet datasæt i fire lige store dele.
 
 \begin{itemize}
-    \item \textbf{Q1 (First Quartile)}: The 25th percentile.
-    \item \textbf{Q2 (Second Quartile)}: The 50th percentile. This is the \textbf{median} of the dataset.
-    \item \textbf{Q3 (Third Quartile)}: The 75th percentile.
+    \item \textbf{Q1 (første kvartil)}: 25.-percentilen.
+    \item \textbf{Q2 (anden kvartil)}: 50.-percentilen. Det er datasættets \textbf{median}.
+    \item \textbf{Q3 (tredje kvartil)}: 75.-percentilen.
 \end{itemize}
 \end{definition}
 
-\begin{example} Calculating Quartiles
+\begin{example} Beregning af kvartiler
 
-For the sorted response time data: $\{120, 150, 180, 200, 220, | 250, 280, 300, 350, 400\}$
+For de sorterede svartider: $\{120, 150, 180, 200, 220, | 250, 280, 300, 350, 400\}$
 \begin{itemize}
-    \item The lower half is $\{120, 150, 180, 200, 220\}$. The median of this half is $Q1 = 180$~ms.
-    \item The upper half is $\{250, 280, 300, 350, 400\}$. The median of this half is $Q3 = 300$~ms.
+    \item Den nederste halvdel er $\{120, 150, 180, 200, 220\}$. Medianen af denne halvdel er $Q1 = 180$~ms.
+    \item Den øverste halvdel er $\{250, 280, 300, 350, 400\}$. Medianen af denne halvdel er $Q3 = 300$~ms.
 \end{itemize}
 \end{example}
 
-\begin{example} Quartiles from an Ogive
+\begin{example} Kvartiler aflæst på en sumkurve
 
-Quartiles can be read directly from an ogive. As an example, we will again use the lamp lifetime data. Reading from the ogive in \autoref{fig:lamp_life_ogive_quartiles}, the approximate quartiles are $Q1 \approx 900$, $Q2$ (median) $\approx 1000$, and $Q3 \approx 1100$ hours.
+Kvartiler kan aflæses direkte på en sumkurve. Som eksempel bruger vi igen pærernes levetider. Aflæst på sumkurven i \autoref{fig:lamp_life_ogive_quartiles} er de omtrentlige kvartiler $Q1 \approx 900$, $Q2$ (medianen) $\approx 1000$ og $Q3 \approx 1100$ timer.
 
 \begin{figure}[h!]
 \centering
@@ -734,10 +734,10 @@ Quartiles can be read directly from an ogive. As an example, we will again use t
     \def\xQthree{1116.28}
 
     \begin{axis}[
-        title={Cumulative Relative Frequency of Lamp Lifetimes (Ogive)},
+        title={Kumuleret relativ hyppighed af pærernes levetider (sumkurve)},
         clip=false,
-        xlabel={Lifetime (in Hours)},
-        ylabel={Cumulative Relative Frequency},
+        xlabel={Levetid (i timer)},
+        ylabel={Kumuleret relativ hyppighed},
         ymin=0, ymax=1.05,
         xmin=400, xmax=1500,
         width=0.9\linewidth,
@@ -746,7 +746,7 @@ Quartiles can be read directly from an ogive. As an example, we will again use t
         grid style={dashed,gray!30},
         title style={font=\large\bfseries},
         xtick={400,600,800,1000,1200,1400},
-        xticklabels={400,600,800,,{1,200},{1,400}},
+        xticklabels={400,600,800,,{1\,200},{1\,400}},
         ytick={0.25,0.50,0.75,1.00},
         yticklabels={$\pmb{0.25}$,$\pmb{0.50}$,$\pmb{0.75}$,},
         yticklabel style={font=\bfseries, text=mseViaBlue},
@@ -779,82 +779,82 @@ Quartiles can be read directly from an ogive. As an example, we will again use t
         \node[anchor=north, font=\bfseries, text=mseViaBlue, yshift=-1.5] at (axis cs:\xQthree,0) {$\pmb{Q3}$};
     \end{axis}
 \end{tikzpicture}
-\caption{An ogive for the lamp lifetime data with quartiles $Q1$, $Q2$, and $Q3$ indicated by dashed lines.}
+\caption{En sumkurve for pærernes levetider med kvartilerne $Q1$, $Q2$ og $Q3$ markeret med stiplede linjer.}
 \label{fig:lamp_life_ogive_quartiles}
 \end{figure}
 
 \end{example}
 
-Percentiles divide data into 100 equal parts, while quartiles divide data into four equal parts.
+Percentiler deler data i 100 lige store dele, mens kvartiler deler data i fire lige store dele.
 
-The \textbf{interquartile range} is a robust measure of dispersion that is generally much less sensitive to extreme observations than the full range or the standard deviation.
+\textbf{Kvartilafstanden} er et robust spredningsmål, som generelt er langt mindre følsomt over for ekstreme observationer end den fulde variationsbredde eller standardafvigelsen.
 
-\begin{definition}[Interquartile Range]
-    The \textbf{interquartile range (IQR)} measures the spread of the middle 50\% of the data and is defined as
+\begin{definition}[Kvartilafstand]
+    \textbf{Kvartilafstanden (IQR)} måler spredningen af de midterste 50\% af data og er defineret som
     $$
     IQR = Q_3 - Q_1,
     $$
-    where $Q_1$ and $Q_3$ are the first and third quartiles. A larger IQR indicates that the central portion of the data is more widely dispersed, while a smaller IQR indicates that it is more tightly clustered.
+    hvor $Q_1$ og $Q_3$ er første og tredje kvartil. En større IQR betyder, at den centrale del af data er mere spredt, mens en mindre IQR betyder, at den er tættere samlet.
 \end{definition}
     
 
-\begin{example} IQR Calculation
+\begin{example} Beregning af IQR
 
-For the response time data: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
+For svartiderne: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
 
 \begin{itemize}
-    \item Lower half: $\{120, 150, 180, 200, 220\}$ → $Q1 = 180$
-    \item Upper half: $\{250, 280, 300, 350, 400\}$ → $Q3 = 300$
-    \item $IQR = 300 - 180 = 120$ milliseconds
+    \item Nederste halvdel: $\{120, 150, 180, 200, 220\}$ → $Q1 = 180$
+    \item Øverste halvdel: $\{250, 280, 300, 350, 400\}$ → $Q3 = 300$
+    \item $IQR = 300 - 180 = 120$ millisekunder
 \end{itemize}
 \end{example}
 
 
-\subsection*{Summary Statistics}
+\subsection*{Opsummerende statistik}
 
-Before we conclude this chapter, we will review the summary statistics covered in this section. \autoref{tab:summary_stats} is a hypothetical example for a separate dataset of 1000 web response times. The underlying observations are not listed, so the values are included to illustrate the structure of a summary table rather than as a reproducible calculation from the preceding ten observations.
+Før vi afslutter dette kapitel, gennemgår vi de opsummerende statistikker, som er behandlet i dette afsnit. \autoref{tab:summary_stats} er et hypotetisk eksempel for et separat datasæt med 1000 svartider fra et websted. De underliggende observationer er ikke angivet, så værdierne er medtaget for at illustrere opbygningen af en opsummerende tabel og ikke som en beregning, der kan efterprøves ud fra de ti foregående observationer.
 
 \begin{example}
 
-For a dataset of 1000 web response times:
+For et datasæt med 1000 svartider fra et websted:
 
 \begin{table}[htbp]
 \centering
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{|l|c|}
 \hline
-\textbf{Measure} & \textbf{Value} \\
+\textbf{Mål} & \textbf{Værdi} \\
 \hline
-Count & 1000 \\
-Mean & 245.3 ms \\
+Antal & 1000 \\
+Gennemsnit & 245.3 ms \\
 Median & 238.0 ms \\
-Mode & 220.0 ms \\
-Standard Deviation & 95.6 ms \\
-Variance & 9139.4 ms² \\
+Typetal & 220.0 ms \\
+Standardafvigelse & 95.6 ms \\
+Varians & 9139.4 ms² \\
 Minimum & 45.0 ms \\
-Maximum & 1200.0 ms \\
-Range & 1155.0 ms \\
+Maksimum & 1200.0 ms \\
+Variationsbredde & 1155.0 ms \\
 Q1 & 180.0 ms \\
 Q3 & 300.0 ms \\
 IQR & 120.0 ms \\
-Skewness & 1.2 (positive skew) \\
-Kurtosis & 2.8 (leptokurtic) \\
+Skævhed & 1.2 (positiv skævhed) \\
+Kurtosis & 2.8 (leptokurtisk) \\
 \hline
 \end{tabular}
-\caption{Complete Statistical Summary}
+\caption{Fuldstændig statistisk opsummering}
 \label{tab:summary_stats}
 \end{table}
 \end{example}
 
-This table provides a complete picture of the data and is often a first step in the analysis of a dataset. Note that the skewness and kurtosis have not been discussed but will be explained in the next section. We have chosen to include them here for completeness as they are often used in the analysis of a dataset - although how to calculate them is beyond the scope of this book.
+Tabellen giver et fuldstændigt billede af data og er ofte et første skridt i analysen af et datasæt. Bemærk, at skævhed og kurtosis ikke er blevet gennemgået, men vil blive forklaret i næste afsnit. Vi har valgt at medtage dem her for fuldstændighedens skyld, da de ofte bruges i analysen af et datasæt -- selv om det ligger uden for denne bogs rammer at beregne dem.
 
 
-\section{Understanding Data Distributions} \label{sec:data_distributions}
-Once we have visualized our data with histograms and box plots, we can begin to analyze the \textit{shape} of the distribution. The shape tells us about the underlying patterns in our data and helps us choose the right statistical tools. In software engineering, understanding the distribution of metrics like response times or error rates is critical for setting performance baselines and detecting anomalies. First we review the concept of outliers.
+\section{Forståelse af datafordelinger} \label{sec:data_distributions}
+Når vi har visualiseret vores data med histogrammer og boksplot, kan vi begynde at analysere fordelingens \textit{form}. Formen fortæller os om de underliggende mønstre i data og hjælper os med at vælge de rette statistiske værktøjer. I softwareudvikling er det afgørende at forstå fordelingen af målinger som svartider eller fejlrater, når man skal fastlægge referenceniveauer for ydelse og opdage afvigelser. Først genopfrisker vi begrebet outliers.
 
-\subsection*{Normal Data Sets}
+\subsection*{Normale datasæt}
 
-Many large data sets yield histograms with a distinctive overall shape: the frequencies peak near the sample median and decrease symmetrically on both sides, forming a characteristic \textbf{bell-shaped curve}. Data sets exhibiting this property are called \textbf{normal}, and their histograms are referred to as \textbf{normal histograms} (see \autoref{fig:normal_hist}).
+Mange store datasæt giver histogrammer med en karakteristisk overordnet form: Hyppighederne topper nær stikprøvens median og aftager symmetrisk på begge sider, så der dannes en karakteristisk \textbf{klokkeformet kurve}. Datasæt med denne egenskab kaldes \textbf{normale}, og deres histogrammer kaldes \textbf{normale histogrammer} (se \autoref{fig:normal_hist}).
 
 \begin{figure}[htbp]
     \centering
@@ -865,7 +865,7 @@ Many large data sets yield histograms with a distinctive overall shape: the freq
         ybar,
         bar width=1,
         enlargelimits=0.05,
-        ylabel={Frequency},
+        ylabel={Hyppighed},
         xmin=1.1,
         xmax=18,
         xtick=\empty,
@@ -882,12 +882,12 @@ Many large data sets yield histograms with a distinctive overall shape: the freq
     };
     \end{axis}
     \end{tikzpicture}
-    \caption{A histogram of a normal data set, showing the characteristic bell shape.}
+    \caption{Et histogram over et normalt datasæt, der viser den karakteristiske klokkeform.}
     \label{fig:normal_hist}
 \end{figure}
 
 
-In software systems, perfectly normal distributions are rare, but some metrics can be \textbf{approximately normal}. For example, the latency of a highly optimized, internal microservice that performs a consistent task might be approximately normal. A histogram of an approximately normal data set looks like \autoref{fig:approx_normal_hist}.
+I softwaresystemer er perfekt normale fordelinger sjældne, men nogle målinger kan være \textbf{tilnærmelsesvis normale}. Svartiden (latensen) for en stærkt optimeret, intern mikrotjeneste, der udfører en ensartet opgave, kan fx være tilnærmelsesvis normal. Et histogram over et tilnærmelsesvis normalt datasæt ser ud som \autoref{fig:approx_normal_hist}.
 
 \begin{figure}[htbp]
     \centering
@@ -898,7 +898,7 @@ In software systems, perfectly normal distributions are rare, but some metrics c
         ybar,
         bar width=1,
         enlargelimits=0.05,
-        ylabel={Frequency},
+        ylabel={Hyppighed},
         xmin=1.1,
         xmax=18,
         xtick=\empty,
@@ -915,23 +915,23 @@ In software systems, perfectly normal distributions are rare, but some metrics c
     };
     \end{axis}
     \end{tikzpicture}
-    \caption{A histogram of a data set that is approximately normal. While not perfectly symmetric, it follows the general bell shape.}
+    \caption{Et histogram over et datasæt, der er tilnærmelsesvis normalt. Selv om det ikke er perfekt symmetrisk, følger det den overordnede klokkeform.}
     \label{fig:approx_normal_hist}
 \end{figure}
 
-Many datasets observed in practice, from human height to measurement errors, follow this specific shape. Such data is said to be \textbf{normally distributed}.
+Mange datasæt fra virkeligheden, fra menneskers højde til målefejl, følger netop denne form. Om sådanne data siger man, at de er \textbf{normalfordelte}.
 
-\begin{definition}[Normal Distribution]
-A \textbf{normal distribution} is a symmetric, bell-shaped distribution where the mean, median, and mode are all equal and located at the center. Its shape is determined entirely by its mean ($\mu$) and standard deviation ($\sigma$).
+\begin{definition}[Normalfordeling]
+En \textbf{normalfordeling} er en symmetrisk, klokkeformet fordeling, hvor middelværdi, median og typetal alle er ens og ligger i centrum. Dens form er fuldstændig bestemt af dens middelværdi ($\mu$) og standardafvigelse ($\sigma$).
 \end{definition}
 
-A histogram estimates the shape of the distribution that generated the observations. With more data and an appropriate choice of bin width, it can give a more detailed picture of the underlying distribution, but it does not necessarily become normal. Whether a normal model is appropriate depends on the data-generating process.
+Et histogram er et skøn over formen af den fordeling, som har frembragt observationerne. Med flere data og et passende valg af intervalbredde kan det give et mere detaljeret billede af den underliggende fordeling, men det bliver ikke nødvendigvis normalt. Om en normalfordelingsmodel er passende, afhænger af den proces, der frembringer data.
 
-\begin{theorem}[Law of Large Numbers]
-    For independent and identically distributed observations with a finite expected value, the sample mean converges to the population mean as the sample size increases.
+\begin{theorem}[Store tals lov]
+    For uafhængige og identisk fordelte observationer med en endelig forventet værdi konvergerer stikprøvens gennemsnit mod populationens middelværdi, når stikprøvestørrelsen vokser.
 \end{theorem}
 
-The Law of Large Numbers concerns the sample mean, not the shape of a histogram. If the underlying population itself is normally distributed, its probability density has the following shape:
+Store tals lov handler om stikprøvens gennemsnit, ikke om et histograms form. Hvis den underliggende population selv er normalfordelt, har dens tæthedsfunktion følgende form:
 
 \begin{figure}[htbp]
     \centering
@@ -954,18 +954,18 @@ The Law of Large Numbers concerns the sample mean, not the shape of a histogram.
     \addplot[smooth, very thick, color=mseViaBlue, samples=200, domain=0:10] { 0.45*exp(-0.5*((x-5)/1.3)^2) };
     \end{axis}
     \end{tikzpicture}
-    \caption{The normal distribution curve.}
+    \caption{Normalfordelingskurven.}
     \label{fig:normal_curve_smooth}
 \end{figure}
 
-For data that is approximately normal, we can use a powerful rule of thumb to understand its spread without looking at every single data point. This is known as the \textbf{Empirical Rule}.
+For data, der er tilnærmelsesvis normale, kan vi bruge en effektiv tommelfingerregel til at forstå spredningen uden at se på hvert eneste datapunkt. Den kaldes \textbf{den empiriske regel}.
 
-\begin{theorem}[The Empirical Rule]
-If a dataset is approximately normal with a sample mean $\bar{x}$ and sample standard deviation $s$, then:
+\begin{theorem}[Den empiriske regel]
+Hvis et datasæt er tilnærmelsesvis normalt med stikprøvegennemsnit $\bar{x}$ og stikprøvestandardafvigelse $s$, gælder:
 \begin{itemize}
-    \item Approximately \textbf{68.3\%} of the observations lie within 1 standard deviation of the mean ($\bar{x} \pm s$).
-    \item Approximately \textbf{95.4\%} of the observations lie within 2 standard deviations of the mean ($\bar{x} \pm 2s$).
-    \item Approximately \textbf{99.7\%} of the observations lie within 3 standard deviations of the mean ($\bar{x} \pm 3s$).
+    \item Cirka \textbf{68.3\%} af observationerne ligger inden for 1 standardafvigelse fra gennemsnittet ($\bar{x} \pm s$).
+    \item Cirka \textbf{95.4\%} af observationerne ligger inden for 2 standardafvigelser fra gennemsnittet ($\bar{x} \pm 2s$).
+    \item Cirka \textbf{99.7\%} af observationerne ligger inden for 3 standardafvigelser fra gennemsnittet ($\bar{x} \pm 3s$).
 \end{itemize}
 \end{theorem}
 
@@ -1018,19 +1018,19 @@ If a dataset is approximately normal with a sample mean $\bar{x}$ and sample sta
     \draw[mseViaBlue!80!black, thick, decorate, decoration={brace, amplitude=4pt, mirror}] (axis cs:-3,-0.17) -- (axis cs:3,-0.16) node[midway, below=4pt, xshift=2pt, font=\scriptsize]{99.7\%};
     \end{axis}
     \end{tikzpicture}
-    \caption{Empirical Rule on a normal curve. The inner bands mark $\pm1\sigma$ (68.3\%), $\pm2\sigma$ (95.4\%), and $\pm3\sigma$ (99.7\%).}
+    \caption{Den empiriske regel vist på en normalfordelingskurve. De indre bånd markerer $\pm1\sigma$ (68.3\%), $\pm2\sigma$ (95.4\%) og $\pm3\sigma$ (99.7\%).}
     \label{fig:empirical_rule_shaded}
 \end{figure}
 
-\subsection*{Skewed Data Sets}
-When a data set is not symmetric about its sample median, it is described as \textbf{skewed}. A long tail extending to the right indicates the distribution is \textbf{skewed to the right}; a long tail to the left means it is \textbf{skewed to the left}. Thus, the histogram in \autoref{fig:left_skewed_hist} is skewed left, while the one in \autoref{fig:right_skewed_hist} is skewed right.
+\subsection*{Skæve datasæt}
+Når et datasæt ikke er symmetrisk omkring stikprøvens median, beskrives det som \textbf{skævt}. En lang hale, der strækker sig mod højre, betyder, at fordelingen er \textbf{højreskæv}; en lang hale mod venstre betyder, at den er \textbf{venstreskæv}. Histogrammet i \autoref{fig:left_skewed_hist} er altså venstreskævt, mens histogrammet i \autoref{fig:right_skewed_hist} er højreskævt.
 
-\begin{definition}[Skewness]
-    \textbf{Skewness} measures the asymmetry of data distribution:
+\begin{definition}[Skævhed]
+    \textbf{Skævhed} måler asymmetrien i en datafordeling:
     \begin{itemize}
-        \item \textbf{Positive skew (skewed to the right)}: Tail extends to the right (mean > median)
-        \item \textbf{Negative skew (skewed to the left)}: Tail extends to the left (mean < median)
-        \item \textbf{Symmetric}: Mean $\approx$ median
+        \item \textbf{Positiv skævhed (højreskæv)}: Halen strækker sig mod højre (gennemsnit > median)
+        \item \textbf{Negativ skævhed (venstreskæv)}: Halen strækker sig mod venstre (gennemsnit < median)
+        \item \textbf{Symmetrisk}: Gennemsnit $\approx$ median
     \end{itemize}
     \end{definition}
 
@@ -1043,7 +1043,7 @@ When a data set is not symmetric about its sample median, it is described as \te
             ybar,
             bar width=1,
             enlargelimits=0.05,
-            ylabel={Frequency},
+            ylabel={Hyppighed},
             xmin=1.1,
             xmax=18,
             xtick=\empty,
@@ -1060,7 +1060,7 @@ When a data set is not symmetric about its sample median, it is described as \te
         };
         \end{axis}
     \end{tikzpicture}
-    \caption{A histogram of a data set that is skewed to the left (negatively skewed). The tail of the distribution is on the left.}
+    \caption{Et histogram over et datasæt, der er venstreskævt (negativt skævt). Fordelingens hale ligger til venstre.}
     \label{fig:left_skewed_hist}
 \end{figure}
 
@@ -1073,7 +1073,7 @@ When a data set is not symmetric about its sample median, it is described as \te
             ybar,
             bar width=1,
             enlargelimits=0.05,
-            ylabel={Frequency},
+            ylabel={Hyppighed},
             xmin=1.1,
             xmax=18,
             xtick=\empty,
@@ -1090,13 +1090,13 @@ When a data set is not symmetric about its sample median, it is described as \te
         };
         \end{axis}
     \end{tikzpicture}
-    \caption{A histogram of a data set that is skewed to the right (positively skewed). The tail of the distribution is on the right.}
+    \caption{Et histogram over et datasæt, der er højreskævt (positivt skævt). Fordelingens hale ligger til højre.}
     \label{fig:right_skewed_hist}
 \end{figure}
 
 \newpage
 
-\autoref{fig:skew_mean_median_mode} illustrates common patterns for the mean, median, and mode in unimodal skewed distributions. These orderings are useful heuristics, not definitions of skewness and not universal rules.
+\autoref{fig:skew_mean_median_mode} illustrerer almindelige mønstre for gennemsnit, median og typetal i unimodale skæve fordelinger. Disse rækkefølger er nyttige tommelfingerregler, ikke definitioner af skævhed og ikke generelle regler.
 
 
 \begin{figure}[htbp]
@@ -1122,12 +1122,12 @@ When a data set is not symmetric about its sample median, it is described as \te
         \addplot[third, thick] coordinates {(2.3,0) (2.3,0.46)};
         \addplot[mseViaBlue!80!black, thick, dashed] coordinates {(2.9,0) (2.9,0.46)};
         % Vertical labels (rotated 90 degrees left)
-        \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:1,0.46) {Mode};
+        \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:1,0.46) {Typetal};
         \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:2,0.46) {Median};
-        \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:3,0.46) {Mean};
+        \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:3,0.46) {Gennemsnit};
         \end{axis}
         \end{tikzpicture}
-        \par\small Right Skew
+        \par\small Højreskæv
     \end{minipage}
     \hfill
     % Symmetric (normal) panel
@@ -1146,10 +1146,10 @@ When a data set is not symmetric about its sample median, it is described as \te
         ]
         \addplot[smooth, very thick, color=mseViaBlue, samples=200, domain=0:10] { 0.45*exp(-0.5*((x-5)/1.3)^2) };
         \addplot[mseViaBlue!80!black, thick, dashed] coordinates {(5,0) (5,0.46)};
-        \node[anchor=south, font=\scriptsize, align=center] at (axis cs:5,0.48) {Mean\\Median\\Mode};
+        \node[anchor=south, font=\scriptsize, align=center] at (axis cs:5,0.48) {Gennemsnit\\Median\\Typetal};
         \end{axis}
         \end{tikzpicture}
-        \par\small Symmetric
+        \par\small Symmetrisk
     \end{minipage}
     \hfill
     % Negative skew panel
@@ -1173,39 +1173,39 @@ When a data set is not symmetric about its sample median, it is described as \te
         \addplot[third, thick] coordinates {(7.7,0) (7.7,0.46)};
         \addplot[mseViaBlue!80!black, thick, dotted] coordinates {(8.3,0) (8.3,0.46)};
         % Vertical labels (rotated 90 degrees left)
-        \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:6.5,0.46) {Mean};
+        \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:6.5,0.46) {Gennemsnit};
         \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:7.5,0.46) {Median};
-        \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:8.5,0.46) {Mode};
+        \node[anchor=west, font=\scriptsize, rotate=45] at (axis cs:8.5,0.46) {Typetal};
         \end{axis}
         \end{tikzpicture}
-        \par\small Left Skew
+        \par\small Venstreskæv
     \end{minipage}
-    \caption{Relationship between mean, median, and mode for positively skewed, symmetric, and negatively skewed distributions.}
+    \caption{Sammenhængen mellem gennemsnit, median og typetal for positivt skæve, symmetriske og negativt skæve fordelinger.}
     \label{fig:skew_mean_median_mode}
 \end{figure}
 
-\subsection*{Outlier Detection}
+\subsection*{Identifikation af outliers}
 
-As mentioned in \autoref{sec:ch6sec1}, outliers are data points that are significantly different from the rest of the data. They can arise due to measurement errors, data entry errors, or genuine variability in the data. Detecting outliers is important because they can distort statistical analyses.
+Som nævnt i \autoref{sec:ch6sec1} er outliers datapunkter, der adskiller sig markant fra resten af data. De kan opstå på grund af målefejl, indtastningsfejl eller reel variation i data. Det er vigtigt at finde outliers, fordi de kan forvrænge statistiske analyser.
 
-A common method for identifying outliers is to use the interquartile range (IQR):
+En almindelig metode til at identificere outliers bruger kvartilafstanden (IQR):
 
 \begin{itemize}
-    \item \textbf{Mild outliers}: Data points outside the $1.5\times IQR$ fences but not outside the $3\times IQR$ fences.
-    \item \textbf{Extreme outliers}: Data points less than $Q_1 - 3 \times IQR$ or greater than $Q_3 + 3 \times IQR$.
+    \item \textbf{Moderate outliers}: Datapunkter, der ligger uden for $1.5\times IQR$-grænserne, men ikke uden for $3\times IQR$-grænserne.
+    \item \textbf{Ekstreme outliers}: Datapunkter, der er mindre end $Q_1 - 3 \times IQR$ eller større end $Q_3 + 3 \times IQR$.
 \end{itemize}
 
-\begin{example} Detecting Outliers
+\begin{example} Identifikation af outliers
 
-Given the response time data: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
+Givet svartiderne: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
 
 \begin{itemize}
     \item $Q_1 = 180$, $Q_3 = 300$, $IQR = 120$
-    \item Lower fence: $Q_1 - 1.5 \times IQR = 180 - 180 = 0$
-    \item Upper fence: $Q_3 + 1.5 \times IQR = 300 + 180 = 480$
+    \item Nedre grænse: $Q_1 - 1.5 \times IQR = 180 - 180 = 0$
+    \item Øvre grænse: $Q_3 + 1.5 \times IQR = 300 + 180 = 480$
 \end{itemize}
 
-All data points are between 0 and 480, so there are no mild outliers in this dataset.
+Alle datapunkter ligger mellem 0 og 480, så der er ingen moderate outliers i dette datasæt.
 
 \end{example}
 
@@ -1213,61 +1213,61 @@ All data points are between 0 and 480, so there are no mild outliers in this dat
 
 \begin{example}
 
-Suppose we have the following set of response times (in milliseconds) for a web application:
+Antag, at vi har følgende svartider (i millisekunder) for en webapplikation:
 
 $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400, 1200\}$.
 
-Let's identify if there is an upper outlier:
+Lad os undersøge, om der er en øvre outlier:
 
 \begin{itemize}
-    \item Sorted data: $120, 150, 180, 200, 220, 250, 280, 300, 350, 400, 1200$
+    \item Sorterede data: $120, 150, 180, 200, 220, 250, 280, 300, 350, 400, 1200$
     \item $n = 11$
-    \item Median ($Q_2$): 250 (6th value)
-    \item Lower half: $120, 150, 180, 200, 220$ $\rightarrow Q_1 = 180$
-    \item Upper half: $280, 300, 350, 400, 1200$ $\rightarrow Q_3 = 350$
+    \item Median ($Q_2$): 250 (6. værdi)
+    \item Nederste halvdel: $120, 150, 180, 200, 220$ $\rightarrow Q_1 = 180$
+    \item Øverste halvdel: $280, 300, 350, 400, 1200$ $\rightarrow Q_3 = 350$
     \item $IQR = Q_3 - Q_1 = 350 - 180 = 170$
-    \item Upper fence: $Q_3 + 1.5 \times IQR = 350 + 1.5 \times 170 = 350 + 255 = 605$
+    \item Øvre grænse: $Q_3 + 1.5 \times IQR = 350 + 1.5 \times 170 = 350 + 255 = 605$
 \end{itemize}
 
-The value $1200$ is greater than $605$, so it is an upper outlier.
+Værdien $1200$ er større end $605$, så den er en øvre outlier.
 
 \end{example}
 
-\subsection*{Box Plots}
+\subsection*{Boksplot}
 
-Box plots provide a compact summary of data distribution, highlighting the median, quartiles, and outliers. \autoref{fig:boxplot_from_image} shows an example of a box plot.
+Boksplot giver en kompakt opsummering af en datafordeling og fremhæver medianen, kvartilerne og outliers. \autoref{fig:boxplot_from_image} viser et eksempel på et boksplot.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{figure/boxplot.png}
-    \caption{An example of a box plot, illustrating the median, quartiles, whiskers, and potential outliers.}
+    \resizebox{0.7\textwidth}{!}{\input{figure/da/boxplot_da}}
+    \caption{Et eksempel på et boksplot, der illustrerer medianen, kvartilerne, knurhårene og mulige outliers.}
     \label{fig:boxplot_from_image}
 \end{figure}
 
 
-\begin{definition}[Box Plot Components]
-A box plot is based on the five-number summary and may also display outliers:
+\begin{definition}[Et boksplots bestanddele]
+Et boksplot bygger på femtalsopsummeringen og kan også vise outliers:
 \begin{itemize}
-    \item \textbf{Lower whisker}: Usually the smallest observation within the lower $1.5\times IQR$ fence
-    \item \textbf{Q1 (First Quartile)}: The 25th percentile
-    \item \textbf{Median (Q2)}: The 50th percentile
-    \item \textbf{Q3 (Third Quartile)}: The 75th percentile
-    \item \textbf{Upper whisker}: Usually the largest observation within the upper $1.5\times IQR$ fence
-    \item \textbf{Outliers}: Points beyond 1.5 × IQR from the box
+    \item \textbf{Nedre knurhår}: Som regel den mindste observation inden for den nedre $1.5\times IQR$-grænse
+    \item \textbf{Q1 (første kvartil)}: 25.-percentilen
+    \item \textbf{Median (Q2)}: 50.-percentilen
+    \item \textbf{Q3 (tredje kvartil)}: 75.-percentilen
+    \item \textbf{Øvre knurhår}: Som regel den største observation inden for den øvre $1.5\times IQR$-grænse
+    \item \textbf{Outliers}: Punkter, der ligger mere end 1.5 × IQR fra boksen
 \end{itemize}
 \end{definition}
 
-A box plot provides a visual summary of the distribution of a dataset, making it easy to compare groups and spot outliers. Here's how to read a box plot.
+Et boksplot giver en visuel opsummering af et datasæts fordeling, så det er let at sammenligne grupper og få øje på outliers. Sådan læser man et boksplot:
 
 \begin{itemize}
-    \item The \textbf{length of the box} shows the spread of the central half of the data. A longer box means more variability in the middle 50\%.
-    \item The \textbf{position of the median line} and the relative whisker lengths can suggest asymmetry, but a box plot alone does not determine the direction or degree of skewness.
-    \item In many unimodal skewed distributions, the mean is pulled toward the longer tail. Consequently, one often sees $\text{mode}<\text{median}<\text{mean}$ for right-skewed data and the reverse ordering for left-skewed data. These are common patterns rather than guaranteed identities.
-    \item The \textbf{whiskers} show the range of the bulk of the data, excluding outliers.
-    \item \textbf{Outliers} highlight unusually high or low values that may warrant further investigation.
+    \item \textbf{Boksens længde} viser spredningen af den midterste halvdel af data. En længere boks betyder mere variation i de midterste 50\%.
+    \item \textbf{Medianlinjens placering} og knurhårenes relative længder kan antyde asymmetri, men et boksplot alene fastlægger ikke retningen eller graden af skævhed.
+    \item I mange unimodale skæve fordelinger trækkes gennemsnittet mod den længste hale. Derfor ser man ofte $\text{typetal}<\text{median}<\text{gennemsnit}$ for højreskæve data og den omvendte rækkefølge for venstreskæve data. Det er almindelige mønstre, ikke garanterede identiteter.
+    \item \textbf{Knurhårene} viser variationsbredden for hovedparten af data, når outliers er udeladt.
+    \item \textbf{Outliers} fremhæver usædvanligt høje eller lave værdier, som kan kræve nærmere undersøgelse.
 \end{itemize}
 
 
-Box plots are especially useful for comparing distributions across several groups or datasets, as they quickly reveal differences in medians, spreads, and the presence of outliers.
+Boksplot er særligt nyttige til at sammenligne fordelinger på tværs af flere grupper eller datasæt, da de hurtigt afslører forskelle i medianer, spredning og forekomst af outliers.
 
-This concludes our discussion of data visualization and summary statistics, and in general our discussion of probability and statistics.
+Dette afslutter vores gennemgang af datavisualisering og opsummerende statistik og dermed vores gennemgang af sandsynlighedsregning og statistik i det hele taget.

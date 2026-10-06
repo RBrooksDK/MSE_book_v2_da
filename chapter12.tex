@@ -1,184 +1,184 @@
-\chapter{Fundamental Concepts in Number Theory}
+\chapter{Grundlæggende begreber i talteori}
 \label{chap:ch12}
-Numbers are the foundation of mathematics, representing quantities, measurements, and relationships in both abstract and concrete forms. The study of numbers dates back thousands of years, with early civilisations like the Babylonians, Egyptians, and Greeks laying the groundwork for modern number theory. These ancient cultures developed basic arithmetic, including addition, subtraction, multiplication, and division, which are still taught today.
+Tal er fundamentet for matematikken. De repræsenterer mængder, målinger og sammenhænge i både abstrakt og konkret form. Studiet af tal går tusinder af år tilbage, og tidlige civilisationer som babylonierne, egypterne og grækerne lagde grunden til den moderne talteori. Disse oldtidskulturer udviklede den grundlæggende aritmetik, herunder addition, subtraktion, multiplikation og division, som der stadig undervises i i dag.
 
-Number theory, often called the "Queen of Mathematics," is a branch of mathematics devoted to the study of integers and the relationships between them. It encompasses a wide range of topics, including prime numbers, divisibility, modular arithmetic, and the properties of number systems. Number theory has a rich history, with significant contributions from mathematicians such as Euclid, who proved the infinitude of prime numbers around 300 BCE, and Pierre de Fermat, known for Fermat's Last Theorem, a problem that puzzled mathematicians for over 350 years until it was finally solved by Andrew Wiles in 1994.
+Talteori, som ofte kaldes »matematikkens dronning«, er en gren af matematikken, der beskæftiger sig med de hele tal og sammenhængene mellem dem. Den omfatter en lang række emner, herunder primtal, delelighed, modulær aritmetik og talsystemers egenskaber. Talteorien har en rig historie med betydelige bidrag fra matematikere som Euklid, der omkring 300 f.v.t. beviste, at der findes uendeligt mange primtal, og Pierre de Fermat, der er kendt for Fermats sidste sætning -- et problem, som matematikere sled med i over 350 år, indtil det endelig blev løst af Andrew Wiles i 1994.
 
 \begin{figure}[h!]
     \centering
     \input{figure/number_sets_venn}
-    \caption{Venn diagram of numbers}
+    \caption{Venn-diagram over tal}
     \label{fig:venn_num2}
 \end{figure}
 
-Throughout history, number theory has evolved from a purely theoretical pursuit to a field with practical applications in modern technology. For example, cryptography, the science of securing communication, relies heavily on number theory, particularly the properties of prime numbers and modular arithmetic. The algorithms that protect our online transactions and digital communications are built upon the principles of number theory.
+Gennem historien har talteorien udviklet sig fra en rent teoretisk disciplin til et felt med praktiske anvendelser i moderne teknologi. Kryptografi, videnskaben om sikker kommunikation, bygger for eksempel i høj grad på talteori, især på primtals egenskaber og modulær aritmetik. De algoritmer, der beskytter vores onlinetransaktioner og digitale kommunikation, er bygget på talteoriens principper.
 
-In this chapter, we will explore various aspects of numbers and number theory, starting with the basics of integers, prime numbers, and number systems, and gradually advancing to more complex topics. By understanding the fundamental properties of numbers, we gain insights into the mathematical structures that underpin the digital world and beyond.
+I dette kapitel udforsker vi forskellige aspekter af tal og talteori. Vi begynder med det grundlæggende om hele tal, primtal og talsystemer og bevæger os gradvist videre til mere komplekse emner. Ved at forstå tallenes grundlæggende egenskaber får vi indsigt i de matematiske strukturer, som den digitale verden og meget mere hviler på.
 
 \begin{remark}
-Many numbers are included in more than one set. Table \ref{tab:number_types} offers an overview of the names, properties of and symbols used for the main number types.
+Mange tal indgår i mere end én mængde. Tabel \ref{tab:number_types} giver et overblik over navne, egenskaber og symboler for de vigtigste taltyper.
 \end{remark}
 
 \begin{table}[ht]
 \centering
-\caption{Types of Numbers and Their Properties}
+\caption{Taltyper og deres egenskaber}
 \label{tab:number_types}
 \renewcommand{\arraystretch}{1.6} % Adjust the row height for the entire table
 \small
 \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.35cm}|>{\centering\arraybackslash}p{1.3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
 \hline
-Natural Numbers & \(\mathbb{N}\) & The non-negative integers (the convention used in this book). & \(0, 1, 2, \ldots\) \\ \hline
-Integers & \(\mathbb{Z}\) & All positive and negative whole numbers. & \(\{\ldots, -2, -1, 0, 1, 2, \ldots\}\) \\ \hline
-Rational Numbers & \(\mathbb{Q}\) & All real numbers which can be expressed as a fraction, \(\frac{p}{q}\), where \(p\) and \(q\) are integers and \(q \neq 0\). All integers are rational numbers as \(1\) is a non-zero integer. & \(\dfrac{1}{5}, \dfrac{5}{1} (=5), \dfrac{2}{3}, \dfrac{3}{2}, \dfrac{0}{3} (=0)\) \\ \hline
-Irrational Numbers & \(\mathbb{R}\ \setminus \mathbb{Q}\) & All real numbers which cannot be expressed as a fraction whose numerator and denominator are integers. & \(\pi, \sqrt{2}, \sqrt{3}\) \\ \hline
-Real Numbers & \(\mathbb{R}\) & Includes all numbers on the number line. & \(\dfrac{1}{5}, \sqrt{\dfrac{1}{5}}, 0, -2\) \\ \hline
-\makecell[l]{Pure Imaginary\\Numbers} & \(i\mathbb{R}\) & Numbers of the form \(bi\), where \(b\) is real and \(i^2=-1\). & \(\begin{array}{l}
+Naturlige tal & \(\mathbb{N}\) & De ikke-negative hele tal (den konvention, der bruges i denne bog). & \(0, 1, 2, \ldots\) \\ \hline
+Hele tal & \(\mathbb{Z}\) & Alle positive og negative hele tal. & \(\{\ldots, -2, -1, 0, 1, 2, \ldots\}\) \\ \hline
+Rationale tal & \(\mathbb{Q}\) & Alle reelle tal, der kan skrives som en brøk, \(\frac{p}{q}\), hvor \(p\) og \(q\) er hele tal, og \(q \neq 0\). Alle hele tal er rationale tal, da \(1\) er et helt tal forskelligt fra nul. & \(\dfrac{1}{5}, \dfrac{5}{1} (=5), \dfrac{2}{3}, \dfrac{3}{2}, \dfrac{0}{3} (=0)\) \\ \hline
+Irrationale tal & \(\mathbb{R}\ \setminus \mathbb{Q}\) & Alle reelle tal, der ikke kan skrives som en brøk, hvis tæller og nævner er hele tal. & \(\pi, \sqrt{2}, \sqrt{3}\) \\ \hline
+Reelle tal & \(\mathbb{R}\) & Omfatter alle tal på tallinjen. & \(\dfrac{1}{5}, \sqrt{\dfrac{1}{5}}, 0, -2\) \\ \hline
+\makecell[l]{Rene imaginære\\tal} & \(i\mathbb{R}\) & Tal på formen \(bi\), hvor \(b\) er reel, og \(i^2=-1\). & \(\begin{array}{l}
 \vspace{3pt} 3i = \sqrt{-9},\ -5i = -\sqrt{-25}, \\
 3\sqrt{2}i = \sqrt{-18} \vspace{3pt}
 \end{array}\) \\ \hline
-Complex Numbers & \(\mathbb{C}\) & All numbers of the form $a+bi$, where $a,b\in\mathbb{R}$ and $i^2=-1$. & $1+2 i, 1, i,-3 i, 0,-5+i$ \\ \hline
+Komplekse tal & \(\mathbb{C}\) & Alle tal på formen $a+bi$, hvor $a,b\in\mathbb{R}$, og $i^2=-1$. & $1+2 i, 1, i,-3 i, 0,-5+i$ \\ \hline
 \end{tabularx}
 \end{table}
 
 \begin{remark}
-    In Figure \ref{fig:venn_num2}, the rational and irrational numbers partition the real numbers. Every complex number has the form $a+bi$ with $a,b\in\mathbb{R}$. The real numbers are precisely those with $b=0$; complex numbers with $b\neq0$ are non-real. Pure imaginary numbers have $a=0$ and form only one subset of the complex numbers, not all non-real complex numbers.
+    I Figur \ref{fig:venn_num2} udgør de rationale og de irrationale tal en partition af de reelle tal. Ethvert komplekst tal har formen $a+bi$ med $a,b\in\mathbb{R}$. De reelle tal er netop dem med $b=0$; komplekse tal med $b\neq0$ er ikke-reelle. Rene imaginære tal har $a=0$ og udgør kun én delmængde af de komplekse tal, ikke alle ikke-reelle komplekse tal.
 \end{remark}
 
-\section{Types of Numbers}
-Let’s now focus on the real-number subsets in the table: natural numbers, whole numbers, integers, rational numbers, irrational numbers, and real numbers. The preceding overview places these sets within the larger complex-number system.
+\section{Taltyper}
+Lad os nu fokusere på de delmængder af de reelle tal, der står i tabellen: naturlige tal, ikke-negative hele tal (på engelsk \emph{whole numbers}), hele tal, rationale tal, irrationale tal og reelle tal. Overblikket ovenfor placerer disse mængder i det større system af komplekse tal.
 
-\subsection*{Natural Numbers}
-We begin with the natural numbers. We distinguish between whole numbers: $0, 1, 2, 3, \ldots$ and counting numbers: $1, 2, 3, \ldots$. These numbers are primarily used for counting. Natural numbers are often regarded as exact values (e.g., there are 4 tires on a car, 8 legs on a spider). However, in some contexts, they may be used as approximations (e.g., there were approximately 1000 people in the crowd).
+\subsection*{Naturlige tal}
+Vi begynder med de naturlige tal. Vi skelner mellem de ikke-negative hele tal: $0, 1, 2, 3, \ldots$ og tælletallene (på engelsk \emph{counting numbers}): $1, 2, 3, \ldots$. Disse tal bruges primært til at tælle med. Naturlige tal opfattes ofte som eksakte værdier (fx har en bil 4 dæk, og en edderkop har 8 ben). I nogle sammenhænge kan de dog bruges som tilnærmelser (fx var der cirka 1000 mennesker i mængden).
 
-One of the key properties of natural numbers is that they are \textit{closed} under certain operations, such as addition and multiplication. This means that if you take any two natural numbers and add or multiply them, the result will always be another natural number. For example, if $a$ and $b$ are natural numbers, then both $a + b$ and $a \times b$ are also natural numbers.
+En af de naturlige tals centrale egenskaber er, at de er \textit{lukkede} under visse operationer, såsom addition og multiplikation. Det betyder, at hvis du tager to vilkårlige naturlige tal og lægger dem sammen eller ganger dem, vil resultatet altid være et naturligt tal. Hvis $a$ og $b$ for eksempel er naturlige tal, er både $a + b$ og $a \times b$ også naturlige tal.
 
-There is very little consensus as to whether the symbol $\mathbb{N}$ includes 0. Therefore, the set of whole numbers (that include 0) is often denoted $\mathbb{W}$.
+Der er meget lidt enighed om, hvorvidt symbolet $\mathbb{N}$ omfatter 0. Derfor betegnes mængden af ikke-negative hele tal (som omfatter 0) ofte $\mathbb{W}$ (af engelsk »whole numbers«).
 
-\subsection*{Integers}
-Integers are the basic building blocks of number theory, consisting of the set of whole numbers and their negatives. Formally, integers include numbers like $\ldots,-3,-2,-1,0,1,2,3, \ldots$ Basic arithmetic operations, such as addition and multiplication, follow certain properties:
+\subsection*{Hele tal}
+De hele tal er talteoriens grundlæggende byggesten. De består af de ikke-negative hele tal og deres negative modstykker. Formelt omfatter de hele tal tal som $\ldots,-3,-2,-1,0,1,2,3, \ldots$ Grundlæggende regneoperationer som addition og multiplikation følger bestemte regler:
 
-\begin{custombox}{{Commutative, Associative, and Distributive Laws}}
+\begin{custombox}{{Kommutative, associative og distributive love}}
 
 
     \begin{itemize}
-    \item Commutativity: $a+b=b+a$
-    \item Associativity: $(a+b)+c=a+(b+c)$
-    \item Distributive property: $a \times(b+c)=a \times b+a \times c$
+    \item Kommutativitet: $a+b=b+a$
+    \item Associativitet: $(a+b)+c=a+(b+c)$
+    \item Den distributive lov: $a \times(b+c)=a \times b+a \times c$
     \end{itemize}
     
 \end{custombox}
 
-Integers are a fundamental set of numbers in mathematics, denoted by the symbol $\mathbb{Z}$. This set includes all the positive and negative whole numbers, as well as zero. Integers extend the natural numbers by incorporating their additive inverses, thereby allowing for the complete operation of subtraction within the set.
+De hele tal er en grundlæggende talmængde i matematikken og betegnes med symbolet $\mathbb{Z}$. Mængden omfatter alle positive og negative hele tal samt nul. De hele tal udvider de naturlige tal ved at inddrage deres additive inverse, så subtraktion fuldt ud kan udføres inden for mængden.
 
-\textbf{Additive Identity:} The number \(0\) is known as the additive identity. This is because for any integer \(a\), adding zero does not change the value of \(a\). In mathematical terms, this property is expressed as \(0 + a = a + 0 = a\). This identity is crucial because it ensures that the set of integers remains stable under addition.
+\textbf{Additivt neutralt element:} Tallet \(0\) kaldes det additive neutrale element. Det skyldes, at det for ethvert helt tal \(a\) gælder, at værdien af \(a\) ikke ændres, når man lægger nul til. Matematisk udtrykkes denne egenskab som \(0 + a = a + 0 = a\). Det neutrale element er afgørende, fordi det sikrer, at mængden af hele tal forbliver stabil under addition.
     
- \textbf{Multiplicative Identity:} Similarly, the number \(1\) serves as the multiplicative identity. For any integer \(a\), multiplying by one leaves the value of \(a\) unchanged: \(1 \times a = a \times 1 = a\). This property underpins the stability of integers under multiplication, maintaining the integrity of the set.
+ \textbf{Multiplikativt neutralt element:} Tilsvarende fungerer tallet \(1\) som det multiplikative neutrale element. For ethvert helt tal \(a\) gælder, at multiplikation med én lader værdien af \(a\) være uændret: \(1 \times a = a \times 1 = a\). Denne egenskab ligger til grund for de hele tals stabilitet under multiplikation og bevarer mængdens integritet.
     
-\textbf{Additive Inverse:} For each integer \(a\), there exists a corresponding additive inverse, denoted as \(-a\). The additive inverse is defined such that when \(a\) and \(-a\) are added together, the result is the additive identity, zero: \(a + (-a) = 0\). This property allows for the operation of subtraction within the set of integers, as subtraction can be viewed as the addition of an additive inverse.
+\textbf{Additiv invers:} Til ethvert helt tal \(a\) findes en tilhørende additiv invers, som betegnes \(-a\). Den additive inverse er defineret sådan, at når \(a\) og \(-a\) lægges sammen, er resultatet det additive neutrale element, nul: \(a + (-a) = 0\). Denne egenskab gør det muligt at udføre subtraktion inden for mængden af hele tal, da subtraktion kan opfattes som addition af en additiv invers.
 
-\begin{custombox}{Closure Property}
-    \textbf{Addition:} The set of integers is closed under the operation of addition. This means that if you take any two integers and add them together, the sum will always be an integer. For example, if \(a\) and \(b\) are integers, then \(a + b\) is also an integer. This closure property ensures that the set of integers is stable and complete under addition, meaning that no matter how many times you add integers together, the result will remain within the set of integers.
+\begin{custombox}{Lukkethed}
+    \textbf{Addition:} Mængden af hele tal er lukket under addition. Det betyder, at hvis du tager to vilkårlige hele tal og lægger dem sammen, vil summen altid være et helt tal. Hvis \(a\) og \(b\) for eksempel er hele tal, er \(a + b\) også et helt tal. Denne lukkethed sikrer, at mængden af hele tal er stabil og fuldstændig under addition. Uanset hvor mange gange du lægger hele tal sammen, vil resultatet altså forblive inden for mængden af hele tal.
 
-\textbf{Multiplication:} The set of integers is also closed under multiplication. If you multiply any two integers, the product will always be an integer. For instance, if \(a\) and \(b\) are integers, then \(a \times b\) is also an integer. This property guarantees that the operation of multiplication, like addition, does not produce results outside the set of integers, thereby preserving the integrity of the set under multiplication.
+\textbf{Multiplikation:} Mængden af hele tal er også lukket under multiplikation. Hvis du ganger to vilkårlige hele tal, vil produktet altid være et helt tal. Hvis \(a\) og \(b\) for eksempel er hele tal, er \(a \times b\) også et helt tal. Denne egenskab garanterer, at multiplikation ligesom addition ikke giver resultater uden for mængden af hele tal, og bevarer derved mængdens integritet under multiplikation.
 
 \end{custombox}
 
-It is universally agreed upon that the definition of an integer is clear and precise. Therefore, when in doubt, it is advisable to refer to numbers within this set as "integers." When you specifically need to refer to only the positive integers, it is both accurate and professional to explicitly state "positive integers." This terminology not only ensures clarity but also reflects a sound understanding of mathematical conventions. 
+Der er universel enighed om, at definitionen af et helt tal er klar og præcis. Når du er i tvivl, er det derfor tilrådeligt at omtale tal i denne mængde som »hele tal«. Når du specifikt kun vil omtale de positive hele tal, er det både præcist og professionelt eksplicit at skrive »positive hele tal«. Denne terminologi sikrer ikke blot klarhed, men viser også en sikker forståelse af matematiske konventioner. 
 
-Remember, zero is neither positive nor negative, so when discussing subsets of integers, careful consideration of this fact is necessary:
+Husk, at nul hverken er positivt eller negativt. Når man taler om delmængder af de hele tal, skal man derfor tage nøje hensyn til dette:
 
 \begin{itemize}
-    \item \textbf{Integers:} $\mathbb{Z} = \{\ldots,-4,-3,-2,-1,0,1,2,3,4, \ldots\}$
-    \item \textbf{Negative Integers:} $\mathbb{Z}^- = \{\ldots,-4,-3,-2,-1\}$
-    \item \textbf{Positive Integers:} $\mathbb{Z}^+ = \{1,2,3,4, \ldots\}$
-    \item \textbf{Non-Negative Integers:} $\mathbb{Z}_0^+ = \mathbb{Z}_{\geq 0} = \{0,1,2,3,4, \ldots\}$
-    \item \textbf{Non-Positive Integers:} $\mathbb{Z}_0^- = \mathbb{Z}_{\leq 0} = \{\ldots,-4,-3,-2,-1, 0\}$
+    \item \textbf{Hele tal:} $\mathbb{Z} = \{\ldots,-4,-3,-2,-1,0,1,2,3,4, \ldots\}$
+    \item \textbf{Negative hele tal:} $\mathbb{Z}^- = \{\ldots,-4,-3,-2,-1\}$
+    \item \textbf{Positive hele tal:} $\mathbb{Z}^+ = \{1,2,3,4, \ldots\}$
+    \item \textbf{Ikke-negative hele tal:} $\mathbb{Z}_0^+ = \mathbb{Z}_{\geq 0} = \{0,1,2,3,4, \ldots\}$
+    \item \textbf{Ikke-positive hele tal:} $\mathbb{Z}_0^- = \mathbb{Z}_{\leq 0} = \{\ldots,-4,-3,-2,-1, 0\}$
 \end{itemize}
 
-This notation should be consistent with standard mathematical conventions.
+Denne notation bør være i overensstemmelse med gængse matematiske konventioner.
 
-\subsection*{Rational Numbers}
-Rational numbers, denoted by the symbol $\mathbb{Q}$, are numbers that can be expressed as the quotient of two integers, where the numerator is any integer and the denominator is a non-zero integer. Formally, a rational number can be written as $\frac{a}{b}$, where $a \in \mathbb{Z}$ and $b \in \mathbb{Z} \setminus \{0\}$. This set of numbers is fundamental in mathematics as it provides a means to represent fractions and ratios, allowing for a wide range of arithmetic operations, and as such are a generalisation of common fractions which we saw in \autoref{chap:ch0}. They can represent any number that can be written as a finite or repeating decimal.
+\subsection*{Rationale tal}
+Rationale tal, som betegnes med symbolet $\mathbb{Q}$, er tal, der kan skrives som kvotienten af to hele tal, hvor tælleren er et vilkårligt helt tal, og nævneren er et helt tal forskelligt fra nul. Formelt kan et rationalt tal skrives som $\frac{a}{b}$, hvor $a \in \mathbb{Z}$ og $b \in \mathbb{Z} \setminus \{0\}$. Denne talmængde er grundlæggende i matematikken, da den giver mulighed for at repræsentere brøker og forhold og dermed for en lang række regneoperationer. De rationale tal er således en generalisering af de almindelige brøker, som vi så i \autoref{chap:ch0}. De kan repræsentere ethvert tal, der kan skrives som et endeligt eller periodisk decimaltal.
 
-One of the key properties of rational numbers is that each non-zero rational number has a \textit{multiplicative inverse}. The multiplicative inverse of a rational number $\frac{a}{b}$ is the rational number $\frac{b}{a}$, provided that $a \neq 0$. The importance of the multiplicative inverse lies in the fact that when a number is multiplied by its inverse, the result is the \textit{multiplicative identity}, which is 1. In other words, for any rational number $\frac{a}{b}$, its inverse is denoted by $\left(\frac{a}{b}\right)^{-1} = \frac{b}{a}$, and we have:
+En af de rationale tals centrale egenskaber er, at ethvert rationalt tal forskelligt fra nul har en \textit{multiplikativ invers}. Den multiplikative inverse til et rationalt tal $\frac{a}{b}$ er det rationale tal $\frac{b}{a}$, forudsat at $a \neq 0$. Betydningen af den multiplikative inverse ligger i, at når et tal ganges med sin inverse, er resultatet det \textit{multiplikative neutrale element}, som er 1. For ethvert rationalt tal $\frac{a}{b}$ betegnes den inverse med andre ord $\left(\frac{a}{b}\right)^{-1} = \frac{b}{a}$, og vi har:
 
 \[
 \frac{a}{b} \times \frac{b}{a} = \frac{ab}{ba} = 1
 \]
 
-This property ensures that rational numbers are closed under multiplication and division (except division by zero), making them a robust and versatile set of numbers for various mathematical operations.
+Denne egenskab sikrer, at de rationale tal er lukkede under multiplikation og division (bortset fra division med nul), hvilket gør dem til en robust og alsidig talmængde til forskellige matematiske operationer.
 
-Rational numbers are dense on the number line, meaning that between any two rational numbers, there exists another rational number. This property makes the set of rational numbers particularly important in the study of real numbers, as it allows for the approximation of irrational numbers to any desired degree of accuracy.
+De rationale tal ligger tæt på tallinjen. Det betyder, at der mellem to vilkårlige rationale tal findes et andet rationalt tal. Denne egenskab gør mængden af rationale tal særligt vigtig i studiet af de reelle tal, da den gør det muligt at tilnærme irrationale tal med en vilkårlig ønsket nøjagtighed.
 
-\subsection*{Irrational Numbers}
-Irrational numbers, denoted by the symbol $\mathbb{R} \setminus \mathbb{Q}$, are real numbers that cannot be expressed as the quotient of two integers. Unlike rational numbers, which have a repeating or terminating decimal expansion, the decimal expansion of an irrational number neither repeats nor terminates. This property makes irrational numbers fundamentally different from rational numbers, as they cannot be precisely represented as fractions.
+\subsection*{Irrationale tal}
+Irrationale tal, som betegnes med symbolet $\mathbb{R} \setminus \mathbb{Q}$, er reelle tal, der ikke kan skrives som kvotienten af to hele tal. I modsætning til rationale tal, som har en periodisk eller endelig decimalfremstilling, er decimalfremstillingen af et irrationalt tal hverken periodisk eller endelig. Denne egenskab gør irrationale tal fundamentalt forskellige fra rationale tal, da de ikke kan repræsenteres præcist som brøker.
 
-Some of the most famous examples of irrational numbers include:
+Nogle af de mest kendte eksempler på irrationale tal er:
 
 \begin{itemize}
-    \item \textbf{Pi} ($\pi$): Perhaps the most well-known irrational number, $\pi$ is the ratio of the circumference of a circle to its diameter. Its value is approximately $3.14159\ldots$, but its decimal expansion goes on infinitely without repeating. $\pi$ plays a crucial role in geometry, trigonometry, and calculus.
+    \item \textbf{Pi} ($\pi$): $\pi$ er måske det mest kendte irrationale tal og er forholdet mellem en cirkels omkreds og dens diameter. Værdien er cirka $3.14159\ldots$, men decimalfremstillingen fortsætter uendeligt uden at gentage sig. $\pi$ spiller en afgørende rolle i geometri, trigonometri og infinitesimalregning.
 
-    \item \textbf{The Golden Ratio} ($\phi$): The golden ratio, $\phi \approx 1.61803\ldots$, is an irrational number that appears frequently in nature, art, and architecture. It is defined as the positive solution to the equation $x^2 - x - 1 = 0$, and it is the limit of the ratio of successive Fibonacci numbers.
+    \item \textbf{Det gyldne snit} ($\phi$): Det gyldne snit, $\phi \approx 1.61803\ldots$, er et irrationalt tal, der ofte optræder i naturen, kunsten og arkitekturen. Det er defineret som den positive løsning til ligningen $x^2 - x - 1 = 0$, og det er grænseværdien for forholdet mellem på hinanden følgende Fibonaccital.
 
-    \item \textbf{The Square Root of 2} ($\sqrt{2}$): The square root of 2, approximately $1.41421\ldots$, is the length of the diagonal of a square with side length 1. This number is historically significant because its discovery by the ancient Greeks, particularly the Pythagoreans, revealed the existence of numbers that could not be expressed as the ratio of two integers. The Pythagorean theorem states that in a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides. For a right triangle with both legs of length 1, the hypotenuse is $\sqrt{2}$, demonstrating that $\sqrt{2}$ cannot be a rational number.
+    \item \textbf{Kvadratroden af 2} ($\sqrt{2}$): Kvadratroden af 2, cirka $1.41421\ldots$, er længden af diagonalen i et kvadrat med sidelængden 1. Tallet har historisk betydning, fordi oldtidens grækere, især pythagoræerne, med opdagelsen af det afslørede, at der findes tal, som ikke kan skrives som forholdet mellem to hele tal. Pythagoras' sætning siger, at i en retvinklet trekant er kvadratet på hypotenusen lig med summen af kvadraterne på de to andre sider. For en retvinklet trekant, hvor begge kateter har længden 1, er hypotenusen $\sqrt{2}$, hvilket viser, at $\sqrt{2}$ ikke kan være et rationalt tal.
 
-    \item \textbf{Euler's Number} ($e$): The number $e \approx 2.71828\ldots$ is the base of the natural logarithm and is a fundamental constant in mathematics, particularly in calculus and complex analysis. The number $e$ arises naturally in various growth processes, such as compound interest and population growth.
+    \item \textbf{Eulers tal} ($e$): Tallet $e \approx 2.71828\ldots$ er grundtallet for den naturlige logaritme og en grundlæggende konstant i matematikken, især i infinitesimalregning og kompleks analyse. Tallet $e$ opstår naturligt i forskellige vækstprocesser, såsom renters rente og befolkningsvækst.
 \end{itemize}
 
-Irrational numbers fill the gaps between rational numbers on the number line, making the real numbers a continuous set. However, like rational numbers, they too have important properties. For instance, while irrational numbers do not have a simple fractional representation, they are nonetheless essential in representing the lengths, areas, and volumes that cannot be captured by rational numbers alone.
+Irrationale tal udfylder hullerne mellem de rationale tal på tallinjen og gør dermed de reelle tal til en kontinuert mængde. Ligesom de rationale tal har de dog også vigtige egenskaber. Selv om irrationale tal for eksempel ikke har en simpel brøkfremstilling, er de alligevel uundværlige til at repræsentere de længder, arealer og rumfang, som ikke kan beskrives med rationale tal alene.
 
-\subsection*{Real Numbers}
-Real numbers, denoted by the symbol $\mathbb{R}$, form the foundation of most mathematical analysis and are essential in describing continuous quantities. The set of real numbers is composed of both rational numbers ($\mathbb{Q}$) and irrational numbers ($\mathbb{R} \setminus \mathbb{Q}$), thus encompassing all numbers that can be placed on the number line. While both rational and irrational numbers are part of the real number system, they differ significantly in their properties:
+\subsection*{Reelle tal}
+Reelle tal, som betegnes med symbolet $\mathbb{R}$, danner grundlaget for det meste af den matematiske analyse og er uundværlige til at beskrive kontinuerte størrelser. Mængden af reelle tal består af både de rationale tal ($\mathbb{Q}$) og de irrationale tal ($\mathbb{R} \setminus \mathbb{Q}$) og omfatter dermed alle tal, der kan placeres på tallinjen. Selv om både rationale og irrationale tal er en del af det reelle talsystem, adskiller deres egenskaber sig markant:
 
-\begin{custombox}{Similarities and Differences of Rational and Irrational Numbers}
+\begin{custombox}{Ligheder og forskelle mellem rationale og irrationale tal}
     \begin{itemize}
-    \item \textbf{Representation:} Rational numbers can be represented as fractions, while irrational numbers cannot. This distinction makes irrational numbers more complex to handle, especially in arithmetic operations.
+    \item \textbf{Repræsentation:} Rationale tal kan repræsenteres som brøker, mens irrationale tal ikke kan. Denne forskel gør irrationale tal mere komplicerede at håndtere, især i regneoperationer.
 
-    \item \textbf{Decimal Expansion:} The decimal expansion of rational numbers is either finite or periodic, while that of irrational numbers is infinite and non-repeating.
+    \item \textbf{Decimalfremstilling:} Decimalfremstillingen af rationale tal er enten endelig eller periodisk, mens decimalfremstillingen af irrationale tal er uendelig og ikke-periodisk.
 
-    \item \textbf{Closure Properties:} Rational numbers are closed under addition, subtraction, multiplication, and division (except by zero). Irrational numbers are not closed under these operations; for example, the sum or product of two irrational numbers can sometimes be rational.
+    \item \textbf{Lukkethed:} De rationale tal er lukkede under addition, subtraktion, multiplikation og division (bortset fra division med nul). De irrationale tal er ikke lukkede under disse operationer; for eksempel kan summen eller produktet af to irrationale tal undertiden være rationalt.
 
-    \item \textbf{Density:} Rational numbers are dense on the real number line, meaning that between any two rational numbers, there exists another rational number. Irrational numbers are also densely distributed but in a complementary manner, filling in the "gaps" left by the rationals, ensuring that the real number line is continuous without any breaks.
+    \item \textbf{Tæthed:} De rationale tal ligger tæt på den reelle tallinje. Det betyder, at der mellem to vilkårlige rationale tal findes et andet rationalt tal. De irrationale tal ligger også tæt, men på en komplementær måde: De udfylder de »huller«, som de rationale tal efterlader, og sikrer, at den reelle tallinje er kontinuert uden afbrydelser.
 \end{itemize}
 \end{custombox}
 
-The real number line is a continuous, unbroken line that extends infinitely in both directions. Every point on this line corresponds to a unique real number, whether rational or irrational. This continuity is what allows the real numbers to model continuous phenomena in nature, such as time, distance, and temperature.
+Den reelle tallinje er en kontinuert, ubrudt linje, der strækker sig uendeligt i begge retninger. Hvert punkt på linjen svarer til ét bestemt reelt tal, uanset om det er rationalt eller irrationalt. Det er denne kontinuitet, der gør det muligt at bruge de reelle tal til at modellere kontinuerte fænomener i naturen, såsom tid, afstand og temperatur.
 
-\section{Integer Properties and Modular Arithmetic}
-In \ref{chap:ch0} we introduced the concept of a factor. A factor is a portion of a quantity, usually an integer or polynomial that, when multiplied by other factors, gives the entire quantity.
+\section{Egenskaber ved hele tal og modulær aritmetik}
+I kapitel \ref{chap:ch0} introducerede vi begrebet faktor. En faktor er en del af en størrelse, som regel et helt tal eller et polynomium, der ganget med andre faktorer giver hele størrelsen.
 
-In number theory, a factor of a number \(n\) is synonymous with a \textbf{divisor} of \(n\). Specifically, a divisor of an integer \(n\) is an integer \(d\) that divides \(n\) and results in another integer.
+I talteori er en faktor i et tal \(n\) det samme som en \textbf{divisor} i \(n\). Mere præcist er en divisor i et helt tal \(n\) et helt tal \(d\), der går op i \(n\), så resultatet bliver et andet helt tal.
 
-A positive \textbf{proper divisor} is a positive divisor of a number \(n\), excluding \(n\) itself. Similarly, a \textbf{proper factor} of a positive integer \(n\) is a factor of \(n\) other than 1 or \(n\).
+En positiv \textbf{ægte divisor} er en positiv divisor i et tal \(n\), bortset fra \(n\) selv. Tilsvarende er en \textbf{ægte faktor} i et positivt helt tal \(n\) en faktor i \(n\), der er forskellig fra 1 og \(n\).
 
-For example, the factors of 12 are:
+Faktorerne i 12 er for eksempel:
 
 \[
 1, 2, 3, 4, 6, 12
 \]
 
-In this list, 2, 3, 4, and 6 are proper factors of 12, meaning they are less than 12 itself but greater than 1.
+I denne liste er 2, 3, 4 og 6 ægte faktorer i 12. Det betyder, at de er mindre end 12 selv, men større end 1.
 
-A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. In other words, a prime number cannot be formed by multiplying two smaller natural numbers. The first few prime numbers are:
+Et primtal er et naturligt tal større end 1, som ikke har andre positive divisorer end 1 og sig selv. Et primtal kan med andre ord ikke dannes ved at gange to mindre naturlige tal. De første primtal er:
 
 \[
 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, \ldots
 \]
 
-Notice that 2 is the only even prime number because any other even number can be divided by 2, making it \textit{composite}. A \textbf{composite number}, in contrast to a prime, is a natural number greater than 1 that can be divided evenly by at least one positive integer other than 1 and itself. For example, 6 is a composite number because it can be expressed as \(6 = 2 \times 3\).
+Bemærk, at 2 er det eneste lige primtal, fordi ethvert andet lige tal kan divideres med 2 og dermed er \textit{sammensat}. Et \textbf{sammensat tal} er i modsætning til et primtal et naturligt tal større end 1, som går op med mindst ét andet positivt helt tal end 1 og sig selv. For eksempel er 6 et sammensat tal, fordi det kan skrives som \(6 = 2 \times 3\).
 
-\subsection*{Prime factorisation}
-Prime factorisation is the process of breaking down a composite number into a product of its prime factors. For any composite number, this factorisation is unique, except for the order of the factors. For instance, consider the number 60:
+\subsection*{Primfaktoropløsning}
+Primfaktoropløsning er processen, hvor et sammensat tal opløses i et produkt af dets primfaktorer. For ethvert sammensat tal er denne opløsning entydig, bortset fra faktorernes rækkefølge. Se for eksempel på tallet 60:
 \[
 60 = 2 \times 2 \times 3 \times 5 = 2^2 \times 3 \times 5
 \]
-Here, 2, 3, and 5 are prime factors of 60 and $2^2 \times 3 \times 5$ is the \textbf{canonical factorisation} of 60 - we usually just call it the prime factorisation.
+Her er 2, 3 og 5 primfaktorer i 60, og $2^2 \times 3 \times 5$ er den \textbf{kanoniske faktorisering} af 60 -- normalt kalder vi den blot primfaktoropløsningen.
 
-\begin{theorem}{The Fundamental Theorem of Arithmetic}
-Every integer greater than 1 can be represented uniquely as a product of prime numbers, up to the order of the factors.
+\begin{theorem}{Aritmetikkens fundamentalsætning}
+Ethvert helt tal større end 1 kan skrives entydigt som et produkt af primtal, bortset fra faktorernes rækkefølge.
 \end{theorem}
 
-This theorem underscores the importance of prime numbers as the "building blocks" of all natural numbers.
+Denne sætning understreger primtallenes betydning som »byggesten« for alle naturlige tal.
 
 \begin{example}
 
@@ -187,28 +187,28 @@ This theorem underscores the importance of prime numbers as the "building blocks
 \]
 \end{example}
 
-No matter how you factorise 84, you will always end up with this set of prime numbers (2, 3, and 7), though the order might differ.
+Uanset hvordan du faktoriserer 84, ender du altid med de samme primtal (2, 3 og 7), selv om rækkefølgen kan variere.
 
-The prime factorisation allows for a unique representation of the number in terms of its prime factors.
+Primfaktoropløsningen giver en entydig fremstilling af tallet ved hjælp af dets primfaktorer.
 
-\subsection*{Greatest Common Divisor (GCD)}
-The Greatest Common Divisor (GCD), also referred to as the \textit{highest common factor} (HCF) or \textit{greatest common factor} (GFC), of two or more integers is the largest positive integer that divides each of the given integers without leaving a remainder. To determine the GCD, one commonly employs the prime factorisation of the numbers involved. The GCD is then found by multiplying the common prime factors with the smallest exponents from the prime factorisation of the numbers.
+\subsection*{Største fælles divisor (GCD)}
+Den største fælles divisor (GCD, af engelsk \emph{greatest common divisor}) af to eller flere hele tal, som også kaldes \textit{største fælles faktor} (på engelsk \textit{highest common factor}, HCF, eller \textit{greatest common factor}, GCF), er det største positive hele tal, der går op i hvert af de givne tal uden at efterlade en rest. For at bestemme GCD bruger man almindeligvis primfaktoropløsningen af de involverede tal. GCD findes derefter ved at gange de fælles primfaktorer med de mindste eksponenter fra tallenes primfaktoropløsninger.
 
-For example, consider finding the GCD of 24 and 36:
+Se for eksempel på, hvordan man finder GCD af 24 og 36:
 \[
 24 = 2^3 \times 3, \quad 36 = 2^2 \times 3^2
 \]
-The common prime factors are 2 and 3. Thus, the GCD is:
+De fælles primfaktorer er 2 og 3. Dermed er GCD:
 \[
 \text{GCD} = 2^2 \times 3 = 12
 \]
 
-\begin{example} Find the GCD of 36 and 120
+\begin{example} Find GCD af 36 og 120
 
 \begin{solution}
     
 
-The arrows indicate the numbers that we chose.
+Pilene viser de tal, vi har valgt.
 
 \begin{tikzpicture}
     % First line
@@ -229,7 +229,7 @@ The arrows indicate the numbers that we chose.
     \draw[thick, teal, ->] (0.65, -1.8) -- (0.65, -1.4);
 \end{tikzpicture}
 
-We see that 2 and 3 are common factors, and choose the ones with the smallest exponents:
+Vi ser, at 2 og 3 er fælles faktorer, og vælger dem med de mindste eksponenter:
 
 \[
 GCD = 2^2\times 3 = 12
@@ -238,19 +238,19 @@ GCD = 2^2\times 3 = 12
 
 \end{example}
  
-\subsection*{Least Common Multiple (LCM)}
-The Least Common Multiple (LCM) of two or more integers is the smallest positive integer that is evenly divisible by each of the given integers. The LCM can also be determined using the prime factorisation of the numbers. 
+\subsection*{Mindste fælles multiplum (LCM)}
+Det mindste fælles multiplum (LCM, af engelsk \emph{least common multiple}) af to eller flere hele tal er det mindste positive hele tal, som hvert af de givne tal går op i. LCM kan også bestemmes ved hjælp af tallenes primfaktoropløsning. 
 
-For instance, to find the LCM of 24 and 36:
+Se for eksempel på, hvordan man finder LCM af 24 og 36:
 \[
 24 = 2^3 \times 3, \quad 36 = 2^2 \times 3^2
 \]
-The LCM is obtained by taking the highest power of each prime factor that appears in the factorisation of either number:
+LCM fås ved at tage den højeste potens af hver primfaktor, der optræder i opløsningen af et af tallene:
 \[
 \text{LCM} = 2^3 \times 3^2 = 72
 \]
 
-\begin{example} Find the LCM of 12 and 18.
+\begin{example} Find LCM af 12 og 18.
 
 \begin{solution}
 \[
@@ -260,7 +260,7 @@ The LCM is obtained by taking the highest power of each prime factor that appear
 18 = 2 \times 3^2
 \]
 
-The highest powers occurring in either factorisation are $2^2$ and $3^2$, so
+De højeste potenser, der optræder i en af opløsningerne, er $2^2$ og $3^2$, så
 
 \[
 LCM = 2^2 \times 3^2 = 36
@@ -270,12 +270,12 @@ LCM = 2^2 \times 3^2 = 36
     
 \end{example}
 
-\begin{example} Find the LCM of 80 and 120
+\begin{example} Find LCM af 80 og 120
 
 \begin{solution}
     
 
-The arrows indicate the numbers that we chose.
+Pilene viser de tal, vi har valgt.
 
 \begin{tikzpicture}
     % First line
@@ -298,7 +298,7 @@ The arrows indicate the numbers that we chose.
     \draw[thick, teal, ->] (1.6, -1.8) -- (1.6, -1.4);
 \end{tikzpicture}
 
-For the LCM, we choose the greatest exponent of each prime that occurs in either factorisation:
+Til LCM vælger vi den største eksponent for hvert primtal, der optræder i en af opløsningerne:
 
 \[
 LCM = 2^4\times 3 \times 5 = 240
@@ -308,49 +308,49 @@ LCM = 2^4\times 3 \times 5 = 240
 \end{example}
 
 
-\subsection*{Connection Between GCD and LCM}
+\subsection*{Sammenhængen mellem GCD og LCM}
 
-An important relationship between the GCD and LCM of two numbers \(a\) and \(b\) is given by the formula:
+En vigtig sammenhæng mellem GCD og LCM af to tal \(a\) og \(b\) er givet ved formlen:
 \[
 \text{GCD}(a, b) \times \text{LCM}(a, b) = |a b|
 \]
-For example, using the numbers 24 and 36:
+Med tallene 24 og 36 får vi for eksempel:
 \[
 12 \times 72 = 24 \times 36 = 864
 \]
-This relationship is a powerful tool in solving problems related to divisibility, number theory, and algebra.
+Denne sammenhæng er et stærkt værktøj til at løse problemer inden for delelighed, talteori og algebra.
 
-The study of primes and factors is foundational in mathematics, providing essential tools for understanding the structure of numbers. The concepts of prime factorisation, the Fundamental Theorem of Arithmetic, and the calculations of GCD and LCM are not only critical in theoretical mathematics but also in practical applications, such as cryptography, coding theory, and the analysis of algorithms.
+Studiet af primtal og faktorer er grundlæggende i matematikken og giver vigtige værktøjer til at forstå tallenes struktur. Begreberne primfaktoropløsning, aritmetikkens fundamentalsætning og beregning af GCD og LCM er ikke kun afgørende i teoretisk matematik, men også i praktiske anvendelser som kryptografi, kodningsteori og analyse af algoritmer.
 
-\subsection*{Divisors and Remainders}
+\subsection*{Divisorer og rester}
 \label{sec:2.3Mod}
-Division involving integers can be tricky since the result might not always be an integer. Often, division produces a remainder. For example,
+Division med hele tal kan være vanskelig, da resultatet ikke altid er et helt tal. Ofte giver en division en rest. For eksempel er
 
 \[
 9 = 2 \times 4 + 1.
 \]
 
-In this case, dividing 9 by 4 leaves a \textit{remainder} of 1.
+Her giver division af 9 med 4 en \textit{rest} på 1.
 
-In general, for integers \(a\neq0\) and \(b\), there exist unique integers $q$ and $r$ such that
+Generelt gælder det for hele tal \(a\neq0\) og \(b\), at der findes entydigt bestemte hele tal $q$ og $r$, så
 
 \[
 b = q a + r, \qquad 0\leq r<|a|.
 \]
 
-The integer $q$ is the quotient and \(r\) is the remainder. If \(r=0\), then \(a\) divides \(b\), denoted by \(a \mid b\). For instance, \(2 \mid 128\) and \(7 \mid 49\), but \(3 \nmid 4\).
+Det hele tal $q$ er kvotienten, og \(r\) er resten. Hvis \(r=0\), går \(a\) op i \(b\), hvilket skrives \(a \mid b\). For eksempel gælder \(2 \mid 128\) og \(7 \mid 49\), men \(3 \nmid 4\).
 
-In this book, \emph{factor} and \emph{divisor} are used interchangeably. A positive proper divisor of a positive integer $b$ is a positive divisor other than $b$ itself. A prime number therefore has exactly two positive divisors, 1 and itself, and no proper divisor greater than 1.
+I denne bog bruges \emph{faktor} og \emph{divisor} i flæng. En positiv ægte divisor i et positivt helt tal $b$ er en positiv divisor, der er forskellig fra $b$ selv. Et primtal har derfor præcis to positive divisorer, 1 og sig selv, og ingen ægte divisor større end 1.
 
-\subsection*{Modular Arithmetic}
-The \texttt{mod} operator, commonly encountered in computer programming, provides the remainder after division. For example:
+\subsection*{Modulær aritmetik}
+Operatoren \texttt{mod}, som man ofte støder på i programmering, giver resten efter division. For eksempel:
 \begin{enumerate}
-    \item \(25 \bmod 4 = 1\) because \(25 \div 4 = 6\) with a remainder of 1.
-    \item \(19 \bmod 5 = 4\) since \(19 = 3 \times 5 + 4\).
+    \item \(25 \bmod 4 = 1\), fordi \(25 \div 4 = 6\) med en rest på 1.
+    \item \(19 \bmod 5 = 4\), da \(19 = 3 \times 5 + 4\).
     \item \(24 \bmod 5 = 4\).
     \item \(99 \bmod 11 = 0\).
 \end{enumerate}
 
-While there are some convention-dependent details for negative operands in programming languages, we focus on positive integers. Congruence notation expresses that two integers have the same remainder: $24\equiv4\pmod 5$ and $21\equiv0\pmod 7$. This is distinct from the remainder operation, written $24\bmod5=4$ and $21\bmod7=0$.
+Selv om der i programmeringssprog er nogle konventionsafhængige detaljer for negative operander, fokuserer vi på positive hele tal. Kongruensnotation udtrykker, at to hele tal har samme rest: $24\equiv4\pmod 5$ og $21\equiv0\pmod 7$. Det er forskelligt fra restoperationen, som skrives $24\bmod5=4$ og $21\bmod7=0$.
 
-Modular arithmetic is sometimes referred to as clock arithmetic. Imagine using a 24-hour clock: 09:00 represents 9 in the morning, while 21:00 represents 9 in the evening. If a journey starts at 07:00 and lasts 25 hours, the arrival time would be 08:00 the next day. Mathematically, this can be expressed as \(7 + 25 = 32\) and \(32 \bmod 24 = 8\). Essentially, we start at 7 and move 25 hours forward on the clock face, landing at 8.
+Modulær aritmetik kaldes undertiden uraritmetik. Forestil dig et 24-timersur: 09:00 betyder klokken 9 om morgenen, mens 21:00 betyder klokken 9 om aftenen. Hvis en rejse starter kl. 07:00 og varer 25 timer, er ankomsttiden kl. 08:00 næste dag. Matematisk kan det udtrykkes som \(7 + 25 = 32\) og \(32 \bmod 24 = 8\). Vi starter altså ved 7 og bevæger os 25 timer frem på urskiven, så vi lander på 8.

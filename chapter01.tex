@@ -1,11 +1,11 @@
-\chapter{Functions}
+\chapter{Funktioner}
 \label{chap:ch1}
-Functions represent a crucial concept in mathematics, serving as a bridge between arithmetic and higher-level mathematical analysis. A function can be thought of as a special relationship between two sets, where each input (from the domain) is associated with exactly one output (from the co-domain). Understanding functions and their properties allows us to model and solve real-world problems with greater precision and flexibility.
+Funktioner er et centralt begreb i matematikken og danner bro mellem aritmetik og mere avanceret matematisk analyse. En funktion kan opfattes som en særlig sammenhæng mellem to mængder, hvor hvert input (fra definitionsmængden) er knyttet til præcis ét output (fra dispositionsmængden). Når vi forstår funktioner og deres egenskaber, kan vi modellere og løse virkelige problemer med større præcision og fleksibilitet.
 
-In this chapter, we introduce the concept of functions, including their definitions, notations, and key properties. We then examine common types of functions graphically, and develop the related ideas of logarithms and solving exponential and logarithmic equations. These concepts set the stage for more advanced mathematical discussions throughout the book.
+I dette kapitel introducerer vi funktionsbegrebet, herunder definitioner, notation og vigtige egenskaber. Derefter undersøger vi almindelige funktionstyper grafisk og udvikler de beslægtede begreber logaritmer og løsning af eksponential- og logaritmeligninger. Disse begreber danner grundlag for mere avancerede matematiske emner senere i bogen.
 
-\section{Properties of Functions}
-In mathematics, a function assigns each element of one set to a specific element of another set (which may be the same set). For example, consider a Mathematics for Software Engineering class where each student is assigned a grade from the set \(\{12, 10, 7, 4, 02\}\). Suppose the grades are as follows:
+\section{Funktioners egenskaber}
+I matematikken knytter en funktion hvert element i én mængde til et bestemt element i en anden mængde (som kan være den samme mængde). Se for eksempel på et hold i Matematik for softwareingeniører, hvor hver studerende får en karakter fra mængden \(\{12, 10, 7, 4, 02\}\). Antag, at karaktererne er som følger:
 
 \begin{figure}[htbp]
     \centering
@@ -31,32 +31,32 @@ In mathematics, a function assigns each element of one set to a specific element
         \draw[->, thick, black] (A4.east) -- (B1.west);
         \draw[->, thick, black] (A5.east) -- (B5.west);
     \end{tikzpicture}
-    \caption{Example of a function mapping names to numbers.}
+    \caption{Eksempel på en funktion, der afbilder navne over i tal.}
     \label{fig:names_to_numbers}
 \end{figure}
 
 
-This assignment of grades, illustrated in \autoref{fig:names_to_numbers}, exemplifies a function.
+Denne tildeling af karakterer, som er illustreret i \autoref{fig:names_to_numbers}, er et eksempel på en funktion.
 
-Functions play a crucial role in mathematics and computer science. They define discrete structures such as sequences and strings and are used to analyse the time complexity of algorithms. Many computer programs are designed to compute values of functions. Recursive functions, defined in terms of themselves, are especially significant in computer science. This section provides an overview of the fundamental concepts of functions needed in the mathematics for software engineering.
+Funktioner spiller en central rolle i matematik og datalogi. De definerer diskrete strukturer som følger og strenge, og de bruges til at analysere algoritmers tidskompleksitet. Mange computerprogrammer er designet til at beregne funktionsværdier. Rekursive funktioner, der er defineret ved hjælp af sig selv, har særlig stor betydning i datalogi. Dette afsnit giver et overblik over de grundlæggende funktionsbegreber, som er nødvendige i matematik for softwareingeniører.
 
 \begin{definition}
-Let $A$ and $B$ be nonempty sets. A function $f$ from $A$ to $B$ is an assignment of exactly one element of $B$ to each element of $A$. We write $f(a)=b$ if $b$ is the unique element of $B$ assigned by the function $f$ to the element $a$ of $A$. If $f$ is a function from $A$ to $B$, we write $f: A \rightarrow B$.
+Lad $A$ og $B$ være ikke-tomme mængder. En funktion $f$ fra $A$ til $B$ er en tildeling af præcis ét element i $B$ til hvert element i $A$. Vi skriver $f(a)=b$, hvis $b$ er det entydige element i $B$, som funktionen $f$ tildeler elementet $a$ i $A$. Hvis $f$ er en funktion fra $A$ til $B$, skriver vi $f: A \rightarrow B$.
 \end{definition}
 
 \begin{remark}
-    Functions are sometimes also called mappings or transformations.
+    Funktioner kaldes undertiden også afbildninger eller transformationer.
 \end{remark}
 
-Functions can be specified in various ways. Sometimes, we explicitly state the assignments, as shown in \autoref{fig:names_to_numbers}. Often, a formula such as \(f(x) = x + 1\) is used to define a function. In other cases, a computer program may specify the function.
+Funktioner kan angives på forskellige måder. Nogle gange angiver vi tildelingerne eksplicit, som vist i \autoref{fig:names_to_numbers}. Ofte bruges en forskrift som \(f(x) = x + 1\) til at definere en funktion. I andre tilfælde kan funktionen være givet ved et computerprogram.
 
 \begin{definition}
-If $f$ is a function from $A$ to $B$, we say that $A$ is the \textbf{domain} of $f$ and $B$ is the \textbf{co-domain} of $f$. If $f(a)=b$, we say that $b$ is the \textbf{image} of $a$ and $a$ is a \textbf{preimage} of $b$. The \textbf{range}, or image, of $f$ is the set of all images of elements of $A$. Also, if $f$ is a function from $A$ to $B$, we say that $f$ \textbf{maps} $A$ to $B$.    
+Hvis $f$ er en funktion fra $A$ til $B$, siger vi, at $A$ er \textbf{definitionsmængden} for $f$, og at $B$ er \textbf{dispositionsmængden} for $f$. Hvis $f(a)=b$, siger vi, at $b$ er \textbf{billedet} af $a$, og at $a$ er et \textbf{urbillede} af $b$. \textbf{Værdimængden}, eller billedmængden, for $f$ er mængden af alle billeder af elementer i $A$. Hvis $f$ er en funktion fra $A$ til $B$, siger vi desuden, at $f$ \textbf{afbilder} $A$ ind i $B$.    
 \end{definition}
 
-When defining a function, we specify its domain, co-domain, and the mapping of elements from the domain to the co-domain. Two functions are equal if they have the same domain, the same co-domain, and map each element of their domain to the same element in the co-domain. 
+Når vi definerer en funktion, angiver vi dens definitionsmængde, dens dispositionsmængde og afbildningen af elementerne i definitionsmængden over i dispositionsmængden. To funktioner er ens, hvis de har samme definitionsmængde og samme dispositionsmængde og afbilder hvert element i definitionsmængden over i det samme element i dispositionsmængden. 
 
-It's important to note that altering the domain or co-domain results in a different function. Similarly, changing the mapping of elements also produces a different function.
+Det er vigtigt at bemærke, at en ændring af definitionsmængden eller dispositionsmængden giver en anden funktion. Tilsvarende giver en ændring af afbildningen af elementerne også en anden funktion.
 
 
 \begin{figure}[htbp]
@@ -80,46 +80,46 @@ It's important to note that altering the domain or co-domain results in a differ
     ([shift={(270:1.5cm)}]6,0);
 
 \end{tikzpicture}
-\caption{A function \(f\) mapping an element \(a\) from set \(A\) to an element \(b=f(a)\) in set \(B\).}
+\caption{En funktion \(f\), der afbilder et element \(a\) i mængden \(A\) over i et element \(b=f(a)\) i mængden \(B\).}
 \label{fig:function_mapping}
 \end{figure}
 
-The following examples illustrate various functions. In each example, we describe the domain, co-domain, range, and the assignment of values to the elements of the domain.
+De følgende eksempler illustrerer forskellige funktioner. I hvert eksempel beskriver vi definitionsmængden, dispositionsmængden, værdimængden og tildelingen af værdier til elementerne i definitionsmængden.
 
-\begin{example} What are the domain, co-domain, and range of the function that assigns grades to students described in the first paragraph of the introduction of this section?
+\begin{example} Hvad er definitionsmængden, dispositionsmængden og værdimængden for den funktion, der tildeler de studerende karakterer, og som er beskrevet i første afsnit af indledningen til dette afsnit?
 
 \begin{solution}
-    Let $G$ be the function that assigns a grade to a student in our Software engineering mathematics class. Note that $G$(Alice) $=12$, for instance. The domain of $G$ is the set \{Alice, Bob, Carol, Dave, Eve $\}$, and the co-domain is the set $\{12, 10, 7, 4, 02\}$. The range of $G$ is the set $\{12, 10, 7, 02\}$, because each grade except $4$ is assigned to some student.
+    Lad $G$ være den funktion, der tildeler en studerende på vores hold i matematik for softwareingeniører en karakter. Bemærk for eksempel, at $G$(Alice) $=12$. Definitionsmængden for $G$ er mængden \{Alice, Bob, Carol, Dave, Eve $\}$, og dispositionsmængden er mængden $\{12, 10, 7, 4, 02\}$. Værdimængden for $G$ er mængden $\{12, 10, 7, 02\}$, fordi alle karakterer undtagen $4$ er tildelt mindst én studerende.
 \end{solution}
     
 \end{example}
 
 \begin{example}
-    Let $f$ be the function that assigns the last two bits of a bit string of length 2 or greater to that string. For example, $f(11010)=10$. Then, the domain of $f$ is the set of all bit strings of length 2 or greater, and both the co-domain and range are the set $\{00,01,10,11\}$.
+    Lad $f$ være den funktion, der til en bitstreng af længde 2 eller mere tildeler strengens sidste to bit. For eksempel er $f(11010)=10$. Så er definitionsmængden for $f$ mængden af alle bitstrenge af længde 2 eller mere, og både dispositionsmængden og værdimængden er mængden $\{00,01,10,11\}$.
 \end{example}
 
 \begin{example}
-    Let $f: \mathbb{Z} \rightarrow \mathbb{Z}$ assign the square of an integer to this integer. Then, $f(x)=x^2$, where the domain of $f$ is the set of all integers, the co-domain of $f$ is the set of all integers, and the range of $f$ is the set of all integers that are perfect squares, namely, $\{0,1,4,9, \ldots\}$.
+    Lad $f: \mathbb{Z} \rightarrow \mathbb{Z}$ tildele et helt tal dets kvadrat. Så er $f(x)=x^2$, hvor definitionsmængden for $f$ er mængden af alle hele tal, dispositionsmængden for $f$ er mængden af alle hele tal, og værdimængden for $f$ er mængden af alle hele tal, der er kvadrattal, nemlig $\{0,1,4,9, \ldots\}$.
 \end{example}
 
-\subsection*{One-to-One and Onto Functions}
-In mathematics, functions are a fundamental concept used to describe the relationship between two sets. However, not all functions behave the same way. To understand these differences, we introduce the concepts of one-to-one (injective) and onto (surjective) functions.
+\subsection*{Injektive og surjektive funktioner}
+I matematikken er funktioner et grundlæggende begreb, der bruges til at beskrive sammenhængen mellem to mængder. Men ikke alle funktioner opfører sig ens. For at forstå forskellene introducerer vi begreberne injektive og surjektive funktioner.
 
-Some functions never assign the same value to two different domain elements. These functions are said to be \textbf{one-to-one}.
+Nogle funktioner tildeler aldrig den samme værdi til to forskellige elementer i definitionsmængden. Sådanne funktioner kaldes \textbf{injektive}.
 
-\begin{definition} {One-to-One functions (Injective)}
-A function \( f: A \rightarrow B \) is called \textbf{one-to-one} (or \textbf{injective}) if different elements in \( A \) map to different elements in \( B \). In other words, if \( f(a_1) = f(a_2) \), then \( a_1 = a_2 \). This property ensures that no two distinct elements in \( A \) are mapped to the same element in \( B \).     
+\begin{definition} {Injektive funktioner}
+En funktion \( f: A \rightarrow B \) kaldes \textbf{injektiv}, hvis forskellige elementer i \( A \) afbildes over i forskellige elementer i \( B \). Med andre ord: Hvis \( f(a_1) = f(a_2) \), så er \( a_1 = a_2 \). Denne egenskab sikrer, at to forskellige elementer i \( A \) aldrig afbildes over i det samme element i \( B \).     
 \end{definition}
 
-For a real-valued function drawn in the Cartesian plane, the function is one-to-one if and only if no horizontal line intersects its graph more than once. This criterion is known as the horizontal line test.
+For en reel funktion, hvis graf er tegnet i et koordinatsystem, gælder, at funktionen er injektiv, hvis og kun hvis ingen vandret linje skærer grafen mere end én gang. Dette kriterium kaldes den vandrette linjetest.
 
-\begin{definition}{Onto Functions (Surjective)}
-A function \( f: A \rightarrow B \) is called \textbf{onto} (or \textbf{surjective}) if every element in \( B \) is the image of at least one element in \( A \). In other words, for every \( b \in B \), there exists at least one \( a \in A \) such that \( f(a) = b \). This property ensures that the function ``covers'' the entire set \( B \).
+\begin{definition}{Surjektive funktioner}
+En funktion \( f: A \rightarrow B \) kaldes \textbf{surjektiv}, hvis hvert element i \( B \) er billede af mindst ét element i \( A \). Med andre ord findes der for hvert \( b \in B \) mindst ét \( a \in A \), så \( f(a) = b \). Denne egenskab sikrer, at funktionen »dækker« hele mængden \( B \).
 \end{definition}
 
-\subsection*{Inverse Functions}
+\subsection*{Inverse funktioner}
 
-Now, consider a function \( f: A \rightarrow B \) that is both one-to-one and onto. Because \( f \) is onto, every element of \( B \) is the image of some element in \( A \). Furthermore, because \( f \) is one-to-one, every element of \( B \) is the image of a unique element of \( A \). This unique correspondence allows us to define a new function from \( B \) to \( A \) that ``reverses'' the mapping given by \( f \).
+Se nu på en funktion \( f: A \rightarrow B \), som er både injektiv og surjektiv. Fordi \( f \) er surjektiv, er hvert element i \( B \) billede af et element i \( A \). Fordi \( f \) er injektiv, er hvert element i \( B \) desuden billede af ét entydigt bestemt element i \( A \). Denne entydige korrespondance gør det muligt at definere en ny funktion fra \( B \) til \( A \), som »vender« den afbildning om, der er givet ved \( f \).
 
 \begin{figure}[htbp]
 \centering
@@ -148,38 +148,38 @@ Now, consider a function \( f: A \rightarrow B \) that is both one-to-one and on
 \draw[->] (5.4,-1.8) to[bend left=20] node[midway, below] {$f^{-1}$} (0.6,-1.8);
 
 \end{tikzpicture}
-\caption{The function $f^{-1}$ is the inverse of function $f$.}
+\caption{Funktionen $f^{-1}$ er den inverse funktion til $f$.}
 \label{fig:inv}
 \end{figure}
 
-This new function is called the \textbf{inverse function} of \( f \), denoted by \( f^{-1}: B \rightarrow A \). The inverse function \( f^{-1} \) satisfies the following properties:
+Denne nye funktion kaldes den \textbf{inverse funktion} (eller omvendte funktion) til \( f \) og betegnes \( f^{-1}: B \rightarrow A \). Den inverse funktion \( f^{-1} \) har følgende egenskaber:
 
 \[
-f(f^{-1}(b)) = b \quad \text{for every } b \in B.
+f(f^{-1}(b)) = b \quad \text{for alle } b \in B.
 \]
 \[
-f^{-1}(f(a)) = a \quad \text{for every } a \in A.
+f^{-1}(f(a)) = a \quad \text{for alle } a \in A.
 \]
 
-We can summarise these considerations in the following definition
+Vi kan sammenfatte disse overvejelser i følgende definition
 
-\begin{definition}{Inverse Functions}
-Let $f$ be a one-to-one correspondence from the set $A$ to the set $B$. The inverse function of $f$ is the function that assigns to an element $b$ belonging to $B$ the unique element $a$ in $A$ such that $f(a)=b$. The inverse function of $f$ is denoted by $f^{-1}$. Hence, $f^{-1}(b)=a$ when $f(a)=b$.    
+\begin{definition}{Inverse funktioner}
+Lad $f$ være en bijektion fra mængden $A$ til mængden $B$. Den inverse funktion til $f$ er den funktion, der til et element $b$ i $B$ tildeler det entydige element $a$ i $A$, for hvilket $f(a)=b$. Den inverse funktion til $f$ betegnes $f^{-1}$. Altså er $f^{-1}(b)=a$, når $f(a)=b$.    
 \end{definition}
 
-These properties show that \( f^{-1} \) effectively undoes the work of \( f \), mapping each element of \( B \) back to the corresponding element in \( A \).
+Disse egenskaber viser, at \( f^{-1} \) reelt ophæver virkningen af \( f \) ved at afbilde hvert element i \( B \) tilbage i det tilsvarende element i \( A \).
 
 \begin{example}
 
 
-Let \( f: \mathbb{R} \rightarrow \mathbb{R} \) be defined by \( f(x) = 2x + 3 \). We can check that \( f \) is both one-to-one and onto:
+Lad \( f: \mathbb{R} \rightarrow \mathbb{R} \) være defineret ved \( f(x) = 2x + 3 \). Vi kan kontrollere, at \( f \) er både injektiv og surjektiv:
 
 \begin{itemize}
-    \item \textbf{One-to-One}: If \( f(x_1) = f(x_2) \), then \( 2x_1 + 3 = 2x_2 + 3 \). Subtracting 3 from both sides gives \( 2x_1 = 2x_2 \), and dividing by 2 yields \( x_1 = x_2 \). Thus, \( f \) is one-to-one.
-    \item \textbf{Onto}: Given any \( y \in \mathbb{R} \), we can solve \( y = 2x + 3 \) for \( x \) to find \( x = \frac{y - 3}{2} \). Since this \( x \) exists for every \( y \), \( f \) is onto.
+    \item \textbf{Injektiv}: Hvis \( f(x_1) = f(x_2) \), så er \( 2x_1 + 3 = 2x_2 + 3 \). Når vi trækker 3 fra på begge sider, får vi \( 2x_1 = 2x_2 \), og division med 2 giver \( x_1 = x_2 \). Altså er \( f \) injektiv.
+    \item \textbf{Surjektiv}: For et vilkårligt \( y \in \mathbb{R} \) kan vi løse \( y = 2x + 3 \) med hensyn til \( x \) og får \( x = \frac{y - 3}{2} \). Da dette \( x \) findes for alle \( y \), er \( f \) surjektiv.
 \end{itemize}
 
-Since \( f \) is both one-to-one and onto, it has an inverse function \( f^{-1} \) defined by
+Da \( f \) er både injektiv og surjektiv, har den en invers funktion \( f^{-1} \), der er defineret ved
 
 \[
 f^{-1}(y) = \frac{y - 3}{2}.
@@ -188,8 +188,8 @@ f^{-1}(y) = \frac{y - 3}{2}.
   
 \end{example}
 
-\subsection*{Composite Functions}
-In mathematics, functions can be combined to form new functions. One important way of combining functions is through the composition of functions. The composite of two functions is essentially applying one function to the results of another.
+\subsection*{Sammensatte funktioner}
+I matematikken kan funktioner kombineres til nye funktioner. En vigtig måde at kombinere funktioner på er sammensætning af funktioner. At sammensætte to funktioner består i bund og grund i at anvende den ene funktion på resultaterne af den anden.
 
 \begin{figure}[htbp]
 \centering
@@ -223,65 +223,65 @@ In mathematics, functions can be combined to form new functions. One important w
 \draw[->, bend right=20] ([shift={(270:1.5cm)}]0,0) to node[midway, below] {$f \circ g$} ([shift={(270:1.5cm)}]10,0);
 
 \end{tikzpicture}
-\caption{The composition of $f$ and $g$.}
+\caption{Sammensætningen af $f$ og $g$.}
 \label{fig:composite}
 \end{figure}
 
 \begin{definition}
     
 
-Let \( f: B \rightarrow C \) and \( g: A \rightarrow B \) be two functions. The \textbf{composite function} of \( f \) and \( g \), denoted by \( f \circ g \), is a function from \( A \) to \( C \) defined by
+Lad \( f: B \rightarrow C \) og \( g: A \rightarrow B \) være to funktioner. Den \textbf{sammensatte funktion} af \( f \) og \( g \), som betegnes \( f \circ g \), er en funktion fra \( A \) til \( C \), der er defineret ved
 
 \[
 (f \circ g)(x) = f(g(x)),
 \]
 
-for every \( x \in A \).
+for alle \( x \in A \).
 
 \end{definition}
 
-In other words, the composite function \( f \circ g \) means that you first apply the function \( g \) to the input \( x \), and then apply the function \( f \) to the result of \( g(x) \). In \autoref{fig:composite} the composition of functions is shown.
+Den sammensatte funktion \( f \circ g \) betyder med andre ord, at du først anvender funktionen \( g \) på inputtet \( x \) og derefter anvender funktionen \( f \) på resultatet \( g(x) \). Sammensætning af funktioner er vist i \autoref{fig:composite}.
 
 \begin{example}
     
 
-Consider the functions \( f(x) = 2x + 3 \) and \( g(x) = x^2 \). The composite function \( f \circ g \) is given by:
+Se på funktionerne \( f(x) = 2x + 3 \) og \( g(x) = x^2 \). Den sammensatte funktion \( f \circ g \) er givet ved:
 
 \[
 (f \circ g)(x) = f(g(x)) = f(x^2) = 2x^2 + 3.
 \]
 
-Here, the function \( g(x) \) squares the input \( x \), and then the function \( f(x) \) multiplies the result by 2 and adds 3.
+Her kvadrerer funktionen \( g(x) \) inputtet \( x \), hvorefter funktionen \( f(x) \) ganger resultatet med 2 og lægger 3 til.
 \end{example}
 
-Now, let's reverse the composition and compute \( g \circ f \):
+Lad os nu bytte om på rækkefølgen i sammensætningen og beregne \( g \circ f \):
 
 \[
 (g \circ f)(x) = g(f(x)) = g(2x + 3) = (2x + 3)^2.
 \]
 
-Notice that \( f \circ g \) and \( g \circ f \) are generally different functions, illustrating that the composition of functions is not commutative.
+Bemærk, at \( f \circ g \) og \( g \circ f \) generelt er forskellige funktioner. Det viser, at sammensætning af funktioner ikke er kommutativ.
 
 \begin{example}
-    Let $g$ be the function from the set $\{a, b, c\}$ to itself such that $g(a)=b, g(b)=c$, and $g(c)=a$. Let $f$ be the function from the set $\{a, b, c\}$ to the set $\{1,2,3\}$ such that $f(a)=3, f(b)=2$, and $f(c)=1$. What is the composition of $f$ and $g$, and what is the composition of $g$ and $f$ ?
+    Lad $g$ være funktionen fra mængden $\{a, b, c\}$ til sig selv, så $g(a)=b, g(b)=c$ og $g(c)=a$. Lad $f$ være funktionen fra mængden $\{a, b, c\}$ til mængden $\{1,2,3\}$, så $f(a)=3, f(b)=2$ og $f(c)=1$. Hvad er sammensætningen af $f$ og $g$, og hvad er sammensætningen af $g$ og $f$?
 
     \begin{solution}
-        The composition $f \circ g$ is defined by $(f \circ g)(a)=f(g(a))=f(b)=2$, $(f \circ g)(b)=f(g(b))=f(c)=1$, and $(f \circ g)(c)=f(g(c))=f(a)=3$.
+        Sammensætningen $f \circ g$ er defineret ved $(f \circ g)(a)=f(g(a))=f(b)=2$, $(f \circ g)(b)=f(g(b))=f(c)=1$ og $(f \circ g)(c)=f(g(c))=f(a)=3$.
         
-        Note that $g \circ f$ is not defined, because the range of $f$ is not a subset of the domain of $g$.
+        Bemærk, at $g \circ f$ ikke er defineret, fordi værdimængden for $f$ ikke er en delmængde af definitionsmængden for $g$.
     \end{solution}
 \end{example}
 
 
 \begin{example}{label:}
-Let $f$ and $g$ be the functions from the set of integers to the set of integers defined by $f(x)=2 x+3$ and $g(x)=3 x+2$. What is the composition of $f$ and $g$ ? What is the composition of $g$ and $f$?
+Lad $f$ og $g$ være funktionerne fra mængden af hele tal til mængden af hele tal, der er defineret ved $f(x)=2 x+3$ og $g(x)=3 x+2$. Hvad er sammensætningen af $f$ og $g$? Hvad er sammensætningen af $g$ og $f$?
 
 \begin{solution}
-Both the compositions $f \circ g$ and $g \circ f$ are defined. Moreover,
+Både sammensætningen $f \circ g$ og sammensætningen $g \circ f$ er defineret. Desuden er
 \[
 (f \circ g)(x)=f(g(x))=f(3 x+2)=2(3 x+2)+3=6 x+7
 \]
-and
+og
 \[
 (g \circ f)(x)=g(f(x))=g(2 x+3)=3(2 x+3)+2=6 x+11 .
 \]
@@ -289,264 +289,264 @@ and
 \end{example}
 
 \begin{remark}
-Even though \( f \circ g \) and \( g \circ f \) are both defined for the functions \( f \) and \( g \) in the preceding example, they are not equal. In other words, function composition is not commutative in general.
+Selv om \( f \circ g \) og \( g \circ f \) begge er defineret for funktionerne \( f \) og \( g \) i det foregående eksempel, er de ikke ens. Sammensætning af funktioner er med andre ord generelt ikke kommutativ.
   
 \end{remark}
 
-When the composition of a function and its inverse is formed, in either order, an identity function is obtained. To see this, suppose that \( f \) is a one-to-one correspondence from the set \( A \) to the set \( B \). Then the inverse function \( f^{-1} \) exists and is a one-to-one correspondence from \( B \) to \( A \). The inverse function reverses the correspondence of the original function, so \( f^{-1}(b)=a \) when \( f(a)=b \), and \( f(a)=b \) when \( f^{-1}(b)=a \).
+Når en funktion sammensættes med sin inverse funktion, uanset i hvilken rækkefølge, får man en identitetsfunktion. Antag for at se dette, at \( f \) er en bijektion fra mængden \( A \) til mængden \( B \). Så findes den inverse funktion \( f^{-1} \), og den er en bijektion fra \( B \) til \( A \). Den inverse funktion vender den oprindelige funktions korrespondance om, så \( f^{-1}(b)=a \), når \( f(a)=b \), og \( f(a)=b \), når \( f^{-1}(b)=a \).
 
-Hence,
+Derfor er
 
 \[
 \left(f^{-1} \circ f\right)(a) = f^{-1}(f(a)) = f^{-1}(b) = a,
 \]
 
-and
+og
 
 \[
 \left(f \circ f^{-1}\right)(b) = f\left(f^{-1}(b)\right) = f(a) = b.
 \]
 
-Consequently, \( f^{-1} \circ f = I_A \) and \( f \circ f^{-1} = I_B \), where \( I_A \) and \( I_B \) are the identity functions on the sets \( A \) and \( B \), respectively. That is, \( \left(f^{-1}\right)^{-1} = f \).
+Følgelig er \( f^{-1} \circ f = I_A \) og \( f \circ f^{-1} = I_B \), hvor \( I_A \) og \( I_B \) er identitetsfunktionerne på henholdsvis mængden \( A \) og mængden \( B \). Det vil sige, at \( \left(f^{-1}\right)^{-1} = f \).
 
 \begin{example}
-    If $f: \mathbb{R} \rightarrow \mathbb{R}$ is defined as $f(x)=2 x+3$, then $f^{-1}(x)=\frac{x-3}{2}$. The composition $f \circ f^{-1}$ would be the identity function $I_{\mathbb{R}}$ on the real numbers, meaning $f\left(f^{-1}(x)\right)=x$ for all $x \in \mathbb{R}$.
+    Hvis $f: \mathbb{R} \rightarrow \mathbb{R}$ er defineret ved $f(x)=2 x+3$, så er $f^{-1}(x)=\frac{x-3}{2}$. Den sammensatte funktion $f \circ f^{-1}$ er da identitetsfunktionen $I_{\mathbb{R}}$ på de reelle tal, dvs. $f\left(f^{-1}(x)\right)=x$ for alle $x \in \mathbb{R}$.
 \end{example}
 
-\section{Graphical Identification of Function Types}
-Understanding the behaviour of different types of functions is fundamental in mathematics. Functions can be classified based on their graphical patterns, which provide valuable insights into their characteristics. In this section, we will explore various types of functions, including linear, quadratic, exponential, and more. By examining their graphs, we can identify key features such as intercepts, slopes, curvature, and asymptotic behaviour, enabling us to distinguish between these different types of functions effectively.
+\section{Grafisk identifikation af funktionstyper}
+Det er grundlæggende i matematikken at forstå, hvordan forskellige typer af funktioner opfører sig. Funktioner kan klassificeres ud fra mønstrene i deres grafer, som giver værdifuld indsigt i deres egenskaber. I dette afsnit undersøger vi forskellige typer af funktioner, herunder lineære funktioner, andengradsfunktioner, eksponentialfunktioner med flere. Ved at undersøge deres grafer kan vi identificere vigtige træk som skæringspunkter med akserne, hældninger, krumning og asymptotisk opførsel, så vi effektivt kan skelne mellem de forskellige funktionstyper.
 
-\subsection*{Linear Functions}
-The general equation for a linear function is given by
+\subsection*{Lineære funktioner}
+Den generelle ligning for en lineær funktion er givet ved
 
 \[
-y = ax + b \quad \text{(often written as } y = mx + b\text{)},
+y = ax + b \quad \text{(ofte skrevet som } y = mx + b\text{)},
 \]
 
-where \(a\) (or \(m\)) represents the slope and \(b\) is the y-intercept. The domain of this function is all real numbers. This equation is in slope-intercept form because \(a\) (or \(m\)) gives the slope and \(b\) gives the y-intercept. If \(a = 0\), the function simplifies to \(y = b\), which is a constant function.
+hvor \(a\) (eller \(m\)) er hældningen, og \(b\) er skæringen med y-aksen. Definitionsmængden for funktionen er alle reelle tal. Ligningen står på hældning-skæringsform, fordi \(a\) (eller \(m\)) angiver hældningen, og \(b\) angiver skæringen med y-aksen. Hvis \(a = 0\), reduceres funktionen til \(y = b\), som er en konstant funktion.
 
-The parent function for a linear equation is
+Grundfunktionen for en lineær ligning er
 
 \[
 y = x.
 \]
 
-The transformed function can be written in the point-slope form as
+Den transformerede funktion kan skrives på punkt-hældningsform som
 
 \[
 y = y_1 + a(x - x_1),
 \]
 
-where the graph contains the point \((x_1, y_1)\) and has slope \(a\). In this form:
+hvor grafen går gennem punktet \((x_1, y_1)\) og har hældningen \(a\). I denne form gælder:
 \begin{itemize}
-    \item \(a\) is the vertical dilation (slope),
-    \item \(y_1\) represents the vertical translation,
-    \item \(x_1\) represents the horizontal translation.
+    \item \(a\) er den lodrette skalering (hældningen),
+    \item \(y_1\) angiver den lodrette forskydning,
+    \item \(x_1\) angiver den vandrette forskydning.
 \end{itemize}
 
-This point-slope form can also be written as
+Punkt-hældningsformen kan også skrives som
 
 \[
 y - y_1 = a(x - x_1),
 \]
 
-where the coordinates of the fixed point \((x_1, y_1)\) appear with a negative sign. The form \(y = y_1 + a(x - x_1)\) expresses \(y\) explicitly in terms of \(x\), making it easier to enter into a graphing calculator.
+hvor koordinaterne til det faste punkt \((x_1, y_1)\) optræder med negativt fortegn. Formen \(y = y_1 + a(x - x_1)\) udtrykker \(y\) eksplicit ved \(x\), hvilket gør den lettere at indtaste på en grafregner.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{figure/book1.png} % Adjust width here to scale the image
-    \caption{Linear functions}
+    \resizebox{\textwidth}{!}{\DaLinearPanels}
+    \caption{Lineære funktioner}
     \label{fig:book_image}
 \end{figure}
 
-The graph of a linear function is a straight line. The parent function \(y = x\) is shown on the left in \autoref{fig:book_image}, the slope-intercept form in the middle, and the point-slope form on the right.
+Grafen for en lineær funktion er en ret linje. Grundfunktionen \(y = x\) er vist til venstre i \autoref{fig:book_image}, hældning-skæringsformen i midten og punkt-hældningsformen til højre.
 
-For the slope-intercept form: "Start at \(b\) on the \(y\)-axis, move \(x\) units horizontally, and rise \(ax\) units vertically." For the point-slope form: "Start at \((x_1, y_1)\), move \((x - x_1)\) units horizontally, and rise \(a(x - x_1)\) units vertically."
+For hældning-skæringsformen gælder: »Start i \(b\) på \(y\)-aksen, gå \(x\) enheder vandret, og stig \(ax\) enheder lodret.« For punkt-hældningsformen gælder: »Start i \((x_1, y_1)\), gå \((x - x_1)\) enheder vandret, og stig \(a(x - x_1)\) enheder lodret.«
 
-\subsection*{Quadratic Functions}
-The general equation for a quadratic function is given by
+\subsection*{Andengradsfunktioner}
+Den generelle ligning for en andengradsfunktion er givet ved
 
 \[
 y = ax^2 + bx + c,
 \]
 
-where \(a \neq 0\), and \(a\), \(b\), and \(c\) are constants. The domain of this function is all real numbers.
+hvor \(a \neq 0\), og \(a\), \(b\) og \(c\) er konstanter. Definitionsmængden for funktionen er alle reelle tal.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{figure/book2.png} % Adjust width here to scale the image
-    \caption{Quadratic functions}
+    \resizebox{\textwidth}{!}{\DaQuadraticPanels}
+    \caption{Andengradsfunktioner}
     \label{fig:book_image2}
 \end{figure}
 
-The parent function for a quadratic equation is
+Grundfunktionen for en andengradsligning er
 
 \[
 y = x^2,
 \]
 
-where the vertex of the parabola is at the origin \((0, 0)\).
+hvor parablens toppunkt ligger i origo \((0, 0)\).
 
-The transformed function can be written in vertex form as
+Den transformerede funktion kan skrives på toppunktsform som
 
 \[
 y = k + a(x-h)^2,
 \]
 
-where the vertex of the parabola is located at \((h, k)\). In this form:
+hvor parablens toppunkt ligger i \((h, k)\). I denne form gælder:
 \begin{itemize}
-    \item \(k\) represents the vertical translation,
-    \item \(h\) represents the horizontal translation,
-    \item \(a\) represents the vertical dilation.
+    \item \(k\) angiver den lodrette forskydning,
+    \item \(h\) angiver den vandrette forskydning,
+    \item \(a\) angiver den lodrette skalering.
 \end{itemize}
 
-Vertex form can also be written as
+Toppunktsformen kan også skrives som
 
 \[
 y - k = a(x-h)^2,
 \]
 
-but expressing \(y\) explicitly in terms of \(x\) makes the equation easier to enter into a graphing calculator.
+men når \(y\) udtrykkes eksplicit ved \(x\), er ligningen lettere at indtaste på en grafregner.
 
-The graph of a quadratic function is a parabola (from the Greek word for "along the path of a ball"). The parabola is concave up if \(a > 0\) and concave down if \(a < 0\). This behaviour is illustrated in \autoref{fig:book_image2}.
+Grafen for en andengradsfunktion er en parabel (af det græske ord for »langs en bolds bane«). Parablen er konveks (krummer opad), hvis \(a > 0\), og konkav (krummer nedad), hvis \(a < 0\). Denne opførsel er illustreret i \autoref{fig:book_image2}.
 
-\subsection*{Power Functions}
-The general equation for a power function is given by
+\subsection*{Potensfunktioner}
+Den generelle ligning for en potensfunktion er givet ved
 
 \[
 y = ax^b,
 \]
 
-where \(a\) and \(b\) are nonzero constants. The domain of the function depends on the value of \(b\):
+hvor \(a\) og \(b\) er konstanter forskellige fra nul. Funktionens definitionsmængde afhænger af værdien af \(b\):
 \begin{itemize}
-    \item If \(b > 0\), the domain is all real numbers.
-    \item If \(b < 0\), the domain excludes \(x = 0\) to avoid division by zero.
-    \item If \(b\) is not an integer, the domain usually excludes negative numbers to avoid taking roots of negative numbers.
+    \item Hvis \(b > 0\), er definitionsmængden alle reelle tal.
+    \item Hvis \(b < 0\), udelukker definitionsmængden \(x = 0\) for at undgå division med nul.
+    \item Hvis \(b\) ikke er et helt tal, udelukker definitionsmængden som regel negative tal for at undgå at tage rødder af negative tal.
 \end{itemize}
-In most applications, the domain is restricted to non-negative numbers.
+I de fleste anvendelser er definitionsmængden begrænset til ikke-negative tal.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{figure/book3.png} % Adjust width here to scale the image
-    \caption{Power functions}
+    \resizebox{\textwidth}{!}{\DaPowerPanels}
+    \caption{Potensfunktioner}
     \label{fig:book_image3}
 \end{figure}
 
-The parent function for a power function is
+Grundfunktionen for en potensfunktion er
 
 \[
 y = x^b.
 \]
 
-For the general power function \(y = ax^b\):
+For den generelle potensfunktion \(y = ax^b\) gælder:
 \begin{itemize}
-    \item If \(b > 0\), then \(y\) varies directly with the \(b\)th power of \(x\), meaning \(y\) is directly proportional to the \(b\)th power of \(x\).
-    \item If \(b < 0\), then \(y\) varies inversely with the \(b\)th power of \(x\), meaning \(y\) is inversely proportional to the \(b\)th power of \(x\).
+    \item Hvis \(b > 0\), varierer \(y\) ligefrem med \(b\)'te potens af \(x\), dvs. \(y\) er ligefrem proportional med \(b\)'te potens af \(x\).
+    \item Hvis \(b < 0\), varierer \(y\) omvendt med \(b\)'te potens af \(x\), dvs. \(y\) er omvendt proportional med \(b\)'te potens af \(x\).
 \end{itemize}
 
-The dilation factor \(a\) serves as the proportionality constant.
+Skaleringsfaktoren \(a\) fungerer som proportionalitetskonstant.
 
-The translated form of a power function is
+Den forskudte form af en potensfunktion er
 
 \[
 y = d + a(x - c)^b,
 \]
 
-where \(c\) and \(d\) are the horizontal and vertical translations, respectively. This can be compared with the translated forms of linear and quadratic functions:
+hvor \(c\) og \(d\) er henholdsvis den vandrette og den lodrette forskydning. Dette kan sammenlignes med de forskudte former af lineære funktioner og andengradsfunktioner:
 
 \[
 \begin{aligned}
-& y = y_1 + a(x - x_1) &\text{(linear function)}, \\
-& y = k + a(x - h)^2 &\text{(quadratic function)}.
+& y = y_1 + a(x - x_1) &\text{(lineær funktion)}, \\
+& y = k + a(x - h)^2 &\text{(andengradsfunktion)}.
 \end{aligned}
 \]
 
-Unless otherwise stated, "power function" will imply the untranslated form, \(y = ax^b\).
+Medmindre andet er angivet, betyder »potensfunktion« den ikke-forskudte form, \(y = ax^b\).
 
-\autoref{fig:book_image3} shows the graphs of power functions for different values of \(b\). In all cases, \(a > 0\). The shape and concavity of the graph depend on the value of \(b\):
+\autoref{fig:book_image3} viser graferne for potensfunktioner for forskellige værdier af \(b\). I alle tilfælde er \(a > 0\). Grafens form og krumning afhænger af værdien af \(b\):
 \begin{itemize}
-    \item If \(b > 0\), the graph contains the origin.
-    \item If \(b < 0\), the graph has the axes as asymptotes.
-    \item The function is increasing if \(b > 0\) and decreasing if \(b < 0\).
-    \item The graph is concave up if \(b > 1\) or \(b < 0\), and concave down if \(0 < b < 1\).
+    \item Hvis \(b > 0\), går grafen gennem origo.
+    \item Hvis \(b < 0\), har grafen akserne som asymptoter.
+    \item Funktionen er voksende, hvis \(b > 0\), og aftagende, hvis \(b < 0\).
+    \item Grafen er konveks (krummer opad), hvis \(b > 1\) eller \(b < 0\), og konkav (krummer nedad), hvis \(0 < b < 1\).
 \end{itemize}
-The concavity of the graph describes the rate at which \(y\) increases. For \(b > 0\), concave up indicates that \(y\) is increasing at an increasing rate, while concave down indicates that \(y\) is increasing at a decreasing rate.
+Grafens krumning beskriver, hvor hurtigt \(y\) vokser. For \(b > 0\) betyder konveks, at \(y\) vokser med en stigende hastighed, mens konkav betyder, at \(y\) vokser med en aftagende hastighed.
 
-\subsection*{Exponential Functions}
+\subsection*{Eksponentialfunktioner}
 
-The general equation for an exponential function is given by
+Den generelle ligning for en eksponentialfunktion er givet ved
 
 \[
 y = a b^x,
 \]
 
-where \(a\) and \(b\) are constants, \(a \neq 0\), \(b > 0\), and \(b \neq 1\). The domain of this function is all real numbers.
+hvor \(a\) og \(b\) er konstanter, \(a \neq 0\), \(b > 0\) og \(b \neq 1\). Definitionsmængden for funktionen er alle reelle tal.
 
-The parent function for an exponential equation is
+Grundfunktionen for en eksponentialligning er
 
 \[
 y = b^x,
 \]
-where the asymptote is the \(x\)-axis.
+hvor asymptoten er \(x\)-aksen.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\textwidth]{figure/book4.png} % Adjust width here to scale the image
-    \caption{Exponential functions}
+    \resizebox{\textwidth}{!}{\DaExponentialPanels}
+    \caption{Eksponentialfunktioner}
     \label{fig:book_image4}
 \end{figure}
 
-In the equation \(y = a b^x\), we say that "\(y\) varies exponentially with \(x\)." This means that \(y\) changes by a constant factor \(b\) for each unit increase in \(x\).
+I ligningen \(y = a b^x\) siger vi, at »\(y\) varierer eksponentielt med \(x\)«. Det betyder, at \(y\) ændres med en konstant faktor \(b\), hver gang \(x\) øges med én enhed.
 
-The translated form of the exponential function is
+Den forskudte form af eksponentialfunktionen er
 
 \[
 y = a b^x + c,
 \]
 
-where the asymptote is the line \(y = c\). Unless otherwise stated, "exponential function" will refer to the untranslated form \(y = a b^x\).
+hvor asymptoten er linjen \(y = c\). Medmindre andet er angivet, betyder »eksponentialfunktion« den ikke-forskudte form \(y = a b^x\).
 
-\autoref{fig:book_image4} illustrates exponential functions for different values of \(a\) and \(b\). The key properties of the graph are as follows:
+\autoref{fig:book_image4} illustrerer eksponentialfunktioner for forskellige værdier af \(a\) og \(b\). Grafens vigtigste egenskaber er:
 \begin{itemize}
-    \item The constant \(a\) is the \(y\)-intercept of the graph.
-    \item The function is increasing if \(b > 1\) and decreasing if \(0 < b < 1\), provided \(a > 0\).
-    \item If \(a < 0\), the function's behavior is reversed: it is decreasing if \(b > 1\) and increasing if \(0 < b < 1\).
-    \item The graph is concave up if \(a > 0\) and concave down if \(a < 0\).
+    \item Konstanten \(a\) er grafens skæring med \(y\)-aksen.
+    \item Funktionen er voksende, hvis \(b > 1\), og aftagende, hvis \(0 < b < 1\), forudsat at \(a > 0\).
+    \item Hvis \(a < 0\), er funktionens opførsel omvendt: Den er aftagende, hvis \(b > 1\), og voksende, hvis \(0 < b < 1\).
+    \item Grafen er konveks (krummer opad), hvis \(a > 0\), og konkav (krummer nedad), hvis \(a < 0\).
 \end{itemize}
 
-Mathematicians often use one of two particular constants as the base for an exponential function: either 10, which is the base of the decimal system, or the naturally occurring number \( e \), which approximately equals 2.71828. These bases are significant in various mathematical applications.
+Matematikere bruger ofte en af to særlige konstanter som grundtal for en eksponentialfunktion: enten 10, som er grundtallet i titalssystemet, eller det naturligt forekommende tal \( e \), som er tilnærmelsesvis 2.71828. Disse grundtal har stor betydning i mange matematiske anvendelser.
 
-\begin{definition}{Special Exponential Functions}
+\begin{definition}{Særlige eksponentialfunktioner}
 
 \begin{align*}
-y &= a \cdot 10^{bx} \hspace{1cm} \text{base-10 exponential function} \\
-y &= a \cdot e^{bx}  \hspace{1.2cm} \text{natural (base-}e\text{) exponential function,}
+y &= a \cdot 10^{bx} \hspace{1cm} \text{eksponentialfunktion med grundtal 10} \\
+y &= a \cdot e^{bx}  \hspace{1.2cm} \text{naturlig eksponentialfunktion (grundtal }e\text{),}
 \end{align*}
 
-where $a$ and $b$ are constants and the domain is all real numbers.
+hvor $a$ og $b$ er konstanter, og definitionsmængden er alle reelle tal.
     
 \end{definition}
 
-To generalise the exponential function, the variable in the exponent is often multiplied by a constant. The (untranslated) general forms of these exponential functions are given below:
+For at generalisere eksponentialfunktionen ganges variablen i eksponenten ofte med en konstant. De (ikke-forskudte) generelle former af disse eksponentialfunktioner er givet nedenfor:
 
 \[
 y = a \cdot 10^{bx}
-\quad \text{and} \quad
+\quad \text{og} \quad
 y = a \cdot e^{bx}
 \]
 
-These functions can be further generalised by incorporating translations in both the \(x\)- and \(y\)-directions. The translated forms are:
+Funktionerne kan generaliseres yderligere ved at indføre forskydninger i både \(x\)- og \(y\)-retningen. De forskudte former er:
 
 \[
 y = a \cdot 10^{b(x - c)} + d
-\quad \text{and} \quad
+\quad \text{og} \quad
 y = a \cdot e^{b(x - c)} + d
 \]
 
-The base-\(e\) exponential function, in particular, has a significant advantage when studying calculus, as the rate of change of \(e^x\) is equal to \(e^x\) itself.
+Eksponentialfunktionen med grundtal \(e\) har især en betydelig fordel i differentialregning, fordi ændringshastigheden for \(e^x\) er lig med \(e^x\) selv.
 
-\section{Logarithms}
-Any positive number can be written as a power of 10. For instance,
+\section{Logaritmer}
+Ethvert positivt tal kan skrives som en potens af 10. For eksempel er
 
 \[
 \begin{aligned}
@@ -556,7 +556,7 @@ Any positive number can be written as a power of 10. For instance,
 \end{aligned}
 \]
 
-The exponents \(0.4771 \ldots\), \(0.6989 \ldots\), and \(1.1760 \ldots\) are called the base-10 logarithms of 3, 5, and 15, respectively:
+Eksponenterne \(0.4771 \ldots\), \(0.6989 \ldots\) og \(1.1760 \ldots\) kaldes 10-talslogaritmerne af henholdsvis 3, 5 og 15:
 
 \[
 \begin{aligned}
@@ -566,19 +566,19 @@ The exponents \(0.4771 \ldots\), \(0.6989 \ldots\), and \(1.1760 \ldots\) are ca
 \end{aligned}
 \]
 
-To better understand the meaning of logarithms, press \texttt{LOG} 3 on your calculator. You will get:
+For bedre at forstå, hvad logaritmer betyder, kan du trykke \texttt{LOG} 3 på din lommeregner. Du får:
 
 \[
 \log 3 = 0.477121254 \ldots
 \]
 
-Then, without rounding, raise 10 to this power. You will obtain:
+Opløft derefter 10 til denne potens uden at afrunde. Du får:
 
 \[
 10^{0.477121254 \ldots} = 3
 \]
 
-The powers of 10 have the normal properties of exponentiation. For instance,
+Potenser af 10 har de sædvanlige egenskaber for potenser. For eksempel er
 \[
 \begin{aligned}
 15 & = (3)(5) = \left(10^{0.4771 \ldots}\right)\left(10^{0.6990 \ldots}\right) \\
@@ -587,92 +587,92 @@ The powers of 10 have the normal properties of exponentiation. For instance,
 \end{aligned}
 \]
 
-This means \(10^{0.4771 \ldots + 0.6990 \ldots} = 10^{1.1761 \ldots}\). Here, you add the exponents while keeping the same base. You can verify with your calculator that \(10^{1.1761 \ldots}\) is approximately 15; the displayed decimals have been rounded.
+Det betyder, at \(10^{0.4771 \ldots + 0.6990 \ldots} = 10^{1.1761 \ldots}\). Her lægger du eksponenterne sammen og beholder det samme grundtal. Du kan kontrollere med din lommeregner, at \(10^{1.1761 \ldots}\) er tilnærmelsesvis 15; de viste decimaler er afrundet.
 
-From this example, you can infer that logarithms have the same properties as exponents. This is expected because logarithms \textit{are} exponents. For instance,
-
-\[
-\log(3 \cdot 5) = \log 3 + \log 5 \quad \text{\textit{The logarithm of a product equals the sum of the logarithms of the factors}.}
-\]
-
-From the values given earlier, you can also show that:
+Af dette eksempel kan du slutte, at logaritmer har de samme egenskaber som eksponenter. Det er forventeligt, fordi logaritmer \textit{er} eksponenter. For eksempel er
 
 \[
-\log \frac{15}{3} = \log 15 - \log 3 \quad \text{\textit{The logarithm of a quotient}.}
+\log(3 \cdot 5) = \log 3 + \log 5 \quad \text{\textit{Logaritmen af et produkt er summen af faktorernes logaritmer}.}
 \]
 
-This property is reasonable because you divide powers of equal bases by subtracting the exponents:
+Ud fra de tidligere angivne værdier kan du også vise, at:
+
+\[
+\log \frac{15}{3} = \log 15 - \log 3 \quad \text{\textit{Logaritmen af en kvotient}.}
+\]
+
+Denne egenskab er rimelig, fordi man dividerer potenser med samme grundtal ved at trække eksponenterne fra hinanden:
 
 \[
 \frac{15}{3} = \frac{10^{1.1760 \ldots}}{10^{0.477 \ldots}} = 10^{1.1760 \ldots - 0.4771 \ldots} = 10^{0.6989 \ldots} = 5
 \]
 
-Since a power can be written as a product, you can find the logarithm of a power as follows:
+Da en potens kan skrives som et produkt, kan du finde logaritmen af en potens på følgende måde:
 
 \[
 \begin{aligned}
 \log 3^4 & = \log (3 \cdot 3 \cdot 3 \cdot 3) = \log 3 + \log 3 + \log 3 + \log 3 \\
-& = 4 \log 3 \quad \text{\textit{Combine like terms}.}
+& = 4 \log 3 \quad \text{\textit{Saml ensartede led}.}
 \end{aligned}
 \]
 
-The logarithm of a power equals the exponent times the logarithm of the quantity being raised to that power. To verify this result, observe that \(3^4 = 81\). Press \(4 \times \texttt{LOG}\,3\) on your calculator, and you'll find it equals \(1.9084 \ldots\).
+Logaritmen af en potens er eksponenten gange logaritmen af det tal, der opløftes til potensen. For at kontrollere resultatet kan du bemærke, at \(3^4 = 81\). Tryk \(4 \times \texttt{LOG}\,3\) på din lommeregner, og du vil se, at det giver \(1.9084 \ldots\).
 
-\begin{definition}{Base-10 Logarithms}
+\begin{definition}{10-talslogaritmer}
 
 \[
 \log x=y \iff 10^y=x, \qquad x>0
 \]
 
-\textit{Verbally}: $\log x$ is the exponent in the power of 10 that gives $x$   
+\textit{Med ord}: $\log x$ er eksponenten i den potens af 10, der giver $x$   
 \end{definition}
 
-The term logarithm comes from the Greek words \emph{logos}, meaning "ratio," and \emph{arithmos}, meaning "number." Before the invention of calculators, base-10 logarithms were calculated approximately using infinite series and recorded in tables. Products involving many factors, such as
+Ordet logaritme kommer af de græske ord \emph{logos}, der betyder »forhold«, og \emph{arithmos}, der betyder »tal«. Før lommeregneren blev opfundet, blev 10-talslogaritmer beregnet tilnærmelsesvis ved hjælp af uendelige rækker og opført i tabeller. Produkter med mange faktorer, som
 \[
 (357)(4.367)(22.4)(3.142)
 \]
-could be calculated by adding their logarithms rather than tediously multiplying several pairs of numbers. John Napier introduced logarithms in the early seventeenth century, and Henry Briggs subsequently developed and published extensive tables of common (base-10) logarithms.
+kunne beregnes ved at lægge faktorernes logaritmer sammen i stedet for møjsommeligt at gange flere talpar sammen. John Napier introducerede logaritmerne i begyndelsen af det syttende århundrede, og Henry Briggs udviklede og udgav efterfølgende omfattende tabeller over titalslogaritmer (med grundtal 10).
 
-\begin{custombox}{Properties of base-10 logarithms}
-For $x>0$, $y>0$, and $r\in\mathbb{R}$, the following properties hold:
+\begin{custombox}{Regneregler for 10-talslogaritmer}
+For $x>0$, $y>0$ og $r\in\mathbb{R}$ gælder følgende regler:
 \begin{itemize}
-    \item Log of a Product:
+    \item Logaritmen af et produkt:
     
     \[
     \log x y=\log x+\log y
     \]
     
-    \textit{Verbally}: The $\log$ of a product equals the sum of the logs of the factors.
+    \textit{Med ord}: $\log$ af et produkt er summen af faktorernes log.
     \vspace{0.2cm}
-    \item Log of a Quotient:
+    \item Logaritmen af en kvotient:
     
     \[
     \log \frac{x}{y}=\log x-\log y
     \]
     \vspace{0.1cm}
-    \textit{Verbally}: The $\log$ of a quotient equals the log of the numerator minus the $\log$ of the denominator.
+    \textit{Med ord}: $\log$ af en kvotient er tællerens log minus nævnerens $\log$.
     \vspace{0.2cm}
-    \item Log of a Power:
+    \item Logaritmen af en potens:
     \[
     \log x^r=r \log x
     \]
-    \textit{Verbally}: The $\log$ of a power equals the exponent times the log of the quantity being raised to that power.
+    \textit{Med ord}: $\log$ af en potens er eksponenten gange log af det tal, der opløftes til potensen.
 \end{itemize}
 
    
 \end{custombox}
 
-\begin{example} Find $x$ if $\log_{10} 10^{3.721}=x$
+\begin{example} Find $x$, hvis $\log_{10} 10^{3.721}=x$
 
 \begin{solution}
-By definition, the logarithm is the exponent of 10. So $x=3.721$.
+Ifølge definitionen er logaritmen eksponenten til 10. Altså er $x=3.721$.
 \end{solution}
 \end{example}
 
-\begin{example} Find $x$ if $0.258=10^x$
+\begin{example} Find $x$, hvis $0.258=10^x$
 
 \begin{solution}
-   By definition, $x$, the exponent of 10, is the logarithm of 0.258.
+   Ifølge definitionen er $x$, eksponenten til 10, logaritmen af 0.258.
 
     \[
     x=\log_{10} 0.258=-0.5883 \ldots
@@ -681,12 +681,12 @@ By definition, the logarithm is the exponent of 10. So $x=3.721$.
     
 \end{example}
 
-\begin{custombox}{The most important thing to remember about logarithms is this}
-    \textbf{A logarithm is an exponent.}
+\begin{custombox}{Det vigtigste, du skal huske om logaritmer, er dette}
+    \textbf{En logaritme er en eksponent.}
 \end{custombox}
 
-\subsection*{Logarithms with Any Base: The Change-of-Base Property}
-If \(x = 10^y\), then \(y\) is the base-10 logarithm of \(x\). Similarly, if \(x = 2^y\), then \(y\) is the base-2 logarithm of \(x\). The only difference between these logarithms is the number that serves as the base. To distinguish among logarithms with different bases, the base is written as a subscript after the abbreviation "log." For instance:
+\subsection*{Logaritmer med vilkårligt grundtal: reglen for basisskift}
+Hvis \(x = 10^y\), er \(y\) 10-talslogaritmen af \(x\). Tilsvarende gælder, at hvis \(x = 2^y\), er \(y\) 2-talslogaritmen af \(x\). Den eneste forskel på disse logaritmer er det tal, der fungerer som grundtal. For at skelne mellem logaritmer med forskellige grundtal skrives grundtallet som et sænket tegn efter forkortelsen »log«. For eksempel:
 
 \[
 \begin{aligned}
@@ -696,35 +696,35 @@ If \(x = 10^y\), then \(y\) is the base-10 logarithm of \(x\). Similarly, if \(x
 \end{aligned}
 \]
 
-The symbol \(\log_2 8\) is pronounced "log to the base 2 of 8." The symbol \(\log_{10} 100\) is, of course, equivalent to \(\log 100\), as defined in the previous section. Note that in all cases, a logarithm represents an exponent.
+Symbolet \(\log_2 8\) udtales »logaritmen med grundtal 2 af 8«. Symbolet \(\log_{10} 100\) er naturligvis det samme som \(\log 100\), som defineret i det foregående afsnit. Bemærk, at en logaritme i alle tilfælde er en eksponent.
 
-\begin{definition}{Logarithm with Any Base}
-\textit{Algebraically}:
+\begin{definition}{Logaritme med vilkårligt grundtal}
+\textit{Algebraisk}:
 
-\hspace{1cm}$\log _b x=y$ if and only if $b^y=x, \quad$ where $b>0, b \neq 1$, and $x>0$
+\hspace{1cm}$\log _b x=y$ hvis og kun hvis $b^y=x, \quad$ hvor $b>0, b \neq 1$, og $x>0$
 
 \vspace{0.3cm}
 
-\textit{Verbally}:
+\textit{Med ord}:
 
-\hspace{1cm} $\log _b x=y$ means that $y$ is the exponent of $b$ that gives $x$ as the answer.
+\hspace{1cm} $\log _b x=y$ betyder, at $y$ er den eksponent til $b$, der giver $x$ som resultat.
     
 \end{definition}
 
-The way you pronounce the symbol for logarithm gives you a way to remember the definition. The next two examples show you how to do this.
+Måden, du udtaler logaritmesymbolet på, giver dig en måde at huske definitionen på. De næste to eksempler viser, hvordan du gør.
 
-\begin{example} Write $\log _5 c=a$ in exponential form.
+\begin{example} Skriv $\log _5 c=a$ på eksponentiel form.
 
 \begin{solution}
 
-Think this:
+Tænk sådan:
 \begin{itemize}
-    \item "\(\log_5 \ldots\)" is read as "log base 5 \(\ldots\)," meaning 5 is the base.
-    \item A logarithm is an exponent. Since the \(\log\) equals \(a\), \(a\) must be the exponent.
-    \item The "answer" obtained from \(5^a\) is the argument of the logarithm, denoted as \(c\).
+    \item »\(\log_5 \ldots\)« læses »logaritmen med grundtal 5 \(\ldots\)«, dvs. 5 er grundtallet.
+    \item En logaritme er en eksponent. Da \(\log\) er lig med \(a\), må \(a\) være eksponenten.
+    \item Det »resultat«, man får af \(5^a\), er logaritmens argument, som betegnes \(c\).
 \end{itemize}
 
-Write only this: 
+Skriv kun dette: 
 
 \[
 5^a = c
@@ -732,7 +732,7 @@ Write only this:
 \end{solution}
 \end{example}
 
-\begin{example} Assuming $z>0$, $z\neq 1$, and $m>0$, write $z^4=m$ in logarithmic form.
+\begin{example} Antag, at $z>0$, $z\neq 1$ og $m>0$, og skriv $z^4=m$ på logaritmisk form.
 
 \begin{solution}
     $\log _z m=4$
@@ -740,22 +740,22 @@ Write only this:
     
 \end{example}
 
-Two bases of logarithms are used frequently enough to have their own key on most calculators. One is the base-10 logarithm, also known as the common logarithm, as discussed in the previous section. The other is the base-\(e\) logarithm, known as the natural logarithm, where \(e = 2.71828 \ldots\), a naturally occurring number (like \(\pi\)) that will be advantageous in your future mathematical studies.
+To grundtal for logaritmer bruges så ofte, at de har deres egen tast på de fleste lommeregnere. Det ene er 10-talslogaritmen, også kaldet titalslogaritmen, som blev behandlet i det foregående afsnit. Det andet er logaritmen med grundtal \(e\), kaldet den naturlige logaritme, hvor \(e = 2.71828 \ldots\) er et naturligt forekommende tal (ligesom \(\pi\)), som vil være en fordel i dine videre matematikstudier.
 
-The symbol \(\ln x\) (pronounced "el en of \(x\)") is used for natural logarithms, and is defined as:
+Symbolet \(\ln x\) (udtales »el-en af \(x\)«) bruges om naturlige logaritmer og er defineret som:
 \[
 \ln x = \log_e x
 \]
 
-\begin{definition}{Common Logarithm and Natural Logarithm}
-\hspace{1cm} \textit{Common}: The symbol $\log x$ means $\log _{10} x$.
+\begin{definition}{Titalslogaritme og naturlig logaritme}
+\hspace{1cm} \textit{Titalslogaritme}: Symbolet $\log x$ betyder $\log _{10} x$.
 
-\hspace{1cm}  \textit{Natural}: \hspace{0.2cm}The symbol $\ln x$ means $\log _e x$, where $e$ is a constant equal to $2.71828182845 \ldots$
+\hspace{1cm}  \textit{Naturlig}: \hspace{0.2cm}Symbolet $\ln x$ betyder $\log _e x$, hvor $e$ er en konstant lig med $2.71828182845 \ldots$
 \end{definition}
 
-\begin{example} Find $\log _5 17$. Check your answer by an appropriate numerical method.
+\begin{example}\label{ex:log5-17} Find $\log _5 17$. Kontrollér dit svar med en passende numerisk metode.
 
-\begin{solution} Let $x=\log _5 17$.
+\begin{solution} Lad $x=\log _5 17$.
 
 \begin{equation*}
 \begin{aligned}
@@ -770,34 +770,34 @@ The symbol \(\ln x\) (pronounced "el en of \(x\)") is used for natural logarithm
 \end{solution}
 \end{example}
 
-In this example, note that the base-5 logarithm of a number is directly proportional to the base-10 logarithm of that number. The conclusion of the example can be expressed as follows:
+Bemærk i dette eksempel, at 5-talslogaritmen af et tal er ligefrem proportional med 10-talslogaritmen af samme tal. Eksemplets konklusion kan udtrykkes således:
 
 \[
 \log_5 17 = \frac{1}{\log_{10} 5} \cdot \log_{10} 17 = 1.4306 \ldots \log_{10} 17
 \]
 
-To find the base-5 logarithm of any number, simply multiply its base-10 logarithm by \(1.4306 \ldots\) (that is, divide by \(\log_{10} 5\)).
+For at finde 5-talslogaritmen af et vilkårligt tal skal du blot gange tallets 10-talslogaritme med \(1.4306 \ldots\) (dvs. dividere med \(\log_{10} 5\)).
 
-This proportional relationship is known as the change-of-base property. From the results of Example 3, you can write:
+Denne proportionale sammenhæng kaldes reglen for basisskift. Ud fra resultaterne i \autoref{ex:log5-17} kan du skrive:
 
 \[
 \log_5 17 = \frac{\log_{10} 17}{\log_{10} 5}
 \]
 
-Notice that the logarithm with the desired base is isolated on the left side of the equation, while the two logarithms on the right side share the same base—typically one that is available on your calculator. The box below illustrates this property for bases \(a\) and \(b\) with argument \(x\):
+Bemærk, at logaritmen med det ønskede grundtal står isoleret på ligningens venstre side, mens de to logaritmer på højre side har samme grundtal -- typisk et, som findes på din lommeregner. Boksen nedenfor viser reglen for grundtallene \(a\) og \(b\) med argumentet \(x\):
 
-\begin{custombox}{The Change-of-Base Property of Logarithms}
+\begin{custombox}{Reglen for basisskift for logaritmer}
 
 \begin{equation*}
-\log _a x=\frac{\log_b x}{\log_b a} \quad \text { or } \quad \log_a x=\frac{1}{\log_b a}\left(\log_b x\right)
+\log _a x=\frac{\log_b x}{\log_b a} \quad \text { eller } \quad \log_a x=\frac{1}{\log_b a}\left(\log_b x\right)
 \end{equation*}
 
-where $a>0$, $a\neq 1$, $b>0$, $b\neq 1$, and $x>0$.
+hvor $a>0$, $a\neq 1$, $b>0$, $b\neq 1$ og $x>0$.
     
 \end{custombox}
 
 \begin{example}
-Find $\ln 29$ using the change-of-base property with base-10 logarithms. Check your answer directly by pressing $\ln 29$ on your calculator.
+Find $\ln 29$ ved hjælp af reglen for basisskift med 10-talslogaritmer. Kontrollér dit svar direkte ved at trykke $\ln 29$ på din lommeregner.
 
 \begin{solution}
 
@@ -805,53 +805,53 @@ Find $\ln 29$ using the change-of-base property with base-10 logarithms. Check y
 \ln 29=\frac{\log 29}{\log e}=\frac{1.4623 \ldots}{0.4342 \ldots}=3.3672 \ldots
 \]
 
-\hspace{0.9cm} Directly: $\quad \ln 29=3.3672 \ldots,$
+\hspace{0.9cm} Direkte: $\quad \ln 29=3.3672 \ldots,$
 
-which agrees with the answer we got using the change-of-base property.
+hvilket stemmer med det svar, vi fik ved hjælp af reglen for basisskift.
 \end{solution}
 \end{example}
 
-\begin{custombox}{Properties of Logarithms}
+\begin{custombox}{Logaritmeregler}
 \setlength{\leftskip}{1cm}  % Reset the text indent
 \setlength{\rightskip}{1cm} % Reset the right indent
-Let $b>0$ with $b\neq 1$, and let $x>0$, $y>0$, and $r\in\mathbb{R}$.
+Lad $b>0$ med $b\neq 1$, og lad $x>0$, $y>0$ og $r\in\mathbb{R}$.
 
-The Logarithm of a Power:
+Logaritmen af en potens:
 $$
 \log _b x^r=r \log _b x
 $$
 
-\textit{Verbally}: The logarithm of a power equals the product of the exponent and the logarithm of the quantity being raised to that power.
+\textit{Med ord}: Logaritmen af en potens er produktet af eksponenten og logaritmen af det tal, der opløftes til potensen.
 \vspace{0.5cm}
-The Logarithm of a Product:
+Logaritmen af et produkt:
 $$
 \log _b(x y)=\log _b x+\log _b y
 $$
-\textit{Verbally}: The logarithm of a product equals the sum of the logarithms of the factors.
+\textit{Med ord}: Logaritmen af et produkt er summen af faktorernes logaritmer.
 \vspace{0.5cm}
-The Logarithm of a Quotient:
+Logaritmen af en kvotient:
 $$
 \log _b \frac{x}{y}=\log _b x-\log _b y
 $$
 
-\textit{Verbally}: The logarithm of a quotient equals the logarithm of the numerator minus the logarithm of the denominator.
+\textit{Med ord}: Logaritmen af en kvotient er tællerens logaritme minus nævnerens logaritme.
 
 \setlength{\leftskip}{0cm}  % Reset the text indent
 \setlength{\rightskip}{0cm} % Reset the right indent
 
 \end{custombox}
 
-\subsection*{Solving Exponential and Logarithmic Equations}
-Logarithms provide a way to solve an equation with a variable in the exponent or to solve an equation that already contains logarithms. We will demonstrate this through the next few examples.
+\subsection*{Løsning af eksponential- og logaritmeligninger}
+Logaritmer giver en metode til at løse en ligning med en variabel i eksponenten eller en ligning, der allerede indeholder logaritmer. Det viser vi i de næste eksempler.
 
-\begin{example} Solve the exponential equation $7^{3 x}=983$ algebraically, using logarithms.
+\begin{example} Løs eksponentialligningen $7^{3 x}=983$ algebraisk ved hjælp af logaritmer.
 
 \begin{solution}
 \begin{align*}
 & 7^{3x} = 983  \\
-& \log 7^{3x} = \log 983 && \texttt{\small Take the base-10 logarithm of both sides.} \\
-& 3x \log 7 = \log 983 && \texttt{\small Apply the logarithm power property.} \\
-& x = \frac{\log 983}{3 \log 7} && \texttt{\small Divide both sides by the coefficient of x.}\\
+& \log 7^{3x} = \log 983 && \texttt{\small Tag 10-talslogaritmen på begge sider.} \\
+& 3x \log 7 = \log 983 && \texttt{\small Brug reglen for logaritmen af en potens.} \\
+& x = \frac{\log 983}{3 \log 7} && \texttt{\small Dividér begge sider med koefficienten til x.}\\
 & x = 1.1803 \ldots   
 \end{align*}
 
@@ -860,7 +860,7 @@ Logarithms provide a way to solve an equation with a variable in the exponent or
     
 \end{example}
 
-\begin{example} Solve the equation
+\begin{example} Løs ligningen
     \begin{equation*}
 \log _2(x-1)+\log _2(x-3)=3
 \end{equation*}
@@ -871,18 +871,18 @@ Logarithms provide a way to solve an equation with a variable in the exponent or
 
 \begin{align*}
 & \log _2(x-1)+\log _2(x-3)=3  \\
-& \log _2[(x-1)(x-3)]=3 && \texttt{\small Apply the logarithm of a product property.} \\
-& 2^3=(x-1)(x-3) && \texttt{\small Use the definition of logarithm.} \\
-& 8=x^2-4 x+3 && \texttt{\small Expand the product.}\\
-& x^2-4 x-5=0 && \texttt{\small Reduce one side to zero. Use the symmetric }\\
-&\vspace{-0.2cm}   && \texttt{\small property of equality.} \\
-& (x-5)(x+1)=0 && \texttt{\small Solve by factoring.} \\
-& x=5 \quad \text{ or } \quad x=-1
+& \log _2[(x-1)(x-3)]=3 && \texttt{\small Brug reglen for logaritmen af et produkt.} \\
+& 2^3=(x-1)(x-3) && \texttt{\small Brug definitionen af logaritmen.} \\
+& 8=x^2-4 x+3 && \texttt{\small Gang parenteserne ud.}\\
+& x^2-4 x-5=0 && \texttt{\small Få nul på den ene side. Brug lighedens }\\
+&\vspace{-0.2cm}   && \texttt{\small symmetriegenskab.} \\
+& (x-5)(x+1)=0 && \texttt{\small Løs ved faktorisering.} \\
+& x=5 \quad \text{ eller } \quad x=-1
 \end{align*}
-We need to be cautious here because the solutions in the final step are the solutions of the quadratic equation, and we must make sure they are also solutions of the original logarithmic equation. Check by substituting the solutions into the original equation.
+Vi skal være forsigtige her, fordi løsningerne i sidste trin er løsninger til andengradsligningen, og vi skal sikre os, at de også er løsninger til den oprindelige logaritmeligning. Kontrollér ved at indsætte løsningerne i den oprindelige ligning.
 
 \begin{minipage}[t]{0.45\textwidth}
-If $x=5$, then
+Hvis $x=5$, så er
 \[
 \begin{aligned}
 & \log _2(5-1)+\log _2(5-3) \\
@@ -893,21 +893,21 @@ If $x=5$, then
 \end{minipage}%
 \hfill
 \begin{minipage}[t]{0.45\textwidth}
-If $x=-1$, then
+Hvis $x=-1$, så er
 \[
 \begin{aligned}
 & \log _2(-1-1)+\log _2(-1-3) \\
 & =\log _2(-2)+\log _2(-4)
 \end{aligned}
 \]
-which is undefined.
+hvilket ikke er defineret.
 \end{minipage}
 
 \end{solution}
 
 \end{example}
 
-\begin{example} Solve the equation
+\begin{example} Løs ligningen
 
 \[
 e^{2 x}-3 e^x+2=0
@@ -921,24 +921,24 @@ e^{2 x}-3 e^x+2=0
 & \left(e^x\right)^2-3 e^x+2=0
 \end{aligned}
 \]
-We realise that this is a quadratic equation in the variable $e^x$. Using the quadratic formula, you get
+Vi indser, at dette er en andengradsligning i variablen $e^x$. Med løsningsformlen for andengradsligningen får du
 
 \[
 \begin{aligned}
 & e^x=\frac{+3 \pm \sqrt{9-4(2)}}{2}=\frac{3 \pm 1}{2} \\
-& e^x=2 \text { or } e^x=1
+& e^x=2 \text { eller } e^x=1
 \end{aligned}
 \]
 
 
-You now have to solve these two equations.
+Nu skal du løse disse to ligninger.
 \[
 \begin{array}{ll}
 e^x=2 & \qquad e^x=1 \\
 x=\ln 2=0.6931 \ldots & \qquad x=0
 \end{array}
 \]
-Check:
+Kontrol:
 
 \[
 \begin{array}{ll}
@@ -947,13 +947,13 @@ e^{2 \ln 2}-3 e^{\ln 2}+2 & \qquad \left(e^0\right)^2-3 e^0+2 \\
 =2^2-3(2)+2=0 &
 \end{array}
 \]
-Both solutions are correct.
+Begge løsninger er korrekte.
 \end{solution}  
 \end{example}
 
 \newpage
 
-\begin{example} Solve the logarithmic equation $\ln (x+3)+\ln (x+5)=0$
+\begin{example} Løs logaritmeligningen $\ln (x+3)+\ln (x+5)=0$
 
 \begin{solution}
     \[
@@ -963,10 +963,10 @@ Both solutions are correct.
 & (x+3)(x+5)=e^0=1 \\
 & x^2+8 x+15=1 \\
 & x^2+8 x+14=0 \\
-& x=-2.5857 \ldots \quad \text { or } \qquad x=-5.4142 \ldots
+& x=-2.5857 \ldots \quad \text { eller } \qquad x=-5.4142 \ldots
 \end{aligned}
 \]
-Check:
+Kontrol:
 \[
 \begin{aligned}
 & x=-2.5857 \ldots: \\
@@ -975,7 +975,7 @@ Check:
 & =-0.8813 \ldots+0.8813 \ldots=0
 \end{aligned}
 \]
-which is ok.
+hvilket er i orden.
 
 \[
 \begin{aligned}
@@ -985,9 +985,9 @@ which is ok.
 \end{aligned}
 \]
 
-which is undefined.
+hvilket ikke er defineret.
 
-The only valid solution is $x=-2.5857 \ldots$.
+Den eneste gyldige løsning er $x=-2.5857 \ldots$.
 \end{solution}
     
 \end{example}

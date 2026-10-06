@@ -121,6 +121,19 @@ Format: engelsk → dansk (bemærkning).
 | natural logarithm | naturlig logaritme |
 | change-of-base property | reglen for basisskift |
 | increasing / decreasing | voksende / aftagende |
+| parent function | grundfunktion |
+| slope-intercept / point-slope form | hældning-skæringsform / punkt-hældningsform |
+| vertex form | toppunktsform |
+| vertical / horizontal translation | lodret / vandret forskydning |
+| dilation (factor) | skalering (skaleringsfaktor) |
+| rise / run | stigning / vandret skridt |
+| origin | origo |
+| graphing calculator | grafregner |
+| image / preimage | billede / urbillede |
+| varies directly / inversely | ligefrem / omvendt proportional |
+| multiplicand / multiplier | multiplikand / multiplikator |
+| column (i regneopstillinger) | kolonne (»søjle« bruges om matricer) |
+| decimal point | decimalpunktum |
 
 ## Kapitel 2 – talsystemer
 
@@ -329,6 +342,13 @@ Format: engelsk → dansk (bemærkning).
 | gradient descent | gradientnedstigning |
 | learning rate | læringsrate |
 | loss / cost function | tabsfunktion / omkostningsfunktion |
+| marginal profit | marginal fortjeneste |
+| jump discontinuity | springdiskontinuitet |
+| instantaneous rate of change | momentan ændringshastighed |
+| stationary point of inflection | stationært vendepunkt |
+| absolute maximum / minimum / extrema | globalt maksimum / minimum / globale ekstrema |
+| derivative from first principles | den afledte ud fra definitionen |
+| vertical intercept | skæring med andenaksen |
 
 ## Kapitel 12 – talteori
 
@@ -408,3 +428,46 @@ Format: engelsk → dansk (bemærkning).
 | telescoping series | teleskoprække |
 | reindexing | omindeksering |
 | cheat sheet | oversigtsark |
+| performance | ydeevne |
+| runtime environment | kørselsmiljø |
+| clock cycles | clockcyklusser |
+| linearithmic | linearitmisk (log-lineær) |
+| super-exponential | supereksponentiel |
+| branching factor | forgreningsgrad |
+| travelling salesperson problem | den handelsrejsendes problem |
+| limit superior / inferior | limes superior / inferior |
+| strict upper / lower bound | streng øvre / nedre grænse |
+| factorial growth \(O(n!)\) | fakultetsvækst |
+
+## Kapitel 15 – Analyse af kode
+
+| Engelsk | Dansk |
+| --- | --- |
+| construct analysis | analyse af kodekonstruktioner |
+| time unit | tidsenhed |
+| pass | gennemløb |
+| shift (string matching) | forskydning |
+| memoization | memoisering |
+| tail recursion / tail position | halerekursion / haleposition |
+| stack overflow | stakoverløb |
+| divide-and-conquer | del og hersk |
+| subarray | delarray |
+| step size | skridtlængde |
+| enhanced for loop | udvidet for-løkke |
+
+## Bilag A og B – Vigtige begreber og summer
+
+| Engelsk | Dansk |
+| --- | --- |
+| image / preimage | billede / urbillede |
+| one-to-one / onto | injektiv / surjektiv |
+| nonsingular | ikke-singulær |
+| one's complement | enerkomplement |
+| ratio scale | forholdsskala |
+| closure / decimal expansion / density | lukkethed / decimaludvikling / tæthed |
+| Unit Property / Zero Property | Enhedsegenskaben / Nulegenskaben |
+| Disappearing Opposite | Forsvindende modsætning |
+| eventually | fra et vist trin |
+| closed form / common ratio | lukket form / kvotient |
+| harmonic number | harmonisk tal |
+| Stirling's approximation | Stirlings approksimation |

@@ -1,50 +1,50 @@
-\chapter{Number Systems}
+\chapter{Talsystemer}
 \label{chap:ch2}
 
-We are so accustomed to working within the decimal system that we often forget it is a relatively recent invention and was once considered revolutionary. It is time to carefully examine how we represent numbers. Typically, we use the decimal system, where a number like 3459 is shorthand for \(3 \times 1000 + 4 \times 100 + 5 \times 10 + 9\). The position of each digit is crucial, as it allows us to distinguish between values like 30 and 3. The decimal system is a\textbf{ positional numeral system}, meaning it has designated positions for units, tens, hundreds, and so forth. Each digit’s position implies the multiplier (a power of ten) that should be used with that digit, and each position has a value ten times that of the position to its right.
+Vi er så vant til at arbejde i titalssystemet, at vi ofte glemmer, at det er en forholdsvis ny opfindelse, som engang blev betragtet som revolutionerende. Det er på tide at se nøje på, hvordan vi repræsenterer tal. Normalt bruger vi titalssystemet, hvor et tal som 3459 er en kort skrivemåde for \(3 \times 1000 + 4 \times 100 + 5 \times 10 + 9\). Hvert ciffers position er afgørende, fordi den gør det muligt at skelne mellem værdier som 30 og 3. Titalssystemet er et\textbf{ positionssystem}, dvs. det har faste positioner for enere, tiere, hundreder og så videre. Et ciffers position angiver den multiplikator (en potens af ti), som cifferet skal ganges med, og hver position har en værdi, der er ti gange så stor som værdien af positionen til højre for den.
 
-Notice that we can save space by writing 1000 as \(10^3\), where the exponent 3 indicates the number of zeros. Thus, \(100000 = 10^5\). If the exponent is negative, it represents a fraction, e.g., \(10^{-3} = \frac{1}{1000}\). Perhaps the most ingenious aspect of the positional system was the addition of the decimal point, which allows us to include decimal fractions. For example, the number 123.456 is equivalent to:
+Bemærk, at vi kan spare plads ved at skrive 1000 som \(10^3\), hvor eksponenten 3 angiver antallet af nuller. Altså er \(100000 = 10^5\). Hvis eksponenten er negativ, repræsenterer den en brøk, fx \(10^{-3} = \frac{1}{1000}\). Det mest geniale ved positionssystemet var måske indførelsen af decimalpunktummet, som gør det muligt at medtage decimalbrøker. For eksempel svarer tallet 123.456 til:
 \[
 1 \times 100 + 2 \times 10 + 3 \times 1 + 4 \times \frac{1}{10} + 5 \times \frac{1}{100} + 6 \times \frac{1}{1000}.
 \]
 
-This can be visualised as:
+Det kan illustreres således:
 \[
 \begin{array}{rccccccccc}
-\text{Multiplier:} & \ldots & 10^2 & 10^1 & 10^0 & . & 10^{-1} & 10^{-2} & 10^{-3} & \ldots \\
-\text{Digits:} & \ldots & 1 & 2 & 3 & . & 4 & 5 & 6 &\ldots \\
+\text{Multiplikator:} & \ldots & 10^2 & 10^1 & 10^0 & . & 10^{-1} & 10^{-2} & 10^{-3} & \ldots \\
+\text{Cifre:} & \ldots & 1 & 2 & 3 & . & 4 & 5 & 6 &\ldots \\
 & & & & & \uparrow & & & & \\
-& & & & & \text{Decimal Point:} & & & &
+& & & & & \text{Decimalpunktum:} & & & &
 \end{array}
 \]
-However, there is no inherent reason why we must use powers of 10, or base 10. The Babylonians, for instance, used base 60, and base 12 was very common in medieval Europe. Today, the most widely used numeral systems are summarised in \autoref{tab:number_systems}
+Der er imidlertid ingen grund til, at vi nødvendigvis skal bruge potenser af 10, dvs. grundtallet 10. Babylonierne brugte for eksempel grundtallet 60, og grundtallet 12 var meget udbredt i middelalderens Europa. I dag er de mest anvendte talsystemer sammenfattet i \autoref{tab:number_systems}
 
 \begin{table}[ht]
 \centering
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Numeral system} & \textbf{Symbols} & \textbf{Base} & \textbf{Additional information} \\ \hline
+\textbf{Talsystem} & \textbf{Symboler} & \textbf{Grundtal} & \textbf{Yderligere oplysninger} \\ \hline
 \textbf{Decimal} & 0-9 & 10 & - \\ \hline
-\textbf{Binary} & 0, 1 & 2 & - \\ \hline
+\textbf{Binær} & 0, 1 & 2 & - \\ \hline
 \textbf{Hexadecimal} & 0-9, A-F & 16 & $\mathrm{A} \equiv 10, \mathrm{B} \equiv 11, \mathrm{C} \equiv 12,$ $\mathrm{D} \equiv 13, \mathrm{E} \equiv 14, \mathrm{F} \equiv 15$ \\ \hline
-\textbf{Octal} & 0-7 & 8 & - \\ \hline
+\textbf{Oktal} & 0-7 & 8 & - \\ \hline
 \end{tabular}
-\caption{Summary of Common Numeral Systems}
+\caption{Oversigt over almindelige talsystemer}
 \label{tab:number_systems}
 \end{table}
 
-We begin by focusing on binary which will also receive the most detailed attention in this chapter.
+Vi begynder med totalssystemet, som også er det system, vi behandler mest indgående i dette kapitel.
 
-\section{Binary Numbers}
-In the binary scale, we express numbers in powers of 2 rather than the 10s of the decimal scale. For some numbers, this is easy. Recall $2^0=1$,
+\section{Binære tal}
+I totalssystemet udtrykker vi tal ved potenser af 2 i stedet for potenser af 10 som i titalssystemet. For nogle tal er det let. Husk, at $2^0=1$,
 
 \begin{table}[!ht]
 \centering
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|c c c c c c c c|}
 \hline 
-\multirow{2}{*}{Decimal number} & & \multirow{2}{*}{In powers of 2} & \multicolumn{4}{c}{Power of 2} & \multirow{2}{*}{Binary number} \\
+\multirow{2}{*}{Decimaltal} & & \multirow{2}{*}{Som potenser af 2} & \multicolumn{4}{c}{Potens af 2} & \multirow{2}{*}{Binært tal} \\
 & & & 3 & 2 & 1 & 0 & \\ \hline
 8 & $=$ & $2^3$ & 1 & 0 & 0 & 0 & 1000 \\
 7 & $=$ & $2^2 + 2^1 + 2^0$ & 0 & 1 & 1 & 1 & 111 \\
@@ -55,19 +55,19 @@ In the binary scale, we express numbers in powers of 2 rather than the 10s of th
 2 & $=$ & $2^1$ & 0 & 0 & 1 & 0 & 10 \\
 1 & $=$ & $2^0$ & 0 & 0 & 0 & 1 & 1 \\ \hline
 \end{tabular}
-\caption{Decimal Numbers in Binary Representation}
+\caption{Decimaltal i binær repræsentation}
 \end{table}
 
-As in decimal, we write this with the position of the digit representing the power, the first place after the decimal being the $2^0$ position, the next the $2^1$, and so on. To convert a decimal number to binary, we can use the \texttt{mod} operator.
+Som i titalssystemet skriver vi tallet, så cifrets position angiver potensen: Den første plads efter decimalpunktummet er $2^0$-pladsen, den næste er $2^1$-pladsen og så videre. For at omregne et decimaltal til et binært tal kan vi bruge operatoren \texttt{mod}.
 
-As an example, consider 88 in decimal or $88_{10}$. We would like to write it as a binary number. We take the number and successively divide \texttt{mod} 2. See below:
+Se som eksempel på 88 i titalssystemet, dvs. $88_{10}$. Vi vil gerne skrive det som et binært tal. Vi tager tallet og dividerer successivt \texttt{mod} 2. Se nedenfor:
 
 \begin{table}[h!]
 \centering
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|c|c|c|c|c|}
 \hline 
-Step Number $n$ & $x_n$ & $x_n / 2$ & $x_n \bmod 2$ \\ \hline
+Trin nr. $n$ & $x_n$ & $x_n / 2$ & $x_n \bmod 2$ \\ \hline
 0 & 88 & 44 & 0 \\ 
 1 & 44 & 22 & 0 \\
 2 & 22 & 11 & 0 \\
@@ -76,92 +76,92 @@ Step Number $n$ & $x_n$ & $x_n / 2$ & $x_n \bmod 2$ \\ \hline
 5 & 2 & 1 & 0 \\
 6 & 1 & 0 & 1 \\ \hline
 \end{tabular}
-\caption{Conversion of Decimal 88 to Binary}
+\caption{Omregning af decimaltallet 88 til binær form}
 \end{table}
 
-Writing the last column in reverse, that is from the bottom up, we have 1011000, which is the binary form of 88, i.e., $88_{10} = 1011000_2$.
+Når vi skriver den sidste kolonne i omvendt rækkefølge, dvs. nedefra og op, får vi 1011000, som er den binære form af 88, dvs. $88_{10} = 1011000_2$.
 
-Binary decimals are less common but quite possible. Thus, 101.1011 is just $2^2 + 2^0 + 2^{-1} + 2^{-3} + 2^{-4}$, which is, after some calculation, 5.6875. We have seen how to turn the integer part of a decimal number into a binary number, and we can do the same with a decimal fraction. Consider 0.6875. As before, we draw up a table:
+Binære tal med cifre efter punktummet er mindre almindelige, men sagtens mulige. Således er 101.1011 blot $2^2 + 2^0 + 2^{-1} + 2^{-3} + 2^{-4}$, hvilket efter lidt regning giver 5.6875. Vi har set, hvordan man omregner heltalsdelen af et decimaltal til et binært tal, og vi kan gøre det samme med en decimalbrøk. Se på 0.6875. Som før opstiller vi en tabel:
 
 \begin{table}[h!]
 \centering
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|c|c|c|c|}
 \hline 
-Step Number $n$ & $x_n$ & $x_n \times 2$ & $\left\lfloor x_n \times 2 \right\rfloor$ \\ \hline
+Trin nr. $n$ & $x_n$ & $x_n \times 2$ & $\left\lfloor x_n \times 2 \right\rfloor$ \\ \hline
 0 & 0.6875 & 1.375 & 1 \\ \hline
 1 & 0.375 & 0.75 & 0 \\ \hline
 2 & 0.75 & 1.5 & 1 \\ \hline
 3 & 0.5 & 1 & 1 \\ \hline
 \end{tabular}
-\caption{Conversion of Decimal Fraction 0.6875 to Binary}
+\caption{Omregning af decimalbrøken 0.6875 til binær form}
 \end{table}
 
-Giving, reading down, $0.6875_{10} = 1011_2$.
+Når vi læser nedad, får vi $0.6875_{10} = 0.1011_2$.
 
-\subsection*{Binary Expansion}
+\subsection*{Binær opløsning}
 
-The process outlined in the previous section is called \textbf{binary expansion} and refers to the representation of a number in the binary (base-2) numeral system. Every decimal number can be expressed as a sum of powers of 2, where each power corresponds to a binary digit (bit) in the number's binary form.
+Fremgangsmåden fra det foregående afsnit kaldes \textbf{binær opløsning} og betegner repræsentationen af et tal i totalssystemet (grundtal 2). Ethvert decimaltal kan skrives som en sum af potenser af 2, hvor hver potens svarer til et binært ciffer (en bit) i tallets binære form.
 
-Let's reconsider the decimal number 88. To find its binary expansion, we identify the largest power of 2 less than or equal to 88 and continue subtracting powers of 2 until we reach 0.
+Lad os igen se på decimaltallet 88. For at finde dets binære opløsning finder vi den største potens af 2, der er mindre end eller lig med 88, og fortsætter med at trække potenser af 2 fra, indtil vi når 0.
 
-First, we note that $2^6 = 64$ is the largest power of 2 less than 88:
+Først bemærker vi, at $2^6 = 64$ er den største potens af 2, der er mindre end 88:
 \[
 88 = 64 + 24
 \]
 
-Next, we find that $2^4 = 16$ is the largest power of 2 less than 24:
+Dernæst finder vi, at $2^4 = 16$ er den største potens af 2, der er mindre end 24:
 \[
 24 = 16 + 8
 \]
 
-Finally, $2^3 = 8$ exactly matches the remainder:
+Til sidst passer $2^3 = 8$ præcis med resten:
 \[
 8 = 8 + 0
 \]
 
-Thus, we have:
+Altså har vi:
 \[
 88 = 2^6 + 2^4 + 2^3
 \]
 
-In binary, each of these powers of 2 is represented by a '1' in the corresponding place value, with '0' in place values where no power of 2 contributes:
+I binær form repræsenteres hver af disse potenser af 2 af et »1« på den tilsvarende plads, mens der står »0« på de pladser, hvor ingen potens af 2 bidrager:
 \[
 88_{10} = 1011000_2
 \]
 
-To summarise:
+Sammenfattende:
 \begin{itemize}
-    \item $2^6 = 64$ corresponds to the leftmost '1' in the binary expansion.
-    \item $2^4 = 16$ corresponds to the next '1'.
-    \item $2^3 = 8$ corresponds to the next '1'.
-    \item The remaining digits are '0' because $2^5$, $2^2$, $2^1$, and $2^0$ do not contribute to the value 88.
+    \item $2^6 = 64$ svarer til det »1« længst til venstre i den binære opløsning.
+    \item $2^4 = 16$ svarer til det næste »1«.
+    \item $2^3 = 8$ svarer til det næste »1«.
+    \item De øvrige cifre er »0«, fordi $2^5$, $2^2$, $2^1$ og $2^0$ ikke bidrager til værdien 88.
 \end{itemize}
 
-Thus, the binary expansion of 88 is $1011000_2$. This method of representing numbers is fundamental in computer science and digital electronics, where binary representation is the standard for data storage and processing.
+Den binære opløsning af 88 er altså $1011000_2$. Denne måde at repræsentere tal på er grundlæggende i datalogi og digital elektronik, hvor binær repræsentation er standarden for lagring og behandling af data.
 
-\subsection*{Binary Operations}
-Binary operations are basic arithmetic operations performed on binary numbers. These operations are essential in computing and digital systems, as they form the foundation for how computers process and manipulate data.
+\subsection*{Binære operationer}
+Binære operationer er grundlæggende regneoperationer, der udføres på binære tal. Disse operationer er afgørende i computere og digitale systemer, fordi de udgør fundamentet for, hvordan computere behandler og manipulerer data.
 
-Binary addition, subtraction, and multiplication are similar to their decimal counterparts but follow simpler rules due to the binary system's limited digits. For example, binary addition follows these rules:
+Binær addition, subtraktion og multiplikation svarer til de tilsvarende operationer i titalssystemet, men følger enklere regler, fordi totalssystemet kun har få cifre. For eksempel følger binær addition disse regler:
 
 \[
 0 + 0 = 0, \quad 0 + 1 = 1, \quad 1 + 0 = 1, \quad 1 + 1 = 10
 \]
 
-In this case, \(1 + 1\) results in \(10_2\), which means 0 with a carry of 1 to the next higher bit. Binary subtraction and multiplication follow similar straightforward rules that are easy to implement in digital systems.
+Her giver \(1 + 1\) resultatet \(10_2\), hvilket betyder 0 med 1 i mente til den næste, højere bit. Binær subtraktion og multiplikation følger tilsvarende enkle regler, som er lette at implementere i digitale systemer.
 
-The XOR (exclusive OR) operation is another important binary operation. XOR produces a 1 if the two bits being compared are different and a 0 if they are the same:
+XOR-operationen (eksklusivt OR) er en anden vigtig binær operation. XOR giver 1, hvis de to bit, der sammenlignes, er forskellige, og 0, hvis de er ens:
 
 \[
 0 \oplus 0 = 0, \quad 0 \oplus 1 = 1, \quad 1 \oplus 0 = 1, \quad 1 \oplus 1 = 0
 \]
 
-In binary addition, the XOR operation is used to add two bits without considering any carry from a previous bit. This is because XOR effectively performs addition modulo 2, which aligns perfectly with how binary addition works. For example:
+Ved binær addition bruges XOR-operationen til at lægge to bit sammen uden at tage hensyn til en eventuel mente fra en foregående bit. Det skyldes, at XOR reelt udfører addition modulo 2, hvilket passer præcis med, hvordan binær addition fungerer. For eksempel:
 
 \[
 \begin{array}{c|c|c|c}
-\text{Bit 1} & \text{Bit 2} & \text{XOR (Sum)} & \text{AND (Carry)} \\
+\text{Bit 1} & \text{Bit 2} & \text{XOR (sum)} & \text{AND (mente)} \\
 \hline
 0 & 0 & 0 & 0 \\
 0 & 1 & 1 & 0 \\
@@ -170,16 +170,16 @@ In binary addition, the XOR operation is used to add two bits without considerin
 \end{array}
 \]
 
-In the case of \(1 + 1\), XOR gives a sum of 0 and an AND operation (which detects the carry) gives a carry of 1, resulting in the binary number 10.
+I tilfældet \(1 + 1\) giver XOR summen 0, og en AND-operation (som registrerer menten) giver menten 1, hvilket resulterer i det binære tal 10.
 
 \begin{align*}
 0 + 0 &= 0 \\
 0 + 1 &= 1 \\
-1 + 1 &= 10 \quad \text{so we carry 1 and leave a zero} \\
+1 + 1 &= 10 \quad \text{så vi har 1 i mente og skriver et nul} \\
 1 + 1 + 1 &= 1 + (1 + 1) = 1 + 10 = 11.
 \end{align*}
 
-We can write this in very much the same way as for a decimal addition:
+Vi kan opstille det på stort set samme måde som en addition i titalssystemet:
 
 \[
 \begin{array}{r|r|r|r|r|r|r|r}
@@ -192,12 +192,12 @@ We can write this in very much the same way as for a decimal addition:
 \end{array}
 \]
 
-The right-hand arrow shows where we carry a 1. The left-hand arrow shows where we have $1 + 1 + 1$ so we carry a 1 and have a 1 left over.
+Den højre pil viser, hvor vi har 1 i mente. Den venstre pil viser, hvor vi har $1 + 1 + 1$, så vi har 1 i mente og 1 tilbage.
 
-As we will see below, we will often need to handle multiple carries. There are two ways to handle this which resemble the methods we know from the decimal system. We will explain using an example.
+Som vi skal se nedenfor, får vi ofte brug for at håndtere flere menter. Det kan gøres på to måder, der minder om de metoder, vi kender fra titalssystemet. Vi forklarer dem med et eksempel.
 
-\subsubsection*{Method 1: Column-wise Binary Addition with Multiple Carries}
-Consider
+\subsubsection*{Metode 1: Kolonnevis binær addition med flere menter}
+Se på
 
 \begin{equation*}
 \begin{tikzpicture}[
@@ -219,19 +219,19 @@ Consider
 \end{tikzpicture}
 \end{equation*}
 
-\textbf{Step 1: Add the Rightmost Column }\newline
-Start by adding the rightmost bits:
+\textbf{Trin 1: Læg kolonnen længst til højre sammen }\newline
+Begynd med at lægge bittene længst til højre sammen:
 
 $$
-1+1+1+1=100_2 \quad(\text { which is binary for } 4)
+1+1+1+1=100_2 \quad(\text { som er binært for } 4)
 $$
-Reading the result from right to left (i.e. from \textit{least significant bit} (LSB) to the \textit{most significant bit}(MSB))
+Når vi læser resultatet fra højre mod venstre (dvs. fra \textit{mindst betydende bit} (LSB) til \textit{mest betydende bit}(MSB)), gør vi følgende:
 \begin{itemize}
-    \item write down the 0
-    \item carry the 0 to the next column
-    \item carry the 1 to the third column
+    \item skriv 0
+    \item overfør 0 som mente til næste kolonne
+    \item overfør 1 som mente til tredje kolonne
 \end{itemize}
-You end up with
+Du ender med
 
 \begin{equation*}
 \begin{tikzpicture}[
@@ -256,20 +256,20 @@ You end up with
 \end{tikzpicture}
 \end{equation*}
 
-\textbf{Step 2: Add the Second Column from the Right}\newline
-Next, add the second column:
+\textbf{Trin 2: Læg den anden kolonne fra højre sammen}\newline
+Læg dernæst den anden kolonne sammen:
 
 
 
 $$
-0+1+0+0+1=10_2 \quad(\text{ which is binary for } 2)
+0+1+0+0+1=10_2 \quad(\text{ som er binært for } 2)
 $$
-Reading the result from LSB to MSB:
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the 0
-    \item carry the 1 to the next column
+    \item skriv 0
+    \item overfør 1 som mente til næste kolonne
 \end{itemize}
-You end up with
+Du ender med
 
 \begin{equation*}
 \begin{tikzpicture}[
@@ -298,21 +298,21 @@ You end up with
 \end{equation*}
 
 
-\textbf{Step 3: Add the Third Column from the Right}\newline
-Now, add the third column:
+\textbf{Trin 3: Læg den tredje kolonne fra højre sammen}\newline
+Læg nu den tredje kolonne sammen:
 
 $$
-1+1+1+1+1+1=110_2 \quad(\text{ which is binary for } 6)
+1+1+1+1+1+1=110_2 \quad(\text{ som er binært for } 6)
 $$
-Reading the result from LSB to MSB
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the 0
-    \item carry the 1 to the fourth column
-    \item carry the 1 to the fifth column
+    \item skriv 0
+    \item overfør 1 som mente til fjerde kolonne
+    \item overfør 1 som mente til femte kolonne
 \end{itemize}
-You end up with
+Du ender med
 
-Our sum so far:
+Vores sum indtil videre:
 
 \begin{equation*}
 \begin{tikzpicture}[
@@ -338,20 +338,20 @@ Our sum so far:
 \end{equation*}
 
 
-\textbf{Step 4: Add the Fourth Column from the Right}\newline
-Move to the fourth column:
+\textbf{Trin 4: Læg den fjerde kolonne fra højre sammen}\newline
+Gå videre til den fjerde kolonne:
 
 $$
-1+1+1+1+1=101_2 \quad(\text{ which is binary for } 5)
+1+1+1+1+1=101_2 \quad(\text{ som er binært for } 5)
 $$
 
-Reading the result from LSB to MSB
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the 1
-    \item carry the 0 to the fifth column
-    \item carry the 1 to the sixth column
+    \item skriv 1
+    \item overfør 0 som mente til femte kolonne
+    \item overfør 1 som mente til sjette kolonne
 \end{itemize}
-You end up with
+Du ender med
 
 \begin{equation*}
 \begin{tikzpicture}[
@@ -379,19 +379,19 @@ You end up with
 \end{tikzpicture}
 \end{equation*}
 
-\textbf{Step 5: Add the Leftmost Column}\newline
-Add the leftmost column:
+\textbf{Trin 5: Læg kolonnen længst til venstre sammen}\newline
+Læg kolonnen længst til venstre sammen:
 
 $$
-1+1+1+1+1=101_2 \quad(\text{ which is binary for } 5)
+1+1+1+1+1=101_2 \quad(\text{ som er binært for } 5)
 $$
-Reading the result from LSB to MSB
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the 1
-    \item carry the 0 to the sixth column
-    \item carry the 1 to the seventh column
+    \item skriv 1
+    \item overfør 0 som mente til sjette kolonne
+    \item overfør 1 som mente til syvende kolonne
 \end{itemize}
-This results in
+Det giver
 
 \begin{equation*}
 \begin{tikzpicture}[
@@ -420,8 +420,8 @@ This results in
 \end{equation*}
 
 
-\textbf{Step 6: Add the Remaining Carries}\newline
-Finally, add the remaining carries:
+\textbf{Trin 6: Læg de resterende menter sammen}\newline
+Læg til sidst de resterende menter sammen:
 
 \begin{equation*}
 \begin{tikzpicture}[
@@ -443,7 +443,7 @@ Finally, add the remaining carries:
 \end{tikzpicture}
 \end{equation*}
 
-The following example demonstrates the entire process by using different colors to distinguish each column and the corresponding carries they produce. Note that the last two digits in the sum are colored black, as they do not result from any specific column but are instead generated solely from the carries.
+Det følgende eksempel viser hele processen, hvor forskellige farver skelner mellem kolonnerne og de menter, de giver anledning til. Bemærk, at de to sidste cifre i summen er sorte, fordi de ikke stammer fra en bestemt kolonne, men udelukkende fremkommer af menterne.
 
 \begin{equation*}
 \begin{tikzpicture}[
@@ -474,22 +474,22 @@ The following example demonstrates the entire process by using different colors 
 \end{tikzpicture}
 \end{equation*}
 
-\subsubsection*{Method 2: Direct Summation and Simplification}
-We will illustrate the second method using the same example. In the previous case, we carried the actual binary number to the next columns. In this method, we write down 0 if the sum is even and 1 if the sum is odd. Every time a sum a multiple of 2, we carry a 1 to the next columns, and then continue this process for each column, including the carries in the calculation of that column.
+\subsubsection*{Metode 2: Direkte summation og forenkling}
+Vi illustrerer den anden metode med det samme eksempel. I det foregående tilfælde overførte vi selve det binære tal til de næste kolonner. I denne metode skriver vi 0, hvis summen er lige, og 1, hvis summen er ulige. For hvert multiplum af 2 i summen overfører vi 1 som mente til de næste kolonner, og vi fortsætter sådan for hver kolonne, idet menterne indgår i beregningen af den pågældende kolonne.
 
-\textbf{Step 1: Add the Rightmost Column}\newline
-Add bits in column 1 (from counting from MSB):
+\textbf{Trin 1: Læg kolonnen længst til højre sammen}\newline
+Læg bittene i kolonne 1 sammen (talt fra MSB):
 
 $$
-1+1+1+1=100_2 \quad(\text{ which is binary for } 4)
+1+1+1+1=100_2 \quad(\text{ som er binært for } 4)
 $$
-Reading the result from LSB to MSB
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the 0
-    \item carry a 1 for the first multiple of 2
-    \item carry a 1 for the second multiple of 2
+    \item skriv 0
+    \item overfør 1 som mente for det første multiplum af 2
+    \item overfør 1 som mente for det andet multiplum af 2
 \end{itemize}
-This results in
+Det giver
 
 
 \begin{equation*}
@@ -521,19 +521,19 @@ This results in
 \end{tikzpicture}
 \end{equation*}
 
-\textbf{Step 2: Add the Second Column from the Right}\newline
-Add bits in column 2 (from counting from MSB):
+\textbf{Trin 2: Læg den anden kolonne fra højre sammen}\newline
+Læg bittene i kolonne 2 sammen (talt fra MSB):
 
 $$
-1+1+1+1=100_2 \quad(\text{ which is binary for } 4)
+1+1+1+1=100_2 \quad(\text{ som er binært for } 4)
 $$
-Reading the result from LSB to MSB
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the 0
-    \item carry a 1 for the first multiple of 2
-    \item carry a 1 for the second multiple of 2
+    \item skriv 0
+    \item overfør 1 som mente for det første multiplum af 2
+    \item overfør 1 som mente for det andet multiplum af 2
 \end{itemize}
-This results in
+Det giver
 
 
 \begin{equation*}
@@ -565,21 +565,21 @@ This results in
 \end{tikzpicture}
 \end{equation*}
 
-\textbf{Step 3: Add the Third Column from the Right}
-Add bits in column 3 (from counting from MSB):
+\textbf{Trin 3: Læg den tredje kolonne fra højre sammen}
+Læg bittene i kolonne 3 sammen (talt fra MSB):
 
 $$
-1+1+1+1+1+1=110_2 \quad(\text{ which is binary for } 6)
+1+1+1+1+1+1=110_2 \quad(\text{ som er binært for } 6)
 $$
-Reading the result from LSB to MSB
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the 0
-    \item carry a 1 for the first multiple of 2
-    \item carry a 1 for the second multiple of 2
-    \item carry a 1 for the third multiple of 2
+    \item skriv 0
+    \item overfør 1 som mente for det første multiplum af 2
+    \item overfør 1 som mente for det andet multiplum af 2
+    \item overfør 1 som mente for det tredje multiplum af 2
 \end{itemize}
 
-This results in
+Det giver
 
 
 \begin{equation*}
@@ -611,20 +611,20 @@ This results in
 \end{tikzpicture}
 \end{equation*}
 
-\textbf{Step 4: Add the Fourth Column from the Right}\newline
-Add bits in column 4 (from counting from MSB):
+\textbf{Trin 4: Læg den fjerde kolonne fra højre sammen}\newline
+Læg bittene i kolonne 4 sammen (talt fra MSB):
 
 $$
-1+1+1+1+1+1+1=111_2 \quad(\text{ which is binary for } 7)
+1+1+1+1+1+1+1=111_2 \quad(\text{ som er binært for } 7)
 $$
-Reading the result from LSB to MSB
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the 1
-    \item carry a 1 for the first multiple of 2
-    \item carry a 1 for the second multiple of 2
-    \item carry a 1 for the third multiple of 2
+    \item skriv 1
+    \item overfør 1 som mente for det første multiplum af 2
+    \item overfør 1 som mente for det andet multiplum af 2
+    \item overfør 1 som mente for det tredje multiplum af 2
 \end{itemize}
-This results in
+Det giver
 
 
 \begin{equation*}
@@ -657,17 +657,17 @@ This results in
 \end{equation*}
 
 
-\textbf{Step 5: Add the Leftmost Column}\newline
-Add bits in leftmost column):
+\textbf{Trin 5: Læg kolonnen længst til venstre sammen}\newline
+Læg bittene i kolonnen længst til venstre sammen:
 
 $$
-1+1+1+1+1+1+1=111_2 \quad(\text{ which is binary for } 7)
+1+1+1+1+1+1+1=111_2 \quad(\text{ som er binært for } 7)
 $$
-Reading the result from LSB to MSB
+Når vi læser resultatet fra LSB til MSB:
 \begin{itemize}
-    \item write down the result in binary, i.e. 1 1 1
+    \item skriv resultatet i binær form, dvs. 1 1 1
 \end{itemize}
-This results in
+Det giver
 
 
 \begin{equation*}
@@ -698,14 +698,14 @@ This results in
 \end{tikzpicture}
 \end{equation*}
 
-which corresponds to the result we obtained above. While not demonstrated explicitly here, subtraction works in a similar fashion.
+hvilket svarer til det resultat, vi fik ovenfor. Selv om det ikke er vist eksplicit her, fungerer subtraktion på tilsvarende måde.
 
-By using one of these methods for handling multiple carries, allow us to also multiply two binary numbers.
+Med en af disse metoder til at håndtere flere menter kan vi også gange to binære tal med hinanden.
 
 
 
-\subsection*{Multiplication in Binary}
-Multiplication in binary is technically easier than multiplication in decimal. In binary operations, we work exclusively with two digits: 0 and 1. This means that both the multiplier\footnote{The "multiplicand" is the number to be multiplied, and the "multiplier" is the number by which it is multiplied.} and the multiplicand consist only of 0s and 1s. The process of finding the binary product is analogous to traditional multiplication in the decimal system. The four possible products of individual binary digits are:
+\subsection*{Multiplikation i totalssystemet}
+Multiplikation i totalssystemet er teknisk set lettere end multiplikation i titalssystemet. I binære operationer arbejder vi udelukkende med to cifre: 0 og 1. Det betyder, at både multiplikatoren\footnote{»Multiplikanden« er det tal, der skal ganges, og »multiplikatoren« er det tal, der ganges med.} og multiplikanden kun består af 0'er og 1'er. Fremgangsmåden til at finde det binære produkt svarer til almindelig multiplikation i titalssystemet. De fire mulige produkter af enkelte binære cifre er:
 
 \[
 \begin{aligned}
@@ -713,13 +713,13 @@ Multiplication in binary is technically easier than multiplication in decimal. I
 & 0 \times 1=0 \\
 & 1 \times 0=0 \\
 & 1 \times 1=1 \\
-& 1 \times 10_2 = 10_2 \quad \left( \text{multiplying by base } 10_2 \text{ adds a 0 to the end} \right)
+& 1 \times 10_2 = 10_2 \quad \left( \text{multiplikation med grundtallet } 10_2 \text{ tilføjer et 0 til sidst} \right)
 \end{aligned}
 \]
 
-The last step means that $101_2 \times 10_2 = 1010_2$ which is analogous to the decimal case: $143_{10} \times 10_{10} = 1430_{10}$.
+Det sidste trin betyder, at $101_2 \times 10_2 = 1010_2$, hvilket svarer til tilfældet i titalssystemet: $143_{10} \times 10_{10} = 1430_{10}$.
 
-We will illustrate the process by supplying a couple of examples.
+Vi illustrerer fremgangsmåden med et par eksempler.
 
 \begin{example}
 
@@ -744,19 +744,19 @@ We will illustrate the process by supplying a couple of examples.
     \end{tikzpicture}
 \end{equation*}
 
-Here are the steps:
+Trinene er:
 
 \begin{itemize}
-    \item Multiply the multiplicand (line 1) by the LSB of the multiplier (line 2), which in this case is 1.
-    \item Record this result in line 3.
-    \item Append a 0 to line 4 to account for the shift to the next power of 2 in the multiplier.
-    \item Multiply the multiplicand (line 1) by the next bit of the multiplier (line 2), which is also 1 in this case.
-    \item Add this result to line 4, after the 0 you appended earlier.
-    \item Finally, sum the values in lines 3 and 4, as outlined in the previous section, to obtain the final result in line 5.
+    \item Gang multiplikanden (linje 1) med multiplikatorens LSB (linje 2), som her er 1.
+    \item Skriv resultatet i linje 3.
+    \item Tilføj et 0 i linje 4 for at tage højde for forskydningen til den næste potens af 2 i multiplikatoren.
+    \item Gang multiplikanden (linje 1) med multiplikatorens næste bit (linje 2), som her også er 1.
+    \item Skriv dette resultat i linje 4 foran det 0, du tilføjede før.
+    \item Læg til sidst værdierne i linje 3 og 4 sammen som beskrevet i det foregående afsnit for at få det endelige resultat i linje 5.
 \end{itemize}
 \end{example}
 
-We offer two additional examples:
+Vi giver yderligere to eksempler:
 
 \begin{example}
 
@@ -808,14 +808,14 @@ We offer two additional examples:
     
 \end{example}
 
-In \autoref{ex1.3} notice that we omitted the row of zeroes that the second value of the multiplier would have produced, and notice even further that we added two 0's before restating the multiplicand in the sum.
+Bemærk i \autoref{ex1.3}, at vi har udeladt den række af nuller, som multiplikatorens anden værdi ville have givet, og bemærk desuden, at vi har tilføjet to 0'er, før vi gentog multiplikanden i summen.
 
-Binary multiplication, like binary addition, is a core operation in computer arithmetic. By breaking the process down into manageable steps—multiplying individual bits and then summing the results—it becomes clear how similar it is to the multiplication methods we use in the decimal system. The main difference is the simplicity and efficiency of working within the binary system, where only the digits 0 and 1 are involved.
+Binær multiplikation er ligesom binær addition en central operation i computeraritmetik. Når processen deles op i overskuelige trin -- først gange de enkelte bit og derefter lægge resultaterne sammen -- bliver det tydeligt, hvor meget den ligner de multiplikationsmetoder, vi bruger i titalssystemet. Den største forskel er, at det er enkelt og effektivt at arbejde i totalssystemet, hvor kun cifrene 0 og 1 indgår.
 
-We notice how binary multiplication builds on binary addition. Each step, involving shifts and sums, essentially consists of repeated additions adjusted by powers of two. A strong grasp of binary addition naturally leads to a better understanding of binary multiplication and its applications.
+Vi bemærker, hvordan binær multiplikation bygger på binær addition. Hvert trin, som består af forskydninger og summer, er i bund og grund gentagne additioner, justeret med potenser af to. En solid forståelse af binær addition fører derfor naturligt til en bedre forståelse af binær multiplikation og dens anvendelser.
 
-\section{Octal and Hexadecimal}
-Octal is a base-8 numbering system that uses the digits 0 through 7. It is closely related to binary, which is a base-2 system. The connection between the two lies in how easily binary numbers can be converted to octal and vice versa. Each octal digit corresponds to exactly three binary digits (bits), making conversions straightforward. For example, the binary number `110` converts directly to the octal digit `6`. Because of this close relationship, octal is often used as a shorthand for binary in computing, particularly in contexts where grouping binary digits in sets of three simplifies reading and interpreting binary data.
+\section{Oktal og hexadecimal}
+Ottetalssystemet (oktal) er et talsystem med grundtal 8, der bruger cifrene 0 til og med 7. Det er nært beslægtet med totalssystemet, som har grundtal 2. Forbindelsen mellem de to består i, hvor let binære tal kan omregnes til oktale tal og omvendt. Hvert oktalt ciffer svarer til præcis tre binære cifre (bit), hvilket gør omregninger ligetil. For eksempel kan det binære tal »110« omregnes direkte til det oktale ciffer »6«. På grund af denne nære sammenhæng bruges oktal ofte som en kortform for binær i datalogi, især i sammenhænge, hvor det bliver lettere at læse og fortolke binære data, når de binære cifre grupperes tre og tre.
 
 \[
 \begin{aligned}
@@ -824,7 +824,7 @@ Octal is a base-8 numbering system that uses the digits 0 through 7. It is close
 \end{aligned}
 \]
 
-Since \(8\) is \(2^3\), we can express it in binary:
+Da \(8\) er \(2^3\), kan vi udtrykke det i binær form:
 
 \[
 \begin{aligned}
@@ -836,12 +836,12 @@ Since \(8\) is \(2^3\), we can express it in binary:
 \]
 
 \[
-\text{Thus, } 3021_8 = \textcolor{Green}{011}\textcolor{YellowOrange}{000} \textcolor{blue}{010}\textcolor{red}{001}_2 = \textcolor{Green}{11}\textcolor{YellowOrange}{000} \textcolor{blue}{010}\textcolor{red}{001}_2
+\text{Altså er } 3021_8 = \textcolor{Green}{011}\textcolor{YellowOrange}{000} \textcolor{blue}{010}\textcolor{red}{001}_2 = \textcolor{Green}{11}\textcolor{YellowOrange}{000} \textcolor{blue}{010}\textcolor{red}{001}_2
 \]
 
-We obtain the final result by removing leading zeros.
+Vi får det endelige resultat ved at fjerne de foranstillede nuller.
 
-Hexadecimal is a base-16 numbering system that uses sixteen distinct symbols: the digits 0-9 and the letters A-F, where A represents 10, B represents 11, and so on up to F, which represents 15. Hexadecimal is closely related to binary because each hexadecimal digit corresponds exactly to four binary digits (bits). This direct relationship makes it easy to convert between the two systems. For example, the hexadecimal digit `A` translates to the binary sequence `1010`. Due to this efficiency in grouping, hexadecimal is often used in computing as a more compact and readable way to represent binary data, particularly in areas like memory addresses and colour codes in web design.
+Sekstentalssystemet (hexadecimal) er et talsystem med grundtal 16, der bruger seksten forskellige symboler: cifrene 0-9 og bogstaverne A-F, hvor A repræsenterer 10, B repræsenterer 11 og så videre op til F, som repræsenterer 15. Hexadecimal er nært beslægtet med binær, fordi hvert hexadecimalt ciffer svarer præcis til fire binære cifre (bit). Denne direkte sammenhæng gør det let at omregne mellem de to systemer. For eksempel svarer det hexadecimale ciffer »A« til den binære sekvens »1010«. Fordi grupperingen er så effektiv, bruges hexadecimal ofte i datalogi som en mere kompakt og læsevenlig måde at repræsentere binære data på, især til fx hukommelsesadresser og farvekoder i webdesign.
 
 \[
 \begin{aligned}
@@ -850,7 +850,7 @@ A2E_{16} & = 10 \cdot 16^2 + 2 \cdot 16^1 + 14 \cdot 16^0 = 2560 + 32 + 14 = 260
 \end{aligned}
 \]
 
-Since \(16\) is \(2^4\), we can, for instance, express $A2E_{16}$ in binary:
+Da \(16\) er \(2^4\), kan vi for eksempel udtrykke $A2E_{16}$ i binær form:
 
 \[
 \begin{aligned}
@@ -861,10 +861,10 @@ E & \rightarrow 1110 \\
 \]
 
 \[
-\text{Thus, } A2E_{16} = 101000101110_2
+\text{Altså er } A2E_{16} = 101000101110_2
 \]
 
-Similarly we get $5EB52_{16}$ as
+Tilsvarende får vi $5EB52_{16}$ som
 
 \[
 \begin{aligned}
@@ -877,103 +877,102 @@ B & \rightarrow 1011 \\
 \]
 
 \[
-\text{Thus, } 5EB52_{16} = 0101\,1110\,1011\,0101\,0010_2 = 1011110101101010010_2
+\text{Altså er } 5EB52_{16} = 0101\,1110\,1011\,0101\,0010_2 = 1011110101101010010_2
 \]
 
-The four-bit groups make the conversion transparent. In the final representation, the single leading zero may be omitted without changing the value.
+Grupperne med fire bit gør omregningen gennemskuelig. I den endelige repræsentation kan det ene foranstillede nul udelades uden at ændre værdien.
 
-\section{Converting Between Systems}
+\section{Omregning mellem talsystemer}
 
-Understanding how to convert numbers between binary, decimal, octal, and hexadecimal systems is essential in computer science and digital electronics. Each system is a different base, and each has its own applications. Here's a step-by-step guide to help you convert numbers from one system to another.
+Det er vigtigt i datalogi og digital elektronik at forstå, hvordan man omregner tal mellem totalssystemet, titalssystemet, ottetalssystemet og sekstentalssystemet. Hvert system har sit eget grundtal og sine egne anvendelser. Her er en trinvis vejledning, der hjælper dig med at omregne tal fra ét system til et andet.
 
-\subsection*{Decimal to Binary Conversion}
-To convert a decimal number to binary:
+\subsection*{Fra decimal til binær}
+Sådan omregner du et decimaltal til binær form:
 \begin{enumerate}
-    \item Divide the decimal number by 2.
-    \item Record the remainder (it will be 0 or 1).
-    \item Divide the quotient by 2 and record the remainder.
-    \item Repeat until the quotient is 0.
-    \item The binary number is the sequence of remainders read from bottom to top.
+    \item Dividér decimaltallet med 2.
+    \item Notér resten (den er 0 eller 1).
+    \item Dividér kvotienten med 2, og notér resten.
+    \item Gentag, indtil kvotienten er 0.
+    \item Det binære tal er rækken af rester læst nedefra og op.
 \end{enumerate}
 
-\begin{example} Convert \(23_{10}\) to binary.
+\begin{example} Omregn \(23_{10}\) til binær form.
 
 \begin{solution}
 
 \[
 \begin{aligned}
-23 \div 2 & = 11 \quad \text{remainder } 1 \\
-11 \div 2 & = 5 \quad \text{remainder } 1 \\
-5 \div 2 & = 2 \quad \text{remainder } 1 \\
-2 \div 2 & = 1 \quad \text{remainder } 0 \\
-1 \div 2 & = 0 \quad \text{remainder } 1 \\
+23 \div 2 & = 11 \quad \text{rest } 1 \\
+11 \div 2 & = 5 \quad \text{rest } 1 \\
+5 \div 2 & = 2 \quad \text{rest } 1 \\
+2 \div 2 & = 1 \quad \text{rest } 0 \\
+1 \div 2 & = 0 \quad \text{rest } 1 \\
 \end{aligned}
 \]
-Thus, \(23_{10} = 10111_2\). \end{solution}
+Altså er \(23_{10} = 10111_2\). \end{solution}
 \end{example}
 
-\subsection*{Decimal to Octal Conversion}
-To convert a decimal number to octal:
+\subsection*{Fra decimal til oktal}
+Sådan omregner du et decimaltal til oktal form:
 \begin{enumerate}
-    \item Divide the decimal number by 8.
-    \item Record the remainder.
-    \item Divide the quotient by 8 and record the remainder.
-    \item Repeat until the quotient is 0.
-    \item The octal number is the sequence of remainders read from bottom to top.
+    \item Dividér decimaltallet med 8.
+    \item Notér resten.
+    \item Dividér kvotienten med 8, og notér resten.
+    \item Gentag, indtil kvotienten er 0.
+    \item Det oktale tal er rækken af rester læst nedefra og op.
 \end{enumerate}
 
-\begin{example}Convert \(78_{10}\) to octal.
+\begin{example}Omregn \(78_{10}\) til oktal form.
 
 \begin{solution}
     
 
-
 \[
 \begin{aligned}
-78 \div 8 & = 9 \quad \text{remainder } 6 \\
-9 \div 8 & = 1 \quad \text{remainder } 1 \\
-1 \div 8 & = 0 \quad \text{remainder } 1 \\
+78 \div 8 & = 9 \quad \text{rest } 6 \\
+9 \div 8 & = 1 \quad \text{rest } 1 \\
+1 \div 8 & = 0 \quad \text{rest } 1 \\
 \end{aligned}
 \]
-Thus, \(78_{10} = 116_8\). \end{solution}
+Altså er \(78_{10} = 116_8\). \end{solution}
     
 \end{example}
 
-\subsection*{Decimal to Hexadecimal Conversion}
-To convert a decimal number to hexadecimal:
+\subsection*{Fra decimal til hexadecimal}
+Sådan omregner du et decimaltal til hexadecimal form:
 \begin{enumerate}
-    \item Divide the decimal number by 16.
-    \item Record the remainder (use A, B, C, D, E, F for remainders 10, 11, 12, 13, 14, 15 respectively).
-    \item Divide the quotient by 16 and record the remainder.
-    \item Repeat until the quotient is 0.
-    \item The hexadecimal number is the sequence of remainders read from bottom to top.
+    \item Dividér decimaltallet med 16.
+    \item Notér resten (brug A, B, C, D, E, F for henholdsvis resterne 10, 11, 12, 13, 14, 15).
+    \item Dividér kvotienten med 16, og notér resten.
+    \item Gentag, indtil kvotienten er 0.
+    \item Det hexadecimale tal er rækken af rester læst nedefra og op.
 \end{enumerate}
 
-\begin{example}Convert \(255_{10}\) to hexadecimal.
+\begin{example}Omregn \(255_{10}\) til hexadecimal form.
 
 \begin{solution}
     
 \[
 \begin{aligned}
-255 \div 16 & = 15 \quad \text{remainder } 15 \quad (\text{F}) \\
-15 \div 16 & = 0 \quad \text{remainder } 15 \quad (\text{F}) \\
+255 \div 16 & = 15 \quad \text{rest } 15 \quad (\text{F}) \\
+15 \div 16 & = 0 \quad \text{rest } 15 \quad (\text{F}) \\
 \end{aligned}
 \]
-Thus, \(255_{10} = FF_{16}\).\end{solution}
+Altså er \(255_{10} = FF_{16}\).\end{solution}
 
 \end{example}
 
 
-\subsection*{Binary to Decimal Conversion}
-To convert a binary number to decimal:
+\subsection*{Fra binær til decimal}
+Sådan omregner du et binært tal til decimal form:
 \begin{enumerate}
-    \item Multiply each bit by 2 raised to the power of its position, starting from 0 on the right.
-    \item Sum all the products.
+    \item Gang hver bit med 2 opløftet til bittens position, idet du starter med 0 længst til højre.
+    \item Læg alle produkterne sammen.
 \end{enumerate}
 
-Notice that this amounts to the method outlined above about binary expansion.
+Bemærk, at dette svarer til metoden med binær opløsning, som er beskrevet ovenfor.
 
-\begin{example} Convert \(1101_2\) to decimal.
+\begin{example} Omregn \(1101_2\) til decimal form.
 
 \begin{solution}
     
@@ -986,14 +985,14 @@ Notice that this amounts to the method outlined above about binary expansion.
 
 \end{example}
 
-\subsection*{Binary to Octal Conversion}
-To convert a binary number to octal:
+\subsection*{Fra binær til oktal}
+Sådan omregner du et binært tal til oktal form:
 \begin{enumerate}
-    \item Group the binary digits into sets of three, starting from the right. Add leading zeros if necessary.
-    \item Convert each group of three binary digits to its octal equivalent.
+    \item Gruppér de binære cifre tre og tre, idet du starter fra højre. Tilføj foranstillede nuller, hvis det er nødvendigt.
+    \item Omregn hver gruppe med tre binære cifre til det tilsvarende oktale ciffer.
 \end{enumerate}
 
-\begin{example}Convert \(110110_2\) to octal.
+\begin{example}Omregn \(110110_2\) til oktal form.
 
 \begin{solution}
 \[
@@ -1002,18 +1001,18 @@ To convert a binary number to octal:
 110 & \rightarrow 6 \\
 \end{aligned}
 \]
-Thus, \(110110_2 = 66_8\). \end{solution}
+Altså er \(110110_2 = 66_8\). \end{solution}
 
 \end{example}
 
-\subsection*{Binary to Hexadecimal Conversion}
-To convert a binary number to hexadecimal:
+\subsection*{Fra binær til hexadecimal}
+Sådan omregner du et binært tal til hexadecimal form:
 \begin{enumerate}
-    \item Group the binary digits into sets of four, starting from the right. Add leading zeros if necessary.
-    \item Convert each group of four binary digits to its hexadecimal equivalent.
+    \item Gruppér de binære cifre fire og fire, idet du starter fra højre. Tilføj foranstillede nuller, hvis det er nødvendigt.
+    \item Omregn hver gruppe med fire binære cifre til det tilsvarende hexadecimale ciffer.
 \end{enumerate}
 
-\begin{example}Convert \(10110101_2\) to hexadecimal.
+\begin{example}Omregn \(10110101_2\) til hexadecimal form.
 
 \begin{solution}
 \[
@@ -1022,14 +1021,14 @@ To convert a binary number to hexadecimal:
 0101 & \rightarrow 5 \\
 \end{aligned}
 \]
-Thus, \(10110101_2 = B5_{16}\). \end{solution}
+Altså er \(10110101_2 = B5_{16}\). \end{solution}
 
 \end{example}
 
-\subsection*{Octal to Binary Conversion}
-To convert an octal number to binary: Convert each octal digit to its 3-bit binary equivalent!
+\subsection*{Fra oktal til binær}
+Sådan omregner du et oktalt tal til binær form: Omregn hvert oktalt ciffer til det tilsvarende binære tal med 3 bit!
 
-\begin{example}Convert \(57_8\) to binary.
+\begin{example}Omregn \(57_8\) til binær form.
 
 \begin{solution}
 \[
@@ -1038,18 +1037,18 @@ To convert an octal number to binary: Convert each octal digit to its 3-bit bina
 7 & \rightarrow 111 \\
 \end{aligned}
 \]
-Thus, \(57_8 = 101111_2\). \end{solution}
+Altså er \(57_8 = 101111_2\). \end{solution}
 
 \end{example}
 
-\subsection*{Octal to Decimal Conversion}
-To convert an octal number to decimal:
+\subsection*{Fra oktal til decimal}
+Sådan omregner du et oktalt tal til decimal form:
 \begin{enumerate}
-    \item Multiply each digit by 8 raised to the power of its position, starting from 0 on the right.
-    \item Sum all the products.
+    \item Gang hvert ciffer med 8 opløftet til cifrets position, idet du starter med 0 længst til højre.
+    \item Læg alle produkterne sammen.
 \end{enumerate}
 
-\begin{example}Convert \(157_8\) to decimal.
+\begin{example}Omregn \(157_8\) til decimal form.
 
 \begin{solution}
     
@@ -1061,14 +1060,14 @@ To convert an octal number to decimal:
 
 \end{example}
 
-\subsection*{Octal to Hexadecimal Conversion}
-To convert an octal number to hexadecimal:
+\subsection*{Fra oktal til hexadecimal}
+Sådan omregner du et oktalt tal til hexadecimal form:
 \begin{enumerate}
-    \item First, convert the octal number to binary.
-    \item Then, convert the binary number to hexadecimal by grouping the binary digits in sets of four.
+    \item Omregn først det oktale tal til binær form.
+    \item Omregn derefter det binære tal til hexadecimal form ved at gruppere de binære cifre fire og fire.
 \end{enumerate}
 
-\begin{example}Convert \(157_8\) to hexadecimal.
+\begin{example}Omregn \(157_8\) til hexadecimal form.
 
 \begin{solution}
 
@@ -1079,13 +1078,13 @@ To convert an octal number to hexadecimal:
 7 & \rightarrow 111 \\
 \end{aligned}
 \]
-Thus, \(157_8 = 001101111_2 = 6F_{16}\). \end{solution}
+Altså er \(157_8 = 001101111_2 = 6F_{16}\). \end{solution}
 \end{example}
 
-\subsection*{Hexadecimal to Binary Conversion}
-To convert a hexadecimal number to binary: Convert each hexadecimal digit to its 4-bit binary equivalent.
+\subsection*{Fra hexadecimal til binær}
+Sådan omregner du et hexadecimalt tal til binær form: Omregn hvert hexadecimalt ciffer til det tilsvarende binære tal med 4 bit.
 
-\begin{example}Convert \(2B_{16}\) to binary.
+\begin{example}Omregn \(2B_{16}\) til binær form.
 
 \begin{solution}
     
@@ -1097,18 +1096,18 @@ To convert a hexadecimal number to binary: Convert each hexadecimal digit to its
 B & \rightarrow 1011 \\
 \end{aligned}
 \]
-Thus, \(2B_{16} = 00101011_2\).\end{solution}
+Altså er \(2B_{16} = 00101011_2\).\end{solution}
 
 \end{example}
 
-\subsection*{Hexadecimal to Decimal Conversion}
-To convert a hexadecimal number to decimal:
+\subsection*{Fra hexadecimal til decimal}
+Sådan omregner du et hexadecimalt tal til decimal form:
 \begin{enumerate}
-    \item Multiply each digit by 16 raised to the power of its position, starting from 0 on the right.
-    \item Sum all the products.
+    \item Gang hvert ciffer med 16 opløftet til cifrets position, idet du starter med 0 længst til højre.
+    \item Læg alle produkterne sammen.
 \end{enumerate}
 
-\begin{example}Convert \(2B_{16}\) to decimal.
+\begin{example}Omregn \(2B_{16}\) til decimal form.
 
 \begin{solution}
 \[
@@ -1118,14 +1117,14 @@ To convert a hexadecimal number to decimal:
 \] \end{solution}
 \end{example}
 
-\subsection*{Hexadecimal to Octal Conversion}
-To convert a hexadecimal number to octal:
+\subsection*{Fra hexadecimal til oktal}
+Sådan omregner du et hexadecimalt tal til oktal form:
 \begin{enumerate}
-    \item First, convert the hexadecimal number to binary.
-    \item Then, convert the binary number to octal by grouping the binary digits in sets of three.
+    \item Omregn først det hexadecimale tal til binær form.
+    \item Omregn derefter det binære tal til oktal form ved at gruppere de binære cifre tre og tre.
 \end{enumerate}
 
-\begin{example}Convert \(2B_{16}\) to octal.
+\begin{example}Omregn \(2B_{16}\) til oktal form.
 
 \begin{solution}
 
@@ -1135,12 +1134,12 @@ To convert a hexadecimal number to octal:
 B & \rightarrow 1011 \\
 \end{aligned}
 \]
-Thus, \(2B_{16} = 00101011_2 = 53_8\). \end{solution}
+Altså er \(2B_{16} = 00101011_2 = 53_8\). \end{solution}
 
 \end{example}
 
-\subsection*{Final Thoughts on Conversion}
-The concept of expansion plays a central role in these conversions. Whether you are expanding a decimal number into its binary, octal, or hexadecimal form, or converting a binary number into its octal or hexadecimal equivalent, you are more or less expressing the number in terms of powers of the base. The expansion method is essentially the same for each system as it boils down to dividing by the highest power of the base recursively:
+\subsection*{Afsluttende bemærkninger om omregning}
+Begrebet opløsning spiller en central rolle i disse omregninger. Uanset om du opløser et decimaltal i dets binære, oktale eller hexadecimale form eller omregner et binært tal til dets oktale eller hexadecimale modstykke, udtrykker du mere eller mindre tallet ved potenser af grundtallet. Metoden med opløsning er i bund og grund den samme for alle systemer, da den går ud på rekursivt at dividere med den højeste potens af grundtallet:
 
 $$
 \begin{aligned}
@@ -1149,4 +1148,4 @@ $$
 \end{aligned}
 $$
 
-By understanding these expansions and the relationships between these number systems, you can efficiently switch between them, allowing you to represent and manipulate data in the most suitable format for any given situation.
+Når du forstår disse opløsninger og sammenhængene mellem talsystemerne, kan du effektivt skifte mellem dem, så du kan repræsentere og behandle data i det format, der passer bedst til den givne situation.

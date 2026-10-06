@@ -1,167 +1,167 @@
-\chapter{Combinatorics and Probability Theory}
+\chapter{Kombinatorik og sandsynlighedsteori}
 \label{chap:ch4}
-Imagine you are tasked with forming teams of 3 for a semester project in a class of 45 students. Initially, the order in which you choose the team members does not matter, so you are just concerned with combinations. The number of ways to form a team of 3 from 45 students comes out to 14,190 possibilities!
+Forestil dig, at du skal danne hold på 3 til et semesterprojekt i en klasse med 45 studerende. I første omgang har rækkefølgen, du vælger holdmedlemmerne i, ingen betydning, så du skal kun tænke på kombinationer. Antallet af måder at danne et hold på 3 ud af 45 studerende på er hele 14\,190 muligheder!
 
-The following semester introduces the students to Scrum project management, where each team must have three specific roles: Scrum Master, Product Owner, and Development Team. This small change, specifying roles, suddenly transforms the problem from a simple \textit{combination} into a \textit{permutation}. Now, the number of possible ways to assign these roles leaps to 85,140!
+Det følgende semester introduceres de studerende til projektstyring med Scrum, hvor hvert hold skal have tre bestemte roller: Scrum Master, Product Owner og Development Team. Denne lille ændring -- at rollerne angives -- forvandler pludselig problemet fra en simpel \textit{kombination} til en \textit{permutation}. Nu springer antallet af mulige måder at fordele rollerne på op til 85\,140!
 
-Frustrated by the sheer number of options, the 45 students throw a party to relax. Being well-mannered, they decide that everyone should shake hands with every other person exactly once. After a few minutes, they calculate the total number of handshakes — 990. The students are once again surprised by how something as simple as shaking hands can add up so quickly.
+De 45 studerende er frustrerede over det enorme antal muligheder og holder en fest for at slappe af. Da de er velopdragne, beslutter de, at alle skal give hånd til alle andre præcis én gang. Efter et par minutter regner de det samlede antal håndtryk ud -- 990. De studerende bliver igen overraskede over, hvor hurtigt noget så simpelt som at give hånd kan løbe op.
 
-As the night progresses, one student proposes a fun game — a random drawing for five door prizes, each unique. With 45 students in attendance and only five prizes available, the chance of winning nothing becomes a concerning 89 per cent. The students quickly realize that the odds are not in their favor.
+Som aftenen skrider frem, foreslår en studerende en sjov leg -- en lodtrækning om fem dørpræmier, som alle er forskellige. Med 45 fremmødte studerende og kun fem præmier bliver chancen for ikke at vinde noget bekymrende høje 89 procent. De studerende indser hurtigt, at oddsene ikke er på deres side.
 
-Not ready to give up on their luck, a smaller group decides to flip a coin 10 times, with the hope of landing exactly five heads to win the game. However, when they learn that the probability of this happening is only about 25 per cent, their spirits dampen further.
+En mindre gruppe er ikke klar til at opgive lykken og beslutter at kaste en mønt 10 gange i håb om at få præcis fem gange krone og vinde spillet. Men da de finder ud af, at sandsynligheden for, at det sker, kun er omkring 25 procent, falder humøret yderligere.
 
-The students conclude that rather than relying on chance, it is time to dive deeper into understanding combinatorics and probability theory. Armed with this knowledge, they can better predict outcomes and avoid future disappointments at both parties and project planning.
+De studerende konkluderer, at i stedet for at stole på tilfældet er det på tide at gå i dybden med kombinatorik og sandsynlighedsteori. Med denne viden kan de bedre forudsige udfald og undgå fremtidige skuffelser både til fester og i projektplanlægningen.
 
-\section{Sample Space and Events}
+\section{Udfaldsrum og hændelser}
 \label{sec:sample_space}
-A \textbf{random experiment }is one that can lead to different outcomes, even when repeated under the same conditions. This randomness is a fundamental aspect of many engineering tasks.
+Et \textbf{stokastisk eksperiment }er et eksperiment, der kan føre til forskellige udfald, selv når det gentages under de samme betingelser. Denne tilfældighed er et grundlæggende aspekt af mange ingeniøropgaver.
 
-Think of it this way: Let us say you are testing the speed of a website under different conditions. Sometimes it loads quickly, and other times it is slower. Even if you are using the same code and server, things like network traffic or server load make the results vary each time. 
+Tænk på det på denne måde: Lad os sige, at du tester hastigheden af et websted under forskellige forhold. Nogle gange indlæses det hurtigt, andre gange er det langsommere. Selv om du bruger den samme kode og server, får ting som netværkstrafik eller belastning af serveren resultaterne til at variere fra gang til gang. 
 
-\begin{definition}{Random Experiment}
-    A random experiment is one that can give different results, even if you do everything the same each time.
+\begin{definition}{Stokastisk eksperiment}
+    Et stokastisk eksperiment er et eksperiment, der kan give forskellige resultater, selv om du gør alting på samme måde hver gang.
 \end{definition}
 
-Or, imagine you are measuring the signal strength in a wireless device. You might get slightly different readings each time because of things like interference or small changes in the environment.
+Eller forestil dig, at du måler signalstyrken i en trådløs enhed. Du får måske lidt forskellige målinger hver gang på grund af ting som interferens eller små ændringer i omgivelserne.
 
-This randomness shows up all over the place, from software performance tests to electrical engineering experiments. It is important to expect it and include it in your thinking. Otherwise, you might make decisions based on incomplete or misleading data. When you account for random variation, you can make smarter predictions and designs.
+Denne tilfældighed viser sig overalt, fra ydelsestest af software til eksperimenter inden for elektroteknik. Det er vigtigt at forvente den og tage højde for den i sine overvejelser. Ellers risikerer du at træffe beslutninger på grundlag af ufuldstændige eller misvisende data. Når du tager højde for tilfældig variation, kan du lave bedre forudsigelser og design.
 
-To model and analyze a random experiment, it is crucial to understand the set of possible outcomes that can occur. In probability theory, this set is called the \textbf{sample space}, denoted by \( S \). A sample space can be either \textbf{discrete} (consisting of a finite or countably infinite set of outcomes) or \textbf{continuous} (containing an interval of real numbers). The exact definition of a sample space often depends on the objectives of the analysis.
+For at modellere og analysere et stokastisk eksperiment er det afgørende at kende mængden af mulige udfald. I sandsynlighedsteorien kaldes denne mængde \textbf{udfaldsrummet}, og den betegnes \( S \). Et udfaldsrum kan enten være \textbf{diskret} (bestå af en endelig eller tælleligt uendelig mængde af udfald) eller \textbf{kontinuert} (indeholde et interval af reelle tal). Den præcise definition af et udfaldsrum afhænger ofte af formålet med analysen.
 
-An \textbf{outcome} is a single possible result of the random experiment, and an \textbf{event} is any subset of the sample space, which may consist of one or more outcomes. Below are some examples to illustrate these concepts:
+Et \textbf{udfald} er ét muligt resultat af det stokastiske eksperiment, og en \textbf{hændelse} er en vilkårlig delmængde af udfaldsrummet, som kan bestå af ét eller flere udfald. Nedenfor følger nogle eksempler, der illustrerer disse begreber:
 
-\begin{example}[ Network Latency] \\
-Consider an experiment where you measure the latency of data packets in a network. The sample space can be defined based on the type of measurements:
+\begin{example}[ Netværksforsinkelse] \\
+Se på et eksperiment, hvor du måler forsinkelsen (latensen) af datapakker i et netværk. Udfaldsrummet kan defineres ud fra typen af målinger:
 \begin{itemize}
-    \item If latency is measured as a positive real number, the sample space is continuous: 
+    \item Hvis latensen måles som et positivt reelt tal, er udfaldsrummet kontinuert: 
     \[
     S = \{ x \mid x > 0 \}.
     \]
-    \item If it is known that latency ranges between 10 and 100 milliseconds, the sample space can be refined to:
+    \item Hvis det vides, at latensen ligger mellem 10 og 100 millisekunder, kan udfaldsrummet indsnævres til:
     \[
     S = \{ x \mid 10 \leq x \leq 100 \}.
     \]
-    \item If the objective is to categorize latency as low, medium, or high, the sample space becomes discrete:
+    \item Hvis formålet er at inddele latensen i lav, middel eller høj, bliver udfaldsrummet diskret:
     \[
-    S = \{\text{low}, \text{medium}, \text{high}\}.
+    S = \{\text{lav}, \text{middel}, \text{høj}\}.
     \]
-    \item For a simple evaluation of whether the latency meets a standard threshold, the sample space can be reduced to:
+    \item Ved en simpel vurdering af, om latensen overholder en standardgrænse, kan udfaldsrummet reduceres til:
     \[
-    S = \{\text{pass}, \text{fail}\}.
+    S = \{\text{bestået}, \text{fejlet}\}.
     \]
 \end{itemize}
-Each outcome in these sample spaces represents a single possible latency measurement, and events can be defined as sets of outcomes, such as "latency is high."
+Hvert udfald i disse udfaldsrum repræsenterer én mulig måling af latensen, og hændelser kan defineres som mængder af udfald, fx »latensen er høj«.
 
 \end{example}
 
-Understanding the nature of sample spaces, outcomes, and events is fundamental in probability, as it allows us to define and work with probabilities of complex scenarios in various engineering contexts. Let us summarise these key concepts:
+Det er grundlæggende i sandsynlighedsregning at forstå, hvad udfaldsrum, udfald og hændelser er, fordi det gør det muligt at definere og arbejde med sandsynligheder for komplekse scenarier i forskellige ingeniørsammenhænge. Lad os opsummere disse centrale begreber:
 
-\begin{definition}{Sample Spaces, Outcomes, and Events}
-    \textbf{Sample Space:} The set of all possible outcomes of a random experiment is called the sample space, denoted by \( S \). Outcomes can be discrete or continuous, depending on the nature of the experiment.
+\begin{definition}{Udfaldsrum, udfald og hændelser}
+    \textbf{Udfaldsrum:} Mængden af alle mulige udfald af et stokastisk eksperiment kaldes udfaldsrummet og betegnes \( S \). Udfaldene kan være diskrete eller kontinuerte afhængigt af eksperimentets karakter.
     
-    \textbf{Outcome:} A single possible result of a random experiment.
+    \textbf{Udfald:} Ét muligt resultat af et stokastisk eksperiment.
     
-    \textbf{Event:} Any subset of the sample space, which may consist of one or more outcomes.
+    \textbf{Hændelse:} En vilkårlig delmængde af udfaldsrummet, som kan bestå af ét eller flere udfald.
 \end{definition}
 
-\begin{example} Software Release Testing \\
-    Imagine a software testing process where each test case can either pass or fail. The sample space for a single test case is discrete and can be represented as:
+\begin{example} Test af en softwareudgivelse \\
+    Forestil dig en softwaretestproces, hvor hvert testtilfælde enten kan bestås eller fejle. Udfaldsrummet for et enkelt testtilfælde er diskret og kan skrives som:
     \[
-    S = \{\text{pass}, \text{fail}\}.
+    S = \{\text{bestået}, \text{fejlet}\}.
     \]
-    If you run three test cases, the combined sample space for all possible outcomes is:
+    Hvis du kører tre testtilfælde, er det samlede udfaldsrum for alle mulige udfald:
     \begin{align*}
-    S = \{&(\text{pass, pass, pass}), (\text{pass, pass, fail}), (\text{pass, fail, pass}), \\
-    &(\text{pass, fail, fail}), (\text{fail, pass, pass}), (\text{fail, pass, fail}), \\
-    &(\text{fail, fail, pass}), (\text{fail, fail, fail})\}.
+    S = \{&(\text{bestået, bestået, bestået}), (\text{bestået, bestået, fejlet}), (\text{bestået, fejlet, bestået}), \\
+    &(\text{bestået, fejlet, fejlet}), (\text{fejlet, bestået, bestået}), (\text{fejlet, bestået, fejlet}), \\
+    &(\text{fejlet, fejlet, bestået}), (\text{fejlet, fejlet, fejlet})\}.
     \end{align*}
-    This sample space includes all sequences of outcomes for the three tests.
+    Dette udfaldsrum omfatter alle følger af udfald for de tre test.
     
     \begin{itemize}
-        \item The total number of possible outcomes is \( 2^3 = 8 \).
-        \item An event could be defined as "at least one test fails," which would include outcomes like \(\text{(fail, pass, pass)}\), \(\text{(pass, fail, fail)}\), and others where at least one test fails.
+        \item Det samlede antal mulige udfald er \( 2^3 = 8 \).
+        \item En hændelse kunne defineres som »mindst én test fejler«, hvilket ville omfatte udfald som \(\text{(fejlet, bestået, bestået)}\), \(\text{(bestået, fejlet, fejlet)}\) og de øvrige, hvor mindst én test fejler.
     \end{itemize}
     
     \end{example}
     
 
-\begin{example} Component Quality in Manufacturing \\
-A company manufactures electronic components, and each component is tested for compliance with quality standards. The test can return one of three outcomes: \texttt{pass}, \texttt{marginal}, or \texttt{fail}. The sample space is:
+\begin{example} Komponentkvalitet i produktionen \\
+En virksomhed producerer elektroniske komponenter, og hver komponent testes for, om den overholder kvalitetsstandarderne. Testen kan give et af tre udfald: \texttt{bestået}, \texttt{marginal} eller \texttt{fejlet}. Udfaldsrummet er:
 \[
-S = \{\text{pass}, \text{marginal}, \text{fail}\}.
+S = \{\text{bestået}, \text{marginal}, \text{fejlet}\}.
 \]
-\textbf{Event:} Suppose we are interested in the event that a component does not pass the quality test. This event is a set of outcomes:
+\textbf{Hændelse:} Antag, at vi er interesseret i hændelsen, at en komponent ikke består kvalitetstesten. Denne hændelse er en mængde af udfald:
 \[
-E = \{\text{marginal}, \text{fail}\}.
+E = \{\text{marginal}, \text{fejlet}\}.
 \]
 \end{example}
 
-This means that all the operations we have defined on sets translate directly into operations on events:
+Det betyder, at alle de operationer, vi har defineret på mængder, kan overføres direkte til operationer på hændelser:
 \begin{itemize}
-    \item $A \cup B$: the event that at least one of $A$ or $B$ occurs.
-    \item $A \cap B$: the event that both $A$ and $B$ occur together.
-    \item $\skoverline{A}$ or $A^c$: the event that $A$ does not occur.
-    \item $A \setminus B$ or $A - B$: the event that $A$ occurs but $B$ does not.
-    \item $A \Delta B$ or $A \oplus B$: the event that either $A$ or $B$ occurs, but not both (symmetric difference).
+    \item $A \cup B$: hændelsen, at mindst én af $A$ og $B$ indtræffer.
+    \item $A \cap B$: hændelsen, at både $A$ og $B$ indtræffer.
+    \item $\skoverline{A}$ eller $A^c$: hændelsen, at $A$ ikke indtræffer.
+    \item $A \setminus B$ eller $A - B$: hændelsen, at $A$ indtræffer, men $B$ ikke gør.
+    \item $A \Delta B$ eller $A \oplus B$: hændelsen, at enten $A$ eller $B$ indtræffer, men ikke begge (symmetrisk differens).
 \end{itemize}
 
-Thus, probability theory builds directly on set theory: probability assigns a numerical measure to these subsets of the sample space. Later in this chapter, we will see how this measure is defined and used to reason about uncertainty.
+Sandsynlighedsteorien bygger altså direkte på mængdelæren: En sandsynlighed tildeler et numerisk mål til disse delmængder af udfaldsrummet. Senere i kapitlet ser vi, hvordan dette mål defineres og bruges til at ræsonnere om usikkerhed.
 
-We can summarise the considerations of this section in the following table:
+Vi kan opsummere overvejelserne i dette afsnit i følgende tabel:
 
 \begin{table}[h]
     \centering
     \renewcommand{\arraystretch}{1.5} % Adjust this value for desired spacing
     \begin{tabular}{|c|c|c|c|}
     \hline
-    \textbf{Operation} & \textbf{Boolean Algebra} & \textbf{Logic} & \textbf{Set Theory} \\
+    \textbf{Operation} & \textbf{Boolesk algebra} & \textbf{Logik} & \textbf{Mængdelære} \\
     \hline
-    \texttt{NOT} & $\skoverline{x}$ & $\neg x$ & $A^c$ or $A'$\\
+    \texttt{NOT} & $\skoverline{x}$ & $\neg x$ & $A^c$ eller $A'$\\
     \hline
     \texttt{OR} & $+$ & $\vee$ & $\cup$ \\
     \hline
     \texttt{AND} & $\cdot$ & $\wedge$ & $\cap$ \\
     \hline
-    \texttt{NAND} & $\skoverline{x \cdot y}$ & $\neg (x \wedge y)$ & $(A \cap B)^c$ or \(\skoverline{A \cap B}\)\\
+    \texttt{NAND} & $\skoverline{x \cdot y}$ & $\neg (x \wedge y)$ & $(A \cap B)^c$ eller \(\skoverline{A \cap B}\)\\
     \hline
-    \texttt{NOR} & $\skoverline{x + y}$ & $\neg (x \vee y)$ & $(A \cup B)^c$ or \(\skoverline{A \cup B}\) \\
+    \texttt{NOR} & $\skoverline{x + y}$ & $\neg (x \vee y)$ & $(A \cup B)^c$ eller \(\skoverline{A \cup B}\) \\
     \hline
-    \texttt{XOR} (Symmetric Difference) & $x \oplus y$ & $(x \wedge \neg y) \vee (\neg x \wedge y)$ & $A \triangle B$ or \(A \oplus B\) \\
+    \texttt{XOR} (symmetrisk differens) & $x \oplus y$ & $(x \wedge \neg y) \vee (\neg x \wedge y)$ & $A \triangle B$ eller \(A \oplus B\) \\
     \hline
-    Difference & $x \cdot \skoverline{y}$ & $x \wedge \neg y$ & $A - B$ or \( A \setminus B \) \\
+    Differens & $x \cdot \skoverline{y}$ & $x \wedge \neg y$ & $A - B$ eller \( A \setminus B \) \\
     \hline
     \end{tabular}
-    \caption{Comparison of Operators in Boolean Algebra, Logic, and Set Theory}
+    \caption{Sammenligning af operatorer i boolesk algebra, logik og mængdelære}
 \end{table}
 
-In this book, we will use the notation $A^c$ to denote the complement of the set $A$, which includes all elements not in $A$.
+I denne bog bruger vi notationen $A^c$ for komplementet til mængden $A$, som omfatter alle elementer, der ikke er med i $A$.
 
-\section{Counting Principles}
+\section{Tælleprincipper}
 
-In many problems across mathematics, computer science, and engineering, determining the number of ways certain events can occur is important. Whether you're arranging elements, selecting groups, or navigating through complex scenarios, counting techniques provide the foundational tools to solve these problems. These techniques go beyond simple arithmetic and allow us to tackle questions like:
+I mange problemer inden for matematik, datalogi og ingeniørfag er det vigtigt at bestemme, på hvor mange måder bestemte hændelser kan indtræffe. Uanset om du ordner elementer, udvælger grupper eller navigerer gennem komplekse scenarier, giver tælleteknikker de grundlæggende værktøjer til at løse disse problemer. Teknikkerne rækker ud over simpel aritmetik og gør det muligt at besvare spørgsmål som:
 
 \begin{itemize}
-    \item How many ways can we arrange a set of objects?
-    \item In how many different paths can a process unfold?
-    \item What is the probability of a specific event occurring given multiple possibilities?
+    \item På hvor mange måder kan vi ordne en mængde af objekter?
+    \item Ad hvor mange forskellige veje kan en proces forløbe?
+    \item Hvad er sandsynligheden for, at en bestemt hændelse indtræffer, når der er flere muligheder?
 \end{itemize}
 
-Counting techniques, such as permutations, combinations, and the multiplication rule, help us quantify these possibilities systematically.
+Tælleteknikker som permutationer, kombinationer og multiplikationsreglen hjælper os med at opgøre disse muligheder systematisk.
 
-\subsection*{Multiplication Rule}
+\subsection*{Multiplikationsreglen}
 
-We start out by discussing the most basic counting principle: the \textbf{multiplication rule}:
+Vi begynder med at se på det mest grundlæggende tælleprincip, \textbf{multiplikationsreglen}:
 
-\begin{theorem}[Multiplication Rule]
-    Let an operation be described as a sequence of $k$ steps. Assume the following conditions:
+\begin{theorem}[Multiplikationsreglen]
+    Lad en handling være beskrevet som en følge af $k$ trin. Antag følgende betingelser:
     
     \begin{itemize}
-        \item There are $n_1$ ways to complete step 1.
-        \item There are $n_2$ ways to complete step 2 for each way of completing step 1.
-        \item There are $n_3$ ways to complete step 3 for each possible completion of the first two steps, and similarly for every subsequent step.
+        \item Der er $n_1$ måder at udføre trin 1 på.
+        \item Der er $n_2$ måder at udføre trin 2 på for hver måde at udføre trin 1 på.
+        \item Der er $n_3$ måder at udføre trin 3 på for hver mulig udførelse af de to første trin, og tilsvarende for hvert af de efterfølgende trin.
     \end{itemize}
     
-    Then, the total number of ways to complete the entire operation is given by:
+    Så er det samlede antal måder at udføre hele handlingen på givet ved:
     
     \[
     n_1 \times n_2 \times \cdots \times n_k.
@@ -169,232 +169,232 @@ We start out by discussing the most basic counting principle: the \textbf{multip
 \end{theorem}
     
 \begin{example}
-    Suppose you are choosing a meal at a restaurant. You have the following options:
+    Antag, at du skal vælge et måltid på en restaurant. Du har følgende muligheder:
         
     \begin{itemize}
-            \item 3 choices for the main course.
-            \item 4 choices for the side dish.
-            \item 2 choices for the drink.
+            \item 3 valgmuligheder til hovedretten.
+            \item 4 valgmuligheder til tilbehøret.
+            \item 2 valgmuligheder til drikkevaren.
     \end{itemize}
         
-    Using the multiplication rule, the total number of ways to choose a meal is:
+    Ifølge multiplikationsreglen er det samlede antal måder at vælge et måltid på:
         
     \[
         3 \times 4 \times 2 = 24.
     \]
         
-    Therefore, there are 24 different meal combinations available.
+    Der er altså 24 forskellige måltidskombinationer at vælge imellem.
 \end{example}
 
-\begin{example} Automobile Options
+\begin{example} Tilvalg til biler
 
-An automobile manufacturer provides vehicles equipped with selected
-options. Each vehicle is ordered
+En bilproducent leverer biler med udvalgte
+tilvalg. Hver bil bestilles
 
 \begin{itemize}
-    \item With or without an automatic transmission
-    \item With or without a sunroof
-    \item With one of three choices of a stereo system
-    \item With one of four exterior colors
+    \item med eller uden automatgear
+    \item med eller uden soltag
+    \item med ét ud af tre valgmuligheder for stereoanlæg
+    \item med én ud af fire udvendige farver
 \end{itemize}
 
-If the sample space consists of the set of all possible vehicle types, what is the number of outcomes in the sample space?
+Hvis udfaldsrummet består af mængden af alle mulige biltyper, hvad er så antallet af udfald i udfaldsrummet?
 \end{example}
 
 \begin{solution}
-Using the multiplication rule, we can calculate the total number of possible vehicle types by multiplying the number of choices for each option:
+Ved hjælp af multiplikationsreglen kan vi beregne det samlede antal mulige biltyper ved at gange antallet af valgmuligheder for hvert tilvalg:
 
 \begin{itemize}
-    \item 2 choices for the transmission (with or without automatic transmission)
-    \item 2 choices for the sunroof (with or without sunroof)
-    \item 3 choices for the stereo system
-    \item 4 choices for the exterior color
+    \item 2 valgmuligheder for gearkassen (med eller uden automatgear)
+    \item 2 valgmuligheder for soltaget (med eller uden soltag)
+    \item 3 valgmuligheder for stereoanlægget
+    \item 4 valgmuligheder for den udvendige farve
 \end{itemize}
 
-Therefore, the total number of possible vehicle types is:
+Det samlede antal mulige biltyper er derfor:
 
 \[
 2 \times 2 \times 3 \times 4 = 48
 \]
 
-So, there are 48 different possible vehicle types in the sample space.
+Der er altså 48 forskellige mulige biltyper i udfaldsrummet.
 \end{solution}
 
-\subsection*{Replacement and Order in Counting}
+\subsection*{Tilbagelægning og rækkefølge ved optælling}
 
-Next we turn to an important distinction between with and without replacement in counting principles:
+Dernæst ser vi på en vigtig skelnen i tælleprincipperne, nemlig mellem optælling med og uden tilbagelægning:
 
-\begin{definition}[Counting with and without Replacement]
-    When counting the number of ways to select objects from a set, two common scenarios are:
+\begin{definition}[Optælling med og uden tilbagelægning]
+    Når vi tæller antallet af måder at udvælge objekter fra en mængde på, er der to almindelige scenarier:
 
     \begin{itemize}
-        \item \textbf{With Replacement}: An object can be selected more than once.
-        \item \textbf{Without Replacement}: Once an object is selected, it cannot be chosen again.
+        \item \textbf{Med tilbagelægning}: Et objekt kan udvælges mere end én gang.
+        \item \textbf{Uden tilbagelægning}: Når et objekt er udvalgt, kan det ikke vælges igen.
     \end{itemize}
     \end{definition}
     
 \begin{example}
-    Suppose you have a bag containing 5 different colored balls. You draw 2 balls:
+    Antag, at du har en pose med 5 kugler i forskellige farver. Du trækker 2 kugler:
 \begin{itemize}
-    \item \textbf{With Replacement}: The first ball is placed back in the bag before drawing the second. There are \(5 \times 5 = 25\) possible outcomes.
-    \item \textbf{Without Replacement}: The first ball is not placed back, so the number of outcomes is \(5 \times 4 = 20\).
+    \item \textbf{Med tilbagelægning}: Den første kugle lægges tilbage i posen, før den anden trækkes. Der er \(5 \times 5 = 25\) mulige udfald.
+    \item \textbf{Uden tilbagelægning}: Den første kugle lægges ikke tilbage, så antallet af udfald er \(5 \times 4 = 20\).
 \end{itemize}
 \end{example}
 
 \begin{example}
-    Three people are drawing cards one after another from a standard deck of 52 cards. The goal is to find the Ace of Spades. Let's examine the two scenarios: with replacement and without replacement.
+    Tre personer trækker kort efter tur fra et almindeligt spil kort med 52 kort. Målet er at finde spar es. Lad os se på de to scenarier: med tilbagelægning og uden tilbagelægning.
 
-    \textbf{Without Replacement}
+    \textbf{Uden tilbagelægning}
 
-    In this scenario, each card drawn is not put back into the deck, reducing the total number of cards available after each draw.
+    I dette scenarie lægges et trukket kort ikke tilbage i bunken, så det samlede antal tilgængelige kort bliver mindre efter hver trækning.
     \begin{itemize}
-        \item First Draw: The first person has a $\frac{1}{52}$ chance of drawing the Ace of Spades.
-        \item Second Draw: If the first person does not draw the Ace of Spades, there are now 51 cards left, and the second person has a $\frac{1}{51}$ chance of drawing the Ace of Spades.
-        \item Third Draw: If the Ace of Spades has not been drawn by the first two people, the third person has a $\frac{1}{50}$ chance of drawing it.
+        \item Første trækning: Den første person har en chance på $\frac{1}{52}$ for at trække spar es.
+        \item Anden trækning: Hvis den første person ikke trækker spar es, er der nu 51 kort tilbage, og den anden person har en chance på $\frac{1}{51}$ for at trække spar es.
+        \item Tredje trækning: Hvis spar es ikke er trukket af de to første personer, har den tredje person en chance på $\frac{1}{50}$ for at trække det.
     \end{itemize}
     
-    The probabilities change with each draw because the total number of cards decreases, and previously drawn cards are not available.
+    Sandsynlighederne ændrer sig ved hver trækning, fordi det samlede antal kort bliver mindre, og tidligere trukne kort ikke er tilgængelige.
     
-    \textbf{With Replacement}
+    \textbf{Med tilbagelægning}
 
-    In this scenario, each card drawn is returned to the deck and reshuffled before the next person draws. This keeps the total number of cards constant.
+    I dette scenarie lægges hvert trukket kort tilbage i bunken, som blandes, før den næste person trækker. Det samlede antal kort er dermed konstant.
     \begin{itemize}
-        \item First Draw: The first person has a $\frac{1}{52}$ chance of drawing the Ace of Spades.
-        \item Second Draw: Since the card is replaced and shuffled back into the deck, the second person also has a $\frac{1}{52}$ chance of drawing the Ace of Spades.
-        \item Third Draw: Similarly, the third person has a $\frac{1}{52}$ chance of drawing the Ace of Spades.
+        \item Første trækning: Den første person har en chance på $\frac{1}{52}$ for at trække spar es.
+        \item Anden trækning: Da kortet lægges tilbage og blandes ind i bunken igen, har den anden person også en chance på $\frac{1}{52}$ for at trække spar es.
+        \item Tredje trækning: Tilsvarende har den tredje person en chance på $\frac{1}{52}$ for at trække spar es.
     \end{itemize}
     
-    The probabilities remain the same for each draw because the deck is reset to its original state after each draw.
+    Sandsynlighederne er de samme ved hver trækning, fordi bunken bringes tilbage til sin oprindelige tilstand efter hver trækning.
 
 \end{example}
 
 \begin{example}
-    Imagine you have a group of 5 students: Alice, Bob, Charlie, David, and Eve. You need to select 2 of them for different scenarios, illustrating when the order of selection matters and when it does not.
+    Forestil dig, at du har en gruppe på 5 studerende: Alice, Bob, Charlie, David og Eve. Du skal udvælge 2 af dem i forskellige scenarier, som illustrerer, hvornår rækkefølgen af udvælgelsen har betydning, og hvornår den ikke har.
     \begin{itemize}
-        \item \textbf{Order Matters}: Selecting Alice as Captain and Bob as Assistant Captain is a different outcome than selecting Bob as Captain and Alice as Assistant Captain.
+        \item \textbf{Rækkefølgen har betydning}: At vælge Alice som anfører og Bob som viceanfører er et andet udfald end at vælge Bob som anfører og Alice som viceanfører.
         \end{itemize}
-    Now, imagine you are simply selecting 2 students to form a study group with no specific roles assigned. Here, the order does not matter.
+    Forestil dig nu, at du blot udvælger 2 studerende til en læsegruppe uden bestemte roller. Her har rækkefølgen ingen betydning.
     \begin{itemize}
-        \item \textbf{Order does not matter:}  Choosing Alice and Bob is considered the same outcome as choosing Bob and Alice; there is no distinction between the two orders since there are no assigned roles.
+        \item \textbf{Rækkefølgen har ingen betydning:}  At vælge Alice og Bob betragtes som det samme udfald som at vælge Bob og Alice; der er ingen forskel på de to rækkefølger, da der ikke er tildelt roller.
     \end{itemize}
     \label{ex:order_matters}
 \end{example}
 
-\autoref{ex:order_matters} illustrates the distinction between \textit{permutations} and \textit{combinations}, two fundamental counting principles that are widely used in probability theory and combinatorics.
+\autoref{ex:order_matters} illustrerer forskellen mellem \textit{permutationer} og \textit{kombinationer}, to grundlæggende tælleprincipper, som er meget udbredte i sandsynlighedsteori og kombinatorik.
 
-\begin{definition}[Permutation and Combination]
+\begin{definition}[Permutation og kombination]
     \begin{itemize}
-        \item \textbf{Permutation (order matters)}: Different sequences are counted as distinct outcomes, leading to a higher count.
-        \item \textbf{Combination (order does not matter)}: Sequences are treated as identical, resulting in a lower count.
+        \item \textbf{Permutation (rækkefølgen har betydning)}: Forskellige rækkefølger tælles som forskellige udfald, hvilket giver et større antal.
+        \item \textbf{Kombination (rækkefølgen har ingen betydning)}: Rækkefølger behandles som ens, hvilket giver et mindre antal.
     \end{itemize}
 \end{definition}
 
-We will first discuss permutations, which are used when the order of selection matters.
+Vi ser først på permutationer, som bruges, når rækkefølgen af udvælgelsen har betydning.
 
-\subsection*{Permutations}
+\subsection*{Permutationer}
 
-Consider a set of elements, such as $S=\{a, b, c\}$. A permutation of the elements is an ordered sequence of the elements. For example, $a b c, a c b, b a c, b c a, c a b$, and $c b a$ are all the permutations of the elements of $S$.
+Se på en mængde af elementer, fx $S=\{a, b, c\}$. En permutation af elementerne er en ordnet følge af elementerne. For eksempel er $a b c, a c b, b a c, b c a, c a b$ og $c b a$ alle permutationerne af elementerne i $S$.
 
-\begin{proposition}[Permutations of \(n\) Distinct Objects]
-    The number of ordered arrangements (permutations) of $n$ distinct objects is
+\begin{proposition}[Permutationer af \(n\) forskellige objekter]
+    Antallet af ordnede opstillinger (permutationer) af $n$ forskellige objekter er
     \[
     n! = n \cdot (n-1) \cdot \dots \cdot 2 \cdot 1.
     \]
 \end{proposition}
 
-This outcome is a direct application of the multiplication rule. To form a permutation, you start by choosing an element for the first position from the total of $n$ elements. Next, you choose an element for the second position from the remaining $n-1$ elements, then for the third position from the remaining $n-2$ elements, and continue this way until all positions are filled. Such arrangements are often called linear permutations.
+Resultatet er en direkte anvendelse af multiplikationsreglen. For at danne en permutation begynder du med at vælge et element til den første plads blandt alle $n$ elementer. Derefter vælger du et element til den anden plads blandt de resterende $n-1$ elementer, så til den tredje plads blandt de resterende $n-2$ elementer og fortsætter på denne måde, indtil alle pladser er besat. Sådanne opstillinger kaldes ofte lineære permutationer.
 
 \begin{example}
-    It is said that any shuffling of a deck of card has only happened once in history. This is because the number of ways to shuffle a deck of 52 cards is \(52!\), which is an astronomically large number.
+    Man siger, at enhver blanding af et spil kort kun er forekommet én gang i historien. Det skyldes, at antallet af måder at blande et spil med 52 kort på er \(52!\), hvilket er et astronomisk stort tal.
 
     \[52! \approx 8.07 \times 10^{67}\]
 \end{example}
 
 \begin{example}
-    Suppose you have 5 different books on a shelf. You want to rearrange them in a different order. The number of ways to rearrange the books is
+    Antag, at du har 5 forskellige bøger på en hylde. Du vil stille dem i en anden rækkefølge. Antallet af måder at stille bøgerne på er
     \[5! = 5 \times 4 \times 3 \times 2 \times 1 = 120\]
 \end{example}
 
-There are cases where we are only interested in arranging a subset of elements from a larger set. The formula for counting these arrangements also derives from the multiplication rule.
+Der er tilfælde, hvor vi kun er interesseret i at ordne en delmængde af elementerne fra en større mængde. Formlen for antallet af sådanne opstillinger følger også af multiplikationsreglen.
 
-\begin{theorem}[Permutations of Subsets]
-    For integers $n \ge r \ge 0$, the number of ordered selections of $r$ distinct objects from $n$ distinct objects is
+\begin{theorem}[Permutationer af delmængder]
+    For hele tal $n \ge r \ge 0$ er antallet af ordnede udvælgelser af $r$ forskellige objekter blandt $n$ forskellige objekter
     \[
     P_r^n = P(n,r) = n \cdot (n-1) \cdots (n-r+1) = \frac{n!}{(n-r)!}.
     \]
 \end{theorem}
 
 \begin{example}
-    Suppose you have 5 different books on a shelf, and you want to rearrange 3 of them in a different order. The number of ways to rearrange the 3 books is
+    Antag, at du har 5 forskellige bøger på en hylde, og at du vil stille 3 af dem i en anden rækkefølge. Antallet af måder at stille de 3 bøger på er
     \[
     P_3^5=5 \times 4 \times 3 = 60
     \]
 \end{example}
 
 \begin{example}
-    There are 10 entries in a contest. Only three will win, $1^{\text {st }}, 2^{\text {nd }}$, or $3^{\text {rd }}$ prize. What are the possible results?
+    Der er 10 deltagere i en konkurrence. Kun tre vinder, nemlig 1., 2. eller 3. præmie. Hvad er de mulige resultater?
 \end{example}
 \begin{solution}
-    The number of ways to award the prizes is the number of permutations of 3 objects selected from 10, which is
+    Antallet af måder at uddele præmierne på er antallet af permutationer af 3 objekter udvalgt blandt 10, dvs.
     \[
     P_3^{10}= \frac{10!}{(10-3)!}=\frac{10!}{7!} = 10 \times 9 \times 8 = 720
     \]
-    Therefore, there are 720 possible outcomes for awarding the prizes.
+    Der er altså 720 mulige udfald af præmieuddelingen.
 \end{solution}
 
-\subsection*{Combinations}
+\subsection*{Kombinationer}
 
-When the order of selection does not matter, we use the concept of combinations. Combinations are used when we are interested in selecting a subset of elements from a larger set without regard to the order in which they are selected. Let us start out with a couple of examples to illustrate the concept of combinations.
+Når rækkefølgen af udvælgelsen ikke har betydning, bruger vi begrebet kombinationer. Kombinationer bruges, når vi er interesseret i at udvælge en delmængde af elementer fra en større mængde uden hensyn til den rækkefølge, de udvælges i. Lad os begynde med et par eksempler, der illustrerer begrebet kombinationer.
 
 \begin{example}
-    Suppose you have a group of 5 students: Alice, Bob, Charlie, David, and Eve. You need to select 2 of them to form a study group. The order in which you select the students does not matter. The possible combinations are:
+    Antag, at du har en gruppe på 5 studerende: Alice, Bob, Charlie, David og Eve. Du skal udvælge 2 af dem til at danne en læsegruppe. Rækkefølgen, du vælger de studerende i, har ingen betydning. De mulige kombinationer er:
     \begin{itemize}
-        \item Alice and Bob
-        \item Alice and Charlie
-        \item Alice and David
-        \item Alice and Eve
-        \item Bob and Charlie
-        \item Bob and David
-        \item Bob and Eve
-        \item Charlie and David
-        \item Charlie and Eve
-        \item David and Eve
+        \item Alice og Bob
+        \item Alice og Charlie
+        \item Alice og David
+        \item Alice og Eve
+        \item Bob og Charlie
+        \item Bob og David
+        \item Bob og Eve
+        \item Charlie og David
+        \item Charlie og Eve
+        \item David og Eve
     \end{itemize}
-    The order of the students in the study group does not matter, so the combinations are considered identical.
+    Rækkefølgen af de studerende i læsegruppen har ingen betydning, så kombinationerne betragtes som ens.
 \end{example}
 
 \begin{example}
-    Maria has three tickets for a concert. She'd like to use one of the tickets herself. She could then offer the other two tickets to any of four friends (Ann, Beth, Chris, Dave). How many ways can 2 people be selected from 4 to go to a concert?
+    Maria har tre billetter til en koncert. Hun vil selv bruge den ene billet. De to andre billetter kan hun så tilbyde til hvilke som helst af fire venner (Ann, Beth, Chris, Dave). På hvor mange måder kan 2 personer udvælges blandt 4 til at gå til koncert?
 \end{example}
 
 \begin{example}
-A circuit board has four different locations in which a component can be placed. If three identical components are to be placed on the board, how many different designs are possible?
+Et printkort har fire forskellige pladser, hvor en komponent kan placeres. Hvis tre ens komponenter skal placeres på kortet, hvor mange forskellige designs er så mulige?
 \end{example}
 
 \begin{solution}
-    Since you can only place one component in each slot, placing a component in any slot immediately restricts the choices for the next component.
+    Da der kun kan placeres én komponent på hver plads, begrænser placeringen af en komponent på en plads straks valgmulighederne for den næste komponent.
         
     \begin{enumerate}
-        \item Fill slots 1, 2, and 3.
-        \item Fill slots 1, 2, and 4.
-        \item Fill slots 1, 3, and 4.
-        \item Fill slots 2, 3, and 4.
+        \item Besæt plads 1, 2 og 3.
+        \item Besæt plads 1, 2 og 4.
+        \item Besæt plads 1, 3 og 4.
+        \item Besæt plads 2, 3 og 4.
     \end{enumerate}
 \end{solution}
 
-These examples illustrate the concept of combinations, where the order of selection does not matter. The formula for combinations is derived from the permutation formula by dividing out the number of ways to arrange the $r$ elements.
+Disse eksempler illustrerer begrebet kombinationer, hvor rækkefølgen af udvælgelsen ikke har betydning. Formlen for kombinationer udledes af formlen for permutationer ved at dividere med antallet af måder at ordne de $r$ elementer på.
 
-\begin{theorem}[Combinations]
-    The number of combinations of $r$ elements selected from a set of $n$ different elements is given by
+\begin{theorem}[Kombinationer]
+    Antallet af kombinationer af $r$ elementer udvalgt fra en mængde med $n$ forskellige elementer er givet ved
     \[
     C_r^n = \binom{n}{r} = \frac{n!}{r!(n-r)!}
     \]
 \end{theorem}
 
-This is also sometimes referred to as the \textbf{binomial coefficient}, denoted by $\binom{n}{r}$, which is read as "n choose r". It is called the binomial coefficient because it appears in the binomial theorem, which expands the powers of a binomial expression:
+Dette kaldes også \textbf{binomialkoefficienten}, som betegnes $\binom{n}{r}$ og læses »n over r«. Den kaldes binomialkoefficienten, fordi den optræder i binomialsætningen, som udvikler potenser af et binomium (et toleddet udtryk):
 
-\begin{theorem}[Binomial Theorem]
-    In algebra, the binomial coefficient is used to expand powers of binomials. According to the binomial theorem
+\begin{theorem}[Binomialsætningen]
+    I algebra bruges binomialkoefficienten til at udvikle potenser af binomier. Ifølge binomialsætningen gælder
 
 $$
 (a+b)^n=\sum_{k=0}^n\binom{n}{k} a^k b^{n-k}
@@ -402,178 +402,178 @@ $$
 
 \end{theorem}
 
-The theorem states that the expansion of the binomial expression $(a+b)^n$ is the sum of the terms $\binom{n}{k} a^k b^{n-k}$ for $k=0,1,2,\ldots,n$. The binomial coefficient $\binom{n}{k}$ gives the number of ways to choose $k$ elements from a set of $n$ elements. We will place no more emphasis on the binomial theorem here, but it is a fundamental concept in algebra and combinatorics, and is widely used in probability theory.
+Sætningen siger, at udviklingen af binomiet $(a+b)^n$ er summen af leddene $\binom{n}{k} a^k b^{n-k}$ for $k=0,1,2,\ldots,n$. Binomialkoefficienten $\binom{n}{k}$ angiver antallet af måder at vælge $k$ elementer fra en mængde med $n$ elementer på. Vi vil ikke lægge yderligere vægt på binomialsætningen her, men den er et grundlæggende begreb i algebra og kombinatorik og bruges i vid udstrækning i sandsynlighedsteori.
 
-We will conclude our discussion of counting principles with principles of counting with replacement.
+Vi afslutter gennemgangen af tælleprincipper med principperne for optælling med tilbagelægning.
 
-\begin{proposition}[With replacement]
-For selections from $n$ types:
+\begin{proposition}[Med tilbagelægning]
+Ved udvælgelse blandt $n$ typer gælder:
 \begin{itemize}
-    \item \textbf{Ordered with replacement}: $n^r$ outcomes.
-    \item \textbf{Unordered with replacement}: $\displaystyle \binom{n+r-1}{r}$ outcomes. % (stars and bars)
+    \item \textbf{Ordnet med tilbagelægning}: $n^r$ udfald.
+    \item \textbf{Uordnet med tilbagelægning}: $\displaystyle \binom{n+r-1}{r}$ udfald. % (stars and bars)
 \end{itemize}
 \end{proposition}
 
-\section{Basic Probability}
-Probability quantifies the likelihood or chance of events associated with a random experiment. For instance, when you hear, “The chance of rain today is 30\%,” it expresses uncertainty about the event that it rains. Probabilities range from 0 to 1 (or equivalently, from 0\% to 100\%). An impossible event has probability 0, and the entire sample space has probability 1. In general probability models, however, an event can have probability 0 without being empty, or probability 1 without containing every possible outcome; such events are called almost impossible and almost sure, respectively.
+\section{Grundlæggende sandsynlighedsregning}
+Sandsynlighed er et mål for, hvor sandsynligt eller hvor stor chancen er for, at hændelser i forbindelse med et stokastisk eksperiment indtræffer. Når du fx hører »Chancen for regn i dag er 30\%«, udtrykker det usikkerhed om hændelsen, at det regner. Sandsynligheder ligger mellem 0 og 1 (eller tilsvarende mellem 0\% og 100\%). En umulig hændelse har sandsynlighed 0, og hele udfaldsrummet har sandsynlighed 1. I generelle sandsynlighedsmodeller kan en hændelse dog have sandsynlighed 0 uden at være tom eller sandsynlighed 1 uden at indeholde alle mulige udfald; sådanne hændelser kaldes henholdsvis næsten umulige og næsten sikre.
 
-Probabilities can be interpreted in different ways:
+Sandsynligheder kan fortolkes på forskellige måder:
 
 \begin{itemize}
-    \item \textbf{Objective (or Classical) Probability}: Often referred to as classical probability, this approach is used when outcomes are equally likely, such as in rolling a fair die or flipping a coin. Probabilities are assigned based on the assumption that each outcome has an equal chance of occurring. For example, when rolling a fair six-sided die, the probability of rolling a 3 is \( \frac{1}{6} \) because there are 6 equally likely outcomes (1, 2, 3, 4, 5, 6), and only one of them is a 3. The probability is the same for all observers.
+    \item \textbf{Objektiv (eller klassisk) sandsynlighed}: Denne tilgang, der ofte kaldes klassisk sandsynlighed, bruges, når udfaldene er lige sandsynlige, fx ved kast med en fair terning eller en mønt. Sandsynlighederne tildeles ud fra antagelsen om, at alle udfald har lige stor chance for at indtræffe. Når man fx kaster en fair sekssidet terning, er sandsynligheden for at slå en 3'er \( \frac{1}{6} \), fordi der er 6 lige sandsynlige udfald (1, 2, 3, 4, 5, 6), og kun ét af dem er en 3'er. Sandsynligheden er den samme for alle iagttagere.
         
-    \item \textbf{Relative Frequency (Empirical Probability)}: Empirical probability is based on observations from experiments rather than theoretical calculations. For example, if a software tester runs a stress test on a server 100 times, and it crashes 7 times, the empirical probability of a crash is \( \frac{7}{100} = 0.07 \). This approach relies on actual data rather than assumptions or intuition.
+    \item \textbf{Relativ hyppighed (empirisk sandsynlighed)}: Empirisk sandsynlighed bygger på observationer fra eksperimenter frem for teoretiske beregninger. Hvis en softwaretester fx kører en belastningstest på en server 100 gange, og serveren går ned 7 gange, er den empiriske sandsynlighed for et nedbrud \( \frac{7}{100} = 0.07 \). Denne tilgang bygger på faktiske data frem for antagelser eller intuition.
         
-    \item \textbf{Subjective Probability}: This reflects our personal belief or degree of confidence in an outcome. Different people might assign different probabilities to the same event based on their knowledge or perspective. You and your friends discuss Denmark’s chances of winning the World Cup. Based on recent performance and team strength, you estimate a 10\% chance. However, a more optimistic friend assigns a 20\% chance, while another gives only 5\%, considering stronger competitors. This illustrates subjective probability, where each person's estimate varies based on personal beliefs and biases rather than objective data.
+    \item \textbf{Subjektiv sandsynlighed}: Den afspejler vores personlige overbevisning eller grad af tiltro til et udfald. Forskellige personer kan tildele den samme hændelse forskellige sandsynligheder ud fra deres viden eller synsvinkel. Du og dine venner diskuterer Danmarks chancer for at vinde VM. Ud fra holdets seneste præstationer og styrke vurderer du chancen til 10\%. En mere optimistisk ven sætter den derimod til 20\%, mens en anden kun giver 5\%, fordi der er stærkere konkurrenter. Det illustrerer subjektiv sandsynlighed, hvor hver persons vurdering varierer ud fra personlige overbevisninger og forudindtagethed frem for objektive data.
     
 
 \end{itemize}
 
-When assigning probabilities, it’s essential that the sum of all probabilities in an experiment equals 1, ensuring consistency with the relative frequency interpretation.
+Når vi tildeler sandsynligheder, er det afgørende, at summen af alle sandsynligheder i et eksperiment er 1. Det sikrer overensstemmelse med fortolkningen som relativ hyppighed.
 
-We start by establishing the Axioms of Probability, which lay the foundation for how probabilities are assigned to events. These axioms define the basic properties that every probability measure must satisfy.
+Vi begynder med at opstille sandsynlighedsregningens aksiomer, som danner grundlaget for, hvordan sandsynligheder tildeles hændelser. Aksiomerne fastlægger de grundlæggende egenskaber, som ethvert sandsynlighedsmål skal opfylde.
     
-\begin{axiom}[Axioms of Probability]
+\begin{axiom}[Sandsynlighedsregningens aksiomer]
     \begin{itemize}
-        \item \textbf{Axiom 1:} For any event \(A\), \( 0 \leq P(A) \leq 1 \).
-        \item \textbf{Axiom 2:} Probability of the sample space \(S\) is \(P(S) = 1\).
-        \item \textbf{Axiom 3:} If \(A_1, A_2, A_3, \cdots\) are disjoint events, then \(P\left(A_1 \cup A_2 \cup A_3 \cdots\right) = P\left(A_1\right) + P\left(A_2\right) + P\left(A_3\right) + \cdots\)
+        \item \textbf{Aksiom 1:} For enhver hændelse \(A\) gælder \( 0 \leq P(A) \leq 1 \).
+        \item \textbf{Aksiom 2:} Sandsynligheden for udfaldsrummet \(S\) er \(P(S) = 1\).
+        \item \textbf{Aksiom 3:} Hvis \(A_1, A_2, A_3, \cdots\) er disjunkte hændelser, så gælder \(P\left(A_1 \cup A_2 \cup A_3 \cdots\right) = P\left(A_1\right) + P\left(A_2\right) + P\left(A_3\right) + \cdots\)
     \end{itemize}
 \end{axiom}
 
-The property that \( 0 \leq P(A) \leq 1 \) is equivalent to the requirement that a relative frequency must be between 0 and 1. The property that \( P(S) = 1 \) is a consequence of the fact that an outcome from the sample space occurs on every trial of an experiment. Consequently, the relative frequency of \( S \) is 1. Property 3 implies that if the events \( A_1 \) and \( A_2 \) have no outcomes in common, the relative frequency of outcomes in \( A_1 \cup A_2 \) is the sum of the relative frequencies of the outcomes in \( A_1 \) and \( A_2 \).
+Egenskaben \( 0 \leq P(A) \leq 1 \) svarer til kravet om, at en relativ hyppighed skal ligge mellem 0 og 1. Egenskaben \( P(S) = 1 \) er en følge af, at der ved hvert forsøg i et eksperiment indtræffer et udfald fra udfaldsrummet. Derfor er den relative hyppighed af \( S \) lig med 1. Egenskab 3 indebærer, at hvis hændelserne \( A_1 \) og \( A_2 \) ikke har nogen udfald til fælles, er den relative hyppighed af udfald i \( A_1 \cup A_2 \) summen af de relative hyppigheder af udfaldene i \( A_1 \) og \( A_2 \).
 
-In the next sections we will see more about the probability of events and how to calculate them.
+I de næste afsnit ser vi nærmere på sandsynligheden for hændelser, og hvordan den beregnes.
 
-\subsection*{Probability of an Event}
-The probability of an event is a measure of the likelihood that the event will occur. It is denoted by \( P(A) \), where \( A \) is the event, and it ranges from 0 to 1. The empty event has probability 0, and the sample space has probability 1.
+\subsection*{Sandsynligheden for en hændelse}
+Sandsynligheden for en hændelse er et mål for, hvor sandsynligt det er, at hændelsen indtræffer. Den betegnes \( P(A) \), hvor \( A \) er hændelsen, og den ligger mellem 0 og 1. Den tomme hændelse har sandsynlighed 0, og udfaldsrummet har sandsynlighed 1.
 
-\begin{definition}[Classical Probability for Equally Likely Outcomes]
-    If a finite sample space consists of equally likely outcomes, the probability of an event \( A \) is the ratio of the number of outcomes in \(A\) to the total number of outcomes in the sample space:
+\begin{definition}[Klassisk sandsynlighed for lige sandsynlige udfald]
+    Hvis et endeligt udfaldsrum består af lige sandsynlige udfald, er sandsynligheden for en hændelse \( A \) forholdet mellem antallet af udfald i \(A\) og det samlede antal udfald i udfaldsrummet:
     \[
-    P(A) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}}
+    P(A) = \frac{\text{Antal gunstige udfald}}{\text{Samlet antal udfald}}
     \]
 \end{definition}
 
 \begin{example}
-    Suppose you are testing a software module with 10 different test cases. Out of these, 3 test cases are known to fail due to a bug. If you randomly select one test case to run, what is the probability that the selected test case will fail?
+    Antag, at du tester et softwaremodul med 10 forskellige testtilfælde. Det vides, at 3 af testtilfældene fejler på grund af en fejl i koden. Hvis du vælger et tilfældigt testtilfælde og kører det, hvad er så sandsynligheden for, at det valgte testtilfælde fejler?
 \end{example}
 
 \begin{solution}
-    Here, the event $A$ is "the test case fails."
+    Her er hændelsen $A$ »testtilfældet fejler«.
 \begin{itemize}
-    \item Number of favorable outcomes (failing test cases) $=3$
-    \item Total number of outcomes (total test cases) $=10$
+    \item Antal gunstige udfald (fejlende testtilfælde) $=3$
+    \item Samlet antal udfald (testtilfælde i alt) $=10$
 \end{itemize}
 
-Using the formula:
+Ved hjælp af formlen får vi:
 
 $$
-P(A)=\frac{\text { Number of favorable outcomes }}{\text { Total number of outcomes }}=\frac{3}{10}=0.3
+P(A)=\frac{\text { Antal gunstige udfald }}{\text { Samlet antal udfald }}=\frac{3}{10}=0.3
 $$
 
 
-Therefore, the probability that a randomly selected test case will fail is 0.3 , indicating that there is a $30 \%$ chance of failure.
+Sandsynligheden for, at et tilfældigt valgt testtilfælde fejler, er altså 0.3, hvilket betyder, at der er $30 \%$ chance for fejl.
 
 \end{solution}
 
 \begin{example}
-    Imagine a software development environment where you have 50 files, consisting of 20 Python scripts, 15 Java files, and 15 configuration files. If you randomly select one file to edit, what is the probability that the file is a Python script?
+    Forestil dig et softwareudviklingsmiljø med 50 filer, som består af 20 Python-scripts, 15 Java-filer og 15 konfigurationsfiler. Hvis du vælger en tilfældig fil at redigere, hvad er så sandsynligheden for, at filen er et Python-script?
 \end{example}
 
 \begin{solution}
-Here, the event $A$ is "the selected file is a Python script."
+Her er hændelsen $A$ »den valgte fil er et Python-script«.
 \begin{itemize}
-    \item Number of favorable outcomes (Python scripts) $=20$
-    \item Total number of outcomes (total files) $=50$
+    \item Antal gunstige udfald (Python-scripts) $=20$
+    \item Samlet antal udfald (filer i alt) $=50$
 \end{itemize}
 
-Using the formula:
+Ved hjælp af formlen får vi:
 
 $$
-P(A)=\frac{\text { Number of favorable outcomes }}{\text { Total number of outcomes }}=\frac{20}{50}=0.4
+P(A)=\frac{\text { Antal gunstige udfald }}{\text { Samlet antal udfald }}=\frac{20}{50}=0.4
 $$
 
-Thus, the probability of selecting a Python script is 0.4 , meaning there is a $40 \%$ chance of choosing a Python file from the set.
+Sandsynligheden for at vælge et Python-script er altså 0.4, hvilket betyder, at der er $40 \%$ chance for at vælge en Python-fil blandt filerne.
 
 \end{solution}
 
-\section{Probability of Joint Events and Set Operations}
-Joint events are formed by applying basic set operations to individual events. Commonly, we encounter unions of events, such as $A \cup B$; intersections of events, such as $A \cap B$; and complements of events, such as $A^c$. These combined events are often of particular interest, and their probabilities can frequently be derived from the probabilities of the individual events that compose them. Understanding these set operations is essential for accurately calculating the probability of joint events. In this section, we will explore how unions of events and other set operations can be used to determine the probabilities of more complex events.
+\section{Sandsynlighed for sammensatte hændelser og mængdeoperationer}
+Sammensatte hændelser dannes ved at anvende de grundlæggende mængdeoperationer på enkelte hændelser. Vi møder ofte foreningsmængder af hændelser som $A \cup B$, fællesmængder af hændelser som $A \cap B$ og komplementer af hændelser som $A^c$. Disse sammensatte hændelser er ofte af særlig interesse, og deres sandsynligheder kan tit udledes af sandsynlighederne for de enkelte hændelser, de er sammensat af. Det er vigtigt at forstå disse mængdeoperationer for at kunne beregne sandsynligheden for sammensatte hændelser korrekt. I dette afsnit ser vi på, hvordan foreningsmængder af hændelser og andre mængdeoperationer kan bruges til at bestemme sandsynlighederne for mere komplekse hændelser.
 
-When dealing with events, the intersection represents \texttt{AND} while the union represents \texttt{OR} The probability of the intersection of events $A$ and $B$, denoted as $P(A \cap B)$, can also be expressed as $P(A, B)$ or $P(A B)$.
+Når vi arbejder med hændelser, svarer fællesmængden til \texttt{AND}, mens foreningsmængden svarer til \texttt{OR}. Sandsynligheden for fællesmængden af hændelserne $A$ og $B$, som betegnes $P(A \cap B)$, kan også skrives $P(A, B)$ eller $P(A B)$.
 
-From the axioms of probability, we can derive the following rules of probabilities:
+Ud fra sandsynlighedsregningens aksiomer kan vi udlede følgende regler for sandsynligheder:
 
-\begin{theorem}{Rules of Probability}
+\begin{theorem}{Regler for sandsynlighed}
     \begin{itemize}
-        \item \textbf{Complement Rule:} The probability of the complement of event $A$ is
+        \item \textbf{Komplementreglen:} Sandsynligheden for komplementet til hændelse $A$ er
     
         \[
         P(A^c) = 1 - P(A)
         \]
 
-        \item \textbf{Empty Set Rule:} The probability of the empty set is 0, i.e.,
+        \item \textbf{Reglen for den tomme mængde:} Sandsynligheden for den tomme mængde er 0, dvs.
         
         \[P(\emptyset) = 0\]
         
-        \item \textbf{Addition Rule:} For any two events $A$ and $B$, the probability of the union of events $A$ and $B$ is given by
+        \item \textbf{Additionsreglen:} For to vilkårlige hændelser $A$ og $B$ er sandsynligheden for foreningsmængden af hændelserne $A$ og $B$ givet ved
         \[
         P(A \cup B) = P(A) + P(B) - P(A \cap B)
         \]
 
-        \item \textbf{Difference Rule:} The probability of the difference between events $A$ and $B$ is given by
+        \item \textbf{Differensreglen:} Sandsynligheden for differensen mellem hændelserne $A$ og $B$ er givet ved
         \[
         P(A-B)=P(A)-P(A \cap B)
         \]
-        \item \textbf{Subset Rule:} If $A$ is a subset of $B$ ($A \subset B$), then
+        \item \textbf{Delmængdereglen:} Hvis $A$ er en delmængde af $B$ ($A \subset B$), så gælder
         \[P(A) \leq P(B)\].
     \end{itemize}
 \end{theorem}
 
-We can obtain the Complement Rule by noting:
+Vi kan udlede komplementreglen ved at bemærke følgende:
 
 \begin{align*}
-    1 &= P(S) & \text{(axiom 2)} \\
-      &= P(A \cup A^c) & \text{(definition of complement)} \\
-      &= P(A) + P(A^c) & \text{(since } A \text{ and } A^c \text{ are disjoint)}
+    1 &= P(S) & \text{(aksiom 2)} \\
+      &= P(A \cup A^c) & \text{(definitionen af komplement)} \\
+      &= P(A) + P(A^c) & \text{(da } A \text{ og } A^c \text{ er disjunkte)}
 \end{align*}
 
-Since $\emptyset=S^c$, we can apply part the Complement Rule to deduce that $P(\emptyset)=1-P(S)=0$. This is intuitive because, by definition, an event occurs when the outcome of the random experiment is part of that event. However, since the empty set contains no elements, no outcome of the experiment can ever belong to it, making its probability zero.
+Da $\emptyset=S^c$, kan vi bruge komplementreglen til at slutte, at $P(\emptyset)=1-P(S)=0$. Det er intuitivt, fordi en hændelse pr. definition indtræffer, når udfaldet af det stokastiske eksperiment er en del af hændelsen. Men da den tomme mængde ikke indeholder nogen elementer, kan intet udfald af eksperimentet nogensinde tilhøre den, og derfor er dens sandsynlighed nul.
 
-The Difference Rule can be obtained by showing that $P(A)=P(A \cap B)+P(A-B)$. Note that the two sets $A \cap B$ and $A-B$ are disjoint and their union is $A$. Thus, by the third axiom of probability
+Differensreglen kan udledes ved at vise, at $P(A)=P(A \cap B)+P(A-B)$. Bemærk, at de to mængder $A \cap B$ og $A-B$ er disjunkte, og at deres foreningsmængde er $A$. Ifølge sandsynlighedsregningens tredje aksiom gælder derfor
 
 \begin{align*}
-    P(A) &= P\left((A \cap B) \cup (A - B)\right) & \text{(since } A = (A \cap B) \cup (A - B)) \\
-         &= P(A \cap B) + P(A - B) & \text{(since } A \cap B \text{ and } A - B \text{ are disjoint)}
+    P(A) &= P\left((A \cap B) \cup (A - B)\right) & \text{(da } A = (A \cap B) \cup (A - B)) \\
+         &= P(A \cap B) + P(A - B) & \text{(da } A \cap B \text{ og } A - B \text{ er disjunkte)}
     \end{align*}
     
 
-The Addition Rule we obtain by noting that $A$ and $B-A$ are disjoint sets and their union is $A \cup B$. Thus,
+Additionsreglen får vi ved at bemærke, at $A$ og $B-A$ er disjunkte mængder, og at deres foreningsmængde er $A \cup B$. Dermed gælder
 
 \begin{align*}
-    P(A \cup B) &= P(A \cup (B - A)) && (\text{since } A \cup B = A \cup (B - A)) \\
-                &= P(A) + P(B - A) && (\text{since } A \text{ and } B - A \text{ are disjoint}) \\
-                &= P(A) + P(B) - P(A \cap B) && (\text{by part the Difference Rule})
+    P(A \cup B) &= P(A \cup (B - A)) && (\text{da } A \cup B = A \cup (B - A)) \\
+                &= P(A) + P(B - A) && (\text{da } A \text{ og } B - A \text{ er disjunkte}) \\
+                &= P(A) + P(B) - P(A \cap B) && (\text{jf. differensreglen})
     \end{align*}
     
-And finally the Subset Rule is a direct consequence of the fact that if $A \subset B$, then $B$ can be written as the union of $A$ and $B-A$. Since $A$ and $B-A$ are disjoint, we have $P(B)=P(A)+P(B-A) \geq P(A)$.
+Endelig er delmængdereglen en direkte følge af, at hvis $A \subset B$, kan $B$ skrives som foreningsmængden af $A$ og $B-A$. Da $A$ og $B-A$ er disjunkte, har vi $P(B)=P(A)+P(B-A) \geq P(A)$.
 
-We conclude this section with a few examples illustrating the application of these rules to calculate probabilities of joint events.
+Vi afslutter afsnittet med nogle eksempler, der viser, hvordan disse regler anvendes til at beregne sandsynligheder for sammensatte hændelser.
 
 \begin{example}
-    A company has bid on two large construction projects. The company president believes that the probability of winning the first contract is 0.6, the probability of winning the second contract is 0.4, and the probability of winning both contracts is 0.2.
+    En virksomhed har afgivet bud på to store byggeprojekter. Virksomhedens direktør vurderer, at sandsynligheden for at vinde den første kontrakt er 0.6, sandsynligheden for at vinde den anden kontrakt er 0.4, og sandsynligheden for at vinde begge kontrakter er 0.2.
 
     \begin{enumerate}[label=(\alph*)]
-        \item What is the probability that the company wins at least one contract?
-        \item What is the probability that the company wins the first contract but not the second contract?
-        \item What is the probability that the company wins neither contract?
-        \item What is the probability that the company wins exactly one contract?
+        \item Hvad er sandsynligheden for, at virksomheden vinder mindst én kontrakt?
+        \item Hvad er sandsynligheden for, at virksomheden vinder den første kontrakt, men ikke den anden?
+        \item Hvad er sandsynligheden for, at virksomheden ikke vinder nogen af kontrakterne?
+        \item Hvad er sandsynligheden for, at virksomheden vinder præcis én kontrakt?
     \end{enumerate}
 \end{example}
 
 \begin{solution}
-    Let $A$ be the event that the company wins the first contract, and $B$ be the event that the company wins the second contract. Given:
+    Lad $A$ være hændelsen, at virksomheden vinder den første kontrakt, og $B$ hændelsen, at virksomheden vinder den anden kontrakt. Vi har givet:
     \begin{itemize}
         \item $P(A) = 0.6$
         \item $P(B) = 0.4$
@@ -581,7 +581,7 @@ We conclude this section with a few examples illustrating the application of the
     \end{itemize}
     
     \begin{enumerate}[label=(\alph*)]
-        \item The probability that the company wins at least one contract is the probability of the union of events $A$ and $B$. Using the Addition Rule:
+        \item Sandsynligheden for, at virksomheden vinder mindst én kontrakt, er sandsynligheden for foreningsmængden af hændelserne $A$ og $B$. Ifølge additionsreglen er:
         
         \begin{align*}
             P(A \cup B) &= P(A) + P(B) - P(A \cap B) \\
@@ -589,9 +589,9 @@ We conclude this section with a few examples illustrating the application of the
                         &= 0.8
         \end{align*}
         
-        Therefore, the probability that the company wins at least one contract is 0.8.
+        Sandsynligheden for, at virksomheden vinder mindst én kontrakt, er altså 0.8.
         
-        \item The probability that the company wins the first contract but not the second contract is the probability of the difference between events $A$ and $B$. Using the Difference Rule:
+        \item Sandsynligheden for, at virksomheden vinder den første kontrakt, men ikke den anden, er sandsynligheden for differensen mellem hændelserne $A$ og $B$. Ifølge differensreglen er:
         
         \begin{align*}
             P(A - B) &= P(A) - P(A \cap B) \\
@@ -599,9 +599,9 @@ We conclude this section with a few examples illustrating the application of the
                     &= 0.4
         \end{align*}
         
-        Therefore, the probability that the company wins the first contract but not the second contract is 0.4.
+        Sandsynligheden for, at virksomheden vinder den første kontrakt, men ikke den anden, er altså 0.4.
         
-        \item The probability that the company wins neither contract is the probability of the complement of the union of events $A$ and $B$. Using the Complement Rule:
+        \item Sandsynligheden for, at virksomheden ikke vinder nogen af kontrakterne, er sandsynligheden for komplementet til foreningsmængden af hændelserne $A$ og $B$. Ifølge komplementreglen er:
         
         \begin{align*}
             P((A \cup B)^c) &= 1 - P(A \cup B) \\
@@ -609,56 +609,56 @@ We conclude this section with a few examples illustrating the application of the
                                     &= 0.2
         \end{align*}
         
-        Therefore, the probability that the company wins neither contract is 0.2.
+        Sandsynligheden for, at virksomheden ikke vinder nogen af kontrakterne, er altså 0.2.
         
-        \item The probability that the company wins exactly one contract is the probability of the difference between the union of events $A$ and $B$ and the intersection of events $A$ and $B$. Using the Difference Rule:
+        \item Sandsynligheden for, at virksomheden vinder præcis én kontrakt, er sandsynligheden for differensen mellem foreningsmængden af hændelserne $A$ og $B$ og fællesmængden af hændelserne $A$ og $B$. Ifølge differensreglen er:
             
             \begin{align*}
                 P((A \cup B) - (A \cap B)) &= P(A \cup B) - P(A \cap B) \\
                                             &= 0.8 - 0.2 \\
                                             &= 0.6
             \end{align*}
-            So, the probability that the company wins exactly one contract is 0.6.
+            Sandsynligheden for, at virksomheden vinder præcis én kontrakt, er altså 0.6.
             \end{enumerate}
 \end{solution}
 
 \begin{example}
     \begin{itemize}
-    \item There is a 60 percent chance that it will rain today.
-    \item There is a 50 percent chance that it will rain tomorrow.
-    \item There is a 30 percent chance that it does not rain either day.
+    \item Der er 60 procents chance for, at det regner i dag.
+    \item Der er 50 procents chance for, at det regner i morgen.
+    \item Der er 30 procents chance for, at det ikke regner nogen af dagene.
     \end{itemize}
     
 \begin{enumerate}[label=(\alph*)]
-    \item The probability that it will rain today or tomorrow
-    \item The probability that it will rain today and tomorrow.
-    \item The probability that it will rain today but not tomorrow.
-    \item The probability that it either will rain today or tomorrow, but not both.
+    \item Sandsynligheden for, at det regner i dag eller i morgen.
+    \item Sandsynligheden for, at det regner i dag og i morgen.
+    \item Sandsynligheden for, at det regner i dag, men ikke i morgen.
+    \item Sandsynligheden for, at det regner enten i dag eller i morgen, men ikke begge dage.
 \end{enumerate}
     
 \begin{solution}
 \begin{enumerate}[label=(\alph*)]
-    \item     Let \( A \) be the event that it rains today, and \( B \) be the event that it rains tomorrow.
+    \item     Lad \( A \) være hændelsen, at det regner i dag, og \( B \) hændelsen, at det regner i morgen.
         
-    Given:
+    Vi har givet:
     \begin{align*}
-        P(A \cup B) &= 1 - P\left((A \cup B)^c\right) \quad &\text{by the Complement Rule} \\
-                &= 1 - P\left(A^c \cap B^c\right) \quad &\text{by De Morgan's Law} \\
+        P(A \cup B) &= 1 - P\left((A \cup B)^c\right) \quad &\text{jf. komplementreglen} \\
+                &= 1 - P\left(A^c \cap B^c\right) \quad &\text{jf. De Morgans lov} \\
                 &= 1 - 0.3 \\
                 &= 0.7
     \end{align*}
             
         
-    Therefore, the probability that it will rain today or tomorrow is \( 0.7 \).
+    Sandsynligheden for, at det regner i dag eller i morgen, er altså \( 0.7 \).
 
-    \item The probability that it will rain today and tomorrow: this is $P(A \cap B)$. To find this we note that
+    \item Sandsynligheden for, at det regner i dag og i morgen: Det er $P(A \cap B)$. For at bestemme den bemærker vi, at
     \begin{align*}
     P(A \cap B) &= P(A) + P(B) - P(A \cup B) \\
                 &= 0.6 + 0.5 - 0.7 \\
                 &= 0.4
     \end{align*}
 
-    \item The probability that it will rain today but not tomorrow: this is $P\left(A \cap B^c\right)$.
+    \item Sandsynligheden for, at det regner i dag, men ikke i morgen: Det er $P\left(A \cap B^c\right)$.
 
     \begin{align*}
         P(A \cap B^c) &= P(A - B) \\
@@ -667,14 +667,14 @@ We conclude this section with a few examples illustrating the application of the
                       &= 0.2
         \end{align*}
         
-    \item The probability that it either will rain today or tomorrow but not both: this is $P(A-B)+P(B-A)$. We have already found $P(A-B)=.2$. Similarly, we can find $P(B-A)$:
+    \item Sandsynligheden for, at det regner enten i dag eller i morgen, men ikke begge dage: Det er $P(A-B)+P(B-A)$. Vi har allerede fundet $P(A-B)=.2$. På tilsvarende måde kan vi bestemme $P(B-A)$:
     
     \begin{align*}
         P(B-A) & =P(B)-P(B \cap A) \\
         & =0.5-0.4 \\
         & =0.1
         \end{align*}
-    Thus,
+    Dermed er
     \begin{align*}
         P(A-B)+P(B-A) &= 0.2+0.1 \\
                       &= 0.3

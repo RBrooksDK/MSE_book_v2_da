@@ -1,0 +1,15 @@
+% Danish drawing of a function of two variables mapping a point of the
+% domain (a region in the plane) to a number z in the range.
+\begin{tikzpicture}[font=\small]
+  \fill[mseViaBlue!45, draw=mseViaBlue!70!black]
+    plot[smooth cycle, tension=0.8] coordinates {(0,1.6) (1.6,2.3) (3.5,2.4) (3.3,0.9) (3.4,-0.4) (2.2,-1.2) (0.4,-0.6) (-0.6,0.6)};
+  \fill[black] (1.4,0.9) circle (2.2pt);
+  \node[anchor=north] at (1.4,0.75) {$(x, y)$};
+  \draw[mseViaBlue!60!black, thick] (4.3,0.2) -- (8.3,0.2);
+  \fill[black] (6.3,0.2) circle (2.2pt);
+  \node[anchor=north] at (6.3,0.05) {$z$};
+  \draw[-{Stealth[length=7pt]}, very thick, red!70!black] (1.6,1.05) to[out=40, in=120] (6.15,0.35);
+  \node at (3.9,2.05) {$f$};
+  \node[font=\bfseries] at (1.4,-1.9) {Definitionsmængde};
+  \node[font=\bfseries] at (6.3,-1.9) {Værdimængde};
+\end{tikzpicture}
