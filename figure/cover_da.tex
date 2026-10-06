@@ -1,0 +1,37 @@
+% Danish cover: the original artwork with the embedded English title and topic
+% labels covered and re-set in Danish. Coordinates are fractions of the image
+% width and height, measured from the lower-left corner.
+\definecolor{coverBg}{RGB}{1,16,19}
+\definecolor{coverTeal}{RGB}{52,184,184}
+\begin{tikzpicture}
+  \node[inner sep=0pt, anchor=south west] (cover) at (0,0)
+    {\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{figure/cover_mse1_26.png}};
+  \begin{scope}[x={(cover.south east)}, y={(cover.north west)}, font=\sffamily]
+    % Title
+    \fill[coverBg] (0.030,0.474) rectangle (0.640,0.748);
+    \node[anchor=west, text=white, font=\sffamily\bfseries\fontsize{50}{50}\selectfont]
+      at (0.050,0.704) {MATEMATIK};
+    \node[anchor=west, text=coverTeal, font=\sffamily\bfseries\fontsize{26}{26}\selectfont]
+      at (0.285,0.641) {FOR};
+    \node[anchor=west, text=white, font=\sffamily\bfseries\fontsize{50}{50}\selectfont]
+      at (0.050,0.580) {SOFTWARE-};
+    \node[anchor=west, text=coverTeal, font=\sffamily\bfseries\fontsize{50}{50}\selectfont]
+      at (0.050,0.508) {INGENI\O RER};
+    % First row of topic labels
+    \foreach \xa/\xb in {0.030/0.165, 0.175/0.285, 0.295/0.395, 0.405/0.535, 0.545/0.648}
+      \fill[coverBg] (\xa,0.330) rectangle (\xb,0.385);
+    \foreach \xc/\txt in {0.097/{ARITMETIK OG\\FUNKTIONER}, 0.230/{TALSYSTEMER\\OG BIN\AE RE\\TAL},
+                          0.345/{M\AE NGDE-\\L\AE RE}, 0.470/{SANDSYNLIGHED\\OG STATISTIK},
+                          0.597/{LINE\AE R\\ALGEBRA}}
+      \node[text=white!85, align=center, font=\sffamily\fontsize{6.6}{7.6}\selectfont, anchor=north]
+        at (\xc,0.383) {\txt};
+    % Second row of topic labels
+    \foreach \xa/\xb in {0.030/0.178, 0.188/0.322, 0.332/0.475}
+      \fill[coverBg] (\xa,0.200) rectangle (\xb,0.255);
+    \foreach \xc/\txt in {0.104/{DIFFERENTIAL-\\REGNING I EN OG\\FLERE VARIABLE},
+                          0.255/{BOOLESK\\ALGEBRA OG\\LOGISKE GATES},
+                          0.403/{TIDSKOMPLEKSITET\\OG KODEANALYSE}}
+      \node[text=white!85, align=center, font=\sffamily\fontsize{6.6}{7.6}\selectfont, anchor=north]
+        at (\xc,0.253) {\txt};
+  \end{scope}
+\end{tikzpicture}%

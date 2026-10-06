@@ -1,4 +1,5 @@
 \documentclass[fleqn, 11pt, color=blue]{elegantbook}
+\usepackage[danish]{babel}
 \usepackage{parskip}  % Adds space between paragraphs and removes indentation
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
@@ -63,7 +64,7 @@
 }
 
 % Customise the listing caption name
-\renewcommand{\lstlistingname}{Algorithm}
+\renewcommand{\lstlistingname}{Algoritme}
 
 
 % Define a style for inline Java code
@@ -90,11 +91,57 @@
 \newcommand{\addend}{\text{\textsl{\color{gray}{Addend}}}}
 \newcommand{\augend}{\text{\textsl{\color{gray}{Augend}}}}
 \newcommand{\sumOut}{\text{\textsl{\color{gray}{Sum}}}}
+\title{Matematik for softwareingeni{\o}rer}
 \institute{VIA University College}
 
 \author{Richard Brooks}
-\date{May, 2025}
+\date{Maj 2025}
 \version{2.0}
+
+% Danish UI labels. ElegantBook has no lang=da option, so the English class
+% defaults are kept and the template strings are overridden here.
+\renewcommand{\figurename}{Figur}
+\renewcommand{\tablename}{Tabel}
+\renewcommand{\chaptername}{Kapitel}
+\renewcommand{\partname}{\color{structurecolor} Del}
+\renewcommand{\appendixname}{Bilag}
+\renewcommand{\authorname}{\textbf{Forfatter: }}
+\renewcommand{\institutename}{\textbf{Institution: }}
+\renewcommand{\datename}{\textbf{Dato: }}
+\renewcommand{\versionname}{\textbf{Version: }}
+\renewcommand{\notename}{Note}
+\renewcommand{\proofname}{Bevis}
+\renewcommand{\problemname}{Opgave}
+\renewcommand{\definitionname}{Definition}
+\renewcommand{\theoremname}{S{\ae}tning}
+\renewcommand{\axiomname}{Aksiom}
+\renewcommand{\postulatename}{Postulat}
+\renewcommand{\lemmaname}{Lemma}
+\renewcommand{\propositionname}{Proposition}
+\renewcommand{\corollaryname}{Korollar}
+\renewcommand{\examplename}{Eksempel}
+\renewcommand{\exercisename}{{\O}velse}
+\renewcommand{\remarkname}{Bem{\ae}rkning:}
+\renewcommand{\assumptionname}{Antagelse}
+\renewcommand{\conclusionname}{Konklusion}
+\renewcommand{\solutionname}{L{\o}sning:}
+\renewcommand{\propertyname}{Egenskab}
+\renewcommand{\introductionname}{Introduktion}
+\renewcommand{\ebibname}{Litteratur}
+\renewcommand{\updatename}{Opdateringer:}
+\renewcommand{\historyname}{Versionshistorik}
+\renewcommand{\figref}[1]{\textbf{Figur}~\ref{#1}}
+\renewcommand{\tabref}[1]{\textbf{Tabel}~\ref{#1}}
+\addto\captionsdanish{%
+  \renewcommand{\contentsname}{Indhold}%
+  \renewcommand{\figurename}{Figur}%
+  \renewcommand{\tablename}{Tabel}%
+  \renewcommand{\chaptername}{Kapitel}%
+  \renewcommand{\partname}{\color{structurecolor} Del}%
+  \renewcommand{\appendixname}{Bilag}%
+  \renewcommand{\bibname}{Litteratur}%
+  \renewcommand{\proofname}{Bevis}%
+}
 
 \cover{figure/cover_mse1_26.png}
 
@@ -123,16 +170,29 @@
 \makeatletter
 \AtBeginDocument{%
   \def\tcb@cnt@definitionautorefname{Definition}%
-  \def\tcb@cnt@theoremautorefname{Theorem}%
+  \def\tcb@cnt@theoremautorefname{S{\ae}tning}%
   \def\tcb@cnt@lemmaautorefname{Lemma}%
-  \def\tcb@cnt@corollaryautorefname{Corollary}%
+  \def\tcb@cnt@corollaryautorefname{Korollar}%
   \def\tcb@cnt@propositionautorefname{Proposition}%
-  \def\tcb@cnt@axmautorefname{Axiom}%
-  \def\tcb@cnt@postulatenameautorefname{Postulate}%
-  \def\examautorefname{Example}%
-  \def\exerautorefname{Exercise}%
-  \def\probautorefname{Problem}%
-  \def\remarkautorefname{Remark}%
+  \def\tcb@cnt@axmautorefname{Aksiom}%
+  \def\tcb@cnt@postulatenameautorefname{Postulat}%
+  \def\examautorefname{Eksempel}%
+  \def\exerautorefname{{\O}velse}%
+  \def\probautorefname{Opgave}%
+  \def\remarkautorefname{Bem{\ae}rkning}%
+  \def\figureautorefname{Figur}%
+  \def\tableautorefname{Tabel}%
+  \def\chapterautorefname{Kapitel}%
+  \def\appendixautorefname{Bilag}%
+  \def\partautorefname{Del}%
+  \def\sectionautorefname{Afsnit}%
+  \def\subsectionautorefname{Afsnit}%
+  \def\subsubsectionautorefname{Afsnit}%
+  \def\equationautorefname{Ligning}%
+  \def\itemautorefname{Punkt}%
+  \def\footnoteautorefname{Fodnote}%
+  \def\pageautorefname{side}%
+  \def\lstlistingautorefname{Algoritme}%
 }
 \makeatother
 %======================================================================
@@ -209,6 +269,7 @@
 
 \addbibresource{reference.bib}
 \DeclareLanguageMapping{english}{english-apa}
+\DeclareLanguageMapping{danish}{danish-apa}
 
 \usepackage{clrscode4e}
 
@@ -222,7 +283,7 @@
   \parindent=0pt
   \setcounter{page}{1}%
   \ifcsname @cover\endcsname
-    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{\@cover}%
+    \input{figure/cover_da}%
   \else
     \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{example-image}%
   \fi
@@ -242,7 +303,7 @@
 % ======================================================================
 % PART 1: INTRODUCTORY CONCEPTS
 % ======================================================================
-\part{Introductory Concepts}
+\part{Grundl{\ae}ggende begreber}
 
 \setcounter{chapter}{-1}
 \input{chapter00}
@@ -254,7 +315,7 @@
 % ======================================================================
 % PART 2: PROBABILITY AND STATISTICS
 % ======================================================================
-\part{Probability and Statistics}
+\part{Sandsynlighedsregning og statistik}
 
  % Assuming this is Probability
 \input{chapter04} % Assuming this is more Probability
@@ -264,7 +325,7 @@
 % % ======================================================================
 % % PART 3: LINEAR ALGEBRA
 % % ======================================================================
-\part{Linear Algebra}
+\part{Line{\ae}r algebra}
 
 \input{chapter07} % Assuming this is Linear Equations
 \input{chapter08} % Assuming this is Vectors and Matrices
@@ -273,7 +334,7 @@
 % ======================================================================
 % PART 4: DIFFERENTIAL CALCULUS
 % ======================================================================
-\part{Differential Calculus}
+\part{Differentialregning}
 
 \input{chapter10} % Differential Calculus
 \input{chapter11} % Multivariable Calculus & Gradients (when you write it)
@@ -281,7 +342,7 @@
 % ======================================================================
 % PART 5: SPECIALIZED TOPICS
 % ======================================================================
-\part{Additional Topics}
+\part{Supplerende emner}
 
 \input{chapter12.tex}
 \input{chapter13.tex}

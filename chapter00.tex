@@ -1,44 +1,44 @@
-\chapter{Basic Arithmetic}
+\chapter{Grundlæggende aritmetik}
 \label{chap:ch0}
-A solid understanding of basic arithmetic operations forms the foundation for more advanced mathematical topics. Arithmetic involves the manipulation of numbers through fundamental operations such as addition, subtraction, multiplication, and division. These operations are not only essential in everyday calculations but also serve as the building blocks for more complex mathematical procedures.
+En solid forståelse af de grundlæggende regneoperationer er fundamentet for mere avancerede matematiske emner. Aritmetik handler om at behandle tal ved hjælp af grundlæggende operationer som addition, subtraktion, multiplikation og division. Disse operationer er ikke kun vigtige i hverdagens beregninger. De er også byggestenene i mere komplekse matematiske metoder.
 
-In this chapter, we review the core techniques of algebraic arithmetic: factorisation and the order of operations, working with fractions, exponents and radicals, using formulae and substitution, and rearranging formulae. Mastery of these skills will prepare you for the study of functions and the topics that follow.
+I dette kapitel gennemgår vi de centrale teknikker inden for algebraisk regning: faktorisering og regnearternes hierarki, regning med brøker, potenser og rødder, brug af formler og indsættelse samt omskrivning af formler. Når du behersker disse færdigheder, er du klar til at studere funktioner og de emner, der følger.
 
-\section{Factorisation and the Order of Operations}
-Recall that when computing a product such as
+\section{Faktorisering og regnearternes hierarki}
+Husk, at når vi beregner et produkt som
 
 \[
 a(b + c) = ab + ac
 \]
-we distribute the factor \(a\) across each term inside the parentheses. We call this \textbf{the distributive property}. However, it is often advantageous or necessary to perform the reverse operation, known as factorisation. Factorisation involves expressing the sum \(ab + ac\) in its factored form \(a(b + c)\).
+ganger vi faktoren \(a\) ind på hvert led i parentesen. Dette kalder vi \textbf{den distributive lov}. Det er dog ofte en fordel eller ligefrem nødvendigt at udføre den omvendte operation, som kaldes faktorisering. Ved faktorisering skriver vi summen \(ab + ac\) på faktoriseret form \(a(b + c)\).
 
-Mathematically, the expression \(a(b + c)\) is considered more simplified or "better" than \(ab + ac\). To understand why, we must distinguish between \textbf{terms} and \textbf{factors}. Terms are separated by addition or subtraction, while factors are separated by multiplication or division. For instance, the expression 
+Matematisk betragtes udtrykket \(a(b + c)\) som mere reduceret eller »bedre« end \(ab + ac\). For at forstå hvorfor må vi skelne mellem \textbf{led} og \textbf{faktorer}. Led er adskilt af addition eller subtraktion, mens faktorer er adskilt af multiplikation eller division. For eksempel består udtrykket
 
 \[ 
 8 - 5 + 3 
 \]
-consists of three terms (8, -5, and 3), whereas the expression 
+af tre led (8, -5 og 3), mens udtrykket
 
 \[ 
 2 \times 5 \times 3 
 \]
-consists of three factors (2, 5, and 3). Consider the expression 
+består af tre faktorer (2, 5 og 3). Se på udtrykket
 
 \[ 
 5 + 2 + 7 \times 8 
 \]
-which consists of three terms (5, 2, and \(7 \times 8\)), and note that one of the terms itself contains two factors (7 and 8). Similarly, the expression 
+som består af tre led (5, 2 og \(7 \times 8\)). Bemærk, at et af leddene selv indeholder to faktorer (7 og 8). På samme måde består udtrykket
 
 \[ 
 5(2 + 4)(-9) 
 \]
-consists of three factors (5, \(2 + 4\), and -9), with one factor, \(2 + 4\), containing two terms.
+af tre faktorer (5, \(2 + 4\) og -9), hvor faktoren \(2 + 4\) indeholder to led.
 
-The advantage of expressing mathematical expressions in factored form lies in the ability to simplify them more effectively. This will become clearer throughout the chapter, especially when working with fractions and equations. Here are some examples of factorisation:
+Fordelen ved at skrive matematiske udtryk på faktoriseret form er, at de så kan reduceres mere effektivt. Det bliver tydeligere i løbet af kapitlet, især når vi arbejder med brøker og ligninger. Her er nogle eksempler på faktorisering:
 
 \newpage
 
-\begin{example} Factorisation
+\begin{example} Faktorisering
 
 \begin{align*}
 ab - ac &= a(b - c) \\
@@ -51,35 +51,35 @@ ab - abc - a &= a(b - bc - 1)
 
 \end{example}
 
-When evaluating mathematical expressions, it is crucial to follow a specific order of operations to ensure accurate results. The correct sequence for performing these operations is as follows:
+Når vi udregner matematiske udtryk, er det afgørende at følge en bestemt rækkefølge for operationerne for at få korrekte resultater. Operationerne udføres i denne rækkefølge:
 
 \begin{enumerate}
-    \item \textbf{Brackets (Parentheses)}: First, perform all operations inside brackets or parentheses.
-    \item \textbf{Exponents and Radicals}: Next, evaluate exponents (powers) and radicals (roots).
-    \item \textbf{Multiplication and Division}: Then, perform multiplication and division from left to right as they appear.
-    \item \textbf{Addition and Subtraction}: Finally, execute addition and subtraction from left to right as they appear.
+    \item \textbf{Parenteser}: Udfør først alle operationer inde i parenteser.
+    \item \textbf{Potenser og rødder}: Udregn derefter potenser og rødder.
+    \item \textbf{Multiplikation og division}: Udfør så multiplikation og division fra venstre mod højre i den rækkefølge, de optræder.
+    \item \textbf{Addition og subtraktion}: Udfør til sidst addition og subtraktion fra venstre mod højre i den rækkefølge, de optræder.
 \end{enumerate}
 
-Let's consider examples for each operation to illustrate the order of operations:
+Lad os se på et eksempel for hver operation for at illustrere regnearternes hierarki:
 
-\begin{example} Brackets \newline
-Evaluate the expression: \((2 + 3) \times 4\)
+\begin{example} Parenteser \newline
+Udregn udtrykket: \((2 + 3) \times 4\)
 
 \[
 (2 + 3) \times 4 = 5 \times 4 = 20
 \]
 \end{example}
 
-\begin{example} Exponents and Radicals \newline
-Evaluate the expression: \(3^2 + \sqrt{16}\)
+\begin{example} Potenser og rødder \newline
+Udregn udtrykket: \(3^2 + \sqrt{16}\)
 
 \[
 3^2 + \sqrt{16} = 9 + 4 = 13
 \]
 \end{example}
 
-\begin{example} Multiplication and Division \newline
-Evaluate the expression: \(6 \div 2 \times 3\). According to the standard order of operations, we perform division and multiplication from left to right:
+\begin{example} Multiplikation og division \newline
+Udregn udtrykket: \(6 \div 2 \times 3\). Ifølge det almindelige regnearternes hierarki udfører vi division og multiplikation fra venstre mod højre:
 
 \[
 6 \div 2 \times 3 = (6 \div 2) \times 3 = 3 \times 3 = 9
@@ -87,16 +87,16 @@ Evaluate the expression: \(6 \div 2 \times 3\). According to the standard order 
 
 \end{example}
 
-\begin{example} Addition and Subtraction \newline
-Evaluate the expression: \(8 - 3 + 2\)
+\begin{example} Addition og subtraktion \newline
+Udregn udtrykket: \(8 - 3 + 2\)
 
 \[
 8 - 3 + 2 = 5 + 2 = 7
 \]
 \end{example}
 
-\section{Fractions}
-By definition, a fraction always consists of (at least) two factors. The first factor we will call the \textbf{numerator} and is the “top part” of the fraction. The bottom part we will call the \textbf{denominator}. Perhaps the most important rule when working with fractions is that two fractions can only be added or subtracted if they have identical denominators. Also, the denominator must never be equal to 0.
+\section{Brøker}
+Per definition består en brøk altid af (mindst) to faktorer. Den første faktor kalder vi \textbf{tælleren}. Det er brøkens »øverste del«. Den nederste del kalder vi \textbf{nævneren}. Den måske vigtigste regel for regning med brøker er, at to brøker kun kan lægges sammen eller trækkes fra hinanden, hvis de har samme nævner. Desuden må nævneren aldrig være lig med 0.
 
 \begin{example}
 
@@ -105,10 +105,10 @@ By definition, a fraction always consists of (at least) two factors. The first f
 \]    
 \end{example}
 
-Here we must make sure that \(x^2 - 2 \neq 0\) which means that we may only use values different from \(\pm\sqrt{2}\).
+Her skal vi sikre, at \(x^2 - 2 \neq 0\). Det betyder, at vi kun må bruge værdier, der er forskellige fra \(\pm\sqrt{2}\).
 
-\begin{proposition}[Rules for Calculations with Fractions]
-For $a,b,c,m \in \mathbb{R}$, with $a,b,c,m \neq 0$ where required, the following identities hold:
+\begin{proposition}[Regneregler for brøker]
+For $a,b,c,m \in \mathbb{R}$, hvor $a,b,c,m \neq 0$ når det er nødvendigt, gælder følgende identiteter:
 \begingroup
 \setlength{\jot}{8pt} % increase space between align rows (default ~3pt)
 \begin{align*}
@@ -123,9 +123,9 @@ For $a,b,c,m \in \mathbb{R}$, with $a,b,c,m \neq 0$ where required, the followin
 \endgroup
 \end{proposition}
 
-To extend or reduce a fraction, we must multiply or divide by the same numbers in the denominator and numerator:
+For at forlænge eller forkorte en brøk skal vi gange eller dividere med det samme tal i både tæller og nævner:
 
-\begin{example} Extending or reducing fractions
+\begin{example} Forlængelse og forkortning af brøker
 
 \[
 \frac{72}{144} = \frac{72 \div 12}{144 \div 12} = \frac{6}{12} = \frac{6 \div 6}{12 \div 6} = \frac{1}{2}
@@ -144,28 +144,28 @@ To extend or reduce a fraction, we must multiply or divide by the same numbers i
 \]    
 \end{example}
 
-To factorise an expression, all terms must be divided or multiplied uniformly. This implies that it is not possible to simplify the following expression any further, even though it might be tempting:
+Når vi faktoriserer et udtryk, skal alle led divideres eller ganges på samme måde. Det betyder, at følgende udtryk ikke kan reduceres yderligere, selv om det kan være fristende:
 
 \[
 \frac{a}{2a + b} \neq \frac{1}{2 + b}
 \]
 
-For proper factorisation of \(\frac{a}{2a + b}\), you must divide \(a\) into all terms in the denominator:
+For at faktorisere \(\frac{a}{2a + b}\) korrekt skal du dividere \(a\) op i alle led i nævneren:
 
 \[
 \frac{a}{2a + b} = \frac{1}{2 + \frac{b}{a}}
 \]
 
-As illustrated above, the multiplication of fractions is straightforward: you multiply the numerators and denominators with each other, respectively.
+Som vist ovenfor er multiplikation af brøker ligetil: Man ganger tællerne med hinanden og nævnerne med hinanden.
 
-\begin{example} Multiplication of fractions \newline
-Consider the fractions \(\frac{a}{b}\) and \(\frac{c}{d}\). Their product is:
+\begin{example} Multiplikation af brøker \newline
+Se på brøkerne \(\frac{a}{b}\) og \(\frac{c}{d}\). Deres produkt er:
 
 \[
 \frac{a}{b} \times \frac{c}{d} = \frac{a \times c}{b \times d}
 \]
 
-For instance, if \(a = 2\), \(b = 3\), \(c = 4\), and \(d = 5\), then:
+Hvis for eksempel \(a = 2\), \(b = 3\), \(c = 4\) og \(d = 5\), så er:
 
 \[
 \frac{2}{3} \times \frac{4}{5} = \frac{2 \times 4}{3 \times 5} = \frac{8}{15}
@@ -173,7 +173,7 @@ For instance, if \(a = 2\), \(b = 3\), \(c = 4\), and \(d = 5\), then:
   
 \end{example} 
 
-\begin{example} Dividing fractions
+\begin{example} Division af brøker
 
 \[
 \frac{6}{7} \div \frac{4}{21} = \frac{6}{7} \times \frac{21}{4} = \frac{126}{28} = \frac{63}{14} = \frac{9}{2}
@@ -193,9 +193,9 @@ For instance, if \(a = 2\), \(b = 3\), \(c = 4\), and \(d = 5\), then:
   
 \end{example}
 
-Adding and subtracting fractions seems to cause more problems than multiplication and division. The key is to find a common denominator between the fractions and then remember the above-mentioned rule about extending fractions.
+Addition og subtraktion af brøker volder ofte flere problemer end multiplikation og division. Nøglen er at finde en fællesnævner for brøkerne og huske reglen ovenfor om forlængelse af brøker.
 
-\begin{example} Adding and subtracting fractions
+\begin{example} Addition og subtraktion af brøker
 
  \[
 \frac{1}{5} + \frac{2}{5} = \frac{1 + 2}{5} = \frac{3}{5}
@@ -211,7 +211,7 @@ Adding and subtracting fractions seems to cause more problems than multiplicatio
 
 \end{example}
 
-Note: Never do
+Bemærk: Gør aldrig sådan:
 
 \[
 \frac{a}{b} + \frac{c}{d} = \frac{a + b}{b + d}
@@ -232,21 +232,21 @@ Note: Never do
 \]    
 \end{example}
 
-Remember, when a fraction is preceded by a minus sign, all signs in the numerator must be changed accordingly. This is similar to how you would change all signs within parentheses when they are preceded by a minus sign.
+Husk, at når der står et minustegn foran en brøk, skal alle fortegn i tælleren ændres. Det svarer til, at man ændrer alle fortegn inde i en parentes, når der står et minustegn foran den.
 
-Consider the expression:
+Se på udtrykket:
 
 \[
 -\frac{a - b}{c}
 \]
 
-To correctly handle the negative sign, change all the signs in the numerator:
+For at håndtere minustegnet korrekt ændrer vi alle fortegn i tælleren:
 
 \[
 -\frac{a - b}{c} = \frac{-a + b}{c}
 \]
 
-For example, if \(a = 5\) and \(b = 3\), then:
+Hvis for eksempel \(a = 5\) og \(b = 3\), så er:
 
 \[
 -\frac{5 - 3}{c} = \frac{-5 + 3}{c} = \frac{-2}{c}
@@ -259,10 +259,10 @@ For example, if \(a = 5\) and \(b = 3\), then:
 \]    
 \end{example}
 
-\section{Exponents, Radicals and Surds}
-An \textbf{exponent} is a shortcut for repeated multiplication of the same number:
+\section{Potenser, rødder og irrationelle rødder}
+En \textbf{eksponent} er en kort måde at skrive gentagen multiplikation af det samme tal på:
 
-\begin{example} Exponentiation
+\begin{example} Potensopløftning
 
 \[
 4 \times 4 \times 4 \times 4 \times 4 = 4^5
@@ -273,26 +273,26 @@ x \times x \times x \times x \times x = x^5
 \]  
 \end{example}
 
-\textbf{Radicals}, or \textbf{roots}, are closely related to exponentiation. Over the real numbers, the principal square root \(\sqrt{x}\) is defined to be the non-negative number whose square is \(x\), so it is only defined when \(x\geq 0\). Consequently, squaring a real number and then taking the principal square root gives its absolute value: \(\sqrt{x^2}=|x|\).
+\textbf{Rødder} er tæt knyttet til potensopløftning. Over de reelle tal er kvadratroden \(\sqrt{x}\) defineret som det ikke-negative tal, hvis kvadrat er \(x\). Den er derfor kun defineret, når \(x\geq 0\). Hvis man kvadrerer et reelt tal og derefter tager kvadratroden, får man følgelig tallets absolutte værdi: \(\sqrt{x^2}=|x|\).
 
-\begin{example} Taking the root
+\begin{example} Uddragning af rod
 
 \[
 \sqrt{a} \times \sqrt{a} = (\sqrt{a})^2 = a
 \]
 
 \[
-\sqrt{a} = b \iff a = b^2 \text{ and } b\geq 0
+\sqrt{a} = b \iff a = b^2 \text{ og } b\geq 0
 \]    
 \end{example}
 
 
 
-A \textbf{surd} is a type of radical that is both real and irrational, examples include \(\sqrt{2}, \sqrt{3}, \sqrt{5},\) and \(\sqrt{6}\).
+En \textbf{irrationel rod} (på engelsk \emph{surd}) er en rod, der både er reel og irrational. Eksempler er \(\sqrt{2}, \sqrt{3}, \sqrt{5}\) og \(\sqrt{6}\).
 
-Numbers can be raised to powers other than 2, such as cubing (raising to the third power), or even raising to the fourth power, the 100th power, and so forth. Correspondingly, you can take the cube root of a number, the fourth root, the 100th root, and so on. To indicate a root other than a square root, the same radical symbol is used, but with a number called the index inserted into the radical sign, typically positioned within the "check mark" part.
+Tal kan opløftes i andre potenser end 2, for eksempel i tredje potens eller i fjerde potens, 100. potens og så videre. Tilsvarende kan man tage kubikroden af et tal, fjerderoden, den 100. rod og så videre. For at angive en anden rod end kvadratroden bruger man det samme rodtegn, men indsætter et tal, kaldet rodeksponenten, i rodtegnet. Tallet placeres typisk i den del af tegnet, der ligner et »flueben«.
 
-\begin{example} Index and argument
+\begin{example} Rodeksponent og argument
 
 \[
 4^3 = 64 \iff \sqrt[3]{64} = 4
@@ -300,28 +300,28 @@ Numbers can be raised to powers other than 2, such as cubing (raising to the thi
    
 \end{example}
 
-In this example, the "3" inside the radical sign is the \textbf{index} of the radical. The "64" is referred to as the argument of the \textbf{radical}, also known as the \textbf{radicand}. Since square roots are the most common type of radicals, the index is usually omitted for square roots. Although "\(\sqrt[2]{2}\)" would be technically correct, it is rarely used in practice.
-\begin{proposition}{Rules for calculations involving radicals}
+I dette eksempel er »3« i rodtegnet rodens \textbf{rodeksponent}. »64« kaldes argumentet for \textbf{roden}, også kendt som \textbf{radikanden}. Da kvadratrødder er den mest almindelige type rødder, udelader man normalt rodeksponenten for kvadratrødder. Selv om »\(\sqrt[2]{2}\)« teknisk set er korrekt, bruges det sjældent i praksis.
+\begin{proposition}{Regneregler for rødder}
     \begin{align*}
-    &(1) \quad \sqrt[n]{x y}=\sqrt[n]{x} \times \sqrt[n]{y}   &   &\textnormal{where } x,y \geq 0\\
-    &(2) \quad \sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}    &   &\textnormal{where } x \geq 0 \textnormal{ and } y > 0 \\
-    &(3) \quad \sqrt{x^2} = |x|   &   &\textnormal{where } x \in \mathbb{R} \\
-    &(4) \quad (\sqrt[n]{x})^n = x    &   &\textnormal{where } x\geq 0, \textnormal{ or where } x<0 \textnormal{ and } n \textnormal{ is odd}\\
-    &(5) \quad \sqrt[n]{-x}=-\sqrt[n]{x}  &   &\textnormal{where } x \geq 0 \textnormal{ and } n \in \mathbb{N} \textnormal{ is odd }
+    &(1) \quad \sqrt[n]{x y}=\sqrt[n]{x} \times \sqrt[n]{y}   &   &\textnormal{hvor } x,y \geq 0\\
+    &(2) \quad \sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}    &   &\textnormal{hvor } x \geq 0 \textnormal{ og } y > 0 \\
+    &(3) \quad \sqrt{x^2} = |x|   &   &\textnormal{hvor } x \in \mathbb{R} \\
+    &(4) \quad (\sqrt[n]{x})^n = x    &   &\textnormal{hvor } x\geq 0, \textnormal{ eller hvor } x<0 \textnormal{ og } n \textnormal{ er ulige}\\
+    &(5) \quad \sqrt[n]{-x}=-\sqrt[n]{x}  &   &\textnormal{hvor } x \geq 0 \textnormal{ og } n \in \mathbb{N} \textnormal{ er ulige }
     \end{align*}
 \end{proposition}
 
-Raising a number to a \textbf{power}, also known as \textbf{exponentiation}, is a fundamental mathematical operation that involves multiplying a number by itself a certain number of times as we saw above. The \textbf{base} is the number being multiplied, and the \textbf{exponent} indicates how many times the base is used as a factor. For example, \(a^n\) means that the base \(a\) is multiplied by itself \(n\) times. Exponentiation is a powerful tool in mathematics, with a few essential rules that govern its application.
+At opløfte et tal i en \textbf{potens}, også kaldet \textbf{potensopløftning}, er en grundlæggende matematisk operation. Som vi så ovenfor, ganger man et tal med sig selv et bestemt antal gange. \textbf{Grundtallet} er det tal, der ganges, og \textbf{eksponenten} angiver, hvor mange gange grundtallet indgår som faktor. For eksempel betyder \(a^n\), at grundtallet \(a\) ganges med sig selv \(n\) gange. Potensopløftning er et stærkt værktøj i matematikken, og nogle få vigtige regler styrer, hvordan det bruges.
 
-\begin{proposition}{Properties of Integer Exponents}
+\begin{proposition}{Potensregneregler for heltallige eksponenter}
 \label{prop:DefPow}
-Let $n,m\in\mathbb{Z}$. The following identities hold whenever all expressions involved are defined. In particular, a base with a negative exponent must be nonzero.
+Lad $n,m\in\mathbb{Z}$. Følgende identiteter gælder, når alle de indgående udtryk er definerede. Især skal et grundtal med negativ eksponent være forskelligt fra nul.
 \[
 \begin{aligned}
 &\text{(1)}\quad x^{n}\cdot x^{m}=x^{\,n+m},\\[2pt]
-&\text{(2)}\quad \dfrac{x^{n}}{x^{m}}=x^{\,n-m}\quad \text{with } x\neq 0,\\[2pt]
+&\text{(2)}\quad \dfrac{x^{n}}{x^{m}}=x^{\,n-m}\quad \text{med } x\neq 0,\\[2pt]
 &\text{(3)}\quad x^{n}\cdot y^{n}=(xy)^{n},\\[2pt]
-&\text{(4)}\quad \dfrac{x^{n}}{y^{n}}=\left(\dfrac{x}{y}\right)^{n}\quad \text{with } y\neq 0,\\[2pt]
+&\text{(4)}\quad \dfrac{x^{n}}{y^{n}}=\left(\dfrac{x}{y}\right)^{n}\quad \text{med } y\neq 0,\\[2pt]
 &\text{(5)}\quad \bigl(x^{n}\bigr)^{m}=x^{\,nm},\\[2pt]
 &\text{(6)}\quad x^{1}=x.
 \end{aligned}
@@ -329,34 +329,34 @@ Let $n,m\in\mathbb{Z}$. The following identities hold whenever all expressions i
 \end{proposition}
 
 
-Some of these rules allow the concept of powers to be extended so that the exponent may be any integer. If you set \(n = m\) in rule (2), you get:
+Nogle af disse regler gør det muligt at udvide potensbegrebet, så eksponenten kan være et vilkårligt helt tal. Hvis man sætter \(n = m\) i regel (2), får man:
 
 \[
 \frac{x^n}{x^n} = x^{n-n} = x^0
 \]
 
-For \(x\neq 0\), the quotient \(\dfrac{x^n}{x^n}\) equals 1, so we obtain
+For \(x\neq 0\) er brøken \(\dfrac{x^n}{x^n}\) lig med 1, så vi får
 
 \[
 x^0 = 1
 \]
 
-Thus, the concept of exponentiation is extended to include \(n \in \mathbb{N} \cup \{0\}\). If you now set \(n = 0\) again in rule (2), you get:
+Dermed er potensbegrebet udvidet til at omfatte \(n \in \mathbb{N} \cup \{0\}\). Hvis man nu igen sætter \(n = 0\) i regel (2), får man:
 
 \[
 \frac{x^0}{x^m} = x^{0-m} = x^{-m}
 \]
 
-But according to the previous calculation, \(x^0 = 1\). Therefore, you obtain
+Men ifølge den forrige udregning er \(x^0 = 1\). Derfor får man
 
 \begin{equation*}
  \frac{1}{x^m} = x^{-m}   
 \end{equation*}
 
-As demonstrated in \autoref{prop:DefPow}, these rules provide a complete framework for manipulating expressions with any integer exponents. As a consequence, the following additional rules can be derived:
+Som vist i \autoref{prop:DefPow} giver disse regler en fuldstændig ramme for at regne med udtryk med vilkårlige heltallige eksponenter. Som en konsekvens kan følgende yderligere regler udledes:
 
-\begin{proposition}{More Properties of Integer Exponents}
-Let $n,m\in\mathbb{Z}$. Then the following hold (with $x,y\in\mathbb{R}$ and nonzero where stated):
+\begin{proposition}{Flere potensregneregler for heltallige eksponenter}
+Lad $n,m\in\mathbb{Z}$. Så gælder følgende (med $x,y\in\mathbb{R}$ og forskellige fra nul, hvor det er angivet):
 \[
 \begin{aligned}
 &\text{(7)}\quad x^{0}=1   &\qquad&   x \neq 0  \\
@@ -365,50 +365,50 @@ Let $n,m\in\mathbb{Z}$. Then the following hold (with $x,y\in\mathbb{R}$ and non
 \]
 \end{proposition}
 
-Let us illustrate these rules with a couple of examples.
+Lad os illustrere disse regler med et par eksempler.
 
-\begin{example} Reduce the following expression
+\begin{example} Reducér følgende udtryk
 
     \begin{equation*}
 \left(3 x y^6\right)^3=3^3 \cdot x^3 \cdot\left(y^6\right)^3=27 x^3 y^{18}
 \end{equation*}
 \end{example}
 
-\begin{example} Reduce the following expression
+\begin{example} Reducér følgende udtryk
 
 \begin{equation*}
 \frac{a^{-4} b^3}{a^7 b^{-5}}=\frac{a^{-4}}{a^7} \cdot \frac{b^3}{b^{-5}}=a^{-4-7} \cdot b^{3-(-5)}=a^{-11} \cdot b^8=\frac{b^8}{a^{11}}
 \end{equation*}
 \end{example}
 
-For positive numbers \(x\), the concept of exponentiation can be further extended to apply when the exponent is a rational number. Any rational number \(r \in \mathbb{Q}\) can be written as \(r = \dfrac{m}{n}\), where \(m \in \mathbb{Z}\) and \(n \in \mathbb{N}\). For \(x > 0\), we now define
+For positive tal \(x\) kan potensbegrebet udvides yderligere, så det også gælder, når eksponenten er et rationalt tal. Ethvert rationalt tal \(r \in \mathbb{Q}\) kan skrives som \(r = \dfrac{m}{n}\), hvor \(m \in \mathbb{Z}\) og \(n \in \mathbb{N}\). For \(x > 0\) definerer vi nu
 
 \begin{equation*}
 y=x^r=x^{\frac{m}{n}}
 \end{equation*}
 
-From this, you obtain (using, among other things, rule (5)):
+Heraf får man (blandt andet ved hjælp af regel (5)):
 
 \[
 y^n = \left(x^{\frac{m}{n}}\right)^n = x^{\frac{m}{n} \cdot n} = x^m
 \]
 
-Finally, by using the concept of radicals, we obtain
+Ved at bruge rodbegrebet får vi til sidst
 
 \begin{equation*}
  y^n=x^m \quad \iff \quad y=\sqrt[n]{x^m}   
 \end{equation*}
 
-Note that because \(x > 0\), it follows that \(y > 0\) as well. We are now ready to state \textbf{\textit{the extended concept of exponentiation}}.
+Bemærk, at fordi \(x > 0\), er også \(y > 0\). Vi er nu klar til at formulere \textbf{\textit{det udvidede potensbegreb}}.
 
-\begin{definition}{The Extended Concept of Exponentiation}
-$\textnormal{Let } m \in \mathbb{Z} \textnormal{ and let }  n \in \mathbb{N} \textnormal{ such that } \dfrac{m}{n} \in \mathbb{Q}  \textnormal{. Then the following applies:}$
+\begin{definition}{Det udvidede potensbegreb}
+$\textnormal{Lad } m \in \mathbb{Z} \textnormal{ og lad }  n \in \mathbb{N}\textnormal{, så } \dfrac{m}{n} \in \mathbb{Q}  \textnormal{. Så gælder følgende:}$
 
 \[
 x^{\frac{m}{n}} = \sqrt[n]{x^m} \hspace{1cm} x > 0
 \]
 
-\textnormal{And more specifically, the following holds true}
+\textnormal{Mere specifikt gælder}
 
 \[
 x^{\frac{1}{n}} = \sqrt[n]{x} \hspace{1.3cm} x > 0
@@ -416,12 +416,12 @@ x^{\frac{1}{n}} = \sqrt[n]{x} \hspace{1.3cm} x > 0
 
 \end{definition}
 
-The denominator of a rational exponent corresponds to the index of the radical, while the numerator remains as the exponent of the base. Conversely, the index of a radical can be transformed into the denominator of an exponent in an equivalent exponential expression. This property allows us to convert any radical expression into an exponential form, providing a powerful tool for simplification.
+Nævneren i en rational eksponent svarer til rodens rodeksponent, mens tælleren forbliver eksponent for grundtallet. Omvendt kan en rods rodeksponent omdannes til nævneren i en eksponent i et tilsvarende potensudtryk. Denne egenskab gør det muligt at omskrive ethvert rodudtryk til potensform, hvilket er et stærkt værktøj til reduktion.
 
 \begin{example}
 
 \[
-\sqrt[5]{x^3} = x^{\frac{3}{5}} \quad  \textnormal{vs.} \quad \sqrt[3]{x^5} = x^{\frac{5}{3}}
+\sqrt[5]{x^3} = x^{\frac{3}{5}} \quad  \textnormal{mod} \quad \sqrt[3]{x^5} = x^{\frac{5}{3}}
 \]
 
 \[
@@ -433,7 +433,7 @@ The denominator of a rational exponent corresponds to the index of the radical, 
 \]
 \end{example}
 
-This property can also be reversed: any rational exponent can be rewritten as a radical expression by using the denominator as the radical's index. The ability to interchange between exponential and radical forms enables us to evaluate expressions that were previously difficult to handle by converting them into radicals.
+Denne egenskab kan også vendes om: Enhver rational eksponent kan skrives om til et rodudtryk ved at bruge nævneren som rodens rodeksponent. Når vi kan skifte mellem potensform og rodform, kan vi udregne udtryk, som tidligere var svære at håndtere, ved at omskrive dem til rødder.
 
 \begin{example}
 \[
@@ -441,7 +441,7 @@ This property can also be reversed: any rational exponent can be rewritten as a 
 \]    
 \end{example}
 
-One of the greatest advantages of converting a radical expression into an exponential form is that it allows us to apply all the properties of exponents to simplify the expression. The following examples illustrate how various properties can be utilised to simplify expressions with rational exponents.
+En af de største fordele ved at omskrive et rodudtryk til potensform er, at vi så kan bruge alle potensreglerne til at reducere udtrykket. De følgende eksempler viser, hvordan forskellige regler kan bruges til at reducere udtryk med rationale eksponenter.
 
 \begin{example}
 
@@ -466,35 +466,35 @@ a^{\frac{2}{3}}b^{\frac{1}{2}}a^{\frac{1}{6}}b^{\frac{1}{5}} = a^{\frac{2}{3}+\f
 \]
 \end{example}
 
-It is important to remember that when simplifying expressions with rational exponents, we are applying the same exponent rules that are used for integer exponents. The only difference is that we must also adhere to the rules for fractions.
+Det er vigtigt at huske, at når vi reducerer udtryk med rationale eksponenter, bruger vi de samme potensregler som for heltallige eksponenter. Den eneste forskel er, at vi også skal overholde reglerne for brøker.
 
-\section{Using Formulae and Substitution}
-In the study of engineering, physical quantities are often related to each other through formulas. These formulas consist of variables and constants that represent the physical quantities in question. To evaluate a formula, one must substitute numerical values for the variables.
+\section{Brug af formler og indsættelse}
+I ingeniørfagene er fysiske størrelser ofte knyttet til hinanden gennem formler. Formlerne består af variable og konstanter, som repræsenterer de pågældende fysiske størrelser. For at udregne en formel skal man indsætte talværdier for variablene.
 
-For example, Ohm’s law provides a formula that relates the voltage, \(v\), across a resistor with a resistance value \(R\), to the current \(i\) flowing through it. The formula is given by
+Ohms lov er for eksempel en formel, der forbinder spændingen \(v\) over en modstand med resistansen \(R\) og strømmen \(i\), der løber gennem den. Formlen er givet ved
 
 \[
 v = iR
 \]
 
-This formula allows us to calculate the voltage \(v\) if the values for \(i\) and \(R\) are known. For instance, if \(i = 13 \, \text{A}\) and \(R = 5 \, \Omega\), then
+Med denne formel kan vi beregne spændingen \(v\), hvis værdierne af \(i\) og \(R\) er kendte. Hvis for eksempel \(i = 13 \, \text{A}\) og \(R = 5 \, \Omega\), så er
 
 \[
 v = iR = (13)(5) = 65
 \]
 
-Thus, the voltage is 65 V.
+Spændingen er altså 65 V.
 
-This example highlights the importance of paying close attention to the units of any physical quantities involved. A formula is only valid if a consistent set of units is used.
+Eksemplet viser, hvor vigtigt det er at holde nøje øje med enhederne for de fysiske størrelser, der indgår. En formel er kun gyldig, hvis man bruger et konsistent sæt enheder.
 
-\begin{example} Inserting into formulae \newline
-The kinetic energy \(K\) of an object with mass \(M\) moving at speed \(v\) can be calculated using the formula:
+\begin{example} Indsættelse i formler \newline
+Den kinetiske energi \(K\) for et legeme med massen \(M\), som bevæger sig med farten \(v\), kan beregnes med formlen:
 
 \[
 K = \frac{1}{2}Mv^2
 \]
 
-Calculate the kinetic energy of an object with a mass of 5 kg moving at a speed of \(2 \, \text{m} \, \text{s}^{-1}\).
+Beregn den kinetiske energi for et legeme med en masse på 5 kg, som bevæger sig med en fart på \(2 \, \text{m} \, \text{s}^{-1}\).
 
 \begin{solution}
 \[
@@ -503,19 +503,19 @@ K = \frac{1}{2}Mv^2 = \frac{1}{2}(5)(2^2) = 10
 
 \end{solution}
 
-In the SI system, the unit of energy is the joule, so the kinetic energy of the object is 10 joules.
+I SI-systemet er enheden for energi joule, så legemets kinetiske energi er 10 joule.
 \end{example}
 
-\begin{example} Inserting into formulae \newline
-The area \(A\) of a circle with radius \(r\) can be calculated using the formula \(A = \pi r^2\).
+\begin{example} Indsættelse i formler \newline
+Arealet \(A\) af en cirkel med radius \(r\) kan beregnes med formlen \(A = \pi r^2\).
 
-Alternatively, if the diameter \(d\) of the circle is known, the equivalent formula can be used:
+Hvis cirklens diameter \(d\) er kendt, kan man i stedet bruge den tilsvarende formel:
 
 \[
 A = \frac{\pi d^2}{4}
 \]
 
-Calculate the area of a circle with a diameter of 0.1 m. The value of \(\pi\) is pre-programmed in your calculator.
+Beregn arealet af en cirkel med en diameter på 0.1 m. Værdien af \(\pi\) er indbygget i din lommeregner.
 
 \begin{solution}
     \[
@@ -527,66 +527,66 @@ A = \frac{\pi (0.1)^2}{4} = 0.00785 \, \text{m}^2
 
 \end{example}
 
-\begin{example} Inserting into formulae \newline
-The volume \(V\) of a circular cylinder is equal to its cross-sectional area \(A\) multiplied by its length \(h\).
+\begin{example} Indsættelse i formler \newline
+Rumfanget \(V\) af en cirkulær cylinder er lig med dens tværsnitsareal \(A\) ganget med dens længde \(h\).
 
-Calculate the volume of a cylinder with a diameter of 0.1 m and a length of 0.3 m.
+Beregn rumfanget af en cylinder med en diameter på 0.1 m og en længde på 0.3 m.
 
 \begin{solution}
   \[
 V = Ah = \frac{\pi (0.1)^2}{4} \times 0.3 = 0.00236
 \]
 
-The volume is \(0.00236 \, \text{m}^3\).
+Rumfanget er \(0.00236 \, \text{m}^3\).
 \end{solution}
 \end{example}
 
-\section{Rearranging Formulae}
-In the formula for the area of a circle, \(A = \pi r^2\), the variable \(A\) is referred to as the subject of the formula. A variable is considered the subject if it appears by itself on one side of the equation, usually on the left-hand side, and nowhere else in the formula. If we are asked to transpose the formula for \(r\), or solve for \(r\), we must rearrange the equation so that \(r\) becomes the subject. When transposing a formula, any operation performed on one side must also be applied to the other side. There are five key rules to follow during this process.
+\section{Omskrivning af formler}
+I formlen for cirklens areal, \(A = \pi r^2\), er variablen \(A\) isoleret. En variabel er isoleret, hvis den står alene på den ene side af lighedstegnet, normalt på venstre side, og ikke optræder andre steder i formlen. Hvis vi bliver bedt om at isolere \(r\) i formlen eller løse den med hensyn til \(r\), skal vi omskrive ligningen, så \(r\) bliver isoleret. Når man omskriver en formel, skal enhver operation, der udføres på den ene side, også udføres på den anden side. Der er fem centrale regler, som skal følges i denne proces.
 
-\begin{custombox}{Rules for rearranging formulae}
-The following operations can be performed on both sides of the formula:
+\begin{custombox}{Regler for omskrivning af formler}
+Følgende operationer kan udføres på begge sider af formlen:
 \begin{itemize}
-    \item Add the same quantity to both sides
-    \item Subtract the same quantity from both sides
-    \item Multiply both sides by the same nonzero quantity - remember to multiply all terms
-    \item Divide both sides by the same nonzero quantity - remember to divide all terms
-    \item Apply the same function to both sides, while checking its domain and whether the operation is reversible
+    \item Læg den samme størrelse til på begge sider
+    \item Træk den samme størrelse fra på begge sider
+    \item Gang begge sider med den samme størrelse forskellig fra nul -- husk at gange alle led
+    \item Divider begge sider med den samme størrelse forskellig fra nul -- husk at dividere alle led
+    \item Anvend den samme funktion på begge sider, og kontrollér samtidig funktionens definitionsmængde, og om operationen kan vendes om
 \end{itemize}
 \end{custombox}
 
-The first four operations preserve equivalence when their stated restrictions are satisfied. Applying a function such as squaring need not be reversible: for example, \(x=2\) implies \(x^2=4\), but \(x^2=4\) also permits \(x=-2\). Solutions obtained after a non-reversible operation must therefore be checked in the original equation.
+De første fire operationer bevarer ækvivalensen, når deres angivne begrænsninger er opfyldt. At anvende en funktion, for eksempel at kvadrere, kan ikke nødvendigvis vendes om: For eksempel medfører \(x=2\), at \(x^2=4\), men \(x^2=4\) tillader også \(x=-2\). Løsninger, der er fundet efter en operation, som ikke kan vendes om, skal derfor kontrolleres i den oprindelige ligning.
 
-\begin{example} Transpose the formula \(p = 5t - 17\) to make \(t\) the subject.
+\begin{example} Omskriv formlen \(p = 5t - 17\), så \(t\) bliver isoleret.
 
 \begin{solution}
- To isolate \(t\) on the left-hand side, proceed in steps using the five rules. First, add 17 to both sides of the equation \(p = 5t - 17\):
+ For at isolere \(t\) på venstre side går vi frem trinvis efter de fem regler. Læg først 17 til på begge sider af ligningen \(p = 5t - 17\):
 \[
 p + 17 = 5t - 17 + 17
 \]
-Simplifying, we get:
+Ved reduktion får vi:
 \[
 p + 17 = 5t
 \]
-Next, divide both sides by 5 to isolate \(t\):
+Divider derefter begge sider med 5 for at isolere \(t\):
 \[
 \frac{p + 17}{5} = t
 \]
-Thus, the formula for \(t\) is:
+Formlen for \(t\) er altså:
 \[
 t = \frac{p + 17}{5}
 \]   
 \end{solution}    
 \end{example}
 
-\begin{example} Transpose the formula \(\sqrt{2q} = p\) to solve for \(q\).
+\begin{example} Omskriv formlen \(\sqrt{2q} = p\), og løs den med hensyn til \(q\).
 
 \begin{solution}
-   First, square both sides to eliminate the square root around \(2q\). Note that \((\sqrt{2q})^2 = 2q\). This gives:
+   Kvadrér først begge sider for at fjerne kvadratroden omkring \(2q\). Bemærk, at \((\sqrt{2q})^2 = 2q\). Det giver:
 \[
 2q = p^2
 \]
-Next, divide both sides by 2 to solve for \(q\):
+Divider derefter begge sider med 2 for at løse med hensyn til \(q\):
 \[
 q = \frac{p^2}{2}
 \]   
@@ -597,21 +597,21 @@ q = \frac{p^2}{2}
 \newpage
 
 \begin{example}
-Transpose the formula \(v = \sqrt{t^2 + w}\) to solve for \(w\). To isolate \(w\), follow these steps:   
+Omskriv formlen \(v = \sqrt{t^2 + w}\), og løs den med hensyn til \(w\). Følg disse trin for at isolere \(w\):   
 
 \begin{solution}
     \begin{enumerate}[a.]
-        \item First, square both sides to eliminate the square root around \(t^2 + w\):
+        \item Kvadrér først begge sider for at fjerne kvadratroden omkring \(t^2 + w\):
         \[
         v^2 = t^2 + w
         \]
 
-        \item Next, subtract \(t^2\) from both sides to isolate \(w\):
+        \item Træk derefter \(t^2\) fra på begge sider for at isolere \(w\):
         \[
         v^2 - t^2 = w
         \]
 
-        \item Finally, write down the formula for \(w\):
+        \item Skriv til sidst formlen for \(w\):
         \[
         w = v^2 - t^2
         \]
@@ -620,27 +620,27 @@ Transpose the formula \(v = \sqrt{t^2 + w}\) to solve for \(w\). To isolate \(w\
     \end{solution}
 \end{example}
 
-\begin{example} Transpose the formula \(x = \frac{1}{y}\) to solve for \(y\).
+\begin{example} Omskriv formlen \(x = \frac{1}{y}\), og løs den med hensyn til \(y\).
 
 \begin{solution}
-To isolate \(y\), notice that \(y\) appears in the denominator. Multiplying both sides by \(y\) removes the fraction:
+For at isolere \(y\) bemærker vi, at \(y\) står i nævneren. Hvis vi ganger begge sider med \(y\), forsvinder brøken:
 
 \[
 yx = y \times \frac{1}{y}
 \]
 
-This simplifies to:
+Det reduceres til:
 
 \[
 yx = 1
 \]
 
-Finally, divide both sides by \(x\) to solve for \(y\):
+Divider til sidst begge sider med \(x\) for at løse med hensyn til \(y\):
 \[
 y = \frac{1}{x}
 \]
 
-Alternatively, you can simply invert both sides directly to obtain:
+Alternativt kan du blot invertere begge sider direkte og få:
 
 \[
 y = \frac{1}{x}
@@ -651,44 +651,43 @@ y = \frac{1}{x}
 \end{example}
 
 
-\begin{example} Make \(R\) the subject of the formula:
+\begin{example} Isolér \(R\) i formlen:
 
 \[
 \frac{2}{R} = \frac{3}{x + y}
 \]
 
-\begin{solution} Since \(R\) appears in a fraction, invert both sides:
+\begin{solution} Da \(R\) står i en brøk, inverterer vi begge sider:
 
 \[
 \frac{R}{2} = \frac{x + y}{3}
 \]
 
-Multiplying both sides by 2 yields: $R = \dfrac{2(x + y)}{3}$    
+Ved at gange begge sider med 2 får vi: $R = \dfrac{2(x + y)}{3}$    
 \end{solution}
     
 \end{example} 
 
-\begin{example} Make \(R\) the subject of the formula:
+\begin{example} Isolér \(R\) i formlen:
 
 \[
 \frac{1}{R} = \frac{1}{R_1} + \frac{1}{R_2}
 \]
 \begin{solution}
-The two terms on the right-hand side can be combined:
+De to led på højre side kan samles:
 \[
 \frac{1}{R_1} + \frac{1}{R_2} = \frac{R_2 + R_1}{R_1R_2}
 \]
 
-The formula then becomes:
+Formlen bliver så:
 \[
 \frac{1}{R} = \frac{R_2 + R_1}{R_1R_2}
 \]
 
-Finally, inverting both sides gives:
+Til sidst inverterer vi begge sider og får:
 \[
 R = \frac{R_1R_2}{R_2 + R_1}
 \]
 
 \end{solution}
 \end{example}
-
