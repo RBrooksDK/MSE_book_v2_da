@@ -18,3 +18,5 @@
 *.pdf_tex
 work_*
 
+
+__pycache__/
