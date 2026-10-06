@@ -1,0 +1,359 @@
+\chapter{Multivariable Calculus and Gradients}
+\label{chap:ch11}
+
+In the previous chapter, we explored the derivative as a tool for measuring the rate of change of a function of a single variable. Geometrically, this corresponded to finding the slope of a curve at a point. However, many real-world systems depend on multiple factors. The fuel efficiency of an aircraft depends on both its speed and altitude. The performance of a machine learning model is a function of thousands, or even millions, of parameters. To navigate these complex relationships, we must extend our understanding of calculus to higher dimensions.
+
+This brings us from the simple path of a curve to the vast terrain of a surface. Imagine again our hiker, but now standing on a mountain range. The "slope" is no longer a single number; it depends entirely on the direction the hiker chooses to face. Pointing straight up the mountain reveals the steepest path, while facing along the mountain's contour results in a perfectly level path. The mathematical tool that captures this multidimensional slope is the \textbf{gradient}.
+
+
+\section{Functions of Several Variables}
+
+We now extend our view from functions of a single variable, \(f(x)\), to functions of two or more variables. For simplicity, we will focus on functions of two variables, written as \(z = f(x, y)\). The main difference is thus that, instead of mapping values of one variable to values of another variable, we map ordered pairs of variables to another variable.
+
+\begin{definition}[Function of Two Variables]
+A \emph{function of two variables} is a rule that assigns to each ordered pair \((x, y)\) in a set \(D \subseteq \mathbb{R}^2\) a unique real number \(z\), which we write as \(z = f(x, y)\). The set \(D\) is called the \emph{domain} of \(f\).
+
+The \emph{range} of \(f\) is the set of all real numbers \(z\) for which there exists at least one \((x, y) \in D\) such that \(f(x, y) = z\) which is illustrated in \autoref{fig:ch11-domain-range}.
+\end{definition}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{domainrange.png}
+    \caption{The domain of a function of two variables consists of ordered pairs \((x, y)\).}
+    \label{fig:ch11-domain-range}
+\end{figure}
+
+
+\begin{example}
+    Find the domain and range of the function \(f(x, y) = \sqrt{9 - x^2 - y^2}\).
+\end{example}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{domain.png}
+    \caption{The domain of the function \(f(x, y)=\sqrt{9-x^2-y^2}\) is a closed disk of radius 3.}
+    \label{fig:ch11-domain}
+\end{figure}
+
+\begin{solution}
+    To determine the domain, we require the expression inside the square root to be non-negative:
+    \[
+        9 - x^2 - y^2 \geq 0.
+    \]
+    Rearranging gives the inequality
+    \[
+        x^2 + y^2 \leq 9.
+    \]
+    Therefore, the domain of \(f\) is the closed disk of radius \(3\) centred at the origin, which is illustrated in \autoref{fig:ch11-domain}, and explicitly given by
+    \[
+        \operatorname{Dom}(f)
+        = \{(x,y) \in \mathbb{R}^2 \mid x^2 + y^2 \leq 9\}.
+    \]
+
+    To find the range, note that for any point \((x,y)\) in the domain we have
+    \[
+        0 \leq x^2 + y^2 \leq 9,
+    \]
+    so
+    \[
+        0 \leq 9 - x^2 - y^2 \leq 9.
+    \]
+    Taking square roots (and remembering the square root is always non-negative) gives
+    \[
+        0 \leq f(x,y) = \sqrt{9 - x^2 - y^2} \leq 3.
+    \]
+
+    Both endpoints of this interval are attainable:  
+    \begin{itemize}
+        \item \(f(x,y) = 3\) at the centre \((0,0)\),
+        \item \(f(x,y) = 0\) on the boundary circle \(x^2 + y^2 = 9\).
+    \end{itemize}
+
+    Thus, the range of \(f\) is the closed interval
+    \[
+        \operatorname{Ran}(f) = \{ z \in \mathbb{R} \mid 0 \leq z \leq 3 \} = [0,3].
+    \]
+\end{solution}
+
+While the graph of \(f(x)\) is a curve in a 2D plane, the graph of \(f(x, y)\) is a \textbf{surface} in 3D space. When graphing a function of two variables \(z = f(x,y)\), each point \((x,y)\) in the domain is assigned a height \(z\), producing an ordered triple \((x,y,z)\). The collection of all such triples forms a \emph{surface} in three-dimensional space. One can think of the \(xy\)-plane lying flat, with the value of \(z\) plotted vertically above (or below) each point \((x,y)\). 
+
+
+\begin{definition}[Level Curve and Contour Map]
+A \textbf{level curve} of a function \(f(x, y)\) is the set of all points \((x, y)\) in the input plane where the function has a constant value, i.e., \(f(x, y) = c\) for some constant \(c\).
+
+A collection of level curves for different values of \(c\) forms a \textbf{contour map}.
+\end{definition}
+
+
+\begin{figure}[htbp]
+    \caption{Contour Maps: (a) a 3D surface plot with contour lines projected onto the $xy$-plane, and (b) a topographic map showing level curves.}
+    \centering
+    \begin{subfigure}[based]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{contour.png}
+        \caption{The surface $z = x^2 + y^2$ with contour lines projected onto the $xy$-plane. Each contour corresponds to a constant function value, illustrating how level curves arise from horizontal slices of the surface.}
+        \label{fig:ch11-3d-contour-surface}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[c]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{topographic-map.png}
+        \caption{A topographic map of a hilly terrain.}
+        \label{fig:ch11-topographic-map}
+    \end{subfigure}
+\end{figure}
+
+On a geographical map, these lines represent paths of constant elevation. On our function surface, they represent paths of constant "height" \(z\). \autoref{fig:ch11-3d-contour-surface} shows the surface \(z = x^2 + y^2\) with contour lines projected onto the \(xy\)-plane. Each contour corresponds to a constant function value, illustrating how level curves arise from horizontal slices of the surface. \autoref{fig:ch11-topographic-map} shows a topographic map of a hilly terrain. These contour lines are not limited to simple functions; they can also represent much more intricate surfaces.
+
+
+\section{Partial Derivatives and the Gradient}
+How do we measure the rate of change of a multivariable function? Since the slope depends on the direction, we can start with the simplest directions: parallel to the coordinate axes. This leads to the idea of a \textbf{partial derivative}.
+
+\subsection*{Partial Derivatives}
+
+For a function \(z = f(x,y)\), we analyse how the surface changes by allowing one variable to vary while keeping the other fixed. The resulting rates of change are the \emph{partial derivatives} of \(f\). The partial derivative with respect to \(x\) is computed by treating \(y\) as constant and differentiating with respect to \(x\); the derivative with respect to \(y\) is obtained similarly. These two quantities, \(\partial z/\partial x\) and \(\partial z/\partial y\), describe how steeply the surface rises or falls in the coordinate directions.
+
+Geometrically, \( \frac{\partial f}{\partial x} \) at a point \((a, b)\) represents the slope of the surface in the direction of the x-axis and \( \frac{\partial f}{\partial y} \) represents the slope of the surface in the direction of the y-axis.
+
+
+\begin{definition}[Partial Derivatives]
+The \textbf{partial derivative} of \( f(x, y) \) with respect to \( x \), denoted \( \frac{\partial f}{\partial x} \) or \( f_x \), is
+$$
+\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}
+$$
+The \textbf{partial derivative} with respect to \( y \), denoted \( \frac{\partial f}{\partial y} \) or \( f_y \), is
+$$
+\frac{\partial f}{\partial y} = \lim_{h \to 0} \frac{f(x, y+h) - f(x, y)}{h}
+$$
+\end{definition}
+
+\begin{example}
+    Consider the function 
+    \[
+        f(x,y) = x^{2} + 2y^{2}.
+    \]
+    We compute its partial derivatives by differentiating with respect to one variable while holding the other constant.
+
+    \textbf{Partial derivative with respect to \(x\).}
+
+    Treat \(y\) as a constant and differentiate as in single–variable calculus:
+    \[
+        \frac{\partial}{\partial x}(x^{2} + 2y^{2}) 
+        = 2x.
+    \]
+
+    Geometrically, this corresponds to slicing the surface \(z=f(x,y)\) with a plane \(y=\text{constant}\), which produces the parabola \(z=x^{2}+\text{constant}\). The value \(2x\) is the slope of this parabola at the chosen point.
+
+    \textbf{Partial derivative with respect to \(y\).} 
+
+    Now treat \(x\) as constant:
+    \[
+        \frac{\partial}{\partial y}(x^{2} + 2y^{2})
+        = 4y.
+    \]
+
+    This represents the slope of the cross–section obtained by slicing the surface with a plane \(x=\text{constant}\).
+
+\end{example}
+
+\begin{example}
+    Find the partial derivatives of \( f(x, y) = 3x^2 + 2xy^3 + 5y \).
+\end{example}
+
+\begin{solution}
+    
+To find \( \frac{\partial f}{\partial x} \), we treat \( y \) as a constant:
+\[
+\frac{\partial f}{\partial x} = \frac{\partial}{\partial x}(3x^2) + \frac{\partial}{\partial x}(2xy^3) + \frac{\partial}{\partial x}(5y) = 6x + 2y^3 + 0 = 6x + 2y^3
+\]
+To find \( \frac{\partial f}{\partial y} \), we treat \( x \) as a constant:
+\[
+\frac{\partial f}{\partial y} = \frac{\partial}{\partial y}(3x^2) + \frac{\partial}{\partial y}(2xy^3) + \frac{\partial}{\partial y}(5y) = 0 + 2x(3y^2) + 5 = 6xy^2 + 5
+\]
+\end{solution}
+
+\subsection*{The Gradient Vector}
+
+The partial derivatives give us the rate of change in two specific directions. The \textbf{gradient} combines this information into a single vector that points in the direction of the \emph{steepest} rate of change.\footnote{This property is formally proven using the concept of the \textit{directional derivative}, which measures the rate of change in any arbitrary direction.} The word ``gradient'' in mathematics describes a vector that indicates both the direction and the steepness of ascent for a function of several variables:
+
+$$
+\nabla f(x, y) = \left\langle \frac{\partial f}{\partial x},\ \frac{\partial f}{\partial y} \right\rangle
+= 
+\begin{bmatrix}
+    \frac{\partial f}{\partial x} \\
+    \frac{\partial f}{\partial y}
+\end{bmatrix}
+$$
+
+The symbol $\nabla$ is called the \textbf{nabla} or \textbf{del} operator.
+
+\begin{definition}[The Gradient]
+The \textbf{gradient} of a function \( f(x, y) \), denoted \( \nabla f \), is the vector function defined by:
+
+$$
+\nabla f(x, y) = \left\langle \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right\rangle = \frac{\partial f}{\partial x} \mathbf{i} + \frac{\partial f}{\partial y} \mathbf{j}
+$$
+
+\end{definition}
+
+The gradient is the multivariable analogue of the first derivative. It has two crucial geometric properties:
+\begin{enumerate}
+    \item \textbf{Direction of Steepest Ascent:} At a point where \(\nabla f(x,y)\neq\vect{0}\), the unit vector $\nabla f/\lVert\nabla f\rVert$ gives the direction in which \(f\) increases most rapidly.
+    \item \textbf{Perpendicularity to Level Curves:} At a regular point where \(\nabla f(x,y)\neq\vect{0}\), the gradient is orthogonal (perpendicular) to the level curve through \((x,y)\).
+\end{enumerate}
+
+Both properties are extremely useful. The first tells us that the gradient points in the direction of steepest ascent, while the second explains that this direction is perpendicular to the contour lines. Consequently, to move uphill as fast as possible, one should walk in the direction of the gradient; to move downhill as fast as possible, one should walk in the opposite direction, that is, along the negative gradient.
+
+\begin{figure}[htbp]
+    \caption{Two perspectives of the function \( f(x, y) = 3x^2 + 2xy^3 + 5y \). The 3D view (a) shows the physical surface, while the 2D view (b) shows the contour map we use for analysis. The red gradient vectors point in the direction of steepest ascent and are always perpendicular to the level curves.}
+    \centering
+    % Subfigure for the 3D plot
+    \begin{subfigure}[b]{0.55\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{surface_with_projected_gradients.png}
+        \caption{A 3D view of the surface \(z = f(x, y)\) with its gradient field projected below.}
+        \label{fig:ch11-3d-view}
+    \end{subfigure}
+    \hfill % Adds a little space between the figures
+    % Subfigure for the 2D plot
+    \begin{subfigure}[b]{0.41\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{contour_with_gradients.png}
+        \caption{A 2D top-down view showing the contour map and the gradient field.}
+        \label{fig:ch11-2d-view}
+    \end{subfigure}
+
+    \label{fig:ch11-side-by-side}
+\end{figure}
+
+To fully appreciate the geometric meaning of the gradient, it is helpful to visualize it from two different perspectives, as shown in \autoref{fig:ch11-side-by-side}. The figure presents the same function, \( f(x, y) = 3x^2 + 2xy^3 + 5y \), in two ways: as a three-dimensional surface and as a two-dimensional contour map.
+
+On the left, in \autoref{fig:ch11-3d-view}, we see the function as a landscape. The height of the surface at any point \((x, y)\) corresponds to the value of \(z = f(x, y)\). Below this surface, we have projected its contour map along with its gradient field, represented by red arrows. You can visually trace how the steepness of the surface at a point relates to the arrow directly beneath it.
+
+On the right, in \autoref{fig:ch11-2d-view}, we have the perspective we most often work with: a top-down view of the xy-plane. This is the standard contour map, where each line connects points of equal "elevation." The gradient vectors are overlaid on this map.
+
+By comparing these two views, we can confirm the two fundamental properties of the gradient:
+
+\begin{enumerate}
+    \item \textbf{Direction of Steepest Ascent:} Look at any red arrow on the 2D map. Notice that it always points from a lower-value region (lighter colours) towards a higher-value region (darker colours). The arrows show the "uphill" direction. This corresponds directly to the steepest path one could take up the surface in the 3D view.
+    
+    \item \textbf{Perpendicularity to Level Curves:} Observe the relationship between the red arrows and the white contour lines in \autoref{fig:ch11-2d-view}. At every point, the gradient vector is perfectly orthogonal (perpendicular) to the level curve passing through that point. This makes intuitive sense: to climb a hill most efficiently, you must walk perpendicular to the paths of level elevation.
+\end{enumerate}
+
+This side-by-side comparison bridges the gap between the physical reality of the function's shape and the mathematical tools we use to analyze it.
+
+\section{Applications of the Gradient}
+
+The gradient is one of the most fundamental concepts in applied mathematics, with profound implications in physics, engineering, and computer science, and lies as the cornerstone in recent developments in machine learning and artificial intelligence.
+
+\subsection*{Optimisation and Gradient Descent}
+Remember our hiker trying to find the lowest point in a foggy valley. The most efficient strategy is to always walk in the direction of steepest \emph{descent}. From the properties of the gradient, we know this direction is exactly opposite to the gradient vector, \( -\nabla f \).
+
+This simple idea is the foundation of the \textbf{Gradient Descent} algorithm, which is central to training modern machine learning models. The "altitude" of the hiker is the model's error (or loss function), and the "position" is the set of model parameters. The algorithm works as follows:
+
+\vspace{1cm}
+
+\begin{enumerate}
+    \item Start at a random point (random set of parameters).
+    \item Calculate the gradient of the loss function at that point.
+    \item Take a small step in the direction of the negative gradient, \( -\nabla f \).
+    \item Repeat until a chosen stopping criterion is met, such as a small gradient norm or a sufficiently small change in the loss.
+\end{enumerate}
+
+This iterative process follows local descent directions and can find useful parameter values even when a function has millions of variables. A small gradient does not by itself guarantee a local minimum, and for a general non-convex loss the method may approach a saddle point or a non-global local minimum.
+
+\begin{example}
+
+A simple loss function is given by \( L(w_1, w_2) = w_1^2 + 2w_2^2 \). If we are at the point \((w_1, w_2) = (2, 1)\), in which direction should we move to decrease the loss fastest?
+\end{example}
+\begin{solution}
+We need to find the direction of the negative gradient, \( -\nabla L \).
+First, we compute the gradient:
+\[
+\nabla L = \left\langle \frac{\partial L}{\partial w_1}, \frac{\partial L}{\partial w_2} \right\rangle = \langle 2w_1, 4w_2 \rangle
+\]
+Next, we evaluate the gradient at the point \((2, 1)\):
+\[
+\nabla L(2, 1) = \langle 2(2), 4(1) \rangle = \langle 4, 4 \rangle
+\]
+The negative gradient is a steepest-descent vector:
+\[
+-\nabla L(2, 1) = \langle -4, -4 \rangle
+\]
+The corresponding unit direction is $\langle-1/\sqrt{2},-1/\sqrt{2}\rangle$. A gradient-descent update takes a step proportional to $\langle-4,-4\rangle$, with the step length controlled by the learning rate.
+\end{solution}
+
+\section{Application: Training a Model with Gradient Descent}
+
+We have seen that the gradient, \(\nabla f\), points in the direction of steepest ascent, and its negative, \(-\nabla f\), points in the direction of steepest descent. This principle is not merely a geometric curiosity; it is the engine that drives the training of most modern machine learning models. We will now explore a complete, practical example: finding the optimal line to fit a dataset using \textbf{Linear Regression} and the \textbf{Gradient Descent} algorithm.
+
+\begin{example}
+    Optimising a Simple Linear Regression Model
+\end{example}
+
+\begin{solution}
+Imagine we have a dataset consisting of \(n\) points \((x_i, y_i)\). For instance, \(x_i\) could be the size of a house and \(y_i\) its price. Our goal is to find the straight line that best fits this data. This process is known as linear regression.
+
+\vspace{1em}
+\textbf{Step 1: Define the Model}
+
+A straight line is defined by its intercept (\(\beta_0\)) and its slope (\(\beta_1\)). For any given input \(x_i\), our model predicts a value, which we'll call \(\hat{y}_i\), according to the equation:
+\[
+\hat{y}_i = \beta_0 + \beta_1 x_i
+\]
+Our task is to find the optimal values for the parameters \(\beta_0\) and \(\beta_1\).
+
+\vspace{1em}
+\textbf{Step 2: Define the Loss Function}
+
+How do we know if a line is a "good fit"? We measure its error. For each data point, the error is the difference between the actual value (\(y_i\)) and the predicted value (\(\hat{y}_i\)). To ensure errors don't cancel each other out and to penalize larger errors more heavily, we square these differences. We then average this squared error over all \(n\) data points. This gives us the \textbf{Mean Squared Error (MSE)} loss function, \(L\):
+\[
+L(\beta_0, \beta_1) = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \frac{1}{n} \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1 x_i)^2
+\]
+This is the central equation. Notice that the loss \(L\) is not a function of \(x\) or \(y\) (which are fixed data points), but a function of our model's parameters, \(\beta_0\) and \(\beta_1\). It is a convex quadratic surface: typically bowl-shaped, although it can have a flat direction if the data do not identify both parameters uniquely. Our goal is to find a global minimum of this surface.
+
+\vspace{1em}
+\textbf{Step 3: Compute the Gradient of the Loss Function}
+
+To find the bottom of the loss surface using gradient descent, we need to know the direction of steepest descent at any point. This requires computing the gradient of \(L\) with respect to its variables, \(\beta_0\) and \(\beta_1\). The gradient is the vector of partial derivatives:
+\[
+\nabla L = \left\langle \frac{\partial L}{\partial \beta_0}, \frac{\partial L}{\partial \beta_1} \right\rangle
+\]
+We find each partial derivative using the rules of differentiation, particularly the chain rule.
+
+For \(\frac{\partial L}{\partial \beta_0}\), we treat \(\beta_1\) as a constant and differentiate:
+\[
+\frac{\partial L}{\partial \beta_0} = \frac{1}{n} \sum_{i=1}^{n} 2(y_i - \beta_0 - \beta_1 x_i) \cdot (-1) = -\frac{2}{n} \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1 x_i)
+\]
+For \(\frac{\partial L}{\partial \beta_1}\), we treat \(\beta_0\) as a constant and differentiate:
+\[
+\frac{\partial L}{\partial \beta_1} = \frac{1}{n} \sum_{i=1}^{n} 2(y_i - \beta_0 - \beta_1 x_i) \cdot (-x_i) = -\frac{2}{n} \sum_{i=1}^{n} (y_i - \beta_0 - \beta_1 x_i) x_i
+\]
+These two expressions give us the components of the gradient vector \(\nabla L\) for any given \(\beta_0\) and \(\beta_1\).
+
+\vspace{1em}
+\textbf{Step 4: The Gradient Descent Algorithm}
+
+Now we have all the pieces. The Gradient Descent algorithm is an iterative process:
+\begin{enumerate}
+    \item Start with an initial guess for \(\beta_0\) and \(\beta_1\) (e.g., random values).
+    \item Calculate the gradient \(\nabla L\) using the current values of \(\beta_0\) and \(\beta_1\).
+    \item Update the parameters by taking a small step in the direction of the \emph{negative} gradient.
+\end{enumerate}
+This update step is the core of the algorithm. We introduce a small positive constant \(\eta\) (eta), called the \textbf{learning rate}, which controls the size of our steps. The update rules are:
+\[
+\beta_0 \leftarrow \beta_0 - \eta \frac{\partial L}{\partial \beta_0}
+\]
+\[
+\beta_1 \leftarrow \beta_1 - \eta \frac{\partial L}{\partial \beta_1}
+\]
+We repeat this process many times. With each step, our parameters \(\beta_0\) and \(\beta_1\) move closer to the values that minimize the loss function \(L\), effectively "walking downhill" on the loss surface until they settle at the bottom.
+
+Using more compact vector notation, where \(\boldsymbol{\beta}\) is the vector \(\langle \beta_0, \beta_1 \rangle\), the entire update rule can be written as:
+\[
+\boldsymbol{\beta} \leftarrow \boldsymbol{\beta} - \eta \nabla L
+\]
+This single expression elegantly captures the process of optimizing a machine learning model. It is a direct and powerful application of the gradient, demonstrating how a fundamental concept from calculus is used to solve complex, real-world problems. \end{solution}
+
+This chapter has extended the concept of the derivative into multiple variables. We started by exploring functions of several variables, partial derivatives, and finally the gradient vector. The gradient, as the "full" derivative for multivariable functions, not only describes the rate of change in all directions but also provides the theoretical foundation for powerful optimisation algorithms that drive modern technology. We then applied the gradient to the problem of finding the optimal line to fit a dataset using linear regression and the gradient descent algorithm. This concludes the chapter and effectively concludes this book about Mathematics for Software Engineering.

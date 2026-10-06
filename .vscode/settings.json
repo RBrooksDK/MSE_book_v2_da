@@ -1,0 +1,14 @@
+{
+  "files.autoSave": "afterDelay",
+  "latex-workshop.latex.search.rootFiles.include": [
+    "main.tex"
+  ],
+  "latex-workshop.latex.search.rootFiles.exclude": [
+    "colors.tex",
+    "numbernotes.tex",
+    "testcircuit.tex"
+  ],
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.view.pdf.tab.editorGroup": "right"
+}

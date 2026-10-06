@@ -1,0 +1,22 @@
+\documentclass{article}
+\usepackage{circuitikz}
+\usetikzlibrary{circuits.logic.US}
+
+\begin{document}
+\begin{circuitikz} \draw
+    (0,0) node[and gate US, draw, logic gate inputs=nn] (and1) {}
+    (and1.input 1) -- ++(-1,0) node[left] {$x$}
+    (and1.input 2) -- ++(-1,0) node[left] {$y$}
+
+    (0,-2) node[not gate US, draw, anchor=input] (not1) {}
+    (not1.input) -- ++(-1,0) node[left] {$x$}
+
+    (not1.output) -- ++(1,0) |- (2,-2) node[and gate US, draw, logic gate inputs=nn] (and2) {}
+    (and2.input 2) -- ++(-1,0) node[left] {$y$}
+
+    (and1.output) -- ++(1,0) node[or gate US, draw, anchor=input 1] (or1) {}
+    (and2.output) -- ++(1,0) |- (or1.input 2)
+
+    (or1.output) -- ++(1,0) node[right] {$xy + \overline{x}y$};
+\end{circuitikz}
+\end{document}

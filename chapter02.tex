@@ -1,0 +1,1152 @@
+\chapter{Number Systems}
+\label{chap:ch2}
+
+We are so accustomed to working within the decimal system that we often forget it is a relatively recent invention and was once considered revolutionary. It is time to carefully examine how we represent numbers. Typically, we use the decimal system, where a number like 3459 is shorthand for \(3 \times 1000 + 4 \times 100 + 5 \times 10 + 9\). The position of each digit is crucial, as it allows us to distinguish between values like 30 and 3. The decimal system is a\textbf{ positional numeral system}, meaning it has designated positions for units, tens, hundreds, and so forth. Each digit’s position implies the multiplier (a power of ten) that should be used with that digit, and each position has a value ten times that of the position to its right.
+
+Notice that we can save space by writing 1000 as \(10^3\), where the exponent 3 indicates the number of zeros. Thus, \(100000 = 10^5\). If the exponent is negative, it represents a fraction, e.g., \(10^{-3} = \frac{1}{1000}\). Perhaps the most ingenious aspect of the positional system was the addition of the decimal point, which allows us to include decimal fractions. For example, the number 123.456 is equivalent to:
+\[
+1 \times 100 + 2 \times 10 + 3 \times 1 + 4 \times \frac{1}{10} + 5 \times \frac{1}{100} + 6 \times \frac{1}{1000}.
+\]
+
+This can be visualised as:
+\[
+\begin{array}{rccccccccc}
+\text{Multiplier:} & \ldots & 10^2 & 10^1 & 10^0 & . & 10^{-1} & 10^{-2} & 10^{-3} & \ldots \\
+\text{Digits:} & \ldots & 1 & 2 & 3 & . & 4 & 5 & 6 &\ldots \\
+& & & & & \uparrow & & & & \\
+& & & & & \text{Decimal Point:} & & & &
+\end{array}
+\]
+However, there is no inherent reason why we must use powers of 10, or base 10. The Babylonians, for instance, used base 60, and base 12 was very common in medieval Europe. Today, the most widely used numeral systems are summarised in \autoref{tab:number_systems}
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Numeral system} & \textbf{Symbols} & \textbf{Base} & \textbf{Additional information} \\ \hline
+\textbf{Decimal} & 0-9 & 10 & - \\ \hline
+\textbf{Binary} & 0, 1 & 2 & - \\ \hline
+\textbf{Hexadecimal} & 0-9, A-F & 16 & $\mathrm{A} \equiv 10, \mathrm{B} \equiv 11, \mathrm{C} \equiv 12,$ $\mathrm{D} \equiv 13, \mathrm{E} \equiv 14, \mathrm{F} \equiv 15$ \\ \hline
+\textbf{Octal} & 0-7 & 8 & - \\ \hline
+\end{tabular}
+\caption{Summary of Common Numeral Systems}
+\label{tab:number_systems}
+\end{table}
+
+We begin by focusing on binary which will also receive the most detailed attention in this chapter.
+
+\section{Binary Numbers}
+In the binary scale, we express numbers in powers of 2 rather than the 10s of the decimal scale. For some numbers, this is easy. Recall $2^0=1$,
+
+\begin{table}[!ht]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c c c c c c c c|}
+\hline 
+\multirow{2}{*}{Decimal number} & & \multirow{2}{*}{In powers of 2} & \multicolumn{4}{c}{Power of 2} & \multirow{2}{*}{Binary number} \\
+& & & 3 & 2 & 1 & 0 & \\ \hline
+8 & $=$ & $2^3$ & 1 & 0 & 0 & 0 & 1000 \\
+7 & $=$ & $2^2 + 2^1 + 2^0$ & 0 & 1 & 1 & 1 & 111 \\
+6 & $=$ & $2^2 + 2^1$ & 0 & 1 & 1 & 0 & 110 \\
+5 & $=$ & $2^2 + 2^0$ & 0 & 1 & 0 & 1 & 101 \\
+4 & $=$ & $2^2$ & 0 & 1 & 0 & 0 & 100 \\
+3 & $=$ & $2^1 + 2^0$ & 0 & 0 & 1 & 1 & 11 \\
+2 & $=$ & $2^1$ & 0 & 0 & 1 & 0 & 10 \\
+1 & $=$ & $2^0$ & 0 & 0 & 0 & 1 & 1 \\ \hline
+\end{tabular}
+\caption{Decimal Numbers in Binary Representation}
+\end{table}
+
+As in decimal, we write this with the position of the digit representing the power, the first place after the decimal being the $2^0$ position, the next the $2^1$, and so on. To convert a decimal number to binary, we can use the \texttt{mod} operator.
+
+As an example, consider 88 in decimal or $88_{10}$. We would like to write it as a binary number. We take the number and successively divide \texttt{mod} 2. See below:
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+Step Number $n$ & $x_n$ & $x_n / 2$ & $x_n \bmod 2$ \\ \hline
+0 & 88 & 44 & 0 \\ 
+1 & 44 & 22 & 0 \\
+2 & 22 & 11 & 0 \\
+3 & 11 & 5 & 1 \\
+4 & 5 & 2 & 1 \\
+5 & 2 & 1 & 0 \\
+6 & 1 & 0 & 1 \\ \hline
+\end{tabular}
+\caption{Conversion of Decimal 88 to Binary}
+\end{table}
+
+Writing the last column in reverse, that is from the bottom up, we have 1011000, which is the binary form of 88, i.e., $88_{10} = 1011000_2$.
+
+Binary decimals are less common but quite possible. Thus, 101.1011 is just $2^2 + 2^0 + 2^{-1} + 2^{-3} + 2^{-4}$, which is, after some calculation, 5.6875. We have seen how to turn the integer part of a decimal number into a binary number, and we can do the same with a decimal fraction. Consider 0.6875. As before, we draw up a table:
+
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+Step Number $n$ & $x_n$ & $x_n \times 2$ & $\left\lfloor x_n \times 2 \right\rfloor$ \\ \hline
+0 & 0.6875 & 1.375 & 1 \\ \hline
+1 & 0.375 & 0.75 & 0 \\ \hline
+2 & 0.75 & 1.5 & 1 \\ \hline
+3 & 0.5 & 1 & 1 \\ \hline
+\end{tabular}
+\caption{Conversion of Decimal Fraction 0.6875 to Binary}
+\end{table}
+
+Giving, reading down, $0.6875_{10} = 1011_2$.
+
+\subsection*{Binary Expansion}
+
+The process outlined in the previous section is called \textbf{binary expansion} and refers to the representation of a number in the binary (base-2) numeral system. Every decimal number can be expressed as a sum of powers of 2, where each power corresponds to a binary digit (bit) in the number's binary form.
+
+Let's reconsider the decimal number 88. To find its binary expansion, we identify the largest power of 2 less than or equal to 88 and continue subtracting powers of 2 until we reach 0.
+
+First, we note that $2^6 = 64$ is the largest power of 2 less than 88:
+\[
+88 = 64 + 24
+\]
+
+Next, we find that $2^4 = 16$ is the largest power of 2 less than 24:
+\[
+24 = 16 + 8
+\]
+
+Finally, $2^3 = 8$ exactly matches the remainder:
+\[
+8 = 8 + 0
+\]
+
+Thus, we have:
+\[
+88 = 2^6 + 2^4 + 2^3
+\]
+
+In binary, each of these powers of 2 is represented by a '1' in the corresponding place value, with '0' in place values where no power of 2 contributes:
+\[
+88_{10} = 1011000_2
+\]
+
+To summarise:
+\begin{itemize}
+    \item $2^6 = 64$ corresponds to the leftmost '1' in the binary expansion.
+    \item $2^4 = 16$ corresponds to the next '1'.
+    \item $2^3 = 8$ corresponds to the next '1'.
+    \item The remaining digits are '0' because $2^5$, $2^2$, $2^1$, and $2^0$ do not contribute to the value 88.
+\end{itemize}
+
+Thus, the binary expansion of 88 is $1011000_2$. This method of representing numbers is fundamental in computer science and digital electronics, where binary representation is the standard for data storage and processing.
+
+\subsection*{Binary Operations}
+Binary operations are basic arithmetic operations performed on binary numbers. These operations are essential in computing and digital systems, as they form the foundation for how computers process and manipulate data.
+
+Binary addition, subtraction, and multiplication are similar to their decimal counterparts but follow simpler rules due to the binary system's limited digits. For example, binary addition follows these rules:
+
+\[
+0 + 0 = 0, \quad 0 + 1 = 1, \quad 1 + 0 = 1, \quad 1 + 1 = 10
+\]
+
+In this case, \(1 + 1\) results in \(10_2\), which means 0 with a carry of 1 to the next higher bit. Binary subtraction and multiplication follow similar straightforward rules that are easy to implement in digital systems.
+
+The XOR (exclusive OR) operation is another important binary operation. XOR produces a 1 if the two bits being compared are different and a 0 if they are the same:
+
+\[
+0 \oplus 0 = 0, \quad 0 \oplus 1 = 1, \quad 1 \oplus 0 = 1, \quad 1 \oplus 1 = 0
+\]
+
+In binary addition, the XOR operation is used to add two bits without considering any carry from a previous bit. This is because XOR effectively performs addition modulo 2, which aligns perfectly with how binary addition works. For example:
+
+\[
+\begin{array}{c|c|c|c}
+\text{Bit 1} & \text{Bit 2} & \text{XOR (Sum)} & \text{AND (Carry)} \\
+\hline
+0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 \\
+1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+\end{array}
+\]
+
+In the case of \(1 + 1\), XOR gives a sum of 0 and an AND operation (which detects the carry) gives a carry of 1, resulting in the binary number 10.
+
+\begin{align*}
+0 + 0 &= 0 \\
+0 + 1 &= 1 \\
+1 + 1 &= 10 \quad \text{so we carry 1 and leave a zero} \\
+1 + 1 + 1 &= 1 + (1 + 1) = 1 + 10 = 11.
+\end{align*}
+
+We can write this in very much the same way as for a decimal addition:
+
+\[
+\begin{array}{r|r|r|r|r|r|r|r}
+& 1 & 1 & 0 & 1 & 0 & 1 & \\
++ & 1 & 0 & 1 & 1 & 1 & 0 & \\
+\hline
+1 & 1 & 0 & 0 & 0 & 1 & 1 & \quad \text{Sum} \\
+\uparrow & & & & \uparrow & & & \\
+& & & & & & &
+\end{array}
+\]
+
+The right-hand arrow shows where we carry a 1. The left-hand arrow shows where we have $1 + 1 + 1$ so we carry a 1 and have a 1 left over.
+
+As we will see below, we will often need to handle multiple carries. There are two ways to handle this which resemble the methods we know from the decimal system. We will explain using an example.
+
+\subsubsection*{Method 1: Column-wise Binary Addition with Multiple Carries}
+Consider
+
+\begin{equation*}
+\begin{tikzpicture}[
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  &  &  &  &  &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-4-2.south west) -- (m-4-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+\textbf{Step 1: Add the Rightmost Column }\newline
+Start by adding the rightmost bits:
+
+$$
+1+1+1+1=100_2 \quad(\text { which is binary for } 4)
+$$
+Reading the result from right to left (i.e. from \textit{least significant bit} (LSB) to the \textit{most significant bit}(MSB))
+\begin{itemize}
+    \item write down the 0
+    \item carry the 0 to the next column
+    \item carry the 1 to the third column
+\end{itemize}
+You end up with
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  &  &  & 1 & 0 &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  &  &  &  & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-5-2.south west) -- (m-5-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+\textbf{Step 2: Add the Second Column from the Right}\newline
+Next, add the second column:
+
+
+
+$$
+0+1+0+0+1=10_2 \quad(\text{ which is binary for } 2)
+$$
+Reading the result from LSB to MSB:
+\begin{itemize}
+    \item write down the 0
+    \item carry the 1 to the next column
+\end{itemize}
+You end up with
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  &  &  & 1 &  &   &            \\
+        &   &   &   &   &   &  &  &  &  & 1 &  &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  &  &  & 0 & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-6-2.south west) -- (m-6-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+
+\textbf{Step 3: Add the Third Column from the Right}\newline
+Now, add the third column:
+
+$$
+1+1+1+1+1+1=110_2 \quad(\text{ which is binary for } 6)
+$$
+Reading the result from LSB to MSB
+\begin{itemize}
+    \item write down the 0
+    \item carry the 1 to the fourth column
+    \item carry the 1 to the fifth column
+\end{itemize}
+You end up with
+
+Our sum so far:
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  & 1 & 1 &  &  &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  &  & 0 & 0 & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-5-2.south west) -- (m-5-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+
+\textbf{Step 4: Add the Fourth Column from the Right}\newline
+Move to the fourth column:
+
+$$
+1+1+1+1+1=101_2 \quad(\text{ which is binary for } 5)
+$$
+
+Reading the result from LSB to MSB
+\begin{itemize}
+    \item write down the 1
+    \item carry the 0 to the fifth column
+    \item carry the 1 to the sixth column
+\end{itemize}
+You end up with
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  & 0 &  &  &  &   &            \\
+        &   &   &   &   &   &  & 1 & 1 &  &  &  &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  & 1 & 0 & 0 & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-6-2.south west) -- (m-6-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+\textbf{Step 5: Add the Leftmost Column}\newline
+Add the leftmost column:
+
+$$
+1+1+1+1+1=101_2 \quad(\text{ which is binary for } 5)
+$$
+Reading the result from LSB to MSB
+\begin{itemize}
+    \item write down the 1
+    \item carry the 0 to the sixth column
+    \item carry the 1 to the seventh column
+\end{itemize}
+This results in
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  & 0 &  &  &  &  &   &            \\
+        &   &   &   &   &   & 1 & 1 &  &  &  &  &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 0 & 0 & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-6-2.south west) -- (m-6-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+
+\textbf{Step 6: Add the Remaining Carries}\newline
+Finally, add the remaining carries:
+
+\begin{equation*}
+\begin{tikzpicture}[
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  & 1 & 1 & 1 & 1 & 0 & 0 &  0&            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-4-2.south west) -- (m-4-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+The following example demonstrates the entire process by using different colors to distinguish each column and the corresponding carries they produce. Note that the last two digits in the sum are colored black, as they do not result from any specific column but are instead generated solely from the carries.
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 3/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  \textcolor{YellowOrange}{1} &  \textcolor{YellowOrange}{0} &  &  &  &  &   &            \\
+        &   &   &   &   &   &  & \textcolor{Purple}{1} & \textcolor{Purple}{0} &  & \textcolor{red}{1}  &  &   &            \\
+        &   &   &   &   &   &  &  & \textcolor{Green}{1}  & \textcolor{Green}{1}  & \textcolor{blue}{1}  & \textcolor{blue}{0}  &   &            \\
+        &  &  &  &  &  &  &  & \textcolor{YellowOrange}{1} & \textcolor{Purple}{1} & \textcolor{Green}{1}  & \textcolor{red}{1}  & \textcolor{blue}{1} &     \\
+    +   &  &  &  &  &  &  &  &  \textcolor{YellowOrange}{1} & \textcolor{Purple}{1} & \textcolor{Green}{1}  & \textcolor{red}{0} & \textcolor{blue}{1}  &            \\
+    +   &  &  &  &  &  &  &  &  \textcolor{YellowOrange}{1} & \textcolor{Purple}{1} & \textcolor{Green}{1}  & \textcolor{red}{0}  & \textcolor{blue}{1}  &            \\
+    +   &  &  &  &  &  &  &  &  \textcolor{YellowOrange}{1} & \textcolor{Purple}{1} & \textcolor{Green}{1}  & \textcolor{red}{1}  & \textcolor{blue}{1}  &            \\
+        &  &  &  &  &  & 1 & 1 &  \textcolor{YellowOrange}{1} & \textcolor{Purple}{1} & \textcolor{Green}{0}  & \textcolor{red}{0}  & \textcolor{blue}{1}  &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-7-2.south west) -- (m-7-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+\subsubsection*{Method 2: Direct Summation and Simplification}
+We will illustrate the second method using the same example. In the previous case, we carried the actual binary number to the next columns. In this method, we write down 0 if the sum is even and 1 if the sum is odd. Every time a sum a multiple of 2, we carry a 1 to the next columns, and then continue this process for each column, including the carries in the calculation of that column.
+
+\textbf{Step 1: Add the Rightmost Column}\newline
+Add bits in column 1 (from counting from MSB):
+
+$$
+1+1+1+1=100_2 \quad(\text{ which is binary for } 4)
+$$
+Reading the result from LSB to MSB
+\begin{itemize}
+    \item write down the 0
+    \item carry a 1 for the first multiple of 2
+    \item carry a 1 for the second multiple of 2
+\end{itemize}
+This results in
+
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 3/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  &  &  &  &  &   &            \\
+        &   &   &   &   &   &  &  &  &  &  & 1 &   &            \\
+        &   &   &   &   &   &  &  & &  &  & 1 &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  &  &  &  & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-7-2.south west) -- (m-7-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+\textbf{Step 2: Add the Second Column from the Right}\newline
+Add bits in column 2 (from counting from MSB):
+
+$$
+1+1+1+1=100_2 \quad(\text{ which is binary for } 4)
+$$
+Reading the result from LSB to MSB
+\begin{itemize}
+    \item write down the 0
+    \item carry a 1 for the first multiple of 2
+    \item carry a 1 for the second multiple of 2
+\end{itemize}
+This results in
+
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 3/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  &  &  &  &  &   &            \\
+        &   &   &   &   &   &  &  &  &  & 1  &  &   &            \\
+        &   &   &   &   &   &  &  & &  & 1 &  &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  &  &  & 0 & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-7-2.south west) -- (m-7-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+\textbf{Step 3: Add the Third Column from the Right}
+Add bits in column 3 (from counting from MSB):
+
+$$
+1+1+1+1+1+1=110_2 \quad(\text{ which is binary for } 6)
+$$
+Reading the result from LSB to MSB
+\begin{itemize}
+    \item write down the 0
+    \item carry a 1 for the first multiple of 2
+    \item carry a 1 for the second multiple of 2
+    \item carry a 1 for the third multiple of 2
+\end{itemize}
+
+This results in
+
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 3/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  &  & 1 &  &  &   &            \\
+        &   &   &   &   &   &  &  &  & 1 &   &  &   &            \\
+        &   &   &   &   &   &  &  & & 1 &  &  &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  &  & 0 & 0 & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-7-2.south west) -- (m-7-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+\textbf{Step 4: Add the Fourth Column from the Right}\newline
+Add bits in column 4 (from counting from MSB):
+
+$$
+1+1+1+1+1+1+1=111_2 \quad(\text{ which is binary for } 7)
+$$
+Reading the result from LSB to MSB
+\begin{itemize}
+    \item write down the 1
+    \item carry a 1 for the first multiple of 2
+    \item carry a 1 for the second multiple of 2
+    \item carry a 1 for the third multiple of 2
+\end{itemize}
+This results in
+
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 3/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  & 1 &  &  &  &   &            \\
+        &   &   &   &   &   &  &  & 1 &  &   &  &   &            \\
+        &   &   &   &   &   &  &  & 1 &  &  &  &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  &  &  &  & 1 & 0 & 0 & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-7-2.south west) -- (m-7-13.south east);
+
+\end{tikzpicture}
+\end{equation*}
+
+
+\textbf{Step 5: Add the Leftmost Column}\newline
+Add bits in leftmost column):
+
+$$
+1+1+1+1+1+1+1=111_2 \quad(\text{ which is binary for } 7)
+$$
+Reading the result from LSB to MSB
+\begin{itemize}
+    \item write down the result in binary, i.e. 1 1 1
+\end{itemize}
+This results in
+
+
+\begin{equation*}
+\begin{tikzpicture}[
+    row 1/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 2/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    row 3/.style={font=\textsl,font=\tiny, anchor=mid,
+        inner sep=1.5pt},
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  &  &  &  &  &   &            \\
+        &   &   &   &   &   &  &  &  &  &   &  &   &            \\
+        &   &   &   &   &   &  &  & &  &  &  &   &            \\
+        &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &     \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 0 & 1 &            \\
+    +   &  &  &  &  &  &  &  & 1 & 1 & 1 & 1 & 1 &            \\
+        &  &  &  &  &  & 1 & 1 & 1 & 1 & 0 & 0 & 0 &            \\                                                  
+    };
+
+    \draw[-,color=black,semithick] (m-7-2.south west) -- (m-7-13.south east);
+\end{tikzpicture}
+\end{equation*}
+
+which corresponds to the result we obtained above. While not demonstrated explicitly here, subtraction works in a similar fashion.
+
+By using one of these methods for handling multiple carries, allow us to also multiply two binary numbers.
+
+
+
+\subsection*{Multiplication in Binary}
+Multiplication in binary is technically easier than multiplication in decimal. In binary operations, we work exclusively with two digits: 0 and 1. This means that both the multiplier\footnote{The "multiplicand" is the number to be multiplied, and the "multiplier" is the number by which it is multiplied.} and the multiplicand consist only of 0s and 1s. The process of finding the binary product is analogous to traditional multiplication in the decimal system. The four possible products of individual binary digits are:
+
+\[
+\begin{aligned}
+& 0 \times 0=0 \\
+& 0 \times 1=0 \\
+& 1 \times 0=0 \\
+& 1 \times 1=1 \\
+& 1 \times 10_2 = 10_2 \quad \left( \text{multiplying by base } 10_2 \text{ adds a 0 to the end} \right)
+\end{aligned}
+\]
+
+The last step means that $101_2 \times 10_2 = 1010_2$ which is analogous to the decimal case: $143_{10} \times 10_{10} = 1430_{10}$.
+
+We will illustrate the process by supplying a couple of examples.
+
+\begin{example}
+
+
+\begin{equation*}
+\begin{tikzpicture}[
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &  (1) &   &   &   &  &  &  &  & 1 & 0 & 0  &            \\
+     \times   &   & (2)  &   &   &   &  &  &  &  &   & 1 &  1 &            \\
+        &   & (3)  &   &   &   &  &  & &  & 1 & 0 & 0  &            \\
+       + &  & (4) &  &  &  &  &  &  & 1 & 0 & 0 & 0 &     \\
+        &  & (5) &  &  &  &  &  &  & 1 & 1 & 0 & 0 &            \\                                                  
+    };
+
+    \draw[dashed, color=black, semithick] (m-2-2.south west) -- (m-2-13.south east);
+    \draw[-,color=black,semithick] (m-4-2.south west) -- (m-4-13.south east);
+    \end{tikzpicture}
+\end{equation*}
+
+Here are the steps:
+
+\begin{itemize}
+    \item Multiply the multiplicand (line 1) by the LSB of the multiplier (line 2), which in this case is 1.
+    \item Record this result in line 3.
+    \item Append a 0 to line 4 to account for the shift to the next power of 2 in the multiplier.
+    \item Multiply the multiplicand (line 1) by the next bit of the multiplier (line 2), which is also 1 in this case.
+    \item Add this result to line 4, after the 0 you appended earlier.
+    \item Finally, sum the values in lines 3 and 4, as outlined in the previous section, to obtain the final result in line 5.
+\end{itemize}
+\end{example}
+
+We offer two additional examples:
+
+\begin{example}
+
+\begin{equation*}
+\begin{tikzpicture}[
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   &  &  &  &  & 1 & 0 & 1  &            \\
+     \times   &   &   &   &   &   &  &  &  & 1 &  0 & 1 &  1 &            \\
+        &   &   &   &   &   &  &  & &  & 1 & 0 & 1  &            \\
+       + &  &  &  &  &  &  &  &  & 1 & 0 & 1 & 0 &     \\
+       + &  &  &  &  &  &  &  & 0 & 0 & 0 & 0 & 0 &            \\               
+       + &  &  &  &  &  &  & 1 & 0 & 1 & 0 & 0 & 0 &     \\
+        &  &  &  &  &  &  & 1 & 1 & 0 & 1 & 1 & 1 &            \\                                        
+    };
+
+    \draw[dashed, color=black, semithick] (m-2-2.south west) -- (m-2-13.south east);
+    \draw[-,color=black,semithick] (m-6-2.south west) -- (m-6-13.south east);
+    \end{tikzpicture}
+\end{equation*}
+    
+\end{example}
+
+\begin{example}
+\label{ex1.3}
+\begin{equation*}
+\begin{tikzpicture}[
+    every node/.style={column sep=.5mm,row sep=1mm}]
+    \matrix (m) [matrix of math nodes,
+        nodes in empty cells,
+        %nodes=draw
+    ] 
+    {
+        &   &   &   &   &   & \textcolor{Green}{1} & \textcolor{Green}{0} & \textcolor{Green}{0} & \textcolor{Green}{1} & \textcolor{Green}{1} & \textcolor{Green}{1} & \textcolor{Green}{0}  &            \\
+     \times   &   &   &   &   &   &  &  &  &  &  1 & 0 &  1 &            \\
+        &   &   &   &   &   & \textcolor{Green}{1} & \textcolor{Green}{0} & \textcolor{Green}{0} & \textcolor{Green}{1} & \textcolor{Green}{1} & \textcolor{Green}{1} & \textcolor{Green}{0}   &            \\
+       + &  &  &  & \textcolor{Green}{1} & \textcolor{Green}{0} & \textcolor{Green}{0} & \textcolor{Green}{1} & \textcolor{Green}{1} & \textcolor{Green}{1} & \textcolor{Green}{0} & \textcolor{Red}{0} & \textcolor{Red}{0} &            \\             
+        &  &  &  & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 & 0 &     \\                                     
+    };
+
+    \draw[dashed, color=black, semithick] (m-2-2.south west) -- (m-2-13.south east);
+    \draw[-,color=black,semithick] (m-4-2.south west) -- (m-4-13.south east);
+    \end{tikzpicture}
+\end{equation*}
+    
+\end{example}
+
+In \autoref{ex1.3} notice that we omitted the row of zeroes that the second value of the multiplier would have produced, and notice even further that we added two 0's before restating the multiplicand in the sum.
+
+Binary multiplication, like binary addition, is a core operation in computer arithmetic. By breaking the process down into manageable steps—multiplying individual bits and then summing the results—it becomes clear how similar it is to the multiplication methods we use in the decimal system. The main difference is the simplicity and efficiency of working within the binary system, where only the digits 0 and 1 are involved.
+
+We notice how binary multiplication builds on binary addition. Each step, involving shifts and sums, essentially consists of repeated additions adjusted by powers of two. A strong grasp of binary addition naturally leads to a better understanding of binary multiplication and its applications.
+
+\section{Octal and Hexadecimal}
+Octal is a base-8 numbering system that uses the digits 0 through 7. It is closely related to binary, which is a base-2 system. The connection between the two lies in how easily binary numbers can be converted to octal and vice versa. Each octal digit corresponds to exactly three binary digits (bits), making conversions straightforward. For example, the binary number `110` converts directly to the octal digit `6`. Because of this close relationship, octal is often used as a shorthand for binary in computing, particularly in contexts where grouping binary digits in sets of three simplifies reading and interpreting binary data.
+
+\[
+\begin{aligned}
+12_8 &= 1 \cdot 8^1 + 2 \cdot 8^0  = 10_{10} \\
+3021_8 & = 3 \cdot 8^3 + 0 \cdot 8^2 + 2 \cdot 8^1 + 1 \cdot 8^0 = 1553_{10}
+\end{aligned}
+\]
+
+Since \(8\) is \(2^3\), we can express it in binary:
+
+\[
+\begin{aligned}
+3 & \rightarrow \textcolor{Green}{011} \\
+0 & \rightarrow \textcolor{YellowOrange}{000} \\
+2 & \rightarrow \textcolor{blue}{010} \\
+1 & \rightarrow \textcolor{red}{001} \\
+\end{aligned}
+\]
+
+\[
+\text{Thus, } 3021_8 = \textcolor{Green}{011}\textcolor{YellowOrange}{000} \textcolor{blue}{010}\textcolor{red}{001}_2 = \textcolor{Green}{11}\textcolor{YellowOrange}{000} \textcolor{blue}{010}\textcolor{red}{001}_2
+\]
+
+We obtain the final result by removing leading zeros.
+
+Hexadecimal is a base-16 numbering system that uses sixteen distinct symbols: the digits 0-9 and the letters A-F, where A represents 10, B represents 11, and so on up to F, which represents 15. Hexadecimal is closely related to binary because each hexadecimal digit corresponds exactly to four binary digits (bits). This direct relationship makes it easy to convert between the two systems. For example, the hexadecimal digit `A` translates to the binary sequence `1010`. Due to this efficiency in grouping, hexadecimal is often used in computing as a more compact and readable way to represent binary data, particularly in areas like memory addresses and colour codes in web design.
+
+\[
+\begin{aligned}
+123_{16} &= 1 \cdot 16^2 + 2 \cdot 16^1 + 3 \cdot 16^0  = 256 + 32 + 3 = 291_{10} \\
+A2E_{16} & = 10 \cdot 16^2 + 2 \cdot 16^1 + 14 \cdot 16^0 = 2560 + 32 + 14 = 2606_{10}
+\end{aligned}
+\]
+
+Since \(16\) is \(2^4\), we can, for instance, express $A2E_{16}$ in binary:
+
+\[
+\begin{aligned}
+A & \rightarrow 1010 \\
+2 & \rightarrow 0010 \\
+E & \rightarrow 1110 \\
+\end{aligned}
+\]
+
+\[
+\text{Thus, } A2E_{16} = 101000101110_2
+\]
+
+Similarly we get $5EB52_{16}$ as
+
+\[
+\begin{aligned}
+5 & \rightarrow 0101 \\
+E & \rightarrow 1110 \\
+B & \rightarrow 1011 \\
+5 & \rightarrow 0101 \\
+2 & \rightarrow 0010 \\
+\end{aligned}
+\]
+
+\[
+\text{Thus, } 5EB52_{16} = 0101\,1110\,1011\,0101\,0010_2 = 1011110101101010010_2
+\]
+
+The four-bit groups make the conversion transparent. In the final representation, the single leading zero may be omitted without changing the value.
+
+\section{Converting Between Systems}
+
+Understanding how to convert numbers between binary, decimal, octal, and hexadecimal systems is essential in computer science and digital electronics. Each system is a different base, and each has its own applications. Here's a step-by-step guide to help you convert numbers from one system to another.
+
+\subsection*{Decimal to Binary Conversion}
+To convert a decimal number to binary:
+\begin{enumerate}
+    \item Divide the decimal number by 2.
+    \item Record the remainder (it will be 0 or 1).
+    \item Divide the quotient by 2 and record the remainder.
+    \item Repeat until the quotient is 0.
+    \item The binary number is the sequence of remainders read from bottom to top.
+\end{enumerate}
+
+\begin{example} Convert \(23_{10}\) to binary.
+
+\begin{solution}
+
+\[
+\begin{aligned}
+23 \div 2 & = 11 \quad \text{remainder } 1 \\
+11 \div 2 & = 5 \quad \text{remainder } 1 \\
+5 \div 2 & = 2 \quad \text{remainder } 1 \\
+2 \div 2 & = 1 \quad \text{remainder } 0 \\
+1 \div 2 & = 0 \quad \text{remainder } 1 \\
+\end{aligned}
+\]
+Thus, \(23_{10} = 10111_2\). \end{solution}
+\end{example}
+
+\subsection*{Decimal to Octal Conversion}
+To convert a decimal number to octal:
+\begin{enumerate}
+    \item Divide the decimal number by 8.
+    \item Record the remainder.
+    \item Divide the quotient by 8 and record the remainder.
+    \item Repeat until the quotient is 0.
+    \item The octal number is the sequence of remainders read from bottom to top.
+\end{enumerate}
+
+\begin{example}Convert \(78_{10}\) to octal.
+
+\begin{solution}
+    
+
+
+\[
+\begin{aligned}
+78 \div 8 & = 9 \quad \text{remainder } 6 \\
+9 \div 8 & = 1 \quad \text{remainder } 1 \\
+1 \div 8 & = 0 \quad \text{remainder } 1 \\
+\end{aligned}
+\]
+Thus, \(78_{10} = 116_8\). \end{solution}
+    
+\end{example}
+
+\subsection*{Decimal to Hexadecimal Conversion}
+To convert a decimal number to hexadecimal:
+\begin{enumerate}
+    \item Divide the decimal number by 16.
+    \item Record the remainder (use A, B, C, D, E, F for remainders 10, 11, 12, 13, 14, 15 respectively).
+    \item Divide the quotient by 16 and record the remainder.
+    \item Repeat until the quotient is 0.
+    \item The hexadecimal number is the sequence of remainders read from bottom to top.
+\end{enumerate}
+
+\begin{example}Convert \(255_{10}\) to hexadecimal.
+
+\begin{solution}
+    
+\[
+\begin{aligned}
+255 \div 16 & = 15 \quad \text{remainder } 15 \quad (\text{F}) \\
+15 \div 16 & = 0 \quad \text{remainder } 15 \quad (\text{F}) \\
+\end{aligned}
+\]
+Thus, \(255_{10} = FF_{16}\).\end{solution}
+
+\end{example}
+
+
+\subsection*{Binary to Decimal Conversion}
+To convert a binary number to decimal:
+\begin{enumerate}
+    \item Multiply each bit by 2 raised to the power of its position, starting from 0 on the right.
+    \item Sum all the products.
+\end{enumerate}
+
+Notice that this amounts to the method outlined above about binary expansion.
+
+\begin{example} Convert \(1101_2\) to decimal.
+
+\begin{solution}
+    
+
+\[
+\begin{aligned}
+1 \cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 & = 8 + 4 + 0 + 1 = 13_{10}
+\end{aligned}
+\] \end{solution}
+
+\end{example}
+
+\subsection*{Binary to Octal Conversion}
+To convert a binary number to octal:
+\begin{enumerate}
+    \item Group the binary digits into sets of three, starting from the right. Add leading zeros if necessary.
+    \item Convert each group of three binary digits to its octal equivalent.
+\end{enumerate}
+
+\begin{example}Convert \(110110_2\) to octal.
+
+\begin{solution}
+\[
+\begin{aligned}
+110 & \rightarrow 6 \\
+110 & \rightarrow 6 \\
+\end{aligned}
+\]
+Thus, \(110110_2 = 66_8\). \end{solution}
+
+\end{example}
+
+\subsection*{Binary to Hexadecimal Conversion}
+To convert a binary number to hexadecimal:
+\begin{enumerate}
+    \item Group the binary digits into sets of four, starting from the right. Add leading zeros if necessary.
+    \item Convert each group of four binary digits to its hexadecimal equivalent.
+\end{enumerate}
+
+\begin{example}Convert \(10110101_2\) to hexadecimal.
+
+\begin{solution}
+\[
+\begin{aligned}
+1011 & \rightarrow B \\
+0101 & \rightarrow 5 \\
+\end{aligned}
+\]
+Thus, \(10110101_2 = B5_{16}\). \end{solution}
+
+\end{example}
+
+\subsection*{Octal to Binary Conversion}
+To convert an octal number to binary: Convert each octal digit to its 3-bit binary equivalent!
+
+\begin{example}Convert \(57_8\) to binary.
+
+\begin{solution}
+\[
+\begin{aligned}
+5 & \rightarrow 101 \\
+7 & \rightarrow 111 \\
+\end{aligned}
+\]
+Thus, \(57_8 = 101111_2\). \end{solution}
+
+\end{example}
+
+\subsection*{Octal to Decimal Conversion}
+To convert an octal number to decimal:
+\begin{enumerate}
+    \item Multiply each digit by 8 raised to the power of its position, starting from 0 on the right.
+    \item Sum all the products.
+\end{enumerate}
+
+\begin{example}Convert \(157_8\) to decimal.
+
+\begin{solution}
+    
+\[
+\begin{aligned}
+1 \cdot 8^2 + 5 \cdot 8^1 + 7 \cdot 8^0 & = 64 + 40 + 7 = 111_{10}
+\end{aligned}
+\] \end{solution}
+
+\end{example}
+
+\subsection*{Octal to Hexadecimal Conversion}
+To convert an octal number to hexadecimal:
+\begin{enumerate}
+    \item First, convert the octal number to binary.
+    \item Then, convert the binary number to hexadecimal by grouping the binary digits in sets of four.
+\end{enumerate}
+
+\begin{example}Convert \(157_8\) to hexadecimal.
+
+\begin{solution}
+
+\[
+\begin{aligned}
+1 & \rightarrow 001 \\
+5 & \rightarrow 101 \\
+7 & \rightarrow 111 \\
+\end{aligned}
+\]
+Thus, \(157_8 = 001101111_2 = 6F_{16}\). \end{solution}
+\end{example}
+
+\subsection*{Hexadecimal to Binary Conversion}
+To convert a hexadecimal number to binary: Convert each hexadecimal digit to its 4-bit binary equivalent.
+
+\begin{example}Convert \(2B_{16}\) to binary.
+
+\begin{solution}
+    
+
+
+\[
+\begin{aligned}
+2 & \rightarrow 0010 \\
+B & \rightarrow 1011 \\
+\end{aligned}
+\]
+Thus, \(2B_{16} = 00101011_2\).\end{solution}
+
+\end{example}
+
+\subsection*{Hexadecimal to Decimal Conversion}
+To convert a hexadecimal number to decimal:
+\begin{enumerate}
+    \item Multiply each digit by 16 raised to the power of its position, starting from 0 on the right.
+    \item Sum all the products.
+\end{enumerate}
+
+\begin{example}Convert \(2B_{16}\) to decimal.
+
+\begin{solution}
+\[
+\begin{aligned}
+2 \cdot 16^1 + 11 \cdot 16^0 & = 32 + 11 = 43_{10}
+\end{aligned}
+\] \end{solution}
+\end{example}
+
+\subsection*{Hexadecimal to Octal Conversion}
+To convert a hexadecimal number to octal:
+\begin{enumerate}
+    \item First, convert the hexadecimal number to binary.
+    \item Then, convert the binary number to octal by grouping the binary digits in sets of three.
+\end{enumerate}
+
+\begin{example}Convert \(2B_{16}\) to octal.
+
+\begin{solution}
+
+\[
+\begin{aligned}
+2 & \rightarrow 0010 \\
+B & \rightarrow 1011 \\
+\end{aligned}
+\]
+Thus, \(2B_{16} = 00101011_2 = 53_8\). \end{solution}
+
+\end{example}
+
+\subsection*{Final Thoughts on Conversion}
+The concept of expansion plays a central role in these conversions. Whether you are expanding a decimal number into its binary, octal, or hexadecimal form, or converting a binary number into its octal or hexadecimal equivalent, you are more or less expressing the number in terms of powers of the base. The expansion method is essentially the same for each system as it boils down to dividing by the highest power of the base recursively:
+
+$$
+\begin{aligned}
+7562_{10} & =1 \cdot 16^3+3466=1 \cdot 16^3+13 \cdot 16^2+138 \\
+& =\textcolor{red}{1} \cdot 16^3+ \textcolor{blue}{13} \cdot 16^2+\textcolor{YellowOrange}{8} \cdot 16^1+\textcolor{Green}{10} \cdot 16^0=\textcolor{red}{1} \, \textcolor{blue}{D} \, \textcolor{YellowOrange}{8} \, \textcolor{Green}{A}
+\end{aligned}
+$$
+
+By understanding these expansions and the relationships between these number systems, you can efficiently switch between them, allowing you to represent and manipulate data in the most suitable format for any given situation.

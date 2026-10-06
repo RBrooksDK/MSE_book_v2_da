@@ -1,0 +1,694 @@
+\chapter{Basic Arithmetic}
+\label{chap:ch0}
+A solid understanding of basic arithmetic operations forms the foundation for more advanced mathematical topics. Arithmetic involves the manipulation of numbers through fundamental operations such as addition, subtraction, multiplication, and division. These operations are not only essential in everyday calculations but also serve as the building blocks for more complex mathematical procedures.
+
+In this chapter, we review the core techniques of algebraic arithmetic: factorisation and the order of operations, working with fractions, exponents and radicals, using formulae and substitution, and rearranging formulae. Mastery of these skills will prepare you for the study of functions and the topics that follow.
+
+\section{Factorisation and the Order of Operations}
+Recall that when computing a product such as
+
+\[
+a(b + c) = ab + ac
+\]
+we distribute the factor \(a\) across each term inside the parentheses. We call this \textbf{the distributive property}. However, it is often advantageous or necessary to perform the reverse operation, known as factorisation. Factorisation involves expressing the sum \(ab + ac\) in its factored form \(a(b + c)\).
+
+Mathematically, the expression \(a(b + c)\) is considered more simplified or "better" than \(ab + ac\). To understand why, we must distinguish between \textbf{terms} and \textbf{factors}. Terms are separated by addition or subtraction, while factors are separated by multiplication or division. For instance, the expression 
+
+\[ 
+8 - 5 + 3 
+\]
+consists of three terms (8, -5, and 3), whereas the expression 
+
+\[ 
+2 \times 5 \times 3 
+\]
+consists of three factors (2, 5, and 3). Consider the expression 
+
+\[ 
+5 + 2 + 7 \times 8 
+\]
+which consists of three terms (5, 2, and \(7 \times 8\)), and note that one of the terms itself contains two factors (7 and 8). Similarly, the expression 
+
+\[ 
+5(2 + 4)(-9) 
+\]
+consists of three factors (5, \(2 + 4\), and -9), with one factor, \(2 + 4\), containing two terms.
+
+The advantage of expressing mathematical expressions in factored form lies in the ability to simplify them more effectively. This will become clearer throughout the chapter, especially when working with fractions and equations. Here are some examples of factorisation:
+
+\newpage
+
+\begin{example} Factorisation
+
+\begin{align*}
+ab - ac &= a(b - c) \\
+-ab - ac &= a(-b - c) \\
+-ab - ac &= -a(b + c) \\
+ab - ac + aa - aa &= a(b - c + a - a) \\
+abc - ab + aba &= ab(c - 1 + a) \\
+ab - abc - a &= a(b - bc - 1)
+\end{align*}
+
+\end{example}
+
+When evaluating mathematical expressions, it is crucial to follow a specific order of operations to ensure accurate results. The correct sequence for performing these operations is as follows:
+
+\begin{enumerate}
+    \item \textbf{Brackets (Parentheses)}: First, perform all operations inside brackets or parentheses.
+    \item \textbf{Exponents and Radicals}: Next, evaluate exponents (powers) and radicals (roots).
+    \item \textbf{Multiplication and Division}: Then, perform multiplication and division from left to right as they appear.
+    \item \textbf{Addition and Subtraction}: Finally, execute addition and subtraction from left to right as they appear.
+\end{enumerate}
+
+Let's consider examples for each operation to illustrate the order of operations:
+
+\begin{example} Brackets \newline
+Evaluate the expression: \((2 + 3) \times 4\)
+
+\[
+(2 + 3) \times 4 = 5 \times 4 = 20
+\]
+\end{example}
+
+\begin{example} Exponents and Radicals \newline
+Evaluate the expression: \(3^2 + \sqrt{16}\)
+
+\[
+3^2 + \sqrt{16} = 9 + 4 = 13
+\]
+\end{example}
+
+\begin{example} Multiplication and Division \newline
+Evaluate the expression: \(6 \div 2 \times 3\). According to the standard order of operations, we perform division and multiplication from left to right:
+
+\[
+6 \div 2 \times 3 = (6 \div 2) \times 3 = 3 \times 3 = 9
+\]
+
+\end{example}
+
+\begin{example} Addition and Subtraction \newline
+Evaluate the expression: \(8 - 3 + 2\)
+
+\[
+8 - 3 + 2 = 5 + 2 = 7
+\]
+\end{example}
+
+\section{Fractions}
+By definition, a fraction always consists of (at least) two factors. The first factor we will call the \textbf{numerator} and is the “top part” of the fraction. The bottom part we will call the \textbf{denominator}. Perhaps the most important rule when working with fractions is that two fractions can only be added or subtracted if they have identical denominators. Also, the denominator must never be equal to 0.
+
+\begin{example}
+
+\[
+\frac{1}{x^2 - 2}
+\]    
+\end{example}
+
+Here we must make sure that \(x^2 - 2 \neq 0\) which means that we may only use values different from \(\pm\sqrt{2}\).
+
+\begin{proposition}[Rules for Calculations with Fractions]
+For $a,b,c,m \in \mathbb{R}$, with $a,b,c,m \neq 0$ where required, the following identities hold:
+\begingroup
+\setlength{\jot}{8pt} % increase space between align rows (default ~3pt)
+\begin{align*}
+(1) & \quad \frac{a}{b} \times m = \frac{am}{b} \\
+(2) & \quad \frac{a}{b} \div m = \frac{a}{bm} \\
+(3) & \quad m \div \frac{a}{b} = \frac{mb}{a} \\
+(4) & \quad \frac{a}{b} \times \frac{c}{a} = \frac{c}{b} \\
+(5) & \quad \frac{a}{b} \div \frac{c}{a} = \frac{a^2}{bc} \\
+(6) & \quad \frac{a}{b} = \frac{ac}{bc} \\
+(7) & \quad \frac{a}{b} + \frac{c}{a} = \frac{a^2 + bc}{ab}
+\end{align*}
+\endgroup
+\end{proposition}
+
+To extend or reduce a fraction, we must multiply or divide by the same numbers in the denominator and numerator:
+
+\begin{example} Extending or reducing fractions
+
+\[
+\frac{72}{144} = \frac{72 \div 12}{144 \div 12} = \frac{6}{12} = \frac{6 \div 6}{12 \div 6} = \frac{1}{2}
+\]
+
+\[
+\frac{2}{3} = \frac{2 \times 6}{3 \times 6} = \frac{12}{18}
+\]
+
+\[
+\frac{2x}{2xx} = \frac{2}{2x}
+\]
+
+\[
+\frac{3a}{6a + 3b} = \frac{3a}{3(2a + b)} = \frac{a}{2a + b}
+\]    
+\end{example}
+
+To factorise an expression, all terms must be divided or multiplied uniformly. This implies that it is not possible to simplify the following expression any further, even though it might be tempting:
+
+\[
+\frac{a}{2a + b} \neq \frac{1}{2 + b}
+\]
+
+For proper factorisation of \(\frac{a}{2a + b}\), you must divide \(a\) into all terms in the denominator:
+
+\[
+\frac{a}{2a + b} = \frac{1}{2 + \frac{b}{a}}
+\]
+
+As illustrated above, the multiplication of fractions is straightforward: you multiply the numerators and denominators with each other, respectively.
+
+\begin{example} Multiplication of fractions \newline
+Consider the fractions \(\frac{a}{b}\) and \(\frac{c}{d}\). Their product is:
+
+\[
+\frac{a}{b} \times \frac{c}{d} = \frac{a \times c}{b \times d}
+\]
+
+For instance, if \(a = 2\), \(b = 3\), \(c = 4\), and \(d = 5\), then:
+
+\[
+\frac{2}{3} \times \frac{4}{5} = \frac{2 \times 4}{3 \times 5} = \frac{8}{15}
+\]
+  
+\end{example} 
+
+\begin{example} Dividing fractions
+
+\[
+\frac{6}{7} \div \frac{4}{21} = \frac{6}{7} \times \frac{21}{4} = \frac{126}{28} = \frac{63}{14} = \frac{9}{2}
+\]
+
+\[
+\frac{1}{2} \div 3 = \frac{1}{2} \div \frac{3}{1} = \frac{1}{2} \times \frac{1}{3} = \frac{1}{6}
+\]
+
+\[
+\frac{2}{3} \div \frac{8}{9} = \frac{2}{3} \times \frac{9}{8} = \frac{18}{24} = \frac{3}{4}
+\]
+
+\[
+\frac{8}{9} \div 16 = \frac{8}{9} \times \frac{1}{16} = \frac{8}{144} = \frac{4}{72} = \frac{1}{18}
+\]
+  
+\end{example}
+
+Adding and subtracting fractions seems to cause more problems than multiplication and division. The key is to find a common denominator between the fractions and then remember the above-mentioned rule about extending fractions.
+
+\begin{example} Adding and subtracting fractions
+
+ \[
+\frac{1}{5} + \frac{2}{5} = \frac{1 + 2}{5} = \frac{3}{5}
+\]
+
+\[
+\frac{1}{4} + \frac{2}{3} = \frac{1 \times 3}{4 \times 3} + \frac{2 \times 4}{3 \times 4} = \frac{3}{12} + \frac{8}{12} = \frac{3 + 8}{12} = \frac{11}{12}
+\]
+
+\[
+\frac{7}{12} - \frac{5}{8} = \frac{7 \times 8}{12 \times 8} - \frac{5 \times 12}{8 \times 12} = \frac{56}{96} - \frac{60}{96} = \frac{56 - 60}{96} = \frac{-4}{96} = \frac{-1}{24}
+\]
+
+\end{example}
+
+Note: Never do
+
+\[
+\frac{a}{b} + \frac{c}{d} = \frac{a + b}{b + d}
+\]   
+
+\begin{example}
+
+\[
+\frac{x}{x - 1} \times \frac{2}{x(x + 4)} = \frac{2x}{(x - 1)x(x + 4)} = \frac{2}{(x - 1)(x + 4)}
+\]
+
+\[
+\frac{2}{x - 1} \div \frac{x}{x - 1} = \frac{2}{x - 1} \times \frac{x - 1}{x} = \frac{2(x - 1)}{(x - 1)x} = \frac{2}{x}
+\]
+
+\[
+\frac{x + 1}{x^2 + 2} + \frac{x - 6}{x^2 + 2} = \frac{x + 1 + x - 6}{x^2 + 2} = \frac{2x - 5}{x^2 + 2}
+\]    
+\end{example}
+
+Remember, when a fraction is preceded by a minus sign, all signs in the numerator must be changed accordingly. This is similar to how you would change all signs within parentheses when they are preceded by a minus sign.
+
+Consider the expression:
+
+\[
+-\frac{a - b}{c}
+\]
+
+To correctly handle the negative sign, change all the signs in the numerator:
+
+\[
+-\frac{a - b}{c} = \frac{-a + b}{c}
+\]
+
+For example, if \(a = 5\) and \(b = 3\), then:
+
+\[
+-\frac{5 - 3}{c} = \frac{-5 + 3}{c} = \frac{-2}{c}
+\]
+
+\begin{example}
+
+\[
+\frac{x + 1}{x^2 + 2} - \frac{x - 6}{x^2 + 2} = \frac{x + 1 - x + 6}{x^2 + 2} = \frac{7}{x^2 + 2}
+\]    
+\end{example}
+
+\section{Exponents, Radicals and Surds}
+An \textbf{exponent} is a shortcut for repeated multiplication of the same number:
+
+\begin{example} Exponentiation
+
+\[
+4 \times 4 \times 4 \times 4 \times 4 = 4^5
+\]
+
+\[
+x \times x \times x \times x \times x = x^5
+\]  
+\end{example}
+
+\textbf{Radicals}, or \textbf{roots}, are closely related to exponentiation. Over the real numbers, the principal square root \(\sqrt{x}\) is defined to be the non-negative number whose square is \(x\), so it is only defined when \(x\geq 0\). Consequently, squaring a real number and then taking the principal square root gives its absolute value: \(\sqrt{x^2}=|x|\).
+
+\begin{example} Taking the root
+
+\[
+\sqrt{a} \times \sqrt{a} = (\sqrt{a})^2 = a
+\]
+
+\[
+\sqrt{a} = b \iff a = b^2 \text{ and } b\geq 0
+\]    
+\end{example}
+
+
+
+A \textbf{surd} is a type of radical that is both real and irrational, examples include \(\sqrt{2}, \sqrt{3}, \sqrt{5},\) and \(\sqrt{6}\).
+
+Numbers can be raised to powers other than 2, such as cubing (raising to the third power), or even raising to the fourth power, the 100th power, and so forth. Correspondingly, you can take the cube root of a number, the fourth root, the 100th root, and so on. To indicate a root other than a square root, the same radical symbol is used, but with a number called the index inserted into the radical sign, typically positioned within the "check mark" part.
+
+\begin{example} Index and argument
+
+\[
+4^3 = 64 \iff \sqrt[3]{64} = 4
+\]
+   
+\end{example}
+
+In this example, the "3" inside the radical sign is the \textbf{index} of the radical. The "64" is referred to as the argument of the \textbf{radical}, also known as the \textbf{radicand}. Since square roots are the most common type of radicals, the index is usually omitted for square roots. Although "\(\sqrt[2]{2}\)" would be technically correct, it is rarely used in practice.
+\begin{proposition}{Rules for calculations involving radicals}
+    \begin{align*}
+    &(1) \quad \sqrt[n]{x y}=\sqrt[n]{x} \times \sqrt[n]{y}   &   &\textnormal{where } x,y \geq 0\\
+    &(2) \quad \sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}    &   &\textnormal{where } x \geq 0 \textnormal{ and } y > 0 \\
+    &(3) \quad \sqrt{x^2} = |x|   &   &\textnormal{where } x \in \mathbb{R} \\
+    &(4) \quad (\sqrt[n]{x})^n = x    &   &\textnormal{where } x\geq 0, \textnormal{ or where } x<0 \textnormal{ and } n \textnormal{ is odd}\\
+    &(5) \quad \sqrt[n]{-x}=-\sqrt[n]{x}  &   &\textnormal{where } x \geq 0 \textnormal{ and } n \in \mathbb{N} \textnormal{ is odd }
+    \end{align*}
+\end{proposition}
+
+Raising a number to a \textbf{power}, also known as \textbf{exponentiation}, is a fundamental mathematical operation that involves multiplying a number by itself a certain number of times as we saw above. The \textbf{base} is the number being multiplied, and the \textbf{exponent} indicates how many times the base is used as a factor. For example, \(a^n\) means that the base \(a\) is multiplied by itself \(n\) times. Exponentiation is a powerful tool in mathematics, with a few essential rules that govern its application.
+
+\begin{proposition}{Properties of Integer Exponents}
+\label{prop:DefPow}
+Let $n,m\in\mathbb{Z}$. The following identities hold whenever all expressions involved are defined. In particular, a base with a negative exponent must be nonzero.
+\[
+\begin{aligned}
+&\text{(1)}\quad x^{n}\cdot x^{m}=x^{\,n+m},\\[2pt]
+&\text{(2)}\quad \dfrac{x^{n}}{x^{m}}=x^{\,n-m}\quad \text{with } x\neq 0,\\[2pt]
+&\text{(3)}\quad x^{n}\cdot y^{n}=(xy)^{n},\\[2pt]
+&\text{(4)}\quad \dfrac{x^{n}}{y^{n}}=\left(\dfrac{x}{y}\right)^{n}\quad \text{with } y\neq 0,\\[2pt]
+&\text{(5)}\quad \bigl(x^{n}\bigr)^{m}=x^{\,nm},\\[2pt]
+&\text{(6)}\quad x^{1}=x.
+\end{aligned}
+\]
+\end{proposition}
+
+
+Some of these rules allow the concept of powers to be extended so that the exponent may be any integer. If you set \(n = m\) in rule (2), you get:
+
+\[
+\frac{x^n}{x^n} = x^{n-n} = x^0
+\]
+
+For \(x\neq 0\), the quotient \(\dfrac{x^n}{x^n}\) equals 1, so we obtain
+
+\[
+x^0 = 1
+\]
+
+Thus, the concept of exponentiation is extended to include \(n \in \mathbb{N} \cup \{0\}\). If you now set \(n = 0\) again in rule (2), you get:
+
+\[
+\frac{x^0}{x^m} = x^{0-m} = x^{-m}
+\]
+
+But according to the previous calculation, \(x^0 = 1\). Therefore, you obtain
+
+\begin{equation*}
+ \frac{1}{x^m} = x^{-m}   
+\end{equation*}
+
+As demonstrated in \autoref{prop:DefPow}, these rules provide a complete framework for manipulating expressions with any integer exponents. As a consequence, the following additional rules can be derived:
+
+\begin{proposition}{More Properties of Integer Exponents}
+Let $n,m\in\mathbb{Z}$. Then the following hold (with $x,y\in\mathbb{R}$ and nonzero where stated):
+\[
+\begin{aligned}
+&\text{(7)}\quad x^{0}=1   &\qquad&   x \neq 0  \\
+&\text{(8)}\quad \frac{1}{x^{m}}=x^{-m} &\qquad& x \neq 0 \\
+\end{aligned}
+\]
+\end{proposition}
+
+Let us illustrate these rules with a couple of examples.
+
+\begin{example} Reduce the following expression
+
+    \begin{equation*}
+\left(3 x y^6\right)^3=3^3 \cdot x^3 \cdot\left(y^6\right)^3=27 x^3 y^{18}
+\end{equation*}
+\end{example}
+
+\begin{example} Reduce the following expression
+
+\begin{equation*}
+\frac{a^{-4} b^3}{a^7 b^{-5}}=\frac{a^{-4}}{a^7} \cdot \frac{b^3}{b^{-5}}=a^{-4-7} \cdot b^{3-(-5)}=a^{-11} \cdot b^8=\frac{b^8}{a^{11}}
+\end{equation*}
+\end{example}
+
+For positive numbers \(x\), the concept of exponentiation can be further extended to apply when the exponent is a rational number. Any rational number \(r \in \mathbb{Q}\) can be written as \(r = \dfrac{m}{n}\), where \(m \in \mathbb{Z}\) and \(n \in \mathbb{N}\). For \(x > 0\), we now define
+
+\begin{equation*}
+y=x^r=x^{\frac{m}{n}}
+\end{equation*}
+
+From this, you obtain (using, among other things, rule (5)):
+
+\[
+y^n = \left(x^{\frac{m}{n}}\right)^n = x^{\frac{m}{n} \cdot n} = x^m
+\]
+
+Finally, by using the concept of radicals, we obtain
+
+\begin{equation*}
+ y^n=x^m \quad \iff \quad y=\sqrt[n]{x^m}   
+\end{equation*}
+
+Note that because \(x > 0\), it follows that \(y > 0\) as well. We are now ready to state \textbf{\textit{the extended concept of exponentiation}}.
+
+\begin{definition}{The Extended Concept of Exponentiation}
+$\textnormal{Let } m \in \mathbb{Z} \textnormal{ and let }  n \in \mathbb{N} \textnormal{ such that } \dfrac{m}{n} \in \mathbb{Q}  \textnormal{. Then the following applies:}$
+
+\[
+x^{\frac{m}{n}} = \sqrt[n]{x^m} \hspace{1cm} x > 0
+\]
+
+\textnormal{And more specifically, the following holds true}
+
+\[
+x^{\frac{1}{n}} = \sqrt[n]{x} \hspace{1.3cm} x > 0
+\]
+
+\end{definition}
+
+The denominator of a rational exponent corresponds to the index of the radical, while the numerator remains as the exponent of the base. Conversely, the index of a radical can be transformed into the denominator of an exponent in an equivalent exponential expression. This property allows us to convert any radical expression into an exponential form, providing a powerful tool for simplification.
+
+\begin{example}
+
+\[
+\sqrt[5]{x^3} = x^{\frac{3}{5}} \quad  \textnormal{vs.} \quad \sqrt[3]{x^5} = x^{\frac{5}{3}}
+\]
+
+\[
+\frac{1}{\sqrt[7]{x^3}} = x^{-\frac{3}{7}}
+\]
+
+\[
+\frac{1}{\sqrt[3]{x^2}} = \left(x^2\right)^{-\frac{1}{3}} = x^{-\frac{2}{3}}
+\]
+\end{example}
+
+This property can also be reversed: any rational exponent can be rewritten as a radical expression by using the denominator as the radical's index. The ability to interchange between exponential and radical forms enables us to evaluate expressions that were previously difficult to handle by converting them into radicals.
+
+\begin{example}
+\[
+27^{-\frac{4}{3}} = \frac{1}{\sqrt[3]{27^4}} = \frac{1}{\left(\sqrt[3]{27}\right)^4} = \frac{1}{3^4} = \frac{1}{81}
+\]    
+\end{example}
+
+One of the greatest advantages of converting a radical expression into an exponential form is that it allows us to apply all the properties of exponents to simplify the expression. The following examples illustrate how various properties can be utilised to simplify expressions with rational exponents.
+
+\begin{example}
+
+\[
+a^{\frac{2}{3}}b^{\frac{1}{2}}a^{\frac{1}{6}}b^{\frac{1}{5}} = a^{\frac{2}{3}+\frac{1}{6}}b^{\frac{1}{2}+\frac{1}{5}} = a^{\frac{4}{6}+\frac{1}{6}}b^{\frac{5}{10}+\frac{2}{10}} = a^{\frac{5}{6}}b^{\frac{7}{10}}
+\]
+
+\[
+\left( x^{\frac{1}{3}} x^{\frac{2}{5}} \right)^{\frac{3}{4}} = x^{\frac{1}{3} \times \frac{3}{4}} x^{\frac{2}{5} \times \frac{3}{4}} = x^{\frac{3}{12}} x^{\frac{6}{20}} = x^{\frac{1}{4}} x^{\frac{3}{10}} = x^{\frac{11}{20}}
+\]
+
+\[
+\frac{x^{\frac{4}{2}}x^{\frac{4}{6}}x^{\frac{1}{2}}x^{\frac{5}{6}}}{x^{\frac{7}{2}}x^0}
+=x^{\frac{4}{2}+\frac{4}{6}+\frac{1}{2}+\frac{5}{6}-\frac{7}{2}}
+=x^{\frac{1}{2}}
+\]
+
+\[
+\left(25x^{\frac{1}{3}}x^{\frac{2}{5}}\right)^{-\frac{1}{2}}
+=\left(25x^{\frac{11}{15}}\right)^{-\frac{1}{2}}
+=\frac{1}{5x^{\frac{11}{30}}}
+\]
+\end{example}
+
+It is important to remember that when simplifying expressions with rational exponents, we are applying the same exponent rules that are used for integer exponents. The only difference is that we must also adhere to the rules for fractions.
+
+\section{Using Formulae and Substitution}
+In the study of engineering, physical quantities are often related to each other through formulas. These formulas consist of variables and constants that represent the physical quantities in question. To evaluate a formula, one must substitute numerical values for the variables.
+
+For example, Ohm’s law provides a formula that relates the voltage, \(v\), across a resistor with a resistance value \(R\), to the current \(i\) flowing through it. The formula is given by
+
+\[
+v = iR
+\]
+
+This formula allows us to calculate the voltage \(v\) if the values for \(i\) and \(R\) are known. For instance, if \(i = 13 \, \text{A}\) and \(R = 5 \, \Omega\), then
+
+\[
+v = iR = (13)(5) = 65
+\]
+
+Thus, the voltage is 65 V.
+
+This example highlights the importance of paying close attention to the units of any physical quantities involved. A formula is only valid if a consistent set of units is used.
+
+\begin{example} Inserting into formulae \newline
+The kinetic energy \(K\) of an object with mass \(M\) moving at speed \(v\) can be calculated using the formula:
+
+\[
+K = \frac{1}{2}Mv^2
+\]
+
+Calculate the kinetic energy of an object with a mass of 5 kg moving at a speed of \(2 \, \text{m} \, \text{s}^{-1}\).
+
+\begin{solution}
+\[
+K = \frac{1}{2}Mv^2 = \frac{1}{2}(5)(2^2) = 10
+\] 
+
+\end{solution}
+
+In the SI system, the unit of energy is the joule, so the kinetic energy of the object is 10 joules.
+\end{example}
+
+\begin{example} Inserting into formulae \newline
+The area \(A\) of a circle with radius \(r\) can be calculated using the formula \(A = \pi r^2\).
+
+Alternatively, if the diameter \(d\) of the circle is known, the equivalent formula can be used:
+
+\[
+A = \frac{\pi d^2}{4}
+\]
+
+Calculate the area of a circle with a diameter of 0.1 m. The value of \(\pi\) is pre-programmed in your calculator.
+
+\begin{solution}
+    \[
+A = \frac{\pi (0.1)^2}{4} = 0.00785 \, \text{m}^2
+\]
+
+\end{solution}
+
+
+\end{example}
+
+\begin{example} Inserting into formulae \newline
+The volume \(V\) of a circular cylinder is equal to its cross-sectional area \(A\) multiplied by its length \(h\).
+
+Calculate the volume of a cylinder with a diameter of 0.1 m and a length of 0.3 m.
+
+\begin{solution}
+  \[
+V = Ah = \frac{\pi (0.1)^2}{4} \times 0.3 = 0.00236
+\]
+
+The volume is \(0.00236 \, \text{m}^3\).
+\end{solution}
+\end{example}
+
+\section{Rearranging Formulae}
+In the formula for the area of a circle, \(A = \pi r^2\), the variable \(A\) is referred to as the subject of the formula. A variable is considered the subject if it appears by itself on one side of the equation, usually on the left-hand side, and nowhere else in the formula. If we are asked to transpose the formula for \(r\), or solve for \(r\), we must rearrange the equation so that \(r\) becomes the subject. When transposing a formula, any operation performed on one side must also be applied to the other side. There are five key rules to follow during this process.
+
+\begin{custombox}{Rules for rearranging formulae}
+The following operations can be performed on both sides of the formula:
+\begin{itemize}
+    \item Add the same quantity to both sides
+    \item Subtract the same quantity from both sides
+    \item Multiply both sides by the same nonzero quantity - remember to multiply all terms
+    \item Divide both sides by the same nonzero quantity - remember to divide all terms
+    \item Apply the same function to both sides, while checking its domain and whether the operation is reversible
+\end{itemize}
+\end{custombox}
+
+The first four operations preserve equivalence when their stated restrictions are satisfied. Applying a function such as squaring need not be reversible: for example, \(x=2\) implies \(x^2=4\), but \(x^2=4\) also permits \(x=-2\). Solutions obtained after a non-reversible operation must therefore be checked in the original equation.
+
+\begin{example} Transpose the formula \(p = 5t - 17\) to make \(t\) the subject.
+
+\begin{solution}
+ To isolate \(t\) on the left-hand side, proceed in steps using the five rules. First, add 17 to both sides of the equation \(p = 5t - 17\):
+\[
+p + 17 = 5t - 17 + 17
+\]
+Simplifying, we get:
+\[
+p + 17 = 5t
+\]
+Next, divide both sides by 5 to isolate \(t\):
+\[
+\frac{p + 17}{5} = t
+\]
+Thus, the formula for \(t\) is:
+\[
+t = \frac{p + 17}{5}
+\]   
+\end{solution}    
+\end{example}
+
+\begin{example} Transpose the formula \(\sqrt{2q} = p\) to solve for \(q\).
+
+\begin{solution}
+   First, square both sides to eliminate the square root around \(2q\). Note that \((\sqrt{2q})^2 = 2q\). This gives:
+\[
+2q = p^2
+\]
+Next, divide both sides by 2 to solve for \(q\):
+\[
+q = \frac{p^2}{2}
+\]   
+\end{solution}
+ 
+\end{example}
+
+\newpage
+
+\begin{example}
+Transpose the formula \(v = \sqrt{t^2 + w}\) to solve for \(w\). To isolate \(w\), follow these steps:   
+
+\begin{solution}
+    \begin{enumerate}[a.]
+        \item First, square both sides to eliminate the square root around \(t^2 + w\):
+        \[
+        v^2 = t^2 + w
+        \]
+
+        \item Next, subtract \(t^2\) from both sides to isolate \(w\):
+        \[
+        v^2 - t^2 = w
+        \]
+
+        \item Finally, write down the formula for \(w\):
+        \[
+        w = v^2 - t^2
+        \]
+    \end{enumerate}
+
+    \end{solution}
+\end{example}
+
+\begin{example} Transpose the formula \(x = \frac{1}{y}\) to solve for \(y\).
+
+\begin{solution}
+To isolate \(y\), notice that \(y\) appears in the denominator. Multiplying both sides by \(y\) removes the fraction:
+
+\[
+yx = y \times \frac{1}{y}
+\]
+
+This simplifies to:
+
+\[
+yx = 1
+\]
+
+Finally, divide both sides by \(x\) to solve for \(y\):
+\[
+y = \frac{1}{x}
+\]
+
+Alternatively, you can simply invert both sides directly to obtain:
+
+\[
+y = \frac{1}{x}
+\]    
+\end{solution}
+
+
+\end{example}
+
+
+\begin{example} Make \(R\) the subject of the formula:
+
+\[
+\frac{2}{R} = \frac{3}{x + y}
+\]
+
+\begin{solution} Since \(R\) appears in a fraction, invert both sides:
+
+\[
+\frac{R}{2} = \frac{x + y}{3}
+\]
+
+Multiplying both sides by 2 yields: $R = \dfrac{2(x + y)}{3}$    
+\end{solution}
+    
+\end{example} 
+
+\begin{example} Make \(R\) the subject of the formula:
+
+\[
+\frac{1}{R} = \frac{1}{R_1} + \frac{1}{R_2}
+\]
+\begin{solution}
+The two terms on the right-hand side can be combined:
+\[
+\frac{1}{R_1} + \frac{1}{R_2} = \frac{R_2 + R_1}{R_1R_2}
+\]
+
+The formula then becomes:
+\[
+\frac{1}{R} = \frac{R_2 + R_1}{R_1R_2}
+\]
+
+Finally, inverting both sides gives:
+\[
+R = \frac{R_1R_2}{R_2 + R_1}
+\]
+
+\end{solution}
+\end{example}
+

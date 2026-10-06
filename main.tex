@@ -1,0 +1,302 @@
+\documentclass[fleqn, 11pt, color=blue]{elegantbook}
+\usepackage{parskip}  % Adds space between paragraphs and removes indentation
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usetikzlibrary{shapes.geometric} % Add this line
+\usetikzlibrary{arrows.meta, positioning} % For better arrowheads
+\usetikzlibrary{intersections} % Required for name path and intersections
+\usepackage{circuitikz}
+\usetikzlibrary{circuits.logic.US}
+\usepackage{mymacro}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable} % Needed to read data tables
+\usepackage{booktabs} % For professional-looking tables
+\usepackage{colortbl} % For coloring table rules
+
+
+% Reset any color scheme
+\color{black} % Ensure text color is black
+\pagecolor{white} % Ensure page color is white
+
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Customise the listing caption to "Algorithm"
+% Define custom style for Python code
+\lstdefinestyle{pythonStyle}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  frame=single,
+  breaklines=true
+}
+
+% Define custom style for Java code
+\lstdefinestyle{javaStyle}{
+  language=Java,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{purple}\bfseries,
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  frame=single,
+  breaklines=true
+}
+
+% Customise the listing caption name
+\renewcommand{\lstlistingname}{Algorithm}
+
+
+% Define a style for inline Java code
+\newcommand{\inlinecode}[1]{\lstinline[language=Java, basicstyle=\ttfamily\small]{#1}}
+
+% Override the colors used in the clrscode4e package
+\definecolor{commentcolor}{cmyk}{0, 0, 0, 1} % Change comment color to black
+\definecolor{linenumcolor}{cmyk}{0, 0, 0, 1} % Change line number color to black
+
+\usepackage{array,tabularx,mathtools}
+\newcommand*{\carry}[1][1]{\overset{#1}}
+\newcolumntype{B}[1]{r*{#1}{@{\,}r}}
+\usepackage{lmodern}
+
+% Define skewed overline
+\newcommand{\myol}[2][3]{{}\mkern#1mu\overline{\mkern-#1mu#2}}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+
+
+
+\usetikzlibrary{matrix}
+
+\newcommand{\addend}{\text{\textsl{\color{gray}{Addend}}}}
+\newcommand{\augend}{\text{\textsl{\color{gray}{Augend}}}}
+\newcommand{\sumOut}{\text{\textsl{\color{gray}{Sum}}}}
+\institute{VIA University College}
+
+\author{Richard Brooks}
+\date{May, 2025}
+\version{2.0}
+
+\cover{figure/cover_mse1_26.png}
+
+% modify the color in the middle of titlepage
+\definecolor{customcolor}{RGB}{108, 162, 198}
+\colorlet{coverlinecolor}{customcolor}
+
+\newcommand{\mycircled}[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+            
+
+\usepackage{nccmath, mathtools}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{placeins}
+\usepgfplotslibrary{fillbetween} 
+
+
+%======================================================================
+% FINAL, CORRECT SOLUTION FOR AUTOREF NAMES IN ELEGANTBOOK
+% This works by defining the internal counter names that hyperref needs.
+% Place this block in the preamble of your main.tex file.
+%======================================================================
+\makeatletter
+\AtBeginDocument{%
+  \def\tcb@cnt@definitionautorefname{Definition}%
+  \def\tcb@cnt@theoremautorefname{Theorem}%
+  \def\tcb@cnt@lemmaautorefname{Lemma}%
+  \def\tcb@cnt@corollaryautorefname{Corollary}%
+  \def\tcb@cnt@propositionautorefname{Proposition}%
+  \def\tcb@cnt@axmautorefname{Axiom}%
+  \def\tcb@cnt@postulatenameautorefname{Postulate}%
+  \def\examautorefname{Example}%
+  \def\exerautorefname{Exercise}%
+  \def\probautorefname{Problem}%
+  \def\remarkautorefname{Remark}%
+}
+\makeatother
+%======================================================================
+
+% Redefine the example environment to add vertical spacing before it
+\makeatletter
+\renewenvironment{example}[1][]{%
+  \vspace{1em}% Add vertical space before the example
+  \refstepcounter{exam}%
+  \par\noindent\textbf{\color{main}{\examplename} \theexam #1 }\rmfamily}{%
+  \par\ignorespacesafterend}
+\makeatother
+
+\input{msecolors} % Load custom colors matching the MkDocs website
+\usetikzlibrary{decorations.pathmorphing}
+% Load the amsthm package
+%\usepackage{amsthm}
+
+%======================================================================
+% PREAMBLE DEFINITIONS FOR VENN DIAGRAM STYLE
+% (Place these in your document's preamble)
+%======================================================================
+\colorlet{vennColor}{mseViaBlue} % You can change this color for the whole document
+\colorlet{circle edge}{vennColor}
+\colorlet{circle area}{vennColor!20}
+
+\tikzset{
+    filled/.style={fill=circle area, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick}
+}
+
+% Define the standard circle paths for reuse
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+%======================================================================
+
+
+% Redefine the QED symbol to your custom arrow
+%\renewcommand{\qedsymbol}{\color{fourth}\FilledTriangleLeft}
+
+\newcommand{\EndSolutionSymbol}{\ensuremath{\color{fourth}\blacktriangleleft}}
+
+% Redefine the solution environment to use EndSolutionSymbol and control line spacing
+\makeatletter
+\renewenvironment{solution}
+  {\par\noindent\textbf{\textit{\color{fourth}\solutionname}} \normalfont}
+  {\nobreak\hfill\EndSolutionSymbol{}}  % Removed \par to avoid extra line
+\makeatother
+
+%\newcommand{\vect}[1]{\pmb{\boldsymbol{#1}}}
+%\newcommand{\vect}[1]{\mathbf{\boldsymbol{#1}}}
+\newcommand{\vect}[1]{\pmb{#1}}
+
+
+% Define custom colors to match the MkDocs website
+\definecolor{headercolor}{RGB}{108, 162, 198}  % #6CA2C6 - VIA blue for links/accents
+\definecolor{backgroundcolor}{RGB}{249, 249, 250}  % Light background
+\definecolor{outlinecolor}{RGB}{108, 162, 198}  % #6CA2C6 - VIA blue
+\definecolor{accentcolor}{RGB}{255, 140, 0}    % #FF8C00 - Orange accent
+
+% Dark mode colors (can be used with \ifxetex or similar conditionals)
+\definecolor{darkbg}{RGB}{13, 16, 23}          % #0d1017 - Dark background
+\definecolor{darkblue}{RGB}{18, 49, 97}        % #123161 - Header/active elements
+\definecolor{glowblue}{RGB}{42, 157, 244}      % #2A9DF4 - Glow/secondary blue
+
+% Question/Answer colors to match website admonitions
+\definecolor{questioncolor}{RGB}{45, 180, 153}   % #2DB499 - Question green
+\definecolor{questionbg}{RGB}{204, 241, 234}     % #CCF1EA - Question background
+\definecolor{answercolor}{RGB}{229, 171, 72}     % #E5AB48 - Answer orange
+\definecolor{answerbg}{RGB}{255, 239, 211}       % #FFEFD3 - Answer background
+
+% Define a custom tcolorbox environment using these colors
+\newtcolorbox{custombox}[2][]{colback=headercolor!5, colframe=headercolor, coltitle=white, fonttitle=\bfseries, colbacktitle=headercolor, title={#2}, #1}
+
+\addbibresource{reference.bib}
+\DeclareLanguageMapping{english}{english-apa}
+
+\usepackage{clrscode4e}
+
+% Full-page cover only (cover image includes title and design)
+\makeatletter
+\renewcommand*{\maketitle}{%
+  \hypersetup{pageanchor=false}
+  \pagenumbering{Alph}
+  \newgeometry{margin=0in}
+  \thispagestyle{empty}%
+  \parindent=0pt
+  \setcounter{page}{1}%
+  \ifcsname @cover\endcsname
+    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{\@cover}%
+  \else
+    \includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{example-image}%
+  \fi
+  \restoregeometry
+  \clearpage}
+\makeatother
+
+\begin{document}
+
+\maketitle
+
+\frontmatter
+\tableofcontents
+
+\mainmatter
+
+% ======================================================================
+% PART 1: INTRODUCTORY CONCEPTS
+% ======================================================================
+\part{Introductory Concepts}
+
+\setcounter{chapter}{-1}
+\input{chapter00}
+\input{chapter01} 
+\input{chapter02} 
+\input{chapter03}
+
+
+% ======================================================================
+% PART 2: PROBABILITY AND STATISTICS
+% ======================================================================
+\part{Probability and Statistics}
+
+ % Assuming this is Probability
+\input{chapter04} % Assuming this is more Probability
+\input{chapter05} % Assuming this is Conditional Probability
+\input{chapter06} % Assuming this is Descriptive Statistics
+
+% % ======================================================================
+% % PART 3: LINEAR ALGEBRA
+% % ======================================================================
+\part{Linear Algebra}
+
+\input{chapter07} % Assuming this is Linear Equations
+\input{chapter08} % Assuming this is Vectors and Matrices
+\input{chapter09} % Assuming this is Matrix Algebra
+
+% ======================================================================
+% PART 4: DIFFERENTIAL CALCULUS
+% ======================================================================
+\part{Differential Calculus}
+
+\input{chapter10} % Differential Calculus
+\input{chapter11} % Multivariable Calculus & Gradients (when you write it)
+
+% ======================================================================
+% PART 5: SPECIALIZED TOPICS
+% ======================================================================
+\part{Additional Topics}
+
+\input{chapter12.tex}
+\input{chapter13.tex}
+\input{chapter14.tex}
+\input{chapter15.tex}
+
+
+
+% Print the bibliography
+\nocite{*}
+\printbibliography[heading=bibintoc, title=\ebibname]
+
+\appendix
+\input{concepts.tex}
+\input{appendix01.tex}
+
+\end{document}
+

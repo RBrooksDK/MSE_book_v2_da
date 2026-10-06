@@ -1,0 +1,1722 @@
+\chapter{Code Analysis Techniques}\label{chap:ch15}
+
+In software engineering, understanding the efficiency of code is pivotal for building scalable, responsive applications. Building on the principles of asymptotic notation, we now turn to practical code analysis — dissecting how code components like loops, conditionals, and sequential statements contribute to an algorithm's overall complexity.
+
+Code analysis can be broadly divided into two categories:
+
+\begin{enumerate}
+    \item \textbf{Static Analysis:} This approach involves examining code without executing it. We focus on evaluating the structure and operations of the code, particularly through complexity analysis. This is the primary focus of this chapter.
+    \item \textbf{Dynamic Analysis:} By running code on various inputs, we measure real execution times and memory usage in specific environments. While valuable, dynamic analysis is outside the scope of this chapter and is typically used for performance profiling.
+\end{enumerate}
+
+Asymptotic notation offers a high-level view of an algorithm's performance, predicting its growth rate as the input size increases. However, theoretical complexity doesn’t account for constants, smaller terms, or machine-specific factors. In practical scenarios, these details can substantially impact runtime, especially for applications handling frequent operations on large datasets.
+
+Consider two algorithms whose running times are both $\Theta(n)$. They have the same asymptotic growth rate, but one algorithm may have a constant factor several times larger than the other, causing it to run more slowly in practice. A real-world understanding of complexity requires analysing each part of the code, estimating the number of operations in concrete terms, and identifying areas for potential optimization.
+
+Below you see two algorithms for filtering even numbers from an integer array. Both algorithms have $\Theta(n)$ running time, but one uses a single loop while the other performs a redundant preliminary pass and therefore has a larger constant factor in this model.
+
+
+\begin{lstlisting}[style=javaStyle, caption={Single pass to filter even numbers}, label={lst:java_single_pass1}]
+    public List<Integer> filterEvenSinglePass(int[] arr) {
+        List<Integer> evenNumbers = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 == 0) {
+                evenNumbers.add(arr[i]);
+            }
+        }
+        return evenNumbers;
+    }
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[style=javaStyle, caption={Multiple passes to filter even numbers}, label={lst:java_multiple_passes}]
+    public List<Integer> filterEvenMultiplePasses(int[] arr) {
+        List<Integer> evenNumbers = new ArrayList<>();
+
+        // First pass: count even numbers
+        int evenCount = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 == 0) {
+                evenCount++;
+            }
+        }
+
+        // Second pass: collect even numbers
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 == 0) {
+                evenNumbers.add(arr[i]);
+            }
+        }
+
+        return evenNumbers;
+    }
+\end{lstlisting}
+
+Algorithm \ref{lst:java_single_pass1} uses a single pass through the array to identify even numbers. As it iterates, it directly appends each even number to a result list, resulting in a single $\mathcal{O}(n)$ traversal.
+
+Algorithm \ref{lst:java_multiple_passes}, however, makes two full passes through the array. The first pass counts the number of even elements, although that count is not subsequently used, and the second pass collects the elements. Both algorithms have running time $\Theta(n)$, but the redundant first pass adds work. The exact ratio is not simply two because list operations, comparisons, and other statements also contribute to the running time.
+
+In practical terms, Algorithm \ref{lst:java_single_pass1} is faster because it completes the task in a single traversal, while Algorithm \ref{lst:java_multiple_passes} introduces a larger constant factor by making two full passes through the array. This example highlights how even within the same $\mathcal{O}(n)$ complexity, different implementations can have varying real-world performance due to differing constant factors.
+
+In this chapter, we will systematically analyse code components, beginning with pseudocode to abstract language-specific syntax. We will then explore the complexity of various code structures, including loops, conditionals, and sequences. Finally, we will consider practical aspects, discussing how constants and lower-order terms, often overlooked in asymptotic notation, can affect real-world performance.
+
+
+\section{Pseudocode}\label{sec:ch11-1}
+To analyse algorithms effectively without getting bogged down by language-specific syntax, we use pseudocode — a simplified, high-level representation of code that emphasizes the logic and structure of an algorithm. Pseudocode allows us to describe and analyse algorithms in a way that’s independent of any programming language, focusing purely on the sequence and efficiency of operations. Writing pseudocode serves as a bridge between conceptual algorithm design and implementation. By abstracting away language details, pseudocode helps in visualizing the core operations of an algorithm, making it easier to identify complexity and optimize performance before implementing it in code.
+
+Pseudocode also enables collaborative work, allowing team members with varying language expertise to understand and contribute to algorithm design without needing to know specific syntax. Moreover, pseudocode is useful for documenting algorithms, as it provides a concise, yet clear summary of the steps involved, which is easier to read than fully detailed code.
+
+We follow the conventions from \cite{clrs4} that adhere to a specific set of formatting rules to ensure clarity and uniformity:
+
+\begin{enumerate}
+    \item \textbf{Loop Structures}: We use \texttt{\For} and \texttt{\While} to denote iterations:
+    \begin{itemize}
+        \item \texttt{\For $i \gets 1$ \To $n$} represents a loop incrementing \( i \) by 1 from 1 through \( n \).
+        \item \texttt{\While} condition represents a loop that continues while the specified condition is true.
+    \end{itemize}
+    \item \textbf{Assignment and Operations}: The assignment operator $\gets$ indicates variable assignment, e.g., \texttt{$sum \gets 0$ } sets \texttt{sum} to zero. Basic arithmetic operations (\texttt{+, -, *, /}) follow standard notation.
+    \item \textbf{Procedure and Function Calls}: Procedures are named in small caps, such as \texttt{$\proc{Sum-Array}(arr)$}, while variables and identifiers appear in italics.
+    \item \textbf{Comments}: Comments appear in a \textcolor{commentcolor}{Bordeaux} colour, providing contextual information for each step.
+\end{enumerate}
+
+To illustrate, let’s look at a simple example of an algorithm that calculates the sum of elements in an array. Here, we use pseudocode to describe the algorithm, focusing on the logic and steps involved.
+
+\begin{codebox}
+    \Procname{$\proc{Sum-Array}(arr)$}
+    \li $sum \gets 0$ \CommentAt{7}{initialise sum to zero}
+    \li \For $i \gets 0$ \To $\attrib{arr}{length} - 1$ \Do
+    \li     $sum \gets sum + arr[i]$ \CommentAt{7}{Add the current element to sum}
+        \End
+    \li \Return $sum$ \CommentAt{7}{Return the final sum}
+\end{codebox}
+
+In this pseudocode:
+\begin{itemize}
+    \item The procedure \texttt{$\proc{Sum-Array}$} takes an array \texttt{arr} as input.
+    \item We initialise a variable \texttt{sum} to zero.
+    \item A \texttt{\For} loop iterates over each element in the array, adding it to \texttt{sum}.
+    \item Finally, the function returns the computed \texttt{sum}.
+\end{itemize}
+
+This pseudocode captures the algorithm's essential steps without syntax-specific details, making it easy to analyse and adapt. Here is a more complex example:
+
+\begin{codebox}
+    \Procname{$\proc{Find-Max-Even-Sum}(arr)$}
+    \li $maxSum \gets 0$ \CommentAt{7}{Initialise max sum to zero}
+    \li $currentSum \gets 0$ \CommentAt{7}{Track the sum of the current subarray}
+    \li \For $i \gets 0$ \To $\attrib{arr}{length} - 1$ \Do
+    \li \If $arr[i] \bmod 2 == 0$ \Then
+    \li $currentSum \gets currentSum + arr[i]$ \CommentAt{12}{Add even number to current sum}
+    \li $maxSum \gets \proc{max}(maxSum, currentSum)$ \CommentAt{12}{Update if currentSum > maxSum}
+    \li \Else \li $currentSum \gets 0$ \CommentAt{7}{Reset current sum if odd number is encountered} \End \End
+    \li \Return $maxSum$ \CommentAt{7}{Return the maximum sum of any contiguous even subarray}
+\end{codebox}
+
+This procedure calculates the maximum sum of contiguous even elements in an array:
+
+\begin{itemize}
+    \item The procedure takes an input array \texttt{arr} and initialises \texttt{maxSum} to track the maximum sum and \texttt{currentSum} to accumulate the sum of the current contiguous even subarray.
+    \item A single \texttt{\For} loop iterates through \texttt{arr}:
+    \item If an element is even, it is added to \texttt{currentSum}, and \texttt{maxSum} is updated if \texttt{currentSum} exceeds it.
+    \item If an element is odd, \texttt{currentSum} is reset to 0, as the contiguous subarray is interrupted.
+\end{itemize}
+
+Here are two more examples of pseudocode, one for \textit{iterative binary search }and another for \textit{recursive binary search}. The pseudocode for both algorithms is similar, but the recursive version uses a function call to invoke itself, while the iterative version uses a loop to manage the search process.
+
+\begin{codebox}
+    \Procname{$\proc{Binary-Search-Iterative}(arr, key)$}
+    \li $low \gets 0$ \CommentAt{7}{Initialise low index}
+    \li $high \gets arr.length -1$ \CommentAt{7}{Initialise high index}
+    \li \While $low \leq high$ \Do
+    \li     $mid \gets \floor{(low + high) / 2}$ \CommentAt{7}{Calculate mid index}
+    \li     \If $arr[mid] == key$ \Then
+    \li         \Return $mid$ \CommentAt{7}{Key found at mid index}
+    \li     \ElseIf $arr[mid] < key$ \Then
+    \li         $low \gets mid + 1$ \CommentAt{7}{Update low index}
+    \li     \Else
+    \li         $high \gets mid - 1$ \CommentAt{7}{Update high index}
+        \End
+        \End
+    \li \Return $-1$ \CommentAt{7}{Key not found}
+\end{codebox}
+
+Here's a step-by-step explanation of what the code does:
+
+\begin{enumerate}
+    \item \textbf{Initialisation}:
+        \begin{itemize}
+            \item \texttt{low} is initialised to the first index of the array \texttt{A}.
+            \item \texttt{high} is initialised to the last index of the array \texttt{A}.
+        \end{itemize}
+    \item \textbf{While Loop}:
+        \begin{itemize}
+            \item The loop continues as long as \texttt{low} is less than or equal to \texttt{high}.
+        \end{itemize}
+    \item \textbf{Calculate Mid-Index}:
+        \begin{itemize}
+            \item \texttt{mid} is calculated as the floor value of the average of \texttt{low} and \texttt{high}.
+        \end{itemize}
+    \item \textbf{Comparison}:
+        \begin{itemize}
+            \item If the element at the \texttt{mid} index is equal to the \texttt{key}, the function returns \texttt{mid}, indicating the position of the \texttt{key} in the array.
+            \item If the element at the \texttt{mid} index is less than the \texttt{key}, it means the \texttt{key} must be in the right half of the array. Therefore, \texttt{low} is updated to \texttt{mid + 1}.
+            \item If the element at the \texttt{mid} index is greater than the \texttt{key}, it means the \texttt{key} must be in the left half of the array. Therefore, \texttt{high} is updated to \texttt{mid - 1}.
+        \end{itemize}
+    \item \textbf{Key Not Found}:
+        \begin{itemize}
+            \item If the loop exits without finding the \texttt{key}, the function returns \texttt{-1}, indicating that the \texttt{key} is not present in the array.
+        \end{itemize}
+\end{enumerate}
+
+This algorithm efficiently searches for a \texttt{key} in a sorted array by repeatedly dividing the search interval in half. The time complexity of binary search is \(\mathcal{O}(\log n)\), making it much faster than a linear search for large arrays. The algorithm is \textbf{iterative} because it uses a \texttt{\While} loop to repeatedly execute a block of code until a certain condition is met. In this case, the loop continues to execute as long as \texttt{low} is less than or equal to \texttt{high}. Each iteration of the loop performs a comparison and updates the \texttt{low} and \texttt{high} indices accordingly. This iterative approach contrasts with a recursive approach, where the function would call itself with updated parameters until the base condition is met.
+
+\begin{codebox}
+    \Procname{$\proc{Binary-Search-Recursive}(arr, key, low, high)$}
+    \li \If $low > high$ \Then
+    \li     \Return $-1$ \CommentAt{7}{Key not found} \End
+    \li $mid \gets \floor{(low + high) / 2}$ \CommentAt{7}{Calculate mid index}
+    \li \If $arr[mid] == key$ \Then
+    \li     \Return $mid$ \CommentAt{7}{Key found at mid index}
+    \li \ElseIf $arr[mid] < key$ \Then
+    \li     \Comment{Search right half}
+    \li     \Return $\proc{Binary-Search-Recursive}(arr, key, mid + 1, high)$
+    \li \Else
+    \li     \Comment{Search left half}
+    \li     \Return $\proc{Binary-Search-Recursive}(arr, key, low, mid - 1)$ 
+        \End
+\end{codebox}
+
+This code implements a recursive binary search algorithm. The function $\proc{Binary-Search-Recursive}$ takes an array \texttt{arr}, a \texttt{key} to search for, and the \texttt{low} and \texttt{high} indices that define the current search range.
+
+\begin{enumerate}
+    \item \textbf{Base Case}: If \texttt{low} is greater than \texttt{high}, the function returns $-1$, indicating that the key is not found in the array.
+    \item \textbf{Calculate Midpoint}: The midpoint \texttt{mid} is calculated as the floor of the average of \texttt{low} and \texttt{high}.
+    \item \textbf{Key Comparison}:
+    \begin{itemize}
+        \item If the element at \texttt{mid} index is equal to the \texttt{key}, the function returns \texttt{mid}, indicating the key is found at this index.
+        \item If the element at \texttt{mid} index is less than the \texttt{key}, the function recursively searches the right half of the array by updating \texttt{low} to \texttt{mid + 1}.
+        \item If the element at \texttt{mid} index is greater than the \texttt{key}, the function recursively searches the left half of the array by updating \texttt{high} to \texttt{mid - 1}.
+    \end{itemize}
+\end{enumerate}
+
+This algorithm efficiently searches for a \texttt{key} in a sorted array by repeatedly dividing the search interval in half. The algorithm is \textbf{recursive} because it calls itself with updated parameters to narrow down the search range. In each recursive call, the function calculates the midpoint of the current range and performs a comparison. Depending on the result, the function either returns the \texttt{mid} index if the key is found, or recursively calls itself on either the left or right half of the current interval, adjusting the \texttt{low} or \texttt{high} index accordingly. The recursion continues until the base condition is met, either finding the key or determining that it is not present. This recursive approach contrasts with an iterative approach, which uses a loop to perform the search rather than recursive function calls.
+
+\section{Construct Analysis}\label{sec:ch11-2}
+Construct analysis involves breaking down code into its fundamental components, such as loops, conditionals, and sequences, to understand how each contributes to the overall complexity. By analysing these constructs, we can identify bottlenecks, inefficiencies, and areas for optimization within an algorithm. This section will explore the complexity of various code structures, focusing on loops, conditionals, and sequences, and how they impact an algorithm's performance.
+
+\subsection*{Basic Operations}
+The time required by a function or procedure is proportional to the number of "basic operations" that it performs. Examples of basic operations include:
+
+\begin{enumerate}
+    \item \textbf{Arithmetic Operation}: A single arithmetic operation, such as addition (+), multiplication (\texttt{*}), subtraction (-), or division (/).
+    \item \textbf{Assignment}: Assigning a value to a variable, e.g., $x \gets 0$.
+    \item \textbf{Test/Comparison}: Evaluating a condition, such as $x == 0$ or $i \leq n$.
+    \item \textbf{Function Call}: Invoking a function or procedure, e.g., calling \proc{Find-Max-Even-Sum}.
+    \item \textbf{Return Statement}: Returning a value from a function, e.g., \texttt{return total}.
+    \item \textbf{Read Operation}: Reading a value of a primitive type (e.g., integer, float, character, boolean) from input or memory.
+    \item \textbf{Write Operation}: Writing a value of a primitive type to output or memory.
+\end{enumerate}
+
+These basic operations form the foundation of more complex operations. In the simplified \emph{unit-cost model} used in this chapter, each operation on fixed-size primitive values is assigned constant cost. This assumption does not apply unchanged to arbitrarily large integers or to operations whose cost depends on the data representation. By counting operations in this model, we can estimate a construct's running time. We will include only items 1--5 in our detailed counts and omit separate read and write costs.
+
+All of the following are $\mathcal{O}(1)$ algorithms because they perform a constant number of basic operations:
+
+\begin{codebox}
+    \Procname{$\proc{Inc}(x)$}
+    \li \Return $x + 1$
+\end{codebox}
+
+\begin{codebox}
+    \Procname{$\proc{Mul}(x, y)$}
+    \li \Return $x \times y$
+\end{codebox}
+
+\begin{codebox}
+    \Procname{$\proc{Foo}(x)$}
+    \li $y \gets x \times 77.3$
+    \li \Return $x / 8.2$
+\end{codebox}
+
+\begin{codebox}
+    \Procname{$\proc{Bar}(x, y)$}
+    \li $z \gets x + y$
+    \li $w \gets x \times y$
+    \li $q \gets (w^z) \bmod 870$
+    \li \Return $9 \times q$
+\end{codebox}
+
+In the last example, the function $\proc{Bar}$ performs a series of arithmetic operations, assignments, and a modulo operation. Each of these operations is considered a basic operation, and the function's time complexity is $\mathcal{O}(1)$ because it performs a constant number of basic operations. Here is break-down:
+
+\begin{itemize}
+    \item \textbf{Line 1:} $z \gets x + y$
+    \begin{itemize}
+        \item \textbf{Arithmetic Operation}: 1 (addition)
+        \item \textbf{Assignment}: 1 (assigning to $z$)
+    \end{itemize}
+    \textbf{Total Operations}: 2
+    
+    \item \textbf{Line 2:} $w \gets x \times y$
+    \begin{itemize}
+        \item \textbf{Arithmetic Operation}: 1 (multiplication)
+        \item \textbf{Assignment}: 1 (assigning to $w$)
+    \end{itemize}
+    \textbf{Total Operations}: 2
+    
+    \item \textbf{Line 3:} $q \gets (w^z) \bmod 870$
+    \begin{itemize}
+        \item \textbf{Arithmetic Operations}: 2 (one for exponentiation $w^z$ and one for modulo 870)
+        \item \textbf{Assignment}: 1 (assigning to $q$)
+    \end{itemize}
+    \textbf{Total Operations}: 3
+    
+    \item \textbf{Line 4:} \Return $9 \times q$
+    \begin{itemize}
+        \item \textbf{Arithmetic Operation}: 1 (multiplication by 9)
+        \item \textbf{Assignment (Implicit)}: 1 (returning the result)
+    \end{itemize}
+    \textbf{Total Operations}: 2
+\end{itemize}
+
+Adding up the operations for each line, we get:
+\[
+2 + 2 + 3 + 2 = 9
+\]
+
+The total number of basic operations is constant (9 operations), making this an $O(1)$ algorithm.
+
+\subsection*{Sequential Statements}
+
+When an algorithm contains multiple statements that are executed one after the other, they are referred to as "sequential statements" or "consecutive statements" The total time complexity of sequential statements depends on the individual complexities of each of those statements. Specifically, the overall complexity is dominated by the highest-order term among the individual statements.
+
+Consider a sequence of statements:
+
+\begin{align*}
+    \text{statement 1;} \\
+    \text{statement 2;} \\
+    & \vdots \\
+    \text{statement k;}
+\end{align*}
+
+The total time for executing these statements can be represented as:
+
+\[
+\text{Total time} = \text{time(statement 1)} + \text{time(statement 2)} + \cdots + \text{time(statement } k) 
+\]
+
+If each statement is “simple,” meaning it only involves basic operations, then each of these statements takes a constant amount of time, resulting in a total complexity of $\mathcal{O}(1)$. This applies to cases where the number of operations within each statement does not depend on the size of the input - we saw this in the previous section.
+
+However, in more general scenarios, the complexity of sequential statements is determined by the highest order among the individual complexities. For example, if one statement has a complexity of $\mathcal{O}(n)$ and another has a complexity of $\mathcal{O}(n^2)$, the overall complexity is $\mathcal{O}(n^2)$, as the highest-order term will dominate for sufficiently large input sizes.
+
+As we have seen multiple times, in asymptotic analysis, lower-order terms become insignificant as the input size grows larger, and hence are not included in the final representation of the algorithm's complexity. Thus, when evaluating sequential statements, only the term with the highest growth rate needs to be considered for the purposes of estimating the total time complexity.
+
+\subsection*{Simple Loops}
+
+Loops are primary determinants of an algorithm's complexity, as they often define how many times a particular operation is executed. A simple loop that runs from 1 to $n$ has a time complexity of $\mathcal{O}(n)$. This is because the loop executes $n$ times, and if the sequence of statements within the loop has a complexity of $\mathcal{O}(1)$, the total time complexity for the loop is $n \times \mathcal{O}(1)$, which simplifies to $\mathcal{O}(n)$. 
+
+The general form of a loop can be represented as:
+
+\[
+\begin{aligned}
+& \text{for } i \text{ in } 1, 2, \ldots, N \text{ loop} \\
+& \quad \text{sequence of statements} \\
+& \text{end loop;}
+\end{aligned}
+\]
+
+Here, the loop executes $N$ times, which means that the sequence of statements also executes $N$ times. Assuming that each of these statements is a basic operation with complexity $\mathcal{O}(1)$, the total time complexity of the loop is $\mathcal{O}(N)$. 
+
+An illustrative example involves considering a function that performs multiplication without using the built-in multiplication operator (\texttt{*}). Instead, the function uses a loop to add the first operand repeatedly:
+
+\begin{codebox}
+    \Procname{$\proc{Mul2}(x, y)$}
+    \li $result \gets 0$
+    \li \For $i \gets 0$ \To $y - 1$ \Do
+    \li     $result \gets result + x$
+        \End
+    \li \Return $result$
+\end{codebox}
+
+In this function, the loop runs $y$ times, performing a constant-time addition operation in each iteration. Hence, the complexity of this function is $\mathcal{O}(y)$. The time complexity here depends directly on the size of the input $y$, demonstrating how loop bounds directly affect the performance characteristics of an algorithm.
+
+Functions containing simple for loops that iterate through the entire input generally have a complexity of $\mathcal{O}(n)$, where $n$ is the size of the input. This is because each element of the input is processed in sequence, leading to a linear relationship between the input size and the number of operations performed.
+
+Consider the following:
+
+\begin{codebox}
+    \Procname{$\proc{Factorial}(n)$}
+    \li $result \gets 1$
+    \li \For $num \gets 1$ \To $n$ \Do
+    \li     $result \gets result \times num$
+        \End
+    \li \Return $result$
+\end{codebox}
+
+
+The given code for calculating the factorial of a number \( n \) involves a single loop that iterates from 1 to \( n \). For each iteration, it performs a constant-time multiplication operation (result *= num). Thus, the loop runs \( n \) times, and each iteration is an \(\mathcal{O}(1)\) operation.
+
+Therefore, the overall time complexity of the $\proc{factorial}$ function is $\mathcal{O}(n)$. Now consider:
+
+\begin{codebox}
+    \Procname{$\proc{Factorial2}(n)$}
+    \li $result \gets 1$
+    \li $count \gets 0$
+    \li \For $num \gets 1$ \To $n$ \Do
+    \li     $result \gets result \times num$
+    \li     $count \gets count + 1$
+        \End
+    \li \Return $result$
+\end{codebox}
+
+The function $\proc{factorial2}$ is very similar to the previous example of calculating the factorial of a number \( n \). It contains a single loop that iterates from 1 to \( n \). During each iteration, it performs two constant-time operations: multiplication (result *= num) and addition (count += 1). Since these operations are both \(\mathcal{O}(1)\) and the loop runs \( n \) times, the total time complexity is still \(\mathcal{O}(n)\).
+
+The presence of the additional assignment (count += 1) does not change the \textit{asymptotic} complexity, as it is still a constant-time operation repeated \( n \) times. Thus, the overall complexity remains \(\mathcal{O}(n)\). The additional  operation may however affect the practical performance of the function, as it increases the number of basic operations executed in each iteration.
+
+\subsection*{If-Then-Else Statements}
+For an \texttt{if-then-else} structure, the running time depends on the cost of evaluating the condition and the branch that executes. When analysing the \emph{worst case}, we use the slower branch plus the condition cost. For a specific input, only the cost of the branch actually taken is included.
+
+\begin{itemize}
+    \item \textbf{If the condition is simple}, like comparing two numbers, it takes constant time, $\mathcal{O}(1)$.
+    \item \textbf{If the condition is more complex}, such as checking membership in a large data structure, the time complexity will reflect that of the condition evaluation.
+\end{itemize}
+
+Consider the following pseudocode for an \texttt{if-then-else} statement:
+
+\begin{codebox}
+    \li \If cond \Then
+    \li     \text{block 1 (sequence of statements)}
+    \li \Else
+    \li     \text{block 2 (sequence of statements)}
+    \li \End
+\end{codebox}
+
+
+Here, either block 1 will execute, or block 2 will execute. Therefore, the worst-case time is the slower of the two possibilities:
+
+\[
+\max (\text{time(block 1)}, \text{time(block 2)})
+\]
+
+If block 1 takes $\mathcal{O}(1)$ and block 2 takes $\mathcal{O}(N)$, the overall time complexity for the \texttt{if-then-else} statement is $\mathcal{O}(N)$.
+
+The complexity of conditionals depends on the condition itself. Condition evaluation time can be constant, linear, or even worse, depending on the specific check being performed.
+
+Consider the following examples to illustrate this further:
+
+\begin{codebox}
+    \Procname{$\proc{Count\_ts}(a\_str)$}
+    \li $count \gets 0$
+    \li \For each $char$ in $a\_str$ \Do
+    \li     \If $char = \text{'t'}$ \Then
+    \li         $count \gets count + 1$
+            \End
+        \End
+    \li \Return $count$
+\end{codebox}
+
+
+In this example, we used an \texttt{\If} statement to check if one character is equal to another, which is a constant-time operation. The overall function runs in linear time with respect to the size of \texttt{a\_str}, since the condition check is simple. Letting $n = |\texttt{a\_str}|$, this function has time complexity $\mathcal{O}(n)$.
+
+Now, consider this code:
+
+\begin{codebox}
+    \Procname{$\proc{Count\_same\_ltrs}(a\_str, b\_str)$}
+    \li $count \gets 0$
+    \li \For each $char$ in $a\_str$ \Do
+    \li     \If $char \in b\_str$ \Then
+    \li         $count \gets count + 1$
+            \End
+        \End
+    \li \Return $count$
+\end{codebox}
+
+This code looks similar to $\proc{count\_ts}$ but the conditional check \texttt{char $\in$ b\_str} is more complex. We analyse its worst-case running time: membership testing may inspect every character in \texttt{b\_str}. This occurs when \texttt{char} is absent, because the search cannot return \texttt{False} before all characters have been checked. Big-$\mathcal{O}$ denotes an upper bound; the choice to study the worst case is a separate modelling decision.
+
+Let $n = |\texttt{a\_str}|$ and $m = |\texttt{b\_str}|$. The \texttt{\For} loop iterates $\mathcal{O}(n)$ times, and each iteration performs an $\mathcal{O}(m)$ conditional check. Since we execute an $\mathcal{O}(m)$ check $\mathcal{O}(n)$ times, the overall complexity of this function is $\mathcal{O}(nm)$.
+
+\subsection*{While Loops}
+
+While loops are fundamental constructs for creating iterative processes in algorithms. Unlike \texttt{\For} loops, which iterate a predetermined number of times, a \texttt{\While} loop continues executing as long as a given condition remains true. This flexibility makes \texttt{\While} loops suitable for scenarios where the number of iterations is not known in advance and depends on runtime conditions.
+
+The structure of a \texttt{\While} loop can be represented as:
+
+\[
+\text{while condition is true:}
+\]
+\[
+\quad \text{sequence of statements}
+\]
+
+\begin{itemize}
+    \item The condition is checked before each iteration. If it is false initially, the loop body will not execute.
+    \item The number of iterations depends on how the condition evolves and transitions to false.
+\end{itemize}
+
+The time complexity of a \texttt{\While} loop depends on the complexity of the condition check and the number of iterations required for the condition to become false.
+
+Consider the following example:
+
+\begin{codebox}
+    \Procname{$\proc{Factorial3}(n)$}
+    \li $result \gets 1$
+    \li \While $n > 0$ \Do
+    \li     $result \gets result \times n$
+    \li     $n \gets n - 1$
+        \End
+    \li \Return $result$
+\end{codebox}
+
+In this example, the loop continues while \texttt{n > 0}. Since \texttt{n} is decremented by 1 during each iteration, the loop runs $n$ times, resulting in a time complexity of $\mathcal{O}(n)$.
+
+Consider another example that uses a \texttt{\While} loop to split a string:
+
+\begin{codebox}
+    \Procname{$\proc{Char-Split}(a\_str)$}
+    \li $result \gets [\,]$ \Comment{initialise an empty list}
+    \li $index \gets 0$
+    \li \While $len(a\_str) \neq len(result)$ \Do
+    \li     $append(result, a\_str[index])$
+    \li     $index \gets index + 1$
+        \End
+    \li \Return $result$
+\end{codebox}
+
+In this function, $\texttt{len(a\_str)}$ and $\texttt{len(result)}$ are constant-time operations, as are string indexing and list appending. The while loop runs until the length of $\texttt{result}$ matches the length of $\texttt{a\_str}$, resulting in $n$ iterations where $n$ is the length of the input string. Hence, the overall time complexity of this function is $\mathcal{O}(n)$.
+
+Consider this example:
+
+\begin{codebox}
+    \Procname{$\proc{Sum-Until-Threshold}(arr, threshold)$}
+    \li $sum \gets 0$
+    \li $i \gets 0$
+    \li \While $sum < threshold$ \text{ and } $i < \attrib{arr}{length}$ \Do
+    \li     $sum \gets sum + arr[i]$
+    \li     $i \gets i + 1$
+        \End
+    \li \Return $sum$
+\end{codebox}
+
+Here, the loop runs until the condition \texttt{sum < threshold} is no longer true or until all elements in the array \texttt{arr} have been processed. The running time depends on both the array contents and the value of \texttt{threshold}. In the worst case, the loop examines every element, so the worst-case running time is $\Theta(n)$, where $n$ is the length of the array.
+
+In general, \texttt{while} loops are powerful constructs for iterating over conditions that are not known in advance. The key to analysing their complexity lies in understanding how the condition evolves with each iteration and estimating the number of iterations needed to reach termination. Proper analysis involves understanding both the evolution of the condition and the cost of each iteration.
+
+\subsection*{Nested Loops}
+
+Nested loops are an important construct in algorithm design, where one loop runs inside another. This type of structure significantly affects the time complexity of an algorithm due to the multiplicative effect of multiple iterations.
+
+
+
+Consider the general form of a nested loop:
+
+\newpage
+
+\[
+\text{for } i \gets 1 \text{ to } n:
+\]
+\[
+\quad \text{sequence of statements}
+\]
+\[
+\quad \text{for } j \gets 1 \text{ to } m:
+\]
+\[
+\quad\quad \text{sequence of statements}
+\]
+
+In the case of nested loops, the inner loop executes fully for each iteration of the outer loop. This means that the total number of iterations is the product of the number of iterations of each loop. If the outer loop runs $n$ times and the inner loop runs $m$ times, the total number of times the body of the inner loop executes is $n \times m$. If $m$ and $n$ are both proportional to the size of the input, then the time complexity of the nested loop is $\mathcal{O}(n \times m)$. 
+
+If both the inner and outer loops iterate over the same range, say from 1 to $n$, then the total time complexity of the nested loop structure is $\mathcal{O}(n^2)$. This is often the case when performing operations on a two-dimensional structure, such as a matrix, where each row and column must be iterated over.
+
+For example:
+
+\begin{codebox}
+    \Procname{$\proc{Sum-Matrix}(matrix)$}
+    \li $sum \gets 0$
+    \li \For $i \gets 0$ \To $\attrib{matrix}{rows} - 1$ \Do
+    \li     \For $j \gets 0$ \To $\attrib{matrix}{cols} - 1$ \Do
+    \li         $sum \gets sum + matrix[i][j]$
+            \End
+        \End
+    \li \Return $sum$
+\end{codebox}
+
+In this pseudocode, the outer loop iterates over each row of the matrix, while the inner loop iterates over each column. If the matrix has $n$ rows and $m$ columns, the time complexity of this nested loop is $\mathcal{O}(n \times m)$. In the case of a square matrix, where $n = m$, the complexity becomes $\mathcal{O}(n^2)$.
+
+In some cases, the number of iterations of the inner loop depends on the index of the outer loop. A common example is a triangular loop structure, where the inner loop runs fewer times as the outer loop progresses.
+
+Consider the following pseudocode:
+
+\begin{codebox}
+    \Procname{$\proc{Triangular-Sum}(n)$}
+    \li $sum \gets 0$
+    \li \For $i \gets 1$ \To $n$ \Do
+    \li     \For $j \gets i$ \To $n$ \Do
+    \li         $sum \gets sum + (i + j)$
+            \End
+        \End
+    \li \Return $sum$
+\end{codebox}
+
+Here, the inner loop starts from the current value of $i$ and runs until $n$. This means that, on the first iteration, the inner loop runs $n$ times, on the second iteration it runs $n-1$ times, and so on, until it runs only once. The total number of iterations for the nested loops can be calculated as (see Appendix \ref{app:appendix01}):
+
+\[
+\sum_{i=1}^{n} (n - i + 1) = \frac{n (n + 1)}{2}
+\]
+
+Thus, the time complexity of this nested loop is $\mathcal{O}(n^2)$. The triangular structure reduces the number of total iterations compared to a full $\mathcal{O}(n^2)$ loop, but the complexity remains quadratic.
+
+In the case of more than two nested loops, the same principle applies. If there are $k$ nested loops, each running $n$ times, the overall time complexity is $\mathcal{O}(n^k)$.
+
+When analysing nested loops, it is crucial to understand the range and bounds of each loop. If the bounds are dynamic and depend on the value of other variables, the complexity can be harder to determine and may require a more in-depth analysis of how those bounds change during execution.
+
+Nested loops are often used for problems involving multi-dimensional data structures or for comparing each element in a collection against every other element (e.g., sorting algorithms like $\proc{Bubble Sort}$, which has a time complexity of $\mathcal{O}(n^2)$ due to its nested loop structure).
+
+\subsection*{Recursion}
+This book, along with the courses it supports, does not cover the topic of recursion in depth. Here we discuss recursion briefly in the context of construct analysis simply for the sake of completeness. We have already seen recursion in the context of binary search. Recursion is a powerful tool in algorithm design, allowing functions to call themselves to solve problems by breaking them down into smaller sub-problems. Recursive algorithms are especially effective for problems that have a natural hierarchical or repetitive structure, such as tree traversal, divide-and-conquer algorithms, or calculating factorials.
+
+A key part of any recursive function is the \textbf{base case} — the condition under which the function stops calling itself to prevent infinite recursion.
+
+Consider the general structure of a recursive function:
+
+\begin{itemize}
+    \item \textbf{Base Case}: The termination condition that stops the recursion.
+    \item \textbf{Recursive Case}: The part of the function that calls itself with a modified input, progressing towards the base case.
+\end{itemize}
+
+A classic example of a recursive function is the calculation of a factorial:
+
+\[
+\texttt{factorial}(n) = 
+\begin{cases}
+1 & \text{if } n = 0 \\
+n \times \texttt{factorial}(n-1) & \text{if } n > 0
+\end{cases}
+\]
+
+In pseudocode, the factorial function can be represented as:
+
+\begin{codebox}
+    \Procname{$\proc{Factorial4}(n)$}
+    \li \If $n == 0$ \Then
+    \li     \Return $1$
+        \End
+    \li \Return $n \times \proc{Factorial}(n-1)$
+\end{codebox}
+
+In this pseudocode:
+\begin{itemize}
+    \item The \textbf{base case} occurs when $n == 0$, returning $1$.
+    \item The \textbf{recursive case} multiplies $n$ by the result of $\proc{Factorial4}(n-1)$.
+\end{itemize}
+
+The time complexity of a recursive function depends on how many times the function calls itself and how much work is done at each level of recursion. For the factorial function:
+
+\begin{itemize}
+    \item The function makes a single recursive call in each step, decrementing $n$ by $1$ each time.
+    \item The recursion depth is $n$, and each call performs $\mathcal{O}(1)$ work (a multiplication).
+\end{itemize}
+
+Thus, the time complexity of the factorial function is $\mathcal{O}(n)$.
+
+To determine the time complexity of a recursive algorithm, we can use recurrence relations. A recurrence relation expresses the time complexity of a recursive function in terms of its sub-problems. For example, the recurrence relation for the factorial function can be represented as:
+
+\[
+T(n) = T(n-1) + \mathcal{O}(1)
+\]
+
+This indicates that the time to compute $\texttt{factorial}(n)$ is equal to the time to compute $\texttt{factorial}(n-1)$ plus a constant amount of work, leading to a complexity of $\mathcal{O}(n)$.
+
+Another well-known example of a recursive function is the Fibonacci sequence:
+
+\[
+\texttt{fibonacci}(n) = 
+\begin{cases}
+0 & \text{if } n = 0 \\
+1 & \text{if } n = 1 \\
+\texttt{fibonacci}(n-1) + \texttt{fibonacci}(n-2) & \text{if } n > 1
+\end{cases}
+\]
+
+The corresponding pseudocode is:
+
+\begin{codebox}
+    \Procname{$\proc{Naive-Fibonacci}(n)$}
+    \li \If $n == 0$ \Then
+    \li     \Return $0$
+        \End
+    \li \If $n == 1$ \Then
+    \li     \Return $1$
+        \End
+    \li \Return $\proc{Fibonacci}(n-1) + \proc{Fibonacci}(n-2)$
+\end{codebox}
+
+In this example:
+\begin{itemize}
+    \item The function calls itself twice in the recursive case, creating a branching structure.
+    \item The \textbf{time complexity} is $\mathcal{O}(2^n)$, which grows exponentially due to repeated sub-problems being solved multiple times. This highlights the inefficiency of the naive recursive Fibonacci implementation.
+\end{itemize}
+
+To improve the efficiency of recursive functions that solve overlapping sub-problems, such as the Fibonacci sequence, \textbf{memoization} can be used. Memoization involves storing the results of sub-problems to avoid redundant calculations.
+
+For example, applying memoization to the Fibonacci function changes the time complexity from $\mathcal{O}(2^n)$ to $\mathcal{O}(n)$ by ensuring each sub-problem is solved only once.
+
+Recursion can often be replaced by iteration, especially for problems where the recursive depth may become a concern. For example, the factorial function can be rewritten iteratively which we saw earlier. Here is the iterative version of the factorial function:
+
+\begin{codebox}
+    \Procname{$\proc{Factorial-Iterative}(n)$}
+    \li $result \gets 1$
+    \li \For $i \gets 1$ \To $n$ \Do
+    \li     $result \gets result \times i$
+        \End
+    \li \Return $result$
+\end{codebox}
+
+This iterative approach has the same time complexity, $\mathcal{O}(n)$, as the recursive version but avoids the overhead of recursive calls and is not limited by the system's stack size.
+
+\textbf{Tail recursion} is a special form of recursion where the recursive call is the last operation in the function. In some languages, tail-recursive functions can be optimized by the compiler into iteration, preventing additional stack usage. Consider the following tail-recursive factorial:
+
+\begin{codebox}
+    \Procname{$\proc{Factorial-Tail}(n, accumulator)$}
+    \li \If $n == 0$ \Then
+    \li     \Return $accumulator$
+        \End
+    \li \Return $\proc{Factorial-Tail}(n-1, accumulator \times n)$
+\end{codebox}
+
+Here, the recursive call is in \textbf{tail position}, meaning no further computation is needed after the call returns. Tail recursion helps reduce the risk of \textit{stack overflow} and is often optimized into a loop by compilers.
+
+Recursion is a versatile tool in algorithm design, enabling elegant solutions to complex problems by breaking them down into smaller, more manageable sub-problems. However, it comes with trade-offs in terms of space and time complexity, especially with deep or exponential recursion.
+
+Analysing recursive algorithms involves understanding the recurrence relations that define their behaviour, identifying base cases, and estimating how many times the function will be called. While recursion can lead to clear and concise code, an iterative approach or optimization techniques like memoization and tail call optimization are often needed to improve efficiency.
+
+\section{Loop Analysis}\label{sec:loop-analysis}
+In the previous section, we already discussed the time complexity of loops. This section will focus on analysing loops in more detail, including nested loops, loops with variable bounds, and loops with conditional exits.
+
+In this book, a request for a Big-$\mathcal{O}$ classification normally means the most informative standard upper bound among the common growth classes under consideration. Thus, while $\mathcal{O}(n^2)$ is a valid upper bound for $f(n)=4n+3$, $\mathcal{O}(n)$ is more informative. Strictly speaking, Big-$\mathcal{O}$ alone need not express tightness; $f(n)=\Theta(n)$ states both a matching asymptotic upper and lower bound.
+
+\subsection*{Techniques for Practical Loop Analysis}
+
+Having understood the different types of loops and their general contributions to complexity, it is now time to delve into practical techniques for analysing these constructs in real-world scenarios. This section will provide actionable methods that readers can apply to systematically evaluate loops in their algorithms, focusing on both theoretical and practical aspects of analysis.
+
+\subsubsection*{Establishing Loop Boundaries}
+To determine the time complexity of a loop, start by establishing the boundaries of each iteration. This involves identifying the starting point, ending point, and increment pattern for loop variables. Loop boundaries define the upper limit of the iteration count, allowing us to deduce the worst-case scenario for the number of times a loop will execute.
+
+For example, consider a loop of the form:
+\[ 
+\text{for } i \gets a \text{ to } b \text{ by } c:
+\]
+The number of iterations in this loop can be calculated as:
+\[
+\left(\frac{b - a}{c}\right) + 1
+\]
+where $a$ is the starting value, $b$ is the ending value, and $c$ is the step size. Analyzing these boundaries helps determine the overall complexity of the loop.
+
+The following examples illustrate this concept.
+
+\begin{example}
+
+    \begin{codebox}
+        \Procname{$\proc{Loop-Constant-Increment}(n)$}
+        \li \For $i \gets 1$ \To $n$ \Do
+        \li     \Comment{Perform some $\mathcal{O}(1)$ operation}
+            \End
+    \end{codebox}
+
+In this example, the loop runs from $a$ to $b$ with a step size of $1$. The number of iterations is:
+
+\[
+\left( \frac{b - a}{1} \right) + 1 = (b - a + 1) = (n - 1 + 1) = n 
+\]
+
+In this example, $i$ starts at $1$ and increments by $1$ until $n$. The loop executes $n$ times, leading to a time complexity of $\mathcal{O}(n)$.
+
+\end{example}
+
+The above example directly illustrates the use of the formula for calculating iteration counts when the step size is constant. Here, $a = 1$, $b = n$, and $c = 1$, resulting in $n$ iterations.
+
+\begin{example}
+
+    \begin{codebox}
+        \Procname{$\proc{Loop-Geometric-Growth}(n)$}
+        \li $i \gets 1$
+        \li \While $i \leq n$ \Do
+        \li     \Comment{Perform some $\mathcal{O}(1)$ operation}
+        \li     $i \gets 2 \times i$
+            \End
+    \end{codebox}
+    
+    In this example, $i$ starts at $1$ and doubles on each iteration until it exceeds $n$. The number of iterations can be determined as follows:
+    
+    The value of $i$ evolves as:
+    
+    \[
+    1, 2, 4, 8, \dots, 2^k
+    \]
+    
+    where $2^k \leq n$. To determine the number of iterations, we solve:
+    
+    \[
+    2^k \leq n \implies k \leq \log_2(n)
+    \]
+    
+    Thus, the number of iterations is approximately $\log_2(n)$, leading to a time complexity of:
+    
+    \[
+    \mathcal{O}(\log n)
+    \]
+    
+    In this example, the increment pattern is multiplicative rather than additive. Although the formula given earlier directly applies to additive increments, the principle of analyzing loop boundaries to determine iteration count still holds. Here, we determine how many times we can double $i$ before it exceeds $n$, resulting in a logarithmic complexity.
+
+\end{example}
+
+\begin{example}
+
+    \begin{codebox}
+        \Procname{$\proc{Loop-Decrement}(n)$}
+        \li $i \gets n$
+        \li \While $i > 0$ \Do
+        \li     \Comment{Perform some $\mathcal{O}(1)$ operation}
+        \li     $i \gets i - 3$
+            \End
+    \end{codebox}
+
+    In this example, $i$ starts at $n$ and decreases by $3$ each time until it becomes less than or equal to $0$. The number of iterations is given by:
+
+    \[
+    i: n, (n - 3), (n - 6), \dots
+    \]
+
+    The loop continues until $i \leq 0$. To determine the number of iterations, we need to consider how many times we can subtract $3$ from $n$:
+
+    \[
+    \frac{n}{3}
+    \]
+
+    Thus, the number of iterations is approximately:
+
+    \[
+    \left( \frac{n}{3} \right)
+    \]
+
+    The overall time complexity of the loop is:
+
+    \[
+    \mathcal{O}(n)
+    \] 
+
+    In this example, the step size is $-3$. Using the general formula provided earlier, we have $a = n$, $b = 0$, and $c = -3$. This leads to an iteration count of approximately $n / 3$. The principle of establishing boundaries and using the formula directly applies here, highlighting how the decrement affects the number of iterations.
+
+\end{example}
+
+
+\subsubsection*{Complexity Through Summation}
+In algorithms with multiple consecutive loops, the overall complexity is the sum of the complexities of each loop. However, when loops are nested, the complexity is the product of their individual complexities. For instance, two consecutive loops each with $\mathcal{O}(n)$ complexity still result in $\mathcal{O}(n)$, whereas a nested structure results in $\mathcal{O}(n^2)$. Understanding this distinction is critical.
+
+Nested loops often require evaluating the total number of operations through summation. If the inner loop is dependent on the value of the outer loop, it is helpful to write down the summation that represents the number of iterations for all loops. For instance:
+\[
+\text{for } i \gets 1 \text{ to } n:
+\]
+\[
+\quad \text{for } j \gets 1 \text{ to } i:
+\]
+The number of total iterations is given by the summation (see Appendix \ref{app:appendix01}):
+\[
+\sum_{i=1}^{n} i = \frac{n(n + 1)}{2} = \mathcal{O}(n^2)
+\]
+This type of analysis is particularly useful for nested loops with dependent ranges. The following examples illustrate this concept.
+
+\begin{example}
+
+    \begin{codebox}
+        \Procname{$\proc{Linear-Sum-Large-Constant}(n)$}
+        \li \For $i \gets 1$ \To $n$ \Do
+        \li     \For $j \gets 1$ \To $10^9$ \Do
+        \li         \Comment{Perform some $\mathcal{O}(1)$ operation}
+                \End
+            \End
+    \end{codebox}
+
+    In this example, the outer loop runs from $1$ to $n$, while the inner loop runs a constant number of times (from $1$ to $10^9$). The total number of iterations is:
+
+    \[
+    \sum_{i=1}^{n} 10^9 = 10^9 \times n = \mathcal{O}(n)
+    \]
+
+    Although the inner loop has a very large constant number of iterations, the overall complexity remains linear in $n$, as the constant factor does not affect the asymptotic growth.
+\end{example}
+
+\begin{example}
+
+    \begin{codebox}
+        \Procname{$\proc{Quadratic-Sum}(n)$}
+        \li \For $i \gets 1$ \To $n$ \Do
+        \li     \For $j \gets 1$ \To $i$ \Do
+        \li         \Comment{Perform some $\mathcal{O}(1)$ operation}
+                \End
+            \End
+    \end{codebox}
+
+In this example, the outer loop runs from $1$ to $n$, and the inner loop runs from $1$ to $i$. The total number of iterations is:
+
+    \[
+        \sum_{i=1}^n \sum_{j=1}^i 1 = \sum_{i=1}^{n} i = \frac{n(n + 1)}{2} = \mathcal{O}(n^2)
+    \]
+
+In this expression:
+\begin{itemize}
+    \item The outer summation, $\sum_{i=1}^n$, represents the iterations of the outer loop over $i$.
+    \item The inner summation, $\sum_{j=1}^i$, represents the iterations of the inner loop for each fixed $i$.
+\end{itemize}
+
+The 1 in the inner summation represents performing a constant-time operation on each inner loop iteration. This expression counts each inner loop iteration individually for all pairs of $i$ and $j$ that satisfy $1 \leq j \leq i$. This double summation is equivalent to $\sum_{i=1}^n = i$, since, for each $i$, the inner loop runs exactly $i$ times. To see why the singular sum is equivalent to the double sum, let us try to implement the single sum:
+
+\begin{codebox}
+    \Procname{$\proc{Sum-Up-To}(n)$}
+    \li $total \gets 0$
+    \li \For $i \gets 1$ \To $n$ \Do
+    \li     $total \gets total + i$
+        \End
+    \li \Return $total$
+\end{codebox}
+
+In this code:
+
+\begin{itemize}
+    \item The outer loop runs from 1 to $n$.
+    \item On each iteration, the current value of $i$ is added to \texttt{total}.
+    \item By the end of the loop, \texttt{total} will contain the sum $1+2+\cdots+n$, which is exactly $\sum_{i=1}^n i$.
+\end{itemize}
+
+While the sum \( \sum_{i=1}^n i = \frac{n(n + 1)}{2} \) grows proportionally to \( n^2 \), the time complexity of the $\proc{Sum-Up-To(n)}$ function remains linear, \( \mathcal{O}(n) \), because it performs a constant-time operation in each of its \( n \) iterations. This demonstrates that an algorithm can have an output magnitude that grows quadratically with \( n \), yet its time complexity depends on the number of operations, which increases linearly.
+
+\end{example}
+
+\begin{example}
+
+    \begin{codebox}
+        \Procname{$\proc{Logarithmic-Growth}(n)$}
+        \li \For $i \gets 1$ \To $n$ \Do
+        \li     $j \gets 1$
+        \li     \While $j < n$ \Do
+        \li         \Comment{Perform some $\mathcal{O}(1)$ operation}
+        \li         $j \gets 2 \times j$
+                \End
+            \End
+    \end{codebox}
+
+    In this example, the outer loop runs from $1$ to $n$, while the inner loop starts at $1$ and doubles $j$ until it reaches or exceeds $n$. The number of iterations for the inner loop is:
+
+    \[
+    \sum_{i=1}^{n} \log_2(n) = n \cdot \mathcal{O}(\log n) = \mathcal{O}(n \log n)
+    \]
+
+    Thus, the overall time complexity of this nested structure is $\mathcal{O}(n \log n)$.
+\end{example}
+
+
+
+\subsubsection*{Worst-Case, Best-Case, and Average-Case Complexity}
+Not all loops run the same number of times in all scenarios. The best-case, worst-case, and average-case behaviours can vary based on the condition that controls the loop's termination. For instance, if a loop exits early due to a condition being met, the best-case complexity could be significantly less than the worst-case complexity. Understanding these different cases and how they affect runtime is vital for real-world applications where inputs may vary.
+
+\begin{example}
+
+    \begin{codebox}
+        \Procname{$\proc{Find-Target}(arr, target)$}
+        \li $n \gets \attrib{arr}{length}$
+        \li \For $i \gets 1$ \To $n$ \Do
+        \li     \If $arr[i] == target$ \Then
+        \li         \Return $i$ \Comment{Return the index of the target if found}
+                \End
+            \End
+    \end{codebox}
+
+    In this example, the goal is to find a target element in an array of length $n$. The number of iterations the loop will run depends on the position of the target:
+
+    \begin{itemize}
+        \item \textbf{Best-Case Complexity:} The target is found at the first position in the array. The loop runs only once, resulting in a complexity of $\boldsymbol{\Theta(1)}$.\footnote{One may think that the lower bound is $\Omega(1)$. In the best case, when the target is at the first position, the algorithm performs a constant amount of work. The time complexity is both $\boldsymbol{\mathcal{O}(1)}$ (upper bound) and $\boldsymbol{\Omega(1)}$ (lower bound), which means it's $\boldsymbol{\Theta(1)}$ (a tight bound). Using $\boldsymbol{\Theta(1)}$ is more precise because it indicates the time is bounded both above and below by a constant.}
+        \item \textbf{Worst-Case Complexity:} The target is not in the array or is found at the last position. The loop runs $n$ times, resulting in a complexity of $\boldsymbol{\mathcal{O}(n)}$.
+        \item \textbf{Average-Case Complexity:} On average, the target may be located somewhere in the middle of the array. Assuming uniform distribution, the average number of iterations is approximately $n/2$, leading to an average-case complexity of $\boldsymbol{\Theta(n)}$.
+    \end{itemize}    
+
+    This example illustrates how the same loop can exhibit different behaviours depending on the input, resulting in distinct best, worst, and average-case complexities.
+\end{example}
+
+\begin{example}
+
+
+Consider the iterative binary search algorithm mentioned previously in this chapter applied to a sorted array of length $n$. Binary search is a divide-and-conquer algorithm that works by repeatedly dividing the search interval in half.
+
+\begin{codebox}
+    \Procname{$\proc{Binary-Search-Iterative}(arr, key)$}
+    \li $low \gets 0$ \CommentAt{7}{Initialise low index}
+    \li $high \gets arr.length -1$ \CommentAt{7}{Initialise high index}
+    \li \While $low \leq high$ \Do
+    \li     $mid \gets \floor{(low + high) / 2}$ \CommentAt{7}{Calculate mid index}
+    \li     \If $arr[mid] == key$ \Then
+    \li         \Return $mid$ \CommentAt{7}{Key found at mid index}
+    \li     \ElseIf $arr[mid] < key$ \Then
+    \li         $low \gets mid + 1$ \CommentAt{7}{Update low index}
+    \li     \Else
+    \li         $high \gets mid - 1$ \CommentAt{7}{Update high index}
+        \End
+        \End
+    \li \Return $-1$ \CommentAt{7}{Key not found}
+\end{codebox}
+
+\begin{itemize}
+    \item \textbf{Best-Case Complexity: } 
+    In the best-case scenario, the target element is located at the middle of the array on the very first comparison. Since this takes only one operation, the complexity is $\boldsymbol{\Theta(1)}$. This notation is used because it provides a tight bound — the algorithm always takes constant time in the best case.
+
+    \item \textbf{Worst-Case Complexity: }
+    In the worst-case scenario, the algorithm keeps dividing the search interval in half until only one candidate remains or the interval becomes empty. The number of iterations grows logarithmically, so the worst-case running time is $\boldsymbol{\Theta(\log n)}$.
+
+    \item \textbf{Average-Case Complexity: }  
+    Conditional on a successful search with the target equally likely to occupy any array position, the expected number of comparisons is proportional to $\log n$. Under this model, the expected running time is therefore $\boldsymbol{\Theta(\log n)}$. A model that also permits unsuccessful searches must specify their probability, but gives the same asymptotic order under ordinary fixed-probability assumptions.
+\end{itemize}
+\end{example}
+
+\begin{example}
+
+    Consider the Naïve String Matching algorithm applied to a text string $T$ of length $n$ and a pattern string $P$ of length $m$. The goal is to find all occurrences of $P$ within $T$ by checking for a match at every possible shift.
+    
+    \begin{codebox}
+        \Procname{$\proc{Naive-String-Matching}(T, P)$}
+        \li $n \gets \attrib{T}{length}$
+        \li $m \gets \attrib{P}{length}$
+        \li \For $s \gets 0$ \To $n - m$ \Do
+        \li     $i \gets 0$
+        \li     \While $i < m$ and $T[s + i] == P[i]$ \Do
+        \li         $i \gets i + 1$
+                \End
+        \li     \If $i == m$ \Then
+        \li         \textbf{report} $s$ \Comment{Pattern found at position $s$}
+                \End
+            \End
+    \end{codebox}
+    
+    \begin{itemize}
+        \item \textbf{Best-Case Complexity: }  
+        In the best-case scenario, the first character comparison fails at every shift. The algorithm still tests all $n-m+1$ shifts, so its best-case running time is $\boldsymbol{\Theta(n-m+1)}$ (and hence $\Theta(n)$ when $m\leq cn$ for a fixed $c<1$).
+    
+        \item \textbf{Worst-Case Complexity: }
+        In the worst-case scenario, the text and pattern contain repeated sequences that force $m$ comparisons at essentially every shift. The worst-case running time is therefore $\boldsymbol{\Theta((n-m+1)m)}$, commonly written $\Theta(nm)$ when $m$ is not close to $n$ in a way that changes the first factor.
+    
+        \item \textbf{Average-Case Complexity: } 
+        Under an independent-character model over a fixed alphabet of at least two symbols, the expected number of comparisons per shift is bounded by a constant. The expected running time is therefore $\boldsymbol{\Theta(n-m+1)}$, often simplified to $\Theta(n)$ under the same convention as above.
+    \end{itemize}
+   
+    
+    This example also illustrates that best, worst, and average case describe different running-time functions, whereas $\mathcal{O}$, $\Omega$, and $\Theta$ describe bounds on whichever function is being analysed.
+    
+    \end{example}
+
+\subsection*{Examples of Loop Analysis}
+We now provide a series of examples to illustrate how to analyse loops.
+
+\begin{example}
+
+    Consider the following algorithm:
+    
+    \begin{codebox}
+        \Procname{$\proc{Loop1}(n)$}
+        \li $i \gets 1$
+        \li \While $i \leq n$ \Do
+        \li     $i \gets 3 \times i$
+            \End
+    \end{codebox}
+    
+    At each iteration of the \texttt{\While} loop, the variable $i$ is multiplied by $3$. We want to determine how many times the loop will execute before $i$ exceeds $n$.
+    
+    Let $k$ be the number of iterations the loop executes.
+    
+    Initially, $i_0 = 1$.
+    
+    After the first iteration:
+    \[ i_1 = 3 \times i_0 = 3 \times 1 = 3 \]
+    
+    After the second iteration:
+    \[ i_2 = 3 \times i_1 = 3 \times 3 = 3^2 = 9 \]
+    
+    After $k$ iterations:
+    \[ i_k = 3^k \times i_0 = 3^k \]
+    
+    The loop continues as long as $i_k \leq n$. Therefore, the condition for loop termination is:
+    \[ 3^k > n \]
+    
+    Taking the logarithm base $3$ of both sides:
+    \[ k > \log_3 n \]
+    
+    Since $k$ must be an integer, the number of iterations is:
+    \[ k = \lceil \log_3 n \rceil \]
+    
+    \textbf{Conclusion:} The loop runs $\lceil \log_3 n \rceil$ times, so the time complexity of the algorithm is $\boldsymbol{\mathcal{O}(\log n)}$.
+    
+\end{example}
+    
+ \begin{example}
+
+    Consider the following algorithm:
+    
+    \begin{codebox}
+        \Procname{$\proc{Loop2}(n)$}
+        \li $s \gets 1$
+        \li \For $i \gets 1$ \To $n$ \Do
+        \li     \For $j \gets 1$ \To $n$ \Do
+        \li         $s \gets s + 1$
+                \End
+            \End
+    \end{codebox}
+    
+    
+    We have two nested \texttt{\For} loops:
+    
+    \begin{itemize}
+        \item The outer loop runs from $i = 1$ to $i = n$, executing $n$ iterations.
+        \item The inner loop runs from $j = 1$ to $j = n$, also executing $n$ iterations for each iteration of the outer loop.
+    \end{itemize}
+    
+    At each iteration of the inner loop, a constant-time operation is performed: $s \gets s + 1$.
+    
+    \textbf{Total number of iterations:}
+    
+    \begin{itemize}
+        \item The inner loop runs $n$ times for each of the $n$ iterations of the outer loop.
+        \item Therefore, the total number of times $s \gets s + 1$ is executed is:
+        \[ n \times n = n^2 \]
+    \end{itemize}
+    
+    \textbf{Conclusion:} The algorithm performs around $n^2$ operations, so the time complexity is $\boldsymbol{\mathcal{O}(n^2)}$.
+        
+\end{example}
+
+\begin{example}
+
+    Consider the following algorithm:
+    
+    \begin{codebox}
+        \Procname{$\proc{Loop3}(n)$}
+        \li $i \gets 1$
+        \li \While $i \leq n$ \Do
+        \li     $i \gets 2 \times i$
+            \End
+    \end{codebox}
+    
+    At each iteration of the \texttt{\While} loop, the variable $i$ is multiplied by $2$. We need to determine how many times the loop will execute before $i$ exceeds $n$.
+    
+    Let $k$ be the number of iterations the loop executes.
+    
+    \begin{itemize}
+        \item \textbf{Initialisation:} $i_0 = 1$.
+        \item \textbf{Iteration Update:} After each iteration, $i$ is updated as:
+        \[ i_k = 2^k \times i_0 = 2^k \]
+        \item \textbf{Termination Condition:} The loop continues while $i_k \leq n$. Thus:
+        \[ 2^k \leq n \]
+        \item \textbf{Solving for $k$:} Taking the logarithm base $2$ of both sides:
+        \[ k \leq \log_2 n \]
+        \item \textbf{Number of Iterations:} Since $k$ must be an integer, the loop executes:
+        \[ k = \lfloor \log_2 n \rfloor + 1 \]
+    \end{itemize}
+    
+    \textbf{Conclusion:} The loop runs $\lfloor \log_2 n \rfloor + 1$ times, so the time complexity of the algorithm is $\boldsymbol{\mathcal{O}(\log n)}$.
+            
+\end{example}
+            
+\begin{example}
+
+    Consider the following algorithm:
+    
+    \begin{codebox}
+        \Procname{$\proc{Loop4}(n)$}
+        \li $i \gets 1$
+        \li \While $i \leq n \times n$ \Do
+        \li     $i \gets 3 \times i$
+            \End
+    \end{codebox}
+    
+    At each iteration of the \texttt{\While} loop, the variable $i$ is multiplied by $3$. We need to determine how many times the loop will execute before $i$ exceeds $n^2$.
+    
+    Let $k$ be the number of iterations the loop executes.
+    
+    \begin{itemize}
+        \item \textbf{Initialisation:} $i_0 = 1$.
+        \item \textbf{Iteration Update:} After each iteration:
+        \[ i_k = 3^k \times i_0 = 3^k \]
+        \item \textbf{Termination Condition:} The loop continues while $i_k \leq n^2$. Thus:
+        \[ 3^k \leq n^2 \]
+        \item \textbf{Solving for $k$:} Taking the logarithm base $3$ of both sides:
+        \[ k \leq \log_3 n^2 \]
+        \item \textbf{Simplifying:} Since $\log_3 n^2 = 2 \log_3 n$:
+        \[ k \leq 2 \log_3 n \]
+        \item \textbf{Number of Iterations:} The loop executes:
+        \[ k = \lfloor 2 \log_3 n \rfloor + 1 \]
+    \end{itemize}
+    
+    \textbf{Conclusion:} The loop runs $\lfloor 2 \log_3 n \rfloor + 1$ times, so the time complexity of the algorithm is $\boldsymbol{\mathcal{O}(\log n)}$.
+    
+\end{example}
+
+\begin{example}
+
+    Consider the following algorithm:
+    
+    \begin{codebox}
+        \Procname{$\proc{Loop5}(n)$}
+        \li $i \gets 1$
+        \li \While $i \leq n$ \Do
+        \li     $j \gets 0$
+        \li     \While $j \leq n$ \Do
+        \li         $j \gets j + 1$
+                \End
+        \li     $i \gets 2 \times i$
+            \End
+    \end{codebox}
+    
+    We need to determine the total number of times the inner statement $j \gets j + 1$ is executed.
+    
+    \begin{itemize}
+        \item \textbf{Outer Loop (\texttt{\While} $i \leq n$):}
+        \begin{itemize}
+            \item The variable $i$ starts at $1$ and is doubled each time: $i = 1, 2, 4, 8, \ldots$.
+            \item The number of iterations of the outer loop is:
+            \[ k = \lfloor \log_2 n \rfloor + 1 \]
+            \item This is because the loop continues while $i \leq n$, and $i$ grows exponentially.
+        \end{itemize}
+        \item \textbf{Inner Loop (\texttt{\While} $j \leq n$):}
+        \begin{itemize}
+            \item For each iteration of the outer loop, $j$ is initialised to $0$.
+            \item The inner loop increments $j$ from $0$ to $n$, executing $n + 1$ times.
+        \end{itemize}
+        \item \textbf{Total Operations:}
+        \begin{itemize}
+            \item The inner loop runs $n + 1$ times per outer loop iteration.
+            \item Total number of times $j \gets j + 1$ is executed:
+            \[ (\lfloor \log_2 n \rfloor + 1) \times (n + 1) \]
+            \item Simplifying, we have:
+            \[ \mathcal{O}((\log n) \times n) = \mathcal{O}(n \log n) \]
+        \end{itemize}
+    \end{itemize}
+    
+    \textbf{Conclusion:} The algorithm performs $(\lfloor \log_2 n \rfloor + 1) \times (n + 1)$ operations, so the time complexity is $\boldsymbol{\mathcal{O}(n \log n)}$.
+    
+\end{example}
+
+\begin{example}
+
+    Consider the following algorithm:
+    
+    \begin{codebox}
+        \Procname{$\proc{Loop6}(n)$}
+        \li $i \gets 1$
+        \li \While $i \leq n$ \Do
+        \li     $j \gets i$
+        \li     \While $j \leq n$ \Do
+        \li         $j \gets j + 1$
+                \End
+        \li     $i \gets 2 \times i$
+            \End
+    \end{codebox}
+    
+    \textbf{Complete Time Complexity Analysis:}
+    
+    We need to determine the total number of times the inner statement $j \gets j + 1$ is executed.
+    
+    \begin{itemize}
+        \item \textbf{Outer Loop (\texttt{\While} $i \leq n$):}
+        \begin{itemize}
+            \item The variable $i$ starts at $1$ and is doubled each time: $i = 1, 2, 4, 8, \ldots$.
+            \item The number of iterations of the outer loop is:
+            \[ k_{\text{max}} = \lfloor \log_2 n \rfloor + 1 \]
+            \item This is because the loop continues while $i \leq n$, and $i$ grows exponentially.
+        \end{itemize}
+        \item \textbf{Inner Loop (\texttt{\While} $j \leq n$):}
+        \begin{itemize}
+            \item For each iteration of the outer loop, $j$ is initialised to the current value of $i$.
+            \item The inner loop increments $j$ from $i$ to $n$, executing $n - i + 1$ times.
+        \end{itemize}
+        \item \textbf{Total Operations:}
+        \begin{itemize}
+            \item The total number of times $j \gets j + 1$ is executed is:
+            \[
+            \text{Total} = \sum_{k=0}^{k_{\text{max}} - 1} (n - i_k + 1)
+            \]
+            where $i_k = 2^k$.
+            \item Substituting $i_k$:
+            \[
+            \text{Total} = \sum_{k=0}^{\lfloor \log_2 n \rfloor} (n - 2^k + 1)
+            \]
+            \item Simplify the sum:
+            \[
+            \begin{aligned}
+            \text{Total} &= \sum_{k=0}^{\lfloor \log_2 n \rfloor} (n + 1 - 2^k) \\
+            &= (\lfloor \log_2 n \rfloor + 1)(n + 1) - \sum_{k=0}^{\lfloor \log_2 n \rfloor} 2^k
+            \end{aligned}
+            \]
+            \item Calculate the sum of $2^k$:
+            \[
+            \sum_{k=0}^{\lfloor \log_2 n \rfloor} 2^k = 2^{\lfloor \log_2 n \rfloor + 1} - 1 \leq 2^{\log_2 n + 1} - 1 = 2n -1
+            \]
+            \item Therefore:
+            \[
+            \text{Total} \leq (\log_2 n +1)(n +1) - (2n -1)
+            \]
+            \item Simplify:
+            \[
+            \begin{aligned}
+            \text{Total} &\leq (\log_2 n +1)(n +1) - 2n +1 \\
+            &= (\log_2 n)(n +1) + (n +1) - 2n +1 \\
+            &= (\log_2 n)(n +1) - n +2
+            \end{aligned}
+            \]
+            \item For large $n$, the term $(\log_2 n)(n +1)$ dominates, so:
+            \[
+            \text{Total} = \mathcal{O}(n \log n)
+            \]
+        \end{itemize}
+    \end{itemize}
+    
+    \textbf{Conclusion:} The algorithm performs $(\log_2 n)(n +1) - n +2$ operations, so the time complexity is $\boldsymbol{\mathcal{O}(n \log n)}$.
+
+    \textbf{Simplified Time Complexity Analysis:}
+
+    We can simplify the analysis by examining the behaviour of the outer and inner loops separately.
+
+\begin{itemize}
+    \item \textbf{Outer Loop (\texttt{\While} $i \leq n$):}
+    \begin{itemize}
+        \item The variable $i$ starts at $1$ and is doubled each time:
+        \[ i = 1, 2, 4, 8, \ldots, n \]
+        \item This doubling behaviour results in a logarithmic number of iterations:
+        \[ \text{Number of iterations of the outer loop} = \mathcal{O}(\log n) \]
+    \end{itemize}
+    \item \textbf{Inner Loop (\texttt{\While} $j \leq n$):}
+    \begin{itemize}
+        \item For each value of $i$, $j$ starts at $i$ and increments by $1$ until $j > n$.
+        \item The number of iterations of the inner loop for a given $i$ is:
+        \[ n - i + 1 \leq n \]
+        \item Which means the inner loop runs approximately $n$ times for each value of $i$.
+        \item Therefore, the inner loop runs $\mathcal{O}(n)$ times for each iteration of the outer loop.
+    \end{itemize}
+    \item \textbf{Total Complexity:}
+    \begin{itemize}
+        \item The outer loop runs $\mathcal{O}(\log n)$ times.
+        \item For each iteration of the outer loop, the inner loop runs $\mathcal{O}(n)$ times.
+        \item Therefore, the total number of operations is:
+        \[ \mathcal{O}(\log n) \times \mathcal{O}(n) = \mathcal{O}(n \log n) \]
+    \end{itemize}
+\end{itemize}
+    
+\end{example}
+    
+\section{Code Analysis}
+We now provide a series of examples to illustrate how to analyse code snippets. All code will be Java code, but the principles apply to any programming language.
+
+\begin{example}
+    
+    \begin{lstlisting}[style=javaStyle, caption={Simple Function}, label={lst:java_simple_function}]
+    public static int sumSquareDifference(int n) {
+        int sum = (n * (n + 1)) / 2;
+        int sumOfSquares = (n * (n + 1) * (2 * n + 1)) / 6;
+        return (sum * sum) - sumOfSquares;
+    }
+    \end{lstlisting}
+
+    Line 2: \texttt{int sum = (n * (n + 1)) / 2;}
+    \begin{itemize}
+        \item \textbf{Assignments}: 
+            \begin{itemize}
+                \item Assign \texttt{sum} = ... : \textbf{1 time unit}
+            \end{itemize}
+        \item \textbf{Arithmetic Operations}: 
+            \begin{itemize}
+                \item Multiplication \texttt{n * (n + 1)}: \textbf{1 time unit}
+                \item Addition \texttt{n + 1}: \textbf{1 time unit}
+                \item Division \texttt{(n * (n + 1)) / 2}: \textbf{1 time unit}
+            \end{itemize}
+        \item \textbf{Total for Line 2}: \textbf{4 time units}
+    \end{itemize}
+
+    Line 3: \texttt{int sumOfSquares = (n * (n + 1) * (2 * n + 1)) / 6;}
+    \begin{itemize}
+        \item \textbf{Assignments}:
+            \begin{itemize}
+                \item Assign \texttt{sumOfSquares} = ... : \textbf{1 time unit}
+            \end{itemize}
+        \item \textbf{Arithmetic Operations}: 
+            \begin{itemize}
+                \item Multiplication \texttt{n * (n + 1)}: \textbf{1 time unit}
+                \item Addition \texttt{n + 1}: \textbf{1 time unit}
+                \item Multiplication \texttt{(n * (n + 1)) * (2 * n + 1)}: \textbf{1 time unit}
+                \item Multiplication \texttt{2 * n}: \textbf{1 time unit}
+                \item Addition \texttt{2 * n + 1}: \textbf{1 time unit}
+                \item Division \texttt{(...) / 6}: \textbf{1 time unit}
+            \end{itemize}
+        \item \textbf{Total for Line 3}: \textbf{7 time units}
+    \end{itemize}
+
+    Line 4: \texttt{return (sum * sum) - sumOfSquares;}
+    \begin{itemize}
+        \item \textbf{Arithmetic Operations}:
+            \begin{itemize}
+                \item Multiplication \texttt{sum * sum}: \textbf{1 time unit}
+                \item Subtraction \texttt{(sum * sum) - sumOfSquares}: \textbf{1 time unit}
+            \end{itemize}
+        \item \textbf{Return Operation} (write to output or return value): 
+            \begin{itemize}
+                \item Return value: \textbf{1 time unit}
+            \end{itemize}
+        \item \textbf{Total for Line 4}: \textbf{3 time units}
+    \end{itemize}
+
+    Summary of Total Time (T):
+    \begin{itemize}
+        \item \textbf{Line 1}: 4 time units
+        \item \textbf{Line 2}: 7 time units
+        \item \textbf{Line 3}: 3 time units
+    \end{itemize}
+
+    Thus, the total time $T$ to execute the function \texttt{sumSquareDifference} is:
+
+    \[
+    T = 4 + 7 + 3 = 14 \text{ time units}
+    \]
+
+    This detailed analysis allows us to precisely calculate the time $T$ based on counting all individual operations, and we see that the time complexity is $\boldsymbol{\mathcal{O}(1)}$.
+
+    We could also place the analysis as code comments in the function to document the time complexity of each line.
+
+    \begin{lstlisting}[style=javaStyle, caption={Simple Function}, label={lst:java_simple_function2}]
+        public static int sumSquareDifference(int n)
+        {
+            int sum = (n * (n + 1)) / 2;        // 4 time units
+            int sumOfSquares = (n * (n + 1) * (2 * n + 1)) / 6;     // 7 time units
+            return (sum * sum) - sumOfSquares;      // 3 time units:
+        } // Total time: T(n) = 4 + 7 + 14 time units so we get O(1)
+    \end{lstlisting}
+    
+We will prefer the latter method as it provides a clear and concise way to document the time complexity of the function or method inside the code itself.
+        
+\end{example}
+
+\begin{example}
+
+In the following example, we present an algorithm to perform the 
+
+\begin{lstlisting}[style = javaStyle, caption={Binary Search Iterative}, label={lst:java_binary_search_none}]
+    public static int binarySearchIter(int[] a, int x) {
+        int low = 0, high = a.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            if (x == a[mid]) {
+                return mid;
+            } 
+            else if (x < a[mid]) {
+                high = mid - 1;
+            } 
+            else {
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
+\end{lstlisting}
+
+\begin{lstlisting}[style=javaStyle, caption={Binary Search Iterative}, label={lst:java_binary_search}]
+    public static int binarySearchIter(int[] a, int x) {
+        int low = 0;
+        int high = a.length - 1; // 2 time units (assignment: 1, subtraction: 1)
+
+        // Loop runs log(n) times and makes 1 comparison per iteration
+        while (low <= high) {
+            int mid = (low + high) / 2; // For each iteration: 1 addition, 1 division, 1 assignment (3 time units)
+
+            if (x == a[mid]) { // Comparison to check if element is found (1 time unit per iteration)
+                return mid; // 1 time unit (return)
+            } else if (x < a[mid]) { // Comparison to decide which half to search next (1 time unit per iteration)
+                high = mid - 1; // For each iteration: 1 subtraction, 1 assignment (2 time units)
+            } else { // If neither condition is satisfied
+                low = mid + 1; // For each iteration: 1 addition, 1 assignment (2 time units)
+            }
+        }
+        return -1; // 1 time unit (return)
+    }
+    // Detailed Time Complexity Analysis
+    // ---------------------------------
+    // Initialisations before the loop: 2 time units (assignments and subtraction)
+    // For each iteration of the while loop (which runs log(n) times):
+    // - Loop condition comparison: 1 time unit
+    // - Midpoint calculation: 3 time units
+    // - Comparisons to check element: 1 time unit
+    // - One of the assignments for updating bounds (either low or high): 2 time units
+    // Total time per iteration: 1 (while comparison) + 3 (mid calculation) + 1 (comparison) + 2 (update bounds) = 7 time units per iteration
+    // The loop runs approximately log(n) times.
+    // T(n) = 2 (initialisation) + 7 * log(n) (loop iterations) + 1 (final return)
+    //      = 3 + 7 * log(n)
+    // Ignoring constants and lower-order terms, we get: T(n) = O(log n)
+
+\end{lstlisting}
+    
+\end{example}
+
+When doing analysis of code, we are mostly interested in the time complexity in terms of Big-$\mathcal{O}$ notation. This allows us to understand how the algorithm scales with input size. The detailed analysis of time units spent on each line of code is useful for understanding the efficiency of the algorithm and identifying bottlenecks. This can be useful when optimizing code for performance. When doing the latter, we still only need to focus on the dominating term in the time complexity, as this is what determines the overall growth rate of the algorithm.
+
+Also, we usually analyse where the time units are spent for each line of code. The following examples use this approach.
+
+\subsection*{Optimising Algorithm Efficiency}
+The final section of this chapter - and of the book - provides an example of how to optimize an algorithm. We will use the example of finding the sum of all possible pairs in an array to illustrate how to improve the efficiency of an algorithm. The algorithm will be optimized from a naive approach to increasingly more efficient solutions. The algorithm does the following:
+
+\begin{itemize}
+    \item The algorithm calculates the \textbf{total sum of all possible pairwise sums} $\operatorname{arr}[i]+\operatorname{arr}[j]$ in the array \texttt{arr}.
+    \item The sum runs over every \emph{ordered pair} of indices $(i,j)$. Thus, both $(i,j)$ and $(j,i)$ are included, as are pairs with $i=j$.
+\end{itemize}
+
+\begin{example} Here is a manual illustration of the sum of pairs:
+
+    Suppose $\operatorname{arr}=[1,2,3]$
+
+   \textbf{ Manually Calculating All Pair Sums:}
+    
+   \begin{align*}
+    \text{totalSum} = & \; (1+1)+(1+2)+(1+3)+ \\
+                    & \; (2+1)+(2+2)+(2+3)+ \\
+                    & \; (3+1)+(3+2)+(3+3) \\
+                    = & \; 2+3+4+3+4+5+4+5+6 \\
+                    = & \; 36
+    \end{align*}
+    
+\end{example}
+
+Let us now consider the \textbf{naive approach} to solving this problem which involves iterating through every possible pair in the array:
+
+\begin{lstlisting}[style = javaStyle, caption={Naive Sum of Pairs with Analysis}, label={lst:java_naive_sum_pairs_analysis}]
+    public static int naiveSumOfPairs(int[] arr) {
+        int n = arr.length; // 1 time unit
+        int totalSum = 0; // 1 time unit
+
+        // Outer loop over 'i' from 0 to n - 1
+        for (int i = 0; i < n; i++) { // 2n + 2
+            // Inner loop over 'j' from 0 to n - 1
+            for (int j = 0; j < n; j++) { // (2n + 2) * n
+                totalSum += arr[i] + arr[j]; // 3n^2
+            }
+        }
+        return totalSum; // 1 time unit
+    }
+    // Detailed Time Complexity Analysis
+    // ---------------------------------
+    // Initializations: 2 time units (n and totalSum assignments)
+    // Outer loop: 2n + 2 time units
+    // Inner loop 1: n * (2n + 2) time units
+    // Inner loop body: 3n^2 time units
+    // Return statement: 1 time unit
+    //
+    // Total Time: T(n) = 2 (initializations)
+    //                    + 2n + 2
+    //                    + 2n^2 + 2n
+    //                    + 3n^2
+    //                    + 1 (return)
+    //                    = 5n^2 + 4n + 5
+    // Dominating Term: 5n^2
+    // Tight asymptotic complexity: Theta(n^2)
+\end{lstlisting}
+
+This algorithm gives us an intuitive solution to the problem. Unfortunately, it is very inefficient for large inputs. Let us now consider a more optimized algorithm for the same problem. The analysis of the inner loop uses the summation methods collected in Appendix \ref{app:appendix01}.
+
+\begin{lstlisting}[style = javaStyle, caption={Optimized Sum of Pairs with Analysis}, label={lst:java_optimized_sum_pairs_analysis}]
+    public static int optimizedSumOfPairs(int[] arr) {
+        int n = arr.length;            // 1 time unit
+        int totalSum = 0;              // 1 time unit
+    
+        // Outer loop over 'i' from 0 to n - 1
+        for (int i = 0; i < n; i++) {  // 2n + 2 time units
+            // Inner loop over 'j' from i to n - 1
+            for (int j = i; j < n; j++) { // (2(n - i) + 2) per i, summed over i
+                if (i == j) {              // Comparison: (n(n + 1)/2) time units
+                    totalSum += arr[i] + arr[j]; // 3 time units, executed n times
+                } else {
+                    totalSum += 2 * (arr[i] + arr[j]); // 4 time units, executed (n^2 - n)/2 times
+                }
+            }
+        }
+        return totalSum; // 1 time unit
+    }
+    
+    // Detailed Time Complexity Analysis
+    // ---------------------------------
+    // Initializations: 2 time units (n and totalSum assignments)
+    // Outer loop: 2n + 2 time units (1 initialization, n + 1 comparisons, n increments)
+    // Inner loop control: Sum of (2(n - i) + 2) for i from 0 to n - 1
+    //     = Sum of (2n - 2i + 2) from i = 0 to n - 1
+    //     = 2n^2 + 2n - n(n - 1)
+    //     = n^2 + 3n time units
+    // Inner loop body (if condition): 
+    //     - Comparisons: (n(n + 1)/2) time units
+    //     - if block (i == j): 3 time units, executed n times => 3n
+    //     - else block (i != j): 4 time units, executed (n^2 - n)/2 times => 2n^2 - 2n
+    //     Total inner loop body: n(n + 1)/2 + 3n + 2n^2 - 2n
+    //     = (5n^2 + 3n)/2 time units
+    // Return statement: 1 time unit
+    //
+    // Total Time: T(n) = 2 (initializations)
+    //                    + 2n + 2 (outer loop)
+    //                    + n^2 + 3n (inner loop control)
+    //                    + (5n^2 + 3n)/2 (inner loop body)
+    //                    + 1 (return)
+    //                    = (7n^2 + 13n + 10)/2
+    // Dominating Term: (7/2)n^2
+    // Tight asymptotic complexity: Theta(n^2)
+\end{lstlisting}
+
+This algorithm is still $\Theta(n^2)$, but under our unit-cost model its leading term is reduced from $5n^2$ to $\tfrac{7}{2}n^2$. Using the complete operation-count formulas at $n=10^5$ gives:
+
+\begin{enumerate}
+    \item $\proc{naiveSumOfPairs}$ (\(5n^2+4n+5\)):
+    \[
+    T(10^5)=5(10^5)^2+4(10^5)+5=50,000,400,005
+    \]
+
+    \item $\proc{optimizedSumOfPairs}$ (\(\tfrac{7n^2+13n+10}{2}\)):
+    \[
+    T(10^5)=\frac{7(10^5)^2+13(10^5)+10}{2}=35,000,650,005
+    \]
+\end{enumerate}
+
+\[
+\text{Difference} = 50,000,400,005-35,000,650,005=14,999,750,000
+\]
+
+Thus, for \(n=10^5\), the naive version performs approximately \textbf{15 billion more operations} in this model. Both algorithms nevertheless have the same tight asymptotic complexity, $\Theta(n^2)$.
+
+The next algorithm is even more efficient, with running time $\Theta(n)$.
+\begin{lstlisting}[style = javaStyle, caption={Efficient Sum of Pairs with Analysis}, label={lst:java_efficient_sum_pairs_analysis}]
+    public static int efficientSumOfPairs(int[] arr) {
+        int n = arr.length;            // 1
+        int totalSum = 0;              // 1
+    
+        for (int i = 0; i < n; i++) { //2n + 2
+            totalSum += 2 * arr[i];   // 3n
+        }
+    
+        return n * totalSum;           // 2
+    }
+        // Detailed Time Complexity Analysis
+        // ---------------------------------
+        // Initializations: 2 time units (n and totalSum assignments)
+        // Loop: 2n + 2 time units (1 initialization, n + 1 comparisons, n increments)
+        // Body: 3n time units (multiplication, addition and assignment, n iterations)
+        // Return statement: 2 time units (multiplication and return)
+        //
+        // Total Time: T(n) = 2 (initializations)
+        //                    + 2n + 2 (loop)
+        //                    + 3n (body)
+        //                    + 2 (return)
+        //          = 5n + 6
+        //
+        // Tight asymptotic complexity: Theta(n)
+\end{lstlisting}    
+
+This algorithm is far more efficient than the two previous algorithms. Its running time is $\Theta(n)$, which is asymptotically better than their quadratic running times. For the input size \(n = 10^5\), the operation count is:
+
+\begin{enumerate}
+    \item $\proc{efficientSumOfPairs}$ (\(5n+6\)):
+    \[
+    \text{Operation count} = 5n+6 = 5\cdot 10^5+6 = 500,006
+    \]
+    \item $\proc{optimizedSumOfPairs}$ (\(\tfrac{7n^2+13n+10}{2}\)):
+    \[
+    \text{Operation count} = 35,000,650,005
+    \]
+    \item $\text{Difference} = 35,000,650,005-500,006=35,000,149,999$
+\end{enumerate}
+
+This illustrates the gain from replacing a $\Theta(n^2)$ algorithm with a $\Theta(n)$ algorithm. The following algorithm also has running time $\Theta(n)$ but uses fewer operations in the chapter's model:
+
+
+\begin{lstlisting}[style = javaStyle, caption={Fast Sum of Pairs with Analysis}, label={lst:java_fast_sum_pairs_analysis}]
+    public static int fastSumOfPairs(int[] arr) {
+        int n = arr.length;               // 1 time unit
+        int sumOfArr = 0;                 // 1 time unit
+    
+        // Loop over 'i' from 0 to n - 1
+        for (int i = 0; i < n; i++) {     // 2n + 2 time units (1 initialization, n + 1 comparisons, n increments)
+            sumOfArr += arr[i];           // 2n time units (addition and assignment per iteration)
+        }
+    
+        int totalSum = 2 * n * sumOfArr;  // 3 time units (2 multiplications, 1 assignment)
+        return totalSum;                  // 1 time unit
+    }
+    // Updated Detailed Time Complexity Analysis
+    // -----------------------------------------
+    // Initializations: 2 time units (n and sumOfArr assignments)
+    // Loop over 'i':
+    //     - Loop control: 2n + 2 time units (1 initialization, n + 1 comparisons, n increments)
+    //     - Loop body: 2n time units (sumOfArr += arr[i]; addition and assignment)
+    // Total for loop: (2n + 2) + 2n = 4n + 2 time units
+    // Computation of totalSum: 3 time units (2 multiplications, 1 assignment)
+    // Return statement: 1 time unit
+    //
+    // Total Time: T(n) = 2 (initializations)
+    //                    + 4n + 2 (loop over 'i')
+    //                    + 3 (compute totalSum)
+    //                    + 1 (return)
+    //                    = 4n + 8
+    // Dominating Term: 4n
+    // Tight asymptotic complexity: Theta(n)
+    
+\end{lstlisting}  
+
+Under the chapter's operation-counting model, $\proc{fastSumOfPairs}$ uses $4n+8$ operations rather than $5n+6$. At $n=10^5$, the difference is $99,998$ operations. Both algorithms nevertheless have running time $\Theta(n)$, and actual performance should be measured if the constant-factor difference matters. We conclude with a final algorithm that has the same asymptotic complexity and a slightly smaller count in this model.
+
+\begin{lstlisting}[style = javaStyle, caption={Ultra Efficient Sum of Pairs with Analysis}, label={lst:java_ultra_efficient_sum_pairs_analysis}]
+    public static int ultraEfficientSumOfPairs(int[] arr) {
+        int n = arr.length;               // 1 time unit
+        int sumOfArr = 0;                 // 1 time unit
+    
+        // Loop over 'value' in 'arr'
+        for (int value : arr) {           // 2n + 1 time units (n iterations)
+            sumOfArr += value;            // 2n time units (addition and assignment per iteration)
+        }
+    
+        int totalSum = 2 * n * sumOfArr;  // 3 time units (2 multiplications, 1 assignment)
+        return totalSum;                  // 1 time unit
+    }
+    
+    // Updated Detailed Time Complexity Analysis
+    // -----------------------------------------
+    // Initializations: 2 time units (n and sumOfArr assignments)
+    // Loop over 'arr':
+    //     - Loop control: 2n + 1 time units (1 initialization, n comparisons, n increments)
+    //     - Loop body: 2n time units (sumOfArr += value; addition and assignment)
+    // Total for loop: (2n + 1) + 2n = 4n + 1 time units
+    // Computation of totalSum: 3 time units (2 multiplications, 1 assignment)
+    // Return statement: 1 time unit
+    //
+    // Total Time: T(n) = 2 (initializations)
+    //                    + (4n + 1) (loop over 'arr')
+    //                    + 3 (compute totalSum)
+    //                    + 1 (return)
+    //                    = 4n + 6
+    // Dominating Term: 4n
+    // Tight asymptotic complexity: Theta(n)
+    
+\end{lstlisting}  
+
+
+Both have identical asymptotic complexity, and the constant difference is negligible.
+
+\textbf{Why $\proc{ultraEfficientSumOfPairs}$ is Better:}
+\begin{enumerate}
+    \item \textbf{Readability:} The enhanced \texttt{for-each} loop directly iterates over elements:
+    \[
+    \texttt{for (int value : arr) \{ sumOfArr += value; \}}
+    \]
+    It is concise, avoids indexing, and is less error-prone compared to a traditional \texttt{for} loop:
+    \[
+    \texttt{for (int i = 0; i < n; i++) \{ sumOfArr += arr[i]; \}}
+    \]
+    \item \textbf{Maintainability:} Enhanced loops are easier to modify and adapt to different data structures.
+    \item \textbf{Modern Practices:} Aligns with current Java standards, improving clarity and intent.
+\end{enumerate}
+
+While both functions perform similarly, $\proc{ultraEfficientSumOfPairs}$ is preferred for its readability, simplicity, and alignment with modern programming practices, making it a more elegant solution.
+

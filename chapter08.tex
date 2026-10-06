@@ -1,0 +1,1505 @@
+\chapter{Vectors and Matrices}\label{chap:ch8}
+A \textbf{vector} is a mathematical object that has both \textbf{magnitude} (length) and \textbf{direction}. In two or three dimensions, a vector is often represented as an arrow pointing from one point to another. For example, the vector \(\vect{v} = (x_1, x_2)\) in 2D space describes a movement from the origin \((0,0)\) to the point \((x_1, x_2)\).
+
+Vectors are used to represent quantities like velocity, force, and displacement, which require both magnitude and direction to fully describe them. Vectors can be added together, scaled by a number, and decomposed into components.
+
+Matrices, on the other hand, are rectangular arrays of numbers arranged in rows and columns. They are used to represent and solve systems of linear equations, perform transformations, and encode relationships between sets of vectors.
+
+\section{Vectors in \texorpdfstring{$\mathbb{R}^2$}{R2} and \texorpdfstring{$\mathbb{R}^n$}{Rn}}
+
+In linear algebra, vectors are often represented as \textbf{column matrices}. For example, the vector \(\vect{v} = (x_1, x_2)\) can be written as a column matrix:
+
+\[ \vect{v} = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} \]
+
+We say that two vectors are \textbf{equal} if and only if their corresponding entries are equal.
+
+\begin{example}
+    The following are vectors in $\mathbb{R}^2$ (a.k.a. the plane consisting of ordered pairs of real numbers):
+
+    \[
+    \vect{u}=\left[\begin{array}{l}
+    3 \\
+    5
+    \end{array}\right], \quad \vect{v}=\left[\begin{array}{l}
+    5 \\
+    3
+    \end{array}\right]
+    \]
+    They are not equal because their corresponding entries do not match.
+\end{example}
+
+\begin{figure}[htbp]
+    \centering
+    % First graph (points)
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            % Draw the axes
+            \draw[->] (-3, 0) -- (3, 0) node[right] {$x_1$};
+            \draw[->] (0, -3) -- (0, 3) node[above] {$x_2$};
+
+            % Plot the points
+            \filldraw[headercolor] (-2,-1) circle (2pt) node[anchor=north east] {(-2, -1)};
+            \filldraw[headercolor] (1,1) circle (2pt) node[anchor=south west] {(1, 1)};
+            \filldraw[headercolor] (2,-2) circle (2pt) node[anchor=north west] {(2, -2)};
+        \end{tikzpicture}
+        \subcaption{Points in the plane}
+    \end{minipage}
+    \hfill
+    % Second graph (vectors)
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            % Draw the axes
+            \draw[->] (-3, 0) -- (3, 0) node[right] {$x_1$};
+            \draw[->] (0, -3) -- (0, 3) node[above] {$x_2$};
+
+            % Plot the vectors
+            \draw[->, thick, headercolor] (0,0) -- (-2,-1) node[anchor=north east] {(-2, -1)};
+            \draw[->, thick, headercolor] (0,0) -- (1,1) node[anchor=south west] {(1, 1)};
+            \draw[->, thick, headercolor] (0,0) -- (2,-2) node[anchor=north west] {(2, -2)};
+        \end{tikzpicture}
+        \subcaption{Vectors from the origin}
+    \end{minipage}
+    \caption{Points and vectors in the plane}
+    \label{fig:points-vectors}
+\end{figure}
+
+The sum of two vectors $\vect{u}$ and $\vect{v}$ in $\mathbb{R}^2$, denoted $\vect{u} + \vect{v}$, is obtained by adding the corresponding entries of $\vect{u}$ and $\vect{v}$. Given a real number $c$, the scalar multiple of $\vect{u}$ by $c$, denoted $c \vect{u}$, is obtained by multiplying each entry in $\vect{u}$ by $c$.
+
+\begin{example}
+    If $\vect{u}$ and $\vect{v}$ are as in the preceding example, then 
+
+$$
+\begin{aligned}
+\vect{u} + \vect{v} & =\left[\begin{array}{l}
+3 \\
+5
+\end{array}\right] + \left[\begin{array}{l}
+5 \\
+3
+\end{array}\right] = \left[\begin{array}{l}
+3+5 \\
+5+3
+\end{array}\right] = \left[\begin{array}{l}
+8 \\
+8
+\end{array}\right], \text { and } \\
+6 \vect{u} & = 6\left[\begin{array}{l}
+3 \\
+5
+\end{array}\right] = \left[\begin{array}{l}
+6 \cdot 3 \\
+6 \cdot 5
+\end{array}\right] = \left[\begin{array}{l}
+18 \\
+30
+\end{array}\right]
+\end{aligned}
+$$
+
+\end{example}
+
+\begin{remark}
+    It is often helpful to identify a vector $\left[\begin{array}{l}a \\ b\end{array}\right] \in \mathbb{R}^2$ with a geometric point $(a, b)$ in the plane in order to get a picture of what we are working with. Please see \autoref{fig:points-vectors} for an example.
+\end{remark}
+
+If $\vect{u}$ and $\vect{v}$ in $\mathbb{R}^2$ are thought of as points in the plane, then $\vect{u} + \vect{v}$ corresponds to the fourth vertex of the parallelogram whose other vertices are $\vect{0}, \vect{u}$, and $\vect{v}$.
+Note: By $\vect{0}$, we mean the zero vector, or the vector whose entries are all zero. In $\mathbb{R}^2$, we have $\vect{0} = \left[\begin{array}{l}
+0 \\
+0
+\end{array}\right]$.
+
+We call this the \textit{parallelogram law of addition} and it can be seen in \autoref{fig:parallelogram-law}.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        % Draw axes
+        \draw[->] (-0.5, 0) -- (4, 0) node[right] {$x_1$};
+        \draw[->] (0, -0.5) -- (0, 3) node[above] {$x_2$};
+
+        % Define the vectors u and v
+        \coordinate (O) at (0, 0);
+        \coordinate (U) at (1.5, 2);
+        \coordinate (V) at (3, 0.5);
+        \coordinate (UplusV) at (3+1.5, 2+0.5);
+
+        % Draw vectors
+        \draw[->, thick] (O) -- (U);
+        \draw[->, thick] (O) -- (V);
+        \draw[->, thick, headercolor] (O) -- (UplusV) node[midway, right] {$\vect{u} + \vect{v}$};
+
+        % Draw the parallelogram
+        \draw[dashed] (U) -- (UplusV);
+        \draw[dashed] (V) -- (UplusV);
+        \fill[headercolor, opacity=0.3] (O) -- (U) -- (UplusV) -- (V) -- cycle;
+
+        % Add labels
+        \node[above right] at (UplusV) {$\vect{u} + \vect{v}$};
+        \node[above] at (U) {$\vect{u}$};
+        \node[below right] at (V) {$\vect{v}$};
+
+        % Mark the origin
+        \node[below left] at (O) {$\vect{0}$};
+    \end{tikzpicture}
+    \caption{The parallelogram law of vector addition in $\mathbb{R}^2$.}
+    \label{fig:parallelogram-law}
+\end{figure}
+
+These ideas generalise to higher-dimensional spaces. More specifically, we can define $\mathbb{R}^n$ as follows.
+
+\begin{definition}
+    For each positive integer $n$, we let $\mathbb{R}^n$ denote the collection of ordered $n$-tuples with each entry in $\mathbb{R}$. We often write these elements as $n \times 1$ matrices. We define addition and scalar multiplication of vectors in $\mathbb{R}^n$ in the same way as we do for $\mathbb{R}^2$. That is, we go coordinate-by-coordinate.
+\end{definition}
+
+\begin{example}
+    If $u_1, u_2, \ldots, u_n \in \mathbb{R}$, then
+
+    \[
+    \vect{u} = \left[\begin{array}{c}
+    u_1 \\
+    u_2 \\
+    \vdots \\
+    u_n
+    \end{array}\right] \in \mathbb{R}^n.
+    \]
+     
+\end{example}
+
+\begin{example}
+    If $\vect{u}$ and $\vect{v}$ are in $\mathbb{R}^n$ (with entries denoted $u_1, \ldots, u_n$ and $v_1, \ldots, v_n$, respectively), and $c \in \mathbb{R}$, then
+
+    \[
+    \begin{aligned}
+    & \vect{u} + \vect{v} = {\left[\begin{array}{c}
+    u_1 \\
+    u_2 \\
+    \vdots \\
+    u_n
+    \end{array}\right] + \left[\begin{array}{c}
+    v_1 \\
+    v_2 \\
+    \vdots \\
+    v_n
+    \end{array}\right] = \left[\begin{array}{c}
+    u_1 + v_1 \\
+    u_2 + v_2 \\
+    \vdots \\
+    u_n + v_n
+    \end{array}\right], \text { and } } 
+    & c \vect{u} = c\left[\begin{array}{c}
+    u_1 \\
+    u_2 \\
+    \vdots \\
+    u_n
+    \end{array}\right] = \left[\begin{array}{c}
+    c u_1 \\
+    c u_2 \\
+    \vdots \\
+    c u_n
+    \end{array}\right]
+    \end{aligned}
+    \]   
+\end{example}
+
+\begin{custombox}{Algebraic Properties of $\mathbb{R}^n$}
+    Let $\vect{u}, \vect{v}, \vect{w} \in \mathbb{R}^n$ and $c, d \in \mathbb{R}$. Then the following properties hold:
+    \begin{enumerate}
+        \item \textbf{Commutative Property of Addition:} $\vect{u} + \vect{v} = \vect{v} + \vect{u}$.
+        \item \textbf{Associative Property of Addition:} $(\vect{u} + \vect{v}) + \vect{w} = \vect{u} + (\vect{v} + \vect{w})$.
+        \item \textbf{Additive Identity:} There exists a vector $\vect{0} \in \mathbb{R}^n$ such that $\vect{u} + \vect{0} = \vect{u}$ for all $\vect{u} \in \mathbb{R}^n$.
+        \item \textbf{Additive Inverse:} For each $\vect{u} \in \mathbb{R}^n$, there exists a vector $-\vect{u} \in \mathbb{R}^n$ such that $\vect{u} + (-\vect{u}) = \vect{0}$.
+        \item \textbf{Distributive Property:} $c(\vect{u} + \vect{v}) = c\vect{u} + c\vect{v}$ and $(c + d)\vect{u} = c\vect{u} + d\vect{u}$.
+        \item \textbf{Associative Property of Scalar Multiplication:} $c(d\vect{u}) = (cd)\vect{u}$.
+        \item \textbf{Multiplicative Identity:} $1\vect{u} = \vect{u}$.
+    \end{enumerate}  
+\end{custombox}
+
+A \textbf{linear combination} is a way to combine vectors using scalar multiplication and addition. Given a set of vectors, we multiply each by a scalar and then sum the results. Linear combinations help us understand how vectors relate to each other and whether one vector can be expressed in terms of others.
+
+\begin{definition}{Linear Combinations}
+    Given a set of vectors $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_p \in \mathbb{R}^n$ and scalars $c_1, c_2, \ldots, c_p \in \mathbb{R}$, the vector $\vect{y}$ given by
+
+\[
+\vect{y} = c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p
+\]
+
+is called a linear combination of $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_p$ with weights $c_1, c_2, \ldots, c_p$.
+
+\end{definition}
+
+\begin{example}
+    Let $\vect{v}_1 = \left[\begin{array}{l}
+        1 \\
+        2
+        \end{array}\right]$ and $\vect{v}_2 = \left[\begin{array}{c}
+        1 \\
+        -1
+        \end{array}\right]$. Some linear combinations of $\vect{v}_1$ and $\vect{v}_2$ include
+        
+        \[
+        \begin{aligned}
+        \vect{0} & = 0 \vect{v}_1 + 0 \vect{v}_2 \\
+        {\left[\begin{array}{l}
+        3 \\
+        0
+        \end{array}\right] } & = \vect{v}_1 + 2 \vect{v}_2 \\
+        {\left[\begin{array}{l}
+        -5 \\
+        -1
+        \end{array}\right] } & = -2 \vect{v}_1 - 3 \vect{v}_2, \text { and } \\
+        {\left[\begin{array}{l}
+        5 \\
+        1
+        \end{array}\right] } & = 2 \vect{v}_1 + 3 \vect{v}_2
+        \end{aligned}
+        \]
+        
+\end{example}
+
+\subsection*{Vector Equations and Linear Systems}
+
+It is often the case that we wish to know if some vector $\vect{b}$ can be formed as a linear combination of some other set of vectors $\vect{a}_1, \ldots, \vect{a}_n$. The process for figuring this out is given by the following.
+
+\begin{custombox}{Using Matrices to Determine Linear Combinations}
+A vector equation
+
+\[
+x_1 \vect{a}_1 + x_2 \vect{a}_2 + \cdots + x_n \vect{a}_n = \vect{b}
+\]
+
+has the same solution set as the linear system whose augmented matrix is
+
+\[
+\left[\begin{array}{lllll}
+\vect{a}_1 & \vect{a}_2 & \ldots & \vect{a}_n & \vect{b}
+\end{array}\right].
+\]    
+\end{custombox}
+
+More specifically, if the $\vect{a}_i$'s are in $\mathbb{R}^m$ with
+
+\[
+\vect{a}_1 = \left[\begin{array}{c}
+a_{11} \\
+a_{21} \\
+\vdots \\
+a_{m1}
+\end{array}\right], \quad \vect{a}_2 = \left[\begin{array}{c}
+a_{12} \\
+a_{22} \\
+\vdots \\
+a_{m2}
+\end{array}\right], \ldots, \quad \vect{a}_n = \left[\begin{array}{c}
+a_{1n} \\
+a_{2n} \\
+\vdots \\
+a_{mn}
+\end{array}\right], \quad \text{and} \quad \vect{b} = \left[\begin{array}{c}
+b_1 \\
+b_2 \\
+\vdots \\
+b_m
+\end{array}\right]
+\]
+
+then you would row reduce the matrix
+
+\[
+\begin{aligned}
+& \left[\begin{array}{ccccc}
+a_{11} & a_{12} & \ldots & a_{1n} & b_1 \\
+a_{21} & a_{22} & \ldots & a_{2n} & b_2 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+a_{m1} & a_{m2} & \ldots & a_{mn} & b_m
+\end{array}\right] \\
+& \begin{array}{ccccc}
+\hspace{0.5cm} \uparrow & \hspace{0.3cm} \uparrow & \hspace{0.0cm} \ldots & \hspace{0.2cm} \uparrow & \hspace{0.2cm} \uparrow \\
+\hspace{0.4cm} \vect{a}_1 & \hspace{0.3cm} \vect{a}_2 & \hspace{0.1cm} \ldots & \hspace{0.2cm} \vect{a}_n & \hspace{0.2cm} \vect{b}
+\end{array}
+\end{aligned}
+\]
+
+to determine if there is some set of weights $x_1, \ldots, x_n$ that work.
+
+\begin{example} Let
+\[
+\begin{aligned}
+&\vect{a}_1=\left[\begin{array}{c}
+2 \\
+-1 \\
+1
+\end{array}\right], \quad \vect{a}_2=\left[\begin{array}{c}
+0 \\
+8 \\
+-2
+\end{array}\right], \quad \vect{a}_3=\left[\begin{array}{l}
+6 \\
+5 \\
+1
+\end{array}\right], \quad \text { and } \vect{b}=\left[\begin{array}{c}
+10 \\
+3 \\
+7
+\end{array}\right]
+\end{aligned}
+\]
+
+We determine if $\vect{b}$ is a linear combination of $\vect{a}_1, \vect{a}_2, \vect{a}_3$, i.e. if there is some set of weights $x_1, x_2, x_3$ such that $x_1 \vect{a}_1 + x_2 \vect{a}_2 + x_3 \vect{a}_3 = \vect{b}$. By the above, we translate this question to the matrix setting.
+
+\[
+\begin{alignedat}{3}
+& \left[\begin{array}{cccc}
+2 & 0 & 6 & 10 \\
+-1 & 8 & 5 & 3 \\
+1 & -2 & 1 & 7
+\end{array}\right]
+& \quad & r_1 \leftrightarrow r_3 
+& \quad & 
+\left[\begin{array}{cccc}
+1 & -2 & 1 & 7 \\
+-1 & 8 & 5 & 3 \\
+2 & 0 & 6 & 10
+\end{array}\right] \\[10pt]
+& & \quad & \begin{aligned}
+    r_2 & \mapsto r_2 + r_1 \\
+    r_3 & \mapsto r_3 - 2r_1
+\end{aligned}
+& \quad & 
+\left[\begin{array}{cccc}
+1 & -2 & 1 & 7 \\
+0 & 6 & 6 & 10 \\
+0 & 4 & 4 & -4
+\end{array}\right] \\[10pt]
+& & \quad & r_3 \mapsto r_3 - \frac{4}{6} r_2
+& \quad & 
+\left[\begin{array}{cccc}
+1 & -2 & 1 & 7 \\
+0 & 6 & 6 & 10 \\
+0 & 0 & 0 & \blacksquare
+\end{array}\right] .
+\end{alignedat}
+\]
+
+Since the symbol $\blacksquare$ denotes something nonzero, we see that there's no solution, i.e. that $\vect{b}$ is not a linear combination of $\vect{a}_1, \vect{a}_2, \vect{a}_3$.
+
+\end{example}
+
+\begin{example} Let
+
+\[
+\vect{a}_1 = \left[\begin{array}{l}
+1 \\
+0 \\
+1
+\end{array}\right], \quad
+\vect{a}_2 = \left[\begin{array}{c}
+-4 \\
+6 \\
+-4
+\end{array}\right], \quad
+\vect{a}_3 = \left[\begin{array}{c}
+-6 \\
+7 \\
+5
+\end{array}\right], \quad
+\text{and } \vect{b} = \left[\begin{array}{c}
+11 \\
+-5 \\
+9
+\end{array}\right]
+\]
+
+We determine if $\vect{b}$ is a linear combination of $\vect{a}_1, \vect{a}_2, \vect{a}_3$. We reduce the corresponding matrix to echelon form:
+
+\[
+\left[\begin{array}{cccc}
+1 & -4 & -6 & 11 \\
+0 & 6 & 7 & -5 \\
+1 & -4 & 5 & 9
+\end{array}\right]
+\quad r_3 \mapsto r_3 - r_1 \quad
+\left[\begin{array}{cccc}
+1 & -4 & -6 & 11 \\
+0 & 6 & 7 & -5 \\
+0 & 0 & 11 & -2
+\end{array}\right]
+\]
+
+and we see that there is a solution. Now we find what weights $x_1, x_2, x_3$ work by finding the reduced echelon form.
+
+\[
+\begin{alignedat}{3}
+& r_3 \mapsto \frac{1}{11} r_3 \quad &
+& \left[\begin{array}{cccc}
+1 & -4 & -6 & 11 \\
+0 & 6 & 7 & -5 \\
+0 & 0 & 1 & -\frac{2}{11}
+\end{array}\right] \\[10pt]
+& \begin{aligned}
+    r_2 & \mapsto r_2 - 7r_3 \\
+    r_1 & \mapsto r_1 + 6r_3
+\end{aligned} & \quad &
+\left[\begin{array}{cccc}
+1 & -4 & 0 & \frac{109}{11} \\
+0 & 6 & 0 & -\frac{41}{11} \\
+0 & 0 & 1 & -\frac{2}{11}
+\end{array}\right]
+\end{alignedat}
+\]
+
+\[
+\begin{alignedat}{3}
+& r_2 \mapsto \frac{1}{6}r_2 \quad &
+& \left[\begin{array}{cccc}
+1 & -4 & 0 & \frac{109}{11} \\
+0 & 1 & 0 & -\frac{41}{66} \\
+0 & 0 & 1 & -\frac{2}{11}
+\end{array}\right] \\[10pt]
+& r_1 \mapsto r_1 + 4r_2 \quad &
+& \left[\begin{array}{cccc}
+1 & 0 & 0 & \frac{245}{33} \\
+0 & 1 & 0 & -\frac{41}{66} \\
+0 & 0 & 1 & -\frac{2}{11}
+\end{array}\right],
+\end{alignedat}
+\]
+
+so $\left(x_1, x_2, x_3\right)=\left(\frac{245}{33},-\frac{41}{66},-\frac{2}{11}\right)$. Since there are no free variables, this is the unique solution.
+
+\end{example}
+
+The \textbf{span} of a set of vectors is the collection of all possible linear combinations of those vectors. In other words, it's the set of all vectors you can reach by scaling and adding the given vectors (see examples in \autoref{fig:span_geometry}). The span gives us insight into the "space" those vectors cover:
+
+\begin{definition}{Span of a Set of Vectors}
+    If $\vect{v}_1, \ldots, \vect{v}_p$ are in $\mathbb{R}^n$, then the set of all linear combinations of $\vect{v}_1, \ldots, \vect{v}_p$ is denoted by \text{Span} $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ and is called the subset of $\mathbb{R}^n$ spanned by $\vect{v}_1, \ldots, \vect{v}_p$. In other words, the span of $\vect{v}_1, \ldots, \vect{v}_p$ is all vectors that can be written in the form
+    $$
+    c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p
+    $$
+    with $c_1, \ldots, c_p$ scalars.
+
+\end{definition}
+
+\begin{figure}[htbp]
+    \centering
+
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}[scale = 0.4]
+            \useasboundingbox (-8,-8) rectangle (8,8);
+
+            \def\A{7}
+            \draw[->] (-\A,0) -- (\A,0) node[right] {$x_1$};
+            \draw[->] (0,-\A) -- (0,\A) node[above] {$x_2$};
+
+            \def\ux{2}
+            \def\uy{1}
+
+            \draw[mseViaBlue] (-\A,-\uy/\ux*\A) -- (\A,\uy/\ux*\A);
+
+            \foreach \s in {-3,-2,-1,1,2,3} {
+                \fill[mseViaBlue] ( {\s*\ux}, {\s*\uy} ) circle (3pt)
+                node[mseViaBlue, anchor=north, xshift=2mm] {$\s\vect u$};
+            }
+
+            \draw[->, very thick] (0,0) -- (\ux,\uy)
+            node[midway, yshift=2mm] {$\vect u$};
+
+            \node at (4,5) {$\operatorname{span}\{\vect u\}$};
+        \end{tikzpicture}
+
+        \subcaption{The span of one vector in $\mathbb{R}^2$ is a line through the origin.}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+
+        \tdplotsetmaincoords{60}{120}
+
+        \begin{tikzpicture}[tdplot_main_coords, scale=0.4]
+            \begin{scope}[tdplot_screen_coords]
+                \path[use as bounding box] (-8,-8) rectangle (8,8);
+            \end{scope}
+
+            \coordinate (U) at (4.4,2.0,0.8);
+            \coordinate (V) at (1.2,-2.8,2.8);
+
+            \def\A{8}
+            \draw[->, gray!50] (0,0,0) -- (\A,0,0)  node[ below] {$x_1$};
+            \draw[gray!50]     (0,0,0) -- (0,-\A,0);
+            \draw[gray!50]     (0,0,0) -- (0,0,-\A);
+
+            \def\L{1.8}
+
+            \coordinate (P1) at ($ -\L*(U) -\L*(V) $);
+            \coordinate (P2) at ($  \L*(U) -\L*(V) $);
+            \coordinate (P3) at ($  \L*(U) +\L*(V) $);
+            \coordinate (P4) at ($ -\L*(U) +\L*(V) $);
+
+            \fill[mseViaBlue, opacity=0.30] (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+
+            \draw (0,0,0) -- (-\A,0,0);
+            \draw[->] (0,0,0) -- (0,\A,0) node[right] {$x_2$};
+            \draw[->] (0,0,0) -- (0,0,\A) node[above] {$x_3$};
+
+            \begin{scope}
+                \clip (P1) -- (P2) -- (P3) -- (P4) -- cycle;
+
+                \foreach \k in {-4,-3,...,4} {
+                    \draw[mseViaBlue!70, dashed]
+                    ($ -\L*(U) + \k*(V) $) -- ($ \L*(U) + \k*(V) $);
+
+                    \draw[mseViaBlue!70, dashed]
+                    ($ \k*(U) -\L*(V) $) -- ($ \k*(U) + \L*(V) $);
+                }
+            \end{scope}
+
+            \foreach \a/\b in {1/1, 1/-1, 0/-1} {
+                \fill[mseViaBlue] ($ \a*(U) + \b*(V) $) circle (3pt)
+                node[xshift=4mm,yshift=-3mm] {$\a\vect u \ifnum\b<0 \b\vect v\else+\b\vect v\fi$};
+            }
+
+            \draw[->, very thick]
+            (0,0,0) -- (U) node[above right] {$\vect u$};
+
+            \draw[->, very thick]
+            (0,0,0) -- (V) node[below left] {$\vect v$};
+
+            \node at (0,4,7)
+            {$\operatorname{span}\{\vect u,\vect v\}$};
+        \end{tikzpicture}
+
+        \subcaption{The span of two non-parallel vectors in $\mathbb{R}^3$ is a plane through the origin.}
+    \end{minipage}
+
+    \caption{Two examples of the geometric interpretation of span}
+    \label{fig:span_geometry}
+\end{figure}
+
+\section{Matrix Equations}
+In the previous sections, we explored different ways of representing linear relationships. For instance, we looked at individual linear equations, such as  
+\[
+2x_1 + 3x_2 = 5,
+\]
+and systems of linear equations, like  
+\[
+\begin{aligned}
+x_1 + 2x_2 &= 4 \\
+3x_1 - x_2 &= 2.
+\end{aligned}
+\]
+We also expressed these systems as vector equations, such as  
+\[
+x_1 \begin{bmatrix} 1 \\ 3 \end{bmatrix} + x_2 \begin{bmatrix} 2 \\ -1 \end{bmatrix} = \begin{bmatrix} 4 \\ 2 \end{bmatrix}.
+\]
+
+Now, it's time to introduce a powerful new form: the \textbf{matrix equation}. This compact representation allows us to handle systems of linear equations efficiently using matrix notation. In this form, our system becomes  
+\[
+A \vect{x} = \vect{b},
+\]
+where \(A\) is a matrix, \(\vect{x}\) is a vector of variables, and \(\vect{b}\) is the result vector. Matrix equations give us a structured, algebraic approach to solving systems.
+
+\begin{definition}{Matrix Equation}
+  If $A$ is an $m \times n$ matrix with columns $\vect{a}_1, \ldots, \vect{a}_n$, and if $\vect{x} \in \mathbb{R}^n$, then the product of $A$ and $\vect{x}$, denoted by $A \vect{x}$, is
+
+\[
+A \vect{x} = \left[\begin{array}{llll}
+\vect{a}_1 & \vect{a}_2 & \ldots & \vect{a}_n
+\end{array}\right] \left[\begin{array}{c}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{array}\right] = x_1 \vect{a}_1 + x_2 \vect{a}_2 + \cdots + x_n \vect{a}_n
+\]
+    
+\end{definition}
+
+\begin{example}
+    \[
+\begin{aligned}
+{\left[\begin{array}{lll}
+4 & 1 & 2 \\
+8 & 0 & 3
+\end{array}\right]\left[\begin{array}{l}
+2 \\
+1 \\
+4
+\end{array}\right] } & =2\left[\begin{array}{l}
+4 \\
+8
+\end{array}\right]+1\left[\begin{array}{l}
+1 \\
+0
+\end{array}\right]+4\left[\begin{array}{l}
+2 \\
+3
+\end{array}\right] \\
+& =\left[\begin{array}{c}
+8 \\
+16
+\end{array}\right]+\left[\begin{array}{l}
+1 \\
+0
+\end{array}\right]+\left[\begin{array}{c}
+8 \\
+12
+\end{array}\right] \\
+& =\left[\begin{array}{l}
+17 \\
+28
+\end{array}\right]
+\end{aligned}
+\]
+\end{example}
+
+Building a bit on the main result from the preceding section, we have the following theorem.
+
+\newpage
+
+\begin{theorem}
+    If $A$ is an $m \times n$ matrix, with columns $\vect{a}_1, \ldots, \vect{a}_n \in \mathbb{R}^m$ and if $\vect{b} \in \mathbb{R}^m$, the matrix equation
+
+\[
+A \vect{x} = \vect{b}
+\]
+
+has the same solution set as the vector equation
+
+\[
+x_1 \vect{a}_1 + x_2 \vect{a}_2 + \cdots + x_n \vect{a}_n = \vect{b}
+\]
+
+which, in turn, has the same solution set as the system of linear equations with augmented matrix
+
+\[
+\left[\begin{array}{lllll}
+\vect{a}_1 & \vect{a}_2 & \ldots & \vect{a}_n & \vect{b}
+\end{array}\right].
+\]
+
+\end{theorem}
+
+This theorem is essential because it ties together the three forms of representing and solving systems of linear equations: matrix equations, vector equations, and systems of equations with augmented matrices. It shows that no matter which form we use, they all lead to the same solution set.
+
+By stating that the matrix equation \( A \vect{x} = \vect{b} \) is equivalent to the vector equation \( x_1 \vect{a}_1 + x_2 \vect{a}_2 + \cdots + x_n \vect{a}_n = \vect{b} \), we can interpret solving a matrix equation as finding the right combination of the columns of \( A \) that yields \( \vect{b} \). This connection allows us to visualize the problem in terms of vector spaces and linear combinations.
+
+Moreover, the theorem shows that this same process is reflected in the augmented matrix, where row reduction reveals the solution through elementary row operations. So whether we approach the problem algebraically, geometrically, or algorithmically, we are dealing with the same underlying structure. This unifying perspective simplifies our approach to solving systems and provides flexibility in how we choose to represent and manipulate the problem.
+
+\begin{remark}
+    The equation $A \vect{x} = \vect{b}$ has a solution if and only if $\vect{b}$ is a linear combination of the columns of $A$.
+\end{remark}
+
+The following theorem tells us when the column vectors of an $m \times n$ matrix (the columns are vectors in $\mathbb{R}^m$, since there are $m$ rows) can be used to generate all of $\mathbb{R}^m$. This basically summarises several things we have already seen in different contexts.
+
+\begin{theorem}
+Let \( A \) be an \( m \times n \) matrix. Then the following statements are equivalent:
+\begin{enumerate}[label=(\alph*)]
+    \item For each \( \vect{b} \in \mathbb{R}^m \), the equation \( A \vect{x} = \vect{b} \) has a solution.
+    \item Each \( \vect{b} \in \mathbb{R}^m \) is a linear combination of the columns of \( A \).
+    \item The columns of \( A \) span \( \mathbb{R}^m \).
+    \item The matrix \( A \) has a pivot position in every row.
+\end{enumerate}
+\end{theorem}
+
+This theorem shows that several seemingly different ideas are in fact equivalent. The existence of a solution to the matrix equation \( A \vect{x} = \vect{b} \) (statement (a)) depends on whether the columns of \( A \) can form any vector in \( \mathbb{R}^m \) (statement (b)). Geometrically, this means the columns span the entire space \( \mathbb{R}^m \) (statement (c)).
+
+Finally, the presence of a pivot position in every row (statement (d)) gives an algebraic condition that guarantees the span of the columns covers \( \mathbb{R}^m \), ensuring that there is always a solution to \( A \vect{x} = \vect{b} \).
+
+This equivalence is a powerful tool, as it connects solutions, linear combinations, and geometric interpretations, while also providing a concrete method (checking for pivot positions) to verify these properties.
+
+\begin{custombox}{Row-Vector Rule for Computing \( A \vect{x} \)}
+Assuming the product \( A \vect{x} \) is defined, the \( i \)-th entry in \( A \vect{x} \) is the sum of the products of corresponding entries from row \( i \) of \( A \) and the vector \( \vect{x} \). In other words, the \( i \)-th entry of \( A \vect{x} \) is the dot product of the vector forming the \( i \)-th row of \( A \) and the vector \( \vect{x} \).
+    
+\end{custombox}
+
+
+This rule simplifies matrix multiplication by breaking it into familiar dot products. There is also a complementary column interpretation: if the columns of $A$ are $\vect{a}_1,\ldots,\vect{a}_n$ and $\vect{x}=(x_1,\ldots,x_n)^T$, then
+\[
+A\vect{x}=x_1\vect{a}_1+\cdots+x_n\vect{a}_n.
+\]
+Thus, $A\vect{x}$ is a linear combination of the \emph{columns} of $A$, while each individual entry of the product is a dot product with a row of $A$.
+
+\begin{example} Let
+
+\[
+A=\left[\begin{array}{ccc}
+1 & -1 & 4 \\
+5 & 0 & 2
+\end{array}\right], \text { and } \vect{x}=\left[\begin{array}{l}
+2 \\
+1 \\
+5
+\end{array}\right]
+\]
+
+Then
+
+\[
+\begin{aligned}
+{\left[\begin{array}{ccc}
+1 & -1 & 4 \\
+5 & 0 & 2
+\end{array}\right]\left[\begin{array}{l}
+2 \\
+1 \\
+5
+\end{array}\right] } & =\left[\begin{array}{c}
+1 \cdot 2+(-1) \cdot 1+4 \cdot 5 \\
+5 \cdot 2+0 \cdot 1+2 \cdot 5
+\end{array}\right] \\
+& =\left[\begin{array}{c}
+21 \\
+20
+\end{array}\right]
+\end{aligned}
+\]
+\end{example}
+
+Notice that the number of columns in $A$ must match the number of rows in $\vect{x}$, for otherwise the dot product would not make sense!
+
+The next theorem captures two important properties of matrix-vector multiplication: \textbf{distributivity} and \textbf{scalar multiplication}. These properties mirror the familiar rules of algebra but now apply in the context of matrices and vectors.
+
+\begin{theorem}
+If \( A \) is an \( m \times n \) matrix, \( \vect{u} \) and \( \vect{v} \) are vectors in \( \mathbb{R}^n \), and \( c \) is a scalar, then:
+
+\begin{enumerate}[label=(\alph*)]
+    \item \( A(\vect{u} + \vect{v}) = A \vect{u} + A \vect{v} \)  
+
+
+    \item \( A(c \vect{u}) = c(A \vect{u}) \)  
+
+\end{enumerate}
+\end{theorem}
+
+Property (a) shows that matrix multiplication distributes over vector addition. It means that multiplying \( A \) by the sum of two vectors is the same as multiplying \( A \) by each vector separately and then adding the results.     Property (b) illustrates that scalar multiplication commutes with matrix multiplication. Multiplying a vector by a scalar first, then applying the matrix, gives the same result as applying the matrix first and then multiplying the resulting vector by the scalar.
+
+\begin{example} Let
+
+\[
+A = \left[\begin{array}{cccc}
+1 & 5 & -2 & 0 \\
+-3 & 1 & 9 & -5 \\
+4 & -8 & -1 & 7
+\end{array}\right], \quad \vect{p} = \left[\begin{array}{c}
+3 \\
+-2 \\
+0 \\
+-4
+\end{array}\right], \quad \vect{b} = \left[\begin{array}{c}
+-7 \\
+9 \\
+0
+\end{array}\right]
+\]
+
+It can be shown that $\vect{p}$ is a solution of $A \vect{x} = \vect{b}$. Use this fact to write $\vect{b}$ as a linear combination of the columns of $A$.
+    
+\end{example}  
+
+\begin{solution} Since $\vect{p}$ is a solution to $A \vect{x} = \vect{b}$, we have:
+    \[
+    A \vect{p} = \vect{b}.
+    \]
+    
+    We can express $\vect{b}$ as a linear combination of the columns of $A$ using the entries of $\vect{p}$. Let $\vect{a}_1$, $\vect{a}_2$, $\vect{a}_3$, and $\vect{a}_4$ denote the columns of $A$, so:
+    \[
+    A = \left[ \vect{a}_1 \ \big| \ \vect{a}_2 \ \big| \ \vect{a}_3 \ \big| \ \vect{a}_4 \right].
+    \]
+    
+    Thus,
+    \[
+    \vect{b} = p_1 \vect{a}_1 + p_2 \vect{a}_2 + p_3 \vect{a}_3 + p_4 \vect{a}_4.
+    \]
+    
+    Now, we compute each term one at a time.
+    
+    \textbf{Compute $p_1 \vect{a}_1$:}
+    \[
+    p_1 \vect{a}_1 = 3 \left[\begin{array}{c}
+    1 \\
+    -3 \\
+    4
+    \end{array}\right] = \left[\begin{array}{c}
+    3 \\
+    -9 \\
+    12
+    \end{array}\right].
+    \]
+    
+    \textbf{Compute $p_2 \vect{a}_2$:}
+    \[
+    p_2 \vect{a}_2 = (-2) \left[\begin{array}{c}
+    5 \\
+    1 \\
+    -8
+    \end{array}\right] = \left[\begin{array}{c}
+    -10 \\
+    -2 \\
+    16
+    \end{array}\right].
+    \]
+    
+    \textbf{Compute $p_3 \vect{a}_3$:}
+    \[
+    p_3 \vect{a}_3 = 0 \left[\begin{array}{c}
+    -2 \\
+    9 \\
+    -1
+    \end{array}\right] = \left[\begin{array}{c}
+    0 \\
+    0 \\
+    0
+    \end{array}\right].
+    \]
+    
+    \textbf{Compute $p_4 \vect{a}_4$:}
+    \[
+    p_4 \vect{a}_4 = (-4) \left[\begin{array}{c}
+    0 \\
+    -5 \\
+    7
+    \end{array}\right] = \left[\begin{array}{c}
+    0 \\
+    20 \\
+    -28
+    \end{array}\right].
+    \]
+    
+    \textbf{Add the computed vectors to find $\vect{b}$:}
+    \[
+    \vect{b} = p_1 \vect{a}_1 + p_2 \vect{a}_2 + p_3 \vect{a}_3 + p_4 \vect{a}_4 = \left[\begin{array}{c}
+    3 \\
+    -9 \\
+    12
+    \end{array}\right] + \left[\begin{array}{c}
+    -10 \\
+    -2 \\
+    16
+    \end{array}\right] + \left[\begin{array}{c}
+    0 \\
+    0 \\
+    0
+    \end{array}\right] + \left[\begin{array}{c}
+    0 \\
+    20 \\
+    -28
+    \end{array}\right].
+    \]
+    
+    Now, compute the sum step by step.
+    
+    \textbf{Step 1: Add $p_1 \vect{a}_1$ and $p_2 \vect{a}_2$:}
+    \[
+    \left[\begin{array}{c}
+    3 \\
+    -9 \\
+    12
+    \end{array}\right] + \left[\begin{array}{c}
+    -10 \\
+    -2 \\
+    16
+    \end{array}\right] = \left[\begin{array}{c}
+    -7 \\
+    -11 \\
+    28
+    \end{array}\right].
+    \]
+    
+    \textbf{Step 2: Add $p_3 \vect{a}_3$ (which is zero) to the result:}
+    \[
+    \left[\begin{array}{c}
+    -7 \\
+    -11 \\
+    28
+    \end{array}\right] + \left[\begin{array}{c}
+    0 \\
+    0 \\
+    0
+    \end{array}\right] = \left[\begin{array}{c}
+    -7 \\
+    -11 \\
+    28
+    \end{array}\right].
+    \]
+    
+    \textbf{Step 3: Add $p_4 \vect{a}_4$ to the result:}
+    \[
+    \left[\begin{array}{c}
+    -7 \\
+    -11 \\
+    28
+    \end{array}\right] + \left[\begin{array}{c}
+    0 \\
+    20 \\
+    -28
+    \end{array}\right] = \left[\begin{array}{c}
+    -7 \\
+    9 \\
+    0
+    \end{array}\right].
+    \]
+    
+    \textbf{Final Result:}
+    \[
+    \vect{b} = \left[\begin{array}{c}
+    -7 \\
+    9 \\
+    0
+    \end{array}\right].
+    \]
+    
+    \textbf{Conclusion:}
+    
+    We have expressed $\vect{b}$ as a linear combination of the columns of $A$ using the entries of $\vect{p}$:
+    \[
+    \vect{b} = 3 \vect{a}_1 - 2 \vect{a}_2 + 0 \vect{a}_3 - 4 \vect{a}_4.
+    \]
+\end{solution}
+
+\section{Solution Sets of Linear Systems}
+Solution sets of linear systems play a crucial role in the study of linear algebra and will reappear in various contexts throughout the subject. In this section, we use vector notation to provide clear, explicit, and geometric descriptions of these solution sets.
+
+A linear system is said to be \textit{homogeneous} if it can be written in the form
+
+\[
+A \vect{x} = \vect{0}
+\]
+
+where $A$ is an $m \times n$ matrix and $\vect{0}$ is the zero vector in $\mathbb{R}^m$. Such a system always has the \textit{trivial solution}, namely $\vect{x} = \vect{0}$ (the zero vector in $\mathbb{R}^n$, not $\mathbb{R}^m$).
+
+Since homogeneous systems always have the trivial solution, the interesting question is whether or not they have \textit{nontrivial solutions}.
+
+\begin{remark}
+    The homogeneous equation $A \vect{x} = \vect{0}$ has a nontrivial solution if and only if the equation has at least one free variable.
+\end{remark}
+
+\begin{example}
+    Determine if the following homogeneous system has a nontrivial solution. If it does, describe the solution set using the free variable(s).
+\[
+\begin{aligned}
+2 x_1+x_2-3 x_3 & =0 \\
+x_1-x_2+x_3 & =0 \\
+-2 x_1+5 x_2-7 x_3 & =0
+\end{aligned}
+\]
+
+\end{example}
+
+\begin{solution}
+    We let $A$ be the coefficient matrix of the system, and reduce the augmented mat rix [ $\left.\begin{array}{cc}A & 0\end{array}\right]$ to echelon form (notice how we put the second equation first in order to simplify the computation a bit):
+
+\[
+\begin{aligned}
+{\left[\begin{array}{cccc}
+1 & -1 & 1 & 0 \\
+2 & 1 & -3 & 0 \\
+-2 & 5 & -7 & 0
+\end{array}\right] } & \sim\left[\begin{array}{cccc}
+1 & -1 & 1 & 0 \\
+0 & 3 & -5 & 0 \\
+0 & 3 & -5 & 0
+\end{array}\right] \\
+& \sim\left[\begin{array}{cccc}
+1 & -1 & 1 & 0 \\
+0 & 3 & -5 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right]
+\end{aligned}
+\]
+
+so we see that $x_3$ is a free variable, and as a result we have nontrivial solutions. Now we get the reduced echelon form:
+
+\[
+\begin{aligned}
+{\left[\begin{array}{cccc}
+1 & -1 & 1 & 0 \\
+0 & 3 & -5 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right] } & \sim\left[\begin{array}{cccc}
+1 & -1 & 1 & 0 \\
+0 & 1 & -\frac{5}{3} & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right] \\
+& \sim\left[\begin{array}{cccc}
+1 & 0 & -\frac{2}{3} & 0 \\
+0 & 1 & -\frac{5}{3} & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right]
+\end{aligned}
+\]
+
+This gives us the equations
+
+\[
+\begin{aligned}
+& x_1-\frac{2}{3} x_3=0 \quad \Longrightarrow x_1=\frac{2}{3} x_3 \\
+& x_2-\frac{5}{3} x_3=0 \quad \Longrightarrow x_2=\frac{5}{3} x_3
+\end{aligned}
+\]
+
+
+In vector form, the solution $\vect{x}$ of the equation $A \vect{x}=0$ is written
+
+\[
+\vect{x}=\left[\begin{array}{l}
+x_1 \\
+x_2 \\
+x_3
+\end{array}\right]=\left[\begin{array}{c}
+\frac{2}{3} x_3 \\
+\frac{5}{3} x_3 \\
+x_3
+\end{array}\right]=x_3\left[\begin{array}{c}
+\frac{2}{3} \\
+\frac{5}{3} \\
+1
+\end{array}\right]
+\]
+
+
+Since $x_3$ can be anything, in geometric terms this solution set describes the line in $\mathbb{R}^3$ extending from the origin through the point $\left(\frac{2}{3}, \frac{5}{3}, 1\right)$.
+\end{solution}
+
+
+\begin{custombox}{Parametric Vector Form}
+    Whenever a solution set is described explicitly with vectors (as in the preceding example), we say that the solution is in \textbf{parametric vector form}.
+\end{custombox}
+
+\begin{example} Describe all solutions of the homogeneous equation
+
+
+\[
+    x_1-2 x_2-5 x_3=0
+\]
+
+\end{example}
+
+\begin{solution}
+
+Writing this system in a matrix, we would see that $x_2$ and $x_3$ are free variables, and $x_1$ is a basic variable with $x_1=2 x_2+5 x_3$. Hence the general solution is
+
+$$
+\vect{x}=\left[\begin{array}{l}
+x_1 \\
+x_2 \\
+x_3
+\end{array}\right]=\left[\begin{array}{c}
+2 x_2+5 x_3 \\
+x_2 \\
+x_3
+\end{array}\right]=x_2\left[\begin{array}{l}
+2 \\
+1 \\
+0
+\end{array}\right]+x_3\left[\begin{array}{l}
+5 \\
+0 \\
+1
+\end{array}\right]
+$$
+
+where the right-most part of this equation is the \textbf{parametric vector} form of the solution set. In this case, the entire solution set is a plane in $\mathbb{R}^3$ that contains the two lines extending from $(0,0,0)$ to $(2,1,0)$, and from $(0,0,0)$ to $(5,0,1)$.
+\end{solution}
+
+When a \textit{nonhomogeneous} linear system has many solutions, the general solution can be written in parametric vector form as one vector plus arbitrary linear combinations of vectors that satisfy the corresponding homogeneous system.
+
+\begin{example} We reconsider the homogeneous system at the beginning of this section, except this time it will be nonhomogeneous (i.e., the right side will not be all zeroes):
+
+\[
+\begin{aligned}
+2 x_1 + x_2 - 3 x_3 & = 2 \\
+x_1 - x_2 + x_3 & = 1 \\
+-2 x_1 + 5 x_2 - 7 x_3 & = -2
+\end{aligned}
+\]
+
+As before, we perform row operations on the augmented matrix \(\left[\begin{array}{cc} A & \vect{b} \end{array}\right]\) where \( A \) is the same coefficient matrix and
+
+\[
+\vect{b} = \begin{bmatrix}
+2 \\
+1 \\
+-2
+\end{bmatrix}
+\]
+
+and we find that
+
+\[
+\left[\begin{array}{cccc}
+1 & -1 & 1 & 1 \\
+2 & 1 & -3 & 2 \\
+-2 & 5 & -7 & -2
+\end{array}\right]
+\sim
+\left[\begin{array}{cccc}
+1 & 0 & -\frac{2}{3} & 1 \\
+0 & 1 & -\frac{5}{3} & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right]
+\]
+
+Hence,
+
+\[
+\begin{aligned}
+x_1 &= 1 + \frac{2}{3} x_3, \text{ and } \\
+x_2 &= \frac{5}{3} x_3
+\end{aligned}
+\]
+
+This can be written as
+
+\[
+\vect{x} = \begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix} =
+\begin{bmatrix}
+1 + \frac{2}{3} x_3 \\
+\frac{5}{3} x_3 \\
+x_3
+\end{bmatrix}
+= \begin{bmatrix}
+1 \\
+0 \\
+0
+\end{bmatrix} + x_3 \begin{bmatrix}
+\frac{2}{3} \\
+\frac{5}{3} \\
+1
+\end{bmatrix}
+\]
+
+which has the form we claimed. This is the equation of the line through the point \((1,0,0)\) that is parallel to the line extending from \((0,0,0)\) through \(\left(\frac{2}{3}, \frac{5}{3}, 1\right)\).
+
+\end{example}
+
+We summarise the general situation with the following theorem. It might be best to think of the conclusion as shifting all homogeneous solutions by the vector $\vect{p}$.
+
+\begin{theorem}
+    Suppose $A \vect{x} = \vect{b}$ is consistent for some $\vect{b}$, and let $\vect{p}$ be a solution. Then the solution set of $A \vect{x} = \vect{b}$ is the set of all vectors of the form
+    \[
+    \vect{w} = \vect{p} + \vect{v}_h,
+    \]
+    where $\vect{v}_h$ is any solution of the homogeneous equation $A \vect{x} = \vect{0}$.
+\end{theorem}
+
+\begin{example} Write the general solution of
+
+\[
+x_1-2 x_2-5 x_3=3
+\]
+
+in parametric vector form. In geometric terms, what does this solution set look like in comparison to the solution set of the equation $x_1-2 x_2-5 x_3=0$ that we saw earlier?
+\end{example}
+
+\begin{solution}
+        Let us solve the equation:
+        \[
+        x_1 - 2 x_2 - 5 x_3 = 3
+        \]
+        
+        To express the general solution, we solve for \( x_1 \) in terms of \( x_2 \) and \( x_3 \):
+    
+        \[
+        \begin{aligned}
+        x_1 &= 3 + 2x_2 + 5x_3, \\
+        x_2 &= x_2, \\
+        x_3 &= x_3.
+        \end{aligned}
+        \]
+        
+        We can express the solution set in \textit{parametric vector form}:
+        \[
+        \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+        3 \\
+        0 \\
+        0
+        \end{bmatrix}
+        +
+        x_2
+        \begin{bmatrix}
+        2 \\
+        1 \\
+        0
+        \end{bmatrix}
+        +
+        x_3
+        \begin{bmatrix}
+        5 \\
+        0 \\
+        1
+        \end{bmatrix}, \quad \text{for all } s, t \in \mathbb{R}.
+        \]
+        
+        \textbf{Geometric Interpretation:} The solution set represents a plane in \(\mathbb{R}^3\). This plane is parallel to the plane defined by the homogeneous equation:
+        \[
+        x_1 - 2 x_2 - 5 x_3 = 0
+        \]
+        
+        The homogeneous solution set can be expressed as:
+        \[
+        \begin{bmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+        \end{bmatrix}
+        =
+        x_2
+        \begin{bmatrix}
+        2 \\
+        1 \\
+        0
+        \end{bmatrix}
+        +
+        x_3
+        \begin{bmatrix}
+        5 \\
+        0 \\
+        1
+        \end{bmatrix}, \quad \text{for all } s, t \in \mathbb{R}.
+        \]
+        
+        Comparing both solution sets, we observe that the original solution is the homogeneous solution shifted by the vector \(\begin{bmatrix} 3 \\ 0 \\ 0 \end{bmatrix}\). Geometrically, this means the plane defined by \( x_1 - 2 x_2 - 5 x_3 = 3 \) is parallel to, but not the same as, the plane defined by \( x_1 - 2 x_2 - 5 x_3 = 0 \). The two planes are offset along the \( x_1 \)-axis by 3 units. The general solution of the equation \( x_1 - 2 x_2 - 5 x_3 = 3 \) is a plane in \(\mathbb{R}^3\) that is parallel to the solution set of the homogeneous equation \( x_1 - 2 x_2 - 5 x_3 = 0 \), but shifted away from the origin. \end{solution}
+
+        \begin{example} Find the parametric equation of the line through $\vect{a}=\left[\begin{array}{c}3 \\ -2\end{array}\right]$ that is also parallel to $\vect{b}=\left[\begin{array}{c}-7 \\ 6\end{array}\right]$.
+        \end{example}
+
+        \begin{solution}
+            The line through $\vect{a}$ parallel to $\vect{b}$ is given by the equation $\vect{r}=\vect{a}+t \vect{b}$, where $t$ is a parameter. Substituting the given vectors, we have
+            \[
+            \begin{aligned}
+            \vect{r} &=\left[\begin{array}{c}
+            3 \\
+            -2
+            \end{array}\right]+t\left[\begin{array}{c}
+            -7 \\
+            6
+            \end{array}\right] \\
+            &=\left[\begin{array}{c}
+            3-7 t \\
+            -2+6 t
+            \end{array}\right]
+            \end{aligned}
+            \]
+            This is the parametric equation of the line through $\vect{a}$ that is parallel to $\vect{b}$.
+        \end{solution}
+
+\section{Linear Independence}
+We conclude this section by introducing one of the most important concepts in linear algebra: \textit{linear independence}. This concept is fundamental to understanding the structure of vectors and their relationships in vector spaces.
+
+\begin{definition}
+    An indexed set of vectors $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\} \subset \mathbb{R}^n$ is said to be \textbf{linearly independent} if the vector equation
+    
+    \[
+    x_1 \vect{v}_1 + \cdots + x_p \vect{v}_p = \vect{0}
+    \]
+    
+    has only the trivial solution, i.e., if the only solution is $\left(x_1, \ldots, x_p\right) = (0, \ldots, 0)$. Likewise, the set $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ is said to be \textbf{linearly dependent} if there exist weights $c_1, \ldots, c_p$, not all zero, such that
+    
+    \[
+    c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p = \vect{0}
+    \]
+    
+    We call such an equation a \textit{linear dependence relation} when the weights are not all zero.
+\end{definition}
+    
+    \begin{remark}
+        A set of vectors cannot be both linearly independent and linearly dependent, but it must be one of them!
+    \end{remark}
+
+    Determining if a set of vectors is linearly independent is tantamount to solving the matrix equation
+
+    \[
+    A \vect{x}=0,
+    \]
+
+where the columns of $A$ are given by the vectors. The set of vectors is linearly independent if and only if the only solution is $\vect{x}=\vect{0}$. Otherwise, there is some linear dependence relation.
+
+    \begin{example}
+        Determine if the following vectors in $\mathbb{R}^3$ are linearly independent:
+
+        \[
+        \vect{v}_1 = \left[\begin{array}{l}
+        2 \\
+        1 \\
+        2
+        \end{array}\right], \quad \vect{v}_2 = \left[\begin{array}{l}
+        1 \\
+        1 \\
+        1
+        \end{array}\right], \quad \vect{v}_3 = \left[\begin{array}{l}
+        0 \\
+        1 \\
+        1
+        \end{array}\right]
+        \]
+    \end{example}
+
+    \begin{solution}
+        We begin by reducing the corresponding augmented matrix to echelon form:
+
+\[
+\begin{aligned}
+{\left[\begin{array}{llll}
+2 & 1 & 0 & 0 \\
+1 & 1 & 1 & 0 \\
+2 & 1 & 1 & 0
+\end{array}\right] } & \sim\left[\begin{array}{llll}
+1 & 1 & 1 & 0 \\
+2 & 1 & 0 & 0 \\
+2 & 1 & 1 & 0
+\end{array}\right] \\
+& \sim\left[\begin{array}{cccc}
+1 & 1 & 1 & 0 \\
+0 & -1 & -2 & 0 \\
+0 & -1 & -1 & 0
+\end{array}\right] \\
+& \sim\left[\begin{array}{cccc}
+1 & 1 & 1 & 0 \\
+0 & -1 & -2 & 0 \\
+0 & 0 & 1 & 0
+\end{array}\right]
+\end{aligned}
+\]
+
+from which we see that there is a solution. Now we want to know if the solution is the trivial solution $(0,0,0)$. Normally, we would continue row operations until we reach reduced echelon form, but we can be smarter about this. Notice first of all that there are no bad rows (so there is at least one solution), which we expect since a homogeneous system always has at least the trivial solution. Since there are no free variables, we see there is exactly one solution. This tells us that the solution must be
+
+\[
+\vect{x}=\left[\begin{array}{l}
+x_1 \\
+x_2 \\
+x_3
+\end{array}\right]=\left[\begin{array}{l}
+0 \\
+0 \\
+0
+\end{array}\right]
+\]
+
+Hence the set of vectors $\left\{\vect{v}_1, \vect{v}_2, \vect{v}_3\right\}$ is linearly independent.
+\end{solution}
+
+In general, it is very useful to determine if some set of vectors is linearly independent, so it is good to have
+some theorems to handle this problem quickly in certain special cases.
+
+\begin{theorem}
+    \begin{enumerate}[(a)]
+        \item If a set of vectors contains the zero vector, then the set is linearly dependent.
+        \item If a set of vectors contains a scalar multiple of another vector, then the set is linearly dependent.
+        \item If a set of vectors contains more vectors than there are entries in each vector, then the set is linearly dependent.
+    \end{enumerate}
+\end{theorem}
+
+The last part of the theorem is particularly useful, as it allows us to quickly determine if a set of vectors is linearly dependent by checking if one of the vectors is a linear combination of the others. We can formalise this idea in the following corollary.
+
+\begin{corollary}
+    An indexed set $S = \left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ of two or more vectors is linearly dependent if and only if at least one of the vectors in $S$ is a linear combination of the others. If $S$ is linearly dependent and $\vect{v}_1 \neq \vect{0}$, then some $\vect{v}_j$ (with $1 < j \leq p$) is a linear combination of the preceding vectors $\vect{v}_1, \ldots, \vect{v}_{j-1}$.
+\end{corollary}
+
+\begin{remark}
+    The corollary tells us that if a set of vectors is linearly dependent, then at least one of the vectors is redundant, as it can be expressed as a linear combination of the others. This redundancy is what causes the linear dependence. This does not mean that every vector in $S$ is a linear combination of the others, but only that \textit{at least one} vector in a linearly dependent set is a linear combination of others.
+\end{remark}
+
+\begin{example} Let
+    \[
+    \vect{u} = \left[\begin{array}{l}
+    2 \\
+    1 \\
+    1
+    \end{array}\right], \quad \vect{v} = \left[\begin{array}{l}
+    4 \\
+    3 \\
+    5
+    \end{array}\right], \quad \vect{w} = \left[\begin{array}{l}
+    1 \\
+    1 \\
+    1
+    \end{array}\right], \quad \vect{z} = \left[\begin{array}{l}
+    0 \\
+    0 \\
+    1
+    \end{array}\right].
+    \]
+
+    \begin{enumerate}[(a)]
+        \item Is any pair of these vectors (e.g. $\{\vect{u}, \vect{v}\}$) linearly dependent? Explain.
+        \item Does the answer to part (a) tell us that $\{\vect{u}, \vect{v}, \vect{w}, \vect{z}\}$ is linearly independent?
+        \item Is $\{\vect{u}, \vect{v}, \vect{w}, \vect{z}\}$ linearly dependent? You should be able to answer this question without any computation.
+    \end{enumerate}
+\end{example}
+
+\begin{solution}
+    \begin{enumerate}[(a)]
+        \item 
+        To determine if any pair of these vectors is linearly dependent, we check whether one vector is a scalar multiple of the other.
+
+        \textbf{Checking the pair $\{\vect{u}, \vect{v}\}$:} Assume there exists a scalar $k$ such that:
+    
+        \[
+        \vect{v} = k \vect{u}.
+        \]
+        
+        Compute $k$ using the first component:
+        \[
+        k = \dfrac{v_1}{u_1} = \dfrac{4}{2} = 2.
+        \]
+        
+        Verify with the second component:
+        \[
+        v_2 = k u_2 \implies 3 = 2 \times 1 \implies 3 = 2.
+        \]
+        
+        Since $3 \ne 2$, $\vect{v}$ is not a scalar multiple of $\vect{u}$.
+        
+        \textbf{Checking the pair $\{\vect{u}, \vect{w}\}$:} Assume there exists a scalar $k$ such that:
+        \[
+        \vect{u} = k \vect{w}.
+        \]
+        
+        Compute $k$ using the first component:
+        \[
+        k = \dfrac{u_1}{w_1} = \dfrac{2}{1} = 2.
+        \]
+        
+        Verify with the second component:
+        \[
+        u_2 = k w_2 \implies 1 = 2 \times 1 \implies 1 = 2.
+        \]
+        
+        Since $1 \ne 2$, $\vect{u}$ is not a scalar multiple of $\vect{w}$.
+        
+        \textbf{Checking the pair $\{\vect{w}, \vect{z}\}$:} Since $z_1 = 0$ and $w_1 = 1$, assuming $\vect{w} = k \vect{z}$ leads to:
+        \[
+        w_1 = k z_1 \implies 1 = k \times 0 \implies 1 = 0,
+        \] which is a contradiction.
+    
+        \item No, the fact that no pair is linearly dependent does not imply that the entire set is linearly independent. Linear independence requires that the only solution to:
+        \[
+        c_1 \vect{u} + c_2 \vect{v} + c_3 \vect{w} + c_4 \vect{z} = \vect{0}
+        \]
+        is $c_1 = c_2 = c_3 = c_4 = 0$.
+        
+        \item Yes, the set is linearly dependent. In $\mathbb{R}^3$, any set of more than three vectors must be linearly dependent because the maximum number of linearly independent vectors in $\mathbb{R}^3$ is three.
+    \end{enumerate}
+        
+        \textbf{Conclusion:}
+        
+        \begin{enumerate}[(a)]
+            \item No pair of these vectors is linearly dependent.
+            \item The answer to part (a) does not guarantee that the entire set is linearly independent.
+            \item The set $\{\vect{u}, \vect{v}, \vect{w}, \vect{z}\}$ is linearly dependent without the need for further computation.
+        \end{enumerate}
+
+\end{solution}
+

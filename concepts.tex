@@ -1,0 +1,1592 @@
+\chapter{Important Concepts}
+\label{chap:ic}
+
+This appendix is a collection of important mathematical concepts that are frequently used in software engineering. 
+The content of this appendix is based on the concepts in this book.
+
+% ---------- 01 
+
+\begin{proposition}[Rules for Calculations with Fractions]
+For $a,b,c,m \in \mathbb{R}$, with $a,b,c,m \neq 0$ where required, the following identities hold:
+\begingroup
+\setlength{\jot}{8pt} % increase space between align rows (default ~3pt)
+\begin{align*}
+(1) & \quad \frac{a}{b} \times m = \frac{am}{b} \\
+(2) & \quad \frac{a}{b} \div m = \frac{a}{bm} \\
+(3) & \quad m \div \frac{a}{b} = \frac{mb}{a} \\
+(4) & \quad \frac{a}{b} \times \frac{c}{a} = \frac{c}{b} \\
+(5) & \quad \frac{a}{b} \div \frac{c}{a} = \frac{a^2}{bc} \\
+(6) & \quad \frac{a}{b} = \frac{ac}{bc} \\
+(7) & \quad \frac{a}{b} + \frac{c}{a} = \frac{a^2 + bc}{ab}
+\end{align*}
+\endgroup
+\end{proposition}
+
+\begin{proposition}{Rules for calculations involving radicals}
+    \begin{align*}
+    &(1) \quad \sqrt[n]{x y}=\sqrt[n]{x} \times \sqrt[n]{y}   &   &\textnormal{where both sides are real; if }n\textnormal{ is even, require }x,y\geq0\\
+    &(2) \quad \sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}    &   &\textnormal{where both sides are real and }y\neq0;\textnormal{ if }n\textnormal{ is even, require }x\geq0,y>0 \\
+    &(3) \quad \sqrt{x^2} = |x|   &   &\textnormal{where } x \in \mathbb{R} \\
+    &(4) \quad (\sqrt[n]{x})^n = x    &   &\textnormal{for all real }x\textnormal{ if }n\textnormal{ is odd, and for }x\geq0\textnormal{ if }n\textnormal{ is even}\\
+    &(5) \quad \sqrt[n]{-x}=-\sqrt[n]{x}  &   &\textnormal{where } x \geq 0 \textnormal{ and } n \in \mathbb{N} \textnormal{ is odd }
+    \end{align*}
+\end{proposition}
+
+\begin{proposition}{Properties of Integer Exponents}
+Let $n,m\in\mathbb{Z}$. Then the following hold wherever the powers are defined; in particular, a base must be non-zero whenever a negative exponent occurs:
+\[
+\begin{aligned}
+&\text{(1)}\quad x^{n}\cdot x^{m}=x^{\,n+m},\\[2pt]
+&\text{(2)}\quad \dfrac{x^{n}}{x^{m}}=x^{\,n-m}\quad \text{with } x\neq 0,\\[2pt]
+&\text{(3)}\quad x^{n}\cdot y^{n}=(xy)^{n},\\[2pt]
+&\text{(4)}\quad \dfrac{x^{n}}{y^{n}}=\left(\dfrac{x}{y}\right)^{n}\quad \text{with } y\neq 0,\\[2pt]
+&\text{(5)}\quad \bigl(x^{n}\bigr)^{m}=x^{\,nm},\\[2pt]
+&\text{(6)}\quad x^{1}=x.
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{proposition}{More Properties of Integer Exponents}
+Let $n,m\in\mathbb{Z}$. Then the following hold (with $x,y\in\mathbb{R}$ and nonzero where stated):
+\[
+\begin{aligned}
+&\text{(7)}\quad x^{0}=1   &\qquad&   x \neq 0  \\
+&\text{(8)}\quad \frac{1}{x^{m}}=x^{-m} &\qquad& x \neq 0 \\
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{definition}{The Extended Concept of Exponentiation}
+$\textnormal{Let } m \in \mathbb{Z} \textnormal{ and let }  n \in \mathbb{N} \textnormal{ such that } \dfrac{m}{n} \in \mathbb{Q}  \textnormal{. Then the following applies:}$
+
+\[
+x^{\frac{m}{n}} = \sqrt[n]{x^m} \hspace{1cm} x > 0
+\]
+
+\textnormal{And more specifically, the following holds true}
+
+\[
+x^{\frac{1}{n}} = \sqrt[n]{x} \hspace{1.3cm} x > 0
+\]
+
+\end{definition}
+
+\begin{custombox}{Rules for rearranging formulae}
+The following operations can be performed on both sides of the formula:
+\begin{itemize}
+    \item Add the same quantity to both sides
+    \item Subtract the same quantity from both sides
+    \item Multiply both sides by the same quantity - remember to multiply all terms
+    \item Divide both sides by the same non-zero quantity - remember to divide all terms
+    \item Apply a function to both sides. This preserves implication, but it preserves equivalence only when the function is one-to-one on the relevant domain; squaring can introduce extraneous solutions, and reciprocals require non-zero sides.
+\end{itemize}
+\end{custombox}
+
+\begin{definition}
+Let $A$ and $B$ be nonempty sets. A function $f$ from $A$ to $B$ is an assignment of exactly one element of $B$ to each element of $A$. We write $f(a)=b$ if $b$ is the unique element of $B$ assigned by the function $f$ to the element $a$ of $A$. If $f$ is a function from $A$ to $B$, we write $f: A \rightarrow B$.
+\end{definition}
+
+\begin{definition}
+If $f$ is a function from $A$ to $B$, we say that $A$ is the \textbf{domain} of $f$ and $B$ is the \textbf{co-domain} of $f$. If $f(a)=b$, we say that $b$ is the \textbf{image} of $a$ and $a$ is a \textbf{preimage} of $b$. The \textbf{range}, or image, of $f$ is the set of all images of elements of $A$. Also, if $f$ is a function from $A$ to $B$, we say that $f$ \textbf{maps} $A$ to $B$.    
+\end{definition}
+
+\begin{definition} {One-to-One functions (Injective)}
+A function \( f: A \rightarrow B \) is called \textbf{one-to-one} (or \textbf{injective}) if different elements in \( A \) map to different elements in \( B \). In other words, if \( f(a_1) = f(a_2) \), then \( a_1 = a_2 \). This property ensures that no two distinct elements in \( A \) are mapped to the same element in \( B \).     
+\end{definition}
+
+\begin{definition}{Onto Functions (Surjective)}
+A function \( f: A \rightarrow B \) is called \textbf{onto} (or \textbf{surjective}) if every element in \( B \) is the image of at least one element in \( A \). In other words, for every \( b \in B \), there exists at least one \( a \in A \) such that \( f(a) = b \). This property ensures that the function ``covers'' the entire set \( B \).
+\end{definition}
+
+\begin{definition}{Inverse Functions}
+Let $f$ be a one-to-one correspondence from the set $A$ to the set $B$. The inverse function of $f$ is the function that assigns to an element $b$ belonging to $B$ the unique element $a$ in $A$ such that $f(a)=b$. The inverse function of $f$ is denoted by $f^{-1}$. Hence, $f^{-1}(b)=a$ when $f(a)=b$.    
+\end{definition}
+
+\begin{definition}
+    
+
+Let \( f: B \rightarrow C \) and \( g: A \rightarrow B \) be two functions. The \textbf{composite function} of \( f \) and \( g \), denoted by \( f \circ g \), is a function from \( A \) to \( C \) defined by
+
+\[
+(f \circ g)(x) = f(g(x)),
+\]
+
+for every \( x \in A \).
+
+\end{definition}
+
+\begin{definition}{Special Exponential Functions}
+
+\begin{align*}
+y &= a \cdot 10^{bx} \hspace{1cm} \text{base-10 exponential function} \\
+y &= a \cdot e^{bx}  \hspace{1.2cm} \text{natural (base-}e\text{) exponential function,}
+\end{align*}
+
+where $a$ and $b$ are constants and the domain is all real numbers.
+    
+\end{definition}
+
+\begin{definition}{Base-10 Logarithms}
+
+\[
+\log x=y \iff 10^y=x, \qquad x>0
+\]
+
+\textit{Verbally}: $\log x$ is the exponent in the power of 10 that gives $x$   
+\end{definition}
+
+\begin{custombox}{Properties of base-10 logarithms}
+The following identities require $x>0$ and $y>0$:
+\begin{itemize}
+    \item Log of a Product:
+    
+    \[
+    \log x y=\log x+\log y
+    \]
+    
+    \textit{Verbally}: The $\log$ of a product equals the sum of the logs of the factors.
+    \vspace{0.2cm}
+    \item Log of a Quotient:
+    
+    \[
+    \log \frac{x}{y}=\log x-\log y
+    \]
+    \vspace{0.1cm}
+    \textit{Verbally}: The $\log$ of a quotient equals the log of the numerator minus the $\log$ of the denominator.
+    \vspace{0.2cm}
+    \item Log of a Power:
+    \[
+    \log x^y=y \log x
+    \]
+    \textit{Verbally}: The $\log$ of a power equals the exponent times the log of the base.
+\end{itemize}
+
+   
+\end{custombox}
+
+\begin{custombox}{The most important thing to remember about logarithms is this}
+    \textbf{A logarithm is an exponent.}
+\end{custombox}
+
+\begin{definition}{Logarithm with Any Base}
+\textit{Algebraically}:
+
+\hspace{1cm}$\log _b x=y$ if and only if $b^y=x, \quad$ where $b>0, b \neq 1$, and $x>0$
+
+\vspace{0.3cm}
+
+\textit{Verbally}:
+
+\hspace{1cm} $\log _b x=y$ means that $y$ is the exponent of $b$ that gives $x$ as the answer.
+    
+\end{definition}
+
+\begin{definition}{Common Logarithm and Natural Logarithm}
+\hspace{1cm} \textit{Common}: The symbol $\log x$ means $\log _{10} x$.
+
+\hspace{1cm}  \textit{Natural}: \hspace{0.2cm}The symbol $\ln x$ means $\log _e x$, where $e$ is a constant equal to $2.71828182845 \ldots$
+\end{definition}
+
+\begin{custombox}{The Change-of-Base Property of Logarithms}
+
+\begin{equation*}
+\log _a x=\frac{\log_b x}{\log_b a} \quad \text { or } \quad \log_a x=\frac{1}{\log_b a}\left(\log_b x\right)
+\end{equation*}
+where $a,b,x>0$ and $a\neq1$, $b\neq1$.
+    
+\end{custombox}
+
+\begin{custombox}{Properties of Logarithms}
+\setlength{\leftskip}{1cm}  % Reset the text indent
+\setlength{\rightskip}{1cm} % Reset the right indent
+Assume throughout that the logarithm bases are positive and not equal to 1, and that all logarithm arguments are positive.
+The Logarithm of a Power:
+$$
+\log _b x^y=y \log _b x
+$$
+
+\textit{Verbally}: The logarithm of a power equals the product of the exponent and the logarithm of the base.
+\vspace{0.5cm}
+The Logarithm of a Product:
+$$
+\log _b(x y)=\log _b x+\log _b y
+$$
+\textit{Verbally}: The logarithm of a product equals the sum of the logarithms of the factors.
+\vspace{0.5cm}
+The Logarithm of a Quotient:
+$$
+\log _b \frac{x}{y}=\log _b x-\log _b y
+$$
+
+\textit{Verbally}: The logarithm of a quotient equals the logarithm of the numerator minus the logarithm of the denominator.
+
+\setlength{\leftskip}{0cm}  % Reset the text indent
+\setlength{\rightskip}{0cm} % Reset the right indent
+
+\end{custombox}
+
+% ---------- 02
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Numeral system} & \textbf{Symbols} & \textbf{Base} & \textbf{Additional information} \\ \hline
+\textbf{Decimal} & 0-9 & 10 & - \\ \hline
+\textbf{Binary} & 0, 1 & 2 & - \\ \hline
+\textbf{Hexadecimal} & 0-9, A-F & 16 & $\mathrm{A} \equiv 10, \mathrm{B} \equiv 11, \mathrm{C} \equiv 12,$ $\mathrm{D} \equiv 13, \mathrm{E} \equiv 14, \mathrm{F} \equiv 15$ \\ \hline
+\textbf{Octal} & 0-7 & 8 & - \\ \hline
+\end{tabular}
+\caption{Summary of Common Numeral Systems}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|c c c c c c c c|}
+\hline 
+\multirow{2}{*}{Decimal number} & & \multirow{2}{*}{In powers of 2} & \multicolumn{4}{c}{Power of 2} & \multirow{2}{*}{Binary number} \\
+& & & 3 & 2 & 1 & 0 & \\ \hline
+8 & $=$ & $2^3$ & 1 & 0 & 0 & 0 & 1000 \\
+7 & $=$ & $2^2 + 2^1 + 2^0$ & 0 & 1 & 1 & 1 & 111 \\
+6 & $=$ & $2^2 + 2^1$ & 0 & 1 & 1 & 0 & 110 \\
+5 & $=$ & $2^2 + 2^0$ & 0 & 1 & 0 & 1 & 101 \\
+4 & $=$ & $2^2$ & 0 & 1 & 0 & 0 & 100 \\
+3 & $=$ & $2^1 + 2^0$ & 0 & 0 & 1 & 1 & 11 \\
+2 & $=$ & $2^1$ & 0 & 0 & 1 & 0 & 10 \\
+1 & $=$ & $2^0$ & 0 & 0 & 0 & 1 & 1 \\ \hline
+\end{tabular}
+\caption{Decimal Numbers in Binary Representation}
+\end{table}
+
+\begin{proposition}{Binary Addition Rules}
+\[
+0 + 0 = 0, \quad 0 + 1 = 1, \quad 1 + 0 = 1, \quad 1 + 1 = 10
+\]
+\end{proposition}
+
+\begin{proposition}{Binary Multiplication Rules}
+\[
+\begin{aligned}
+& 0 \times 0=0 \\
+& 0 \times 1=0 \\
+& 1 \times 0=0 \\
+& 1 \times 1=1 \\
+& 1 \times 10_2 = 10_2 \quad \left( \text{multiplying by base } 10_2 \text{ adds a 0 to the end} \right)
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{proposition}{XOR Operation}
+XOR produces a 1 if the two bits being compared are different and a 0 if they are the same:
+\[
+0 \oplus 0 = 0, \quad 0 \oplus 1 = 1, \quad 1 \oplus 0 = 1, \quad 1 \oplus 1 = 0
+\]
+\end{proposition}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Stealth, node distance=4cm, thick, scale=1]
+
+    % Draw larger circles for sets A and B
+    \draw[thick] (0,0) circle [radius=1.5cm] node at (0, 2) {\Large $A$};
+    \draw[thick] (6,0) circle [radius=1.5cm] node at (6, 2) {\Large $B$};
+
+    % Place larger nodes for elements a and b=f(a)
+    \node[fill, circle, inner sep=2pt, label=below:{$a$}] (a) at (0,0.3) {};
+    \node[fill, circle, inner sep=2pt, label=below:{$b=f(a)$}] (b) at (6,0.3) {};
+
+    % Draw the larger straight arrow representing f
+    \draw[->, ultra thick, black] (a) -- (b) node[midway, above] {\Large $f$};
+
+    % Draw the curved arrow representing f at the bottom, touching the circles
+    \draw[->, ultra thick, black, bend right=30] ([shift={(270:1.5cm)}]0,0) 
+    to node[midway, below] {\Large $f$} 
+    ([shift={(270:1.5cm)}]6,0);
+
+\end{tikzpicture}
+\caption{A function \(f\) mapping an element \(a\) from set \(A\) to an element \(b=f(a)\) in set \(B\).}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Stealth, thick, scale = 1.5]
+
+% Draw circles representing sets A and B
+\draw (0,0) circle (1.5cm);
+\draw (6,0) circle (1.5cm);
+
+% Labels for sets A and B
+\node at (0,-1) {A};
+\node at (6,-1) {B};
+
+
+% Points in sets with adjusted labels
+\node[fill=black, circle, inner sep=1.5pt, label={[xshift=-0.6cm]below:{$a = f^{-1}(b)$}}] (A1) at (0,0.7) {};
+\node[fill=black, circle, inner sep=1.5pt, label={[xshift=0.5cm]below:{$b = f(a)$}}] (B1) at (6,0.7) {};
+
+
+% Arrows for f and f^{-1}
+\draw[->] (A1) to[bend left=30] node[midway, above] {$f(a)$} (B1);
+\draw[->] (B1) to[bend left=30] node[midway, below] {$f^{-1}(b)$} (A1);
+
+% Arrows for f and f^{-1} below the main circles
+\draw[->] (0.6,-1.5) to[bend left=20] node[midway, above] {$f$} (5.4,-1.5);
+\draw[->] (5.4,-1.8) to[bend left=20] node[midway, below] {$f^{-1}$} (0.6,-1.8);
+
+\end{tikzpicture}
+\caption{The function $f^{-1}$ is the inverse of function $f$.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[>=Stealth, thick]
+
+% Draw circles representing sets A, B, and C
+\draw (0,0) circle (1.5cm);  % Set A
+\draw (5,0) circle (1.5cm);  % Set B
+\draw (10,0) circle (1.5cm); % Set C
+
+% Labels for sets A, B, and C
+\node at (0,-1) {A};
+\node at (5,-1) {B};
+\node at (10,-1) {C};
+
+% Points in sets with adjusted labels
+\node[fill=black, circle, inner sep=1.5pt, label={[xshift=-0.1cm]below:{$a$}}] (A) at (0,0.7) {};
+
+\node[fill=black, circle, inner sep=1.5pt, label=below:{$g(a)$}] (B) at (5,0.7) {};
+\node[fill=black, circle, inner sep=1.5pt, label={[xshift=0.4cm]below:{$f(g(a))$}}] (C) at (10,0.7) {};
+
+% Arrows for g and f
+\draw[->] (A) to[bend left=15] node[midway, above] {$g(a)$} (B);
+\draw[->] (B) to[bend left=15] node[midway, above] {$f(g(a))$} (C);
+\draw[->] ([shift={(360:1.5cm)}]0,0) to node[midway, below] {$g$} (3.5,0);
+\draw[->] ([shift={(360:0cm)}]6.5,0) to node[midway, below] {$f$} (8.5,0);
+
+% Arrows for f ∘ g and (f ∘ g)(a)
+\draw[->] (A) to[bend left=40] node[midway, above] {$(f \circ g)(a)$} (C);
+% Draw the curved arrow representing f at the bottom, touching the circles
+\draw[->, bend right=20] ([shift={(270:1.5cm)}]0,0) to node[midway, below] {$f(g(a))$} ([shift={(270:0.7cm)}]10,0);
+
+\end{tikzpicture}
+\caption{The composition of functions \(f\) and \(g\), denoted \(f \circ g\), is the function that results from applying \(g\) and then \(f\).}
+\end{figure}
+
+
+% ---------- 03
+\begin{definition}[Subset]
+    A set $A$ is a \textbf{subset} of a set $B$ if every element of $A$ is also an element of $B$. We write this as $A \subseteq B$.
+\end{definition}
+
+\begin{definition}[Proper Subset]
+    A set $A$ is a \textbf{proper subset} of a set $B$ if $A \subseteq B$ and $A \neq B$. This means that $B$ must contain at least one element that is not in $A$. We write this as $A \subset B$.
+\end{definition}
+
+\begin{definition}[Universal Set]
+    The \textbf{universal set}, denoted by $U$, is the set of all possible elements under consideration in a given context. All other sets in that context are considered subsets of the universal set.
+\end{definition}
+
+\begin{definition}[Empty Set]
+    The \textbf{empty set} (or \textbf{null set}) is the unique set containing no elements. It is denoted by $\emptyset$ or by $\{\}$.
+\end{definition}
+
+\begin{definition}[Disjoint Sets]
+    Two sets, $A$ and $B$, are \textbf{disjoint} if they have no elements in common. In other words, their intersection is the empty set: $A \cap B = \emptyset$.
+\end{definition}
+
+\begin{definition}[Cardinality]
+    The \textbf{cardinality} of a finite set $A$, denoted $|A|$, is the number of distinct elements in the set.
+\end{definition}
+
+\begin{definition}[Power Set]
+    The \textbf{power set} of a set $A$, denoted $\mathcal{P}(A)$, is the set of all subsets of $A$. The elements of the power set are themselves sets.
+\end{definition}
+
+\begin{custombox}{The Duality of Sets and Boolean Algebra}
+    The relationship between set theory and Boolean algebra is so direct that they are considered "dually isomorphic." This means they are structurally identical. Understanding one is understanding the other. The key translations are:
+    \begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{lcl}
+        \textbf{Set Theory} & & \textbf{Boolean Algebra / Logic} \\
+        \hline
+        Union ($\cup$) & $\iff$ & Boolean Sum ($+$) or \texttt{OR} \\
+        Intersection ($\cap$) & $\iff$ & Boolean Product ($\cdot$) or \texttt{AND} \\
+        Complement ($A^c$) & $\iff$ & Complementation ($\overline{x}$) or \texttt{NOT} \\
+        The Universal Set ($U$) & $\iff$ & True (1) \\
+        The Empty Set ($\emptyset$) & $\iff$ & False (0) \\
+    \end{tabular}
+    \end{center}
+\end{custombox}
+
+\begin{definition}[Intersection]
+    The \textbf{intersection} of sets $A$ and $B$, denoted $A \cap B$, is the set containing all elements that are in both $A$ and $B$.
+    \[ A \cap B = \{ x \mid x \in A \text{ and } x \in B \} \]
+\end{definition}
+
+\begin{definition}[Union]
+    The \textbf{union} of sets $A$ and $B$, denoted $A \cup B$, is the set containing all elements that are in $A$, or in $B$, or in both.
+    \[ A \cup B = \{ x \mid x \in A \text{ or } x \in B \} \]
+\end{definition}
+
+\begin{definition}[Set Difference]
+    The \textbf{difference} of set $A$ and set $B$, denoted $A \setminus B$, is the set containing all elements that are in $A$ but not in $B$.
+    \[ A \setminus B = \{ x \mid x \in A \text{ and } x \notin B \} \]
+\end{definition}
+
+\begin{definition}[Symmetric Difference]
+    The \textbf{symmetric difference} of sets $A$ and $B$, denoted $A \oplus B$, is the set of elements which are in either of the sets, but not in their intersection.
+    \[ A \oplus B = (A \cup B) \setminus (A \cap B) \]
+\end{definition}
+
+\begin{definition}[Complement]
+    The \textbf{complement} of a set $A$, denoted $A^c$, is the set of all elements in the universal set $U$ that are not in $A$.
+    \[ A^c = U \setminus A \]
+\end{definition}
+
+\begin{definition}[Cartesian Product]
+    The \textbf{Cartesian product} of sets $A$ and $B$, denoted $A \times B$, is the set of all possible ordered pairs $(a, b)$, where the first element $a$ is from $A$ and the second element $b$ is from $B$.
+    \[ A \times B = \{ (a, b) \mid a \in A \text{ and } b \in B \} \]
+\end{definition}
+
+\begin{custombox}{Set Operations as Bitwise Operations}
+    Let the bit strings for sets $A$ and $B$ be $s_A$ and $s_B$.
+    \begin{itemize}
+        \item \textbf{Union ($A \cup B$)} corresponds to a bitwise \textbf{\texttt{OR}} operation.
+        \item \textbf{Intersection ($A \cap B$)} corresponds to a bitwise \textbf{\texttt{AND}} operation.
+        \item \textbf{Complement ($A^c$)} corresponds to a bitwise \textbf{\texttt{NOT}} (one's complement) operation.
+        \item \textbf{Symmetric Difference ($A \oplus B$)} corresponds to a bitwise \textbf{\texttt{XOR}} operation.
+    \end{itemize}
+\end{custombox}
+
+% ---------- 04 Combinatorics & Probability ----------
+\begin{definition}{Random Experiment}
+    A random experiment is one that can give different results, even if you do everything the same each time.
+\end{definition}
+
+\begin{definition}{Sample Spaces, Outcomes, and Events}
+    \textbf{Sample Space:} The set of all possible outcomes of a random experiment is called the sample space, denoted by \( S \). Outcomes can be discrete or continuous, depending on the nature of the experiment.
+    
+    \textbf{Outcome:} A single possible result of a random experiment.
+    
+    \textbf{Event:} Any subset of the sample space, which may consist of one or more outcomes.
+\end{definition}
+
+\begin{theorem}[Multiplication Rule]
+    Let an operation be described as a sequence of $k$ steps. Assume the following conditions:
+    
+    \begin{itemize}
+        \item There are $n_1$ ways to complete step 1.
+        \item There are $n_2$ ways to complete step 2 for each way of completing step 1.
+        \item There are $n_3$ ways to complete step 3 for each way of completing step 2, and so on.
+    \end{itemize}
+    
+    Then, the total number of ways to complete the entire operation is given by:
+    
+    \[
+    n_1 \times n_2 \times \cdots \times n_k.
+    \]
+\end{theorem}
+
+\begin{definition}[Counting with and without Replacement]
+    When counting the number of ways to select objects from a set, two common scenarios are:
+
+    \begin{itemize}
+        \item \textbf{With Replacement}: An object can be selected more than once.
+        \item \textbf{Without Replacement}: Once an object is selected, it cannot be chosen again.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Permutation and Combination]
+    \begin{itemize}
+        \item \textbf{Permutation (order matters)}: Different sequences are counted as distinct outcomes, leading to a higher count.
+        \item \textbf{Combination (order does not matter)}: Sequences are treated as identical, resulting in a lower count.
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}[Permutations of \(n\) Distinct Objects]
+    The number of ordered arrangements (permutations) of $n$ distinct objects is
+    \[
+    n! = n \cdot (n-1) \cdot \dots \cdot 2 \cdot 1.
+    \]
+\end{proposition}
+
+\begin{theorem}[Permutations of Subsets]
+    For integers $n \ge r \ge 0$, the number of ordered selections of $r$ distinct objects from $n$ distinct objects is
+    \[
+    P_r^n = P(n,r) = n \cdot (n-1) \cdots (n-r+1) = \frac{n!}{(n-r)!}.
+    \]
+\end{theorem}
+
+\begin{theorem}[Combinations]
+    The number of combinations of $r$ elements selected from a set of $n$ different elements is given by
+    \[
+    C_r^n = \binom{n}{r} = \frac{n!}{r!(n-r)!}
+    \]
+\end{theorem}
+
+\begin{theorem}[Binomial Theorem]
+    In algebra, the binomial coefficient is used to expand powers of binomials. According to the binomial theorem
+
+$$
+(a+b)^n=\sum_{k=0}^n\binom{n}{k} a^k b^{n-k}
+$$
+
+\end{theorem}
+
+\begin{proposition}[With replacement]
+For selections from $n$ types:
+\begin{itemize}
+    \item \textbf{Ordered with replacement}: $n^r$ outcomes.
+    \item \textbf{Unordered with replacement}: $\displaystyle \binom{n+r-1}{r}$ outcomes. % (stars and bars)
+\end{itemize}
+\end{proposition}
+
+\begin{axiom}[Axioms of Probability]
+    \begin{itemize}
+        \item \textbf{Axiom 1:} For any event \(A\), \( 0 \leq P(A) \leq 1 \).
+        \item \textbf{Axiom 2:} Probability of the sample space \(S\) is \(P(S) = 1\).
+        \item \textbf{Axiom 3:} If \(A_1, A_2, A_3, \cdots\) are disjoint events, then \(P\left(A_1 \cup A_2 \cup A_3 \cdots\right) = P\left(A_1\right) + P\left(A_2\right) + P\left(A_3\right) + \cdots\)
+    \end{itemize}
+\end{axiom}
+
+\begin{definition}[Probability of an Event]
+    A probability measure assigns a number \(P(A)\in[0,1]\) to each event \(A\) in accordance with the probability axioms. In a finite sample space whose elementary outcomes are equally likely, this reduces to
+    \[
+    P(A) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}}
+    \]
+\end{definition}
+
+\begin{theorem}{Rules of Probability}
+    \begin{itemize}
+        \item \textbf{Complement Rule:} The probability of the complement of event $A$ is
+    
+        \[
+        P(A^c) = 1 - P(A)
+        \]
+
+        \item \textbf{Empty Set Rule:} The probability of the empty set is 0, i.e.,
+        
+        \[P(\emptyset) = 0\]
+        
+        \item \textbf{Addition Rule:} For any two events $A$ and $B$, the probability of the union of events $A$ and $B$ is given by
+        \[
+        P(A \cup B) = P(A) + P(B) - P(A \cap B)
+        \]
+
+        \item \textbf{Difference Rule:} The probability of the difference between events $A$ and $B$ is given by
+        \[
+        P(A-B)=P(A)-P(A \cap B)
+        \]
+        \item \textbf{Subset Rule:} If $A$ is a subset of $B$ ($A \subset B$), then
+        \[P(A) \leq P(B).\]
+    \end{itemize}
+\end{theorem}
+
+% ---------- 05 Conditional Probability ----------
+\begin{definition}[Conditional Probability]
+For any two events \( A \) and \( B \) with \( P(B) > 0 \), the conditional probability of \( A \) given \( B \) is defined as:
+\[
+P(A \mid B) = \frac{P(A \cap B)}{P(B)}, \qquad P(B) > 0
+\]
+\end{definition}
+
+\begin{axiom}[Axioms of Conditional Probability]
+    Fix an event $B$ with $P(B)>0$. Then $A\mapsto P(A\mid B)$ is a probability measure, so:
+    \begin{itemize}
+        \item \textbf{Axiom 1:} For any event \(A\), \( 0 \leq P(A\mid B) \leq 1 \).
+        \item \textbf{Axiom 2:} $P(S\mid B)=1$ (and consequently $P(B\mid B)=1$).
+        \item \textbf{Axiom 3:} If \(A_1, A_2, A_3, \cdots\) are disjoint events, then
+         
+        \hspace*{2.8em}$P\left(A_1 \cup A_2 \cup A_3 \cdots \mid B\right)=P\left(A_1 \mid B\right)+P\left(A_2 \mid B\right)+P\left(A_3 \mid B\right)+\cdots$
+    \end{itemize}
+\end{axiom}
+
+\begin{theorem}{Rules of Conditional Probability}
+    In the following rules, assume $P(C)>0$.
+    \begin{itemize}
+        \item \textbf{Complement Rule:} The probability of the complement of event $A$ given $C$ is
+    
+        \[
+        P\left(A^c \mid C\right)=1-P(A \mid C)
+        \]
+
+        \item \textbf{Empty Set Rule:} The probability of the empty set given some event $C$ is 0, i.e.,
+        
+        \[P(\emptyset \mid C) = 0\]
+        
+        \item \textbf{Addition Rule:} For any two events $A$ and $B$, the probability of the union of events $A$ and $B$ given another event $C$ is
+        \[
+        P(A \cup B \mid C)=P(A \mid C)+P(B \mid C)-P(A \cap B \mid C)
+        \]
+
+        \item \textbf{Difference Rule:} The probability of the difference between events $A$ and $B$ given another event $C$ is
+        \[
+            P(A-B \mid C)=P(A \mid C)-P(A \cap B \mid C)
+        \]
+        \item \textbf{Subset Rule:} If $A \subset B$, then
+        \[
+        P(A \mid C) \leq P(B \mid C)
+        \]
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}[Multiplication Rule]
+    If $P(A)>0$, then $P(A\cap B)=P(A)P(B\mid A)$. If $P(B)>0$, then $P(A\cap B)=P(B)P(A\mid B)$. Hence, when both probabilities are positive:
+    \[
+    P(A \cap B) = P(A) P(B \mid A) = P(B) P(A \mid B)
+    \]
+\end{theorem}
+
+\begin{theorem}[Law of Total Probability]
+For any event \(A\) and event \(B\) with $0<P(B)<1$, the partition $B,B^c$ gives:
+    \begin{align*}
+    P(A) &= P(A \cap B) + P(A \cap B^c) \\
+    &= P(B) P(A \mid B) + P(B^c) P(A \mid B^c)
+    \end{align*}
+
+    More generally, for any finite partition \(B_1,\ldots,B_n\) of $S$ with $P(B_i)>0$ for every $i$:
+    \begin{align*}
+    P(A) &= \sum_{i=1}^{n} P(A \mid B_i) P(B_i)
+    \end{align*}
+\end{theorem}
+
+\begin{definition}[Independence]
+    Events \(A\) and \(B\) are independent precisely when
+    \begin{align*}
+        P(A \cap B) &= P(A)P(B).
+    \end{align*}
+    If $P(B)>0$, this is equivalent to $P(A\mid B)=P(A)$; if $P(A)>0$, it is equivalent to $P(B\mid A)=P(B)$.
+\end{definition}
+
+\begin{theorem}[Independence and DeMorgan's Law]
+        If \( A_1, A_2, \ldots, A_n \) are mutually independent, then
+        \begin{align*}
+        &P\left(A_1 \cup A_2 \cup \cdots \cup A_n\right)=1-\left(1-P\left(A_1\right)\right)\left(1-P\left(A_2\right)\right) \cdots\left(1-P\left(A_n\right)\right)
+        \end{align*}
+\end{theorem}
+
+\begin{definition}[Independence of Multiple Events]
+    Events \(A_1,\ldots,A_k\) are \emph{mutually independent} if, for every subset of at least two distinct indices $J\subseteq\{1,\ldots,k\}$,
+    \[
+      P\!\left(\bigcap_{j\in J}A_j\right)=\prod_{j\in J}P(A_j).
+    \]
+    Checking only the intersection of all $k$ events is not sufficient.
+\end{definition}
+
+\begin{theorem}[Bayes' Theorem]
+    For events $A$ and $B$ with $P(A)>0$, Bayes' theorem gives the first equality below. The expanded denominator also assumes $0<P(B)<1$ so both displayed conditional probabilities are defined:
+    \begin{align*}
+    P(B \mid A) = \frac{P(A \mid B) \cdot P(B)}{P(A)}
+     = \frac{P(A \mid B) \cdot P(B)}{P(A \mid B) \cdot P(B) + P(A \mid B^c) \cdot P(B^c)}
+    \end{align*}
+
+    If $B_1,B_2,\ldots$ form a finite or countable partition of $S$ with $P(B_i)>0$ for all $i$, and $P(A)>0$, then
+
+    \begin{align*}
+    P\left(B_j \mid A\right) = \frac{P\left(A \mid B_j\right) \cdot P\left(B_j\right)}{\sum_i P\left(A \mid B_i\right) \cdot P\left(B_i\right)}
+    \end{align*}
+\end{theorem}
+
+% ---------- 06 Descriptive Statistics ----------
+
+\begin{definition}[Population]
+A \textbf{population} is the complete set of all possible observations or measurements of interest in a particular study. In software engineering contexts, this might include all possible execution times of an algorithm, all user sessions on a website, or all lines of code in a project.
+\end{definition}
+
+\begin{definition}[Sample]
+A \textbf{sample} is a subset of the population that we actually observe or measure. Due to practical constraints, we often work with samples rather than entire populations.
+\end{definition}
+
+\begin{definition}[Qualitative Data]
+\textbf{Qualitative data} (also called categorical data) consists of non-numerical information that can be categorized. Examples include programming languages used in a project, user satisfaction ratings (satisfied/neutral/dissatisfied), or bug severity levels (critical/high/medium/low).
+\end{definition}
+
+\begin{definition}[Quantitative Data]
+\textbf{Quantitative data} consists of numerical measurements that can be ordered and subjected to mathematical operations. This can be further divided into:
+\begin{itemize}
+    \item \textbf{Discrete}: Countable values (number of bugs, lines of code, user sessions)
+    \item \textbf{Continuous}: Measurable values that can take any value within a range (response times, memory usage, CPU utilization)
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Frequency Distribution]
+A \textbf{frequency distribution} is a table that shows the frequency (count) of each value or class of values in a dataset. It can be presented as:
+\begin{itemize}
+    \item \textbf{Absolute frequency}: The actual count of occurrences
+    \item \textbf{Relative frequency}: The proportion of total observations
+    \item \textbf{Cumulative frequency}: The running total of frequencies
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Arithmetic Mean]
+
+For a dataset with $n$ values $x_1, x_2, \ldots, x_n$, the \textbf{arithmetic mean} is defined as:
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}
+$$
+
+\end{definition}
+
+\begin{definition}[Median]
+    For a dataset with $n$ values arranged in ascending order, the median is defined as:
+    \[
+    \text{median} =
+    \begin{cases}
+        x_{\frac{n+1}{2}} & \text{if } n \text{ is odd} \\
+        \frac{x_{\frac{n}{2}} + x_{\frac{n}{2}+1}}{2} & \text{if } n \text{ is even}
+    \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[Mode]
+The \textbf{mode} is the value that appears most frequently in a dataset. A dataset can have:
+\begin{itemize}
+    \item \textbf{No unique mode}: If all observed values have equal frequency, every value ties for highest frequency; some conventions report this as ``no mode.''
+    \item \textbf{One mode (unimodal)}: If one value appears most frequently
+    \item \textbf{Multiple modes (multimodal)}: If two or more values tie for the highest frequency
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Range]
+The \textbf{range} of a dataset is the difference between the maximum and minimum values:
+\[
+\text{Range} = x_{\max} - x_{\min}
+\]
+\end{definition}
+
+\begin{definition}[Sample Variance and Standard Deviation]
+For a sample with $n$ values, the \textbf{sample variance}, denoted by $s^2$, is defined as:
+$$
+s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+$$
+The \textbf{sample standard deviation}, denoted by $s$, is the square root of the variance:
+$$
+s = \sqrt{s^2} = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2}
+$$
+\end{definition}
+
+\begin{definition}[Coefficient of Variation]
+For ratio-scale data with non-zero sample mean, the \textbf{coefficient of variation} is the ratio of the sample standard deviation to the mean:
+\[
+CV = \frac{s}{\bar{x}} \times 100\%
+\]
+\end{definition}
+
+\begin{definition}[Percentile]
+The $p$th \textbf{percentile} is a value at or below which approximately $p\%$ of the ordered observations lie. Several interpolation conventions exist, so a numerical percentile calculation should state the convention used.
+\end{definition}
+
+\begin{definition}[Quartiles]
+
+Quartiles divide an ordered dataset into four equal parts.
+
+\begin{itemize}
+    \item \textbf{Q1 (First Quartile)}: The 25th percentile.
+    \item \textbf{Q2 (Second Quartile)}: The 50th percentile. This is the \textbf{median} of the dataset.
+    \item \textbf{Q3 (Third Quartile)}: The 75th percentile.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Interquartile Range]
+    The \textbf{interquartile range (IQR)} measures the spread of the middle 50\% of the data and is defined as
+    $$
+    IQR = Q_3 - Q_1,
+    $$
+    where $Q_1$ and $Q_3$ are the first and third quartiles. A larger IQR indicates that the central portion of the data is more widely dispersed, while a smaller IQR indicates that it is more tightly clustered.
+\end{definition}
+
+\begin{definition}[Normal Distribution]
+A \textbf{normal distribution} is a symmetric, bell-shaped distribution where the mean, median, and mode are all equal and located at the center. Its shape is determined entirely by its mean ($\mu$) and standard deviation ($\sigma$).
+\end{definition}
+
+\begin{definition}[Skewness]
+    \textbf{Skewness} measures the asymmetry of data distribution:
+    \begin{itemize}
+        \item \textbf{Positive skew (skewed to the right)}: The longer tail extends to the right.
+        \item \textbf{Negative skew (skewed to the left)}: The longer tail extends to the left.
+        \item \textbf{Symmetric}: The two sides have approximately the same shape.
+    \end{itemize}
+    Comparisons between the mean and median can be useful heuristics, but they do not define skewness.
+\end{definition}
+
+\begin{definition}[Box Plot Components]
+A standard Tukey box plot shows the quartiles and whiskers:
+\begin{itemize}
+    \item the box from $Q_1$ to $Q_3$ and a line at the median $Q_2$;
+    \item whiskers extending to the most extreme observations within $1.5\,IQR$ of the relevant quartile; and
+    \item observations beyond the whiskers plotted individually as potential outliers.
+\end{itemize}
+\end{definition}
+
+\begin{theorem}[Law of Large Numbers]
+    If $X_1,X_2,\ldots$ are independent and identically distributed random variables with finite expected value $\mu$, then their sample mean converges to $\mu$ in probability as the sample size tends to infinity.
+\end{theorem}
+
+\begin{theorem}[The Empirical Rule]
+If a dataset is approximately normal with a sample mean $\bar{x}$ and sample standard deviation $s$, then:
+\begin{itemize}
+    \item Approximately \textbf{68.3\%} of the observations lie within 1 standard deviation of the mean ($\bar{x} \pm s$).
+    \item Approximately \textbf{95.4\%} of the observations lie within 2 standard deviations of the mean ($\bar{x} \pm 2s$).
+    \item Approximately \textbf{99.7\%} of the observations lie within 3 standard deviations of the mean ($\bar{x} \pm 3s$).
+\end{itemize}
+\end{theorem}
+
+% ---------- 07-09 Linear Algebra ----------
+
+% 7
+
+\begin{definition}{Linear Equations} A linear equation in the variables $x_1, x_2, \ldots, x_n$ is an equation that can be written in the form
+\[
+a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b
+\]
+
+where $b$ and the coefficients $a_1, \ldots, a_n$ are constants.
+
+\end{definition}
+
+\begin{definition}{Systems of Linear Equations} A \textbf{system of linear equations} (also called a \textbf{linear system}) is a collection of one or more linear equations involving the same set of variables. \end{definition}
+
+\begin{definition}{Solutions to a System of Linear Equations} A \textbf{solution} of a linear system in the variables $x_1, x_2, \ldots, x_n$ is a list of numbers $(s_1, s_2, \ldots, s_n)$ that satisfies all equations of the system when substituted for the variables $x_1, x_2, \ldots, x_n$, respectively. The set of all possible solutions is called its \textbf{solution set}. Two linear systems are called \textbf{equivalent} if they have the same solution set. \end{definition}
+
+\begin{definition} A \textbf{matrix} is a rectangular array of numbers arranged in rows and columns. The \textbf{coefficient matrix} of a linear system contains only the coefficients of the variables, while the \textbf{augmented matrix} includes an additional column for the constants from the right-hand side of the equations. \end{definition}
+
+\begin{definition} The \textbf{size} of a matrix is defined by the number of its rows and columns, expressed as \emph{rows} $\times$ \emph{columns}. For instance, the coefficient matrix above is of size $3 \times 3$, and the augmented matrix is of size $3 \times 4$. \end{definition}
+
+\begin{definition}{Echelon Forms}
+A matrix is in \textbf{echelon form} if it satisfies the following conditions:
+\begin{enumerate}
+    \item All zero rows are at the bottom.
+    \item Each leading entry of a row is in a column to the right of the leading entry of the row above it.
+    \item All entries in a column below a leading entry are zeros.
+\end{enumerate}
+
+In addition to echelon form, a matrix may also be in \textbf{reduced row echelon form} (RREF), which has the following properties:
+\begin{enumerate}[resume]
+    \item The leading entry in each nonzero row is 1.
+    \item Each leading 1 is the only nonzero entry in its column.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}{Existence Theorem}
+A linear system is consistent if and only if an echelon form of the augmented matrix has no row of the form
+    \[
+    \left[\begin{array}{llll}
+    0 & \ldots & 0 & b
+    \end{array}\right]
+    \]
+where $b$ is nonzero.
+\end{theorem}
+
+\begin{theorem}{Uniqueness of Reduced Echelon Form}
+    Each matrix is row equivalent to one and only one reduced echelon matrix
+\end{theorem}
+
+\begin{custombox}{The Row Reduction Algorithm}
+    Here we describe an algorithm for turning any matrix into an equivalent
+    (reduced) echelon matrix. This algorithm is the foundation of solving systems of linear equations using matrices.
+
+    \begin{enumerate}
+        \item Begin with the leftmost nonzero column. This is a pivot column, with the pivot position at the top.
+        \item Select a nonzero entry in the pivot column as a pivot. If necessary, interchange rows to move this entry into the pivot position.
+        \item Use row replacement operations to create zeros in all positions below the pivot.
+        \item Apply steps 1-3 to the submatrix of all entries below and to the right of the pivot position. Repeat this process until there are no more nonzero rows to modify. (At this point we have reached an echelon form of the matrix.)
+        \item Beginning with the rightmost pivot and working upward and to the left, create zeros above each pivot using row operations. If a pivot is not 1, make it 1 by a scaling operation. (This step produces the reduced echelon form of the matrix.)
+    \end{enumerate}
+
+\end{custombox}
+
+\begin{theorem}{Uniqueness Theorem}
+    If a linear system is consistent, then the solution set contains either
+    \begin{enumerate}[label=(\roman*)]
+        \item a unique solution, when there are no free variables, or
+        \item infinitely many solutions, when there is at least one free variable.
+    \end{enumerate}
+\end{theorem}
+
+% 8
+
+\begin{definition}
+    For each positive integer $n$, we let $\mathbb{R}^n$ denote the collection of ordered $n$-tuples with each entry in $\mathbb{R}$. We often write these elements as $n \times 1$ matrices. We define addition and scalar multiplication of vectors in $\mathbb{R}^n$ in the same way as we do for $\mathbb{R}^2$. That is, we go coordinate-by-coordinate.
+\end{definition}
+
+\begin{definition}{Linear Combinations}
+    Given a set of vectors $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_p \in \mathbb{R}^n$ and scalars $c_1, c_2, \ldots, c_p \in \mathbb{R}$, the vector $\vect{y}$ given by
+
+\[
+\vect{y} = c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p
+\]
+
+is called a linear combination of $\vect{v}_1, \vect{v}_2, \ldots, \vect{v}_p$ with weights $c_1, c_2, \ldots, c_p$.
+
+\end{definition}
+
+\begin{definition}{Span of a Set of Vectors}
+    If $\vect{v}_1, \ldots, \vect{v}_p$ are in $\mathbb{R}^n$, then the set of all linear combinations of $\vect{v}_1, \ldots, \vect{v}_p$ is denoted by \text{Span} $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ and is called the subset of $\mathbb{R}^n$ spanned by $\vect{v}_1, \ldots, \vect{v}_p$. In other words, the span of $\vect{v}_1, \ldots, \vect{v}_p$ is all vectors that can be written in the form
+    $$
+    c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p
+    $$
+    with $c_1, \ldots, c_p$ scalars.
+
+\end{definition}
+
+\begin{definition}{Matrix Equation}
+  If $A$ is an $m \times n$ matrix with columns $\vect{a}_1, \ldots, \vect{a}_n$, and if $\vect{x} \in \mathbb{R}^n$, then the product of $A$ and $\vect{x}$, denoted by $A \vect{x}$, is
+
+\[
+A \vect{x} = \left[\begin{array}{llll}
+\vect{a}_1 & \vect{a}_2 & \ldots & \vect{a}_n
+\end{array}\right] \left[\begin{array}{c}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{array}\right] = x_1 \vect{a}_1 + x_2 \vect{a}_2 + \cdots + x_n \vect{a}_n
+\]
+    
+\end{definition}
+
+\begin{definition}
+    An indexed set of vectors $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\} \subset \mathbb{R}^n$ is said to be \textbf{linearly independent} if the vector equation
+    
+    \[
+    x_1 \vect{v}_1 + \cdots + x_p \vect{v}_p = \vect{0}
+    \]
+    
+    has only the trivial solution, i.e., if the only solution is $\left(x_1, \ldots, x_p\right) = (0, \ldots, 0)$. Likewise, the set $\left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ is said to be \textbf{linearly dependent} if there exist weights $c_1, \ldots, c_p$, not all zero, such that
+    
+    \[
+    c_1 \vect{v}_1 + \cdots + c_p \vect{v}_p = \vect{0}
+    \]
+    
+    We call such an equation a \textit{linear dependence relation} when the weights are not all zero.
+\end{definition}
+
+\begin{theorem}
+    If $A$ is an $m \times n$ matrix, with columns $\vect{a}_1, \ldots, \vect{a}_n \in \mathbb{R}^m$ and if $\vect{b} \in \mathbb{R}^m$, the matrix equation
+
+\[
+A \vect{x} = \vect{b}
+\]
+
+has the same solution set as the vector equation
+
+\[
+x_1 \vect{a}_1 + x_2 \vect{a}_2 + \cdots + x_n \vect{a}_n = \vect{b}
+\]
+
+which, in turn, has the same solution set as the system of linear equations with augmented matrix
+
+\[
+\left[\begin{array}{lllll}
+\vect{a}_1 & \vect{a}_2 & \ldots & \vect{a}_n & \vect{b}
+\end{array}\right].
+\]
+
+\end{theorem}
+
+\begin{theorem}
+Let \( A \) be an \( m \times n \) matrix. Then the following statements are equivalent:
+\begin{enumerate}[label=(\alph*)]
+    \item For each \( \vect{b} \in \mathbb{R}^m \), the equation \( A \vect{x} = \vect{b} \) has a solution.
+    \item Each \( \vect{b} \in \mathbb{R}^m \) is a linear combination of the columns of \( A \).
+    \item The columns of \( A \) span \( \mathbb{R}^m \).
+    \item The matrix \( A \) has a pivot position in every row.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+If \( A \) is an \( m \times n \) matrix, \( \vect{u} \) and \( \vect{v} \) are vectors in \( \mathbb{R}^n \), and \( c \) is a scalar, then:
+
+\begin{enumerate}[label=(\alph*)]
+    \item \( A(\vect{u} + \vect{v}) = A \vect{u} + A \vect{v} \)  
+
+
+    \item \( A(c \vect{u}) = c(A \vect{u}) \)  
+
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Suppose $A \vect{x} = \vect{b}$ is consistent for some $\vect{b}$, and let $\vect{p}$ be a solution. Then the solution set of $A \vect{x} = \vect{b}$ is the set of all vectors of the form
+    \[
+    \vect{w} = \vect{p} + \vect{v}_h,
+    \]
+    where $\vect{v}_h$ is any solution of the homogeneous equation $A \vect{x} = \vect{0}$.
+\end{theorem}
+
+\begin{theorem}
+    \begin{enumerate}[(a)]
+        \item If a set of vectors contains the zero vector, then the set is linearly dependent.
+        \item If a set of vectors contains a scalar multiple of another vector, then the set is linearly dependent.
+        \item If a set of vectors contains more vectors than there are entries in each vector, then the set is linearly dependent.
+    \end{enumerate}
+\end{theorem}
+
+% 9
+
+\begin{definition}{Matrix Addition}
+    Let $A$ and $B$ be $m \times n$ matrices. The \textbf{sum} of $A$ and $B$, denoted $A + B$, is the $m \times n$ matrix whose entries are obtained by adding the corresponding entries of $A$ and $B$.
+
+    Given matrices
+
+    $$
+    A=\left[\begin{array}{cccc}
+    a_{11} & a_{12} & \cdots & a_{1 n} \\
+    a_{21} & a_{22} & \cdots & a_{2 n} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    a_{m 1} & a_{m 2} & \cdots & a_{m n}
+    \end{array}\right], \quad B=\left[\begin{array}{cccc}
+    b_{11} & b_{12} & \cdots & b_{1 n} \\
+    b_{21} & b_{22} & \cdots & b_{2 n} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    b_{m 1} & b_{m 2} & \cdots & b_{m n}
+    \end{array}\right]
+    $$
+
+    both of the same dimension $m \times n$, the sum $A+B$ is thus defined as
+
+    $$
+    A+B=\left[\begin{array}{cccc}
+    a_{11}+b_{11} & a_{12}+b_{12} & \cdots & a_{1 n}+b_{1 n} \\
+    a_{21}+b_{21} & a_{22}+b_{22} & \cdots & a_{2 n}+b_{2 n} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    a_{m 1}+b_{m 1} & a_{m 2}+b_{m 2} & \cdots & a_{m n}+b_{m n}
+    \end{array}\right]
+    $$
+\end{definition}
+
+\begin{definition}{Scalar-Matrix Multiplication}
+    Let $A$ be an $m \times n$ matrix and $c$ be a scalar. The \textbf{product} of $c$ and $A$, denoted $cA$, is the $m \times n$ matrix whose entries are obtained by multiplying each entry of $A$ by $c$, and is thus defined as
+
+    $$
+    c A=\left[\begin{array}{cccc}
+    a_{11} & a_{12} & \cdots & a_{1 n} \\
+    a_{21} & a_{22} & \cdots & a_{2 n} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    a_{m 1} & a_{m 2} & \cdots & a_{m n}
+    \end{array}\right] = \left[\begin{array}{cccc}
+    c a_{11} & c a_{12} & \cdots & c a_{1 n} \\
+    c a_{21} & c a_{22} & \cdots & c a_{2 n} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    c a_{m 1} & c a_{m 2} & \cdots & c a_{m n}
+    \end{array}\right]
+    $$
+    
+\end{definition}
+
+\begin{definition}
+    For $A \in \mathbb{R}^{m \times n}$ and $B \in \mathbb{R}^{n \times p}$, with $B=\left[\begin{array}{lll}\vect{b_1} & \vect{b_2} \cdots & \vect{b_p}\end{array}\right]$, we define the product $A B$ by the formula
+
+\[
+A B=\left[\begin{array}{llll}
+A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
+\end{array}\right]
+\]
+
+\end{definition}
+
+\begin{definition}
+    Let $A$ be a square matrix, i.e. $ A \in \mathbb{R}^{n \times n}$. The $k$th power of $A$, denoted $A^k$, is defined as the product of $A$ with itself $k$ times. That is,
+
+    $$
+    A^k=\underbrace{ AAA \cdot \cdots A}_{k \text { times }}
+    $$
+
+    where $A$ appears $k$ times on the right-hand side.
+\end{definition}
+
+\begin{definition}
+    Given a matrix $A \in \mathbb{R}^{m \times n}$, the transpose of $A$ is the matrix $A^T$ whose $i$th column is the $i$th row of $A$.
+\end{definition}
+
+\begin{definition}
+    A square matrix \( A \in \mathbb{R}^{n \times n} \) is invertible (or \textbf{nonsingular}) if there exists a matrix \( C \in \mathbb{R}^{n \times n} \) such that \( A C = C A = I_n \). The matrix \( C \) is called the inverse of \( A \) and is denoted by \( A^{-1} \). Thus, \( A^{-1} A = A A^{-1} = I_n \).
+\end{definition}
+
+\begin{theorem}
+
+    Let $A$, $B$, $C$ be matrices of the same size and let $\alpha$, $\beta$ be scalars. Then
+    \begin{enumerate}[(a)]
+        \item $A+B=B+A$
+        \item $(A+B)+C=A+(B+C)$
+        \item $A+0=A$
+        \item $\alpha(A+B)=\alpha A+\alpha B$
+        \item $(\alpha+\beta) A=\alpha A+\beta A$
+        \item $\alpha(\beta A)=(\alpha \beta) A$
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+        Let $A, B, C$ be matrices, of appropriate dimensions, and let $\alpha$ be a scalar. Then
+\begin{enumerate}[(a)]
+    \item $A(BC) = (AB)C$
+    \item $A(B + C) = AB + AC$
+    \item $(B + C)A = BA + CA$
+    \item $\alpha(AB) = (\alpha A)B = A(\alpha B)$
+    \item If $A$ is $m\times n$, then $I_mA=A=AI_n$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Let $A$ and $B$ be matrices of appropriate dimensions and let $\alpha$ be a scalar. Then
+    \begin{enumerate}[(a)]
+        \item $(A^T)^T = A$
+        \item $(A + B)^T = A^T + B^T$
+        \item $(\alpha A)^T = \alpha A^T$
+        \item $(AB)^T = B^T A^T$
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem} Let $A$ and $B$ be invertible $n \times n$ matrices. Then:
+\begin{enumerate}[(a)]
+    \item $A^{-1}$ is invertible, with
+    \[
+    \left(A^{-1}\right)^{-1}=A
+    \]
+    \item The product $A B$ is invertible, with
+    \[
+    (A B)^{-1}=B^{-1} A^{-1}
+    \]
+    \item The transpose of $A$ is also invertible, i.e. $A^T$ is invertible, with
+    \[
+    \left(A^T\right)^{-1}=\left(A^{-1}\right)^T
+    \]
+\end{enumerate}
+
+\end{theorem}
+
+\begin{theorem}
+    Let $A=\left[\begin{array}{ll}
+    a & b \\
+    c & d
+    \end{array}\right]$. If $ad-bc \neq 0$, then the inverse of $A$ is given by
+
+    \[
+    A^{-1}=\frac{1}{ad-bc}\left[\begin{array}{cc}
+    d & -b \\
+    -c & a
+    \end{array}\right]
+    \]
+\end{theorem}
+
+\begin{theorem}
+    An $n \times n$ matrix $A$ is invertible if and only if $A$ is row equivalent to $I_n$. In this case, any sequence of elementary row operations that reduces $A$ to $I_n$ also transforms $I_n$ into $A^{-1}$.
+\end{theorem}
+
+\begin{custombox}{Algorithm for Finding the Inverse of an $n \times n$ Matrix}
+    Let $A$ be an $n \times n$ matrix. To find the inverse of $A$, follow these steps:
+    \begin{enumerate}
+        \item Form the augmented matrix $[A | I_n]$.
+        \item Perform row operations on $[A | I_n]$ to reduce $A$ to $I_n$.
+        \item The matrix on the right side of the augmented matrix is $A^{-1}$.
+    \end{enumerate}
+
+    If $A$ is not invertible, then the algorithm will not be able to reduce $A$ to $I_n$.
+\end{custombox}
+
+\begin{theorem}
+    Let \( A \) be an invertible matrix. Then the equation \( A \vect{x} = \vect{b} \) has a unique solution given by \( \vect{x} = A^{-1} \vect{b} \).
+\end{theorem}
+
+\begin{theorem}
+    Let \( A \) be an \( n \times n \) matrix. The following statements are equivalent:
+    \begin{enumerate}[(a)]
+        \item $A$ is invertible.
+        \item $A$ is row equivalent to $I_n$.
+        \item $A$ has $n$ pivot positions (i.e. one for each row and column).
+        \item The equation $A \vect{x}=\overline{0}$ has only the trivial solution.
+        \item The columns of $A$ are linearly independent.
+        \item The equation \( A \vect{x} = \vect{b} \) has a unique solution for each \( \vect{b} \in \mathbb{R}^n \).
+        \item The columns of $A \operatorname{span} \mathbb{R}^n$.
+        \item \( \text{det}(A) \neq 0 \).
+        \item There is an $n \times n$ matrix $C$ such that $C A=I$.
+        \item There is an $n \times n$ matrix $D$ such that $A D=I$.
+        \item $A^T$ is invertible.
+    \end{enumerate}
+\end{theorem}
+
+% ---------- 10-11 Calculus ----------
+
+% 10
+
+\begin{definition}[Limit]
+Let \( f(x) \) be a function defined near a point \( c \). We say that the \textbf{limit} of \( f(x) \) as \( x \) approaches \( c \) is \( L \), written as
+\vspace{0.5em}
+\[
+\lim_{x \to c} f(x) = L
+\]
+\vspace{0.5em}
+if we can make the value of \( f(x) \) arbitrarily close to \( L \) by choosing an \( x \) that is sufficiently close to \( c \), but not equal to \( c \).
+\end{definition}
+
+\begin{definition}[Continuity]
+A function \( f \) is \textbf{continuous} at a point \( c \) if the following three conditions are met:
+\begin{enumerate}
+    \item \( f(c) \) is defined.
+    \item \( \lim_{x \to c} f(x) \) exists.
+    \item \( \lim_{x \to c} f(x) = f(c) \).
+\end{enumerate}
+A function is continuous on an interval if it is continuous at every point in that interval.
+\end{definition}
+
+\begin{definition}[The Derivative]
+The \textbf{derivative} of a function \( f \) with respect to \( x \), denoted \( f'(x) \), is the function
+\[
+f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+\]
+provided the limit exists. If \( f'(x) \) exists, we say that \( f \) is \textbf{differentiable} at \( x \).
+\end{definition}
+
+\begin{definition}
+     For a function $y=f(x)$ the points on the graph where the graph has zero slope are called stationary points. In other words stationary points are where $f^{\prime}(x)=0$.
+    \end{definition}
+
+\begin{definition}[The Second Derivative]
+The \textbf{second derivative} of a function \( f \), denoted \( f''(x) \), is the function
+\[
+f''(x) = \frac{d}{dx} \left( f'(x) \right)
+\]
+provided the limit exists.
+\end{definition}
+
+\begin{theorem}{Constant and Power Rules}
+    \begin{enumerate}
+        \item \textbf{Constant Rule:} If $c$ is constant, then $\dfrac{d}{dx}(c) = 0$, \vspace{0.5em}
+        \item \textbf{Power Rule:} For any real $n$, $\dfrac{d}{dx}x^n = n x^{n - 1}$. \vspace{0.5em}
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}{Scalar and Linearity Rules}
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \vspace{0.5em}
+        \item \textbf{Scalar Rule:} \( \frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x) \). \vspace{0.5em}
+        \item \textbf{Linearity Rule:} \( \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) \). \vspace{0.5em}
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}{Product and Quotient Rules}
+    \begin{enumerate}
+        \setcounter{enumi}{4}
+        \vspace{0.5em}
+        \item \textbf{Product Rule:} If \(f(x)\) and \(g(x)\) are differentiable, then \vspace{0.5em}
+        \[
+        \frac{d}{dx}\big(f(x)g(x)\big)=f'(x)g(x)+f(x)g'(x). \vspace{0.5em}
+        \] \vspace{0.5em}
+        \item \textbf{Quotient Rule:} If \(f(x)\) and \(g(x)\) are differentiable and \(g(x)\neq0\), then
+        \vspace{0.5em}
+        \[
+        \frac{d}{dx}\left(\frac{f(x)}{g(x)}\right)=\frac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2}. \vspace{0.5em}
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}{Chain Rule}
+    \vspace{0.5em}
+    \setcounter{enumi}{6}
+    \begin{enumerate}
+        \item If \( h(x) = f(g(x)) \) is a composite function, then its derivative is the derivative of the outer function (evaluated at the inner function) multiplied by the derivative of the inner function. \vspace{0.5em}
+        \[
+        h'(x) = f'(g(x)) \cdot g'(x). \vspace{0.5em}
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}{Rules of Differentiation}
+
+    \begin{enumerate}
+        \item \textbf{Constant Rule:} If $c$ is constant, then $\dfrac{d}{dx}c=0$. \vspace{0.5em}
+        \item \textbf{Power Rule:} For any real $n$, at points where the real-valued power function is defined and differentiable, $\dfrac{d}{dx}x^n = n x^{n-1}$. \vspace{0.5em}
+        \[
+        \frac{d}{dx}x^n = n x^{n-1}.
+        \]
+        \item \textbf{Scalar Rule:} If $c$ is constant, then $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$. \vspace{0.5em}
+        \item \textbf{Linearity:} For differentiable $f,g$ and constants $a,b$, $\dfrac{d}{dx}(a f + b g) = a f' + b g'$. \vspace{0.5em}
+        \item \textbf{Product Rule:} If $f,g$ are differentiable, then $\dfrac{d}{dx}(f g) = f'g + fg'$. \vspace{0.5em}
+        \item \textbf{Quotient Rule:} If $f,g$ are differentiable and $g(x)\neq0$, then $\dfrac{d}{dx}\left(\frac{f}{g}\right) = \frac{f'g - fg'}{g^2}$. \vspace{0.5em}
+        \item \textbf{Chain Rule:} If $f,g$ are differentiable, then $\dfrac{d}{dx}(f(g(x))) = f'(g(x))g'(x)$. \vspace{0.5em}
+    \end{enumerate}
+
+\end{theorem}
+
+\begin{theorem}[The First Derivative Test]
+    Let \(c\) be a critical point of a continuous function \(f\).
+    \begin{itemize}
+        \item If \(f'(x)\) changes from negative to positive at \(c\), then \(f\) has a \textbf{local minimum} at \(c\).
+        \item If \(f'(x)\) changes from positive to negative at \(c\), then \(f\) has a \textbf{local maximum} at \(c\).
+        \item If \(f'(x)\) does not change sign at \(c\), then \(f\) has no local extremum at \(c\). This alone does not imply that $c$ is an inflection point.
+    \end{itemize}
+
+\end{theorem}
+
+\begin{theorem}[The Second Derivative Test]
+    Let \(c\) be a stationary point of \(f\) (i.e., \(f'(c) = 0\)).
+    \begin{itemize}
+        \item If \(f''(c) > 0\), then \(f\) has a \textbf{local minimum} at \(c\).
+        \item If \(f''(c) < 0\), then \(f\) has a \textbf{local maximum} at \(c\).
+        \item If \(f''(c) = 0\), the test is inconclusive.
+    \end{itemize}
+\end{theorem}
+
+% 11
+
+\begin{definition}[Function of Two Variables]
+A \emph{function of two variables} is a rule that assigns to each ordered pair \((x, y)\) in a set \(D \subseteq \mathbb{R}^2\) a unique real number \(z\), which we write as \(z = f(x, y)\). The set \(D\) is called the \emph{domain} of \(f\).
+
+The \emph{range} of \(f\) is the set of all real numbers \(z\) for which there exists at least one \((x, y) \in D\) such that \(f(x, y) = z\) which is illustrated in \autoref{fig:ch11-domain-range}.
+\end{definition}
+
+\begin{definition}[Level Curve and Contour Map]
+A \textbf{level curve} of a function \(f(x, y)\) is the set of all points \((x, y)\) in the input plane where the function has a constant value, i.e., \(f(x, y) = c\) for some constant \(c\).
+
+A collection of level curves for different values of \(c\) forms a \textbf{contour map}.
+\end{definition}
+
+\begin{definition}[Partial Derivatives]
+The \textbf{partial derivative} of \( f(x, y) \) with respect to \( x \), denoted \( \frac{\partial f}{\partial x} \) or \( f_x \), is
+$$
+\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}
+$$
+The \textbf{partial derivative} with respect to \( y \), denoted \( \frac{\partial f}{\partial y} \) or \( f_y \), is
+$$
+\frac{\partial f}{\partial y} = \lim_{h \to 0} \frac{f(x, y+h) - f(x, y)}{h}
+$$
+\end{definition}
+
+\begin{definition}[The Gradient]
+The \textbf{gradient} of a function \( f(x, y) \), denoted \( \nabla f \), is the vector function defined by:
+
+$$
+\nabla f(x, y) = \left\langle \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right\rangle = \frac{\partial f}{\partial x} \mathbf{i} + \frac{\partial f}{\partial y} \mathbf{j}
+$$
+
+\end{definition}
+
+% ---------- 12+ Number Theory and other universal concepts ----------
+
+\begin{custombox}{{Commutative, Associative, and Distributive Laws}}
+
+
+    \begin{itemize}
+    \item Commutativity: $a+b=b+a$
+    \item Associativity: $(a+b)+c=a+(b+c)$
+    \item Distributive property: $a \times(b+c)=a \times b+a \times c$
+    \end{itemize}
+    
+\end{custombox}
+
+\begin{custombox}{Closure Property}
+    \textbf{Addition:} The set of integers is closed under the operation of addition. This means that if you take any two integers and add them together, the sum will always be an integer. For example, if \(a\) and \(b\) are integers, then \(a + b\) is also an integer. This closure property ensures that the set of integers is stable and complete under addition, meaning that no matter how many times you add integers together, the result will remain within the set of integers.
+
+\textbf{Multiplication:} The set of integers is also closed under multiplication. If you multiply any two integers, the product will always be an integer. For instance, if \(a\) and \(b\) are integers, then \(a \times b\) is also an integer. This property guarantees that the operation of multiplication, like addition, does not produce results outside the set of integers, thereby preserving the integrity of the set under multiplication.
+
+\end{custombox}
+
+\begin{custombox}{Similarities and Differences of Rational and Irrational Numbers}
+    \begin{itemize}
+    \item \textbf{Representation:} Rational numbers can be represented as fractions, while irrational numbers cannot. This distinction makes irrational numbers more complex to handle, especially in arithmetic operations.
+
+    \item \textbf{Decimal Expansion:} The decimal expansion of rational numbers is either finite or periodic, while that of irrational numbers is infinite and non-repeating.
+
+    \item \textbf{Closure Properties:} Rational numbers are closed under addition, subtraction, multiplication, and division (except by zero). Irrational numbers are not closed under these operations; for example, the sum or product of two irrational numbers can sometimes be rational.
+
+    \item \textbf{Density:} Rational numbers are dense on the real number line, meaning that between any two rational numbers, there exists another rational number. Irrational numbers are also densely distributed but in a complementary manner, filling in the "gaps" left by the rationals, ensuring that the real number line is continuous without any breaks.
+\end{itemize}
+\end{custombox}
+
+\begin{theorem}{The Fundamental Theorem of Arithmetic}
+Every integer greater than 1 can be represented uniquely as a product of prime numbers, up to the order of the factors.
+\end{theorem}
+
+% 13
+
+\begin{custombox}{Primary Boolean Operations}
+    
+
+\begin{itemize}
+    \item \textbf{Complementation} (denoted as \texttt{NOT}, e.g. $\overline{0}$)
+    \item \textbf{Boolean Sum} (denoted as \texttt{OR}, e.g. $1 + 0$)
+    \item \textbf{Boolean Product} (denoted as \texttt{AND}, e.g. $1 \cdot 0$)
+\end{itemize}
+\end{custombox}
+
+\begin{custombox}{Fundamental Boolean Properties}
+\begin{itemize}
+    \item \textbf{Double Complement:} \\
+    \hspace*{15pt} $\overline{\overline{x}} = x$\hspace{15pt}
+    
+    \item \textbf{Idempotent Laws:} \\
+    \hspace*{15pt}$x + x = x$, \quad $x \cdot x = x$
+    
+    \item \textbf{Identity Laws:} \\
+    \hspace*{15pt}$x + 0 = x$, \quad $x \cdot 1 = x$
+    
+    \item \textbf{Domination Laws:} \\
+    \hspace*{15pt}$x + 1 = 1$, \quad $x \cdot 0 = 0$
+    
+    \item \textbf{Unit Property:} \\
+    \hspace*{15pt}$\overline{x} + x = 1$
+    
+    \item \textbf{Zero Property:} \\
+    \hspace*{15pt} $\overline{x} \cdot x = 0$
+\end{itemize}
+\end{custombox}
+
+\begin{custombox}{Structural Boolean Laws}
+\begin{itemize}
+    \item \textbf{Commutative Laws:} \\
+    \hspace*{15pt}$x + y = y + x$, \quad $x \cdot y = y \cdot x$
+    
+    \item \textbf{Absorption Laws:} \\
+    \hspace*{15pt}$x + (x \cdot y) = x$, \quad $x \cdot (x + y) = x$, \quad $\bar{x} \cdot \bar{y}+x=\bar{y}+x$
+    
+    \item \textbf{De Morgan’s Laws:} \\
+    \hspace*{15pt} $\overline{x \cdot y} = \overline{x} + \overline{y}$, \quad $\overline{x + y} = \overline{x} \cdot \overline{y}$
+    \item \textbf{Associative Laws:} \\
+    \hspace*{15pt} $x + (y + z) = (x + y) + z$, \quad $x \cdot (y \cdot z) = (x \cdot y) \cdot z$
+    
+    \item \textbf{Distributive Law:} \\
+    \hspace*{15pt} $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$, \quad $x + (y \cdot z) = (x + y) \cdot (x + z)$
+\end{itemize}
+\end{custombox}
+
+\begin{custombox}{Advanced Boolean Identities}
+\begin{itemize}
+    \item \textbf{Exclusive \texttt{OR} (\texttt{XOR}):} \\
+    \hspace*{15pt} $x \oplus y = (x \cdot \overline{y}) + (\overline{x} \cdot y)$
+    
+    \item \textbf{Exclusive \texttt{NOR} (\texttt{XNOR}):} \\
+    \hspace*{15pt} $\overline{x \oplus y} = (x \cdot y) + (\overline{x} \cdot \overline{y})$
+    
+    \item \textbf{Disappearing Opposite:} \\
+    \hspace*{15pt} $x + \overline{x} \cdot y = x + y$
+    
+    \item \textbf{FOIL Law (First, Outer, Inner, Last):} \\
+    \hspace*{15pt} $(x + y) \cdot (z + w) = (x \cdot z) + (x \cdot w) + (y \cdot z) + (y \cdot w)$
+\end{itemize}
+\end{custombox}
+
+% 14
+
+In the following definitions, $f$ and $g$ are nonnegative functions and $g(n)>0$ for all sufficiently large $n$.
+
+\begin{definition}{Theta(\(\Theta\))}
+    $f(n)$ is $\Theta(g(n))$ if there exist positive constants $c_1, c_2$, and $k$ such that for all $n \geq k$,
+    \medskip
+    \[
+    c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n)
+    \]
+    \medskip
+This means that $f(n)$ is asymptotically bounded both above and below by $g(n)$, meaning that $f(n)$ grows at the same rate as $g(n)$ as $n$ becomes sufficiently large.
+\end{definition}
+
+\begin{proposition} 
+    Let $f(n)$ and $g(n)$ be two nonnegative functions with $g(n)>0$ eventually, and suppose there is a constant $c>0$ for which
+    \medskip
+    \[
+    \lim _{n \rightarrow \infty} \frac{f(n)}{g(n)}=c
+    \]
+    \medskip
+    Then $f(n)=\Theta(g(n))$. Also, if
+    \medskip
+    \[
+    \lim _{n \rightarrow \infty} \frac{f(n)}{g(n)}
+    \]
+    \medskip
+    exists but does \textbf{not} equal a positive constant, then $f(n) \neq \Theta(g(n))$.
+\end{proposition}
+
+\begin{definition}{Big-$\mathcal{O}$}
+    $f(n)$ is $\mathcal{O}(g(n))$ if there exist positive constants $c$ and $k$ such that for all $n \geq k$,
+    \medskip
+    \[
+    f(n) \leq c \cdot g(n)
+    \]
+    \medskip
+    This means that $f(n)$ is asymptotically bounded above by $g(n)$, meaning that $f(n)$ grows at most as fast as $g(n)$ as $n$ becomes sufficiently large.
+\end{definition}
+
+\begin{definition}{Omega Notation}
+    $f(n)$ is $\Omega(g(n))$ if there exist positive constants $c$ and $k$ such that for all $n \geq k$,
+    \medskip
+    \[
+    f(n) \geq c \cdot g(n)
+    \]
+    \medskip
+    This means that $f(n)$ is asymptotically bounded below by $g(n)$, meaning that $f(n)$ grows at least as fast as $g(n)$ as $n$ becomes sufficiently large.
+\end{definition}
+
+\begin{definition}{Little-$o$}
+    $f(n)$ is $o(g(n))$ if for any positive constant $\epsilon > 0$, there exists a constant $k \geq 0$ such that for all $n \geq k$,
+    \medskip
+    \[
+    f(n) < \epsilon \cdot g(n)
+    \]
+    \medskip
+    This means that $f(n)$ grows strictly slower than $g(n)$ as $n$ becomes sufficiently large.
+    
+\end{definition}
+
+\begin{proposition}
+    Let \( f(n) \) and \( g(n) \) be two nonnegative functions with $g(n)>0$ eventually, and suppose
+    \medskip
+    \[
+    \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} = 0
+    \]
+    \medskip
+    Then \( f(n) = o(g(n)) \), meaning \( f(n) \) grows strictly slower than \( g(n) \) as \( n \to \infty \).
+\end{proposition}
+
+\begin{definition}{Little-$\omega$}
+    $f(n)$ is $\omega(g(n))$ if for any positive constant $\epsilon > 0$, there exists a constant $k \geq 0$ such that for all $n \geq k$,
+    \medskip
+    \[
+    f(n) > \epsilon \cdot g(n)
+    \]
+    \medskip
+    This means that $f(n)$ grows strictly faster than $g(n)$ as $n$ becomes sufficiently large.
+\end{definition}
+
+\begin{proposition}
+    Let \( f(n) \) and \( g(n) \) be two nonnegative functions with $g(n)>0$ eventually, and suppose
+    \medskip
+    \[
+    \lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} = \infty
+    \]
+    \medskip
+    Then \( f(n) = \omega(g(n)) \), meaning \( f(n) \) grows strictly faster than \( g(n) \) as \( n \to \infty \).
+\end{proposition}
+
+        \begin{proposition}
+            Let \( f(n) \) and \( g(n) \) be two nonnegative functions with $g(n)>0$ eventually. If
+            \medskip
+            \[
+            \limsup_{n \rightarrow \infty} \frac{f(n)}{g(n)} < \infty
+            \]
+            \medskip
+            then \( f(n) = \mathcal{O}(g(n)) \), meaning \( f(n) \) grows at most as fast as \( g(n) \) asymptotically.
+        \end{proposition}
+
+        \begin{proposition}
+            Let \( f(n) \) and \( g(n) \) be two nonnegative functions with $g(n)>0$ eventually. If
+            \medskip
+            \[
+            \liminf_{n \rightarrow \infty} \frac{f(n)}{g(n)} > 0
+            \]
+            \medskip
+            then \( f(n) = \Omega(g(n)) \), meaning \( f(n) \) grows at least as fast as \( g(n) \) asymptotically.
+        \end{proposition}
+
+        \begin{custombox}{Informal Limit Approach}
+            \[
+                \begin{array}{ll}
+                \displaystyle \lim_{n \to \infty} \frac{f(n)}{g(n)} = L<\infty & \Rightarrow f(n) = \mathcal{O}(g(n)) \\[10pt]
+                \displaystyle \lim_{n \to \infty} \frac{f(n)}{g(n)} = L>0 & \Rightarrow f(n) = \Omega(g(n))
+                \end{array}
+                \]
+                \medskip
+                \textbf{Note:} This approach is an informal guideline and not a strict mathematical definition. There are cases where this limit-based method may not apply, but it often provides a convenient tool for determining asymptotic behavior.
+        \end{custombox}

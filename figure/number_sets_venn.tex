@@ -1,0 +1,29 @@
+% Shared diagram of the principal number sets.
+% The part of R outside Q is exactly R \setminus Q; it is not a separate oval.
+\begin{tikzpicture}[scale=0.7]
+    % Complex numbers (outer set)
+    \draw[thick, fill=mseComplex!35] (-12,-6) rectangle (10,5);
+    \node at (8,4) {\Huge $\mathbb{C}$};
+
+    % Real numbers. The area not covered by Q is the irrational numbers.
+    \draw[thick, fill=mseReals] (-4,0) ellipse (7.8cm and 4.5cm);
+    \node at (-3,3.8) {\Large $\mathbb{R}$};
+
+    % Rational numbers and their nested subsets
+    \draw[thick, fill=mseRationals] (-7,0) ellipse (4.5cm and 3cm);
+    \node at (-11,0) {\Large $\mathbb{Q}$};
+
+    \draw[thick, fill=mseIntegers] (-7,0) ellipse (3cm and 2cm);
+    \node at (-9.5,0) {\Large $\mathbb{Z}$};
+
+    \draw[thick, fill=mseNaturals] (-7,0) ellipse (2cm and 1.2cm);
+    \node at (-7,0) {\Large $\mathbb{N}$};
+
+    % These labels identify the two complementary regions.
+    \node[align=center] at (0.7,0)
+        {\Large $\mathbb{R}\setminus\mathbb{Q}$\\[-1pt]
+         \small Irrational numbers};
+    \node[align=center] at (7,0)
+        {\Large $\mathbb{C}\setminus\mathbb{R}$\\[-1pt]
+         \small Non-real complex numbers};
+\end{tikzpicture}

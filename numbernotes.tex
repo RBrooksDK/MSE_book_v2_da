@@ -1,0 +1,199 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\title{Chapter 2: Number Systems}
+\author{Your Name}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Number systems are fundamental to both mathematics and computer science, providing the basis for all arithmetic operations, algorithms, and more advanced mathematical concepts. This chapter explores various number systems, including integers, prime numbers, modular arithmetic, and different numeral systems such as binary, octal, and hexadecimal. By understanding these concepts, you will gain insight into the structure and behavior of numbers across different bases and how they apply to mathematical and computational problems.
+
+\section{Integers}
+\subsection{Definition of Integers}
+The set of integers, denoted by \( \mathbb{Z} \), includes all whole numbers and their negatives. Formally:
+\[
+\mathbb{Z} = \{ \ldots, -3, -2, -1, 0, 1, 2, 3, \ldots \}
+\]
+Integers are closed under the operations of addition, subtraction, and multiplication, meaning that the sum, difference, or product of any two integers is also an integer.
+
+\subsection{Properties of Integers}
+\textbf{Additive Identity:} The integer 0 is known as the additive identity because adding 0 to any integer \( a \) leaves it unchanged:
+\[
+0 + a = a + 0 = a
+\]
+
+\textbf{Multiplicative Identity:} The integer 1 is known as the multiplicative identity because multiplying 1 by any integer \( a \) leaves it unchanged:
+\[
+1 \times a = a \times 1 = a
+\]
+
+\textbf{Additive Inverse:} For every integer \( a \), there exists an integer \( -a \) such that:
+\[
+a + (-a) = 0
+\]
+This integer \( -a \) is called the additive inverse of \( a \).
+
+\subsection{Closure Properties}
+The set of integers has important closure properties:
+\begin{itemize}
+    \item \textbf{Closure under Addition:} For any integers \( a \) and \( b \), \( a + b \) is also an integer.
+    \item \textbf{Closure under Multiplication:} For any integers \( a \) and \( b \), \( a \times b \) is also an integer.
+\end{itemize}
+
+\subsection{Examples}
+\textbf{Example 1: Additive Inverse}
+\[
+5 + (-5) = 0
+\]
+
+\textbf{Example 2: Closure under Addition}
+\[
+7 + (-3) = 4 \quad \text{(which is an integer)}
+\]
+
+\textbf{Example 3: Closure under Multiplication}
+\[
+(-6) \times 4 = -24 \quad \text{(which is an integer)}
+\]
+
+\section{Prime Numbers and Factorization}
+\subsection{Prime Numbers}
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. This means that a prime number cannot be formed by multiplying two smaller natural numbers.
+
+\subsection{Fundamental Theorem of Arithmetic}
+The Fundamental Theorem of Arithmetic states that every integer greater than 1 is either a prime number or can be factored uniquely into prime numbers. This is a key concept in number theory.
+
+\textbf{Example: Prime Factorization}
+Consider the integer 140. It can be factored as follows:
+\[
+140 = 2 \times 2 \times 5 \times 7 = 2^2 \times 5 \times 7
+\]
+This is the unique prime factorization of 140.
+
+\subsection{Highest Common Factor (HCF)}
+The highest common factor (HCF) of two integers is the largest integer that divides both of them without leaving a remainder.
+
+\textbf{Example: Finding the HCF}
+Find the HCF of 850 and 680:
+\[
+850 = 2 \times 5^2 \times 17, \quad 680 = 2^3 \times 5 \times 17
+\]
+The HCF is:
+\[
+\text{HCF}(850, 680) = 2 \times 5 \times 17 = 170
+\]
+
+\subsection{Exercises}
+\begin{enumerate}
+    \item Factorize 180 into its prime factors.
+    \item Find the HCF of 126 and 84.
+    \item Determine whether 97 is a prime number.
+\end{enumerate}
+
+\section{Modular Arithmetic}
+\subsection{Introduction to Modular Arithmetic}
+Modular arithmetic is a system of arithmetic for integers, where numbers "wrap around" upon reaching a certain value, known as the modulus. It is also referred to as "clock arithmetic" because of its similarities to the way hours reset after 12 on a clock.
+
+\subsection{Definition}
+For integers \( a \) and \( b \), and a positive integer \( m \) (called the modulus), we say that \( a \) is congruent to \( b \) modulo \( m \) if \( a \) and \( b \) have the same remainder when divided by \( m \). This is written as:
+\[
+a \equiv b \pmod{m}
+\]
+
+\textbf{Example: Modular Arithmetic}
+Consider the equation \( 17 \equiv 5 \pmod{12} \). This means that when 17 is divided by 12, the remainder is 5:
+\[
+17 \div 12 = 1 \quad \text{remainder } 5
+\]
+
+\subsection{Properties of Modular Arithmetic}
+\begin{itemize}
+    \item \textbf{Addition:} \( (a + b) \mod m = [(a \mod m) + (b \mod m)] \mod m \)
+    \item \textbf{Multiplication:} \( (a \times b) \mod m = [(a \mod m) \times (b \mod m)] \mod m \)
+    \item \textbf{Subtraction:} \( (a - b) \mod m = [(a \mod m) - (b \mod m)] \mod m \)
+\end{itemize}
+
+\subsection{Exercises}
+\begin{enumerate}
+    \item Calculate \( 45 \mod 7 \).
+    \item Determine whether \( 23 \equiv 8 \pmod{5} \).
+    \item Compute \( (14 + 29) \mod 6 \).
+\end{enumerate}
+
+\section{Number Systems}
+\subsection{Decimal System (Base-10)}
+The decimal system, or base-10 system, is the standard system for denoting integer and non-integer numbers. Each digit's position represents a power of 10. For example:
+\[
+3459 = 3 \times 10^3 + 4 \times 10^2 + 5 \times 10^1 + 9 \times 10^0
+\]
+
+\subsection{Binary System (Base-2)}
+The binary system uses only two digits, 0 and 1. Each position represents a power of 2. For example:
+\[
+13_{10} = 1101_2 = 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0
+\]
+
+\textbf{Example: Binary Addition}
+Adding two binary numbers:
+\[
+1011_2 + 1101_2 = 11000_2
+\]
+
+\subsection{Octal System (Base-8)}
+The octal system uses eight digits, from 0 to 7. Each position represents a power of 8. For example:
+\[
+3021_8 = 3 \times 8^3 + 0 \times 8^2 + 2 \times 8^1 + 1 \times 8^0 = 1553_{10}
+\]
+
+\subsection{Hexadecimal System (Base-16)}
+The hexadecimal system uses sixteen digits, from 0 to 9 and A to F, where A = 10, B = 11, ..., F = 15. Each position represents a power of 16. For example:
+\[
+A2E_{16} = 10 \times 16^2 + 2 \times 16^1 + 14 \times 16^0 = 2606_{10}
+\]
+
+\subsection{Conversions}
+\textbf{Decimal to Binary Conversion:}
+To convert a decimal number to binary, repeatedly divide the number by 2, noting the quotient and remainder, until the quotient is 0. The binary number is the sequence of remainders read from bottom to top.
+
+\textbf{Example: Convert 13 to Binary}
+\[
+\begin{aligned}
+13 \div 2 &= 6 \quad \text{remainder } 1 \\
+6 \div 2 &= 3 \quad \text{remainder } 0 \\
+3 \div 2 &= 1 \quad \text{remainder } 1 \\
+1 \div 2 &= 0 \quad \text{remainder } 1 \\
+\end{aligned}
+\]
+Thus, \(13_{10} = 1101_2\).
+
+\textbf{Binary to Hexadecimal Conversion:}
+To convert a binary number to hexadecimal, group the binary digits into sets of four (starting from the right), then convert each group to its hexadecimal equivalent.
+
+\textbf{Example: Convert \(11010110_2\) to Hexadecimal}
+\[
+\begin{aligned}
+1101 & = D \\
+0110 & = 6 \\
+\end{aligned}
+\]
+Thus, \(11010110_2 = D6_{16}\).
+
+\subsection{Exercises}
+\begin{enumerate}
+    \item Convert \(56_{10}\) to binary.
+    \item Convert \(110011_2\) to decimal.
+    \item Convert \(3A7_{16}\) to binary.
+    \item Convert \(145_{8}\) to decimal.
+\end{enumerate}
+
+\section{Conclusion}
+Understanding number systems and their properties is essential for both theoretical and practical applications in mathematics and computer science. These systems form the foundation for more complex topics such as algorithms, cryptography, and digital systems. Mastery of these concepts will provide a strong basis for further study in these fields.
+
+\end{document}

@@ -1,0 +1,684 @@
+\chapter{Combinatorics and Probability Theory}
+\label{chap:ch4}
+Imagine you are tasked with forming teams of 3 for a semester project in a class of 45 students. Initially, the order in which you choose the team members does not matter, so you are just concerned with combinations. The number of ways to form a team of 3 from 45 students comes out to 14,190 possibilities!
+
+The following semester introduces the students to Scrum project management, where each team must have three specific roles: Scrum Master, Product Owner, and Development Team. This small change, specifying roles, suddenly transforms the problem from a simple \textit{combination} into a \textit{permutation}. Now, the number of possible ways to assign these roles leaps to 85,140!
+
+Frustrated by the sheer number of options, the 45 students throw a party to relax. Being well-mannered, they decide that everyone should shake hands with every other person exactly once. After a few minutes, they calculate the total number of handshakes — 990. The students are once again surprised by how something as simple as shaking hands can add up so quickly.
+
+As the night progresses, one student proposes a fun game — a random drawing for five door prizes, each unique. With 45 students in attendance and only five prizes available, the chance of winning nothing becomes a concerning 89 per cent. The students quickly realize that the odds are not in their favor.
+
+Not ready to give up on their luck, a smaller group decides to flip a coin 10 times, with the hope of landing exactly five heads to win the game. However, when they learn that the probability of this happening is only about 25 per cent, their spirits dampen further.
+
+The students conclude that rather than relying on chance, it is time to dive deeper into understanding combinatorics and probability theory. Armed with this knowledge, they can better predict outcomes and avoid future disappointments at both parties and project planning.
+
+\section{Sample Space and Events}
+\label{sec:sample_space}
+A \textbf{random experiment }is one that can lead to different outcomes, even when repeated under the same conditions. This randomness is a fundamental aspect of many engineering tasks.
+
+Think of it this way: Let us say you are testing the speed of a website under different conditions. Sometimes it loads quickly, and other times it is slower. Even if you are using the same code and server, things like network traffic or server load make the results vary each time. 
+
+\begin{definition}{Random Experiment}
+    A random experiment is one that can give different results, even if you do everything the same each time.
+\end{definition}
+
+Or, imagine you are measuring the signal strength in a wireless device. You might get slightly different readings each time because of things like interference or small changes in the environment.
+
+This randomness shows up all over the place, from software performance tests to electrical engineering experiments. It is important to expect it and include it in your thinking. Otherwise, you might make decisions based on incomplete or misleading data. When you account for random variation, you can make smarter predictions and designs.
+
+To model and analyze a random experiment, it is crucial to understand the set of possible outcomes that can occur. In probability theory, this set is called the \textbf{sample space}, denoted by \( S \). A sample space can be either \textbf{discrete} (consisting of a finite or countably infinite set of outcomes) or \textbf{continuous} (containing an interval of real numbers). The exact definition of a sample space often depends on the objectives of the analysis.
+
+An \textbf{outcome} is a single possible result of the random experiment, and an \textbf{event} is any subset of the sample space, which may consist of one or more outcomes. Below are some examples to illustrate these concepts:
+
+\begin{example}[ Network Latency] \\
+Consider an experiment where you measure the latency of data packets in a network. The sample space can be defined based on the type of measurements:
+\begin{itemize}
+    \item If latency is measured as a positive real number, the sample space is continuous: 
+    \[
+    S = \{ x \mid x > 0 \}.
+    \]
+    \item If it is known that latency ranges between 10 and 100 milliseconds, the sample space can be refined to:
+    \[
+    S = \{ x \mid 10 \leq x \leq 100 \}.
+    \]
+    \item If the objective is to categorize latency as low, medium, or high, the sample space becomes discrete:
+    \[
+    S = \{\text{low}, \text{medium}, \text{high}\}.
+    \]
+    \item For a simple evaluation of whether the latency meets a standard threshold, the sample space can be reduced to:
+    \[
+    S = \{\text{pass}, \text{fail}\}.
+    \]
+\end{itemize}
+Each outcome in these sample spaces represents a single possible latency measurement, and events can be defined as sets of outcomes, such as "latency is high."
+
+\end{example}
+
+Understanding the nature of sample spaces, outcomes, and events is fundamental in probability, as it allows us to define and work with probabilities of complex scenarios in various engineering contexts. Let us summarise these key concepts:
+
+\begin{definition}{Sample Spaces, Outcomes, and Events}
+    \textbf{Sample Space:} The set of all possible outcomes of a random experiment is called the sample space, denoted by \( S \). Outcomes can be discrete or continuous, depending on the nature of the experiment.
+    
+    \textbf{Outcome:} A single possible result of a random experiment.
+    
+    \textbf{Event:} Any subset of the sample space, which may consist of one or more outcomes.
+\end{definition}
+
+\begin{example} Software Release Testing \\
+    Imagine a software testing process where each test case can either pass or fail. The sample space for a single test case is discrete and can be represented as:
+    \[
+    S = \{\text{pass}, \text{fail}\}.
+    \]
+    If you run three test cases, the combined sample space for all possible outcomes is:
+    \begin{align*}
+    S = \{&(\text{pass, pass, pass}), (\text{pass, pass, fail}), (\text{pass, fail, pass}), \\
+    &(\text{pass, fail, fail}), (\text{fail, pass, pass}), (\text{fail, pass, fail}), \\
+    &(\text{fail, fail, pass}), (\text{fail, fail, fail})\}.
+    \end{align*}
+    This sample space includes all sequences of outcomes for the three tests.
+    
+    \begin{itemize}
+        \item The total number of possible outcomes is \( 2^3 = 8 \).
+        \item An event could be defined as "at least one test fails," which would include outcomes like \(\text{(fail, pass, pass)}\), \(\text{(pass, fail, fail)}\), and others where at least one test fails.
+    \end{itemize}
+    
+    \end{example}
+    
+
+\begin{example} Component Quality in Manufacturing \\
+A company manufactures electronic components, and each component is tested for compliance with quality standards. The test can return one of three outcomes: \texttt{pass}, \texttt{marginal}, or \texttt{fail}. The sample space is:
+\[
+S = \{\text{pass}, \text{marginal}, \text{fail}\}.
+\]
+\textbf{Event:} Suppose we are interested in the event that a component does not pass the quality test. This event is a set of outcomes:
+\[
+E = \{\text{marginal}, \text{fail}\}.
+\]
+\end{example}
+
+This means that all the operations we have defined on sets translate directly into operations on events:
+\begin{itemize}
+    \item $A \cup B$: the event that at least one of $A$ or $B$ occurs.
+    \item $A \cap B$: the event that both $A$ and $B$ occur together.
+    \item $\skoverline{A}$ or $A^c$: the event that $A$ does not occur.
+    \item $A \setminus B$ or $A - B$: the event that $A$ occurs but $B$ does not.
+    \item $A \Delta B$ or $A \oplus B$: the event that either $A$ or $B$ occurs, but not both (symmetric difference).
+\end{itemize}
+
+Thus, probability theory builds directly on set theory: probability assigns a numerical measure to these subsets of the sample space. Later in this chapter, we will see how this measure is defined and used to reason about uncertainty.
+
+We can summarise the considerations of this section in the following table:
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % Adjust this value for desired spacing
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{Operation} & \textbf{Boolean Algebra} & \textbf{Logic} & \textbf{Set Theory} \\
+    \hline
+    \texttt{NOT} & $\skoverline{x}$ & $\neg x$ & $A^c$ or $A'$\\
+    \hline
+    \texttt{OR} & $+$ & $\vee$ & $\cup$ \\
+    \hline
+    \texttt{AND} & $\cdot$ & $\wedge$ & $\cap$ \\
+    \hline
+    \texttt{NAND} & $\skoverline{x \cdot y}$ & $\neg (x \wedge y)$ & $(A \cap B)^c$ or \(\skoverline{A \cap B}\)\\
+    \hline
+    \texttt{NOR} & $\skoverline{x + y}$ & $\neg (x \vee y)$ & $(A \cup B)^c$ or \(\skoverline{A \cup B}\) \\
+    \hline
+    \texttt{XOR} (Symmetric Difference) & $x \oplus y$ & $(x \wedge \neg y) \vee (\neg x \wedge y)$ & $A \triangle B$ or \(A \oplus B\) \\
+    \hline
+    Difference & $x \cdot \skoverline{y}$ & $x \wedge \neg y$ & $A - B$ or \( A \setminus B \) \\
+    \hline
+    \end{tabular}
+    \caption{Comparison of Operators in Boolean Algebra, Logic, and Set Theory}
+\end{table}
+
+In this book, we will use the notation $A^c$ to denote the complement of the set $A$, which includes all elements not in $A$.
+
+\section{Counting Principles}
+
+In many problems across mathematics, computer science, and engineering, determining the number of ways certain events can occur is important. Whether you're arranging elements, selecting groups, or navigating through complex scenarios, counting techniques provide the foundational tools to solve these problems. These techniques go beyond simple arithmetic and allow us to tackle questions like:
+
+\begin{itemize}
+    \item How many ways can we arrange a set of objects?
+    \item In how many different paths can a process unfold?
+    \item What is the probability of a specific event occurring given multiple possibilities?
+\end{itemize}
+
+Counting techniques, such as permutations, combinations, and the multiplication rule, help us quantify these possibilities systematically.
+
+\subsection*{Multiplication Rule}
+
+We start out by discussing the most basic counting principle: the \textbf{multiplication rule}:
+
+\begin{theorem}[Multiplication Rule]
+    Let an operation be described as a sequence of $k$ steps. Assume the following conditions:
+    
+    \begin{itemize}
+        \item There are $n_1$ ways to complete step 1.
+        \item There are $n_2$ ways to complete step 2 for each way of completing step 1.
+        \item There are $n_3$ ways to complete step 3 for each possible completion of the first two steps, and similarly for every subsequent step.
+    \end{itemize}
+    
+    Then, the total number of ways to complete the entire operation is given by:
+    
+    \[
+    n_1 \times n_2 \times \cdots \times n_k.
+    \]
+\end{theorem}
+    
+\begin{example}
+    Suppose you are choosing a meal at a restaurant. You have the following options:
+        
+    \begin{itemize}
+            \item 3 choices for the main course.
+            \item 4 choices for the side dish.
+            \item 2 choices for the drink.
+    \end{itemize}
+        
+    Using the multiplication rule, the total number of ways to choose a meal is:
+        
+    \[
+        3 \times 4 \times 2 = 24.
+    \]
+        
+    Therefore, there are 24 different meal combinations available.
+\end{example}
+
+\begin{example} Automobile Options
+
+An automobile manufacturer provides vehicles equipped with selected
+options. Each vehicle is ordered
+
+\begin{itemize}
+    \item With or without an automatic transmission
+    \item With or without a sunroof
+    \item With one of three choices of a stereo system
+    \item With one of four exterior colors
+\end{itemize}
+
+If the sample space consists of the set of all possible vehicle types, what is the number of outcomes in the sample space?
+\end{example}
+
+\begin{solution}
+Using the multiplication rule, we can calculate the total number of possible vehicle types by multiplying the number of choices for each option:
+
+\begin{itemize}
+    \item 2 choices for the transmission (with or without automatic transmission)
+    \item 2 choices for the sunroof (with or without sunroof)
+    \item 3 choices for the stereo system
+    \item 4 choices for the exterior color
+\end{itemize}
+
+Therefore, the total number of possible vehicle types is:
+
+\[
+2 \times 2 \times 3 \times 4 = 48
+\]
+
+So, there are 48 different possible vehicle types in the sample space.
+\end{solution}
+
+\subsection*{Replacement and Order in Counting}
+
+Next we turn to an important distinction between with and without replacement in counting principles:
+
+\begin{definition}[Counting with and without Replacement]
+    When counting the number of ways to select objects from a set, two common scenarios are:
+
+    \begin{itemize}
+        \item \textbf{With Replacement}: An object can be selected more than once.
+        \item \textbf{Without Replacement}: Once an object is selected, it cannot be chosen again.
+    \end{itemize}
+    \end{definition}
+    
+\begin{example}
+    Suppose you have a bag containing 5 different colored balls. You draw 2 balls:
+\begin{itemize}
+    \item \textbf{With Replacement}: The first ball is placed back in the bag before drawing the second. There are \(5 \times 5 = 25\) possible outcomes.
+    \item \textbf{Without Replacement}: The first ball is not placed back, so the number of outcomes is \(5 \times 4 = 20\).
+\end{itemize}
+\end{example}
+
+\begin{example}
+    Three people are drawing cards one after another from a standard deck of 52 cards. The goal is to find the Ace of Spades. Let's examine the two scenarios: with replacement and without replacement.
+
+    \textbf{Without Replacement}
+
+    In this scenario, each card drawn is not put back into the deck, reducing the total number of cards available after each draw.
+    \begin{itemize}
+        \item First Draw: The first person has a $\frac{1}{52}$ chance of drawing the Ace of Spades.
+        \item Second Draw: If the first person does not draw the Ace of Spades, there are now 51 cards left, and the second person has a $\frac{1}{51}$ chance of drawing the Ace of Spades.
+        \item Third Draw: If the Ace of Spades has not been drawn by the first two people, the third person has a $\frac{1}{50}$ chance of drawing it.
+    \end{itemize}
+    
+    The probabilities change with each draw because the total number of cards decreases, and previously drawn cards are not available.
+    
+    \textbf{With Replacement}
+
+    In this scenario, each card drawn is returned to the deck and reshuffled before the next person draws. This keeps the total number of cards constant.
+    \begin{itemize}
+        \item First Draw: The first person has a $\frac{1}{52}$ chance of drawing the Ace of Spades.
+        \item Second Draw: Since the card is replaced and shuffled back into the deck, the second person also has a $\frac{1}{52}$ chance of drawing the Ace of Spades.
+        \item Third Draw: Similarly, the third person has a $\frac{1}{52}$ chance of drawing the Ace of Spades.
+    \end{itemize}
+    
+    The probabilities remain the same for each draw because the deck is reset to its original state after each draw.
+
+\end{example}
+
+\begin{example}
+    Imagine you have a group of 5 students: Alice, Bob, Charlie, David, and Eve. You need to select 2 of them for different scenarios, illustrating when the order of selection matters and when it does not.
+    \begin{itemize}
+        \item \textbf{Order Matters}: Selecting Alice as Captain and Bob as Assistant Captain is a different outcome than selecting Bob as Captain and Alice as Assistant Captain.
+        \end{itemize}
+    Now, imagine you are simply selecting 2 students to form a study group with no specific roles assigned. Here, the order does not matter.
+    \begin{itemize}
+        \item \textbf{Order does not matter:}  Choosing Alice and Bob is considered the same outcome as choosing Bob and Alice; there is no distinction between the two orders since there are no assigned roles.
+    \end{itemize}
+    \label{ex:order_matters}
+\end{example}
+
+\autoref{ex:order_matters} illustrates the distinction between \textit{permutations} and \textit{combinations}, two fundamental counting principles that are widely used in probability theory and combinatorics.
+
+\begin{definition}[Permutation and Combination]
+    \begin{itemize}
+        \item \textbf{Permutation (order matters)}: Different sequences are counted as distinct outcomes, leading to a higher count.
+        \item \textbf{Combination (order does not matter)}: Sequences are treated as identical, resulting in a lower count.
+    \end{itemize}
+\end{definition}
+
+We will first discuss permutations, which are used when the order of selection matters.
+
+\subsection*{Permutations}
+
+Consider a set of elements, such as $S=\{a, b, c\}$. A permutation of the elements is an ordered sequence of the elements. For example, $a b c, a c b, b a c, b c a, c a b$, and $c b a$ are all the permutations of the elements of $S$.
+
+\begin{proposition}[Permutations of \(n\) Distinct Objects]
+    The number of ordered arrangements (permutations) of $n$ distinct objects is
+    \[
+    n! = n \cdot (n-1) \cdot \dots \cdot 2 \cdot 1.
+    \]
+\end{proposition}
+
+This outcome is a direct application of the multiplication rule. To form a permutation, you start by choosing an element for the first position from the total of $n$ elements. Next, you choose an element for the second position from the remaining $n-1$ elements, then for the third position from the remaining $n-2$ elements, and continue this way until all positions are filled. Such arrangements are often called linear permutations.
+
+\begin{example}
+    It is said that any shuffling of a deck of card has only happened once in history. This is because the number of ways to shuffle a deck of 52 cards is \(52!\), which is an astronomically large number.
+
+    \[52! \approx 8.07 \times 10^{67}\]
+\end{example}
+
+\begin{example}
+    Suppose you have 5 different books on a shelf. You want to rearrange them in a different order. The number of ways to rearrange the books is
+    \[5! = 5 \times 4 \times 3 \times 2 \times 1 = 120\]
+\end{example}
+
+There are cases where we are only interested in arranging a subset of elements from a larger set. The formula for counting these arrangements also derives from the multiplication rule.
+
+\begin{theorem}[Permutations of Subsets]
+    For integers $n \ge r \ge 0$, the number of ordered selections of $r$ distinct objects from $n$ distinct objects is
+    \[
+    P_r^n = P(n,r) = n \cdot (n-1) \cdots (n-r+1) = \frac{n!}{(n-r)!}.
+    \]
+\end{theorem}
+
+\begin{example}
+    Suppose you have 5 different books on a shelf, and you want to rearrange 3 of them in a different order. The number of ways to rearrange the 3 books is
+    \[
+    P_3^5=5 \times 4 \times 3 = 60
+    \]
+\end{example}
+
+\begin{example}
+    There are 10 entries in a contest. Only three will win, $1^{\text {st }}, 2^{\text {nd }}$, or $3^{\text {rd }}$ prize. What are the possible results?
+\end{example}
+\begin{solution}
+    The number of ways to award the prizes is the number of permutations of 3 objects selected from 10, which is
+    \[
+    P_3^{10}= \frac{10!}{(10-3)!}=\frac{10!}{7!} = 10 \times 9 \times 8 = 720
+    \]
+    Therefore, there are 720 possible outcomes for awarding the prizes.
+\end{solution}
+
+\subsection*{Combinations}
+
+When the order of selection does not matter, we use the concept of combinations. Combinations are used when we are interested in selecting a subset of elements from a larger set without regard to the order in which they are selected. Let us start out with a couple of examples to illustrate the concept of combinations.
+
+\begin{example}
+    Suppose you have a group of 5 students: Alice, Bob, Charlie, David, and Eve. You need to select 2 of them to form a study group. The order in which you select the students does not matter. The possible combinations are:
+    \begin{itemize}
+        \item Alice and Bob
+        \item Alice and Charlie
+        \item Alice and David
+        \item Alice and Eve
+        \item Bob and Charlie
+        \item Bob and David
+        \item Bob and Eve
+        \item Charlie and David
+        \item Charlie and Eve
+        \item David and Eve
+    \end{itemize}
+    The order of the students in the study group does not matter, so the combinations are considered identical.
+\end{example}
+
+\begin{example}
+    Maria has three tickets for a concert. She'd like to use one of the tickets herself. She could then offer the other two tickets to any of four friends (Ann, Beth, Chris, Dave). How many ways can 2 people be selected from 4 to go to a concert?
+\end{example}
+
+\begin{example}
+A circuit board has four different locations in which a component can be placed. If three identical components are to be placed on the board, how many different designs are possible?
+\end{example}
+
+\begin{solution}
+    Since you can only place one component in each slot, placing a component in any slot immediately restricts the choices for the next component.
+        
+    \begin{enumerate}
+        \item Fill slots 1, 2, and 3.
+        \item Fill slots 1, 2, and 4.
+        \item Fill slots 1, 3, and 4.
+        \item Fill slots 2, 3, and 4.
+    \end{enumerate}
+\end{solution}
+
+These examples illustrate the concept of combinations, where the order of selection does not matter. The formula for combinations is derived from the permutation formula by dividing out the number of ways to arrange the $r$ elements.
+
+\begin{theorem}[Combinations]
+    The number of combinations of $r$ elements selected from a set of $n$ different elements is given by
+    \[
+    C_r^n = \binom{n}{r} = \frac{n!}{r!(n-r)!}
+    \]
+\end{theorem}
+
+This is also sometimes referred to as the \textbf{binomial coefficient}, denoted by $\binom{n}{r}$, which is read as "n choose r". It is called the binomial coefficient because it appears in the binomial theorem, which expands the powers of a binomial expression:
+
+\begin{theorem}[Binomial Theorem]
+    In algebra, the binomial coefficient is used to expand powers of binomials. According to the binomial theorem
+
+$$
+(a+b)^n=\sum_{k=0}^n\binom{n}{k} a^k b^{n-k}
+$$
+
+\end{theorem}
+
+The theorem states that the expansion of the binomial expression $(a+b)^n$ is the sum of the terms $\binom{n}{k} a^k b^{n-k}$ for $k=0,1,2,\ldots,n$. The binomial coefficient $\binom{n}{k}$ gives the number of ways to choose $k$ elements from a set of $n$ elements. We will place no more emphasis on the binomial theorem here, but it is a fundamental concept in algebra and combinatorics, and is widely used in probability theory.
+
+We will conclude our discussion of counting principles with principles of counting with replacement.
+
+\begin{proposition}[With replacement]
+For selections from $n$ types:
+\begin{itemize}
+    \item \textbf{Ordered with replacement}: $n^r$ outcomes.
+    \item \textbf{Unordered with replacement}: $\displaystyle \binom{n+r-1}{r}$ outcomes. % (stars and bars)
+\end{itemize}
+\end{proposition}
+
+\section{Basic Probability}
+Probability quantifies the likelihood or chance of events associated with a random experiment. For instance, when you hear, “The chance of rain today is 30\%,” it expresses uncertainty about the event that it rains. Probabilities range from 0 to 1 (or equivalently, from 0\% to 100\%). An impossible event has probability 0, and the entire sample space has probability 1. In general probability models, however, an event can have probability 0 without being empty, or probability 1 without containing every possible outcome; such events are called almost impossible and almost sure, respectively.
+
+Probabilities can be interpreted in different ways:
+
+\begin{itemize}
+    \item \textbf{Objective (or Classical) Probability}: Often referred to as classical probability, this approach is used when outcomes are equally likely, such as in rolling a fair die or flipping a coin. Probabilities are assigned based on the assumption that each outcome has an equal chance of occurring. For example, when rolling a fair six-sided die, the probability of rolling a 3 is \( \frac{1}{6} \) because there are 6 equally likely outcomes (1, 2, 3, 4, 5, 6), and only one of them is a 3. The probability is the same for all observers.
+        
+    \item \textbf{Relative Frequency (Empirical Probability)}: Empirical probability is based on observations from experiments rather than theoretical calculations. For example, if a software tester runs a stress test on a server 100 times, and it crashes 7 times, the empirical probability of a crash is \( \frac{7}{100} = 0.07 \). This approach relies on actual data rather than assumptions or intuition.
+        
+    \item \textbf{Subjective Probability}: This reflects our personal belief or degree of confidence in an outcome. Different people might assign different probabilities to the same event based on their knowledge or perspective. You and your friends discuss Denmark’s chances of winning the World Cup. Based on recent performance and team strength, you estimate a 10\% chance. However, a more optimistic friend assigns a 20\% chance, while another gives only 5\%, considering stronger competitors. This illustrates subjective probability, where each person's estimate varies based on personal beliefs and biases rather than objective data.
+    
+
+\end{itemize}
+
+When assigning probabilities, it’s essential that the sum of all probabilities in an experiment equals 1, ensuring consistency with the relative frequency interpretation.
+
+We start by establishing the Axioms of Probability, which lay the foundation for how probabilities are assigned to events. These axioms define the basic properties that every probability measure must satisfy.
+    
+\begin{axiom}[Axioms of Probability]
+    \begin{itemize}
+        \item \textbf{Axiom 1:} For any event \(A\), \( 0 \leq P(A) \leq 1 \).
+        \item \textbf{Axiom 2:} Probability of the sample space \(S\) is \(P(S) = 1\).
+        \item \textbf{Axiom 3:} If \(A_1, A_2, A_3, \cdots\) are disjoint events, then \(P\left(A_1 \cup A_2 \cup A_3 \cdots\right) = P\left(A_1\right) + P\left(A_2\right) + P\left(A_3\right) + \cdots\)
+    \end{itemize}
+\end{axiom}
+
+The property that \( 0 \leq P(A) \leq 1 \) is equivalent to the requirement that a relative frequency must be between 0 and 1. The property that \( P(S) = 1 \) is a consequence of the fact that an outcome from the sample space occurs on every trial of an experiment. Consequently, the relative frequency of \( S \) is 1. Property 3 implies that if the events \( A_1 \) and \( A_2 \) have no outcomes in common, the relative frequency of outcomes in \( A_1 \cup A_2 \) is the sum of the relative frequencies of the outcomes in \( A_1 \) and \( A_2 \).
+
+In the next sections we will see more about the probability of events and how to calculate them.
+
+\subsection*{Probability of an Event}
+The probability of an event is a measure of the likelihood that the event will occur. It is denoted by \( P(A) \), where \( A \) is the event, and it ranges from 0 to 1. The empty event has probability 0, and the sample space has probability 1.
+
+\begin{definition}[Classical Probability for Equally Likely Outcomes]
+    If a finite sample space consists of equally likely outcomes, the probability of an event \( A \) is the ratio of the number of outcomes in \(A\) to the total number of outcomes in the sample space:
+    \[
+    P(A) = \frac{\text{Number of favorable outcomes}}{\text{Total number of outcomes}}
+    \]
+\end{definition}
+
+\begin{example}
+    Suppose you are testing a software module with 10 different test cases. Out of these, 3 test cases are known to fail due to a bug. If you randomly select one test case to run, what is the probability that the selected test case will fail?
+\end{example}
+
+\begin{solution}
+    Here, the event $A$ is "the test case fails."
+\begin{itemize}
+    \item Number of favorable outcomes (failing test cases) $=3$
+    \item Total number of outcomes (total test cases) $=10$
+\end{itemize}
+
+Using the formula:
+
+$$
+P(A)=\frac{\text { Number of favorable outcomes }}{\text { Total number of outcomes }}=\frac{3}{10}=0.3
+$$
+
+
+Therefore, the probability that a randomly selected test case will fail is 0.3 , indicating that there is a $30 \%$ chance of failure.
+
+\end{solution}
+
+\begin{example}
+    Imagine a software development environment where you have 50 files, consisting of 20 Python scripts, 15 Java files, and 15 configuration files. If you randomly select one file to edit, what is the probability that the file is a Python script?
+\end{example}
+
+\begin{solution}
+Here, the event $A$ is "the selected file is a Python script."
+\begin{itemize}
+    \item Number of favorable outcomes (Python scripts) $=20$
+    \item Total number of outcomes (total files) $=50$
+\end{itemize}
+
+Using the formula:
+
+$$
+P(A)=\frac{\text { Number of favorable outcomes }}{\text { Total number of outcomes }}=\frac{20}{50}=0.4
+$$
+
+Thus, the probability of selecting a Python script is 0.4 , meaning there is a $40 \%$ chance of choosing a Python file from the set.
+
+\end{solution}
+
+\section{Probability of Joint Events and Set Operations}
+Joint events are formed by applying basic set operations to individual events. Commonly, we encounter unions of events, such as $A \cup B$; intersections of events, such as $A \cap B$; and complements of events, such as $A^c$. These combined events are often of particular interest, and their probabilities can frequently be derived from the probabilities of the individual events that compose them. Understanding these set operations is essential for accurately calculating the probability of joint events. In this section, we will explore how unions of events and other set operations can be used to determine the probabilities of more complex events.
+
+When dealing with events, the intersection represents \texttt{AND} while the union represents \texttt{OR} The probability of the intersection of events $A$ and $B$, denoted as $P(A \cap B)$, can also be expressed as $P(A, B)$ or $P(A B)$.
+
+From the axioms of probability, we can derive the following rules of probabilities:
+
+\begin{theorem}{Rules of Probability}
+    \begin{itemize}
+        \item \textbf{Complement Rule:} The probability of the complement of event $A$ is
+    
+        \[
+        P(A^c) = 1 - P(A)
+        \]
+
+        \item \textbf{Empty Set Rule:} The probability of the empty set is 0, i.e.,
+        
+        \[P(\emptyset) = 0\]
+        
+        \item \textbf{Addition Rule:} For any two events $A$ and $B$, the probability of the union of events $A$ and $B$ is given by
+        \[
+        P(A \cup B) = P(A) + P(B) - P(A \cap B)
+        \]
+
+        \item \textbf{Difference Rule:} The probability of the difference between events $A$ and $B$ is given by
+        \[
+        P(A-B)=P(A)-P(A \cap B)
+        \]
+        \item \textbf{Subset Rule:} If $A$ is a subset of $B$ ($A \subset B$), then
+        \[P(A) \leq P(B)\].
+    \end{itemize}
+\end{theorem}
+
+We can obtain the Complement Rule by noting:
+
+\begin{align*}
+    1 &= P(S) & \text{(axiom 2)} \\
+      &= P(A \cup A^c) & \text{(definition of complement)} \\
+      &= P(A) + P(A^c) & \text{(since } A \text{ and } A^c \text{ are disjoint)}
+\end{align*}
+
+Since $\emptyset=S^c$, we can apply part the Complement Rule to deduce that $P(\emptyset)=1-P(S)=0$. This is intuitive because, by definition, an event occurs when the outcome of the random experiment is part of that event. However, since the empty set contains no elements, no outcome of the experiment can ever belong to it, making its probability zero.
+
+The Difference Rule can be obtained by showing that $P(A)=P(A \cap B)+P(A-B)$. Note that the two sets $A \cap B$ and $A-B$ are disjoint and their union is $A$. Thus, by the third axiom of probability
+
+\begin{align*}
+    P(A) &= P\left((A \cap B) \cup (A - B)\right) & \text{(since } A = (A \cap B) \cup (A - B)) \\
+         &= P(A \cap B) + P(A - B) & \text{(since } A \cap B \text{ and } A - B \text{ are disjoint)}
+    \end{align*}
+    
+
+The Addition Rule we obtain by noting that $A$ and $B-A$ are disjoint sets and their union is $A \cup B$. Thus,
+
+\begin{align*}
+    P(A \cup B) &= P(A \cup (B - A)) && (\text{since } A \cup B = A \cup (B - A)) \\
+                &= P(A) + P(B - A) && (\text{since } A \text{ and } B - A \text{ are disjoint}) \\
+                &= P(A) + P(B) - P(A \cap B) && (\text{by part the Difference Rule})
+    \end{align*}
+    
+And finally the Subset Rule is a direct consequence of the fact that if $A \subset B$, then $B$ can be written as the union of $A$ and $B-A$. Since $A$ and $B-A$ are disjoint, we have $P(B)=P(A)+P(B-A) \geq P(A)$.
+
+We conclude this section with a few examples illustrating the application of these rules to calculate probabilities of joint events.
+
+\begin{example}
+    A company has bid on two large construction projects. The company president believes that the probability of winning the first contract is 0.6, the probability of winning the second contract is 0.4, and the probability of winning both contracts is 0.2.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item What is the probability that the company wins at least one contract?
+        \item What is the probability that the company wins the first contract but not the second contract?
+        \item What is the probability that the company wins neither contract?
+        \item What is the probability that the company wins exactly one contract?
+    \end{enumerate}
+\end{example}
+
+\begin{solution}
+    Let $A$ be the event that the company wins the first contract, and $B$ be the event that the company wins the second contract. Given:
+    \begin{itemize}
+        \item $P(A) = 0.6$
+        \item $P(B) = 0.4$
+        \item $P(A \cap B) = 0.2$
+    \end{itemize}
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item The probability that the company wins at least one contract is the probability of the union of events $A$ and $B$. Using the Addition Rule:
+        
+        \begin{align*}
+            P(A \cup B) &= P(A) + P(B) - P(A \cap B) \\
+                        &= 0.6 + 0.4 - 0.2 \\
+                        &= 0.8
+        \end{align*}
+        
+        Therefore, the probability that the company wins at least one contract is 0.8.
+        
+        \item The probability that the company wins the first contract but not the second contract is the probability of the difference between events $A$ and $B$. Using the Difference Rule:
+        
+        \begin{align*}
+            P(A - B) &= P(A) - P(A \cap B) \\
+                    &= 0.6 - 0.2 \\
+                    &= 0.4
+        \end{align*}
+        
+        Therefore, the probability that the company wins the first contract but not the second contract is 0.4.
+        
+        \item The probability that the company wins neither contract is the probability of the complement of the union of events $A$ and $B$. Using the Complement Rule:
+        
+        \begin{align*}
+            P((A \cup B)^c) &= 1 - P(A \cup B) \\
+                                    &= 1 - 0.8 \\
+                                    &= 0.2
+        \end{align*}
+        
+        Therefore, the probability that the company wins neither contract is 0.2.
+        
+        \item The probability that the company wins exactly one contract is the probability of the difference between the union of events $A$ and $B$ and the intersection of events $A$ and $B$. Using the Difference Rule:
+            
+            \begin{align*}
+                P((A \cup B) - (A \cap B)) &= P(A \cup B) - P(A \cap B) \\
+                                            &= 0.8 - 0.2 \\
+                                            &= 0.6
+            \end{align*}
+            So, the probability that the company wins exactly one contract is 0.6.
+            \end{enumerate}
+\end{solution}
+
+\begin{example}
+    \begin{itemize}
+    \item There is a 60 percent chance that it will rain today.
+    \item There is a 50 percent chance that it will rain tomorrow.
+    \item There is a 30 percent chance that it does not rain either day.
+    \end{itemize}
+    
+\begin{enumerate}[label=(\alph*)]
+    \item The probability that it will rain today or tomorrow
+    \item The probability that it will rain today and tomorrow.
+    \item The probability that it will rain today but not tomorrow.
+    \item The probability that it either will rain today or tomorrow, but not both.
+\end{enumerate}
+    
+\begin{solution}
+\begin{enumerate}[label=(\alph*)]
+    \item     Let \( A \) be the event that it rains today, and \( B \) be the event that it rains tomorrow.
+        
+    Given:
+    \begin{align*}
+        P(A \cup B) &= 1 - P\left((A \cup B)^c\right) \quad &\text{by the Complement Rule} \\
+                &= 1 - P\left(A^c \cap B^c\right) \quad &\text{by De Morgan's Law} \\
+                &= 1 - 0.3 \\
+                &= 0.7
+    \end{align*}
+            
+        
+    Therefore, the probability that it will rain today or tomorrow is \( 0.7 \).
+
+    \item The probability that it will rain today and tomorrow: this is $P(A \cap B)$. To find this we note that
+    \begin{align*}
+    P(A \cap B) &= P(A) + P(B) - P(A \cup B) \\
+                &= 0.6 + 0.5 - 0.7 \\
+                &= 0.4
+    \end{align*}
+
+    \item The probability that it will rain today but not tomorrow: this is $P\left(A \cap B^c\right)$.
+
+    \begin{align*}
+        P(A \cap B^c) &= P(A - B) \\
+                      &= P(A) - P(A \cap B) \\
+                      &= 0.6 - 0.4 \\
+                      &= 0.2
+        \end{align*}
+        
+    \item The probability that it either will rain today or tomorrow but not both: this is $P(A-B)+P(B-A)$. We have already found $P(A-B)=.2$. Similarly, we can find $P(B-A)$:
+    
+    \begin{align*}
+        P(B-A) & =P(B)-P(B \cap A) \\
+        & =0.5-0.4 \\
+        & =0.1
+        \end{align*}
+    Thus,
+    \begin{align*}
+        P(A-B)+P(B-A) &= 0.2+0.1 \\
+                      &= 0.3
+    \end{align*}
+\end{enumerate}
+\end{solution}
+\end{example}

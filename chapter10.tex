@@ -1,0 +1,1313 @@
+\chapter{Differential Calculus}
+\label{chap:ch10}
+
+In both practical experience and modern engineering, we frequently encounter situations where one quantity changes in response to another. A car’s fuel consumption reflects how distance depends on the amount of fuel used. A sprinter’s velocity describes how position varies with time. In agriculture, yield changes with the amount of fertiliser, and in economics, demand responds to price. The study of such relationships lies at the heart of \emph{differential calculus}, the mathematical discipline devoted to understanding how quantities vary together.
+
+The concept that captures this variation is the \emph{rate of change}.
+
+\begin{itemize}
+\item The change of distance with respect to time is \emph{velocity}.
+\item The change of profit with respect to price is \emph{marginal profit}.
+\item The change of loss with respect to model parameters is the \emph{gradient}.
+\end{itemize}
+
+When a rate of change remains constant, the relationship between the quantities is linear, and the graph forms a straight line. When the rate of change varies, the graph becomes curved, and the slope depends on the specific point of measurement. This naturally leads to the idea of a \emph{tangent line}, which locally approximates a curve at a single point.
+
+% --- Ensure these packages are in your preamble ---
+% \usepackage{pgfplots}
+% \usepackage{xcolor}
+% \pgfplotsset{compat=1.17}
+
+% --- Ensure your custom color is defined ---
+% \definecolor{mseViaBlue}{HTML}{1933CC}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$,
+            ylabel=$y$,
+            width=12cm, height=8cm,
+            xmin=-0.5, xmax=2.5,
+            ymin=-1, ymax=9,
+            xtick={-1, 0, 1, 2},
+            ytick={0, 2, 4, 6, 8},
+            grid=major,
+            grid style={dashed, gray!30},
+            legend style={
+                at={(0.5, 0.97)}, % Position near the top center
+                anchor=north,     % Anchor the top-center of the legend box
+                legend cell align={left}
+            },
+            clip=false
+        ]
+        % Plot the curve f(x) = x^3
+        \addplot[
+            domain=0:2.1, samples=100,
+            smooth, very thick, mseViaBlue
+        ] {x^3};
+        \addlegendentry{\(f(x) = x^3\)}
+
+        % Plot the tangent line at x=1, which is y = 3x - 2
+        \addplot[
+            domain=0:2.5,
+            red, thick
+        ] {3*x - 2};
+        \addlegendentry{Tangent at \(x=1\)}
+
+        % Mark the point of tangency
+        \coordinate (P) at (axis cs:1, 1);
+        \fill[red] (P) circle (2.5pt);
+        \node[below right, font=\small] at (P) {\(P(1, 1)\)};
+        
+        \end{axis}
+    \end{tikzpicture}
+    \caption{The tangent line to the graph of \(f(x)=x^3\) at the point \(P(1, 1)\).}
+    \label{fig:ch10-tangent}
+\end{figure}
+
+\begin{remark}
+For a straight line, the slope is constant. For a curved graph, the slope varies from point to point, so we speak of the \emph{instantaneous rate of change}, the slope of the tangent at a specific point.
+\end{remark}
+
+The same principle extends to computational and data-driven systems. A program’s runtime changes with input size, a model’s accuracy varies with the number of training epochs, and network throughput depends on available bandwidth. In machine learning, the process of training a model resembles a hiker searching for the lowest point in a vast, foggy landscape. The “altitude” represents the model’s error, and progress requires moving downhill. Determining the correct direction among millions of possible ones depends on knowing the local slope — the \emph{derivative} — which expresses the instantaneous rate of change.
+
+Differential calculus provides the tools to describe, compute, and interpret such changes with precision. It transforms intuitive ideas such as being faster, steeper, or more efficient into exact mathematical expressions. This chapter introduces the fundamental ideas of differential calculus, beginning with the concepts of \emph{limits} and \emph{continuity}, which formalise the notion of approaching a point infinitely closely. Building on these, we develop the definition and interpretation of the \emph{derivative} as a measure of instantaneous change and explore its applications in contexts ranging from physical motion to the optimisation of modern algorithms.
+
+
+\section{Limits and Continuity: The Foundation of Calculus}
+
+Before we can measure an instantaneous rate of change, we must first build a formal understanding of what it means to get "infinitesimally close" to a point without necessarily being at that point. This is the concept of a \textbf{limit}. Building on limits, \textbf{continuity} gives us the language to describe functions that are predictable and well-behaved, without sudden jumps or breaks.
+
+\subsection*{Limits}
+
+A limit describes the value that a function "approaches" as its input gets closer and closer to a specific point. This idea is fundamental not just in calculus, but in software engineering, where we often analyze the behavior of systems under approaching conditions.
+
+For example, when analyzing an algorithm's runtime, we ask what happens to the execution time as the input size `n` approaches infinity. In networking, we might model the theoretical maximum throughput as a limit when latency approaches zero.
+
+\begin{definition}[Limit]
+Let \( f(x) \) be a function defined near a point \( c \). We say that the \textbf{limit} of \( f(x) \) as \( x \) approaches \( c \) is \( L \), written as
+\vspace{0.5em}
+\[
+\lim_{x \to c} f(x) = L
+\]
+\vspace{0.5em}
+if we can make the value of \( f(x) \) arbitrarily close to \( L \) by choosing an \( x \) that is sufficiently close to \( c \), but not equal to \( c \).
+\end{definition}
+
+In many simple cases, the limit is just the value of the function at that point. For example, for \( f(x) = x^2 \), the limit as \( x \) approaches 3 is simply \( 3^2 = 9 \). The real power of limits, however, is in handling cases where the function is undefined at the point of interest.
+
+\begin{example} A Limit at an Undefined Point
+
+Consider the function \( f(x) = \frac{\sin(x)}{x} \). This function is fundamental in signal processing and is known as the sinc function. Notice that \( f(0) \) is undefined because it results in division by zero. However, we can ask what value the function approaches as \( x \) gets very close to 0.
+
+By plugging in values very close to 0, we can observe a trend:
+\begin{align*}
+f(0.1) &= \frac{\sin(0.1)}{0.1} \approx 0.9983 \\
+f(0.01) &= \frac{\sin(0.01)}{0.01} \approx 0.99998 \\
+f(-0.01) &= \frac{\sin(-0.01)}{-0.01} \approx 0.99998
+\end{align*}
+The function appears to approach 1. In calculus, it can be formally proven that:
+\[
+\lim_{x \to 0} \frac{\sin(x)}{x} = 1
+\]
+This ability to analyze behavior at a problematic point is essential for creating robust numerical algorithms.
+\end{example}
+
+\begin{example} Asymptotic Analysis with Limits
+
+Suppose you want to analyze whether the function \( f(n) = 5n^2 + 4n + 7 \) is \( \mathcal{O}(n^2) \) as \( n \) grows large, as is common in the study of algorithm complexity. One way to formalize this is to examine the limit:
+\[
+\lim_{n \to \infty} \frac{f(n)}{n^2}
+= \lim_{n \to \infty} \frac{5n^2 + 4n + 7}{n^2}
+= \lim_{n \to \infty} \left( 5 + \frac{4}{n} + \frac{7}{n^2} \right)
+\]
+As \( n \) becomes very large, the terms \( \frac{4}{n} \) and \( \frac{7}{n^2} \) both approach zero, so the whole expression approaches \( 5 \). Because this limit is a finite constant, it confirms that \( f(n) \) grows at the same rate as \( n^2 \). This type of limit calculation is at the heart of asymptotic analysis, formally justifying Big-\(\mathcal{O}\) claims about algorithm runtime.
+\end{example}
+
+\subsection*{Continuity}
+Continuity formalizes the idea of a function being "well-behaved" or predictable. Intuitively, a function is continuous if you can draw its graph without lifting your pen from the paper. In software, we often assume our systems are continuous: a small change in input should lead to a small, predictable change in output, not a sudden, drastic jump.
+
+\begin{definition}[Continuity]
+A function \( f \) is \textbf{continuous} at a point \( c \) if the following three conditions are met:
+\begin{enumerate}
+    \item \( f(c) \) is defined.
+    \item \( \lim_{x \to c} f(x) \) exists.
+    \item \( \lim_{x \to c} f(x) = f(c) \).
+\end{enumerate}
+A function is continuous on an interval if it is continuous at every point in that interval.
+\end{definition}
+
+Discontinuities often represent important events in software systems, such as state transitions or threshold triggers.
+
+\begin{example} Jump Discontinuity in a SaaS Pricing Model
+    
+Consider a cloud service that charges based on the number of API calls per month. The pricing model is tiered: \$20 for up to 10,000 calls, and \$40 for any usage above 10,000 calls. The cost function \(C(x)\), where \(x\) is the number of calls, has a \textbf{jump discontinuity} at \(x = 10,000\).
+\[
+C(x) =
+\begin{cases}
+    20 & \text{if } x \le 10000 \\
+    40 & \text{if } x > 10000
+\end{cases}
+\]
+As shown in \autoref{fig:jump_discontinuity}, the cost suddenly jumps at the threshold. Understanding discontinuities is crucial for modeling any system with threshold-based logic, from auto-scaling policies to billing systems.
+\end{example}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={API Calls},
+    ylabel={Cost (\$)},
+    xmin=0, xmax=20,
+    ymin=0, ymax=50,
+    xtick={0, 10, 20},
+    xticklabels={0, 10k, 20k},
+    ytick={0, 20, 40},
+    grid=major,
+    grid style={dashed,gray!30},
+    title style={font=\bfseries}
+]
+% First tier: C(x) = 20 for x <= 10000
+\addplot[mseViaBlue, very thick, domain=0:10] {20};
+% Second tier: C(x) = 40 for x > 10000
+\addplot[mseViaBlue, very thick, domain=10:20] {40};
+
+% Mark the discontinuity
+% Solid circle at the end of the first tier
+\addplot[only marks, mark=*, mark size=2pt, mseViaBlue] coordinates {(10, 20)};
+% Hollow circle at the start of the second tier
+\addplot[only marks, mark=o, mark size=2pt, mseViaBlue, thick] coordinates {(10, 40)};
+\end{axis}
+\end{tikzpicture}
+\caption{The cost function exhibits a jump discontinuity at 10,000 API calls as the price tier changes.}
+\label{fig:jump_discontinuity}
+\end{figure}
+
+\section{The Derivative: Measuring the Rate of Change}
+\label{sec:ch10-derivative}
+
+We often talk about average rates of change. For example, if a data transfer takes 10 seconds and moves 500 MB, the average transfer rate is 50 MB/s. But this average tells us nothing about fluctuations during the transfer. The \textbf{derivative} is the tool that lets us move from this average rate to the \textbf{instantaneous rate of change} at any specific moment.
+
+We may thus say that differential calculus is about determining how one quantity changes in relation to another. Geometrically, the derivative of a function at a point is the slope of the line tangent to the function's graph at that point. To find the slope of a tangent, we approximate it using secant lines between two nearby points on the curve. As the points move closer together, the secant slope approaches the tangent slope. As shown in \autoref{fig:secant_to_tangent}, this tangent line is the limit of secant lines passing through two points on the curve as the points get infinitesimally close.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle, xlabel={$x$}, ylabel={$y$},
+        xtick=\empty, ytick=\empty,
+        xmin=-0.5, xmax=3, ymin=-0.5, ymax=9,
+        width=14cm, height=10cm,
+        legend style={at={(0.85,1)}, anchor=north west, draw=none, fill=none, legend cell align=left},
+        title style={font=\bfseries}
+    ]
+    \addplot[domain=0:2.5, samples=150, smooth, very thick, mseViaBlue] {x^3};
+    \addlegendentry{\(f(x) = x^3\)}
+    \coordinate (P) at (axis cs:1, 1);
+    \coordinate (Q2) at (axis cs:1.5, 3.375);
+    \coordinate (Q1) at (axis cs:2, 8);
+    \addplot[domain=0.6:2.2, dashed, color=gray] {7*x - 6};
+    \addlegendentry{Secant through $PQ_1$}
+    \addplot[domain=0.6:2.0, color=orange, dashed] {4.75*x - 3.75};
+    \addlegendentry{Secant through $PQ_2$}
+    \addplot[domain=0.5:2.0, red] {3*x - 2};
+    \addlegendentry{Tangent at $P$}
+    \fill[red] (P) circle (2pt) node[below right, xshift=4pt] {$P$};
+    \fill[black] (Q2) circle (2pt) node[right, xshift=4pt] {$Q_2$};
+    \fill[black] (Q1) circle (2pt) node[above right, xshift=4pt] {$Q_1$};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Illustration of the tangent line as a limit of secant lines.}
+    \label{fig:secant_to_tangent}
+    \end{figure}
+    
+    In \autoref{fig:secant_to_tangent} as the point $Q$ moves along the curve toward $P$ (from $Q_1$ to $Q_2$ to $P$), the slope of the secant line $PQ$ approaches the slope of the tangent line to $f(x) = x^3$ at $P$. Note how the tangent only touches the curve at $P$, while the secant passes through two points.
+    
+    This leads to the formal definition of the derivative.
+    
+    \begin{definition}[The Derivative]
+    The \textbf{derivative} of a function \( f \) with respect to \( x \), denoted \( f'(x) \), is the function
+    \[
+    f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+    \]
+    provided the limit exists. If \( f'(x) \) exists, we say that \( f \) is \textbf{differentiable} at \( x \).
+    \end{definition}
+    
+    The expression \( \frac{f(x+h) - f(x)}{h} \) is the \textbf{difference quotient}, representing the average rate of change over the interval from \(x\) to \(x+h\). The derivative is the limit of this average rate as the interval size \(h\) shrinks to zero.
+    
+    \begin{example} Derivative from First Principles
+        
+    Let's find the derivative of \( f(x) = x^2 \) using the limit definition.
+    \end{example}
+    \begin{solution}
+    We start with the difference quotient and simplify:
+    \[
+    \frac{f(x+h) - f(x)}{h} = \frac{(x+h)^2 - x^2}{h} = \frac{x^2 + 2xh + h^2 - x^2}{h} = \frac{2xh + h^2}{h} = 2x + h
+    \]
+    Finally, we take the limit as \( h \to 0 \):
+    \[
+    f'(x) = \lim_{h \to 0} (2x + h) = 2x
+    \]
+    Thus, the derivative of \( f(x) = x^2 \) is \( f'(x) = 2x \). This tells us the slope of the parabola at any point \(x\).
+    \end{solution}
+
+\subsection*{Notation}
+The derivative of $f$ can be written in several equivalent forms:
+\[
+f'(x), \quad \frac{df}{dx}, \quad \frac{dy}{dx}, \quad Df(x), \quad \frac{d}{dx}f(x).
+\]
+
+\section{Rules of Differentiation}
+\label{sec:ch10-rules}
+
+Differential calculus provides a way to find the exact derivative of a function directly from its formula, without relying on graphs or numerical estimation. In practice, this is done using a set of simple rules that allow us to compute the derivative of nearly any function we are likely to encounter. In this section, we will introduce these rules, explain their meaning, and show how to apply them in practice.
+
+
+\subsection*{Constant and Power Rules}
+Perhaps the simplest functions in mathematics are the constant functions and the functions of the form $x^{n}$.\\
+
+\begin{theorem}{Constant and Power Rules}
+    \begin{enumerate}
+        \item \textbf{Constant Rule:} If $c$ is constant, then $\dfrac{d}{dx}(c) = 0$, \vspace{0.5em}
+        \item \textbf{Power Rule:} For any real $n$, $\dfrac{d}{dx}x^n = n x^{n - 1}$. \vspace{0.5em}
+    \end{enumerate}
+\end{theorem}
+
+\begin{example}
+
+    \begin{itemize}
+        \item If \(f(x)=x^7\), then \(f'(x) = 7x^6\),
+        \vspace{0.5em}
+        \item If \(y = x^{-0.5}\), then \(\frac{dy}{dx} = -0.5x^{-1.5}\),
+        \vspace{0.5em}
+        \item \(\frac{d}{dx} x^{-3} = -3x^{-4}\),
+        \vspace{0.5em}
+        \item If \(g(x) = 3.2\), then \(g'(x) = 0\),
+        \vspace{0.5em}
+        \item If \(f(t) = \sqrt{t}=t^{\frac{1}{2}}\), then \(f'(t) = \frac{1}{2} t^{-\frac{1}{2}}=\frac{1}{2 \sqrt{t}} \),
+        \vspace{0.5em}
+        \item If \(h(u) = -13.29\), then \(h'(u) = 0\),
+        \vspace{0.5em}
+        \item $\dfrac{d}{dx}x^3 = 3x^2$,
+        $\dfrac{d}{dx}x^{-2} = -2x^{-3}$.
+    \end{itemize}
+
+\end{example}
+
+In the examples above, we have used the constant and power rules to find the derivatives of several simple functions. However, it is important to remember what these calculations actually represent. The derivative tells us the slope of the tangent line to the graph of a function at any given point.
+
+For instance, if $f(x) = x^{2}$, then $f'(x) = 2x$. To find the slope of the tangent to the graph of $x^{2}$ at $x = 1$, we substitute $x = 1$ into the derivative, giving $f'(1) = 2 \times 1 = 2$. Similarly, the slope of the tangent at $x = -0.5$ is $f'(-0.5) = 2 \times (-0.5) = -1$.
+
+These results are illustrated in \autoref{fig:tangent_lines}, where the tangent lines at $x = 1$ and $x = -0.5$ have slopes of 2 and -1, respectively.
+
+% --- Ensure these packages are in your preamble ---
+% \usepackage{pgfplots}
+% \usepackage{xcolor}
+% \pgfplotsset{compat=1.17}
+
+% --- Ensure your custom color is defined ---
+% \definecolor{mseViaBlue}{HTML}{1933CC}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$,
+            ylabel=$y$,
+            width=12cm, height=8cm,
+            xmin=-1.5, xmax=1.5,
+            ymin=-0.5, ymax=2.5,
+            xtick={-1.5, -1, -0.5, 0, 0.5, 1, 1.5},
+            ytick={0, 0.5, 1, 1.5, 2, 2.5},
+            grid=major,
+            grid style={dashed, gray!30},
+            legend pos=outer north east,
+            legend cell align={left},
+            clip=false,
+        ]
+        % Plot the curve f(x) = x^2
+        \addplot[
+            domain=-1.5:1.5, samples=100,
+            smooth, very thick, mseViaBlue
+        ] {x^2};
+        \addlegendentry{\(f(x)=x^2\)}
+
+        % -- Tangent Line at x = 1 --
+        \addplot[
+            domain=0:1.5,
+            red, thick
+        ] {2*x - 1};
+        \addlegendentry{Tangent at \(x=1\)}
+        
+        % Mark and label the point at x=1
+        \coordinate (P1) at (axis cs:1, 1);
+        \fill[red] (P1) circle (2.5pt);
+        \node[right, xshift=10pt, font=\small, color=red] at (P1) {Slope \(f'(1)=2\)};
+
+        % -- Tangent Line at x = -0.5 --
+        \addplot[
+            domain=-1.5:0.5,
+            orange, thick
+        ] {-x - 0.25};
+        \addlegendentry{Tangent at \(x=-0.5\)}
+
+        % Mark and label the point at x=-0.5
+        \coordinate (P2) at (axis cs:-0.5, 0.25);
+        \fill[orange] (P2) circle (2.5pt);
+        \node[left, xshift=-10pt, font=\small, color=orange] at (P2) {Slope \(f'(-0.5)=-1\)};
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{The tangent lines to the graph of \(f(x) = x^2\) at different points have different slopes.}
+    \label{fig:tangent_lines}
+\end{figure}
+
+
+\begin{example}
+
+Let $f(x)=(x^2+1)^3$. Then
+\[
+f'(x) = 3(x^2+1)^2\cdot 2x = 6x(x^2+1)^2.
+\]
+\end{example}
+
+\begin{example}
+
+Find the slope of the tangent to the graph of the function $g(t)=t^{4}$ at the point on the graph where $t=-2$.
+
+
+\begin{solution}
+    
+The derivative is $g^{\prime}(t)=4 t^{3}$, and so the slope of the tangent line at $t=-2$ is $g^{\prime}(-2)= 4 \times(-2)^{3}=-32$.
+\end{solution}
+
+\end{example}
+
+
+
+\begin{example}
+
+Find the equation of the line tangent to the graph of $y=f(x)=x^{\frac{1}{2}}$ at the point $x=4$.
+
+
+
+\begin{solution}
+
+$f(4)=4^{\frac{1}{2}}=\sqrt{4}=2$, so the coordinates of the point on the graph are $(4,2)$. The derivative is
+
+Any non vertical line has equation of the form $y=m x+b$ where $m$ is the slope and $b$ the vertical intercept.
+
+In this case the slope is $\frac{1}{4}$, so $m=\frac{1}{4}$, and the equation is $y=\frac{x}{4}+b$. Because the line passes through the point $(4,2)$ we know that $y=2$ when $x=4$.
+
+Substituting we get $2=\frac{4}{4}+b$, so that $b=1$. The equation is therefore $y=\frac{x}{4}+1$. \end{solution}
+
+\end{example}
+
+We now know how to differentiate any function that is a power of the variable. Examples are functions like $x^{3}$ and $t^{-1.3}$. You will come across functions that do not at first appear to be a power of the variable, but can be rewritten in this form. One of the simplest examples is the function
+
+\[
+    f(t)=\sqrt{t}
+\]
+
+which can also be written in the form
+
+\[
+f(t)=t^{\frac{1}{2}} .
+\]
+
+The derivative is then
+
+\[
+f^{\prime}(t)=\frac{t^{-\frac{1}{2}}}{2}=\frac{1}{2 \sqrt{t}}
+\]
+
+Similarly, if
+
+\[
+h(s)=\frac{1}{s}=s^{-1}
+\]
+
+then
+
+\[
+h^{\prime}(s)=-s^{-2}=-\frac{1}{s^{2}}
+\]
+
+\begin{example}
+
+If $f(x)=\frac{1}{\sqrt[3]{x}}=x^{-\frac{1}{3}}$ then $f^{\prime}(x)=-\frac{1}{3} x^{-\frac{4}{3}}$.
+\end{example}
+
+\begin{example}
+
+If $y=\frac{1}{x \sqrt{x}}=x^{-\frac{3}{2}}$ then $\frac{d y}{d x}=-\frac{3}{2} x^{-\frac{5}{2}}$.
+\end{example}
+
+
+\subsection*{Scalar Rule and Linearity}
+
+So far we know how to differentiate powers of the independent variable. Many of the functions that arise in applications are built from such powers in simple ways. For instance, the function  $3x^2$ is merely a scalar multiple of $x^2$, yet neither the constant and power rules tell us how to differentiate $3x^2$. Likewise, these rules do not explain how to differentiate expressions such as $x^{2} + x^{3}$ or $x^{2} - x^{3}$.
+
+\begin{theorem}{Scalar and Linearity Rules}
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+        \vspace{0.5em}
+        \item \textbf{Scalar Rule:} \( \frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x) \). \vspace{0.5em}
+        \item \textbf{Linearity Rule:} \( \frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x) \). \vspace{0.5em}
+    \end{enumerate}
+\end{theorem}
+
+The scalar rule and linearity rules address this gap. They describe how to differentiate functions that are formed by multiplying a function by a constant, and by adding or subtracting functions. These rules allow us to extend our differentiation techniques from simple powers to a broad class of functions constructed from them.
+
+\begin{example}
+    \begin{itemize}
+        \item If \(f(x)=3 x^2\) then \(f^{\prime}(x)=3 \times \frac{d}{d x} x^2=6 x\). \vspace{0.5em}
+        \item If \(g(t)=3 t^2+2 t^{-2}\) then \(g^{\prime}(t)=\frac{d}{d t} 3 t^2+\frac{d}{d t} 2 t^{-2}=6 t-4 t^{-3}\). \vspace{0.5em}
+        \item If \(y=\frac{3}{\sqrt{x}}-2 x \sqrt[3]{x}=3 x^{-\frac{1}{2}}-2 x^{\frac{4}{3}}\) then \(\frac{d y}{d x}=-\frac{3}{2} x^{-\frac{3}{2}}-\frac{8}{3} x^{\frac{1}{3}}\). \vspace{0.5em}
+        \item If \(y=-0.3 x^{-0.4}\) then \(\frac{d y}{d x}=0.12 x^{-1.4}\). \vspace{0.5em}
+        \item \(\frac{d}{d x} 2 x^{0.3}=0.6 x^{-0.7}\).
+    \end{itemize}
+    
+\end{example}
+
+\textbf{Caution.} Although the linearity rule states that $\dfrac{d}{dx}\big(f(x)\pm g(x)\big)=f'(x)\pm g'(x)$, this property does \emph{not} extend to products or quotients. In general,
+\[
+\frac{d}{dx}\big(f(x)g(x)\big)\neq f'(x)g'(x),
+\qquad
+\frac{d}{dx}\left(\frac{f(x)}{g(x)}\right)\neq \frac{f'(x)}{g'(x)}.
+\]
+To differentiate $f(x)g(x)$ or $\frac{f(x)}{g(x)}$ we cannot simply differentiate the factors and then multiply or divide the results. The correct techniques are the \emph{product rule} and the \emph{quotient rule}, which are developed in the next section.
+
+\subsection*{The Product and Quotient Rules}
+
+Another common way of combining functions is to multiply them, thereby forming a \emph{product}. The product rule provides the method for differentiating functions constructed in this way. 
+
+On the other hand the quotient rule allows us to differentiate functions which are formed by dividing one function
+by another, i.e. by forming quotients of functions. The quotient rule provides the method for differentiating functions constructed in this way.
+
+\begin{theorem}{Product and Quotient Rules}
+    \begin{enumerate}
+        \setcounter{enumi}{4}
+        \vspace{0.5em}
+        \item \textbf{Product Rule:} If \(f(x)\) and \(g(x)\) are differentiable, then \vspace{0.5em}
+        \[
+        \frac{d}{dx}\big(f(x)g(x)\big)=f'(x)g(x)+f(x)g'(x). \vspace{0.5em}
+        \] \vspace{0.5em}
+        \item \textbf{Quotient Rule:} If \(f(x)\) and \(g(x)\) are differentiable and \(g(x)\neq0\), then
+        \vspace{0.5em}
+        \[
+        \frac{d}{dx}\left(\frac{f(x)}{g(x)}\right)=\frac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2}. \vspace{0.5em}
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{example} Product Rule
+
+    \begin{itemize}
+        \item If \(y=(x+2)\left(x^2+3\right)\) then \(y^{\prime}=(x+2) 2 x+1\left(x^2+3\right)\). \vspace{0.5em}
+        \item If \(f(x)=\sqrt{x}\left(x^3-3 x^2+7\right)\) then \(f^{\prime}(x)=\sqrt{x}\left(3 x^2-6 x\right)+\frac{1}{2} x^{-\frac{1}{2}}\left(x^3-3 x^2+7\right)\). \vspace{0.5em}
+        \item If \(z=\left(t^2+3\right)\left(\sqrt{t}+t^3\right)\) then \(\frac{d z}{d t}=\left(t^2+3\right)\left(\frac{1}{2} t^{-\frac{1}{2}}+3 t^2\right)+2 t\left(\sqrt{t}+t^3\right)\). \vspace{0.5em}
+    \end{itemize}
+
+\end{example}
+
+\begin{example} Quotient Rule
+
+    \begin{itemize}
+        \item If \(y=\frac{2 x^2+3 x}{x^3+1}\), then \(\frac{d y}{d x}=\frac{\left(x^3+1\right)(4 x+3)-\left(2 x^2+3 x\right) 3 x^2}{\left(x^3+1\right)^2}\). \vspace{0.5em}   
+        \item If \(g(t)=\frac{t^2+3 t+1}{\sqrt{t}+1}\) then \(g^{\prime}(t)=\frac{(\sqrt{t}+1)(2 t+3)-\left(t^2+3 t+1\right)\left(\frac{1}{2} t^{-\frac{1}{2}}\right)}{(\sqrt{t}+1)^2}\). \vspace{0.5em}
+    \end{itemize}
+\end{example}
+
+In the quotient rule, because of the minus sign in the numerator (i.e. in the top line) it is important to get the terms in the numerator in the correct order. This is often a source of mistakes, so be careful. Decide on your own way of remembering the correct order of the terms.
+
+
+\subsection*{The Chain Rule}
+The chain rule is arguably the most important differentiation rule, especially in machine learning. It tells us how to find the derivative of a composite function — a function nested inside another. In software, we constantly compose functions, and the chain rule is the mathematical tool for analyzing how changes propagate through these compositions.
+
+\begin{theorem}{Chain Rule}
+    \vspace{0.5em}
+    \setcounter{enumi}{6}
+    \begin{enumerate}
+        \item If \( h(x) = f(g(x)) \) is a composite function, then its derivative is the derivative of the outer function (evaluated at the inner function) multiplied by the derivative of the inner function. \vspace{0.5em}
+        \[
+        h'(x) = f'(g(x)) \cdot g'(x). \vspace{0.5em}
+        \]
+    \end{enumerate}
+\end{theorem}
+
+\begin{example}
+
+Find the derivative of \( h(x) = (x^3 + 2x)^5 \).
+\end{example}
+
+\begin{solution}
+This is a composition where the outer function is \( f(u) = u^5 \) and the inner function is \( g(x) = x^3 + 2x \). Their derivatives are \( f'(u) = 5u^4 \) and \( g'(x) = 3x^2 + 2 \).
+Applying the chain rule:
+\[
+\begin{aligned}
+h'(x) &= f'(g(x)) \cdot g'(x) \\
+&= 5(x^3 + 2x)^4 \cdot (3x^2 + 2)
+\end{aligned}
+\]
+\end{solution}
+
+\begin{example}
+
+    Differentiate \(\left(3 x^2-5\right)^3\).
+\end{example}
+
+\begin{solution}
+    The first step is always to identify that the expression represents a composite function and then to separate it into its outer and inner components. In this example, the outer function is $(\,\cdot\,)^{3}$, whose derivative is $3(\,\cdot\,)^{2}$, and the inner function is $3x^{2}-5$, whose derivative is $6x$. Applying the composite function rule therefore gives
+
+    \[
+    \frac{d}{dx}\big(3x^{2}-5\big)^{3}
+    = 3\big(3x^{2}-5\big)^{2} \times 6x
+    = 18x\big(3x^{2}-5\big)^{2}.
+    \]
+    
+    Alternatively, we may introduce the substitution \(u = 3x^{2}-5\) and write \(y = u^{3}\). Then
+    
+    \[
+    \frac{dy}{dx}
+    = \frac{dy}{du} \times \frac{du}{dx}
+    = 3u^{2} \times 6x
+    = 18x\big(3x^{2}-5\big)^{2}.
+    \]
+    
+\end{solution}
+
+\begin{example}
+
+    Find \(\frac{d y}{d x}\) if \(y=\sqrt{x^2+1}\).
+
+\end{example}
+\begin{solution}
+    The outer function is \(\sqrt{\cdot}\), whose derivative is \(\frac{1}{2\sqrt{\cdot}}\), and the inner function is \(x^2+1\), whose derivative is \(2x\). Applying the chain rule therefore gives
+
+    \[
+    \frac{d y}{d x} = \frac{1}{2\sqrt{x^2+1}} \times 2x = \frac{x}{\sqrt{x^2+1}}.
+    \]
+\end{solution}
+
+The chain rule is the core mechanism behind the \textbf{backpropagation} algorithm used to train neural networks. An error at the output of a network is a composition of many nested functions (the layers). Backpropagation uses the chain rule repeatedly to calculate the derivative of the error with respect to each weight in the network, telling us how to adjust each weight to improve the model.
+
+\begin{example} A Multi-Rule Problem
+
+Find the derivative of \( h(x) = \frac{x^2}{(3x+1)^4} \).
+\end{example}
+
+\begin{solution}
+This problem requires the quotient rule, and the denominator requires the chain rule.
+Let \( f(x) = x^2 \) and \( g(x) = (3x+1)^4 \).
+Then \( f'(x) = 2x \). To find \( g'(x) \), we use the chain rule: \( g'(x) = 4(3x+1)^3 \cdot 3 = 12(3x+1)^3 \).
+Now, apply the quotient rule:
+\[
+\begin{aligned}
+h'(x) &= \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2} \\
+&= \frac{(2x)(3x+1)^4 - (x^2)(12(3x+1)^3)}{((3x+1)^4)^2} \\
+&= \frac{(2x)(3x+1) - 12x^2}{(3x+1)^5} \quad \text{(after factoring out and canceling \((3x+1)^3\))} \\
+&= \frac{6x^2 + 2x - 12x^2}{(3x+1)^5} = \frac{2x - 6x^2}{(3x+1)^5}
+\end{aligned}
+\]
+\end{solution}
+
+\subsection*{Summary of Rules of Differentiation}
+\label{sec:ch10-common}
+
+The rules of differentiation are summarized in the following theorem.
+
+\begin{theorem}{Rules of Differentiation}
+
+    \begin{enumerate}
+        \item \textbf{Constant Rule:} If $c$ is constant, then $\dfrac{d}{dx}c=0$. \vspace{0.5em}
+        \item \textbf{Power Rule:} For any real $n$, $\dfrac{d}{dx}x^n = n x^{n-1}$. \vspace{0.5em}
+        \[
+        \frac{d}{dx}x^n = n x^{n-1}.
+        \]
+        \item \textbf{Scalar Rule:} If $c$ is constant, then $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$. \vspace{0.5em}
+        \item \textbf{Linearity:} For differentiable $f,g$ and constants $a,b$, $\dfrac{d}{dx}(a f + b g) = a f' + b g'$. \vspace{0.5em}
+        \item \textbf{Product Rule:} If $f,g$ are differentiable, then $\dfrac{d}{dx}(f g) = f'g + fg'$. \vspace{0.5em}
+        \item \textbf{Quotient Rule:} If $f,g$ are differentiable and $g(x)\neq0$, then $\dfrac{d}{dx}\left(\frac{f}{g}\right) = \frac{f'g - fg'}{g^2}$. \vspace{0.5em}
+        \item \textbf{Chain Rule:} If $f,g$ are differentiable, then $\dfrac{d}{dx}(f(g(x))) = f'(g(x))g'(x)$. \vspace{0.5em}
+    \end{enumerate}
+
+\end{theorem}
+
+These rules do not apply to every function. For instance, the derivative of $e^{x}$ is $e^{x}$, while the derivative of $\ln x$ is $\dfrac{1}{x}$, and neither of these fits the patterns described so far. The most common differentiable functions that fall outside these earlier rules are listed below.
+
+
+\begin{itemize}
+    \item $\dfrac{d}{dx}e^x = e^x$\vspace{0.5em}
+    \item $\dfrac{d}{dx}\ln x = \dfrac{1}{x}$\vspace{0.5em}
+    \item $\dfrac{d}{dx}\sin x = \cos x$\vspace{0.5em}
+    \item $\dfrac{d}{dx}\cos x = -\sin x$
+\end{itemize}
+
+\begin{example}
+
+    Differentiate \(\ln \left(x^2+3 x+1\right)\).
+\end{example}
+
+\begin{solution} We solve this by using the chain rule and our knowledge of the derivative of \(\ln x\).
+
+    \[
+    \begin{aligned}
+    \frac{d}{d x} \ln\left(x^2+3 x+1\right) & =\frac{d}{d x}\left(\ln u\right) \quad\left(\text { where } u=x^2+3 x+1\right) \\
+    & =\frac{d}{d u}\left(\ln u\right) \times \frac{d u}{d x} \quad(\text { by the chain rule }) \\
+    & =\frac{1}{u} \times \frac{d u}{d x} \\
+    & =\frac{1}{x^2+3 x+1} \times \frac{d}{d x}\left(x^2+3 x+1\right) \\
+    & =\frac{1}{x^2+3 x+1} \times(2 x+3) \\
+    & =\frac{2 x+3}{x^2+3 x+1}
+    \end{aligned}
+    \]
+
+\end{solution}
+
+
+\begin{example}
+    
+Find \(\frac{d}{d x}\left(e^{3 x^2}\right)\).
+\end{example}
+\begin{solution} This is an application of the chain rule together with our knowledge of the derivative of \(e^x\).
+
+\[
+\begin{aligned}
+\frac{d}{d x}\left(e^{3 x^2}\right) & =\frac{d e^u}{d x} \quad \text { where } u=3 x^2 \\
+& =\frac{d e^u}{d u} \times \frac{d u}{d x} \quad \text { by the chain rule } \\
+& =e^u \times \frac{d u}{d x} \\
+& =e^{3 x^2} \times \frac{d}{d x}\left(3 x^2\right) \\
+& =6 x e^{3 x^2}
+\end{aligned}
+\]
+\end{solution}
+
+
+\begin{example}
+
+Find \(\frac{d}{d x}\left(e^{x^2+2 x}\right)\).
+\end{example}
+\begin{solution} Again, we use our knowledge of the derivative of \(e^x\) together with the chain rule.
+
+\[
+\begin{aligned}
+\frac{d}{d x}\left(e^{x^2+2 x}\right) & =\frac{d e^{u}}{d x} \quad\left(\text { where } u=x^2+2 x\right) \\
+& =e^{u} \times \frac{d u}{d x} \quad \text { (by the chain rule) } \\
+& =e^{x^2+2 x} \times \frac{d}{d x}\left(x^2+2 x\right) \\
+& =\left(2x+2\right)e^{x^2+2 x}
+\end{aligned}
+\]
+\end{solution}
+
+
+\begin{example}
+
+Differentiate \(\ln \left(2 x^3+5 x^2-3\right)\).
+\end{example}
+\begin{solution}
+We solve this by using the chain rule and our knowledge of the derivative of \(\ln x\).
+
+\[
+\begin{aligned}
+\frac{d}{d x} \ln \left(2 x^3+5 x^2-3\right) & =\frac{d \ln u}{d x} \quad \text { (where } u=\left(2 x^3+5 x^2-3\right) \\
+& =\frac{d \ln u}{d u} \times \frac{d u}{d x} \quad \text { (by the chain rule) } \\
+& =\frac{1}{u} \times \frac{d u}{d x} \\
+& =\frac{1}{2 x^3+5 x^2-3} \times \frac{d}{d x}\left(2 x^3+5 x^2-3\right) \\
+& =\frac{1}{2 x^3+5 x^2-3} \times\left(6 x^2+10 x\right) \\
+& =\frac{6 x^2+10 x}{2 x^3+5 x^2-3}
+\end{aligned}
+\]
+\end{solution}
+
+There are two shortcuts to differentiating functions involving exponents and logarithms. The four examples above gave
+
+\[
+\begin{aligned}
+\frac{d}{d x}\left(\ln\left(x^2+3 x+1\right)\right) & =\frac{2 x+3}{x^2+3 x+1} \\
+\frac{d}{d x}\left(e^{3 x^2}\right) & =6 x e^{3 x^2} \\
+\frac{d}{d x}\left(e^{x^2+2 x}\right) & =\left(2x+2\right)e^{x^2+2 x} \\
+\frac{d}{d x}\left(\ln\left(2 x^3+5 x^2-3\right)\right) & =\frac{6 x^2+10 x}{2 x^3+5 x^2-3}
+\end{aligned}
+\]
+
+
+These examples suggest the general rules
+
+\[
+\begin{aligned}
+\frac{d}{d x}\left(e^{f(x)}\right) & =f^{\prime}(x) e^{f(x)} \\
+\frac{d}{d x}(\ln f(x)) & =\frac{f^{\prime}(x)}{f(x)}
+\end{aligned}
+\]
+
+
+These rules arise from the chain rule and the facts that \(\frac{d}{dx}e^x=e^x\) and \(\frac{d}{dx}\ln x=\frac{1}{x}\) for $x>0$. They can speed up differentiation, but if you forget them, they can be reconstructed using the chain rule as in the examples above.
+
+
+\section{Applications of Derivatives}
+\label{sec:ch10-applications}
+
+The development of mathematics ranks among the greatest achievements of human thought, and the emergence of calculus — both differential and integral — marks a turning point in that history. Differential calculus in particular has countless practical applications across science and engineering, far too many to enumerate. Its importance is reflected in the fact that virtually every quantitative discipline relies on its methods.
+
+Within elementary mathematics, differential calculus is used primarily in two areas: analysing and sketching curves, and solving optimisation problems. In this section, we offer a brief introduction to how differential calculus is applied in optimisation.
+
+
+\subsection*{Stationary points - the idea behind optimisation}
+Let us return to our metaphor of the mountain range. Imagine standing somewhere among peaks and valleys, perhaps even with your eyes closed or shrouded in fog. As you wander along, you notice that whenever you’re hiking uphill or downhill, you know you are not at the highest summit or the lowest valley—you are either still climbing or still descending.
+
+But at the top of a peak, there is a brief, level stretch where the slope under your feet is zero. At a bottom of a valley, there is also a level spot. If you find yourself on perfectly flat ground—at least for a moment—you have a clue: you might be at a summit, a valley, or perhaps at a gentle inflection point along a ridge. In the vast terrain of a mountain range, it is only at these level patches, where the slope vanishes, that you could possibly be at an extreme point: a maximum or minimum.
+
+This motivates an important step in optimisation: interior points where a differentiable function has a local maximum or minimum must have zero derivative. These locations are known as stationary points. A complete optimisation problem may also require checking endpoints and points where the derivative does not exist.
+
+\begin{definition}
+     For a function $y=f(x)$ the points on the graph where the graph has zero slope are called stationary points. In other words stationary points are where $f^{\prime}(x)=0$.
+    \end{definition}
+
+To find the stationary points of a function we differentiate, set the derivative equal to zero and solve the equation.
+
+\begin{example}
+
+    Find the stationary points of the function $f(x)=2 x^{3}+3 x^{2}-12 x+17$.
+    \label{ex:stationary-points-1}
+\end{example}
+
+
+\begin{solution}
+    
+    $f^{\prime}(x)=6 x^{2}+6 x-12$. Setting $f^{\prime}(x)=0$ and solving we obtain
+
+
+\[
+\begin{aligned}
+6 x^{2}+6 x-12 & =0 \\
+x^{2}+x-2 & =0 \\
+(x-1)(x+2) & =0 \\
+x & =1,-2
+\end{aligned}
+\]
+
+This gives us the values of $x$ for which the function $f$ is stationary. The corresponding values of the function are found by substituting 1 and -2 into the function.
+
+They are $f(1)=2 \times 1^{3}+3 \times 1^{2}-12 \times 1+17=10$ and 
+$f(-2)=2 \times(-2)^{3}+3 \times(-2)^{2}-12 \times(-2)+17=37$. The stationary points are therefore $(1,10)$ and $(-2,37)$.
+\end{solution}
+
+
+\begin{example}
+
+    Find the stationary points of the function $g(t)=e^{t^{2}}$.
+\end{example}
+
+\begin{solution}
+    Differentiating and setting the derivative equal to zero we obtain the equation $g^{\prime}(t)=2 t e^{t^{2}}=0$. Since $e^{t^{2}}$ is never zero, the only solution to this equation is where $2 t=0$, ie $t=0$. Substituting into the formula for $g$ we obtain the function value $g(0)=e^{0^{2}}=1$. Thus the stationary point is $(0,1)$.
+\end{solution}
+
+\subsubsection*{Types of stationary points}
+Returning to our mountain range metaphor, stationary points can be thought of as the special spots where, just for a moment, the ground feels perfectly level beneath your feet. Sometimes, this happens at the very top of a hill—where, if you reach out in any direction, you only sense downhill slopes ahead. This is called a local maximum: the summit of your immediate surroundings, though not necessarily the tallest peak in the whole range. Other times, the level spot is at the bottom of a valley—everything around you slopes upward. This is called a local minimum: the lowest place in your local vicinity, even if deeper valleys exist elsewhere. The “local” label emphasizes that we’re talking about the highest or lowest point nearby, not globally. You might also hear the terms “relative maximum” and “relative minimum” used for these. \autoref{fig:local-extrema} illustrates a function as a landscape with both a hilltop (local maximum) and a valley floor (local minimum). Notice that, at each of these points—just like on a level patch in the mountains—the slope is zero.
+
+% Figure: Local maximum and local minimum (example with f(x)=x^3 - 3x)
+% --- Ensure these packages are in your preamble ---
+% \usepackage{pgfplots}
+% \usepackage{xcolor}
+% \pgfplotsset{compat=1.17} % Or your current version
+
+% --- Ensure your custom color is defined ---
+% \definecolor{mseViaBlue}{HTML}{1933CC}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$,
+            ylabel=$y$,
+            width=12cm, height=8cm, % Slightly adjusted size
+            xmin=-2.5, xmax=2.5,
+            ymin=-3.5, ymax=3.5,
+            xtick={-2, -1, 0, 1, 2},
+            ytick={-3, -2, -1, 0, 1, 2, 3},
+            grid=major,
+            grid style={dashed, gray!30},
+            legend pos=outer north east,
+            clip=false % Allows labels to go outside the axis box
+        ]
+        % Plot the curve f(x) = x^3 - 3x, specifying the domain
+        \addplot[
+            domain=-2.2:2.2, % Explicitly set the domain
+            samples=100,     % Ensure a smooth curve
+            smooth,
+            very thick,
+            mseViaBlue
+        ] {x^3 - 3*x};
+        \addlegendentry{\(f(x)=x^3-3x\)}
+
+        % Mark the stationary points: (-1, 2) and (1, -2)
+        \addplot[
+            only marks,
+            mark=*,              % A solid circle is often clearer
+            mark size=2.5pt,
+            color=red            % Make the points stand out
+        ] coordinates {(-1,2) (1,-2)};
+        \addlegendentry{Stationary points}
+
+        % Add labels for the points using nodes
+        \node[above right, color=red, font=\small] at (axis cs:-1, 2) {Local Maximum};
+        \node[below right, color=red, font=\small] at (axis cs:1, -2) {Local Minimum};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{A curve with a local maximum at \(x=-1\) and a local minimum at \(x=1\).}
+    \label{fig:local-extrema}
+\end{figure}
+
+Local maxima and local minima are not the only types of stationary points. There is a third kind. \autoref{fig:stationary-inflection} shows a stationary point that is neither a local maximum nor a local minimum. This type of stationary point is called a stationary point of inflection or simply \textit{inflection point}.
+
+% --- Ensure these packages are in your preamble ---
+% \usepackage{pgfplots}
+% \usepackage{xcolor}
+% \pgfplotsset{compat=1.17} % Or your current version
+
+% --- Ensure your custom color is defined ---
+% \definecolor{mseViaBlue}{HTML}{1933CC}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$,
+            ylabel=$y$,
+            width=12cm, height=8cm,
+            xmin=-1.5, xmax=3.5,
+            ymin=-4.5, ymax=4.5,
+            xtick={-1, 0, 1, 2, 3},
+            ytick={-4, -2, 0, 2, 4},
+            grid=major,
+            grid style={dashed, gray!30},
+            legend pos=outer north east,
+            legend cell align={left},
+            clip=false
+        ]
+        % Plot the curve f(x) = (x-1)^3
+        \addplot[
+            domain=-0.8:2.8, % Explicitly set the domain
+            samples=100,      % Ensure a smooth curve
+            smooth,
+            very thick,
+            mseViaBlue
+        ] {(x-1)^3};
+        \addlegendentry{\(f(x)=(x-1)^3\)}
+
+        % Mark the stationary point of inflection at x=1
+        \addplot[
+            only marks,
+            mark=*,              % Use a solid circle
+            mark size=2.5pt,
+            color=red
+        ] coordinates {(1,0)};
+        \addlegendentry{Stationary point}
+
+        % Add a label for the point using a node and an arrow
+        \node[color=red, font=\small] (label_node) at (axis cs:2.5, 2) {Stationary point of inflection};
+        \draw[->, color=red, thick] (label_node) -- (axis cs:1.1, 0.1);
+
+        % Optional: Add a tangent line at the inflection point to show it's horizontal
+        \addplot[
+            domain=0:2,
+            dashed,
+            color=black,
+            thin
+        ] {0};
+        \addlegendentry{Tangent at x=1}
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{A function with a stationary point of inflection at \(x=1\). The tangent line at this point is horizontal, but it is neither a local maximum nor a local minimum.}
+    \label{fig:stationary-inflection}
+\end{figure}
+
+\subsection*{The first derivative test}
+Let us return to \autoref{ex:stationary-points-1}. For the function $f(x)=2 x^{3}+3 x^{2}-12 x+17$ we identified stationary points at $(1,10)$ and $(-2,37)$. The natural question is: what type of stationary points are these? Without a sketch of the graph it is not immediately clear whether they correspond to local maxima, local minima, or stationary points of inflection. Drawing an accurate graph would resolve the question, but doing so can require substantial effort. Instead, we seek a method that allows us to classify a stationary point without needing to plot the entire function.
+
+Several approaches exist, but in this section we focus on one technique, known as the \emph{first derivative test}. The idea is to examine the behaviour of the function immediately to the left and immediately to the right of the stationary point.
+
+To understand the principle, imagine a person standing at a point on a landscape where the ground is level. Without seeing the surroundings, the person wishes to determine whether this point is the top of a hill, the bottom of a valley, or neither. One way to decide is to take a small step backward and observe the slope, and then take a small step forward and observe the slope again.
+
+If the ground slopes upward behind and downward ahead, the level point is the top of a hill, corresponding to a local maximum. If the ground slopes downward behind and upward ahead, the point is the bottom of a valley, corresponding to a local minimum. If the slopes have the same sign on both sides, the point is not a local extremum; further analysis is needed to determine whether it is an inflection point.
+
+This reasoning captures the essence of the first derivative test: by analysing the sign of \(f^{\prime}(x)\) immediately on either side of a stationary point, we can determine its character without relying on a graph.
+
+% --- Ensure these packages are in your preamble ---
+% \usepackage{pgfplots}
+% \usepackage{xcolor}
+% \pgfplotsset{compat=1.17}
+
+% --- Ensure your custom color is defined ---
+% \definecolor{mseViaBlue}{HTML}{1933CC}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$,
+            ylabel=$y$,
+            width=12cm, height=8cm,
+            xmin=-2.5, xmax=2.5,
+            ymin=-3.5, ymax=3.5,
+            xtick={-2, -1, 0, 1, 2},
+            ytick={-3, -2, -1, 0, 1, 2, 3},
+            grid=major,
+            grid style={dashed, gray!30},
+            legend pos=outer north east,
+            clip=false
+        ]
+        % Plot the curve f(x) = x^3 - 3x
+        \addplot[
+            domain=-2.2:2.2, samples=100,
+            smooth, very thick, mseViaBlue
+        ] {x^3 - 3*x};
+        \addlegendentry{\(f(x)=x^3-3x\)}
+
+        % -- Local Maximum at x = -1 --
+        \coordinate (max_point) at (axis cs:-1, 2);
+        % Tangent with positive slope (f' > 0)
+        \draw[green!60!black, thick] (axis cs:-1.8, 0.5) -- (axis cs:-1.2, 3.5);
+        \node[above, color=green!60!black] at (axis cs:-1.7, 2.2) {\(f' > 0\)};
+        % Tangent with negative slope (f' < 0)
+        \draw[red, thick] (axis cs:-0.8, 3.5) -- (axis cs:-0.2, 0.5);
+        \node[above, color=red] at (axis cs:-0.3, 2.2) {\(f' < 0\)};
+        % Horizontal tangent (f' = 0)
+        \draw[black, dashed] (axis cs:-1.5, 2) -- (axis cs:-0.5, 2);
+        \node[above] at (max_point) {\(f' = 0\)};
+
+        % -- Local Minimum at x = 1 --
+        \coordinate (min_point) at (axis cs:1, -2);
+        % Tangent with negative slope (f' < 0)
+        \draw[red, thick] (axis cs:0.2, -0.5) -- (axis cs:0.8, -3.5);
+        \node[below, color=red] at (axis cs:0.3, -2.5) {\(f' < 0\)};
+        % Tangent with positive slope (f' > 0), mirrored around x = 1 to match the negative slope tangent
+        \draw[green!60!black, thick] (axis cs:1.2, -3.5) -- (axis cs:1.8, -0.5);
+        \node[below, color=green!60!black] at (axis cs:1.7, -2.5) {\(f' > 0\)};
+        % Horizontal tangent (f' = 0)
+        \draw[black, dashed] (axis cs:0.5, -2) -- (axis cs:1.5, -2);
+        \node[below] at (min_point) {\(f' = 0\)};
+
+        % Mark the stationary points
+        \fill[red] (max_point) circle (2.5pt);
+        \fill[red] (min_point) circle (2.5pt);
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Illustration of the first derivative test. At a local maximum, the derivative changes from positive to negative. At a local minimum, it changes from negative to positive.}
+    \label{fig:first-derivative-test}
+\end{figure}
+
+% --- Ensure these packages are in your preamble ---
+% \usepackage{pgfplots}
+% \usepackage{xcolor}
+% \pgfplotsset{compat=1.17}
+
+% --- Ensure your custom color is defined ---
+% \definecolor{mseViaBlue}{HTML}{1933CC}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle,
+            xlabel=$x$,
+            ylabel=$y$,
+            width=12cm, height=8cm,
+            xmin=-2.5, xmax=2.5,
+            ymin=-2.5, ymax=2.5,
+            xtick={-2, -1, 0, 1, 2},
+            ytick={-2, -1, 0, 1, 2},
+            grid=major,
+            grid style={dashed, gray!30},
+            legend pos=outer north east,
+            clip=false
+        ]
+        % Plot the curve f(x) = x^3 / 2
+        \addplot[
+            domain=-2:2, samples=100,
+            smooth, very thick, mseViaBlue
+        ] {x^3 / 2};
+        \addlegendentry{\(f(x)=\frac{1}{2}x^3\)}
+
+        % -- Stationary Point of Inflection at x = 0 --
+        \coordinate (inflection_point) at (axis cs:0, 0);
+
+        % Tangent with positive slope to the left (f' > 0)
+        \draw[green!60!black, thick] (axis cs:-2, -2) -- (axis cs:-0.5, 0);
+        \node[above, color=green!60!black] at (axis cs:-1.5, -1) {\(f' > 0\)};
+
+        % Tangent with positive slope to the right (f' > 0)
+        \draw[green!60!black, thick] (axis cs:0.5, 0) -- (axis cs:2, 2);
+        \node[below, color=green!60!black] at (axis cs:1.5, 1) {\(f' > 0\)};
+
+        % Horizontal tangent at the inflection point (f' = 0)
+        \draw[black, dashed] (axis cs:-1, 0) -- (axis cs:1, 0);
+        \node[above, anchor=south west] at (inflection_point) {\(f' = 0\)};
+
+        % Mark the stationary point
+        \fill[red] (inflection_point) circle (2.5pt);
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Illustration of a stationary point of inflection. The derivative is zero at \(x=0\), but it is positive on both sides, so the point is neither a local maximum nor a minimum.}
+    \label{fig:stationary-inflection-test}
+\end{figure}
+
+We can summarize these considerations in the following theorem:
+
+\begin{theorem}[The First Derivative Test]
+    Let \(c\) be a critical point of a continuous function \(f\).
+    \begin{itemize}
+        \item If \(f'(x)\) changes from negative to positive at \(c\), then \(f\) has a \textbf{local minimum} at \(c\).
+        \item If \(f'(x)\) changes from positive to negative at \(c\), then \(f\) has a \textbf{local maximum} at \(c\).
+        \item If \(f'(x)\) does not change sign at \(c\), then \(f\) has no local extremum at \(c\). The first derivative test alone does not determine whether $c$ is an inflection point.
+    \end{itemize}
+
+    \end{theorem}
+This test is visualized in \autoref{fig:first-derivative-test} and \autoref{fig:stationary-inflection-test}.
+
+
+\subsection*{Optimisation}
+Now that we've laid the groundwork, we can approach some optimisation problems. When we want to maximise a function $f(x)$ within a specified interval for $x$, our goal is to find the largest value that $f(x)$ achieves on that interval. Importantly, this maximum value does not always coincide with a stationary point. As shown in \autoref{fig:restricted-domain-extrema}, consider searching for the greatest and least values of a function on the interval $2 \leq x \leq 7$. Within this interval, the function has two stationary points—one corresponding to a local maximum, the other to a local minimum. However, the highest value of the function in this interval actually occurs at the endpoint $x=7$, which is not a stationary point. It takes this value simply because, outside of the interval, larger $x$ values are excluded from consideration. In contrast, the minimum value in this example is located at a stationary point within the interval. With this understanding, we can now explain the systematic steps for finding the maximum or minimum of a function in a given region.
+
+% --- Ensure these packages are in your preamble ---
+% \usepackage{pgfplots}
+% \usepackage{xcolor}
+% \pgfplotsset{compat=1.17}
+% \usetikzlibrary{patterns} % For the shaded region
+
+% --- Ensure your custom color is defined ---
+% \definecolor{mseViaBlue}{HTML}{1933CC}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines=middle, % <-- Change from 'left' to 'middle'
+            xlabel=$x$,
+            ylabel=$y$,
+            width=10cm, height=7cm,
+            xmin=0, xmax=8.5,
+            ymin=-5, ymax=75,
+            xtick={0, 1, 2, 3, 4, 5, 6, 7, 8},
+            ytick={0, 25, 50, 75},
+            grid=major,
+            grid style={dashed, gray!30},
+            legend style={
+                at={(0.5, 0.97)}, % Position near the top center
+                anchor=north,     % Anchor the top-center of the legend box
+                legend cell align={left}
+            },
+            clip=false,
+            % Add setting to move x axis to y=0
+            axis x line=bottom, % Ensures x axis is shown
+            axis y line=middle, % y axis through x=0
+            % Customize placement:
+            x axis line style={-}, % Solid x axis
+            y axis line style={-}, % Solid y axis
+            enlarge y limits={abs=0.5}, % Provide space above/below
+            % Custom ticks at y=0 (x axis at y=0)
+            at={(0,0)}
+        ]
+        % Define the function path for shading
+        \addplot[
+            name path=curve,
+            domain=1.5 :7.5, samples=100,
+            smooth, very thick, mseViaBlue
+        ] {2*(x^3 - 12*x^2 + 45*x) - 99};
+        \addlegendentry{\(f(x)\)}
+
+        % -- Highlight the restricted domain [2, 7] --
+        % Create paths for the vertical boundaries
+        \path[name path=left_bound] (axis cs:2, -5) -- (axis cs:2, 45);
+        \path[name path=right_bound] (axis cs:7, -5) -- (axis cs:7, 45);
+        % Shade the area between x=2 and x=7
+        \addplot[gray!20] fill between[of=left_bound and right_bound];
+        \addlegendentry{Domain [2, 7]}
+
+        % -- Mark and Label the Points of Interest --
+        % Local Maximum (at x=3)
+        \coordinate (local_max) at (axis cs:3, 9);
+        \fill[blue] (local_max) circle (2.5pt);
+        \node[above, blue, font=\small] at (local_max) {Local Maximum};
+
+        % Absolute Minimum (at x=5, which is also a local min)
+        \coordinate (abs_min) at (axis cs:5, 1);
+        \fill[red] (abs_min) circle (2.5pt);
+        \node[below, red, font=\small] at (abs_min) {Absolute Minimum};
+
+        % Absolute Maximum (at endpoint x=7)
+        \coordinate (abs_max) at (axis cs:7, 41);
+        \fill[red] (abs_max) circle (2.5pt);
+        \node[above, red, font=\small] at (abs_max) {Absolute Maximum};
+
+        % Left Endpoint (at x=2)
+        \coordinate (left_end) at (axis cs:2, 1);
+        \fill[black] (left_end) circle (2.5pt);
+
+        \end{axis}
+    \end{tikzpicture}
+    \caption{On the restricted domain \([2, 7]\), the absolute maximum occurs at an endpoint (\(x=7\)), not at the local maximum. The absolute minimum occurs at an interior stationary point (\(x=5\)).}
+    \label{fig:restricted-domain-extrema}
+\end{figure}
+
+\subsection*{The location of maxima and minima}
+A function $f(x)$ may or may not have a maximum or minimum value in a particular region of $x$ values. However, if they do exist the maximum and the minimum values must occur at one of three places:
+
+\begin{enumerate}
+  \item At the endpoints (if they exist) of the region under consideration.
+  \item Inside the region at a stationary point.
+  \item Inside the region at a point where the derivative does not exist.
+\end{enumerate}
+
+\begin{remark}
+    
+
+\begin{enumerate}
+  \item It is straightforward to find cases where a function does not attain a maximum or minimum within a certain range. For instance, the function $f(x) = x$ lacks both a maximum and a minimum over the interval $-\infty < x < \infty$; its graph increases without bound as $x$ increases. According to Point 1 above, note that in the region $-\infty < x < \infty$, there are actually no endpoints. As another illustration, for the region $x \geq 1$, there is only a single endpoint at $x = 1$.
+  \item Regarding Point 3, this text does not cover situations where the derivative fails to exist at certain points. Nevertheless, keep in mind that such points can occur and could be where a maximum or minimum is located. For more details, refer to advanced calculus resources.
+\end{enumerate}
+\end{remark}
+
+Now that we know exactly where the maxima or minima can occur, we can give a procedure for finding them.
+
+\subsubsection*{Procedure for finding the maximum or minimum values of a function.}
+\begin{enumerate}
+  \item Find the endpoints of the region under consideration (if there are any).
+  \item Find all the stationary points in the region.
+  \item Find all points in the region where the derivative does not exist.
+  \item Substitute each of these into the function and see which gives the greatest (or smallest) function value.
+\end{enumerate}
+
+\begin{example}
+
+    Find the minimum value and the maximum value of the function $f(x)=x^{2} e^{x}$ for $-4 \leq x \leq 1$.
+\end{example}
+
+\begin{solution} We will follow the procedure outlined above. The endpoints are -4 and 1 . Differentiating we obtain $f^{\prime}(x)=x^{2} e^{x}+2 x e^{x}=x(x+2) e^{x}$. Setting $f^{\prime}(x)=0$ and solving we get stationary points at $x=0$ and $x=-2$. There are no points where the derivative does not exist. Therefore the maximum and minimum values will be found at one of the points $x=-4,-2,0,1$. Substituting we obtain $f(-4) \approx 0.29, f(-2) \approx 0.54, f(0)=0$ and $f(1)=e \approx 2.7$. therefore the maximum value occurs at $x=1$ and is equal to $e$, and the minimum value occurs at $x=0$ and is 0 .
+\end{solution}
+
+\begin{example}
+
+    Find the maximum and minimum values of the function $g(t)=\frac{1}{3} t^{3}-t+2$ for $0 \leq t \leq 3$.
+\end{example}
+
+\begin{solution} The endpoints are $t=0$ and $t=3$. Differentiating and equating to zero we get $g^{\prime}(t)=t^{2}-1=(t-1)(t+1)=0$ so the stationary points are at $t=-1,1$. Since -1 is not in the region, the possible locations of the maximum and the minimum are $t=0,1,3$. Substituting into $g$ we obtain $g(0)=2, g(1)=\frac{4}{3}$ and $g(3)=8$. The maximum is therefore $g(3)=8$ and the minimum is $g(1)=\frac{4}{3}$.
+\end{solution}
+
+\begin{example}
+
+    Suppose you are tuning a machine learning model, and you want to find the learning rate \( \alpha \) (between \(0\) and \(1\)) that minimizes the loss function \( L(\alpha) = (\alpha - 0.3)^2 + 1 \). What value of \( \alpha \) gives the minimum loss?
+    \end{example}
+    
+    \begin{solution} We will apply the procedure for finding absolute extrema on the closed interval \( [0, 1] \). The function to minimize is the loss function \( L(\alpha) = (\alpha - 0.3)^2 + 1 \).
+    
+    \begin{enumerate}
+        \item \textbf{Identify Endpoints:} The region under consideration is \( 0 \le \alpha \le 1 \), so the endpoints are \( \alpha = 0 \) and \( \alpha = 1 \).
+    
+        \item \textbf{Find Stationary Points:} We first find the derivative of the loss function with respect to \( \alpha \):
+        \[
+        \frac{dL}{d\alpha} = \frac{d}{d\alpha} \left[ (\alpha - 0.3)^2 + 1 \right] = 2(\alpha - 0.3)
+        \]
+        Next, we set the derivative to zero to find the stationary points:
+        \[
+        2(\alpha - 0.3) = 0 \implies \alpha = 0.3
+        \]
+        The only stationary point is \( \alpha = 0.3 \), which lies within our interval \( [0, 1] \).
+    
+        \item \textbf{Identify Points Where Derivative is Undefined:} The derivative \( 2(\alpha - 0.3) \) is a simple linear function and is defined for all values of \( \alpha \). There are no such points.
+    
+        \item \textbf{Compare Values at Candidate Points:} We now evaluate the loss function \( L(\alpha) \) at all the candidate points we have found: the endpoints and the stationary point.
+        \begin{itemize}
+            \item At the left endpoint, \( \alpha = 0 \):
+            \[ L(0) = (0 - 0.3)^2 + 1 = 0.09 + 1 = 1.09 \]
+            \item At the stationary point, \( \alpha = 0.3 \):
+            \[ L(0.3) = (0.3 - 0.3)^2 + 1 = 0 + 1 = 1.00 \]
+            \item At the right endpoint, \( \alpha = 1 \):
+            \[ L(1) = (1 - 0.3)^2 + 1 = (0.7)^2 + 1 = 0.49 + 1 = 1.49 \]
+        \end{itemize}
+    \end{enumerate}
+    
+    By comparing these values, we see that the smallest loss is \( 1.00 \), which occurs at the stationary point.
+    
+    \textbf{Conclusion:} The minimum loss occurs when the learning rate is \( \alpha = 0.3 \).
+    \end{solution}
+
+    \section{The Second Derivative: Curvature and Inflection}
+
+    The first derivative, \(f'(x)\), tells us about the slope or rate of change of a function. The \textbf{second derivative}, denoted \(f''(x)\), is the derivative of the first derivative. It measures how the slope itself is changing. This provides deeper insight into the shape of a function's graph.
+    
+    \begin{definition}[The Second Derivative]
+    The \textbf{second derivative} of a function \( f \), denoted \( f''(x) \), is the function
+    \[
+    f''(x) = \frac{d}{dx} \left( f'(x) \right)
+    \]
+    provided the limit exists.
+    \end{definition}
+    
+    The most important geometric interpretation of the second derivative is \textbf{concavity}.
+    
+    \begin{itemize}
+        \item If \( f''(x) > 0 \) on an interval, the slope \(f'(x)\) is increasing. The graph bends upwards, like a cup holding water. We say the function is \textbf{concave up}.
+        \item If \( f''(x) < 0 \) on an interval, the slope \(f'(x)\) is decreasing. The graph bends downwards, like a cup spilling water. We say the function is \textbf{concave down}.
+    \end{itemize}
+    
+    A point on the graph where the concavity changes is called an \textbf{inflection point}. This typically occurs where \(f''(x) = 0\).
+    
+    \begin{figure}[htbp]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis lines=middle,
+                xlabel=$x$,
+                ylabel=$y$,
+                width=12cm, height=8cm,
+                xmin=-2.5, xmax=2.5,
+                ymin=-3, ymax=3,
+                xtick={-2, -1, 0, 1, 2},
+                ytick={-2, 0, 2},
+                grid=major,
+                grid style={dashed, gray!30},
+                legend style={at={(0.03, 0.97)}, anchor=north west},
+                clip=false
+            ]
+            % Plot the curve f(x) = x^3/2 - x
+            \addplot[
+                domain=-2.2:2.2, samples=100,
+                smooth, very thick, mseViaBlue
+            ] {x^3/2 - x};
+            \addlegendentry{\(f(x)=\frac{1}{2}x^3 - x\)}
+    
+            % Mark the inflection point at x=0
+            \coordinate (P) at (axis cs:0, 0);
+            \fill[red] (P) circle (2.5pt);
+            \node[above right, font=\small, color=red] at (P) {Inflection Point at \(x=0\)};
+    
+            % Annotate Concavity
+            \node[below, font=\small, color=orange] at (axis cs:-1.5, -1) {Concave Down (\(f'' < 0\))};
+            \node[above, font=\small, color=green!60!black] at (axis cs:1.5, 1) {Concave Up (\(f'' > 0\))};
+            
+            \end{axis}
+        \end{tikzpicture}
+        \caption{A function showing a region of concave down curvature, followed by a region of concave up curvature. The transition occurs at the inflection point.}
+        \label{fig:ch11-concavity}
+    \end{figure}
+    
+    The second derivative also gives us a powerful tool for classifying stationary points.
+    
+    \begin{theorem}[The Second Derivative Test]
+    Let \(c\) be a stationary point of \(f\) (i.e., \(f'(c) = 0\)).
+    \begin{itemize}
+        \item If \(f''(c) > 0\), then \(f\) has a \textbf{local minimum} at \(c\).
+        \item If \(f''(c) < 0\), then \(f\) has a \textbf{local maximum} at \(c\).
+        \item If \(f''(c) = 0\), the test is inconclusive.
+    \end{itemize}
+    \end{theorem}

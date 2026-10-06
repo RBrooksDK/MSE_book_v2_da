@@ -1,0 +1,660 @@
+\chapter{Linear Equations in Linear Algebra}\label{chap:ch7}
+
+In 1949, Harvard Professor Wassily Leontief used one of the earliest computers, the Mark II, to solve a system of linear equations that modelled the U.S. economy. He divided the economy into 500 sectors, like coal, automotive, and communications, and described how each sector interacted using linear equations. Due to hardware limitations, he reduced the problem to 42 equations, which took the Mark II 56 hours to solve. This effort marked a milestone in computational applications, earning Leontief the 1973 Nobel Prize.
+
+Leontief’s work showcased how linear algebra, combined with computing, could solve large-scale problems — an idea that resonates even more today in the realm of software engineering. Linear algebra is fundamental to many modern technologies, particularly in Machine Learning (ML) and Artificial Intelligence (AI). From powering recommendation systems to optimising neural networks, linear algebra is at the core of algorithms that drive today's intelligent systems.
+
+In ML and AI, large datasets are transformed into matrices, where linear algebra techniques like matrix factorisation, eigenvalue decomposition, and singular value decomposition (SVD) are used to extract insights and make predictions. Neural networks, the backbone of AI, rely on linear algebra to propagate data through layers and adjust weights during training. As a software engineer, mastering these concepts in linear algebra equips you to build scalable, intelligent systems capable of tackling today’s most complex computational problems. 
+
+With the exponential growth in data and computing, the significance of linear algebra in software development, especially in AI and ML, continues to rise. It is a vital tool that bridges theoretical mathematics with real-world applications in tech.
+
+\section{Systems of Linear Equations}
+
+Linear equations and their systems form the foundation of linear algebra, a critical area in mathematics with extensive applications in software engineering. From computer graphics to machine learning algorithms, understanding how to model and solve linear systems is essential for developing efficient and effective software solutions. We begin with a definition:
+
+\begin{definition}{Linear Equations} A linear equation in the variables $x_1, x_2, \ldots, x_n$ is an equation that can be written in the form
+\[
+a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b
+\]
+
+where $b$ and the coefficients $a_1, \ldots, a_n$ are constants.
+
+\end{definition}
+
+Linear equations represent straight lines, planes, and hyperplanes in various dimensions, making them useful for modeling relationships in data and algorithms.
+
+\begin{example} A line in two-dimensional space given by $y = m x + b$ is a linear equation. It can be rewritten to fit our standard form:
+
+    \[
+-m x+y=b
+\]
+
+Here, $a_1 = -m$, $a_2 = 1$, and $b$ is the constant term. \end{example}
+
+\begin{example} The general equation of a plane in three-dimensional space is
+
+\[
+a x+b y+c z=d
+\]
+
+where $a$, $b$, $c$, and $d$ are constants. This equation is linear in the variables $x$, $y$, and $z$.
+\end{example}
+
+\begin{definition}{Systems of Linear Equations} A \textbf{system of linear equations} (also called a \textbf{linear system}) is a collection of one or more linear equations involving the same set of variables. \end{definition}
+
+\begin{example} Consider the following system of linear equations in the variables $x_1, x_2, x_3$:
+\[
+\begin{aligned}
+2x_1 + 3x_2 + x_3 &= 3 \\
+7x_2 - 4x_3 &= 10 \\
+x_3 &= 1
+\end{aligned}
+\]
+This system contains three equations with three unknowns.
+
+\end{example}
+
+To solve the system, we first note from the third equation that $x_3 = 1$. Substituting this into the second equation, we solve for $x_2$:
+\[
+\begin{aligned}
+7x_2 - 4(1) &= 10 \\
+7x_2 &= 14 \\
+x_2 &= 2
+\end{aligned}
+\]
+Now, substituting $x_2 = 2$ and $x_3 = 1$ into the first equation, we solve for $x_1$:
+\[
+\begin{aligned}
+2x_1 + 3(2) + 1 &= 3 \\
+2x_1 &= -4 \\
+x_1 &= -2
+\end{aligned}
+\]
+Thus, the solution to the system is $\left(x_1, x_2, x_3\right) = (-2, 2, 1)$.
+
+\begin{definition}{Solutions to a System of Linear Equations} A \textbf{solution} of a linear system in the variables $x_1, x_2, \ldots, x_n$ is a list of numbers $(s_1, s_2, \ldots, s_n)$ that satisfies all equations of the system when substituted for the variables $x_1, x_2, \ldots, x_n$, respectively. The set of all possible solutions is called its \textbf{solution set}. Two linear systems are called \textbf{equivalent} if they have the same solution set. \end{definition}
+
+A system of linear equations has one of the following outcomes:
+\begin{enumerate}[label=(\roman*)]
+    \item \textbf{No solutions}, when the equations are inconsistent.
+    \item \textbf{Exactly one solution}, when there is a unique set of values satisfying all equations.
+    \item \textbf{Infinitely many solutions}, when there are multiple sets of values that satisfy the equations.
+\end{enumerate}
+
+We say a system is \textbf{consistent} if it has either one or infinitely many solutions. We say a system
+is \textbf{inconsistent} if it has no solution. We formalise this later in this chapter.
+
+\begin{remark} Determining whether a system is consistent addresses the \emph{existence} of solutions. If solutions exist, we may further explore the \emph{uniqueness} of these solutions. \end{remark}
+
+\subsection*{Representing Systems with Matrices}
+Matrices provide a compact and efficient way to represent and manipulate systems of linear equations, which is particularly beneficial in software applications involving large datasets.
+
+\begin{definition} A \textbf{matrix} is a rectangular array of numbers arranged in rows and columns. The \textbf{coefficient matrix} of a linear system contains only the coefficients of the variables, while the \textbf{augmented matrix} includes an additional column for the constants from the right-hand side of the equations. \end{definition}
+
+\begin{example} For the linear system:
+\[
+\begin{aligned}
+2 x_1+3 x_2+x_3 & =3 \\
+7 x_2-4 x_3 & =10 \\
+x_3 & =1
+\end{aligned}
+\]
+
+the coefficient matrix is:
+
+\[
+\left[\begin{array}{ccc}
+2 & 3 & 1 \\
+0 & 7 & -4 \\
+0 & 0 & 1
+\end{array}\right]
+\]
+
+and the augmented matrix is:
+
+\[
+\left[\begin{array}{ccc|c}
+2 & 3 & 1 & 3 \\
+0 & 7 & -4 & 10 \\
+0 & 0 & 1 & 1
+\end{array}\right]
+\]
+
+\end{example}
+
+The vertical line between the coefficient part and the augmented part is optional and is used to visually separate the coefficients from the constants.
+
+\begin{definition} The \textbf{size} of a matrix is defined by the number of its rows and columns, expressed as \emph{rows} $\times$ \emph{columns}. For instance, the coefficient matrix above is of size $3 \times 3$, and the augmented matrix is of size $3 \times 4$. \end{definition}
+
+\subsection*{Solving Systems using Augmented Matrices}
+
+We now illustrate how to solve a system of linear equations using augmented matrix notation. This process will be formalised in the next section but here we offer an example. This method streamlines the process of solving systems by focusing on matrix manipulations.
+
+\begin{example}
+    \label{ex:augmented-matrix}
+Let $r_1$ denote the first row, $r_2$ the second row, and $r_3$ the third row.
+
+\[
+\left[\begin{array}{cccc}
+2 & 3 & 1 & 3 \\
+0 & 7 & -4 & 10 \\
+0 & 0 & 1 & 1
+\end{array}\right]
+\]
+
+To simplify the system, we perform \textit{elementary row operations}. Specifically, we adjust $r_1$ and $r_2$ as follows:
+\[
+\begin{aligned}
+r_1 & \mapsto r_1 - r_3, \\
+r_2 & \mapsto r_2 + 4r_3,
+\end{aligned}
+\]
+which gives:
+\[
+\left[\begin{array}{cccc}
+2 & 3 & 0 & 2 \\
+0 & 7 & 0 & 14 \\
+0 & 0 & 1 & 1
+\end{array}\right]
+\]
+
+Next, we scale $r_2$ by $\frac{1}{7}$:
+\[
+r_2 \mapsto \frac{1}{7}r_2, \quad \left[\begin{array}{cccc}
+2 & 3 & 0 & 2 \\
+0 & 1 & 0 & 2 \\
+0 & 0 & 1 & 1
+\end{array}\right]
+\]
+
+Now, we eliminate the $3$ in the first row by performing:
+\[
+r_1 \mapsto r_1 - 3r_2, \quad \left[\begin{array}{cccc}
+2 & 0 & 0 & -4 \\
+0 & 1 & 0 & 2 \\
+0 & 0 & 1 & 1
+\end{array}\right]
+\]
+
+Finally, we scale $r_1$ by $\frac{1}{2}$ to get:
+\[
+r_1 \mapsto \frac{1}{2}r_1, \quad \left[\begin{array}{cccc}
+1 & 0 & 0 & -2 \\
+0 & 1 & 0 & 2 \\
+0 & 0 & 1 & 1
+\end{array}\right]
+\]
+
+We can now reinterpret the matrix as a linear system. From the augmented matrix, we find:
+\[
+\begin{aligned}
+x_1 &= -2, \\
+x_2 &= 2, \\
+x_3 &= 1.
+\end{aligned}
+\]
+This can be expressed compactly as:
+\[
+(x_1, x_2, x_3) = (-2, 2, 1).
+\]
+Thus, the solution is identical to the one we obtained through substitution.
+\end{example}
+
+\begin{example}
+    \label{ex:inconsistent-system}
+Determine if the following system is consistent:
+        \[
+            \begin{array}{r}
+            x_2+4 x_3=2 \\
+            x_1-3 x_2+2 x_3=6 \\
+            x_1-2 x_2+6 x_3=9
+            \end{array}
+        \]
+\end{example}
+
+\begin{solution}
+    First, we write the augmented matrix of the system:
+    \[
+    \left[\begin{array}{cccc}
+    0 & 1 & 4 & 2 \\
+    1 & -3 & 2 & 6 \\
+    1 & -2 & 6 & 9
+    \end{array}\right]
+    \]
+    
+    To simplify the matrix, we interchange $r_1$ and $r_2$:
+    \[
+    r_1 \leftrightarrow r_2, \quad \left[\begin{array}{cccc}
+    1 & -3 & 2 & 6 \\
+    0 & 1 & 4 & 2 \\
+    1 & -2 & 6 & 9
+    \end{array}\right]
+    \]
+    
+    Next, we eliminate the $1$ in the first column of $r_3$ by performing:
+    \[
+    r_3 \mapsto r_3 - r_1, \quad \left[\begin{array}{cccc}
+    1 & -3 & 2 & 6 \\
+    0 & 1 & 4 & 2 \\
+    0 & 1 & 4 & 3
+    \end{array}\right]
+    \]
+    
+    Then, we eliminate the $1$ in the second column of $r_3$:
+    \[
+    r_3 \mapsto r_3 - r_2, \quad \left[\begin{array}{cccc}
+    1 & -3 & 2 & 6 \\
+    0 & 1 & 4 & 2 \\
+    0 & 0 & 0 & 1
+    \end{array}\right]
+    \]
+    
+    The third row now corresponds to the equation:
+    \[
+    0x_1 + 0x_2 + 0x_3 = 1
+    \]
+    which simplifies to:
+    \[
+    0 = 1
+    \]
+    This is a contradiction, so the system is \textbf{inconsistent} and has no solution. \end{solution}
+
+\begin{example}
+    Give a solution of the following system (if one exists). Is it unique?
+    \[
+        \begin{aligned}
+        x_1+2 x_2+3 x_3 & =4 \\
+        3 x_1+6 x_2+9 x_3 & =12
+        \end{aligned}
+    \]
+\end{example}
+
+\begin{solution}
+        \[
+        \left[\begin{array}{cccc}
+        1 & 2 & 3 & 4 \\
+        3 & 6 & 9 & 12
+        \end{array}\right]
+        \]
+        
+        We observe that $r_2$ is a multiple of $r_1$:
+        \[
+        r_2 = 3r_1
+        \]
+        
+        To simplify the system, we perform the following elementary row operation to eliminate redundancy:
+        \[
+        r_2 \mapsto r_2 - 3r_1,
+        \]
+        which yields:
+        \[
+        \left[\begin{array}{cccc}
+        1 & 2 & 3 & 4 \\
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        \]
+        
+        The second row now consists entirely of zeros, indicating that it does not provide any new information. This means the system is underdetermined and has infinitely many solutions.
+        
+        We can express the first equation in terms of $x_1$:
+        \[
+        x_1 = 4 - 2x_2 - 3x_3
+        \]
+        
+        Letting $x_2$ and $x_3$ be free variables (parameters), we set:
+        \[
+        x_2 = s, \quad x_3 = t, \quad \text{where } s, t \in \mathbb{R}
+        \]
+        
+        Substituting back, we find:
+        \[
+        \begin{aligned}
+        x_1 &= 4 - 2s - 3t, \\
+        x_2 &= s, \\
+        x_3 &= t.
+        \end{aligned}
+        \]
+        
+        This can be expressed compactly as:
+        \[
+        (x_1, x_2, x_3) = (4 - 2s - 3t, \ s, \ t), \quad \text{for all } s, t \in \mathbb{R}.
+        \]
+        
+        The system has infinitely many solutions parameterized by $s$ and $t$. Therefore, the solution is not unique.\end{solution}
+
+\begin{example}
+    \label{ex:unique-solution}
+    Choose $h$ and $k$ such that the following system
+    \[
+    \begin{aligned}
+    x_1-3 x_2 & =1 \\
+    2 x_1+h x_2 & =k
+    \end{aligned}
+    \]
+    has
+\begin{enumerate}[label=(\roman*)]
+    \item a unique solution,
+    \item many solutions, and
+    \item no solution.
+\end{enumerate}
+
+\begin{solution}
+        \[
+        \left[\begin{array}{ccc}
+        1 & -3 & 1 \\
+        2 & h & k
+        \end{array}\right]
+        \]
+        
+        To simplify the system, we perform an elementary row operation to eliminate $x_1$ from the second equation. Specifically, we adjust $r_2$ as follows:
+        \[
+        r_2 \mapsto r_2 - 2r_1,
+        \]
+        which yields:
+        \[
+        \left[\begin{array}{ccc}
+        1 & -3 & 1 \\
+        0 & h + 6 & k - 2
+        \end{array}\right]
+        \]
+        
+        Now, we analyze the resulting system based on the value of $h + 6$.
+        
+        \textbf{Case 1: $h + 6 \ne 0$}
+        
+        When $h + 6 \ne 0$, we can solve for $x_2$ from the second equation:
+        \[
+        (h + 6)x_2 = k - 2 \implies x_2 = \dfrac{k - 2}{h + 6}
+        \]
+        Substituting $x_2$ back into the first equation:
+        \[
+        x_1 - 3x_2 = 1 \implies x_1 = 1 + 3x_2 = 1 + 3\left(\dfrac{k - 2}{h + 6}\right)
+        \]
+        Thus, we obtain a unique solution for $x_1$ and $x_2$. \textbf{The system has a unique solution when $h + 6 \ne 0$.}
+        
+        \newpage
+
+        \textbf{Case 2: $h + 6 = 0$}
+        
+        When $h + 6 = 0$, i.e., $h = -6$, the second equation becomes:
+        \[
+        0x_2 = k - 2
+        \]
+        This simplifies to:
+        \[
+        0 = k - 2
+        \]
+        We have two subcases:
+        
+        \textbf{\textit{Subcase 2a:} $k - 2 = 0$}
+        
+          If $k = 2$, the equation becomes $0 = 0$, which is always true. The second equation provides no new information, so the system reduces to:
+          \[
+          x_1 - 3x_2 = 1
+          \]
+          Here, $x_2$ is a free variable. Solving for $x_1$:
+          \[
+          x_1 = 1 + 3x_2
+          \]
+          \textbf{The system has infinitely many solutions when $h = -6$ and $k = 2$.}
+        
+        \textbf{\textit{Subcase 2b:} $k - 2 \ne 0$}
+        
+          If $k \ne 2$, the equation becomes $0 = k - 2$, which is a contradiction since $0 \ne k - 2$. \textbf{Thus, the system has no solution when $h = -6$ and $k \ne 2$.}
+                
+        \textbf{Conclusion:}
+        
+        \begin{enumerate}[label=(\roman*)]
+            \item \textbf{No solution} when $h = -6$ and $k \ne 2$.
+            \item \textbf{A unique solution} when $h \ne -6$.
+            \item \textbf{Infinitely many solutions} when $h = -6$ and $k = 2$.
+        \end{enumerate} \end{solution}
+
+
+\end{example}
+\section{Elementary Row Operations and Echelon Forms}
+
+In \autoref{ex:augmented-matrix}-\autoref{ex:unique-solution}, we performed a series of operations known as \textbf{elementary row operations}. These are fundamental transformations that simplify systems without changing their solution sets.
+
+The three types of elementary row operations are:
+\begin{itemize}
+    \item \textbf{Replacement:} Replace one row by the sum of itself and a multiple of another row.
+    \item \textbf{Interchange:} Swap two rows.
+    \item \textbf{Scaling:} Multiply all entries in a row by a nonzero constant.
+\end{itemize}
+
+Two matrices are called \textbf{row equivalent} if one can be transformed into the other through a sequence of elementary row operations.
+
+\begin{remark}
+Two linear systems are equivalent (i.e., they have the same solution set) if their augmented matrices are row equivalent. Performing elementary row operations on an augmented matrix does not change the solution set of the system. \end{remark}
+
+As you may have noticed in the examples, the matrices resulting from these operations often have a special pattern — lots of zeros below certain entries. This isn't just a coincidence but a goal in the process. We call this the \textbf{echelon form} of a matrix. By organizing a matrix into echelon form, we:
+
+\begin{itemize}
+    \item Make solving systems of linear equations easier.
+    \item Systematically simplify the matrix, reducing the complexity of calculations.
+    \item Reveal key properties about the system, like existence and number of solutions or whether certain equations are dependent.
+\end{itemize}
+
+\begin{definition}{Echelon Forms}
+A matrix is in \textbf{echelon form} if it satisfies the following conditions:
+\begin{enumerate}
+    \item All zero rows are at the bottom.
+    \item Each leading entry of a row is in a column to the right of the leading entry of the row above it.
+    \item All entries in a column below a leading entry are zeros.
+\end{enumerate}
+
+In addition to echelon form, a matrix may also be in \textbf{reduced row echelon form} (RREF), which has the following properties:
+\begin{enumerate}[resume]
+    \item The leading entry in each nonzero row is 1.
+    \item Each leading 1 is the only nonzero entry in its column.
+\end{enumerate}
+\end{definition}
+
+We say that an echelon matrix $U$ is an echelon form of the matrix $A$ if $U$ is row equivalent to $A$. Similarly, we say that a reduced echelon matrix $U$ is the reduced echelon form of the matrix $A$ if $U$ is row equivalent to $A$.
+
+The significance of putting the augmented matrix of a linear system in echelon form is explained by the
+following theorem.
+
+\begin{theorem}{Existence Theorem}
+A linear system is consistent if and only if an echelon form of the augmented matrix has no row of the form
+    \[
+    \left[\begin{array}{llll}
+    0 & \ldots & 0 & b
+    \end{array}\right]
+    \]
+where $b$ is nonzero.
+\end{theorem}
+
+We saw an example of an inconsistent system in \autoref{ex:inconsistent-system} because the echelon form of the augmented matrix has a row of the form $\left[\begin{array}{lll|l} 0 & 0 & 0 & 1 \end{array}\right]$. This row indicates that the system has no solution.
+
+\begin{example}
+    The augmented matrix of the linear system used as the main example in the preceding section,
+
+\[
+\left[\begin{array}{cccc}
+2 & 3 & 1 & 3 \\
+0 & 7 & -4 & 10 \\
+0 & 0 & 1 & 1
+\end{array}\right] , 
+\] is already in echelon form. Since it has no row of the form mentioned in the theorem, we know immediately
+that this system is consistent. The leading entries are $2$, $7$, and $1$, and all entries below them are zeros. This matrix is not in reduced row echelon form however because the leading entries are not all $1$.
+\end{example}
+
+Recall that we performed a sequence of row operations on the preceding matrix to get
+
+\[
+\left[\begin{array}{cccc}
+1 & 0 & 0 & -2 \\
+0 & 1 & 0 & 2 \\
+0 & 0 & 1 & 1
+\end{array}\right]
+\]
+
+which is in reduced echelon form. This allowed us easily to see the solutions of this system, which is the main advantage of putting the matrix in this form. This brings us to the following important theorem.
+
+\begin{theorem}{Uniqueness of Reduced Echelon Form}
+    Each matrix is row equivalent to one and only one reduced echelon matrix
+\end{theorem}
+
+A pivot position in a matrix $A$ is a location in $A$ that corresponds to a leading 1 in the reduced echelon form of $A$. A pivot column is a column of $A$ that contains a pivot position. Notice that you can obtain a pivot by scaling the leading entry of a row to be $1$. Therefore, the pivot column is the column of the leading entry.
+
+We are now ready to present the algorithm for solving a system of linear equations using matrices.
+
+\begin{custombox}{The Row Reduction Algorithm}
+    Here we describe an algorithm for turning any matrix into an equivalent
+    (reduced) echelon matrix. This algorithm is the foundation of solving systems of linear equations using matrices.
+
+    \begin{enumerate}
+        \item Begin with the leftmost nonzero column. This is a pivot column, with the pivot position at the top.
+        \item Select a nonzero entry in the pivot column as a pivot. If necessary, interchange rows to move this entry into the pivot position.
+        \item Use row replacement operations to create zeros in all positions below the pivot.
+        \item Apply steps 1-3 to the submatrix of all entries below and to the right of the pivot position. Repeat this process until there are no more nonzero rows to modify. (At this point we have reached an echelon form of the matrix.)
+        \item Beginning with the rightmost pivot and working upward and to the left, create zeros above each pivot using row operations. If a pivot is not 1, make it 1 by a scaling operation. (This step produces the reduced echelon form of the matrix.)
+    \end{enumerate}
+
+\end{custombox}
+
+\subsection*{Solutions of Linear Systems}
+
+Let $A$ be the coefficient matrix of a linear system. The pivot columns in the matrix correspond to what we call \textbf{basic variables}. The nonpivot columns correspond to what we call \textbf{free variables}.
+
+\begin{example} Suppose the augmented matrix of a linear system has been reduced to the following form:
+
+\[
+\left[\begin{array}{lllll}
+\blacksquare & * & * & * & * \\
+0 & \blacksquare & * & * & * \\
+0 & 0 & 0 & \blacksquare & * \\
+0 & 0 & 0 & 0 & 0
+\end{array}\right]
+\]
+
+where $\blacksquare$ represents any nonzero number, and $*$ represents any number (including 0 ). The basic variables of this system are $x_1, x_2$, and $x_4$. The only free variable is $x_3$.
+
+\end{example}
+
+
+\begin{theorem}{Uniqueness Theorem}
+    If a linear system is consistent, then the solution set contains either
+    \begin{enumerate}[label=(\roman*)]
+        \item a unique solution, when there are no free variables, or
+        \item infinitely many solutions, when there is at least one free variable.
+    \end{enumerate}
+\end{theorem}
+
+\begin{example} Suppose the following matrix is the augmented matrix of a linear system in the variables $x_1, x_2$, and $x_3$. Row reduce the matrix to echelon form to determine if it is consistent.
+
+\[
+\left[\begin{array}{cccc}
+1 & 2 & 3 & 4 \\
+5 & 6 & 7 & 8 \\
+9 & 10 & 11 & 12
+\end{array}\right]
+\]
+If it is consistent, find the reduced echelon form and write the solution set using free variables as parameters.
+\end{example}
+
+\begin{solution} To simplify the system, we perform \textit{elementary row operations}.
+        
+    \textbf{Step 1: Eliminate the \( 5 \) in \( r_2 \)}
+        
+        We adjust \( r_2 \) as follows:
+        \[
+        r_2 \mapsto r_2 - 5r_1,
+        \]
+        which gives:
+        \[
+        \left[\begin{array}{cccc}
+        1 & 2 & 3 & 4 \\
+        0 & -4 & -8 & -12 \\
+        9 & 10 & 11 & 12
+        \end{array}\right]
+        \]
+        
+    \textbf{Step 2: Eliminate the \( 9 \) in \( r_3 \)}
+        
+        We adjust \( r_3 \) as follows:
+        \[
+        r_3 \mapsto r_3 - 9r_1,
+        \]
+        which gives:
+        \[
+        \left[\begin{array}{ccc|c}
+        1 & 2 & 3 & 4 \\
+        0 & -4 & -8 & -12 \\
+        0 & -8 & -16 & -24
+        \end{array}\right]
+        \]
+        
+    \textbf{Step 3: Eliminate the \( -8 \) in \( r_3 \)}
+        
+        We adjust \( r_3 \) again to eliminate the entry in the second column:
+        \[
+        r_3 \mapsto r_3 - 2r_2,
+        \]
+        which gives:
+        \[
+        \left[\begin{array}{cccc}
+        1 & 2 & 3 & 4 \\
+        0 & -4 & -8 & -12 \\
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        \]
+        
+    \newpage
+
+    \textbf{Step 4: Scale \( r_2 \) to obtain a leading 1}
+        
+        We scale \( r_2 \) by \( -\dfrac{1}{4} \):
+        \[
+        r_2 \mapsto -\dfrac{1}{4} r_2,
+        \]
+        which gives:
+        \[
+        \left[\begin{array}{ccc|c}
+        1 & 2 & 3 & 4 \\
+        0 & 1 & 2 & 3 \\
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        \]
+        
+    \textbf{Step 5: Eliminate the \( 2 \) in \( r_1 \)}
+        
+        We adjust \( r_1 \) as follows:
+        \[
+        r_1 \mapsto r_1 - 2r_2,
+        \]
+        which gives:
+        \[
+        \left[\begin{array}{ccc|c}
+        1 & 0 & -1 & -2 \\
+        0 & 1 & 2 & 3 \\
+        0 & 0 & 0 & 0
+        \end{array}\right]
+        \]
+        
+    At this point, the matrix is in \textit{reduced row-echelon form}.
+        
+    \textbf{Step 6: Interpret the matrix as a linear system}
+        
+        From the augmented matrix, we have:
+        \[
+        \begin{aligned}
+        r_1 &: \quad x_1 - x_3 = -2, \\
+        r_2 &: \quad x_2 + 2x_3 = 3, \\
+        r_3 &: \quad 0 = 0.
+        \end{aligned}
+        \]
+        
+    Since the third row corresponds to the equation \( 0 = 0 \), which is always true, the system is \textbf{consistent}.
+        
+    \textbf{Step 7: Express the solution using a free variable}
+        \[
+        \begin{aligned}
+        x_1 &= -2 + x_3, \\
+        x_2 &= 3 - 2x_3, \\
+        x_3 &= x_3.
+        \end{aligned}
+        \]      
+\end{solution}
