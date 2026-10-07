@@ -146,8 +146,8 @@ Her er en trinvis forklaring af, hvad koden gør:
 \begin{enumerate}
     \item \textbf{Initialisering}:
         \begin{itemize}
-            \item \texttt{low} initialiseres til det første indeks i arrayet \texttt{A}.
-            \item \texttt{high} initialiseres til det sidste indeks i arrayet \texttt{A}.
+            \item \texttt{low} initialiseres til det første indeks i arrayet \texttt{arr}.
+            \item \texttt{high} initialiseres til det sidste indeks i arrayet \texttt{arr}.
         \end{itemize}
     \item \textbf{While-løkke}:
         \begin{itemize}
@@ -868,7 +868,7 @@ I dette udtryk gælder:
     \item Den indre sum, $\sum_{j=1}^i$, svarer til den indre løkkes iterationer for hvert fast $i$.
 \end{itemize}
 
-Tallet 1 i den indre sum svarer til, at der udføres en operation i konstant tid i hver iteration af den indre løkke. Udtrykket tæller hver iteration af den indre løkke enkeltvis for alle par af $i$ og $j$, der opfylder $1 \leq j \leq i$. Dobbeltsummen svarer til $\sum_{i=1}^n = i$, fordi den indre løkke for hvert $i$ kører præcis $i$ gange. For at se, hvorfor den enkelte sum svarer til dobbeltsummen, kan vi prøve at implementere den enkelte sum:
+Tallet 1 i den indre sum svarer til, at der udføres en operation i konstant tid i hver iteration af den indre løkke. Udtrykket tæller hver iteration af den indre løkke enkeltvis for alle par af $i$ og $j$, der opfylder $1 \leq j \leq i$. Dobbeltsummen svarer til $\sum_{i=1}^n i$, fordi den indre løkke for hvert $i$ kører præcis $i$ gange. For at se, hvorfor den enkelte sum svarer til dobbeltsummen, kan vi prøve at implementere den enkelte sum:
 
 \begin{codebox}
     \Procname{$\proc{Sum-Up-To}(n)$}
@@ -904,10 +904,10 @@ Summen \( \sum_{i=1}^n i = \frac{n(n + 1)}{2} \) vokser proportionalt med \( n^2
             \End
     \end{codebox}
 
-    I dette eksempel kører den ydre løkke fra $1$ til $n$, mens den indre løkke starter ved $1$ og fordobler $j$, indtil den når eller overstiger $n$. Antallet af iterationer for den indre løkke er:
+    I dette eksempel kører den ydre løkke fra $1$ til $n$, mens den indre løkke starter ved $1$ og fordobler $j$, indtil den når eller overstiger $n$. Det samlede antal iterationer af den indre løkke over alle iterationer af den ydre løkke er:
 
     \[
-    \sum_{i=1}^{n} \log_2(n) = n \cdot \mathcal{O}(\log n) = \mathcal{O}(n \log n)
+    \sum_{i=1}^{n} \lceil\log_2 n\rceil = n\lceil\log_2 n\rceil = \mathcal{O}(n \log n)
     \]
 
     Den samlede tidskompleksitet for denne indlejrede struktur er altså $\mathcal{O}(n \log n)$.
@@ -1047,9 +1047,9 @@ Vi giver nu en række eksempler, der illustrerer, hvordan man analyserer løkker
     \[ k > \log_3 n \]
     
     Da $k$ skal være et helt tal, er antallet af iterationer:
-    \[ k = \lceil \log_3 n \rceil \]
+    \[ k = \lfloor \log_3 n \rfloor + 1 \]
     
-    \textbf{Konklusion:} Løkken kører $\lceil \log_3 n \rceil$ gange, så algoritmens tidskompleksitet er $\boldsymbol{\mathcal{O}(\log n)}$.
+    \textbf{Konklusion:} Løkken kører $\lfloor \log_3 n \rfloor + 1$ gange, så algoritmens tidskompleksitet er $\boldsymbol{\mathcal{O}(\log n)}$.
     
 \end{example}
     
@@ -1257,14 +1257,9 @@ Vi giver nu en række eksempler, der illustrerer, hvordan man analyserer løkker
             \]
             \item Derfor:
             \[
-            \text{I alt} \leq (\log_2 n +1)(n +1) - (2n -1)
-            \]
-            \item Vi reducerer:
-            \[
             \begin{aligned}
-            \text{I alt} &\leq (\log_2 n +1)(n +1) - 2n +1 \\
-            &= (\log_2 n)(n +1) + (n +1) - 2n +1 \\
-            &= (\log_2 n)(n +1) - n +2
+            \text{I alt} &= (\lfloor\log_2 n\rfloor+1)(n+1) - (2^{\lfloor\log_2 n\rfloor+1}-1) \\
+            &\leq (\log_2 n+1)(n+1).
             \end{aligned}
             \]
             \item For store $n$ dominerer leddet $(\log_2 n)(n +1)$, så:
@@ -1274,7 +1269,7 @@ Vi giver nu en række eksempler, der illustrerer, hvordan man analyserer løkker
         \end{itemize}
     \end{itemize}
     
-    \textbf{Konklusion:} Algoritmen udfører $(\log_2 n)(n +1) - n +2$ operationer, så tidskompleksiteten er $\boldsymbol{\mathcal{O}(n \log n)}$.
+    \textbf{Konklusion:} Algoritmen udfører højst $(\log_2 n+1)(n+1)$ iterationer af den indre løkke, så tidskompleksiteten er $\boldsymbol{\mathcal{O}(n \log n)}$.
 
     \textbf{Forenklet analyse af tidskompleksiteten:}
 
@@ -1369,9 +1364,9 @@ Vi giver nu en række eksempler, der illustrerer, hvordan man analyserer kodesty
 
     Opsummering af den samlede tid (T):
     \begin{itemize}
-        \item \textbf{Linje 1}: 4 tidsenheder
-        \item \textbf{Linje 2}: 7 tidsenheder
-        \item \textbf{Linje 3}: 3 tidsenheder
+        \item \textbf{Linje 2}: 4 tidsenheder
+        \item \textbf{Linje 3}: 7 tidsenheder
+        \item \textbf{Linje 4}: 3 tidsenheder
     \end{itemize}
 
     Den samlede tid $T$ for at udføre funktionen \texttt{sumSquareDifference} er altså:
@@ -1389,8 +1384,8 @@ Vi giver nu en række eksempler, der illustrerer, hvordan man analyserer kodesty
         {
             int sum = (n * (n + 1)) / 2;        // 4 time units
             int sumOfSquares = (n * (n + 1) * (2 * n + 1)) / 6;     // 7 time units
-            return (sum * sum) - sumOfSquares;      // 3 time units:
-        } // Total time: T(n) = 4 + 7 + 14 time units so we get O(1)
+            return (sum * sum) - sumOfSquares;      // 3 time units
+        } // Total time: T(n) = 4 + 7 + 3 = 14 time units so we get O(1)
     \end{lstlisting}
     
 Vi foretrækker den sidste metode, fordi den giver en klar og kortfattet måde at dokumentere funktionens eller metodens tidskompleksitet på direkte i koden.
@@ -1695,7 +1690,7 @@ I kapitlets model for optælling af operationer bruger $\proc{fastSumOfPairs}$ $
     //                    + (4n + 1) (loop over 'arr')
     //                    + 3 (compute totalSum)
     //                    + 1 (return)
-    //                    = 4n + 6
+    //                    = 4n + 7
     // Dominating Term: 4n
     // Tight asymptotic complexity: Theta(n)
     

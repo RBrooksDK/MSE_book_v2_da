@@ -6,7 +6,7 @@ I dette kapitel introducerer vi de værktøjer, der skal til for at analysere al
 
 \section{Introduktion til kompleksitetsanalyse}\label{sec:ch10sec1}
 
-En analyse af en algoritme kan for eksempel vise, at den tid, det tager at løse et problem af størrelse $n$, er givet ved $T(n)=4 n^2-2 n+2$. Ved at se bort fra konstanter -- da de varierer med hardwaren -- og fra langsommere voksende led forenkler vi dette til $T(n)=O\left(n^2\right)$ og fremhæver dermed det dominerende led. Denne abstraktion hjælper os med at forstå kompleksiteten for store input uafhængigt af det konkrete miljø, og det gør store $\mathcal{O}$ til et stærkt værktøj til at sammenligne algoritmer.
+En analyse af en algoritme kan for eksempel vise, at den tid, det tager at løse et problem af størrelse $n$, er givet ved $T(n)=4 n^2-2 n+2$. Ved at se bort fra konstanter -- da de varierer med hardwaren -- og fra langsommere voksende led forenkler vi dette til $T(n)=\mathcal{O}\left(n^2\right)$ og fremhæver dermed det dominerende led. Denne abstraktion hjælper os med at forstå kompleksiteten for store input uafhængigt af det konkrete miljø, og det gør store $\mathcal{O}$ til et stærkt værktøj til at sammenligne algoritmer.
 
 De to centrale elementer i denne teoretiske abstraktion er:
 
@@ -57,7 +57,7 @@ Alle disse ressourcer er vigtige, men i dette kapitel fokuserer vi primært på 
 Kompleksitet påvirker ydeevnen, men ydeevnen alene giver ikke et fuldstændigt billede af en algoritmes effektivitet med hensyn til skalerbarhed. Det er afgørende at forstå begge dele for at kunne vurdere, hvor godt en algoritme vil klare sig i forskellige virkelige scenarier, især når inputstørrelserne vokser betydeligt.
 
 \section{Funktioners vækst}
-I afsnit \ref{sec:ch10sec1}, kapitlets indledning, bemærkede vi, at store $\mathcal{O}$-notation fokuserer på det dominerende led i en algoritmes tidskompleksitet og abstraherer konstanter og mindre led væk. Denne forenkling bygger på den idé, at det dominerende led bestemmer algoritmens kompleksitet, når inputstørrelserne bliver store. Se på følgende Java-kodestykke:
+I \autoref{sec:ch10sec1} bemærkede vi, at store $\mathcal{O}$-notation fokuserer på det dominerende led i en algoritmes tidskompleksitet og abstraherer konstanter og mindre led væk. Denne forenkling bygger på den idé, at det dominerende led bestemmer algoritmens kompleksitet, når inputstørrelserne bliver store. Se på følgende Java-kodestykke:
 
 \newpage
 
@@ -130,7 +130,7 @@ For at forstå, hvordan funktioner vokser, ordner vi nogle grundlæggende funkti
 
 Lad os begynde med det grundlæggende: Enhver konstant funktion vokser langsommere end en lineær funktion, simpelthen fordi en konstant slet ikke vokser. For tilstrækkeligt store værdier vokser en lineær funktion langsommere end en andengradsfunktion, mens en tredjegradsfunktion vokser hurtigere end en andengradsfunktion.
 
-Eksponentialfunktioner er velkendte for deres hurtige vækst. Tænk på historien om en virksomhed, der besluttede at belønne en medarbejder ved at fordoble vedkommendes bonus hver dag i en måned. Selv om det begyndte med et beskedent beløb, eskalerede den eksponentielle stigning hurtigt, og ved månedens udgang ville bonussen være astronomisk. Da virksomheden indså, at omkostningerne var uholdbare, ændrede den hurtigt aftalen til et fast beløb i stedet. Matematisk er effekten tydelig: \( n^2 < 2^n \) for ethvert heltal \( n \geq 4 \). Mere generelt gælder \( n^k < 2^n \) for enhver eksponent \( k \), når \( n \) er tilstrækkeligt stor.
+Eksponentialfunktioner er velkendte for deres hurtige vækst. Tænk på historien om en virksomhed, der besluttede at belønne en medarbejder ved at fordoble vedkommendes bonus hver dag i en måned. Selv om det begyndte med et beskedent beløb, eskalerede den eksponentielle stigning hurtigt, og ved månedens udgang ville bonussen være astronomisk. Da virksomheden indså, at omkostningerne var uholdbare, ændrede den hurtigt aftalen til et fast beløb i stedet. Matematisk er effekten tydelig: \( n^2 < 2^n \) for ethvert heltal \( n \geq 5 \). Mere generelt gælder \( n^k < 2^n \) for enhver eksponent \( k \), når \( n \) er tilstrækkeligt stor.
 
 Endnu mere dramatisk er fakultetsvækst, repræsenteret ved \( n! \), som overhaler eksponentiel vækst for store \( n \). Begrundelsen er, at \( 2^n \) består af \( n \) faktorer 2, mens \( n! \) har de første \( n \) heltal som faktorer, og de fleste af dem er større end 2. Derfor vokser \( n! \) til sidst hurtigere end \( 2^n \). 
 
@@ -162,18 +162,18 @@ Lad os nu se på funktioner med langsommere vækst -- det er den type funktioner
             xlabel style={right},
             ylabel style={above},
             legend pos=north west,
-            title={Væksten af $\log n$ sammenlignet med $n$}
+            title={Væksten af $\log_2 n$ sammenlignet med $n$}
         ]
             % Plot for log(n)
-            \addplot[blue, thick] {ln(x)};
-            \addlegendentry{$\log n$}
+            \addplot[blue, thick] {ln(x)/ln(2)};
+            \addlegendentry{$\log_2 n$}
 
             % Plot for n
             \addplot[red, thick, dashed] {x};
             \addlegendentry{$n$}
         \end{axis}
     \end{tikzpicture}
-    \caption{Graf, der sammenligner vækstraterne for $\log n$ og $n$}
+    \caption{Graf, der sammenligner vækstraterne for $\log_2 n$ og $n$}
 \end{figure}
 
 Sorteringsalgoritmer har derimod ofte køretider, der er proportionale med \( n \log n \). For store \( n \) ser vi, at \( 1 < \log n < n \), hvilket fører til \( n < n \log n < n^2 \). Denne rækkefølge kan sammenfattes som:
@@ -279,7 +279,7 @@ Se på funktionen $f(n)=4 n^3+3 n^2+2 n+10$. Lad os bestemme en asymptotisk øvr
         \item \textbf{Udtryk kompleksiteten ved inputstørrelsen $n$:}
         \begin{itemize}
             \item Når konstanterne og leddene af lavere orden er fjernet, står vi tilbage med $n^3$.
-            Da $4 n^3$ dominerer væksten, beskriver vi kompleksiteten ved $n^3$ for alle tre notationer
+            Da $4 n^3$ dominerer væksten, beskriver vi kompleksiteten ved $n^3$ med store $\mathcal{O}$-notation
 
             \[
                 f(n)=\mathcal{O}\left(n^3\right)
@@ -632,7 +632,7 @@ Når vi forstår disse notationer, får vi et mere fuldstændigt billede af en a
 Ikke alle funktioner kan uden videre klassificeres med notationerne store $\mathcal{O}$, Omega ($\Omega$) og Theta ($\Theta$). I nogle tilfælde er en funktions vækstrate ikke let at bestemme, eller funktionen passer ikke pænt ind i en af disse kategorier. I sådanne tilfælde kan vi bruge yderligere værktøjer til at analysere funktioners vækstrate mere præcist.
 
 \subsection*{Lille \texorpdfstring{$o$}{o}-notation}
-Lille $o$-notation giver en \textit{streng øvre grænse} for en funktions vækstrate. Den beskriver en situation, hvor funktionen vokser langsommere end en anden funktion, men ikke nødvendigvis med samme hastighed. Notationen er nyttig til at angive, at en algoritmes tidskompleksitet er strengt mindre end en given funktion.
+Lille $o$-notation giver en \textit{streng øvre grænse} for en funktions vækstrate. Den beskriver en situation, hvor funktionen vokser langsommere end en anden funktion. Notationen er nyttig til at angive, at en algoritmes tidskompleksitet er strengt mindre end en given funktion.
 
 \begin{definition}{Lille $o$}\label{def:little_o_notation}
     $f(n)$ er $o(g(n))$, hvis der for enhver positiv konstant $\epsilon > 0$ findes en konstant $k \geq 0$, så der for alle $n \geq k$ gælder
@@ -747,7 +747,7 @@ Følgende egenskaber gælder for $o$-notation:
 Lille $o$-notation giver en mere præcis måde at beskrive funktioners vækstrate på, især når funktionen vokser strengt langsommere end en anden funktion. Notationen er nyttig til at angive, at en algoritmes tidskompleksitet er strengt mindre end en given funktion, og giver en mere detaljeret forståelse af algoritmens kompleksitet.
 
 \subsection*{Lille \texorpdfstring{$\omega$}{omega}-notation}
-Lille $\omega$-notation giver en \textit{streng nedre grænse} for en funktions vækstrate. Den beskriver en situation, hvor funktionen vokser hurtigere end en anden funktion, men ikke nødvendigvis med samme hastighed. Notationen er nyttig til at angive, at en algoritmes tidskompleksitet er strengt større end en given funktion.
+Lille $\omega$-notation giver en \textit{streng nedre grænse} for en funktions vækstrate. Den beskriver en situation, hvor funktionen vokser hurtigere end en anden funktion. Notationen er nyttig til at angive, at en algoritmes tidskompleksitet er strengt større end en given funktion.
 
 \begin{definition}{Lille $\omega$}\label{def:little_omega_notation}
     $f(n)$ er $\omega(g(n))$, hvis der for enhver positiv konstant $\epsilon > 0$ findes en konstant $k \geq 0$, så der for alle $n \geq k$ gælder
@@ -962,7 +962,7 @@ Notationerne lille $o$ og lille $\omega$ kan bruges til at give mere præcise gr
                 
                 Nu analyserer vi grænseværdiens opførsel, når \( n \to \infty \):
                 \[
-                \lim_{n \to \infty} \frac{f(n)}{g(n)} = 2 \sin(n) + 3.
+                \frac{f(n)}{g(n)} = 2 \sin(n) + 3.
                 \]
                 
                 Da \( \sin(n) \) svinger mellem \( -1 \) og \( 1 \), når \( n \) vokser, svinger udtrykket \( 2 \sin(n) + 3 \) mellem \( 1 \) og \( 5 \). Den almindelige grænseværdi \( \lim_{n \to \infty} \frac{f(n)}{g(n)} \) eksisterer derfor ikke på grund af denne svingning.

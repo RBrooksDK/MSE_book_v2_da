@@ -396,7 +396,7 @@ Find ligningen for tangenten til grafen for $y=f(x)=x^{\frac{1}{2}}$ i punktet $
 
 \begin{solution}
 
-$f(4)=4^{\frac{1}{2}}=\sqrt{4}=2$, så koordinaterne til punktet på grafen er $(4,2)$. Den afledte er
+$f(4)=4^{\frac{1}{2}}=\sqrt{4}=2$, så koordinaterne til punktet på grafen er $(4,2)$. Den afledte er $f'(x)=\frac{1}{2\sqrt{x}}$, så $f'(4)=\frac{1}{4}$.
 
 Enhver ikke-lodret linje har en ligning på formen $y=m x+b$, hvor $m$ er hældningen, og $b$ er skæringen med andenaksen.
 
@@ -712,7 +712,7 @@ Vi løser opgaven ved hjælp af kædereglen og vores viden om den afledte af \(\
 
 \[
 \begin{aligned}
-\frac{d}{d x} \ln \left(2 x^3+5 x^2-3\right) & =\frac{d \ln u}{d x} \quad \text { (hvor } u=\left(2 x^3+5 x^2-3\right) \\
+\frac{d}{d x} \ln \left(2 x^3+5 x^2-3\right) & =\frac{d \ln u}{d x} \quad \text { (hvor } u=\left(2 x^3+5 x^2-3\right)\text{)} \\
 & =\frac{d \ln u}{d u} \times \frac{d u}{d x} \quad \text { (ifølge kædereglen) } \\
 & =\frac{1}{u} \times \frac{d u}{d x} \\
 & =\frac{1}{2 x^3+5 x^2-3} \times \frac{d}{d x}\left(2 x^3+5 x^2-3\right) \\
@@ -1076,7 +1076,7 @@ Testen er illustreret i \autoref{fig:first-derivative-test} og \autoref{fig:stat
 
 
 \subsection*{Optimering}
-Nu hvor vi har lagt fundamentet, kan vi gå i gang med nogle optimeringsproblemer. Når vi vil maksimere en funktion $f(x)$ på et bestemt interval for $x$, er målet at finde den største værdi, som $f(x)$ antager på intervallet. Det er vigtigt at være opmærksom på, at denne maksimumsværdi ikke altid ligger i et stationært punkt. Se på \autoref{fig:restricted-domain-extrema}, hvor vi søger funktionens største og mindste værdi på intervallet $2 \leq x \leq 7$. På intervallet har funktionen to stationære punkter -- det ene svarer til et lokalt maksimum, det andet til et lokalt minimum. Funktionens største værdi på intervallet antages dog faktisk i endepunktet $x=7$, som ikke er et stationært punkt. Funktionen antager denne værdi, simpelthen fordi større $x$-værdier uden for intervallet ikke tages i betragtning. Mindsteværdien ligger derimod i dette eksempel i et stationært punkt inden for intervallet. Med denne forståelse kan vi nu forklare de systematiske trin til at finde en funktions maksimum eller minimum i et givet område.
+Nu hvor vi har lagt fundamentet, kan vi gå i gang med nogle optimeringsproblemer. Når vi vil maksimere en funktion $f(x)$ på et bestemt interval for $x$, er målet at finde den største værdi, som $f(x)$ antager på intervallet. Det er vigtigt at være opmærksom på, at denne maksimumsværdi ikke altid ligger i et stationært punkt. Se på \autoref{fig:restricted-domain-extrema}, hvor vi søger funktionens største og mindste værdi på intervallet $2 \leq x \leq 7$. På intervallet har funktionen to stationære punkter -- det ene svarer til et lokalt maksimum, det andet til et lokalt minimum. Funktionens største værdi på intervallet antages dog faktisk i endepunktet $x=7$, som ikke er et stationært punkt. Funktionen antager denne værdi, simpelthen fordi større $x$-værdier uden for intervallet ikke tages i betragtning. Mindsteværdien antages derimod både i endepunktet $x=2$ og i det stationære punkt $x=5$. Med denne forståelse kan vi nu forklare de systematiske trin til at finde en funktions maksimum eller minimum i et givet område.
 
 % --- Ensure these packages are in your preamble ---
 % \usepackage{pgfplots}
@@ -1151,11 +1151,12 @@ Nu hvor vi har lagt fundamentet, kan vi gå i gang med nogle optimeringsprobleme
 
         % Left Endpoint (at x=2)
         \coordinate (left_end) at (axis cs:2, 1);
-        \fill[black] (left_end) circle (2.5pt);
+        \fill[red] (left_end) circle (2.5pt);
+        \node[below left, red, font=\small] at (left_end) {Globalt minimum};
 
         \end{axis}
     \end{tikzpicture}
-    \caption{På det begrænsede interval \([2, 7]\) ligger det globale maksimum i et endepunkt (\(x=7\)) og ikke i det lokale maksimum. Det globale minimum ligger i et indre stationært punkt (\(x=5\)).}
+    \caption{På det begrænsede interval \([2, 7]\) ligger det globale maksimum i et endepunkt (\(x=7\)) og ikke i det lokale maksimum. Det globale minimum antages både i endepunktet \(x=2\) og i det indre stationære punkt \(x=5\).}
     \label{fig:restricted-domain-extrema}
 \end{figure}
 
@@ -1250,7 +1251,7 @@ Nu hvor vi ved præcis, hvor maksima og minima kan ligge, kan vi give en fremgan
     \[
     f''(x) = \frac{d}{dx} \left( f'(x) \right)
     \]
-    forudsat at grænseværdien eksisterer.
+    forudsat at $f'$ er differentiabel i $x$.
     \end{definition}
     
     Den vigtigste geometriske fortolkning af den anden afledte er \textbf{krumning}.

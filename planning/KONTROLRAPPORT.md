@@ -1,64 +1,41 @@
-# Kontrolrapport – dansk udgave af *Mathematics for Software Engineering*
+# Kontrolrapport – dansk og engelsk udgave af *Mathematics for Software Engineering*
 
-Kilde: `C:\GitHub\MSE_book_v2` (uændret). Dansk udgave: `C:\GitHub\MSE_book_v2_da`, PDF: `main.pdf`.
+Kilde: `C:\GitHub\MSE_book_v2` (oprindeligt commit `6dc0964`). Dansk udgave:
+`C:\GitHub\MSE_book_v2_da`. Begge udgaver er efterfølgende rettet efter
+`planning/KILDEFEJL.md`.
 
-## Konklusion
+## Status efter fejlrettelserne 7. oktober 2026
 
-- **Hele bogen er oversat:** alle 5 dele, kapitel 0–15, bilag A (Vigtige begreber) og bilag B (Summer), titel, forside, indholdsfortegnelse, LaTeX-etiketter (Figur, Tabel, Eksempel, Sætning, Bilag osv.) og figurer med indlejret engelsk tekst.
-- **Alle eksempler er bevaret:** 237 `example`-miljøer i kilden og 237 i den danske udgave, i samme kapitler og rækkefølge. Uformelle eksempler i brødteksten er oversat på deres plads.
-- **PDF'en bygger uden indholdsfejl:** 303 sider (som kilden), 0 LaTeX-fejl, 0 udefinerede referencer eller citationer, 0 manglende filer, 0 manglende tegn. 44 overfulde linjer (kilden: 40); de er små og kosmetiske.
+- Begge bøger er bygget med `latexmk -pdf main.tex` til en 303-siders PDF.
+- De færdige logs har 0 LaTeX-fejl og 0 udefinerede referencer eller citationer.
+- Alle 5 dele, kapitel 0–15, begge bilag og 237 `example`-miljøer er bevaret i begge udgaver.
+- Kode og pseudokode er ens i udgaverne efter de samme rettelser, også engelske kodekommentarer i den danske bog.
+- Engelsk `figure/topographic-map.png` har nu “Hilly terrain”. Ændringen omfatter kun 526 pixels i etikettens område; resten af billedet er identisk med det tidligere bitmap.
+- Gruppe C i `planning/KILDEFEJL.md` er ikke ændret i bøgerne og kræver forfatterens stillingtagen.
 
-## Optælling før og efter
+## Struktursammenligning
 
-| | Kilde | Dansk |
-| --- | --- | --- |
-| Dele | 5 | 5 |
-| Kapitel-niveau i indholdsfortegnelsen (16 kapitler + bilag + litteratur) | 19 | 19 |
-| Afsnit (section) | 64 | 64 |
-| Bilag | 2 | 2 |
-| `example`-miljøer | 237 | 237 |
-| Sider | 303 | 303 |
+`python tools/compare_tex.py all` viser kun disse allerede kendte forskelle fra
+den danske oversættelses kontrol. Værktøjets exitkode er 1, fordi det markerer
+bevidste grafik- og typografiforskelle som afvigelser. De øvrige 13 af 18 filer
+vises som `OK`, herunder alle rettede formler og kodeblokke.
 
-Strukturtjek (`tools/compare_tex.py all`): miljøer, afsnit, fodnoter, labels, referencer, citationer, punkter, captions, formler, tal og kodeblokke er ens i alle filer. De eneste forskelle er de bevidste afvigelser nedenfor.
+| Fil | Dokumenteret forskel |
+| --- | --- |
+| `chapter01.tex` | De engelske `figure/book1.png`–`book4.png` er samlet i danske `figure/da/function_panels.tex`; sammenligneren ser derfor kun kildens fire rasterfiler. |
+| `chapter04.tex` | Engelske ordenstal `1^{st}`, `2^{nd}`, `3^{rd}` er danske `1.`, `2.`, `3.`. Det giver to manglende matematiksegmenter og tre ekstra tal i dansk løbende tekst, men værdier og betydning er uændrede. |
+| `chapter06.tex` | Engelsk `figure/boxplot.png` er tegnet som `figure/da/boxplot_da.tex` i den danske udgave. Tal-forskellen `0.7` er en figurparameter, ikke en ændring i bogens data. |
+| `chapter11.tex` | Dansk bruger `figure/da/domainrange_da.tex`, `figure/da/contour_da.png` og en dansk tekstoverlejring på det topografiske kort. Tal-forskellen `0.5` er en figurparameter. |
+| `chapter13.tex` | Dansk bruger `figure/da/gates_da.tex` og danske etiketter over `logicincomp.png`. Tal-forskellene `0.8` og `0.9` er figurparametre. |
 
-Søgning efter engelsk (`tools/find_english.py`): kun tre fund. Det er en pgfplots-kommando, tabeloverskriften »Input« (dansk låneord, som teksten også bruger) og »If-then-else-sætninger« (programmeringsbegreb).
+Sammenligneren finder ingen yderligere forskelle i miljøer, kapitler og afsnit,
+eksempler, labels, henvisninger, citationer, formler, kodeblokke eller tal i
+undervisningsteksten. Forskelle i bogens bilag og bibliografi er behandlet i
+`planning/KILDEFEJL.md`.
 
-## Bevidste afvigelser
+## Danske oversættelsesvalg, der fortsat gælder
 
-1. **Typografi:** decimalpunktum er bevaret (som i kilden og STA-bogens danske udgave). Tusindtalsseparatoren `10,000` er skrevet `10\,000`. Værdierne er uændrede.
-2. **Kode og pseudokode** er byte-identisk med kilden; kun captions er oversat.
-3. **Nytegnede figurer med dansk tekst** og samme faglige indhold:
-   - kapitel 1: de fire paneler med funktionstyper (`figure/da/function_panels.tex`);
-   - kapitel 6: boksplot;
-   - kapitel 11: definitions-/værdimængde, konturplot (genereret med forfatterens notebookkode, kun farveskalaens etiket er oversat), topografisk kort (dansk etiket lagt over billedet);
-   - kapitel 13: oversigt over logiske gates, transistorbilledet (danske etiketter lagt over);
-   - bilag A: Venn-diagrammet over talmængder;
-   - forsiden (dansk titel og emneetiketter lagt over omslagsbilledet).
-4. **Rettelser af kilden** (alle i `planning/KILDEFEJL.md` under »Rettet«):
-   - kapitel 1: forkert hårdkodet eksempelnummer erstattet af `\autoref`;
-   - kapitel 2: \(0.6875_{10} = 0.1011_2\) (binært punktum manglede);
-   - kapitel 4: danske ordenstal »1., 2. eller 3. præmie«;
-   - kapitel 5: »In this section« i kapitelindledningen oversat »I dette kapitel«;
-   - kapitel 9: verbet »span« flyttet ud af formlen;
-   - kapitel 12: stavefejlen »GFC« rettet til GCF;
-   - kapitel 15: en afbrudt sætning (linje 1402) fuldført ud fra de efterfølgende captions;
-   - bilag B: `\unskip` efter `\For` fjerner et fejlplaceret mellemrum (kun layout).
-
-Øvrige mulige fejl i kilden (over 50 punkter) er registreret med fil og linje i `planning/KILDEFEJL.md` og oversat uændret.
-
-## Punkter til menneskelig gennemgang
-
-- **Faglige fejl i kilden, som ikke er rettet:**
-  - kapitel 10, linje 399–400: en afledt mangler;
-  - kapitel 15: forkerte totaler i Java-kommentarerne på linje 1393 og 1698 og et forkert iterationsantal i Loop1 (linje 1050–1052);
-  - kapitel 5: terningmængden;
-  - bilag A, linje 1289: nummereringen af kædereglen.
-- **Terminologi:**
-  - »fakultet« for *factorial*;
-  - forkortelserne GCD/LCM;
-  - »Indgang/Udgang« i transistorfiguren, mens brødteksten bruger »input/output«;
-  - »FOIL-loven« beholdt med dansk forklaring;
-  - »halerekursion« og »memoisering«.
-- **Boksplottet** følger etiketterne i det originale billede, også dem, der er registreret som upræcise.
-- **Litteraturlisten:** feltet »Accessed online« og »John Wiley; Sons« kommer fra bibliografifilen og er ikke ændret.
-- **Datoen** på titelsiden er sat til »Maj 2025« efter kilden.
+- Decimalpunktum er bevaret. Tusindtalsseparatoren er et tyndt mellemrum som i `10\,000`.
+- Danske figurtekster, LaTeX-etiketter, indholdsfortegnelse og omslag er bevaret.
+- Danske figurer med indlejret tekst er tegnet eller overlejret som beskrevet i tabellen ovenfor.
+- Egennavne, citationsnøgler og programidentifikatorer er bevaret.

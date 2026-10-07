@@ -405,7 +405,7 @@ XOR giver 1, hvis de to bit, der sammenlignes, er forskellige, og 0, hvis de er 
 \end{definition}
 
 \begin{custombox}{Dualiteten mellem mængdelære og boolesk algebra}
-    Sammenhængen mellem mængdelære og boolesk algebra er så direkte, at de betragtes som »dualt isomorfe«. Det betyder, at de er strukturelt identiske. At forstå den ene er at forstå den anden. De vigtigste oversættelser er:
+    Sammenhængen mellem mængdelære og boolesk algebra er så direkte, at de betragtes som »isomorfe«. Det betyder, at de er strukturelt identiske. At forstå den ene er at forstå den anden. De vigtigste oversættelser er:
     \begin{center}
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{lcl}
@@ -676,7 +676,7 @@ For en vilkårlig hændelse \(A\) og en hændelse \(B\) med $0<P(B)<1$ giver par
 \end{definition}
 
 \begin{theorem}[Bayes' sætning]
-    For hændelser $A$ og $B$ med $P(A)>0$ giver Bayes' sætning den første lighed nedenfor. Den udvidede nævner forudsætter desuden $0<P(B)<1$, så begge de viste betingede sandsynligheder er definerede:
+    For hændelser $A$ og $B$ med $P(A)>0$ og $P(B)>0$ giver Bayes' sætning den første lighed nedenfor. Den udvidede nævner forudsætter desuden $0<P(B)<1$, så begge de viste betingede sandsynligheder er definerede:
     \begin{align*}
     P(B \mid A) = \frac{P(A \mid B) \cdot P(B)}{P(A)}
      = \frac{P(A \mid B) \cdot P(B)}{P(A \mid B) \cdot P(B) + P(A \mid B^c) \cdot P(B^c)}
@@ -853,7 +853,7 @@ hvor $b$ og koefficienterne $a_1, \ldots, a_n$ er konstanter.
 
 \begin{definition} En \textbf{matrix} er et rektangulært skema af tal ordnet i rækker og søjler. \textbf{Koefficientmatricen} for et lineært ligningssystem indeholder kun variablenes koefficienter, mens \textbf{totalmatricen} har en ekstra søjle med konstanterne fra ligningernes højre side. \end{definition}
 
-\begin{definition} \textbf{Størrelsen} af en matrix er bestemt af antallet af rækker og søjler og angives som \emph{rækker} $\times$ \emph{søjler}. For eksempel har koefficientmatricen ovenfor størrelsen $3 \times 3$, og totalmatricen har størrelsen $3 \times 4$. \end{definition}
+\begin{definition} \textbf{Størrelsen} af en matrix er bestemt af antallet af rækker og søjler og angives som \emph{rækker} $\times$ \emph{søjler}. For eksempel har en koefficientmatrix med tre rækker og tre søjler størrelsen $3 \times 3$, og dens totalmatrix har størrelsen $3 \times 4$. \end{definition}
 
 \begin{definition}{Echelonformer}
 En matrix er på \textbf{echelonform}, hvis den opfylder følgende betingelser:
@@ -1197,10 +1197,10 @@ A \vect{b_1} & A \vect{b_2} & \cdots & A \vect{b_p}
         \item $A$ er invertibel.
         \item $A$ er rækkeækvivalent med $I_n$.
         \item $A$ har $n$ pivotpositioner (dvs. én for hver række og søjle).
-        \item Ligningen $A \vect{x}=\overline{0}$ har kun den trivielle løsning.
+        \item Ligningen $A \vect{x}=\vect{0}$ har kun den trivielle løsning.
         \item Søjlerne i $A$ er lineært uafhængige.
         \item Ligningen \( A \vect{x} = \vect{b} \) har en entydig løsning for hvert \( \vect{b} \in \mathbb{R}^n \).
-        \item Søjlerne i $A \textnormal{ udspænder } \mathbb{R}^n$.
+        \item Søjlerne i $A$ udspænder $\mathbb{R}^n$.
         \item \( \text{det}(A) \neq 0 \).
         \item Der findes en $n \times n$-matrix $C$, så $C A=I$.
         \item Der findes en $n \times n$-matrix $D$, så $A D=I$.
@@ -1255,7 +1255,7 @@ forudsat at grænseværdien eksisterer.
 \begin{theorem}{Konstantreglen og potensreglen}
     \begin{enumerate}
         \item \textbf{Konstantreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}(c) = 0$, \vspace{0.5em}
-        \item \textbf{Potensreglen:} For ethvert reelt $n$ gælder $\dfrac{d}{dx}x^n = n x^{n - 1}$. \vspace{0.5em}
+        \item \textbf{Potensreglen:} For ethvert reelt $n$ gælder i de punkter, hvor den reelle potensfunktion er defineret og differentiabel, at $\dfrac{d}{dx}x^n = n x^{n - 1}$. \vspace{0.5em}
     \end{enumerate}
 \end{theorem}
 
@@ -1286,8 +1286,8 @@ forudsat at grænseværdien eksisterer.
 
 \begin{theorem}{Kædereglen}
     \vspace{0.5em}
-    \setcounter{enumi}{6}
     \begin{enumerate}
+    \setcounter{enumi}{6}
         \item Hvis \( h(x) = f(g(x)) \) er en sammensat funktion, er dens afledte lig med den afledte af den ydre funktion (evalueret i den indre funktion) ganget med den afledte af den indre funktion. \vspace{0.5em}
         \[
         h'(x) = f'(g(x)) \cdot g'(x). \vspace{0.5em}
@@ -1300,9 +1300,6 @@ forudsat at grænseværdien eksisterer.
     \begin{enumerate}
         \item \textbf{Konstantreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}c=0$. \vspace{0.5em}
         \item \textbf{Potensreglen:} For ethvert reelt $n$ gælder i de punkter, hvor den reelle potensfunktion er defineret og differentiabel, at $\dfrac{d}{dx}x^n = n x^{n-1}$. \vspace{0.5em}
-        \[
-        \frac{d}{dx}x^n = n x^{n-1}.
-        \]
         \item \textbf{Skalarreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$. \vspace{0.5em}
         \item \textbf{Linearitet:} For differentiable $f,g$ og konstanter $a,b$ gælder $\dfrac{d}{dx}(a f + b g) = a f' + b g'$. \vspace{0.5em}
         \item \textbf{Produktreglen:} Hvis $f,g$ er differentiable, så er $\dfrac{d}{dx}(f g) = f'g + fg'$. \vspace{0.5em}

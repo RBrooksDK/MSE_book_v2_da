@@ -1239,7 +1239,7 @@ som en parameterfremstilling på vektorform. Hvordan ser denne løsningsmængde 
         5 \\
         0 \\
         1
-        \end{bmatrix}, \quad \text{for alle } s, t \in \mathbb{R}.
+        \end{bmatrix}, \quad \text{for alle } x_2, x_3 \in \mathbb{R}.
         \]
         
         \textbf{Geometrisk fortolkning:} Løsningsmængden er en plan i \(\mathbb{R}^3\). Planen er parallel med den plan, der er bestemt af den homogene ligning:
@@ -1267,7 +1267,7 @@ som en parameterfremstilling på vektorform. Hvordan ser denne løsningsmængde 
         5 \\
         0 \\
         1
-        \end{bmatrix}, \quad \text{for alle } s, t \in \mathbb{R}.
+        \end{bmatrix}, \quad \text{for alle } x_2, x_3 \in \mathbb{R}.
         \]
         
         Når vi sammenligner de to løsningsmængder, ser vi, at den oprindelige løsning er den homogene løsning forskudt med vektoren \(\begin{bmatrix} 3 \\ 0 \\ 0 \end{bmatrix}\). Geometrisk betyder det, at planen bestemt af \( x_1 - 2 x_2 - 5 x_3 = 3 \) er parallel med, men ikke den samme som, planen bestemt af \( x_1 - 2 x_2 - 5 x_3 = 0 \). De to planer er forskudt 3 enheder i forhold til hinanden langs \( x_1 \)-aksen. Den fuldstændige løsning til ligningen \( x_1 - 2 x_2 - 5 x_3 = 3 \) er en plan i \(\mathbb{R}^3\), der er parallel med løsningsmængden for den homogene ligning \( x_1 - 2 x_2 - 5 x_3 = 0 \), men forskudt væk fra origo. \end{solution}
@@ -1401,7 +1401,7 @@ nogle sætninger, der hurtigt klarer problemet i visse specialtilfælde.
     \end{enumerate}
 \end{theorem}
 
-Den sidste del af sætningen er særlig nyttig, fordi den gør det muligt hurtigt at afgøre, om en mængde af vektorer er lineært afhængig, ved at undersøge, om en af vektorerne er en linearkombination af de andre. Vi kan formalisere denne idé i følgende korollar.
+Sætningen giver hurtige test for lineær afhængighed. Mere generelt er en mængde lineært afhængig, hvis en af dens vektorer er en linearkombination af de andre. Vi kan formalisere denne idé i følgende korollar.
 
 \begin{corollary}
     En indekseret mængde $S = \left\{\vect{v}_1, \ldots, \vect{v}_p\right\}$ af to eller flere vektorer er lineært afhængig, hvis og kun hvis mindst én af vektorerne i $S$ er en linearkombination af de andre. Hvis $S$ er lineært afhængig, og $\vect{v}_1 \neq \vect{0}$, så er en af vektorerne $\vect{v}_j$ (med $1 < j \leq p$) en linearkombination af de foregående vektorer $\vect{v}_1, \ldots, \vect{v}_{j-1}$.

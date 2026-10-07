@@ -196,7 +196,7 @@ For at beregne den matrix, der fremkommer ved denne sammensætning, multiplicere
 Grundlæggende er \(C\) den matrix, der udtrykker den samlede virkning af at anvende både \(B\) og \(A\) på en vilkårlig vektor \(\vect{x} \in \mathbb{R}^p\), uden at vi behøver at dele det op i mellemtrin.
 
 \begin{definition}
-    For $A \in \mathbb{R}^{m \times n}$ og $B \in \mathbb{R}^{n \times p}$, med $B=\left[\begin{array}{lll}\vect{b_1} & \vect{b_2} \cdots & \vect{b_p}\end{array}\right]$, definerer vi produktet $A B$ ved formlen
+    For $A \in \mathbb{R}^{m \times n}$ og $B \in \mathbb{R}^{n \times p}$, med $B=\left[\begin{array}{llll}\vect{b_1} & \vect{b_2} & \cdots & \vect{b_p}\end{array}\right]$, definerer vi produktet $A B$ ved formlen
 
 \[
 A B=\left[\begin{array}{llll}
@@ -657,7 +657,7 @@ Følgende sætning opsummerer egenskaberne ved den transponerede af en matrix.
     \end{enumerate}
 \end{theorem}
 
-En konsekvens af egenskab (4) er, at
+En konsekvens af egenskab (d) er, at
 \[
 \left(A_1 A_2 \ldots A_k\right)^T=A_k^T A_{k-1}^T \cdots A_2^T A_1^T
 \]
@@ -1260,7 +1260,7 @@ Sætningen om invertible matricer giver en omfattende liste over ækvivalente ud
         \item $A$ er invertibel.
         \item $A$ er rækkeækvivalent med $I_n$.
         \item $A$ har $n$ pivotpositioner (dvs. én for hver række og søjle).
-        \item Ligningen $A \vect{x}=\overline{0}$ har kun den trivielle løsning.
+        \item Ligningen $A \vect{x}=\vect{0}$ har kun den trivielle løsning.
         \item Søjlerne i $A$ er lineært uafhængige.
         \item Ligningen \( A \vect{x} = \vect{b} \) har en entydig løsning for hvert \( \vect{b} \in \mathbb{R}^n \).
         \item Søjlerne i $A$ udspænder $\mathbb{R}^n$.

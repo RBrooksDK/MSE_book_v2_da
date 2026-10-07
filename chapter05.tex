@@ -23,7 +23,7 @@ P(D \mid T),
 hvilket er sandsynligheden for \( D \), givet at \( T \) er indtruffet. Den opdaterede sandsynlighed \( P(D \mid T) \) kaldes \textit{a posteriori-sandsynligheden}, fordi den udtrykker vores reviderede opfattelse af hændelsens sandsynlighed, efter at vi har taget den nye evidens i betragtning. Intuitivt er det rimeligt at forvente, at \( P(D \mid T) \) er større end a priori-sandsynligheden \( P(D) \). Men hvad er den præcise værdi af \( P(D \mid T) \)? Før vi introducerer en generel formel, ser vi på et simpelt eksempel.
 
 \begin{example}
-Jeg kaster en fair terning. Lad \( A \) være hændelsen, at udfaldet er et primtal, dvs. \( A = \{2, 3, 5\} \). Lad desuden \( B \) være hændelsen, at udfaldet er større end eller lig med 3, dvs. \( B = \{3, 4, 5\} \). 
+Jeg kaster en fair terning. Lad \( A \) være hændelsen, at udfaldet er et primtal, dvs. \( A = \{2, 3, 5\} \). Lad desuden \( B \) være hændelsen, at udfaldet er større end eller lig med 3, dvs. \( B = \{3, 4, 5, 6\} \).
 
 \begin{enumerate}[label=(\alph*)]
     \item Hvad er sandsynligheden for \( A \), \( P(A) \)?
@@ -40,10 +40,10 @@ Jeg kaster en fair terning. Lad \( A \) være hændelsen, at udfaldet er et prim
             P(A) &= \frac{3}{6} = \frac{1}{2}
         \end{align*}
     
-        \item Sandsynligheden for \( A \) givet \( B \) er antallet af udfald i fællesmængden af \( A \) og \( B \) divideret med antallet af udfald i \( B \). Da udfaldene i fællesmængden af \( A \) og \( B \) er \(\{3, 5\}\), og udfaldene i \( B \) er \(\{3, 4, 5\}\), har vi: \vspace{0.4cm}
+        \item Sandsynligheden for \( A \) givet \( B \) er antallet af udfald i fællesmængden af \( A \) og \( B \) divideret med antallet af udfald i \( B \). Da udfaldene i fællesmængden af \( A \) og \( B \) er \(\{3, 5\}\), og udfaldene i \( B \) er \(\{3, 4, 5, 6\}\), har vi: \vspace{0.4cm}
     
         \begin{align*}
-        P(A \mid B) &=\frac{|A \cap B|}{|B|} = \frac{|\{3,5\}|}{|\{3,4, 5\}|} = \frac{2}{3}
+        P(A \mid B) &=\frac{|A \cap B|}{|B|} = \frac{|\{3,5\}|}{|\{3,4, 5, 6\}|} = \frac{1}{2}
         \end{align*}
 
     \end{enumerate}

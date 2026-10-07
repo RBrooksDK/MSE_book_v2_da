@@ -58,7 +58,7 @@ I totalssystemet udtrykker vi tal ved potenser af 2 i stedet for potenser af 10 
 \caption{Decimaltal i binær repræsentation}
 \end{table}
 
-Som i titalssystemet skriver vi tallet, så cifrets position angiver potensen: Den første plads efter decimalpunktummet er $2^0$-pladsen, den næste er $2^1$-pladsen og så videre. For at omregne et decimaltal til et binært tal kan vi bruge operatoren \texttt{mod}.
+Som i titalssystemet skriver vi tallet, så cifrets position angiver potensen: Den første plads efter det binære punktum er $2^{-1}$-pladsen, den næste er $2^{-2}$-pladsen og så videre. For at omregne et decimaltal til et binært tal kan vi bruge operatoren \texttt{mod}.
 
 Se som eksempel på 88 i titalssystemet, dvs. $88_{10}$. Vi vil gerne skrive det som et binært tal. Vi tager tallet og dividerer successivt \texttt{mod} 2. Se nedenfor:
 
@@ -478,7 +478,7 @@ Det følgende eksempel viser hele processen, hvor forskellige farver skelner mel
 Vi illustrerer den anden metode med det samme eksempel. I det foregående tilfælde overførte vi selve det binære tal til de næste kolonner. I denne metode skriver vi 0, hvis summen er lige, og 1, hvis summen er ulige. For hvert multiplum af 2 i summen overfører vi 1 som mente til de næste kolonner, og vi fortsætter sådan for hver kolonne, idet menterne indgår i beregningen af den pågældende kolonne.
 
 \textbf{Trin 1: Læg kolonnen længst til højre sammen}\newline
-Læg bittene i kolonne 1 sammen (talt fra MSB):
+Læg bittene i kolonne 1 sammen (talt fra LSB):
 
 $$
 1+1+1+1=100_2 \quad(\text{ som er binært for } 4)
@@ -522,7 +522,7 @@ Det giver
 \end{equation*}
 
 \textbf{Trin 2: Læg den anden kolonne fra højre sammen}\newline
-Læg bittene i kolonne 2 sammen (talt fra MSB):
+Læg bittene i kolonne 2 sammen (talt fra LSB):
 
 $$
 1+1+1+1=100_2 \quad(\text{ som er binært for } 4)
@@ -566,7 +566,7 @@ Det giver
 \end{equation*}
 
 \textbf{Trin 3: Læg den tredje kolonne fra højre sammen}
-Læg bittene i kolonne 3 sammen (talt fra MSB):
+Læg bittene i kolonne 3 sammen (talt fra LSB):
 
 $$
 1+1+1+1+1+1=110_2 \quad(\text{ som er binært for } 6)
@@ -612,7 +612,7 @@ Det giver
 \end{equation*}
 
 \textbf{Trin 4: Læg den fjerde kolonne fra højre sammen}\newline
-Læg bittene i kolonne 4 sammen (talt fra MSB):
+Læg bittene i kolonne 4 sammen (talt fra LSB):
 
 $$
 1+1+1+1+1+1+1=111_2 \quad(\text{ som er binært for } 7)
