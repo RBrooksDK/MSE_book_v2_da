@@ -24,10 +24,10 @@ For $a,b,c,m \in \mathbb{R}$, hvor $a,b,c,m \neq 0$ når det er nødvendigt, gæ
 
 \begin{proposition}{Regneregler for rødder}
     \begin{align*}
-    &(1) \quad \sqrt[n]{x y}=\sqrt[n]{x} \times \sqrt[n]{y}   &   &\textnormal{hvor begge sider er reelle; hvis }n\textnormal{ er lige, kræves }x,y\geq0\\
-    &(2) \quad \sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}    &   &\textnormal{hvor begge sider er reelle og }y\neq0;\textnormal{ hvis }n\textnormal{ er lige, kræves }x\geq0,y>0 \\
+    &(1) \quad \sqrt[n]{x y}=\sqrt[n]{x} \times \sqrt[n]{y}   &   &\textnormal{begge sider reelle; for lige }n\textnormal{ kræves }x,y\geq0\\
+    &(2) \quad \sqrt[n]{\frac{x}{y}} = \frac{\sqrt[n]{x}}{\sqrt[n]{y}}    &   &\textnormal{begge sider reelle, }y\neq0;\textnormal{ for lige }n\textnormal{ kræves }x\geq0,y>0 \\
     &(3) \quad \sqrt{x^2} = |x|   &   &\textnormal{hvor } x \in \mathbb{R} \\
-    &(4) \quad (\sqrt[n]{x})^n = x    &   &\textnormal{for alle reelle }x\textnormal{, hvis }n\textnormal{ er ulige, og for }x\geq0\textnormal{, hvis }n\textnormal{ er lige}\\
+    &(4) \quad (\sqrt[n]{x})^n = x    &   &\textnormal{for ulige }n\textnormal{ og alle }x;\ \textnormal{for lige }n\textnormal{ og }x\geq0\\
     &(5) \quad \sqrt[n]{-x}=-\sqrt[n]{x}  &   &\textnormal{hvor } x \geq 0 \textnormal{ og } n \in \mathbb{N} \textnormal{ er ulige }
     \end{align*}
 \end{proposition}
@@ -141,7 +141,7 @@ Følgende identiteter kræver $x>0$ og $y>0$:
     \item Logaritmen til et produkt:
     
     \[
-    \log x y=\log x+\log y
+    \log(xy)=\log x+\log y
     \]
     
     \textit{Med ord}: $\log$ til et produkt er lig med summen af logaritmerne til faktorerne.
@@ -405,7 +405,7 @@ XOR giver 1, hvis de to bit, der sammenlignes, er forskellige, og 0, hvis de er 
 \end{definition}
 
 \begin{custombox}{Dualiteten mellem mængdelære og boolesk algebra}
-    Sammenhængen mellem mængdelære og boolesk algebra er så direkte, at de betragtes som »isomorfe«. Det betyder, at de er strukturelt identiske. At forstå den ene er at forstå den anden. De vigtigste oversættelser er:
+    For en fast universalmængde er algebraen af dens delmængder med foreningsmængde, fællesmængde og komplement en boolesk algebra. Operationerne svarer til logisk OR, AND og NOT som følger:
     \begin{center}
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{lcl}

@@ -1,6 +1,6 @@
 \chapter{Kombinatorik og sandsynlighedsteori}
 \label{chap:ch4}
-Forestil dig, at du skal danne hold på 3 til et semesterprojekt i en klasse med 45 studerende. I første omgang har rækkefølgen, du vælger holdmedlemmerne i, ingen betydning, så du skal kun tænke på kombinationer. Antallet af måder at danne et hold på 3 ud af 45 studerende på er hele 14\,190 muligheder!
+Forestil dig, at du skal danne hold på 3 til et semesterprojekt i en klasse med 45 studerende. I første omgang har rækkefølgen, du vælger holdmedlemmerne i, ingen betydning, så du skal kun tænke på kombinationer. Der er hele 14\,190 måder at danne et hold på 3 ud af 45 studerende på!
 
 Det følgende semester introduceres de studerende til projektstyring med Scrum, hvor hvert hold skal have tre bestemte roller: Scrum Master, Product Owner og Development Team. Denne lille ændring -- at rollerne angives -- forvandler pludselig problemet fra en simpel \textit{kombination} til en \textit{permutation}. Nu springer antallet af mulige måder at fordele rollerne på op til 85\,140!
 
@@ -14,7 +14,7 @@ De studerende konkluderer, at i stedet for at stole på tilfældet er det på ti
 
 \section{Udfaldsrum og hændelser}
 \label{sec:sample_space}
-Et \textbf{stokastisk eksperiment }er et eksperiment, der kan føre til forskellige udfald, selv når det gentages under de samme betingelser. Denne tilfældighed er et grundlæggende aspekt af mange ingeniøropgaver.
+Et \textbf{stokastisk eksperiment} er et eksperiment, der kan føre til forskellige udfald, selv når det gentages under de samme betingelser. Denne tilfældighed er et grundlæggende aspekt af mange ingeniøropgaver.
 
 Tænk på det på denne måde: Lad os sige, at du tester hastigheden af et websted under forskellige forhold. Nogle gange indlæses det hurtigt, andre gange er det langsommere. Selv om du bruger den samme kode og server, får ting som netværkstrafik eller belastning af serveren resultaterne til at variere fra gang til gang. 
 
@@ -79,7 +79,7 @@ Det er grundlæggende i sandsynlighedsregning at forstå, hvad udfaldsrum, udfal
     
     \begin{itemize}
         \item Det samlede antal mulige udfald er \( 2^3 = 8 \).
-        \item En hændelse kunne defineres som »mindst én test fejler«, hvilket ville omfatte udfald som \(\text{(fejlet, bestået, bestået)}\), \(\text{(bestået, fejlet, fejlet)}\) og de øvrige, hvor mindst én test fejler.
+        \item Hændelsen »mindst én test fejler« omfatter fx \(\text{(fejlet, bestået, bestået)}\) og \(\text{(bestået, fejlet, fejlet)}\) samt alle andre udfald med mindst én fejlet test.
     \end{itemize}
     
     \end{example}

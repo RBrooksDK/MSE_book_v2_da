@@ -63,7 +63,7 @@ Den væsentlige forskel mellem \textbf{kvalitative} og \textbf{kvantitative} dat
 
 I ethvert datasæt har de fleste værdier en tendens til at samle sig i et centralt område, men af og til møder vi værdier, der er meget større eller mindre end resten. De kaldes \textbf{outliers} eller \textbf{ekstremværdier}. Outliers kan opstå af mange grunde: målefejl, usædvanlige, men gyldige hændelser eller naturlig variation i data.
 
-Hvis de fleste webforespørgsler fx er afsluttet på under 400 millisekunder, men én forespørgsel tager 1200 millisekunder, er værdien 1200ms en outlier. Outliers kan have stor indflydelse på opsummerende statistikker som gennemsnittet, så data ser ud til at variere mere, eller så gennemsnittet flyttes væk fra det sted, hvor de fleste værdier ligger.
+Hvis de fleste webforespørgsler fx er afsluttet på under 400 millisekunder, men én forespørgsel tager 1200 millisekunder, er værdien 1200~ms en outlier. Outliers kan have stor indflydelse på opsummerende statistikker som gennemsnittet, så data ser ud til at variere mere, eller så gennemsnittet flyttes væk fra det sted, hvor de fleste værdier ligger.
 
 Det er vigtigt at holde øje med outliers, når man analyserer data, da de kan være tegn på interessante fænomener (fx en sjælden flaskehals i ydelsen), indtastningsfejl eller et behov for nærmere undersøgelse. Der findes formelle metoder til at finde outliers, som vi gennemgår senere, men ofte er et simpelt plot eller et blik på de sorterede data nok til at få øje på værdier, der »skiller sig ud« fra resten.
 
@@ -668,8 +668,8 @@ CV = \frac{s}{\bar{x}} \times 100\%
 
 Se på to systemer:
 \begin{itemize}
-    \item System A: Gennemsnitlig svartid = 100ms, standardafvigelse = 20ms
-    \item System B: Gennemsnitlig svartid = 500ms, standardafvigelse = 100ms
+    \item System A: Gennemsnitlig svartid = 100~ms, standardafvigelse = 20~ms
+    \item System B: Gennemsnitlig svartid = 500~ms, standardafvigelse = 100~ms
 \end{itemize}
 
 \begin{align*}
@@ -696,7 +696,7 @@ Hvis en svartid fx ligger på 95.-percentilen, betyder det, at cirka 95\% af all
 \begin{enumerate}
         \item Sortér data: $\{120, 150, 180, 200, 220, 250, 280, 300, 350, 400\}$
         \item Rang: $\lceil 0.9 \times 10\rceil = 9$
-        \item 90.-percentilen = 350ms
+        \item 90.-percentilen = 350~ms
 \end{enumerate}
     \end{example}
 

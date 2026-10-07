@@ -6,12 +6,12 @@ Kilde: `C:\GitHub\MSE_book_v2` (oprindeligt commit `6dc0964`). Dansk udgave:
 
 ## Status efter fejlrettelserne 7. oktober 2026
 
-- Begge bøger er bygget med `latexmk -pdf main.tex` til en 303-siders PDF.
-- De færdige logs har 0 LaTeX-fejl og 0 udefinerede referencer eller citationer.
+- Begge bøger er bygget med `latexmk -pdf main.tex`: engelsk er 302 sider, dansk er 303 sider efter de opfølgende rettelser.
+- De færdige logs har 0 LaTeX-fejl og 0 udefinerede referencer eller citationer. Dansk log har ingen linjer, der går mere end 5 pt ud i margen.
 - Alle 5 dele, kapitel 0–15, begge bilag og 237 `example`-miljøer er bevaret i begge udgaver.
 - Kode og pseudokode er ens i udgaverne efter de samme rettelser, også engelske kodekommentarer i den danske bog.
 - Engelsk `figure/topographic-map.png` har nu “Hilly terrain”. Ændringen omfatter kun 526 pixels i etikettens område; resten af billedet er identisk med det tidligere bitmap.
-- Gruppe C i `planning/KILDEFEJL.md` er ikke ændret i bøgerne og kræver forfatterens stillingtagen.
+- De 17 resterende punkter i gruppe C i `planning/KILDEFEJL.md` er ikke ændret i bøgerne og kræver forfatterens stillingtagen. Punktet om Shannons pris er efterprøvet og lukket uden bogrettelse.
 
 ## Struktursammenligning
 

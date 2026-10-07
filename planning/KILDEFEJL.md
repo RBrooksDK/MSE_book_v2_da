@@ -13,7 +13,6 @@ udgaver er lavet efter efterregning. Gruppe C er uændret i bøgerne.
 | `chapter04.tex:366–368` | Tilføj en kort løsning til Maria-eksemplet, eller markér det som en opgave uden løsning. |
 | `chapter13.tex:304` | Flyt `\end{example}` efter løsningen, hvis løsningen skal indgå i eksemplet. |
 | `chapter13.tex:600` | Skeln mellem en funktionelt fuldstændig samling operatorer og en enkelt universel gate; NAND og NOR er hver for sig universelle. |
-| `chapter13.tex:28` | Kontrollér årstal og prisens officielle navn i primærkilder; ret derefter både 1939/1940 og stavningen af “Alfred Noble” konsekvent. |
 | `chapter15.tex:603,650` | Beslut, om de rekursive kald skal hedde `Factorial4`/`Naive-Fibonacci` som procedurerne, eller om procedureoverskrifterne skal ændres. Ret kode og pseudokode i begge udgaver ens. |
 | `chapter10.tex:370–375` | Flyt eksemplet med `(x²+1)³` til efter kædereglen, eller giv en kort henvisning frem til den. |
 | `chapter10.tex:865,1067` | Definér “critical point” før sætningen, og skeln mellem stationært vendepunkt og vendepunkt generelt. |
@@ -26,6 +25,27 @@ udgaver er lavet efter efterregning. Gruppe C er uændret i bøgerne.
 | `chapter01.tex:553` | Vælg en ensartet præcision for logaritmen: `0.4771…` eller `0.477…` overalt. |
 | `chapter02.tex:70` | Ret tabellens kolonneformat fra fem til fire kolonner, hvis kildens formattering skal være teknisk konsekvent. |
 | `reference.bib` | Fjern én af de to “Accessed online”-angivelser for Thomas og skriv Montgomery-forlagets ampersand som `\&` eller `and`. Punktet står i gruppe C, selv om den oprindelige punkttekst også siger “Ret bib-filen”; ingen bibliografiposter er ændret. |
+
+## Efterprøvet, ingen bogrettelse
+
+| Kilde | Kontrol |
+| --- | --- |
+| `chapter13.tex:28` | [ASCE's officielle vinderliste](https://www.asce.org/career-growth/awards-and-honors/alfred-noble-prize/alfred-noble-prize-past-award-winners) anfører Claude E. Shannon under 1939 og bruger stavningen “Alfred Noble Prize”. Bogens år og prisnavn står derfor korrekt. |
+
+## Opfølgende rettelser efter review 7. oktober 2026
+
+| Aktuelt sted | Rettelse |
+| --- | --- |
+| `chapter05.tex:193` | `67/137` er rettet til cirka `0.4891` og `48.91%` i begge udgaver. |
+| `chapter05.tex:315,356` | Bemærkningen bruger nu den faktiske marginale `P(B)=0.68`; det fejlagtige uafhængighedsprodukt er `0.272`, mens `P(A∩B)=0.32`. |
+| `chapter02.tex:63,70` | Gentagen heltalsdivision og rest beskrives korrekt, og tabeloverskriften viser `⌊x_n/2⌋`. |
+| `chapter14.tex:576,953` | Ω(1)-udsagnet er afgrænset til positive konstante funktioner; O/Ω-eksemplet henviser til begge propositioner. |
+| `chapter11.tex:351` | Gradientnedstigning er kvalificeret med en passende læringsrate i begge udgaver. |
+| `chapter15.tex:890` | Dansk præciserer, at det er outputtets talværdi, som vokser kvadratisk. |
+| `chapter03.tex:362`, `concepts.tex:408` | Sammenhængen med boolesk algebra er afgrænset til delmængder af en fast universalmængde. |
+| `chapter01.tex:642`, `concepts.tex:144` | Produktreglen for logaritmer viser eksplicit `log(xy)` i begge udgaver. |
+| `chapter01.tex:89`, `chapter04.tex:3`, `chapter06.tex:66,671–672,699` | Henvisning, gentagelse og mellemrum før `ms` er rettet i begge udgaver. |
+| Kun dansk: `chapter03.tex:282`, `chapter04.tex:17,82`, `chapter05.tex:15`, `concepts.tex:30`, `figure/da/overlay_images.tex` | Sprog og sats er justeret; den danske log har nu ingen linjer, der går mere end 5 pt ud i margen. |
 
 ## Rettet
 
@@ -72,7 +92,7 @@ udgaver er lavet efter efterregning. Gruppe C er uændret i bøgerne.
 | `chapter14.tex:9` | Notationen er nu `\mathcal{O}`. |
 | `chapter06.tex:691` | Percentilteksten siger “på eller under” som definitionen. |
 | `chapter06.tex:846–849` | Løftet om en senere forklaring af kurtosis er fjernet; den mangler fortsat med vilje efter brugerens valgmulighed. |
-| `chapter03.tex:361`, `concepts.tex:408` | “Dually isomorphic/dualt isomorfe” er ændret til “isomorphic/isomorfe”. |
+| `chapter03.tex:361`, `concepts.tex:408` | “Dually isomorphic/dualt isomorfe” blev først ændret til “isomorphic/isomorfe”; den senere præcisering til delmængdealgebra er registreret ovenfor. |
 | `concepts.tex:1258` | Potensreglen har nu forbehold om, hvor den reelle potensfunktion er defineret og differentiabel. |
 | `chapter13.tex:244` | Det engelske “since” er rettet til “although”; dansk havde allerede “selv om”. |
 | `chapter12.tex:124` | Hypotenuse-eksemplet siger nu, at `√2` optræder som en længde, uden at udgive det for et irrationalitetsbevis. |

@@ -348,7 +348,7 @@ Dette opdateringstrin er kernen i algoritmen. Vi indfører en lille positiv kons
 \[
 \beta_1 \leftarrow \beta_1 - \eta \frac{\partial L}{\partial \beta_1}
 \]
-Vi gentager denne proces mange gange. For hvert skridt bevæger parametrene \(\beta_0\) og \(\beta_1\) sig tættere på de værdier, der minimerer tabsfunktionen \(L\), så de reelt »går ned ad bakke« på tabsfladen, indtil de falder til ro i bunden.
+Vi gentager denne proces mange gange. Med en passende læringsrate mindsker opdateringerne tabsfunktionen \(L\) og bevæger parametrene \(\beta_0\) og \(\beta_1\) mod et minimum på denne konvekse tabsflade.
 
 Med en mere kompakt vektornotation, hvor \(\boldsymbol{\beta}\) er vektoren \(\langle \beta_0, \beta_1 \rangle\), kan hele opdateringsreglen skrives som:
 \[

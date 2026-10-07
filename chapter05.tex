@@ -12,7 +12,7 @@ Se på følgende scenarie: I en bestemt population har 5\% af individerne en bes
 P(D) = 0.05,
 \]
 
-hvor \( D \) betegner hændelsen, at en person har sygdommen. Sandsynligheden \( P(D) \) kaldes \textit{a priori-sandsynligheden}, fordi den udtrykker vores oprindelige opfattelse af hændelsens sandsynlighed, før vi har fået yderligere information.
+Her betegner \( D \) hændelsen, at personen har sygdommen. \( P(D) \) kaldes \textit{a priori-sandsynligheden}: vores vurdering før yderligere information.
 
 Forestil dig nu, at vi udvælger en tilfældig person og får at vide, at personen er testet positiv for sygdommen. Hvordan skal vi med denne ekstra information opdatere sandsynligheden for, at personen faktisk har sygdommen? Hvad er med andre ord sandsynligheden for, at en person har sygdommen, givet at personen er testet positiv? Lad \( T \) betegne hændelsen, at en person testes positiv. Denne betingede sandsynlighed skrives som:
 
@@ -190,7 +190,7 @@ Resultaterne er opsummeret i følgende kontingenstabel:
         \item \textbf{Sandsynligheden for nyresygdom, \( P(D) \)}:
         \begin{align*}
         P(D) &= \frac{\text{Antal patienter med nyresygdom}}{\text{Samlet antal patienter}} \\
-        &= \frac{67}{137} \approx 0.4883 \text{ eller } 48.83\%
+        &= \frac{67}{137} \approx 0.4891 \text{ eller } 48.91\%
         \end{align*}
         
         \item \textbf{Sandsynligheden for en positiv test, \( P(T^+) \)}:
@@ -353,7 +353,7 @@ En virksomhed har indført et sikkerhedssystem i to lag for at beskytte mod netv
 \end{solution}
 
 \begin{remark}
-    Nogle vil måske intuitivt beregne den fælles sandsynlighed for opdagelse som $P(A \cap B)=P(A) \cdot P(B)=0.4 \cdot 0.6=0.24$. Denne fremgangsmåde overser dog, at sandsynligheden for, at IDS'en opdager indbruddet, afhænger af firewallens resultat. Derfor bruger vi den betingede sandsynlighed $P(B \mid A)$, som tager korrekt højde for afhængigheden mellem de to lag og giver det korrekte resultat 0.32.
+    Man kunne fejlagtigt antage, at de to lag er uafhængige, og beregne $P(A \cap B)=P(A) \cdot P(B)=0.4 \cdot 0.68=0.272$, hvor $P(B)=0.4 \cdot 0.8+0.6 \cdot 0.6=0.68$. Da sandsynligheden for, at IDS'en opdager indbruddet, afhænger af firewallens resultat, bruger vi i stedet $P(B \mid A)$ og får det korrekte resultat 0.32.
 \end{remark}
 
 I nogle situationer afhænger sandsynligheden for en hændelse af forskellige betingelser. Hvis vi kender de betingede sandsynligheder under disse forskellige scenarier, kan vi bestemme hændelsens samlede sandsynlighed. Se for eksempel på halvlederproduktion, hvor vi definerer:

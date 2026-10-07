@@ -573,7 +573,7 @@ f(n)=\Omega(g(n)): \quad f \text{ vokser mindst lige så hurtigt som } g
 Følgende egenskaber gælder for $\Omega$-notation:
 \begin{itemize}
     \item Hvis $f(n) = \Omega(g(n))$ og $g(n) = \Omega(h(n))$, så er $f(n) = \Omega(h(n))$.
-    \item Konstante funktioner er $\Omega(1)$, dvs. at de har en nedre grænse, der ikke afhænger af inputstørrelsen.
+    \item Positive konstante funktioner er $\Omega(1)$, dvs. at de har en nedre grænse, der ikke afhænger af inputstørrelsen.
 \end{itemize}
 
 
@@ -950,7 +950,7 @@ Notationerne lille $o$ og lille $\omega$ kan bruges til at give mere præcise gr
             Da denne grænseværdi er en positiv konstant \( c = 3 > 0 \), følger det af proposition \ref{prop:big_omega_theorem}, at \( f(n) = \Omega(n^2) \). Eksemplet viser, at \( f(n) = 3n^2 + 5n + 7 \) har kvadratisk vækst i betydningen nedre grænse. \end{solution}
 
             \begin{example}
-                Afgør, om \( f(n) = 2n \sin(n) + 3n \) er \( \mathcal{O}(n) \) og \( \Omega(n) \), ved at bruge grænseværdierne som beskrevet i proposition \ref{prop:big_o_theorem}. \end{example}
+                Afgør, om \( f(n) = 2n \sin(n) + 3n \) er \( \mathcal{O}(n) \) og \( \Omega(n) \), ved at bruge grænseværdierne som beskrevet i propositionerne \ref{prop:big_o_theorem} og \ref{prop:big_omega_theorem}. \end{example}
                 
                 \begin{solution}
                 Lad \( g(n) = n \). Vi undersøger opførslen af \( \frac{f(n)}{g(n)} \), når \( n \to \infty \).

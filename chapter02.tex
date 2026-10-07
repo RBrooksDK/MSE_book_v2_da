@@ -60,14 +60,14 @@ I totalssystemet udtrykker vi tal ved potenser af 2 i stedet for potenser af 10 
 
 Som i titalssystemet skriver vi tallet, så cifrets position angiver potensen: Den første plads efter det binære punktum er $2^{-1}$-pladsen, den næste er $2^{-2}$-pladsen og så videre. For at omregne et decimaltal til et binært tal kan vi bruge operatoren \texttt{mod}.
 
-Se som eksempel på 88 i titalssystemet, dvs. $88_{10}$. Vi vil gerne skrive det som et binært tal. Vi tager tallet og dividerer successivt \texttt{mod} 2. Se nedenfor:
+Se som eksempel på 88 i titalssystemet, dvs. $88_{10}$. Vi vil gerne skrive det som et binært tal. Vi dividerer gentagne gange tallet med 2, bruger heltalskvotienten i næste trin og noterer resten. Se nedenfor:
 
 \begin{table}[h!]
 \centering
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|c|c|c|c|c|}
 \hline 
-Trin nr. $n$ & $x_n$ & $x_n / 2$ & $x_n \bmod 2$ \\ \hline
+Trin nr. $n$ & $x_n$ & $\lfloor x_n / 2 \rfloor$ & $x_n \bmod 2$ \\ \hline
 0 & 88 & 44 & 0 \\ 
 1 & 44 & 22 & 0 \\
 2 & 22 & 11 & 0 \\
