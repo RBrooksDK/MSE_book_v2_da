@@ -530,8 +530,8 @@ Kædereglen er nok den vigtigste differentiationsregel, især inden for maskinl�
 
 \begin{theorem}{Kædereglen}
     \vspace{0.5em}
-    \setcounter{enumi}{6}
     \begin{enumerate}
+        \setcounter{enumi}{6}
         \item Hvis \( h(x) = f(g(x)) \) er en sammensat funktion, er dens afledte lig med den afledte af den ydre funktion (udregnet i den indre funktion) ganget med den afledte af den indre funktion. \vspace{0.5em}
         \[
         h'(x) = f'(g(x)) \cdot g'(x). \vspace{0.5em}
@@ -625,9 +625,6 @@ Differentiationsreglerne er samlet i følgende sætning.
     \begin{enumerate}
         \item \textbf{Konstantreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}c=0$. \vspace{0.5em}
         \item \textbf{Potensreglen:} For ethvert reelt $n$ gælder $\dfrac{d}{dx}x^n = n x^{n-1}$. \vspace{0.5em}
-        \[
-        \frac{d}{dx}x^n = n x^{n-1}.
-        \]
         \item \textbf{Skalarreglen:} Hvis $c$ er en konstant, så er $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$. \vspace{0.5em}
         \item \textbf{Linearitet:} For differentiable $f,g$ og konstanter $a,b$ gælder $\dfrac{d}{dx}(a f + b g) = a f' + b g'$. \vspace{0.5em}
         \item \textbf{Produktreglen:} Hvis $f,g$ er differentiable, så er $\dfrac{d}{dx}(f g) = f'g + fg'$. \vspace{0.5em}
@@ -1064,7 +1061,7 @@ Denne tankegang indfanger essensen af første afledtes test: Ved at analysere fo
 Vi kan sammenfatte disse overvejelser i følgende sætning:
 
 \begin{theorem}[Første afledtes test]
-    Lad \(c\) være et kritisk punkt for en kontinuert funktion \(f\).
+    Lad \(c\) være et stationært punkt for en kontinuert funktion \(f\).
     \begin{itemize}
         \item Hvis \(f'(x)\) skifter fra negativ til positiv i \(c\), har \(f\) et \textbf{lokalt minimum} i \(c\).
         \item Hvis \(f'(x)\) skifter fra positiv til negativ i \(c\), har \(f\) et \textbf{lokalt maksimum} i \(c\).
